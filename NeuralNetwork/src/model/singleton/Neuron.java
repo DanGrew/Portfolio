@@ -89,14 +89,6 @@ public class Neuron {
    }// End Method
 
    /**
-    * Method to configure the threshold of the associated {@link ThresholdFunction}.
-    * @param threshold the threshold to use.
-    */
-   public void configureThreshold( double threshold ){
-      thresholdFunction.setThreshold( threshold );
-   }// End Method
-
-   /**
     * Method to process the firing of an associated {@link Synapse}.
     * @param input the double weighted input.
     */

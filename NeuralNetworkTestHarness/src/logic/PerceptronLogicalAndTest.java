@@ -39,9 +39,9 @@ public class PerceptronLogicalAndTest {
                new NetworkPosition( 1, 0 ),
                1.0
       );
-      perceptron.configureThreshold(
+      perceptron.configureBias(
                new NetworkPosition( 1, 0 ),
-               1.5
+               -1.5
       );
    }// End Method
 

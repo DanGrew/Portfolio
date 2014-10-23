@@ -30,9 +30,9 @@ public class PerceptronLogicalNotTest {
                new NetworkPosition( 1, 0 ),
                -1.0
       );
-      perceptron.configureThreshold(
+      perceptron.configureBias(
                new NetworkPosition( 1, 0 ),
-               -0.5
+               0.5
       );
    }// End Method
 
