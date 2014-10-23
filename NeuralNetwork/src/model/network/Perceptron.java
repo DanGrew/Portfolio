@@ -34,7 +34,7 @@ public class Perceptron {
    private NeuronLayer outputLayer;
 
    /**
-    * Constructs a new {@link Perceptron}.
+    * Constructs a new {@link Perceptron}, initialising the layers and bias.
     * @param inputNeurons the number of {@link Neuron}s in the input layer.
     * @param outputNeurons the number of {@link Neuron}s in the output layer.
     */
