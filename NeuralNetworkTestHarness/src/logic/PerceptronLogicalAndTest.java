@@ -43,6 +43,7 @@ public class PerceptronLogicalAndTest {
                new NetworkPosition( 1, 0 ),
                -1.5
       );
+      
    }// End Method
 
    /**
