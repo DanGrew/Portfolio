@@ -18,7 +18,7 @@ import model.function.ThresholdFunction;
  */
 public class Neuron {
 
-	/** The {@link ThresholdFunction} to use when calculating whether the {@link Neuron}
+   /** The {@link ThresholdFunction} to use when calculating whether the {@link Neuron}
     * should fire along the associated {@link Synapse}s.**/
    private ThresholdFunction thresholdFunction;
    /** {@link Map} of output {@link Neuron} that this {@link Neuron} is connected to.**/
@@ -86,15 +86,6 @@ public class Neuron {
    public void configureOutgoingWeight( Neuron output, double weight ){
       Synapse synapse = outgoingSynpases.get( output );
       synapse.setWeight( weight );
-   }// End Method
-
-   /**
-    * Method to configure the threshold of the associated {@link ThresholdFunction}.
-    * @param threshold the threshold to use.
-    */
-   public void configureThreshold( double threshold ){
-      thresholdFunction.setThreshold( threshold );
->>>>>>> branch 'master' of https://github.com/DanGrew/Portfolio.git
    }// End Method
 
    /**
