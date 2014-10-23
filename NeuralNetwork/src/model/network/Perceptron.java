@@ -26,8 +26,6 @@ import model.structure.NeuronLayer.NeuronLayerBuilder;
  */
 public class Perceptron {
 
-   /** The {@link Neuron} representing the bias, connected to all output layers.**/
-   private Neuron bias;
    /** The {@link NeuronLayer} representing the input layer of the {@link Perceptron}.**/
    private NeuronLayer inputLayer;
    /** The {@link NeuronLayer} respresenting the output layer of the {@link Perceptron}.**/
@@ -39,7 +37,6 @@ public class Perceptron {
     * @param outputNeurons the number of {@link Neuron}s in the output layer.
     */
    public Perceptron( int inputNeurons, int outputNeurons ){
-      bias = new Neuron( new BasicInputFunction( 1 ) );
       inputLayer = new NeuronLayer( new NeuronLayerBuilder()
                   .numberOfNeurons( inputNeurons )
                   .thresholdFunction( BasicInputFunction.class )
@@ -61,7 +58,6 @@ public class Perceptron {
          for ( Iterator< Neuron > outputIterator = outputLayer.iterator(); outputIterator.hasNext(); ){
             Neuron output = outputIterator.next();
             input.addOutgoingSynapse( output );
-            bias.addOutgoingSynapse( output );
          }
       }
    }// End Method
@@ -92,16 +88,18 @@ public class Perceptron {
    /**
     * Method to configure the threshold of the {@link Neuron} at the given {@link NetworkPosition}.
     * @param position the {@link NetworkPosition} of the {@link Neuron} to configure.
-    * @param weight the threshold to set for the associated {@link ThresholdFunction}.
+    * @param threshold the threshold to set for the associated {@link ThresholdFunction}.
     */
-   public void configureBias( NetworkPosition position, double weight ){
+   public void configureWeight( NetworkPosition position, double threshold ){
       Neuron neuron = null;
       switch( position.layer ){
          case 0:
-            throw new IllegalArgumentException();
+            neuron = inputLayer.getNeuronAtPosition( position );
+            neuron.configureThreshold( threshold );
+            break;
          case 1:
             neuron = outputLayer.getNeuronAtPosition( position );
-            bias.configureOutgoingWeight( neuron, weight );
+            neuron.configureThreshold( threshold );
             break;
          default:
             throw new IllegalArgumentException();
@@ -112,7 +110,7 @@ public class Perceptron {
     * Method to fire the input values through the network to the output layer.
     */
    public void fireInput(){
-      bias.fireNeuron();
+>>>>>>> branch 'master' of https://github.com/DanGrew/Portfolio.git
       inputLayer.fireLayer();
       outputLayer.fireLayer();
    }// End Method

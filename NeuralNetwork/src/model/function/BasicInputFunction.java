@@ -17,7 +17,7 @@ public class BasicInputFunction extends ThresholdFunction {
     * Constructs a new {@link BasicInputFunction}.
     */
    public BasicInputFunction(){
-      super( null );
+      super( null, null );
    }// End Constructor
 
    /**
@@ -25,7 +25,7 @@ public class BasicInputFunction extends ThresholdFunction {
     * @param input the input value into the Neural Network.
     */
    public BasicInputFunction( double input ){
-      super( input );
+      super( input, input );
    }// End Constructor
 
    /**

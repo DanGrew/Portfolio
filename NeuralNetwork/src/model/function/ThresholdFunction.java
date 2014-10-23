@@ -16,8 +16,9 @@ import model.singleton.Synapse;
  */
 public abstract class ThresholdFunction {
 
-   /** Constant defining the threshold for firing the {@link Neuron}. **/
-   private static final int THRESHOLD = 0;
+   /** The threshold of the function, that needs to be exceeded for the {@link Neuron}
+    * to reach its action potential.**/
+   protected Double threshold;
    /** The calculated output based on the input from associated {@link Neuron}s and
     * {@link Synapse}s. **/
    protected Double output;
@@ -26,14 +27,16 @@ public abstract class ThresholdFunction {
     * Constructs a new {@link ThresholdFunction}.
     */
    protected ThresholdFunction() {
-      this( null );
+      this( null, null );
    }// End Method
 
    /**
     * Constructs a new {@link ThresholdFunction}.
+    * @param threshold the threshold for the function.
     * @param output the precalculated output, or input.
     */
-   protected ThresholdFunction( Double output ) {
+   protected ThresholdFunction( Double threshold, Double output ) {
+      this.threshold = threshold;
       this.output = output;
    }// End Constructor
 
@@ -49,20 +52,16 @@ public abstract class ThresholdFunction {
     * @return true if exceeded, false otherwise.
     */
    public boolean excedesThreshold() {
-      return outputExceedsThreshold( output );
+      return output >= threshold;
    }// End Method
 
    /**
-    * Method to determine if the given output exceeds the threshold.
-    * @param output the output to compare against the threshold.
-    * @return true if exceeded, false otherwise.
+    * Method to set the threshold of the {@link ThresholdFunction}
+    * @param threshold the threshold to exceed.
     */
-   protected boolean outputExceedsThreshold( Double output ){
-      if ( output == null ){
-         return false;
-      } else {
-         return output >= THRESHOLD;
-      }
+   public void setThreshold( double threshold ){
+      this.threshold = threshold;
+>>>>>>> branch 'master' of https://github.com/DanGrew/Portfolio.git
    }// End Method
 
    /**
