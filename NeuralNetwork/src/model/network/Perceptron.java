@@ -51,7 +51,6 @@ public class Perceptron {
       connectLayers();
    }// End Constructor
 
-
    /**
     * Method to connect the {@link Neuron}s in the {@link Perceptron}. This will connect
     * all {@link Neuron}s in the input layer to the output layer.
