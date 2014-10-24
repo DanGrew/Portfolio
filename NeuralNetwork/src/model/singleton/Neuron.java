@@ -10,8 +10,8 @@
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import model.function.McCullochPittsFunction;
-import model.function.ThresholdFunction;
+import model.function.threshold.McCullochPittsFunction;
+import model.function.threshold.ThresholdFunction;
 
 /**
  * The {@link Neuron} represents a single {@link Neuron} in the Neural Network.
@@ -115,6 +115,32 @@ public class Neuron {
             synpase.fire( thresholdFunction.getOutput() );
          }
       }
+   }// End Method
+
+   /**
+    * Method to make the {@link Neuron}s incoming {@link Synapse}s learn from the
+    * given target value. The current output of the {@link Neuron} is used for comparison
+    * of performance.
+    * @param target the target the {@link Neuron} should have achieved.
+    */
+   public void learn( double target ){
+      for ( Synapse synapse : incomingSynapses.values() ){
+         synapse.learn( target, thresholdFunction.getOutput() );
+      }
+   }// End Method
+
+   /**
+    * Method to produce a {@link String} summarising the weights from inputs this {@link Neuron} has
+    * incoming.
+    * @return a {@link String} defining the current weights being applied to the inputs of this
+    * {@link Neuron}.
+    */
+   public String toWeightString(){
+      StringBuffer buffer = new StringBuffer();
+      for ( Synapse synapse : incomingSynapses.values() ){
+         buffer.append( synapse.toWeightString() ).append( " " );
+      }
+      return buffer.toString();
    }// End Method
 
 }// End Class

@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
- package logic;
+ package logic.constructed;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

@@ -5,10 +5,9 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
- package logic;
+ package logic.constructed;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import model.network.Perceptron;
 import model.structure.NetworkPosition;
 
@@ -18,7 +17,7 @@ import org.junit.Test;
 public class PerceptronLogicalNotTest {
 
    /** The {@link Perceptron} constructed and configured. **/
-   private static Perceptron perceptron;
+   protected static Perceptron perceptron;
 
    /**
     * Method to construct the {@link Perceptron} for the model.

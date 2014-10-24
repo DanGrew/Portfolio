@@ -9,11 +9,13 @@
 
 import java.util.Iterator;
 
-import model.function.BasicInputFunction;
-import model.function.McCullochPittsFunction;
-import model.function.ThresholdFunction;
+import model.function.threshold.BasicInputFunction;
+import model.function.threshold.McCullochPittsFunction;
+import model.function.threshold.ThresholdFunction;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
+import model.structure.LearningParameters;
+import model.structure.LearningParameters.LearningParameter;
 import model.structure.NetworkPosition;
 import model.structure.NeuronLayer;
 import model.structure.NeuronLayer.NeuronLayerBuilder;
@@ -115,6 +117,50 @@ public class Perceptron {
       bias.fireNeuron();
       inputLayer.fireLayer();
       outputLayer.fireLayer();
+   }// End Method
+
+   /**
+    * Method to make the {@link Perceptron} learn given the {@link LearningParameters} defining the input values
+    * and target values expected. This will {@link #learn(double)} each target having set the input for the {@link Perceptron},
+    * then move onto the next {@link LearningParameter}. When all {@link LearningParameter}s are {@link LearningParameter#isSatisfied(Perceptron)}
+    * the {@link Perceptron} has learnt the test data.
+    * @param learningParameters the {@link LearningParameters} defining the test cases the {@link Perceptron} should
+    * understand and reproduce.
+    */
+   public void learn( LearningParameters learningParameters ){
+      boolean isComplete = false;
+      while ( !isComplete ){
+         for ( Iterator< LearningParameter > iterator = learningParameters.iterator(); iterator.hasNext(); ){
+            LearningParameter parameter = iterator.next();
+            parameter.configureInput( this );
+            learn( parameter.getTarget() );
+            System.out.println( "LEARNT: \n" + outputLayer.toWeightString() );
+         }
+         isComplete = true;
+         for ( Iterator< LearningParameter > iterator = learningParameters.iterator(); iterator.hasNext(); ){
+            LearningParameter parameter = iterator.next();
+            if ( !parameter.isSatisfied( this ) ){
+               isComplete = false;
+               break;
+            }
+         }
+      }
+   }// End Method
+
+   /**
+    * Method to learn the target output having configured the input for the {@link Perceptron}.
+    * This will make the output {@link NeuronLayer#learn(double)} until the target is achieved
+    * in the output.
+    * @param target the target output value of the output {@link NeuronLayer}. 
+    */
+   private void learn( double target ){
+      fireInput();
+      double output = getOutput()[ 0 ];
+      while ( output != target ){
+         outputLayer.learn( target );
+         fireInput();
+         output = getOutput()[ 0 ];
+      }
    }// End Method
 
    /**

@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
- package model.function;
+ package model.function.threshold;
 
  /**
   * The {@link BasicInputFunction} is respresents the absense of a {@link ThresholdFunction}
