@@ -7,7 +7,8 @@
  */
  package model.singleton;
 
-import model.function.ThresholdFunction;
+import model.function.learning.PerceptronLearningRule;
+import model.function.threshold.ThresholdFunction;
 
  /**
   * The {@link Synapse} is responsible for connecting two {@link Neuron}s and weighting
@@ -15,14 +16,14 @@ import model.function.ThresholdFunction;
   */
 public class Synapse {
 
-   /** Constant defining the default weight of the {@link Synapse} if none is configured. **/
-   private static final double DEFAULT_WEIGHT = 1.0;
    /** The input {@link Neuron} providing the output value to this {@link Synapse}.**/
    private Neuron inputNeuron;
    /** The output {@link Neuron} the {@link Synapse} provides the weighted output to.**/
    private Neuron outputNeuron;
-   /** The weight to apply to the output from the input {@link Neuron}.**/
-   private double weight;
+   /** The {@link PerceptronLearningRule} defining how the {@link Synapse} should learn 
+    * from test data, allowing the {@link PerceptronLearningRule#getWeight()} to be adjusted
+    * to better achieve the target data. */
+   private PerceptronLearningRule learningRule;
 
    /**
     * Constructs a new {@link Synapse}.
@@ -32,7 +33,7 @@ public class Synapse {
    public Synapse( Neuron inputNeuron, Neuron outputNeuron ) {
       this.inputNeuron = inputNeuron;
       this.outputNeuron = outputNeuron;
-      this.weight = DEFAULT_WEIGHT;
+      learningRule = new PerceptronLearningRule( 0.1 );
       connectSynapse();
    }// End Constructor
 
@@ -44,7 +45,7 @@ public class Synapse {
     */
    public Synapse( Neuron inputNeuron, double weight, Neuron outputNeuron ) {
       this( inputNeuron, outputNeuron );
-      this.weight = weight;
+      learningRule.setWeight( weight );
    }// End Constructor
 
    /**
@@ -76,20 +77,7 @@ public class Synapse {
     * @param weight the weight to modify the output of the {@link #inputNeuron}.
     */
    public void setWeight( double weight ){
-      this.weight = weight;
-   }// End Method
-
-   /**
-    * Method to apply the weight to the output provided by the {@link #inputNeuron}.
-    * @param output the output provided.
-    * @return the weighted output to provide to the {@link #outputNeuron}.
-    */
-   private Double applyWeight( Double output ){
-      if ( output == null ){
-         return null;
-      } else {
-         return output * weight;
-      }
+      learningRule.setWeight( weight );
    }// End Method
 
    /**
@@ -97,12 +85,31 @@ public class Synapse {
     * @param output the calculated output from the {@link ThresholdFunction}.
     */
    public void fire( Double output ){
-      Double weightedOutput = applyWeight( output );
+      learningRule.setFiredOutput( output );
+      Double weightedOutput = learningRule.applyWeight( output );
       if ( weightedOutput != null ){
          outputNeuron.synapseFired( weightedOutput );
       } else {
          throw new NullPointerException();
       }
+   }// End Method
+
+   /**
+    * Method to make the {@link Synapse} learn from the performance of the associated
+    * output {@link Neuron}.
+    * @param target the target of the output {@link Neuron}.
+    * @param output the output achieved by the output {@link Neuron}.
+    */
+   public void learn( double target, double output ){
+      learningRule.learn( target, output );
+   }// End Method
+
+   /**
+    * Method to produce a weight sumary of the {@link Synapse}.
+    * @return a {@link String} containing the weight.
+    */
+   public String toWeightString(){
+      return learningRule.getWeight().toString();
    }// End Method
 
 }// End Class

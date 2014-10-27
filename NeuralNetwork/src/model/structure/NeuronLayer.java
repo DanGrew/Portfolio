@@ -14,8 +14,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import architecture.utility.ObjectGenerator;
-import model.function.ThresholdFunction;
+import model.function.threshold.ThresholdFunction;
 import model.singleton.Neuron;
+import model.singleton.Synapse;
 
 /**
  * The {@link NeuronLayer} collects a layer of {@link Neuron}s to process together.
@@ -152,6 +153,21 @@ public class NeuronLayer {
    }// End Method
 
    /**
+    * Method to make the {@link Neuron}s in this {@link NeuronLayer} {@link Neuron#learn(double)}.
+    * @param targets the targets the {@link Neuron}s should have achieved.
+    */
+   public void learn( Double[] targets ){
+      if ( targets.length == neurons.size() ){
+         for ( int i = 0; i < neurons.size(); i++ ){
+            Neuron neuron = neurons.get( i );
+            neuron.learn( targets[ i ] );
+         }
+      } else {
+         throw new IllegalArgumentException();
+      }
+   }// End Method
+
+   /**
     * Method to get an {@link Iterator} of {@link Neuron}s in the {@link NeuronLayer}.
     * @return the {@link Neuron} {@link Iterator}.
     */
@@ -165,6 +181,19 @@ public class NeuronLayer {
     */
    public int size(){
       return neurons.size();
+   }// End Method
+
+   /**
+    * Method to produce a summary of the weights of {@link Synapse}s to {@link Neuron}s in this
+    * {@link NeuronLayer}.
+    * @return a {@link String} summarising the weights.
+    */
+   public String toWeightString(){
+      StringBuffer buffer = new StringBuffer();
+      for ( Neuron neuron : neurons ){
+         buffer.append( neuron.toWeightString() ).append( "\n" );
+      }
+      return buffer.toString();
    }// End Method
 
 }// End Class
