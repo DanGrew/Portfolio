@@ -5,20 +5,23 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
- package logic;
+ package logic.constructed;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import model.network.Perceptron;
 import model.structure.NetworkPosition;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class PerceptronLogicalOrTest {
+/**
+ * The {@link PerceptronLogicalAndTest} is responsible for testing the construction
+ * of a {@link Perceptron} by modelling the logical AND function.
+ */
+public class PerceptronLogicalAndTest {
 
    /** The {@link Perceptron} constructed and configured. **/
-   private static Perceptron perceptron;
+   protected static Perceptron perceptron;
 
    /**
     * Method to construct the {@link Perceptron} for the model.
@@ -37,12 +40,13 @@ public class PerceptronLogicalOrTest {
       );
       perceptron.configureBias(
                new NetworkPosition( 1, 0 ),
-               -0.5
+               -1.5
       );
+
    }// End Method
 
    /**
-    * Method to test that zero and zero results in zero.
+    * Method to test that providing two zeros results in zero.
     */
    @Test public void ZeroZeroTest() {
       perceptron.configureInput(
@@ -54,7 +58,7 @@ public class PerceptronLogicalOrTest {
    }// End Method
 
    /**
-    * Method to test that zero and one results in one.
+    * Method to test that providing zero and one results in zero.
     */
    @Test public void ZeroOneTest() {
       perceptron.configureInput(
@@ -62,11 +66,11 @@ public class PerceptronLogicalOrTest {
                new Double( 1 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 1 );
+      assertTrue( perceptron.getOutput()[ 0 ] == 0 );
    }// End Method
 
    /**
-    * Method to test that one and zero results in one.
+    * Method to test that providing one and zero results in zero.
     */
    @Test public void OneZeroTest() {
       perceptron.configureInput(
@@ -74,11 +78,11 @@ public class PerceptronLogicalOrTest {
                new Double( 0 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 1 );
+      assertTrue( perceptron.getOutput()[ 0 ] == 0 );
    }// End Method
 
    /**
-    * Method to test that one and one results in one.
+    * Method to test that providing one and one results in one.
     */
    @Test public void OneOneTest() {
       perceptron.configureInput(
@@ -87,6 +91,6 @@ public class PerceptronLogicalOrTest {
       );
       perceptron.fireInput();
       assertTrue( perceptron.getOutput()[ 0 ] == 1 );
-   }// End Methode
+   }// End Method
 
 }// End Class
