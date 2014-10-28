@@ -129,12 +129,14 @@ public class Perceptron {
     */
    public void learn( LearningParameters learningParameters ){
       boolean isComplete = false;
+      int epoch = 0;
       while ( !isComplete ){
          for ( Iterator< LearningParameter > iterator = learningParameters.iterator(); iterator.hasNext(); ){
+            epoch++;
             LearningParameter parameter = iterator.next();
             parameter.configureInput( this );
             parameter.applyLearning( this );
-            System.out.println( "LEARNT: \n" + outputLayer.toWeightString() );
+            System.out.println( "EPOCH " + epoch + ": \n" + outputLayer.toWeightString() );
          }
          isComplete = true;
          for ( Iterator< LearningParameter > iterator = learningParameters.iterator(); iterator.hasNext(); ){
@@ -155,10 +157,8 @@ public class Perceptron {
     */
    public void learn( Double[] targets ){
       fireInput();
-      while ( !isLearnt( targets ) ){
-         outputLayer.learn( targets );
-         fireInput();
-      }
+      outputLayer.learn( targets );
+      fireInput();
    }// End Method
 
    /**
