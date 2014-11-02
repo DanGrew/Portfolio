@@ -13,10 +13,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import architecture.utility.ObjectGenerator;
 import model.function.threshold.ThresholdFunction;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
+import architecture.utility.ObjectGenerator;
+import architecture.utility.ReadOnlyArray;
 
 /**
  * The {@link NeuronLayer} collects a layer of {@link Neuron}s to process together.
@@ -131,13 +132,13 @@ public class NeuronLayer {
     * Method to configure the input values for the {@link NeuronLayer}.
     * @param inputValues the input values to set on the {@link Neuron}s.
     */
-   public void configureInput( Double... inputValues ){
-      if ( inputValues.length > size() ){
+   public void configureInput( ReadOnlyArray< Double > inputValues ){
+      if ( inputValues.length() > size() ){
          throw new IllegalArgumentException();
       } else {
-         for ( int i = 0; i < inputValues.length; i++ ){
+         for ( int i = 0; i < inputValues.length(); i++ ){
             Neuron neuron = neurons.get( i );
-            neuron.synapseFired( inputValues[ i ] );
+            neuron.synapseFired( inputValues.get( i ) );
          }
       }
    }// End Method
@@ -156,11 +157,11 @@ public class NeuronLayer {
     * Method to make the {@link Neuron}s in this {@link NeuronLayer} {@link Neuron#learn(double)}.
     * @param targets the targets the {@link Neuron}s should have achieved.
     */
-   public void learn( Double[] targets ){
-      if ( targets.length == neurons.size() ){
+   public void learn( ReadOnlyArray< Double > targets ){
+      if ( targets.length() == neurons.size() ){
          for ( int i = 0; i < neurons.size(); i++ ){
             Neuron neuron = neurons.get( i );
-            neuron.learn( targets[ i ] );
+            neuron.learn( targets.get( i ) );
          }
       } else {
          throw new IllegalArgumentException();

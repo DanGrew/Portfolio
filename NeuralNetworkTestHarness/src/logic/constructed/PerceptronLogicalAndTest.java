@@ -14,6 +14,8 @@ import model.structure.NetworkPosition;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.utility.ReadOnlyArray;
+
 /**
  * The {@link PerceptronLogicalAndTest} is responsible for testing the construction
  * of a {@link Perceptron} by modelling the logical AND function.
@@ -54,7 +56,8 @@ public class PerceptronLogicalAndTest {
                new Double( 0 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 0 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 0 );
    }// End Method
 
    /**
@@ -66,7 +69,8 @@ public class PerceptronLogicalAndTest {
                new Double( 1 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 0 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 0 );
    }// End Method
 
    /**
@@ -78,7 +82,8 @@ public class PerceptronLogicalAndTest {
                new Double( 0 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 0 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 0 );
    }// End Method
 
    /**
@@ -90,7 +95,8 @@ public class PerceptronLogicalAndTest {
                new Double( 1 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 1 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 1 );
    }// End Method
 
 }// End Class

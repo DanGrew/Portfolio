@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import model.network.Perceptron;
+import architecture.utility.ReadOnlyArray;
 
 /**
  * The {@link LearningParameters} are responsible for defining test data and target
@@ -29,9 +30,9 @@ public class LearningParameters {
    public static class LearningParameter {
 
       /** Array of input values to the network. **/
-      private Double[] inputParameters;
+      private ReadOnlyArray< Double > inputParameters;
       /** Array of target output values the network should achieve. **/
-      private Double[] targetParameters;
+      private ReadOnlyArray< Double > targetParameters;
 
       /**
        * Configures the {@link LearningParameter} with the input values.
@@ -39,8 +40,16 @@ public class LearningParameters {
        * @return the {@link LearningParameter}.
        */
       public LearningParameter inputParameters( Double... input ){
-         inputParameters = input;
+         inputParameters = new ReadOnlyArray< Double >( input );
          return this;
+      }// End Method
+
+      /**
+       * Method to get the {@link ReadOnlyArray} of {@link Double} input values to learn.
+       * @return the {@link ReadOnlyArray}.
+       */
+      public ReadOnlyArray< Double > getInputParameters(){
+         return inputParameters;
       }// End Method
 
       /**
@@ -49,8 +58,16 @@ public class LearningParameters {
        * @return the {@link LearningParameter}.
        */
       public LearningParameter targetParameters( Double... targets ){
-         targetParameters = targets;
+         targetParameters = new ReadOnlyArray< Double >( targets );
          return this;
+      }// End Method
+
+      /**
+       * Method to get the {@link ReadOnlyArray} of target {@link Double} values.
+       * @return the {@link ReadOnlyArray}.
+       */
+      public ReadOnlyArray< Double > getTargetParameters(){
+         return targetParameters;
       }// End Method
 
       /**
@@ -60,15 +77,6 @@ public class LearningParameters {
        */
       public void configureInput( Perceptron perceptron ){
          perceptron.configureInput( inputParameters );
-      }// End Method
-
-      /**
-       * Method to apply the learning to the {@link Perceptron}. This will make the
-       * {@link Perceptron#learn(LearningParameters)} the {@link LearningParameters}.
-       * @param perceptron the {@link Perceptron} to learn.
-       */
-      public void applyLearning( Perceptron perceptron ){
-         perceptron.learn( targetParameters );
       }// End Method
 
       /**

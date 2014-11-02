@@ -9,6 +9,7 @@
 
 import java.util.Iterator;
 
+import architecture.utility.ReadOnlyArray;
 import model.function.threshold.BasicInputFunction;
 import model.function.threshold.McCullochPittsFunction;
 import model.function.threshold.ThresholdFunction;
@@ -74,8 +75,16 @@ public class Perceptron {
     * @param inputValues the {@link Double} values to input. Must be same number of values as the
     * number of {@link Neuron}s in the input layer.
     */
-   public void configureInput( Double... inputValues ){
+   public void configureInput( ReadOnlyArray< Double > inputValues ){
       inputLayer.configureInput( inputValues );
+   }// End Method
+
+   /**
+    * Method to configure the {@link Double} input values to the {@link Perceptron}.
+    * @param inputValues the input values.
+    */
+   public void configureInput( Double... inputValues ){
+      inputLayer.configureInput( new ReadOnlyArray< Double >( inputValues ) );
    }// End Method
 
    /**
@@ -135,7 +144,7 @@ public class Perceptron {
             epoch++;
             LearningParameter parameter = iterator.next();
             parameter.configureInput( this );
-            parameter.applyLearning( this );
+            applyOnlineLearning( parameter );
             System.out.println( "EPOCH " + epoch + ": \n" + outputLayer.toWeightString() );
          }
          isComplete = true;
@@ -150,27 +159,30 @@ public class Perceptron {
    }// End Method
 
    /**
-    * Method to learn the target output having configured the input for the {@link Perceptron}.
-    * This will make the output {@link NeuronLayer#learn(double)} until the target is achieved
-    * in the output.
-    * @param targets the target output values of the output {@link NeuronLayer}.
+    * Method to apply online learning, allow the perceptron to learn the target output having
+    * configured the input for the {@link Perceptron}. This will {@link #fireInput()} and
+    * make the output {@link NeuronLayer#learn(Double[])}, adjusting the weights immediately.
+    * @param parameter the {@link LearningParameter} to learn.
     */
-   public void learn( Double[] targets ){
+   public void applyOnlineLearning( LearningParameter parameter ){
       fireInput();
-      outputLayer.learn( targets );
-      fireInput();
+      outputLayer.learn( parameter.getTargetParameters() );
    }// End Method
+
+   public void applyBatchLearning( LearningParameters parameters ){
+
+   }
 
    /**
     * Method to validate whether the {@link Perceptron} has learnt the given target values.
     * @param targets the {@link Double} targets to learn.
     * @return whether the targets have been learnt.
     */
-   public boolean isLearnt( Double[] targets ){
-      Double[] outputs = getOutput();
-      if ( targets.length == outputs.length ){
-         for ( int i = 0; i < outputs.length; i++ ){
-            if ( !outputs[ i ].equals( targets[ i ] ) ){
+   public boolean isLearnt( ReadOnlyArray< Double > targets ){
+      ReadOnlyArray< Double > outputs = getOutput();
+      if ( targets.length() == outputs.length() ){
+         for ( int i = 0; i < outputs.length(); i++ ){
+            if ( !outputs.get( i ).equals( targets.get( i ) ) ){
                return false;
             }
          }
@@ -182,9 +194,9 @@ public class Perceptron {
 
    /**
     * Method to get the array of output values from the output layer.
-    * @return the {@link Double} array of output.
+    * @return the {@link Double} {@link ReadOnlyArray} of output.
     */
-   public Double[] getOutput(){
+   public ReadOnlyArray< Double > getOutput(){
       Double[] output = new Double[ outputLayer.size() ];
       int outputCount = 0;
       for ( Iterator< Neuron > iterator = outputLayer.iterator(); iterator.hasNext(); ){
@@ -192,7 +204,7 @@ public class Perceptron {
          output[ outputCount ] = outputNeuron.getOutput();
          outputCount++;
       }
-      return output;
+      return new ReadOnlyArray< Double >( output );
    }// End Method
 
 }// End Class

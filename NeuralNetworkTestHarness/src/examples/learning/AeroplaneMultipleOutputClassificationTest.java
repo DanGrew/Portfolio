@@ -16,6 +16,8 @@ import model.structure.LearningParameters.LearningParameter;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.utility.ReadOnlyArray;
+
 /**
  * The {@link AeroplaneMultipleOutputClassificationTest} is responsible for teaching a {@link Perceptron}
  * with two output {@link Neuron}s to classify two types of aeroplane.
@@ -26,7 +28,7 @@ public class AeroplaneMultipleOutputClassificationTest {
    private static Perceptron perceptron;
 
    /**
-    * Method to construct the {@link Perceptron}, {@link LearningParameters} and then to teach the 
+    * Method to construct the {@link Perceptron}, {@link LearningParameters} and then to teach the
     * {@link Perceptron}.
     */
    @BeforeClass public static void initialisePerceptron(){
@@ -94,8 +96,9 @@ public class AeroplaneMultipleOutputClassificationTest {
                new Double( 0.1 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 1.0 );
-      assertTrue( perceptron.getOutput()[ 1 ] == 0.0 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 1.0 );
+      assertTrue( output.get( 1 ) == 0.0 );
    }// End Method
 
    /**
@@ -108,8 +111,9 @@ public class AeroplaneMultipleOutputClassificationTest {
                new Double( 0.5 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 0.0 );
-      assertTrue( perceptron.getOutput()[ 1 ] == 1.0 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 0.0 );
+      assertTrue( output.get( 1 ) == 1.0 );
    }// End Method
 
    /**
@@ -121,12 +125,13 @@ public class AeroplaneMultipleOutputClassificationTest {
                new Double( 0.4 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 1.0 );
-      assertTrue( perceptron.getOutput()[ 1 ] == 0.0 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 1.0 );
+      assertTrue( output.get( 1 ) == 0.0 );
    }// End Method
 
    /**
-    * Method to test an example that the {@link Perceptron} has not seen before, with a 
+    * Method to test an example that the {@link Perceptron} has not seen before, with a
     * different result to {@link #UnseenExampleTest()}.
     */
    @Test public void UnseenExampleTest2() {
@@ -135,8 +140,9 @@ public class AeroplaneMultipleOutputClassificationTest {
                new Double( 0.9 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 0.0 );
-      assertTrue( perceptron.getOutput()[ 1 ] == 1.0 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 0.0 );
+      assertTrue( output.get( 1 ) == 1.0 );
    }// End Method
 
 }// End Class

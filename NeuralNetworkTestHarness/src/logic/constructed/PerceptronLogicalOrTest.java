@@ -14,6 +14,8 @@ import model.structure.NetworkPosition;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.utility.ReadOnlyArray;
+
 public class PerceptronLogicalOrTest {
 
    /** The {@link Perceptron} constructed and configured. **/
@@ -49,7 +51,8 @@ public class PerceptronLogicalOrTest {
                new Double( 0 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 0 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 0 );
    }// End Method
 
    /**
@@ -61,7 +64,8 @@ public class PerceptronLogicalOrTest {
                new Double( 1 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 1 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 1 );
    }// End Method
 
    /**
@@ -73,7 +77,8 @@ public class PerceptronLogicalOrTest {
                new Double( 0 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 1 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 1 );
    }// End Method
 
    /**
@@ -85,7 +90,8 @@ public class PerceptronLogicalOrTest {
                new Double( 1 )
       );
       perceptron.fireInput();
-      assertTrue( perceptron.getOutput()[ 0 ] == 1 );
+      ReadOnlyArray< Double > output = perceptron.getOutput();
+      assertTrue( output.get( 0 ) == 1 );
    }// End Methode
 
 }// End Class
