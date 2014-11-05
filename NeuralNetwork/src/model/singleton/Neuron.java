@@ -7,17 +7,24 @@
  */
  package model.singleton;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.StringProperty;
 import model.function.threshold.McCullochPittsFunction;
 import model.function.threshold.ThresholdFunction;
+import model.structure.NetworkPosition;
 
 /**
  * The {@link Neuron} represents a single {@link Neuron} in the Neural Network.
  */
 public class Neuron {
 
+   /** The {@link NetworkPosition} describing where this {@link Neuron} is located. **/
+   private NetworkPosition identification;
    /** The {@link ThresholdFunction} to use when calculating whether the {@link Neuron}
     * should fire along the associated {@link Synapse}s.**/
    private ThresholdFunction thresholdFunction;
@@ -30,19 +37,37 @@ public class Neuron {
     * Constructs a new {@link Neuron}.
     * @param thresholdFunction the {@link ThresholdFunction} the {@link Neuron} will use.
     */
-   public Neuron( ThresholdFunction thresholdFunction ) {
+   public Neuron( NetworkPosition position, ThresholdFunction thresholdFunction ) {
       outgoingSynpases = new LinkedHashMap< Neuron, Synapse >();
       incomingSynapses = new LinkedHashMap< Neuron, Synapse >();
+      this.identification = position;
       this.thresholdFunction = thresholdFunction;
    }// End Constructor
 
    /**
     * Constructs a new {@link Neuron}, using the default {@link ThresholdFunction} as
     * the {@link McCullochPittsFunction}.
+    * @param position the {@link NetworkPosition} of the {@link Neuron}.
     */
-   public Neuron() {
-      this( new McCullochPittsFunction() );
+   public Neuron( NetworkPosition position ) {
+      this( position, new McCullochPittsFunction() );
    }// End Constructor
+   
+   /**
+    * Method to get the {@link StringProperty} of {@link NetworkPosition}.
+    * @return {@link #identification#getIdentificationProperty()}.
+    */
+   public StringProperty getIdentificationProperty(){
+      return identification.getRepresentationProperty();
+   }// End Method
+   
+   /**
+    * Method to get the {@link NetworkPosition} of the {@link Neuron}.
+    * @return the {@link NetworkPosition}.
+    */
+   public NetworkPosition getPosition(){
+      return identification;
+   }// End Method
 
    /**
     * Method to add a {@link Synapse} incoming to this {@link Neuron}.
@@ -103,6 +128,14 @@ public class Neuron {
    public Double getOutput() {
       return thresholdFunction.getOutput();
    }// End Method
+   
+   /**
+    * Method to get the {@link Property} for the output value of the {@link Neuron}.
+    * @return {@link #thresholdFunction#getOutputProperty()}.
+    */
+   public DoubleProperty getOutputProperty(){
+      return thresholdFunction.getOutputProperty();
+   }// End Method
 
    /**
     * Method to fire the {@link Neuron}. This will calculate the output and then fire the
@@ -129,6 +162,14 @@ public class Neuron {
       }
    }// End Method
 
+   /**
+    * Method to get a {@link Iterator} for the {@link Synapse}s incoming to this {@link Neuron}.
+    * @return {@link Iterator} of {@link Synapse}s.
+    */
+   public Iterator< Synapse > inputSynapseIterator(){
+      return incomingSynapses.values().iterator();
+   }// End Method
+   
    /**
     * Method to produce a {@link String} summarising the weights from inputs this {@link Neuron} has
     * incoming.

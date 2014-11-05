@@ -17,7 +17,7 @@ public class BasicInputFunction extends ThresholdFunction {
     * Constructs a new {@link BasicInputFunction}.
     */
    public BasicInputFunction(){
-      super( null );
+      super( 0.0 );
    }// End Constructor
 
    /**
@@ -32,7 +32,7 @@ public class BasicInputFunction extends ThresholdFunction {
     * {@inheritDoc}
     */
    @Override public void synapseFired( double output ) {
-      this.output = output;
+      this.output.set( output );
    }// End Method
 
    /**

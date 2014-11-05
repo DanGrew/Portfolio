@@ -7,6 +7,9 @@
  */
 package model.function.learning;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleDoubleProperty;
 import model.network.Perceptron;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
@@ -23,7 +26,7 @@ public class PerceptronLearningRule {
    /** The output fired by the input {@link Neuron} of the associated {@link Synapse}.**/
    private double firedOutput;
    /** The weight to apply to the fired output of the input {@link Neuron}. **/
-   private double weight;
+   private DoubleProperty weight;
 
    /**
     * Constructs a new {@link PerceptronLearningRule}.
@@ -31,7 +34,7 @@ public class PerceptronLearningRule {
     */
    public PerceptronLearningRule( double learningRate ){
       this.learningRate = learningRate;
-      weight = ObjectGenerator.newRandom();
+      weight = new SimpleDoubleProperty( ObjectGenerator.newRandom() );
    }// End Constructor
 
    /**
@@ -47,15 +50,23 @@ public class PerceptronLearningRule {
     * @return the weight.
     */
    public Double getWeight(){
-      return weight;
+      return weight.get();
    }// End Method
 
+   /**
+    * Method to get the {@link Property} of the weight used for receiving events when changed.
+    * @return the {@link DoubleProperty} for the weight.
+    */
+   public DoubleProperty getWeightProperty(){
+      return weight;
+   }// End Method
+   
    /**
     * Method to set the weight to be applied to the output from the input {@link Neuron}.
     * @param weight the weight to set.
     */
    public void setWeight( double weight ){
-      this.weight = weight;
+      this.weight.set( weight );
    }// End Method
 
    /**
@@ -67,7 +78,7 @@ public class PerceptronLearningRule {
       if ( output == null ){
          return null;
       } else {
-         return output * weight;
+         return output * weight.get();
       }
    }// End Method
 
@@ -78,7 +89,7 @@ public class PerceptronLearningRule {
     */
    public void learn( double target, double output ){
       double learningAdjustment = learningRate * ( target - output ) * firedOutput;
-      setWeight( weight + learningAdjustment );
+      setWeight( weight.get() + learningAdjustment );
    }// End Method
 
 }// End Class

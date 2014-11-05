@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: NeuralNetwork
+Bundle-SymbolicName: NeuralNetwork
+Bundle-Version: 1.0.0.qualifier
+Export-Package: architecture.utility,
+ model.function.learning,
+ model.function.threshold,
+ model.network,
+ model.singleton,
+ model.structure

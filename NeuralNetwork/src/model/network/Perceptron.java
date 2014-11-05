@@ -42,14 +42,19 @@ public class Perceptron {
     * @param outputNeurons the number of {@link Neuron}s in the output layer.
     */
    public Perceptron( int inputNeurons, int outputNeurons ){
-      bias = new Neuron( new BasicInputFunction( 1 ) );
+      bias = new Neuron( 
+               new NetworkPosition( 0, inputNeurons ), 
+               new BasicInputFunction( 1 ) 
+      );
       inputLayer = new NeuronLayer( new NeuronLayerBuilder()
                   .numberOfNeurons( inputNeurons )
                   .thresholdFunction( BasicInputFunction.class )
+                  .layer( 0 )
       );
       outputLayer = new NeuronLayer( new NeuronLayerBuilder()
                   .numberOfNeurons( outputNeurons )
                   .thresholdFunction( McCullochPittsFunction.class )
+                  .layer( 1 )
       );
       connectLayers();
    }// End Constructor
@@ -205,6 +210,30 @@ public class Perceptron {
          outputCount++;
       }
       return new ReadOnlyArray< Double >( output );
+   }// End Method
+   
+   /**
+    * Method to get the {@link Neuron} providing the bias to the network.
+    * @return the bias {@link Neuron}.
+    */
+   public Neuron getBias(){
+      return bias;
+   }// End Method
+   
+   /** 
+    * Method to get the input {@link NeuronLayer} for the network.
+    * @return the {@link NeuronLayer} for the input.
+    */
+   public NeuronLayer getInputLayer(){
+      return inputLayer;
+   }// End Method
+   
+   /**
+    * Method to get the output {@link NeuronLayer} for the network.
+    * @return the {@link NeuronLayer} for the output.
+    */
+   public NeuronLayer getOutputLayer(){
+      return outputLayer;
    }// End Method
 
 }// End Class
