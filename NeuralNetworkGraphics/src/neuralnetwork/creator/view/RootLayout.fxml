@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="450.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <center>
-      <BorderPane prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="450.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
