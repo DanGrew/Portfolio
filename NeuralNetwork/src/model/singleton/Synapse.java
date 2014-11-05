@@ -7,6 +7,8 @@
  */
  package model.singleton;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.Property;
 import model.function.learning.PerceptronLearningRule;
 import model.function.threshold.ThresholdFunction;
 
@@ -70,6 +72,14 @@ public class Synapse {
     */
    public Neuron getOutput(){
       return outputNeuron;
+   }// End Method
+   
+   /**
+    * Method to get the {@link Property} for the weight of the {@link Synapse}.
+    * @return {@link #learningRule#getWeightProperty()}.
+    */
+   public DoubleProperty getWeightProperty(){
+      return learningRule.getWeightProperty();
    }// End Method
 
    /**

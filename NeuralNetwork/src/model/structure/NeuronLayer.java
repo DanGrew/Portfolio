@@ -42,6 +42,8 @@ public class NeuronLayer {
       private int numberOfNeurons;
       /** The {@link Class} of the {@link ThresholdFunction} to use.**/
       private Class< ? extends ThresholdFunction > thresholdFunction;
+      /** The layer position in the network. **/
+      private int layer = 0;
 
       /**
        * Constructs a new {@link NeuronLayerBuilder}.
@@ -67,6 +69,17 @@ public class NeuronLayer {
          this.thresholdFunction = thresholdFunction;
          return this;
       }// End Method
+      
+      /**
+       * Method to configure the position of the layer in the network, used to position
+       * {@link Neuron}s when constructed.
+       * @param layer the position of the layer in the network.
+       * @return the {@link NeuronLayerBuilder}.
+       */
+      public NeuronLayerBuilder layer( int layer ){
+         this.layer = layer;
+         return this;
+      }// End Method
    }// End Class
 
    /**
@@ -77,16 +90,17 @@ public class NeuronLayer {
       thresholdFunction = builder.thresholdFunction;
       capacity = builder.numberOfNeurons;
       neurons = new ArrayList< Neuron >( capacity );
-      constructNeurons();
+      constructNeurons( builder.layer );
    }// End Constructor
 
    /**
     * Method to construct the {@link Neuron}s in the {@link NeuronLayer}.
+    * @param layer the position of the {@link NeuronLayer} in the network.
     */
-   public void constructNeurons() {
+   public void constructNeurons( int layer ) {
       for ( int i = 0; i < capacity; i++ ){
          ThresholdFunction function = ObjectGenerator.construct( thresholdFunction );
-         Neuron neuron = new Neuron( function );
+         Neuron neuron = new Neuron( new NetworkPosition( layer, i ), function );
          addNeuron( neuron );
       }
    }// End Method

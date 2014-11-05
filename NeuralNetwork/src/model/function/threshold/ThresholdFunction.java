@@ -7,6 +7,9 @@
  */
  package model.function.threshold;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.Property;
+import javafx.beans.property.SimpleDoubleProperty;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
 
@@ -20,13 +23,13 @@ public abstract class ThresholdFunction {
    private static final int THRESHOLD = 0;
    /** The calculated output based on the input from associated {@link Neuron}s and
     * {@link Synapse}s. **/
-   protected Double output;
+   protected DoubleProperty output;
 
    /**
     * Constructs a new {@link ThresholdFunction}.
     */
    protected ThresholdFunction() {
-      this( null );
+      this( 0.0 );
    }// End Method
 
    /**
@@ -34,7 +37,7 @@ public abstract class ThresholdFunction {
     * @param output the precalculated output, or input.
     */
    protected ThresholdFunction( Double output ) {
-      this.output = output;
+      this.output = new SimpleDoubleProperty( output );
    }// End Constructor
 
    /**
@@ -49,7 +52,7 @@ public abstract class ThresholdFunction {
     * @return true if exceeded, false otherwise.
     */
    public boolean excedesThreshold() {
-      return outputExceedsThreshold( output );
+      return outputExceedsThreshold( output.get() );
    }// End Method
 
    /**
@@ -71,7 +74,7 @@ public abstract class ThresholdFunction {
     * @param output the output calculated.
     */
    protected void setOutput( Double output ) {
-      this.output = output;
+      this.output.set( output );
    }// End Method
 
    /**
@@ -79,6 +82,15 @@ public abstract class ThresholdFunction {
     * @return the output calculated from the inputs.
     */
    public Double getOutput() {
+      return output.get();
+   }// End Method
+   
+   /** 
+    * Method to get the {@link Property} of the output value of this {@link ThresholdFunction}, used
+    * for receiving events when the value changes.
+    * @return the {@link DoubleProperty} for the output value.
+    */
+   public DoubleProperty getOutputProperty(){
       return output;
    }// End Method
 

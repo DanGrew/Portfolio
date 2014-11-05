@@ -7,6 +7,8 @@
  */
 package model.structure;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import model.singleton.Neuron;
 
 /**
@@ -19,6 +21,8 @@ public class NetworkPosition {
    public final int layer;
    /** The index of the {@link Neuron} in the {@link NeuronLayer}.**/
    public final int index;
+   /** The {@link StringProperty} respresenting the {@link NetworkPosition}. */
+   private final StringProperty stringRepresentation;
 
    /**
     * Constructs a new {@link NetworkPosition}.
@@ -28,6 +32,19 @@ public class NetworkPosition {
    public NetworkPosition( int layer, int index ){
       this.layer = layer;
       this.index = index;
+      stringRepresentation = new SimpleStringProperty( String.format( 
+               "( %d, %d )",
+               layer,
+               index
+      ) );
+   }// End Method
+   
+   /**
+    * Method to get the {@link StringProperty} representing the {@link NetworkPosition}s.
+    * @return the {@link StringProperty} describing the position.
+    */
+   public StringProperty getRepresentationProperty(){
+      return stringRepresentation;
    }// End Method
 
 }// End Class
