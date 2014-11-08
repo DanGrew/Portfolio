@@ -13,6 +13,7 @@ import java.util.Iterator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.network.Perceptron;
@@ -34,12 +35,16 @@ public class NetworkOverviewController {
    @FXML private TableColumn< Synapse, String > inputPositionColumn;
    @FXML private TableColumn< Synapse, String > outputPositionColumn;
    @FXML private TableColumn< Synapse, Number > weightColumn;
+   
    @FXML private TableView< Neuron > inputTable;
    @FXML private TableColumn< Neuron, String > inputNeuronPositionColumn;
    @FXML private TableColumn< Neuron, Number > inputNeuronOutputColumn;
+   
    @FXML private TableView< Neuron > outputTable;
    @FXML private TableColumn< Neuron, String > outputNeuronPositionColumn;
    @FXML private TableColumn< Neuron, Number > outputNeuronOutputColumn;
+   
+   @FXML private ProgressBar learningProgressBar;
    
    /** The {@link ObservableList} of {@link Neuron}s in the input {@link NeuronLayer}. **/
    private ObservableList< Neuron > inputNeurons = FXCollections.observableArrayList();

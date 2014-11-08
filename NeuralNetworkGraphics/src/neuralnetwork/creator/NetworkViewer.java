@@ -10,7 +10,6 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.network.Perceptron;
@@ -30,6 +29,8 @@ public class NetworkViewer extends Application {
    private Stage primaryStage;
    /** The root of the interface.**/
    private BorderPane rootLayout;
+   /** The {@link NetworkViewerController} for the application. **/
+   private NetworkViewerController controller;
    /** The {@link Perceptron} being displayed.**/
    private Perceptron perceptron;
 
@@ -58,9 +59,9 @@ public class NetworkViewer extends Application {
    public void initRootLayout() {
       try {
          FXMLLoader loader = new FXMLLoader();
-         loader.setLocation( NetworkViewer.class.getResource( ROOT_FXML ) );
+         loader.setLocation( NetworkViewer.class.getResource( VIEWER_FXML ) );
          rootLayout = ( BorderPane ) loader.load();
-
+         controller = loader.getController();
          Scene scene = new Scene( rootLayout );
          primaryStage.setScene( scene );
          primaryStage.show();
@@ -73,18 +74,9 @@ public class NetworkViewer extends Application {
     * Method to show the {@link Perceptron} in the {@link NetworkViewer}.
     */
    public void showNetworkOverview() {
-      try {
-         FXMLLoader loader = new FXMLLoader();
-         loader.setLocation( NetworkViewer.class.getResource( VIEWER_FXML ) );
-         AnchorPane networkOverview = ( AnchorPane ) loader.load();
-
-         rootLayout.setCenter( networkOverview );
-
-         NetworkViewerController controller = loader.getController();
-         controller.setPerceptron( perceptron );
-      } catch ( IOException e ) {
-         e.printStackTrace();
-      }
+      controller.applySceneCenter( rootLayout );
+      controller.populate();
+      controller.setPerceptron( perceptron );
    }// End Method
 
    /**
