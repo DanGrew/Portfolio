@@ -45,7 +45,7 @@ public class NetworkOverviewController {
    private ObservableList< Neuron > inputNeurons = FXCollections.observableArrayList();
    /** The {@link ObservableList} of {@link Neuron}s in the output {@link NeuronLayer}. **/
    private ObservableList< Neuron > outputNeurons = FXCollections.observableArrayList();
-   /** The {@link ObservableList} of {@link Synapse}s between al {@link Neuron}s in the {@link Perceptron}. **/
+   /** The {@link ObservableList} of {@link Synapse}s between all {@link Neuron}s in the {@link Perceptron}. **/
    private ObservableList< Synapse > synapses = FXCollections.observableArrayList();
    
    /**

@@ -16,6 +16,7 @@ import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import model.function.threshold.McCullochPittsFunction;
 import model.function.threshold.ThresholdFunction;
+import model.structure.LearningParameter.NeuronValue;
 import model.structure.NetworkPosition;
 
 /**
@@ -135,6 +136,15 @@ public class Neuron {
     */
    public DoubleProperty getOutputProperty(){
       return thresholdFunction.getOutputProperty();
+   }// End Method
+   
+   /**
+    * Method to construct a {@link NeuronValue} representation of this {@link Neuron} and 
+    * its output.
+    * @return a new {@link NeuronValue} for this {@link Neuron} in its current state.
+    */
+   public NeuronValue constructValue(){
+      return new NeuronValue( identification, thresholdFunction.getOutput() );
    }// End Method
 
    /**

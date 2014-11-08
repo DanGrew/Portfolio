@@ -9,8 +9,8 @@ package logic.learning;
 
 import logic.constructed.PerceptronLogicalOrTest;
 import model.network.Perceptron;
+import model.structure.LearningParameter;
 import model.structure.LearningParameters;
-import model.structure.LearningParameters.LearningParameter;
 
 import org.junit.BeforeClass;
 

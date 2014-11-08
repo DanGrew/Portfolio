@@ -10,8 +10,8 @@ package examples.learning;
 import static org.junit.Assert.assertTrue;
 import model.network.Perceptron;
 import model.singleton.Neuron;
+import model.structure.LearningParameter;
 import model.structure.LearningParameters;
-import model.structure.LearningParameters.LearningParameter;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -96,7 +96,7 @@ public class AeroplaneMultipleOutputClassificationTest {
                new Double( 0.1 )
       );
       perceptron.fireInput();
-      ReadOnlyArray< Double > output = perceptron.getOutput();
+      ReadOnlyArray< Double > output = perceptron.getOutputArray();
       assertTrue( output.get( 0 ) == 1.0 );
       assertTrue( output.get( 1 ) == 0.0 );
    }// End Method
@@ -111,7 +111,7 @@ public class AeroplaneMultipleOutputClassificationTest {
                new Double( 0.5 )
       );
       perceptron.fireInput();
-      ReadOnlyArray< Double > output = perceptron.getOutput();
+      ReadOnlyArray< Double > output = perceptron.getOutputArray();
       assertTrue( output.get( 0 ) == 0.0 );
       assertTrue( output.get( 1 ) == 1.0 );
    }// End Method
@@ -125,7 +125,7 @@ public class AeroplaneMultipleOutputClassificationTest {
                new Double( 0.4 )
       );
       perceptron.fireInput();
-      ReadOnlyArray< Double > output = perceptron.getOutput();
+      ReadOnlyArray< Double > output = perceptron.getOutputArray();
       assertTrue( output.get( 0 ) == 1.0 );
       assertTrue( output.get( 1 ) == 0.0 );
    }// End Method
@@ -140,7 +140,7 @@ public class AeroplaneMultipleOutputClassificationTest {
                new Double( 0.9 )
       );
       perceptron.fireInput();
-      ReadOnlyArray< Double > output = perceptron.getOutput();
+      ReadOnlyArray< Double > output = perceptron.getOutputArray();
       assertTrue( output.get( 0 ) == 0.0 );
       assertTrue( output.get( 1 ) == 1.0 );
    }// End Method

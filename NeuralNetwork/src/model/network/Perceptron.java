@@ -9,17 +9,19 @@
 
 import java.util.Iterator;
 
-import architecture.utility.ReadOnlyArray;
 import model.function.threshold.BasicInputFunction;
 import model.function.threshold.McCullochPittsFunction;
 import model.function.threshold.ThresholdFunction;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
+import model.structure.LearningParameter;
+import model.structure.LearningParameter.NeuronValue;
 import model.structure.LearningParameters;
-import model.structure.LearningParameters.LearningParameter;
 import model.structure.NetworkPosition;
 import model.structure.NeuronLayer;
 import model.structure.NeuronLayer.NeuronLayerBuilder;
+import model.structure.NeuronValueArray;
+import architecture.utility.ReadOnlyArray;
 
 /**
  * The {@link Perceptron} provides a basic Neural Network with two layers, input and output.
@@ -77,19 +79,28 @@ public class Perceptron {
    /**
     * Method to configure the input values for the {@link Perceptron}. This can be done multiple times
     * as the {@link Neuron}s are reset after each {@link NeuronLayer} has fired.
-    * @param inputValues the {@link Double} values to input. Must be same number of values as the
+    * @param inputValues the {@link NeuronValueArray} of values to input. Must be same number of values as the
     * number of {@link Neuron}s in the input layer.
     */
-   public void configureInput( ReadOnlyArray< Double > inputValues ){
+   public void configureInput( NeuronValueArray inputValues ){
       inputLayer.configureInput( inputValues );
    }// End Method
 
    /**
     * Method to configure the {@link Double} input values to the {@link Perceptron}.
-    * @param inputValues the input values.
+    * @param inputValues the {@link NeuronValue}s defining the input values.
+    */
+   public void configureInput( NeuronValue... inputValues ){
+      inputLayer.configureInput( new NeuronValueArray( inputValues ) );
+   }// End Method
+   
+   /**
+    * Method to configure the {@link Double} input values to the {@link Perceptron}.
+    * @param inputValues the {@link Double}s defining the input values. A default
+    * {@link NetworkPosition} is assumed.
     */
    public void configureInput( Double... inputValues ){
-      inputLayer.configureInput( new ReadOnlyArray< Double >( inputValues ) );
+      inputLayer.configureInput( new NeuronValueArray( inputValues ) );
    }// End Method
 
    /**
@@ -183,11 +194,13 @@ public class Perceptron {
     * @param targets the {@link Double} targets to learn.
     * @return whether the targets have been learnt.
     */
-   public boolean isLearnt( ReadOnlyArray< Double > targets ){
-      ReadOnlyArray< Double > outputs = getOutput();
+   public boolean isLearnt( ReadOnlyArray< NeuronValue > targets ){
+      NeuronValueArray outputs = getOutput();
       if ( targets.length() == outputs.length() ){
          for ( int i = 0; i < outputs.length(); i++ ){
-            if ( !outputs.get( i ).equals( targets.get( i ) ) ){
+            double output = outputs.get( i ).value.doubleValue();
+            double target = targets.get( i ).value.get();
+            if ( output != target ){
                return false;
             }
          }
@@ -201,7 +214,8 @@ public class Perceptron {
     * Method to get the array of output values from the output layer.
     * @return the {@link Double} {@link ReadOnlyArray} of output.
     */
-   public ReadOnlyArray< Double > getOutput(){
+   @Deprecated
+   public ReadOnlyArray< Double > getOutputArray(){
       Double[] output = new Double[ outputLayer.size() ];
       int outputCount = 0;
       for ( Iterator< Neuron > iterator = outputLayer.iterator(); iterator.hasNext(); ){
@@ -210,6 +224,15 @@ public class Perceptron {
          outputCount++;
       }
       return new ReadOnlyArray< Double >( output );
+   }// End Method
+   
+   /**
+    * Method to get the {@link NeuronValueArray} of output from the output 
+    * {@link NeuronLayer}.
+    * @return the {@link NeuronLayer#constructOutput()};
+    */
+   public NeuronValueArray getOutput(){
+      return outputLayer.constructOutput();
    }// End Method
    
    /**

@@ -16,6 +16,7 @@ import java.util.List;
 import model.function.threshold.ThresholdFunction;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
+import model.structure.LearningParameter.NeuronValue;
 import architecture.utility.ObjectGenerator;
 import architecture.utility.ReadOnlyArray;
 
@@ -144,17 +145,29 @@ public class NeuronLayer {
 
    /**
     * Method to configure the input values for the {@link NeuronLayer}.
-    * @param inputValues the input values to set on the {@link Neuron}s.
+    * @param inputValues the {@link NeuronValueArray} of input values to set on the {@link Neuron}s.
     */
-   public void configureInput( ReadOnlyArray< Double > inputValues ){
+   public void configureInput( NeuronValueArray inputValues ){
       if ( inputValues.length() > size() ){
          throw new IllegalArgumentException();
       } else {
-         for ( int i = 0; i < inputValues.length(); i++ ){
-            Neuron neuron = neurons.get( i );
-            neuron.synapseFired( inputValues.get( i ) );
+         for ( NeuronValue value : inputValues ){
+            Neuron neuron = getNeuronAtPosition( value.position );
+            neuron.synapseFired( value.value.doubleValue() );
          }
       }
+   }// End Method
+   
+   /**
+    * Method to construct a {@link NeuronValueArray} of output from the {@link Neuron}s.
+    * @return a {@link NeuronValueArray} of output.
+    */
+   public NeuronValueArray constructOutput(){
+      NeuronValue[] values = new NeuronValue[ neurons.size() ];
+      for ( int i = 0; i < neurons.size(); i++ ){
+         values[ i ] = neurons.get( i ).constructValue();
+      }
+      return new NeuronValueArray( values );
    }// End Method
 
    /**
@@ -171,11 +184,11 @@ public class NeuronLayer {
     * Method to make the {@link Neuron}s in this {@link NeuronLayer} {@link Neuron#learn(double)}.
     * @param targets the targets the {@link Neuron}s should have achieved.
     */
-   public void learn( ReadOnlyArray< Double > targets ){
+   public void learn( ReadOnlyArray< NeuronValue > targets ){
       if ( targets.length() == neurons.size() ){
-         for ( int i = 0; i < neurons.size(); i++ ){
-            Neuron neuron = neurons.get( i );
-            neuron.learn( targets.get( i ) );
+         for ( NeuronValue value : targets ){
+            Neuron neuron = getNeuronAtPosition( value.position );
+            neuron.learn( value.value.doubleValue() );
          }
       } else {
          throw new IllegalArgumentException();
