@@ -18,7 +18,7 @@ import model.network.Perceptron;
 public class NetworkViewerController {
 
    @FXML private NetworkOverviewController networkOverviewController;
-   @FXML private PercetronLearnerController perceptronLearnerController;
+   @FXML private PerceptronLearnerController perceptronLearnerController;
    
    @FXML private void initialize(){}
    
