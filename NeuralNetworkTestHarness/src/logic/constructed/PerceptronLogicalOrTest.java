@@ -51,7 +51,7 @@ public class PerceptronLogicalOrTest {
                new Double( 0 )
       );
       perceptron.fireInput();
-      ReadOnlyArray< Double > output = perceptron.getOutput();
+      ReadOnlyArray< Double > output = perceptron.getOutputArray();
       assertTrue( output.get( 0 ) == 0 );
    }// End Method
 
@@ -64,7 +64,7 @@ public class PerceptronLogicalOrTest {
                new Double( 1 )
       );
       perceptron.fireInput();
-      ReadOnlyArray< Double > output = perceptron.getOutput();
+      ReadOnlyArray< Double > output = perceptron.getOutputArray();
       assertTrue( output.get( 0 ) == 1 );
    }// End Method
 
@@ -77,7 +77,7 @@ public class PerceptronLogicalOrTest {
                new Double( 0 )
       );
       perceptron.fireInput();
-      ReadOnlyArray< Double > output = perceptron.getOutput();
+      ReadOnlyArray< Double > output = perceptron.getOutputArray();
       assertTrue( output.get( 0 ) == 1 );
    }// End Method
 
@@ -90,7 +90,7 @@ public class PerceptronLogicalOrTest {
                new Double( 1 )
       );
       perceptron.fireInput();
-      ReadOnlyArray< Double > output = perceptron.getOutput();
+      ReadOnlyArray< Double > output = perceptron.getOutputArray();
       assertTrue( output.get( 0 ) == 1 );
    }// End Methode
 
