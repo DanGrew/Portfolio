@@ -159,8 +159,4 @@ public class PerceptronLearnerController implements TableItemControls{
    @Override public void removeAction() {
    }
    
-   public void registerForLearningParameters( ListChangeListener< LearningParameter > listener ){
-      learningParameters.addListener( listener );
-   }
-   
 }// End Class
