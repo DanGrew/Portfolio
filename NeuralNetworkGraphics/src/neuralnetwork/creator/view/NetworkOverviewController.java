@@ -21,6 +21,7 @@ import model.singleton.Neuron;
 import model.singleton.Synapse;
 import model.structure.NeuronLayer;
 import neuralnetwork.creator.NetworkViewer;
+import neuralnetwork.creator.view.component.ProgressBarController;
 import neuralnetwork.creator.view.ordering.NeuronComparator;
 import neuralnetwork.creator.view.ordering.SynapseComparator;
 
@@ -70,6 +71,8 @@ public class NetworkOverviewController {
       inputPositionColumn.setCellValueFactory( cellData -> cellData.getValue().getInput().getIdentificationProperty() );
       outputPositionColumn.setCellValueFactory( cellData -> cellData.getValue().getOutput().getIdentificationProperty() );
       weightColumn.setCellValueFactory( cellData -> cellData.getValue().getWeightProperty() );
+      
+      new ProgressBarController( learningProgressBar );
    }// End Method
    
    /**

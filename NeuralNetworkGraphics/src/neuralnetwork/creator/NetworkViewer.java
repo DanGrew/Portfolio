@@ -39,7 +39,7 @@ public class NetworkViewer extends Application {
     */
    public NetworkViewer() {
       super();
-      perceptron = new Perceptron( 3, 2 );
+      perceptron = new Perceptron( 3, 3 );
    }// End Constructor
 
    /**
@@ -75,8 +75,8 @@ public class NetworkViewer extends Application {
     */
    public void showNetworkOverview() {
       controller.applySceneCenter( rootLayout );
-      controller.populate();
       controller.setPerceptron( perceptron );
+      controller.populate();
    }// End Method
 
    /**

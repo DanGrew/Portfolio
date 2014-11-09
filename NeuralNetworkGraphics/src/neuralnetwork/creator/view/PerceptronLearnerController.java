@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import model.structure.LearningParameter;
 import model.structure.LearningParameter.NeuronValue;
 import model.structure.NetworkPosition;
+import architecture.event.EventSystem;
 import architecture.utility.ObjectGenerator;
 import constructs.view.tableitemcontrols.TableItemControls;
 import constructs.view.tableitemcontrols.TableItemControlsControllerImpl;
@@ -28,6 +29,11 @@ import constructs.view.tableitemcontrols.TableItemControlsControllerImpl;
  */
 public class PerceptronLearnerController implements TableItemControls{
 
+   /** Enum defining the publicly available observables to register interest in. **/
+   public enum Observables {
+      LearningParameters;
+   }
+   
    @FXML private AnchorPane tableControls;
    @FXML private TableItemControlsControllerImpl tableControlsController;
    
@@ -50,6 +56,7 @@ public class PerceptronLearnerController implements TableItemControls{
     */
    @FXML private void initialize(){      
       tableControlsController.setExternalController( this );
+      EventSystem.observeList( Observables.LearningParameters, learningParameters );
 
       parmeterInputPositionColumn.setCellValueFactory( cellData -> cellData.getValue().getValue().position.getRepresentationProperty() );
       parmeterInputColumn.setCellValueFactory( cellData -> cellData.getValue().getValue().value );

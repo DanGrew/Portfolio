@@ -173,6 +173,16 @@ public class Perceptron {
          }
       }
    }// End Method
+   
+   /**
+    * Method to learn the given {@link LearningParameter}. This will call
+    * {@link LearningParameter#configureInput(Perceptron)} and then {@link #applyOnlineLearning(LearningParameter)}.
+    * @param parameter the {@link LearningParameter} to learn.
+    */
+   public void learn( LearningParameter parameter ){
+      parameter.configureInput( this );
+      applyOnlineLearning( parameter );
+   }// End Method
 
    /**
     * Method to apply online learning, allow the perceptron to learn the target output having
