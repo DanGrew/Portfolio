@@ -9,6 +9,8 @@
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.Property;
+import model.data.read.SerializableSynapse;
+import model.data.write.SerializedSynapse;
 import model.function.learning.PerceptronLearningRule;
 import model.function.threshold.ThresholdFunction;
 
@@ -16,7 +18,7 @@ import model.function.threshold.ThresholdFunction;
   * The {@link Synapse} is responsible for connecting two {@link Neuron}s and weighting
   * the output between them.
   */
-public class Synapse {
+public class Synapse extends Singleton< SerializableSynapse, SerializedSynapse >{
 
    /** The input {@link Neuron} providing the output value to this {@link Synapse}.**/
    private Neuron inputNeuron;
@@ -36,6 +38,7 @@ public class Synapse {
       this.inputNeuron = inputNeuron;
       this.outputNeuron = outputNeuron;
       learningRule = new PerceptronLearningRule( 0.1 );
+      identification = inputNeuron.getIdentificationProperty().get() + "_" + outputNeuron.getIdentificationProperty().get();
       connectSynapse();
    }// End Constructor
 
@@ -56,6 +59,14 @@ public class Synapse {
    private void connectSynapse() {
       inputNeuron.addOutgoingSynapse( this );
       outputNeuron.addIncomingSynapse( this );
+   }// End Method
+   
+   /**
+    * Method to get the identification of the {@link Synapse}.
+    * @return the {@link String} representing the id of the {@link Synapse}.
+    */
+   public String getIdentification(){
+      return identification;
    }// End Method
 
    /**
@@ -113,13 +124,30 @@ public class Synapse {
    public void learn( double target, double output ){
       learningRule.learn( target, output );
    }// End Method
-
+   
    /**
     * Method to produce a weight sumary of the {@link Synapse}.
     * @return a {@link String} containing the weight.
     */
    public String toWeightString(){
       return learningRule.getWeight().toString();
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void writeSingleton( SerializableSynapse serializable ) {
+      serializable.setInputNeuron( inputNeuron );
+      serializable.setOutputNeuron( outputNeuron );
+      serializable.setLearningRule( learningRule.getClass() );
+      learningRule.write( serializable );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void readSingleton( SerializedSynapse serialized ){
+      
    }// End Method
 
 }// End Class

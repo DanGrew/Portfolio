@@ -1,0 +1,2565 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xmlPerceptronWrapper>
+    <neuronWrapper>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 0 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 0 )_( 1, 0 )</synapse>
+                <synapse>( 0, 0 )_( 1, 1 )</synapse>
+                <synapse>( 0, 0 )_( 1, 2 )</synapse>
+                <synapse>( 0, 0 )_( 1, 3 )</synapse>
+                <synapse>( 0, 0 )_( 1, 4 )</synapse>
+                <synapse>( 0, 0 )_( 1, 5 )</synapse>
+                <synapse>( 0, 0 )_( 1, 6 )</synapse>
+                <synapse>( 0, 0 )_( 1, 7 )</synapse>
+                <synapse>( 0, 0 )_( 1, 8 )</synapse>
+                <synapse>( 0, 0 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 1 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 1 )_( 1, 0 )</synapse>
+                <synapse>( 0, 1 )_( 1, 1 )</synapse>
+                <synapse>( 0, 1 )_( 1, 2 )</synapse>
+                <synapse>( 0, 1 )_( 1, 3 )</synapse>
+                <synapse>( 0, 1 )_( 1, 4 )</synapse>
+                <synapse>( 0, 1 )_( 1, 5 )</synapse>
+                <synapse>( 0, 1 )_( 1, 6 )</synapse>
+                <synapse>( 0, 1 )_( 1, 7 )</synapse>
+                <synapse>( 0, 1 )_( 1, 8 )</synapse>
+                <synapse>( 0, 1 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 2 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 2 )_( 1, 0 )</synapse>
+                <synapse>( 0, 2 )_( 1, 1 )</synapse>
+                <synapse>( 0, 2 )_( 1, 2 )</synapse>
+                <synapse>( 0, 2 )_( 1, 3 )</synapse>
+                <synapse>( 0, 2 )_( 1, 4 )</synapse>
+                <synapse>( 0, 2 )_( 1, 5 )</synapse>
+                <synapse>( 0, 2 )_( 1, 6 )</synapse>
+                <synapse>( 0, 2 )_( 1, 7 )</synapse>
+                <synapse>( 0, 2 )_( 1, 8 )</synapse>
+                <synapse>( 0, 2 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 3 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 3 )_( 1, 0 )</synapse>
+                <synapse>( 0, 3 )_( 1, 1 )</synapse>
+                <synapse>( 0, 3 )_( 1, 2 )</synapse>
+                <synapse>( 0, 3 )_( 1, 3 )</synapse>
+                <synapse>( 0, 3 )_( 1, 4 )</synapse>
+                <synapse>( 0, 3 )_( 1, 5 )</synapse>
+                <synapse>( 0, 3 )_( 1, 6 )</synapse>
+                <synapse>( 0, 3 )_( 1, 7 )</synapse>
+                <synapse>( 0, 3 )_( 1, 8 )</synapse>
+                <synapse>( 0, 3 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 4 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 4 )_( 1, 0 )</synapse>
+                <synapse>( 0, 4 )_( 1, 1 )</synapse>
+                <synapse>( 0, 4 )_( 1, 2 )</synapse>
+                <synapse>( 0, 4 )_( 1, 3 )</synapse>
+                <synapse>( 0, 4 )_( 1, 4 )</synapse>
+                <synapse>( 0, 4 )_( 1, 5 )</synapse>
+                <synapse>( 0, 4 )_( 1, 6 )</synapse>
+                <synapse>( 0, 4 )_( 1, 7 )</synapse>
+                <synapse>( 0, 4 )_( 1, 8 )</synapse>
+                <synapse>( 0, 4 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 5 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 5 )_( 1, 0 )</synapse>
+                <synapse>( 0, 5 )_( 1, 1 )</synapse>
+                <synapse>( 0, 5 )_( 1, 2 )</synapse>
+                <synapse>( 0, 5 )_( 1, 3 )</synapse>
+                <synapse>( 0, 5 )_( 1, 4 )</synapse>
+                <synapse>( 0, 5 )_( 1, 5 )</synapse>
+                <synapse>( 0, 5 )_( 1, 6 )</synapse>
+                <synapse>( 0, 5 )_( 1, 7 )</synapse>
+                <synapse>( 0, 5 )_( 1, 8 )</synapse>
+                <synapse>( 0, 5 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 6 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 6 )_( 1, 0 )</synapse>
+                <synapse>( 0, 6 )_( 1, 1 )</synapse>
+                <synapse>( 0, 6 )_( 1, 2 )</synapse>
+                <synapse>( 0, 6 )_( 1, 3 )</synapse>
+                <synapse>( 0, 6 )_( 1, 4 )</synapse>
+                <synapse>( 0, 6 )_( 1, 5 )</synapse>
+                <synapse>( 0, 6 )_( 1, 6 )</synapse>
+                <synapse>( 0, 6 )_( 1, 7 )</synapse>
+                <synapse>( 0, 6 )_( 1, 8 )</synapse>
+                <synapse>( 0, 6 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 7 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 7 )_( 1, 0 )</synapse>
+                <synapse>( 0, 7 )_( 1, 1 )</synapse>
+                <synapse>( 0, 7 )_( 1, 2 )</synapse>
+                <synapse>( 0, 7 )_( 1, 3 )</synapse>
+                <synapse>( 0, 7 )_( 1, 4 )</synapse>
+                <synapse>( 0, 7 )_( 1, 5 )</synapse>
+                <synapse>( 0, 7 )_( 1, 6 )</synapse>
+                <synapse>( 0, 7 )_( 1, 7 )</synapse>
+                <synapse>( 0, 7 )_( 1, 8 )</synapse>
+                <synapse>( 0, 7 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 8 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 8 )_( 1, 0 )</synapse>
+                <synapse>( 0, 8 )_( 1, 1 )</synapse>
+                <synapse>( 0, 8 )_( 1, 2 )</synapse>
+                <synapse>( 0, 8 )_( 1, 3 )</synapse>
+                <synapse>( 0, 8 )_( 1, 4 )</synapse>
+                <synapse>( 0, 8 )_( 1, 5 )</synapse>
+                <synapse>( 0, 8 )_( 1, 6 )</synapse>
+                <synapse>( 0, 8 )_( 1, 7 )</synapse>
+                <synapse>( 0, 8 )_( 1, 8 )</synapse>
+                <synapse>( 0, 8 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 9 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 9 )_( 1, 0 )</synapse>
+                <synapse>( 0, 9 )_( 1, 1 )</synapse>
+                <synapse>( 0, 9 )_( 1, 2 )</synapse>
+                <synapse>( 0, 9 )_( 1, 3 )</synapse>
+                <synapse>( 0, 9 )_( 1, 4 )</synapse>
+                <synapse>( 0, 9 )_( 1, 5 )</synapse>
+                <synapse>( 0, 9 )_( 1, 6 )</synapse>
+                <synapse>( 0, 9 )_( 1, 7 )</synapse>
+                <synapse>( 0, 9 )_( 1, 8 )</synapse>
+                <synapse>( 0, 9 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 10 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 10 )_( 1, 0 )</synapse>
+                <synapse>( 0, 10 )_( 1, 1 )</synapse>
+                <synapse>( 0, 10 )_( 1, 2 )</synapse>
+                <synapse>( 0, 10 )_( 1, 3 )</synapse>
+                <synapse>( 0, 10 )_( 1, 4 )</synapse>
+                <synapse>( 0, 10 )_( 1, 5 )</synapse>
+                <synapse>( 0, 10 )_( 1, 6 )</synapse>
+                <synapse>( 0, 10 )_( 1, 7 )</synapse>
+                <synapse>( 0, 10 )_( 1, 8 )</synapse>
+                <synapse>( 0, 10 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 11 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 11 )_( 1, 0 )</synapse>
+                <synapse>( 0, 11 )_( 1, 1 )</synapse>
+                <synapse>( 0, 11 )_( 1, 2 )</synapse>
+                <synapse>( 0, 11 )_( 1, 3 )</synapse>
+                <synapse>( 0, 11 )_( 1, 4 )</synapse>
+                <synapse>( 0, 11 )_( 1, 5 )</synapse>
+                <synapse>( 0, 11 )_( 1, 6 )</synapse>
+                <synapse>( 0, 11 )_( 1, 7 )</synapse>
+                <synapse>( 0, 11 )_( 1, 8 )</synapse>
+                <synapse>( 0, 11 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 12 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 12 )_( 1, 0 )</synapse>
+                <synapse>( 0, 12 )_( 1, 1 )</synapse>
+                <synapse>( 0, 12 )_( 1, 2 )</synapse>
+                <synapse>( 0, 12 )_( 1, 3 )</synapse>
+                <synapse>( 0, 12 )_( 1, 4 )</synapse>
+                <synapse>( 0, 12 )_( 1, 5 )</synapse>
+                <synapse>( 0, 12 )_( 1, 6 )</synapse>
+                <synapse>( 0, 12 )_( 1, 7 )</synapse>
+                <synapse>( 0, 12 )_( 1, 8 )</synapse>
+                <synapse>( 0, 12 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 13 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 13 )_( 1, 0 )</synapse>
+                <synapse>( 0, 13 )_( 1, 1 )</synapse>
+                <synapse>( 0, 13 )_( 1, 2 )</synapse>
+                <synapse>( 0, 13 )_( 1, 3 )</synapse>
+                <synapse>( 0, 13 )_( 1, 4 )</synapse>
+                <synapse>( 0, 13 )_( 1, 5 )</synapse>
+                <synapse>( 0, 13 )_( 1, 6 )</synapse>
+                <synapse>( 0, 13 )_( 1, 7 )</synapse>
+                <synapse>( 0, 13 )_( 1, 8 )</synapse>
+                <synapse>( 0, 13 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 14 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 14 )_( 1, 0 )</synapse>
+                <synapse>( 0, 14 )_( 1, 1 )</synapse>
+                <synapse>( 0, 14 )_( 1, 2 )</synapse>
+                <synapse>( 0, 14 )_( 1, 3 )</synapse>
+                <synapse>( 0, 14 )_( 1, 4 )</synapse>
+                <synapse>( 0, 14 )_( 1, 5 )</synapse>
+                <synapse>( 0, 14 )_( 1, 6 )</synapse>
+                <synapse>( 0, 14 )_( 1, 7 )</synapse>
+                <synapse>( 0, 14 )_( 1, 8 )</synapse>
+                <synapse>( 0, 14 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 15 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 15 )_( 1, 0 )</synapse>
+                <synapse>( 0, 15 )_( 1, 1 )</synapse>
+                <synapse>( 0, 15 )_( 1, 2 )</synapse>
+                <synapse>( 0, 15 )_( 1, 3 )</synapse>
+                <synapse>( 0, 15 )_( 1, 4 )</synapse>
+                <synapse>( 0, 15 )_( 1, 5 )</synapse>
+                <synapse>( 0, 15 )_( 1, 6 )</synapse>
+                <synapse>( 0, 15 )_( 1, 7 )</synapse>
+                <synapse>( 0, 15 )_( 1, 8 )</synapse>
+                <synapse>( 0, 15 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 16 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 16 )_( 1, 0 )</synapse>
+                <synapse>( 0, 16 )_( 1, 1 )</synapse>
+                <synapse>( 0, 16 )_( 1, 2 )</synapse>
+                <synapse>( 0, 16 )_( 1, 3 )</synapse>
+                <synapse>( 0, 16 )_( 1, 4 )</synapse>
+                <synapse>( 0, 16 )_( 1, 5 )</synapse>
+                <synapse>( 0, 16 )_( 1, 6 )</synapse>
+                <synapse>( 0, 16 )_( 1, 7 )</synapse>
+                <synapse>( 0, 16 )_( 1, 8 )</synapse>
+                <synapse>( 0, 16 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 17 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 17 )_( 1, 0 )</synapse>
+                <synapse>( 0, 17 )_( 1, 1 )</synapse>
+                <synapse>( 0, 17 )_( 1, 2 )</synapse>
+                <synapse>( 0, 17 )_( 1, 3 )</synapse>
+                <synapse>( 0, 17 )_( 1, 4 )</synapse>
+                <synapse>( 0, 17 )_( 1, 5 )</synapse>
+                <synapse>( 0, 17 )_( 1, 6 )</synapse>
+                <synapse>( 0, 17 )_( 1, 7 )</synapse>
+                <synapse>( 0, 17 )_( 1, 8 )</synapse>
+                <synapse>( 0, 17 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 18 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 18 )_( 1, 0 )</synapse>
+                <synapse>( 0, 18 )_( 1, 1 )</synapse>
+                <synapse>( 0, 18 )_( 1, 2 )</synapse>
+                <synapse>( 0, 18 )_( 1, 3 )</synapse>
+                <synapse>( 0, 18 )_( 1, 4 )</synapse>
+                <synapse>( 0, 18 )_( 1, 5 )</synapse>
+                <synapse>( 0, 18 )_( 1, 6 )</synapse>
+                <synapse>( 0, 18 )_( 1, 7 )</synapse>
+                <synapse>( 0, 18 )_( 1, 8 )</synapse>
+                <synapse>( 0, 18 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 19 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 19 )_( 1, 0 )</synapse>
+                <synapse>( 0, 19 )_( 1, 1 )</synapse>
+                <synapse>( 0, 19 )_( 1, 2 )</synapse>
+                <synapse>( 0, 19 )_( 1, 3 )</synapse>
+                <synapse>( 0, 19 )_( 1, 4 )</synapse>
+                <synapse>( 0, 19 )_( 1, 5 )</synapse>
+                <synapse>( 0, 19 )_( 1, 6 )</synapse>
+                <synapse>( 0, 19 )_( 1, 7 )</synapse>
+                <synapse>( 0, 19 )_( 1, 8 )</synapse>
+                <synapse>( 0, 19 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 0, 20 )</identification>
+            <incoming/>
+            <outgoing>
+                <synapse>( 0, 20 )_( 1, 0 )</synapse>
+                <synapse>( 0, 20 )_( 1, 1 )</synapse>
+                <synapse>( 0, 20 )_( 1, 2 )</synapse>
+                <synapse>( 0, 20 )_( 1, 3 )</synapse>
+                <synapse>( 0, 20 )_( 1, 4 )</synapse>
+                <synapse>( 0, 20 )_( 1, 5 )</synapse>
+                <synapse>( 0, 20 )_( 1, 6 )</synapse>
+                <synapse>( 0, 20 )_( 1, 7 )</synapse>
+                <synapse>( 0, 20 )_( 1, 8 )</synapse>
+                <synapse>( 0, 20 )_( 1, 9 )</synapse>
+            </outgoing>
+            <thresholdFunction>model.function.threshold.BasicInputFunction</thresholdFunction>
+            <currentOutput>1.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 0 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 0 )</synapse>
+                <synapse>( 0, 20 )_( 1, 0 )</synapse>
+                <synapse>( 0, 1 )_( 1, 0 )</synapse>
+                <synapse>( 0, 2 )_( 1, 0 )</synapse>
+                <synapse>( 0, 3 )_( 1, 0 )</synapse>
+                <synapse>( 0, 4 )_( 1, 0 )</synapse>
+                <synapse>( 0, 5 )_( 1, 0 )</synapse>
+                <synapse>( 0, 6 )_( 1, 0 )</synapse>
+                <synapse>( 0, 7 )_( 1, 0 )</synapse>
+                <synapse>( 0, 8 )_( 1, 0 )</synapse>
+                <synapse>( 0, 9 )_( 1, 0 )</synapse>
+                <synapse>( 0, 10 )_( 1, 0 )</synapse>
+                <synapse>( 0, 11 )_( 1, 0 )</synapse>
+                <synapse>( 0, 12 )_( 1, 0 )</synapse>
+                <synapse>( 0, 13 )_( 1, 0 )</synapse>
+                <synapse>( 0, 14 )_( 1, 0 )</synapse>
+                <synapse>( 0, 15 )_( 1, 0 )</synapse>
+                <synapse>( 0, 16 )_( 1, 0 )</synapse>
+                <synapse>( 0, 17 )_( 1, 0 )</synapse>
+                <synapse>( 0, 18 )_( 1, 0 )</synapse>
+                <synapse>( 0, 19 )_( 1, 0 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 1 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 1 )</synapse>
+                <synapse>( 0, 20 )_( 1, 1 )</synapse>
+                <synapse>( 0, 1 )_( 1, 1 )</synapse>
+                <synapse>( 0, 2 )_( 1, 1 )</synapse>
+                <synapse>( 0, 3 )_( 1, 1 )</synapse>
+                <synapse>( 0, 4 )_( 1, 1 )</synapse>
+                <synapse>( 0, 5 )_( 1, 1 )</synapse>
+                <synapse>( 0, 6 )_( 1, 1 )</synapse>
+                <synapse>( 0, 7 )_( 1, 1 )</synapse>
+                <synapse>( 0, 8 )_( 1, 1 )</synapse>
+                <synapse>( 0, 9 )_( 1, 1 )</synapse>
+                <synapse>( 0, 10 )_( 1, 1 )</synapse>
+                <synapse>( 0, 11 )_( 1, 1 )</synapse>
+                <synapse>( 0, 12 )_( 1, 1 )</synapse>
+                <synapse>( 0, 13 )_( 1, 1 )</synapse>
+                <synapse>( 0, 14 )_( 1, 1 )</synapse>
+                <synapse>( 0, 15 )_( 1, 1 )</synapse>
+                <synapse>( 0, 16 )_( 1, 1 )</synapse>
+                <synapse>( 0, 17 )_( 1, 1 )</synapse>
+                <synapse>( 0, 18 )_( 1, 1 )</synapse>
+                <synapse>( 0, 19 )_( 1, 1 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 2 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 2 )</synapse>
+                <synapse>( 0, 20 )_( 1, 2 )</synapse>
+                <synapse>( 0, 1 )_( 1, 2 )</synapse>
+                <synapse>( 0, 2 )_( 1, 2 )</synapse>
+                <synapse>( 0, 3 )_( 1, 2 )</synapse>
+                <synapse>( 0, 4 )_( 1, 2 )</synapse>
+                <synapse>( 0, 5 )_( 1, 2 )</synapse>
+                <synapse>( 0, 6 )_( 1, 2 )</synapse>
+                <synapse>( 0, 7 )_( 1, 2 )</synapse>
+                <synapse>( 0, 8 )_( 1, 2 )</synapse>
+                <synapse>( 0, 9 )_( 1, 2 )</synapse>
+                <synapse>( 0, 10 )_( 1, 2 )</synapse>
+                <synapse>( 0, 11 )_( 1, 2 )</synapse>
+                <synapse>( 0, 12 )_( 1, 2 )</synapse>
+                <synapse>( 0, 13 )_( 1, 2 )</synapse>
+                <synapse>( 0, 14 )_( 1, 2 )</synapse>
+                <synapse>( 0, 15 )_( 1, 2 )</synapse>
+                <synapse>( 0, 16 )_( 1, 2 )</synapse>
+                <synapse>( 0, 17 )_( 1, 2 )</synapse>
+                <synapse>( 0, 18 )_( 1, 2 )</synapse>
+                <synapse>( 0, 19 )_( 1, 2 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 3 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 3 )</synapse>
+                <synapse>( 0, 20 )_( 1, 3 )</synapse>
+                <synapse>( 0, 1 )_( 1, 3 )</synapse>
+                <synapse>( 0, 2 )_( 1, 3 )</synapse>
+                <synapse>( 0, 3 )_( 1, 3 )</synapse>
+                <synapse>( 0, 4 )_( 1, 3 )</synapse>
+                <synapse>( 0, 5 )_( 1, 3 )</synapse>
+                <synapse>( 0, 6 )_( 1, 3 )</synapse>
+                <synapse>( 0, 7 )_( 1, 3 )</synapse>
+                <synapse>( 0, 8 )_( 1, 3 )</synapse>
+                <synapse>( 0, 9 )_( 1, 3 )</synapse>
+                <synapse>( 0, 10 )_( 1, 3 )</synapse>
+                <synapse>( 0, 11 )_( 1, 3 )</synapse>
+                <synapse>( 0, 12 )_( 1, 3 )</synapse>
+                <synapse>( 0, 13 )_( 1, 3 )</synapse>
+                <synapse>( 0, 14 )_( 1, 3 )</synapse>
+                <synapse>( 0, 15 )_( 1, 3 )</synapse>
+                <synapse>( 0, 16 )_( 1, 3 )</synapse>
+                <synapse>( 0, 17 )_( 1, 3 )</synapse>
+                <synapse>( 0, 18 )_( 1, 3 )</synapse>
+                <synapse>( 0, 19 )_( 1, 3 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 4 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 4 )</synapse>
+                <synapse>( 0, 20 )_( 1, 4 )</synapse>
+                <synapse>( 0, 1 )_( 1, 4 )</synapse>
+                <synapse>( 0, 2 )_( 1, 4 )</synapse>
+                <synapse>( 0, 3 )_( 1, 4 )</synapse>
+                <synapse>( 0, 4 )_( 1, 4 )</synapse>
+                <synapse>( 0, 5 )_( 1, 4 )</synapse>
+                <synapse>( 0, 6 )_( 1, 4 )</synapse>
+                <synapse>( 0, 7 )_( 1, 4 )</synapse>
+                <synapse>( 0, 8 )_( 1, 4 )</synapse>
+                <synapse>( 0, 9 )_( 1, 4 )</synapse>
+                <synapse>( 0, 10 )_( 1, 4 )</synapse>
+                <synapse>( 0, 11 )_( 1, 4 )</synapse>
+                <synapse>( 0, 12 )_( 1, 4 )</synapse>
+                <synapse>( 0, 13 )_( 1, 4 )</synapse>
+                <synapse>( 0, 14 )_( 1, 4 )</synapse>
+                <synapse>( 0, 15 )_( 1, 4 )</synapse>
+                <synapse>( 0, 16 )_( 1, 4 )</synapse>
+                <synapse>( 0, 17 )_( 1, 4 )</synapse>
+                <synapse>( 0, 18 )_( 1, 4 )</synapse>
+                <synapse>( 0, 19 )_( 1, 4 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 5 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 5 )</synapse>
+                <synapse>( 0, 20 )_( 1, 5 )</synapse>
+                <synapse>( 0, 1 )_( 1, 5 )</synapse>
+                <synapse>( 0, 2 )_( 1, 5 )</synapse>
+                <synapse>( 0, 3 )_( 1, 5 )</synapse>
+                <synapse>( 0, 4 )_( 1, 5 )</synapse>
+                <synapse>( 0, 5 )_( 1, 5 )</synapse>
+                <synapse>( 0, 6 )_( 1, 5 )</synapse>
+                <synapse>( 0, 7 )_( 1, 5 )</synapse>
+                <synapse>( 0, 8 )_( 1, 5 )</synapse>
+                <synapse>( 0, 9 )_( 1, 5 )</synapse>
+                <synapse>( 0, 10 )_( 1, 5 )</synapse>
+                <synapse>( 0, 11 )_( 1, 5 )</synapse>
+                <synapse>( 0, 12 )_( 1, 5 )</synapse>
+                <synapse>( 0, 13 )_( 1, 5 )</synapse>
+                <synapse>( 0, 14 )_( 1, 5 )</synapse>
+                <synapse>( 0, 15 )_( 1, 5 )</synapse>
+                <synapse>( 0, 16 )_( 1, 5 )</synapse>
+                <synapse>( 0, 17 )_( 1, 5 )</synapse>
+                <synapse>( 0, 18 )_( 1, 5 )</synapse>
+                <synapse>( 0, 19 )_( 1, 5 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 6 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 6 )</synapse>
+                <synapse>( 0, 20 )_( 1, 6 )</synapse>
+                <synapse>( 0, 1 )_( 1, 6 )</synapse>
+                <synapse>( 0, 2 )_( 1, 6 )</synapse>
+                <synapse>( 0, 3 )_( 1, 6 )</synapse>
+                <synapse>( 0, 4 )_( 1, 6 )</synapse>
+                <synapse>( 0, 5 )_( 1, 6 )</synapse>
+                <synapse>( 0, 6 )_( 1, 6 )</synapse>
+                <synapse>( 0, 7 )_( 1, 6 )</synapse>
+                <synapse>( 0, 8 )_( 1, 6 )</synapse>
+                <synapse>( 0, 9 )_( 1, 6 )</synapse>
+                <synapse>( 0, 10 )_( 1, 6 )</synapse>
+                <synapse>( 0, 11 )_( 1, 6 )</synapse>
+                <synapse>( 0, 12 )_( 1, 6 )</synapse>
+                <synapse>( 0, 13 )_( 1, 6 )</synapse>
+                <synapse>( 0, 14 )_( 1, 6 )</synapse>
+                <synapse>( 0, 15 )_( 1, 6 )</synapse>
+                <synapse>( 0, 16 )_( 1, 6 )</synapse>
+                <synapse>( 0, 17 )_( 1, 6 )</synapse>
+                <synapse>( 0, 18 )_( 1, 6 )</synapse>
+                <synapse>( 0, 19 )_( 1, 6 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 7 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 7 )</synapse>
+                <synapse>( 0, 20 )_( 1, 7 )</synapse>
+                <synapse>( 0, 1 )_( 1, 7 )</synapse>
+                <synapse>( 0, 2 )_( 1, 7 )</synapse>
+                <synapse>( 0, 3 )_( 1, 7 )</synapse>
+                <synapse>( 0, 4 )_( 1, 7 )</synapse>
+                <synapse>( 0, 5 )_( 1, 7 )</synapse>
+                <synapse>( 0, 6 )_( 1, 7 )</synapse>
+                <synapse>( 0, 7 )_( 1, 7 )</synapse>
+                <synapse>( 0, 8 )_( 1, 7 )</synapse>
+                <synapse>( 0, 9 )_( 1, 7 )</synapse>
+                <synapse>( 0, 10 )_( 1, 7 )</synapse>
+                <synapse>( 0, 11 )_( 1, 7 )</synapse>
+                <synapse>( 0, 12 )_( 1, 7 )</synapse>
+                <synapse>( 0, 13 )_( 1, 7 )</synapse>
+                <synapse>( 0, 14 )_( 1, 7 )</synapse>
+                <synapse>( 0, 15 )_( 1, 7 )</synapse>
+                <synapse>( 0, 16 )_( 1, 7 )</synapse>
+                <synapse>( 0, 17 )_( 1, 7 )</synapse>
+                <synapse>( 0, 18 )_( 1, 7 )</synapse>
+                <synapse>( 0, 19 )_( 1, 7 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 8 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 8 )</synapse>
+                <synapse>( 0, 20 )_( 1, 8 )</synapse>
+                <synapse>( 0, 1 )_( 1, 8 )</synapse>
+                <synapse>( 0, 2 )_( 1, 8 )</synapse>
+                <synapse>( 0, 3 )_( 1, 8 )</synapse>
+                <synapse>( 0, 4 )_( 1, 8 )</synapse>
+                <synapse>( 0, 5 )_( 1, 8 )</synapse>
+                <synapse>( 0, 6 )_( 1, 8 )</synapse>
+                <synapse>( 0, 7 )_( 1, 8 )</synapse>
+                <synapse>( 0, 8 )_( 1, 8 )</synapse>
+                <synapse>( 0, 9 )_( 1, 8 )</synapse>
+                <synapse>( 0, 10 )_( 1, 8 )</synapse>
+                <synapse>( 0, 11 )_( 1, 8 )</synapse>
+                <synapse>( 0, 12 )_( 1, 8 )</synapse>
+                <synapse>( 0, 13 )_( 1, 8 )</synapse>
+                <synapse>( 0, 14 )_( 1, 8 )</synapse>
+                <synapse>( 0, 15 )_( 1, 8 )</synapse>
+                <synapse>( 0, 16 )_( 1, 8 )</synapse>
+                <synapse>( 0, 17 )_( 1, 8 )</synapse>
+                <synapse>( 0, 18 )_( 1, 8 )</synapse>
+                <synapse>( 0, 19 )_( 1, 8 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlNeuron">
+            <identification>( 1, 9 )</identification>
+            <incoming>
+                <synapse>( 0, 0 )_( 1, 9 )</synapse>
+                <synapse>( 0, 20 )_( 1, 9 )</synapse>
+                <synapse>( 0, 1 )_( 1, 9 )</synapse>
+                <synapse>( 0, 2 )_( 1, 9 )</synapse>
+                <synapse>( 0, 3 )_( 1, 9 )</synapse>
+                <synapse>( 0, 4 )_( 1, 9 )</synapse>
+                <synapse>( 0, 5 )_( 1, 9 )</synapse>
+                <synapse>( 0, 6 )_( 1, 9 )</synapse>
+                <synapse>( 0, 7 )_( 1, 9 )</synapse>
+                <synapse>( 0, 8 )_( 1, 9 )</synapse>
+                <synapse>( 0, 9 )_( 1, 9 )</synapse>
+                <synapse>( 0, 10 )_( 1, 9 )</synapse>
+                <synapse>( 0, 11 )_( 1, 9 )</synapse>
+                <synapse>( 0, 12 )_( 1, 9 )</synapse>
+                <synapse>( 0, 13 )_( 1, 9 )</synapse>
+                <synapse>( 0, 14 )_( 1, 9 )</synapse>
+                <synapse>( 0, 15 )_( 1, 9 )</synapse>
+                <synapse>( 0, 16 )_( 1, 9 )</synapse>
+                <synapse>( 0, 17 )_( 1, 9 )</synapse>
+                <synapse>( 0, 18 )_( 1, 9 )</synapse>
+                <synapse>( 0, 19 )_( 1, 9 )</synapse>
+            </incoming>
+            <outgoing/>
+            <thresholdFunction>model.function.threshold.McCullochPittsFunction</thresholdFunction>
+            <currentOutput>0.0</currentOutput>
+        </objects>
+    </neuronWrapper>
+    <synapseWrapper>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7927746843342853</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.72289850163974</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4887608358122526</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5435851086969808</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7917415061737303</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7660688226968735</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.08028699236349957</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7052533545217949</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6201700101314433</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.40298221673123225</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.43846489623169493</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5680024903469822</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.18182492438018927</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9624708810008186</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.727506184887132</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.09003455051559495</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9572942437964908</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.22064286710872916</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.3544901587177688</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.03724631053926386</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 0 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 0 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.33411137427817106</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7475557959564515</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8523969747822022</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5165758662984768</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.25253354602512745</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.18990550845776377</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.2870562034437678</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.47654218240745394</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.12110196352240199</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4109576555496517</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.599187610750652</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6643116677921056</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.21286387775240123</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.1896099089547637</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.2491997898612882</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.460428636159111</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.3629117967105814</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.275862539119196</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.1697943900259563</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.3543520179437081</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7091081058722778</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 1 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 1 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.18904604178375772</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.17085752706246637</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9032078213712146</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.41085880773853845</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.1255191664187859</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5116075030727593</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4083072684722966</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7877326074386715</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7662701074627879</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.07207890357317404</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.39334068375657616</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5523582101849096</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.0023591213884759377</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7268694298156267</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.23577921670659685</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9977305088027599</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.32521527199568145</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.43677927954661566</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.15998556029624822</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5092985794877566</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.17480856274583723</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 2 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 2 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.790722684053198</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7943082364610398</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8963950553348333</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5001207702485055</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9781399792010306</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.07130630468323762</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.16470003795199928</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.08961685300400068</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.10506385263931428</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.16202838277734566</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7232555445151062</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.00990279948031847</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6763226926102093</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5753579546158081</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4689155890538862</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.26222000778108734</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5950270372878614</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4092148195263229</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.42954908875202147</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.3430541316931286</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8423029534316601</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 3 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 3 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6090732195205207</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.636652163139408</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6899020696542103</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.27723501411403617</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.720975529567858</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.37768632237127264</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9656386930088402</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.586651626189444</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7274322494765697</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8578523899730702</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.19235423058211198</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.10743490408732415</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6661690306512388</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6899844422120192</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8384158594484424</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.20931720914565755</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.055023221323915794</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.3242064029250622</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8846856422035392</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4591985549386317</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5141587801602338</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 4 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 4 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5806765985586082</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8731381122719112</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8870631766305817</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.939241048013535</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.44335401440133126</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.896440394462159</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.610167721154001</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.09902358299223024</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.41303167995127166</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8573972622714013</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5290444387618769</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6048899016631649</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.35283128353103144</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4038103894805415</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.921944960414306</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.939604960865013</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.28544272006879834</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.22576839638264423</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.16329580577012626</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4921658533871406</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9942878088722771</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 5 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 5 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9794217555295248</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.38912877682757296</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4231324684442954</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5522420993075038</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4663599944931778</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5184844561669125</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7026476078112274</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.2493306773695385</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.021130601209534805</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.36196072865745965</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.388829961510325</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.048252129694129064</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6235954283937589</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7751898317961043</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.621767466277234</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8298196089328138</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.16671108694978565</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.49390111635917033</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7283772470553754</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8834168345757831</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9140484721161326</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 6 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 6 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7380933584553846</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6134520798243013</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.43654593756692583</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8891952616138571</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9542712952619798</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6486059166465521</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4395440164320854</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.3000634170367559</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5084643828645373</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8580900779760623</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6455173599456566</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.2167889833349108</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7936418321442266</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7753180487368517</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7164294996693512</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7174776979574357</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.03201557180611947</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.293068669297024</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8913176860340472</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6986760103661072</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5232791281306916</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 7 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 7 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.40553568107487736</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.2687213399142694</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9960978915483916</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6708466944147959</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6100955975870549</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7583392859736414</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5222638623507063</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.22129009560106383</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9625577973602734</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.19811245116673304</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6574398903963192</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.08775272434777515</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.004939688850649104</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4598473556871543</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6575709305170148</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.13168919862577422</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.07088607472889663</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.32215921207588605</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5528240864606618</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.04277950502636063</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5990081343963924</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 8 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 8 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.13604450035489046</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 0 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 0 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6768477529539012</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 20 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 20 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.46656697502601063</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 1 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 1 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8025104058404178</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 2 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 2 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.13055423343468153</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 3 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 3 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.23455175739944234</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 4 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 4 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.4524558715052974</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 5 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 5 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.38400898216306645</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 6 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 6 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.5944476085664405</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 7 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 7 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.82653589056607</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 8 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 8 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8090924646642719</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 9 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 9 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.06755942784370705</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 10 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 10 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9907937889696821</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 11 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 11 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.7881455275941266</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 12 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 12 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.8820186681692457</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 13 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 13 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.723494377386183</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 14 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 14 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.9922289870654224</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 15 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 15 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.6467211455379985</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 16 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 16 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.32717625197865696</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 17 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 17 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.18057887756802138</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 18 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 18 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.276216246565836</currentWeight>
+        </objects>
+        <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
+            <identification>( 0, 19 )_( 1, 9 )</identification>
+            <inputNeuron>( 0, 19 )</inputNeuron>
+            <outputNeuron>( 1, 9 )</outputNeuron>
+            <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
+            <learningRate>0.1</learningRate>
+            <lastFiredOutput>0.0</lastFiredOutput>
+            <currentWeight>0.40977933577246206</currentWeight>
+        </objects>
+    </synapseWrapper>
+</xmlPerceptronWrapper>

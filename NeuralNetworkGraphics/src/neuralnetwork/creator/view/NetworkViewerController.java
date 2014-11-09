@@ -54,12 +54,13 @@ public class NetworkViewerController {
       parameterMenuItems = new HashMap< LearningParameter, MenuItem >();
       new LearningProcessor( perceptron );
       
-      EventSystem.registerForList( PerceptronLearnerController.Observables.LearningParameters,
+      EventSystem.registerForList( 
+         PerceptronLearnerController.Observables.LearningParameters,
+         LearningParameter.class,
          change -> {
             change.next();
             change.getAddedSubList().forEach( 
-               uncastItem -> {
-                  LearningParameter item = ( LearningParameter )uncastItem;
+               item -> {
                   MenuItem newItem = new MenuItem( item.getDescriptionProperty().get() );
                   newItem.setOnAction( event -> EventSystem.raiseEvent( LearningProcessor.Events.RequestLearnParameter, item ) );
                   parameterMenuItems.put( item, newItem );
@@ -73,7 +74,7 @@ public class NetworkViewerController {
                   learningMenu.getItems().remove( oldItem );
                }
             );
-         } 
+         }
       );
       
       onlineLearning.setOnAction( event -> EventSystem.raiseEvent( PerceptronLearnerController.Events.RequestOnlineLearning, null ) );

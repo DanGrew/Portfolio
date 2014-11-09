@@ -9,6 +9,9 @@ package model.structure;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
+import javax.xml.bind.annotation.XmlElement;
+
 import model.singleton.Neuron;
 
 /**
@@ -18,12 +21,19 @@ import model.singleton.Neuron;
 public class NetworkPosition {
 
    /** The layer that the position is on, increasing from input to output.**/
-   public final int layer;
+   @XmlElement public final int layer;
    /** The index of the {@link Neuron} in the {@link NeuronLayer}.**/
-   public final int index;
+   @XmlElement public final int index;
    /** The {@link StringProperty} respresenting the {@link NetworkPosition}. */
    private final StringProperty stringRepresentation;
 
+   /**
+    * Default constructor.
+    */
+   public NetworkPosition(){
+      this( 0, 0 );
+   }// End Constructor
+   
    /**
     * Constructs a new {@link NetworkPosition}.
     * @param layer the {@link #layer}.

@@ -14,23 +14,26 @@ import java.util.Map;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
+import model.data.read.SerializableNeuron;
+import model.data.write.SerializedNeuron;
 import model.function.threshold.McCullochPittsFunction;
 import model.function.threshold.ThresholdFunction;
 import model.structure.LearningParameter.NeuronValue;
 import model.structure.NetworkPosition;
+import architecture.utility.UnmodifiableIterator;
 
 /**
  * The {@link Neuron} represents a single {@link Neuron} in the Neural Network.
  */
-public class Neuron {
+public class Neuron extends Singleton< SerializableNeuron, SerializedNeuron >{
 
    /** The {@link NetworkPosition} describing where this {@link Neuron} is located. **/
-   private NetworkPosition identification;
+   private NetworkPosition position;
    /** The {@link ThresholdFunction} to use when calculating whether the {@link Neuron}
     * should fire along the associated {@link Synapse}s.**/
    private ThresholdFunction thresholdFunction;
    /** {@link Map} of output {@link Neuron} that this {@link Neuron} is connected to.**/
-   private Map< Neuron, Synapse > outgoingSynpases;
+   private Map< Neuron, Synapse > outgoingSynapses;
    /** {@link Map} of input {@link Neuron} that are connected to this {@link Neuron}.**/
    private Map< Neuron, Synapse > incomingSynapses;
 
@@ -39,10 +42,11 @@ public class Neuron {
     * @param thresholdFunction the {@link ThresholdFunction} the {@link Neuron} will use.
     */
    public Neuron( NetworkPosition position, ThresholdFunction thresholdFunction ) {
-      outgoingSynpases = new LinkedHashMap< Neuron, Synapse >();
+      outgoingSynapses = new LinkedHashMap< Neuron, Synapse >();
       incomingSynapses = new LinkedHashMap< Neuron, Synapse >();
-      this.identification = position;
+      this.position = position;
       this.thresholdFunction = thresholdFunction;
+      identification = position.getRepresentationProperty().get();
    }// End Constructor
 
    /**
@@ -59,7 +63,7 @@ public class Neuron {
     * @return {@link #identification#getIdentificationProperty()}.
     */
    public StringProperty getIdentificationProperty(){
-      return identification.getRepresentationProperty();
+      return position.getRepresentationProperty();
    }// End Method
    
    /**
@@ -67,7 +71,7 @@ public class Neuron {
     * @return the {@link NetworkPosition}.
     */
    public NetworkPosition getPosition(){
-      return identification;
+      return position;
    }// End Method
 
    /**
@@ -92,7 +96,7 @@ public class Neuron {
     * @param synapse the {@link Synapse} connecting the two {@link Neuron}s.
     */
    public void addOutgoingSynapse( Synapse synapse ) {
-      outgoingSynpases.put( synapse.getOutput(), synapse );
+      outgoingSynapses.put( synapse.getOutput(), synapse );
    }// End Method
 
    /**
@@ -110,7 +114,7 @@ public class Neuron {
     * @param weight the weight the {@link Synapse} should use.
     */
    public void configureOutgoingWeight( Neuron output, double weight ){
-      Synapse synapse = outgoingSynpases.get( output );
+      Synapse synapse = outgoingSynapses.get( output );
       synapse.setWeight( weight );
    }// End Method
 
@@ -144,7 +148,7 @@ public class Neuron {
     * @return a new {@link NeuronValue} for this {@link Neuron} in its current state.
     */
    public NeuronValue constructValue(){
-      return new NeuronValue( identification, thresholdFunction.getOutput() );
+      return new NeuronValue( position, thresholdFunction.getOutput() );
    }// End Method
 
    /**
@@ -154,7 +158,7 @@ public class Neuron {
    public void fireNeuron() {
       thresholdFunction.calculateOutput();
       if ( thresholdFunction.excedesThreshold() ){
-         for ( Synapse synpase : outgoingSynpases.values() ){
+         for ( Synapse synpase : outgoingSynapses.values() ){
             synpase.fire( thresholdFunction.getOutput() );
          }
       }
@@ -177,7 +181,15 @@ public class Neuron {
     * @return {@link Iterator} of {@link Synapse}s.
     */
    public Iterator< Synapse > inputSynapseIterator(){
-      return incomingSynapses.values().iterator();
+      return new UnmodifiableIterator< Synapse >( incomingSynapses.values().iterator() );
+   }// End Method
+   
+   /**
+    * Method to get a {@link Iterator} for the {@link Synapse}s outgoing from this {@link Neuron}.
+    * @return {@link Iterator} of {@link Synapse}s.
+    */
+   public Iterator< Synapse > outputSynapseIterator(){
+      return new UnmodifiableIterator< Synapse >( outgoingSynapses.values().iterator() );
    }// End Method
    
    /**
@@ -193,5 +205,23 @@ public class Neuron {
       }
       return buffer.toString();
    }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void writeSingleton( SerializableNeuron serializable ){
+      serializable.addAllIncomingSynapses( inputSynapseIterator() );
+      serializable.addAllOutgoingSynapses( outputSynapseIterator() );
+      serializable.setThresholdFunction( thresholdFunction.getClass() );
+      serializable.setCurrentOutput( getOutput() );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void readSingleton( SerializedNeuron serialized ){
+      
+   }// End Method
+   
 
 }// End Class

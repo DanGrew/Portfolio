@@ -10,6 +10,7 @@ package model.function.learning;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
+import model.data.read.SerializableSynapse;
 import model.network.Perceptron;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
@@ -81,7 +82,7 @@ public class PerceptronLearningRule {
          return output * weight.get();
       }
    }// End Method
-
+   
    /**
     * Method to learn from the target data and adjust the weight appropriately.
     * @param target the target the output {@link Neuron} should have achieved.
@@ -90,6 +91,16 @@ public class PerceptronLearningRule {
    public void learn( double target, double output ){
       double learningAdjustment = learningRate * ( target - output ) * firedOutput;
       setWeight( weight.get() + learningAdjustment );
+   }// End Method
+   
+   /**
+    * Method to write the data of this learning rule to the {@link SerializableSynapse}.
+    * @param serializable the {@link SerializableSynapse} to write to.
+    */
+   public void write( SerializableSynapse serializable ){
+      serializable.setLastFiredOutput( firedOutput );
+      serializable.setLearningRate( learningRate );
+      serializable.setWeight( weight.get() );
    }// End Method
 
 }// End Class

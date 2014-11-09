@@ -46,8 +46,8 @@ public class EventSystem {
    /**
     * {@link EventManagementSystem#registerForList(Enum, ListChangeListener)}.
     */
-   public static void registerForList( Enum< ? > observableReference, ListChangeListener< ? > observer ){
-      eventManagementSystem.registerForList( observableReference, observer );
+   public static < T > void registerForList( Enum< ? > observableReference, Class< T > changeClass, ListChangeListener< T > observer ){
+      eventManagementSystem.registerForList( observableReference, changeClass, observer );
    }// End Method
    
    /**

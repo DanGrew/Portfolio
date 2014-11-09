@@ -85,7 +85,12 @@ public class EventManagementSystemImpl implements EventManagementSystem {
    /**
     * {@inheritDoc}
     */
-   @Override public < T > void registerForList( Enum< ? > observableReference, ListChangeListener< T > observer ){
+   @SuppressWarnings("unchecked") 
+   @Override public < T > void registerForList( 
+            Enum< ? > observableReference, 
+            Class< T > changeClass, 
+            ListChangeListener< T > observer 
+   ){
       ObservableList< T > observable = ( ObservableList< T > ) listObservables.get( observableReference );
       if ( observable == null ){
          throw new IllegalArgumentException( "Observable is not defined." );
