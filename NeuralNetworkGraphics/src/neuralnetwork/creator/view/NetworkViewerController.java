@@ -10,6 +10,7 @@ package neuralnetwork.creator.view;
 import java.util.HashMap;
 import java.util.Map;
 
+import architecture.event.EventSystem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -18,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import model.network.Perceptron;
 import model.structure.LearningParameter;
 import neuralnetwork.creator.NetworkViewer;
+import neuralnetwork.creator.view.module.LearningProcessor;
 
 /**
  * The {@link NetworkViewerController} is responsible for controlling the overall {@link NetworkViewer},
@@ -25,11 +27,14 @@ import neuralnetwork.creator.NetworkViewer;
  */
 public class NetworkViewerController {
 
+   private Perceptron perceptron;
    @FXML private AnchorPane networkViewer;
    @FXML private NetworkOverviewController networkOverviewController;
    @FXML private PerceptronLearnerController perceptronLearnerController;
    
    @FXML private Menu learningMenu;
+   @FXML private MenuItem onlineLearning;
+   @FXML private MenuItem batchLearning;
    private Map< LearningParameter, MenuItem > parameterMenuItems;
    
    @FXML private void initialize(){}
@@ -47,12 +52,16 @@ public class NetworkViewerController {
     */
    public void populate(){
       parameterMenuItems = new HashMap< LearningParameter, MenuItem >();
-      perceptronLearnerController.registerForLearningParameters( 
+      new LearningProcessor( perceptron );
+      
+      EventSystem.registerForList( PerceptronLearnerController.Observables.LearningParameters,
          change -> {
             change.next();
             change.getAddedSubList().forEach( 
-               item -> {
+               uncastItem -> {
+                  LearningParameter item = ( LearningParameter )uncastItem;
                   MenuItem newItem = new MenuItem( item.getDescriptionProperty().get() );
+                  newItem.setOnAction( event -> EventSystem.raiseEvent( LearningProcessor.Events.RequestLearnParameter, item ) );
                   parameterMenuItems.put( item, newItem );
                   learningMenu.getItems().add( newItem );
                }
@@ -66,6 +75,8 @@ public class NetworkViewerController {
             );
          } 
       );
+      
+      onlineLearning.setOnAction( event -> EventSystem.raiseEvent( PerceptronLearnerController.Events.RequestOnlineLearning, null ) );
    }// End Method
    
    /**
@@ -73,6 +84,7 @@ public class NetworkViewerController {
     * @param perceptron the {@link Perceptron}.
     */
    public void setPerceptron( Perceptron perceptron ){
+      this.perceptron = perceptron;
       networkOverviewController.setPerceptron( perceptron );
    }// End Method
 }// End Class

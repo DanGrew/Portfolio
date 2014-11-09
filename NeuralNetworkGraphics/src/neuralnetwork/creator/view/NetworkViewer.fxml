@@ -40,7 +40,11 @@
           <Menu mnemonicParsing="false" text="File" />
             <Menu mnemonicParsing="false" text="Learning">
                <items>
-                  <Menu fx:id="learningMenu" mnemonicParsing="false" text="Learn" />
+                  <Menu fx:id="learningMenu" mnemonicParsing="false" text="Learn">
+                     <items>
+                        <MenuItem fx:id="onlineLearning" mnemonicParsing="false" text="Online" />
+                        <MenuItem fx:id="batchLearning" mnemonicParsing="false" text="Batch" />
+                     </items></Menu>
                </items>
             </Menu>
           <Menu mnemonicParsing="false" text="Help" />

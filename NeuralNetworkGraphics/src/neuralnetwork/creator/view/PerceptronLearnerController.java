@@ -18,7 +18,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import model.structure.LearningParameter;
 import model.structure.LearningParameter.NeuronValue;
+import model.structure.LearningParameters;
 import model.structure.NetworkPosition;
+import neuralnetwork.creator.view.module.LearningProcessor;
+import architecture.event.EventSystem;
 import architecture.utility.ObjectGenerator;
 import constructs.view.tableitemcontrols.TableItemControls;
 import constructs.view.tableitemcontrols.TableItemControlsControllerImpl;
@@ -28,6 +31,17 @@ import constructs.view.tableitemcontrols.TableItemControlsControllerImpl;
  */
 public class PerceptronLearnerController implements TableItemControls{
 
+   /** Enum defining the publicly available observables to register interest in. **/
+   public enum Observables {
+      LearningParameters;
+   }
+   
+   /** Enumdefining the events that this {@link PerceptronLearnerController} can receive
+    * as requests. */
+   public enum Events {
+      RequestOnlineLearning;
+   }// End Enum
+   
    @FXML private AnchorPane tableControls;
    @FXML private TableItemControlsControllerImpl tableControlsController;
    
@@ -50,6 +64,14 @@ public class PerceptronLearnerController implements TableItemControls{
     */
    @FXML private void initialize(){      
       tableControlsController.setExternalController( this );
+      EventSystem.observeList( Observables.LearningParameters, learningParameters );
+      EventSystem.registerForEvent( 
+               Events.RequestOnlineLearning, 
+               ( event, object ) -> EventSystem.raiseEvent( 
+                        LearningProcessor.Events.RequestOnlineLearning, 
+                        new LearningParameters( learningParameters ) 
+               ) 
+      );
 
       parmeterInputPositionColumn.setCellValueFactory( cellData -> cellData.getValue().getValue().position.getRepresentationProperty() );
       parmeterInputColumn.setCellValueFactory( cellData -> cellData.getValue().getValue().value );
