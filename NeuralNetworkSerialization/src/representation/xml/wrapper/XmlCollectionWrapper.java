@@ -5,20 +5,21 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture.data.wrapper;
+package representation.xml.wrapper;
 
 import java.util.Iterator;
 
-import model.data.read.SerializableSingleton;
-import model.data.write.SerializedSingleton;
+import model.data.SerializableSingleton;
 import model.singleton.Singleton;
+import architecture.representation.SingletonContainer;
+import architecture.request.RequestSystem;
 
 /**
  * The {@link XmlCollectionWrapper} provides an extension to the {@link CollectionWrapper} that manages
  * the wrapping of {@link Singleton}s.
  */
 public abstract class XmlCollectionWrapper
-         < S, A extends SerializableSingleton, Z extends SerializedSingleton > extends CollectionWrapper< A > 
+         < S, A extends SerializableSingleton< S > > extends CollectionWrapper< A > implements SingletonContainer
 {
 
    /**
@@ -49,4 +50,16 @@ public abstract class XmlCollectionWrapper
    public void addAllUnwrapped( Iterator< S > iterator ){
       iterator.forEachRemaining( object -> addUnwrapped( object ) );
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    * {@link SerializableSingleton#unwrap()}s and {@link RequestSystem#store(Object)}s it.
+    */
+   @Override public void constructSingletons(){
+      objects.forEach( object -> {
+         S unwrapped = object.unwrap();
+         RequestSystem.store( unwrapped );
+      } );
+   }// End Method
+  
 }// End Class

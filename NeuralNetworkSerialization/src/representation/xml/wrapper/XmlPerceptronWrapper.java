@@ -5,11 +5,12 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture.data.wrapper;
+package representation.xml.wrapper;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import architecture.representation.SingletonContainer;
 import model.network.Perceptron;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
@@ -19,7 +20,7 @@ import model.singleton.Synapse;
  * so that it can be exported as an XML structure.
  */
 @XmlRootElement
-public class XmlPerceptronWrapper {
+public class XmlPerceptronWrapper implements SingletonContainer {
    
    /** The {@link XmlNeuronWrapper} containing the {@link Neuron}s in the {@link Perceptron}. **/
    @XmlElement private XmlNeuronWrapper neuronWrapper;
@@ -47,5 +48,21 @@ public class XmlPerceptronWrapper {
                neuron -> synapseWrapper.addAllUnwrapped( neuron.inputSynapseIterator() ) 
       );
    }// End Constructor
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void constructSingletons() {
+      neuronWrapper.constructSingletons();
+      synapseWrapper.constructSingletons();
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void resolveSingletons() {
+      synapseWrapper.resolveSingletons();
+      neuronWrapper.resolveSingletons();
+   }// End Method
 
 }// End Class

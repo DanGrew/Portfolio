@@ -10,7 +10,7 @@ package model.function.learning;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
-import model.data.read.SerializableSynapse;
+import model.data.SerializableSynapse;
 import model.network.Perceptron;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
@@ -23,12 +23,17 @@ import architecture.utility.ObjectGenerator;
 public class PerceptronLearningRule {
 
    /** The amount to adjust the weights by in each learning phase.**/
-   private final double learningRate;
+   private double learningRate;
    /** The output fired by the input {@link Neuron} of the associated {@link Synapse}.**/
    private double firedOutput;
    /** The weight to apply to the fired output of the input {@link Neuron}. **/
    private DoubleProperty weight;
 
+   /** 
+    * Constructs a new {@link PerceptronLearningRule}.
+    */
+   public PerceptronLearningRule(){}
+   
    /**
     * Constructs a new {@link PerceptronLearningRule}.
     * @param learningRate the learning rate to adjust the weights by each epoch.
@@ -63,11 +68,23 @@ public class PerceptronLearningRule {
    }// End Method
    
    /**
+    * Setter for the learning rate of the {@link Synapse}.
+    * @param learningRate the learning rate.
+    */
+   public void setLearningRate( double learningRate ){
+      this.learningRate = learningRate;
+   }// End Method
+   
+   /**
     * Method to set the weight to be applied to the output from the input {@link Neuron}.
     * @param weight the weight to set.
     */
    public void setWeight( double weight ){
-      this.weight.set( weight );
+      if ( this.weight == null ){
+         this.weight = new SimpleDoubleProperty( weight );
+      } else {
+         this.weight.set( weight );
+      }
    }// End Method
 
    /**

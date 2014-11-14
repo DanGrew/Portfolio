@@ -5,24 +5,24 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture.data.wrapper;
+package representation.xml.wrapper;
 
 import java.util.Iterator;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import model.data.read.SerializableNeuron;
-import model.data.write.SerializedNeuron;
+import architecture.request.RequestSystem;
+import model.data.SerializableNeuron;
 import model.singleton.Neuron;
-import architecture.schema.model.singleton.XmlNeuron;
+import representation.xml.model.XmlNeuron;
 
 /**
  * The {@link XmlNeuronWrapper} provides an extension to the {@link XmlCollectionWrapper} to
  * wrap {@link Neuron}s in their associated {@link XmlNeuron}s.
  */
 @XmlRootElement @XmlSeeAlso( { XmlNeuron.class } )
-public class XmlNeuronWrapper extends XmlCollectionWrapper< Neuron, SerializableNeuron, SerializedNeuron >{
+public class XmlNeuronWrapper extends XmlCollectionWrapper< Neuron, SerializableNeuron >{
    
    /**
     * Constructs a new {@link XmlNeuronWrapper}.
@@ -44,6 +44,20 @@ public class XmlNeuronWrapper extends XmlCollectionWrapper< Neuron, Serializable
     */
    @Override public void addUnwrapped( Neuron object ) {
       addObject( object.write( XmlNeuron.class ) );
-   }// End Method
+   }
 
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void resolveSingletons() {
+      objects.forEach( object -> {
+         Neuron neuron = RequestSystem.retrieve( Neuron.class, object.getIdentification() );
+         if ( neuron == null ){
+            throw new NullPointerException( object.getIdentification() + " does not exist." );
+         } else {
+            neuron.read( object );
+         }
+      } );
+   }// End Method
+   
 }// End Class

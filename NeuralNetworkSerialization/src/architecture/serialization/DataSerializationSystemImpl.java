@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture.data;
+package architecture.serialization;
 
 import java.io.File;
 
@@ -14,18 +14,14 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 /**
- * {@link XMLStorage} provides methods of saving and loading data to and from XML files. 
+ * {@link DataSerializationSystemImpl} provides methods of saving and loading data to and from XML files. 
  */
-public class XMLStorage {
+public class DataSerializationSystemImpl implements DataSerializationSystem {
 
    /**
-    * Method to load the given {@link Class} from the given {@link File}.
-    * @param clazz the expected {@link Class} to be stored in the {@link File}.
-    * @param file the {@link File} pointing to XML data containing a definition for the
-    * given {@link Class}.
-    * @return the parsed object of type T.
+    * {@inheritDoc}
     */
-   public static < T > T loadFromFile( Class< T > clazz, File file ) {
+   public < T > T loadFromFile( Class< T > clazz, File file ) {
       try {
          JAXBContext context = JAXBContext.newInstance( clazz );
          Unmarshaller um = context.createUnmarshaller();
@@ -39,11 +35,9 @@ public class XMLStorage {
    }// End Method
 
    /**
-    * Method to save the given {@link Object} to the given {@link File} as XML.
-    * @param object the {@link Object} to save that has XML mappable properties.
-    * @param file the {@link File} to save to.
+    * {@inheritDoc}
     */
-   public static void saveToFile( Object object, File file ) {
+   public void saveToFile( Object object, File file ) {
       try {
          JAXBContext context = JAXBContext.newInstance( object.getClass() );
          Marshaller m = context.createMarshaller();

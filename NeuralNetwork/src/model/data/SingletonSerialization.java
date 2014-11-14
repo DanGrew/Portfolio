@@ -7,15 +7,13 @@
  */
 package model.data;
 
-import model.data.read.SerializableSingleton;
-import model.data.write.SerializedSingleton;
 import model.singleton.Singleton;
 
 /**
  * The {@link SingletonSerialization} interface represents the interface that should be implemented
  * to serialize a {@link Singleton}.
  */
-public interface SingletonSerialization< S extends SerializableSingleton, T extends SerializedSingleton > {
+public interface SingletonSerialization< S extends SerializableSingleton > {
    
    /** 
     * Method to write the {@link Singleton} to a {@link SerializableSingleton} {@link Object}.
@@ -30,6 +28,6 @@ public interface SingletonSerialization< S extends SerializableSingleton, T exte
     * itself with the data in the {@link SerializedSingleton}.
     * @param serialised the {@link SerializedSingleton} to read from.
     */
-   public void read( T serialised );
+   public void read( S serialised );
 
 }// End Interface

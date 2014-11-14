@@ -5,14 +5,13 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture.data.wrapper;
+package representation.xml.wrapper;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-import model.data.read.SerializableSingleton;
-import model.data.write.SerializedSingleton;
+import model.data.SerializableSingleton;
 import model.singleton.Singleton;
 
 /**
@@ -20,7 +19,7 @@ import model.singleton.Singleton;
  * XML output.
  */
 @XmlAccessorType( XmlAccessType.FIELD )
-public abstract class XmlSingletonWrapper< T > implements SerializableSingleton, SerializedSingleton {
+public abstract class XmlSingletonWrapper< T > implements SerializableSingleton< T > {
 
    /** The identification of the {@link Singleton}.**/
    @XmlElement protected String identification;

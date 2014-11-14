@@ -5,22 +5,21 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture.schema.model.singleton;
+package representation.xml.model;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import model.data.read.SerializableSynapse;
-import model.data.write.SerializedSynapse;
+import model.data.SerializableSynapse;
 import model.function.learning.PerceptronLearningRule;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
-import architecture.data.wrapper.XmlSingletonWrapper;
+import representation.xml.wrapper.XmlSingletonWrapper;
 
 /**
  * The {@link XmlSynapse} provides an implementation of the {@link SerializableSynapse} and the {@link SerializedSynapse}
  * interfaces to represent a {@link Synapse} in XML.
  */
-public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements SerializableSynapse, SerializedSynapse {
+public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements SerializableSynapse {
    
    /** The {@link String} representing the input {@link Neuron}. **/
    @XmlElement private String inputNeuron;
@@ -48,6 +47,10 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
    @Override public void setInputNeuron( Neuron input ) {
       inputNeuron = input.getIdentificationProperty().get();
    }// End Method
+   
+   @Override public String getInputNeuron(){
+      return inputNeuron;
+   }
 
    /**
     * {@inheritDoc}
@@ -55,6 +58,10 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
    @Override public void setOutputNeuron( Neuron output ) {
       outputNeuron = output.getIdentificationProperty().get();
    }// End Method
+   
+   @Override public String getOutputNeuron(){
+      return outputNeuron;
+   }
 
    /**
     * {@inheritDoc}
@@ -62,6 +69,10 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
    @Override public void setLearningRule( Class< ? extends PerceptronLearningRule > learningRule ) {
       this.learningRule = learningRule;
    }// End Method
+   
+   @Override public Class< ? extends PerceptronLearningRule > getLearningRule(){
+      return learningRule;
+   }
 
    /**
     * {@inheritDoc}
@@ -69,6 +80,10 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
    @Override public void setLearningRate( double learningRate ) {
       this.learningRate = learningRate;
    }// End Method
+   
+   @Override public double getLearningRate(){
+      return learningRate;
+   }
 
    /**
     * {@inheritDoc}
@@ -76,6 +91,10 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
    @Override public void setLastFiredOutput( Double lastFiredOutput ) {
       this.lastFiredOutput = lastFiredOutput;
    }// End Method
+   
+   @Override public Double getLastFiredOutput(){
+      return lastFiredOutput;
+   }
 
    /**
     * {@inheritDoc}
@@ -83,5 +102,13 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
    @Override public void setWeight( Double weight ) {
       this.currentWeight = weight;
    }// End Method
+   
+   @Override public Double getWeight(){
+      return currentWeight;
+   }
+
+   @Override public Synapse unwrap() {
+      return new Synapse( Synapse.generateIdentification( inputNeuron, outputNeuron ) );
+   }
    
 }// End Class

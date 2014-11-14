@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture.data.wrapper;
+package representation.xml.wrapper;
 
 import java.util.ArrayList;
 import java.util.Collection;

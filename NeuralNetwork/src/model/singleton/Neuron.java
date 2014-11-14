@@ -14,18 +14,19 @@ import java.util.Map;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
-import model.data.read.SerializableNeuron;
-import model.data.write.SerializedNeuron;
+import model.data.SerializableNeuron;
 import model.function.threshold.McCullochPittsFunction;
 import model.function.threshold.ThresholdFunction;
 import model.structure.LearningParameter.NeuronValue;
 import model.structure.NetworkPosition;
+import architecture.request.RequestSystem;
+import architecture.utility.ObjectGenerator;
 import architecture.utility.UnmodifiableIterator;
 
 /**
  * The {@link Neuron} represents a single {@link Neuron} in the Neural Network.
  */
-public class Neuron extends Singleton< SerializableNeuron, SerializedNeuron >{
+public class Neuron extends Singleton< SerializableNeuron >{
 
    /** The {@link NetworkPosition} describing where this {@link Neuron} is located. **/
    private NetworkPosition position;
@@ -42,11 +43,11 @@ public class Neuron extends Singleton< SerializableNeuron, SerializedNeuron >{
     * @param thresholdFunction the {@link ThresholdFunction} the {@link Neuron} will use.
     */
    public Neuron( NetworkPosition position, ThresholdFunction thresholdFunction ) {
+      super( position.getRepresentationProperty().get() );
       outgoingSynapses = new LinkedHashMap< Neuron, Synapse >();
       incomingSynapses = new LinkedHashMap< Neuron, Synapse >();
       this.position = position;
       this.thresholdFunction = thresholdFunction;
-      identification = position.getRepresentationProperty().get();
    }// End Constructor
 
    /**
@@ -210,6 +211,7 @@ public class Neuron extends Singleton< SerializableNeuron, SerializedNeuron >{
     * {@inheritDoc}
     */
    @Override public void writeSingleton( SerializableNeuron serializable ){
+      serializable.setPosition( position );
       serializable.addAllIncomingSynapses( inputSynapseIterator() );
       serializable.addAllOutgoingSynapses( outputSynapseIterator() );
       serializable.setThresholdFunction( thresholdFunction.getClass() );
@@ -219,9 +221,17 @@ public class Neuron extends Singleton< SerializableNeuron, SerializedNeuron >{
    /**
     * {@inheritDoc}
     */
-   @Override public void readSingleton( SerializedNeuron serialized ){
-      
+   @Override public void readSingleton( SerializableNeuron serialized ){
+      serialized.incomingSynapseIterator().forEachRemaining( reference -> {
+         Synapse synapse = RequestSystem.retrieve( Synapse.class, reference );
+         incomingSynapses.put( synapse.getInput(), synapse );
+      } );
+      serialized.outgoingSynapseIterator().forEachRemaining( reference -> {
+         Synapse synapse = RequestSystem.retrieve( Synapse.class, reference );
+         outgoingSynapses.put( synapse.getOutput(), synapse );
+      } );
+      thresholdFunction = ObjectGenerator.construct( serialized.getThresholdFunction() );
+      thresholdFunction.setOutput( serialized.getCurrentOutput() );
    }// End Method
-   
 
 }// End Class

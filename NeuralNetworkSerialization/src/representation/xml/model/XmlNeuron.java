@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture.schema.model.singleton;
+package representation.xml.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,22 +16,23 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
-import model.data.read.SerializableNeuron;
-import model.data.write.SerializedNeuron;
+import model.data.SerializableNeuron;
 import model.function.threshold.ThresholdFunction;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
-import architecture.data.wrapper.XmlSingletonWrapper;
+import model.structure.NetworkPosition;
+import representation.xml.wrapper.XmlSingletonWrapper;
 
 /**
  * The {@link XmlNeuron} provides an implementation of the {@link SerializableNeuron} and {@link SerializedNeuron}
  * interfaces that will define how the {@link Neuron} is mapped to XML.
  */
 @XmlAccessorType( XmlAccessType.FIELD )
-public class XmlNeuron extends XmlSingletonWrapper< Neuron > implements SerializableNeuron, SerializedNeuron {
+public class XmlNeuron extends XmlSingletonWrapper< Neuron > implements SerializableNeuron {
    
    private static final long serialVersionUID = 1L;
 
+   @XmlElement private NetworkPosition position;
    /** {@link List} of {@link String}s representing the incoming {@link Synapse}s.**/
    @XmlElementWrapper( name = "incoming" ) @XmlElement( name = "synapse" ) 
    private List< String > incomingSynapses;
@@ -52,11 +53,20 @@ public class XmlNeuron extends XmlSingletonWrapper< Neuron > implements Serializ
       outgoingSynapses = new ArrayList< String >();
    }// End Constructor
 
+   @Override public void setPosition( NetworkPosition position ){
+      this.position = position;
+   }
+   
+   @Override public NetworkPosition getPosition(){
+      return position;
+   }
+   
    /**
     * {@inheritDoc}
     */
    @Override public void addIncomingSynapse( Synapse synapse ) {
       incomingSynapses.add( synapse.getIdentification() );
+      incomingSynapses.sort( ( a, b ) -> { return a.compareTo( b ); } );
    }// End Method
 
    /**
@@ -65,12 +75,17 @@ public class XmlNeuron extends XmlSingletonWrapper< Neuron > implements Serializ
    @Override public void addAllIncomingSynapses( Iterator< Synapse > incoming ) {
       incoming.forEachRemaining( synapse -> addIncomingSynapse( synapse ) );
    }// End Method
+   
+   @Override public Iterator< String > incomingSynapseIterator(){
+      return incomingSynapses.iterator();
+   }
 
    /**
     * {@inheritDoc}
     */
    @Override public void addOutgoingSynapse( Synapse synapse ) {
       outgoingSynapses.add( synapse.getIdentification() );
+      outgoingSynapses.sort( ( a, b ) -> { return a.compareTo( b ); } );
    }// End Method
 
    /**
@@ -79,6 +94,10 @@ public class XmlNeuron extends XmlSingletonWrapper< Neuron > implements Serializ
    @Override public void addAllOutgoingSynapses( Iterator< Synapse > incoming ) {
       incoming.forEachRemaining( synapse -> addOutgoingSynapse( synapse ) );
    }// End Method
+   
+   @Override public Iterator< String > outgoingSynapseIterator(){
+      return outgoingSynapses.iterator();
+   }
 
    /**
     * {@inheritDoc}
@@ -86,6 +105,10 @@ public class XmlNeuron extends XmlSingletonWrapper< Neuron > implements Serializ
    @Override public void setThresholdFunction( Class< ? extends ThresholdFunction > functionType ) {
       thresholdFunction = functionType;
    }// End Method
+   
+   @Override public Class< ? extends ThresholdFunction > getThresholdFunction(){
+      return thresholdFunction;
+   }
 
    /**
     * {@inheritDoc}
@@ -94,4 +117,12 @@ public class XmlNeuron extends XmlSingletonWrapper< Neuron > implements Serializ
       currentOutput = output;
    }// End Method
    
+   @Override public Double getCurrentOutput(){
+      return currentOutput;
+   }
+
+   @Override public Neuron unwrap() {
+      return new Neuron( position );
+   }
+
 }// End Class
