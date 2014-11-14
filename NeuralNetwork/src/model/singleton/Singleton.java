@@ -7,20 +7,35 @@
  */
 package model.singleton;
 
-import architecture.utility.ObjectGenerator;
+import model.data.SerializableSingleton;
 import model.data.SingletonSerialization;
-import model.data.read.SerializableSingleton;
-import model.data.write.SerializedSingleton;
+import architecture.utility.ObjectGenerator;
 
 /**
  * The {@link Singleton} provides the base definition for a single {@link Object} that exists in
  * its own right and can be serialized.
  */
-public abstract class Singleton< S extends SerializableSingleton, T extends SerializedSingleton > implements SingletonSerialization< S, T >{
+public abstract class Singleton< S extends SerializableSingleton< ? > > implements SingletonSerialization< S >{
 
    /** The unique identification for this {@link Singleton}. **/
    protected String identification;
 
+   /**
+    * Constructs a new {@link Singleton}.
+    * @param identification the identification of the {@link Singleton}.
+    */
+   public Singleton( String identification ) {
+      this.identification = identification;
+   }// End Constructor
+   
+   /**
+    * Method to get the {@link String} identification of the {@link Singleton}.
+    * @return the {@link String} identification.
+    */
+   public String getIdentification(){
+      return identification;
+   }// End Method
+   
    /**
     * {@inheritDoc}
     */
@@ -40,7 +55,7 @@ public abstract class Singleton< S extends SerializableSingleton, T extends Seri
    /**
     * {@inheritDoc}
     */
-   @Override public void read( T serialized ){
+   @Override public void read( S serialized ){
       identification = serialized.getIdentification();
       readSingleton( serialized );
    }// End Method
@@ -49,7 +64,7 @@ public abstract class Singleton< S extends SerializableSingleton, T extends Seri
     * Method to populate the {@link Singleton} from the {@link SerializedSingleton}.
     * @param serialized the {@link SerializedSingleton} providing the data to populate.
     */
-   protected abstract void readSingleton( T serialized );
+   protected abstract void readSingleton( S serialized );
    
 }// End Class
 

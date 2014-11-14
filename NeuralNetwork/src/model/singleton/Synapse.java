@@ -7,10 +7,11 @@
  */
  package model.singleton;
 
+import architecture.request.RequestSystem;
+import architecture.utility.ObjectGenerator;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.Property;
-import model.data.read.SerializableSynapse;
-import model.data.write.SerializedSynapse;
+import model.data.SerializableSynapse;
 import model.function.learning.PerceptronLearningRule;
 import model.function.threshold.ThresholdFunction;
 
@@ -18,7 +19,7 @@ import model.function.threshold.ThresholdFunction;
   * The {@link Synapse} is responsible for connecting two {@link Neuron}s and weighting
   * the output between them.
   */
-public class Synapse extends Singleton< SerializableSynapse, SerializedSynapse >{
+public class Synapse extends Singleton< SerializableSynapse >{
 
    /** The input {@link Neuron} providing the output value to this {@link Synapse}.**/
    private Neuron inputNeuron;
@@ -30,15 +31,23 @@ public class Synapse extends Singleton< SerializableSynapse, SerializedSynapse >
    private PerceptronLearningRule learningRule;
 
    /**
+    * Constructs a new {@link Synapse} with the given {@link String} identification.
+    * @param identification the identification of the {@link Synapse}.
+    */
+   public Synapse( String identification ){
+      super( identification );
+   }// End Constructor
+   
+   /**
     * Constructs a new {@link Synapse}.
     * @param inputNeuron the {@link Neuron} providing the output to the {@link Synapse}.
     * @param outputNeuron the {@link Neuron} receiving the weighted output form the {@link Synapse}.
     */
    public Synapse( Neuron inputNeuron, Neuron outputNeuron ) {
+      super( generateIdentification( inputNeuron.getIdentificationProperty().get(), outputNeuron.getIdentificationProperty().get() ) );
       this.inputNeuron = inputNeuron;
       this.outputNeuron = outputNeuron;
       learningRule = new PerceptronLearningRule( 0.1 );
-      identification = inputNeuron.getIdentificationProperty().get() + "_" + outputNeuron.getIdentificationProperty().get();
       connectSynapse();
    }// End Constructor
 
@@ -52,6 +61,17 @@ public class Synapse extends Singleton< SerializableSynapse, SerializedSynapse >
       this( inputNeuron, outputNeuron );
       learningRule.setWeight( weight );
    }// End Constructor
+   
+   /**
+    * Method to generate the identification of the {@link Synapse} given the identification of
+    * the input {@link Neuron} and output {@link Neuron}.
+    * @param input the identification of the input {@link Neuron}.
+    * @param output the identification of the output {@link Neuron}.
+    * @return the identification of the {@link Synapse}.
+    */
+   public static String generateIdentification( String input, String output ){
+      return input + "_" + output;
+   }// End Method
 
    /**
     * Method to connect the {@link Synapse} to the {@link #inputNeuron} and the {@link #outputNeuron}.
@@ -146,8 +166,13 @@ public class Synapse extends Singleton< SerializableSynapse, SerializedSynapse >
    /**
     * {@inheritDoc}
     */
-   @Override public void readSingleton( SerializedSynapse serialized ){
-      
+   @Override public void readSingleton( SerializableSynapse serialized ){
+      inputNeuron = RequestSystem.retrieve( Neuron.class, serialized.getInputNeuron() );
+      outputNeuron = RequestSystem.retrieve( Neuron.class, serialized.getOutputNeuron() );
+      learningRule = ObjectGenerator.construct( serialized.getLearningRule() );
+      learningRule.setFiredOutput( serialized.getLastFiredOutput() );
+      learningRule.setWeight( serialized.getWeight() );
+      learningRule.setLearningRate( serialized.getLearningRate() );
    }// End Method
 
 }// End Class

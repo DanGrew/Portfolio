@@ -73,8 +73,10 @@ public abstract class ThresholdFunction {
     * following calculations.
     * @param output the output calculated.
     */
-   protected void setOutput( Double output ) {
-      this.output.set( output );
+   public void setOutput( Double output ) {
+      if ( output != null ){
+         this.output.set( output );
+      }
    }// End Method
 
    /**
