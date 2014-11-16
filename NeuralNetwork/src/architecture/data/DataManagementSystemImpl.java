@@ -10,6 +10,7 @@ package architecture.data;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * The {@link DataManagementSystemImpl} provides the implementation to the {@link DataManagementSystem}
@@ -41,6 +42,14 @@ public class DataManagementSystemImpl implements DataManagementSystem {
    @Override public < T > T retrieve( Class< T > clazz, Predicate< T > criteria ) {
       DataManager< T > manager = getDataManager( clazz );
       return manager.retrieve( criteria );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public < T > Stream< T > retrieveAll( Class< T > clazz, Predicate< T > criteria ){
+      DataManager< T > manager = getDataManager( clazz );
+      return manager.retrieveAll( criteria );
    }// End Method
    
    /**

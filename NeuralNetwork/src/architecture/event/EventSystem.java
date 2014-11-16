@@ -10,7 +10,7 @@ package architecture.event;
 import java.util.Observable;
 import java.util.Observer;
 
-import architecture.event.system.System;
+import architecture.event.system.ManagementSystem;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
  * The {@link EventSystem} provides the public static interface to the {@link EventManagementSystem}
  * implementation.
  */
-public class EventSystem extends System {
+public class EventSystem extends ManagementSystem {
    
    /**
     * {@link EventManagementSystem#observe(Enum, Observable)}.

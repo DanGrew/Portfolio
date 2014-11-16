@@ -8,6 +8,7 @@
 package architecture.data;
 
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * The {@link DataManagementSystem} provides the interface defining access to the {@link Object}s
@@ -29,6 +30,15 @@ public interface DataManagementSystem {
     * @return the matching {@link Object}.
     */
    public < T > T retrieve( Class< T > clazz, Predicate< T > criteria );
+   
+   /**
+    * Method to retrieve the all of the {@link Object}s of the given {@link Class} matching
+    * the given criteria.
+    * @param clazz the {@link Class} the {@link Object} is.
+    * @param criteria the method of matching the {@link Object}.
+    * @return the matching {@link Stream} of {@link Object}s.
+    */
+   public < T > Stream< T > retrieveAll( Class< T > clazz, Predicate< T > criteria );
 
 }// End Interface
 

@@ -13,15 +13,15 @@ import architecture.event.EventManagementSystem;
 import architecture.event.EventManagementSystemImpl;
 
 /**
- * The {@link System} provides and interface for operations, associated with management tasks,
+ * The {@link ManagementSystem} provides and interface for operations, associated with management tasks,
  * across the system.
  */
-public class System {
+public class ManagementSystem {
 
    /** The instance of the {@link EventManagementSystem}. **/
-   private static final EventManagementSystem eventManagementSystem = new EventManagementSystemImpl();
+   private static EventManagementSystem eventManagementSystem = new EventManagementSystemImpl();
    /** The instance of the {@link DataManagementSystem}. **/
-   private static final DataManagementSystem dataManagementSystem = new DataManagementSystemImpl();
+   private static DataManagementSystem dataManagementSystem = new DataManagementSystemImpl();
    
    /**
     * Method to access the {@link EventManagementSystem}.
@@ -38,5 +38,10 @@ public class System {
    protected static DataManagementSystem dataSystem(){
       return dataManagementSystem;
    }// End Method
+   
+   public static void reset(){
+      eventManagementSystem = new EventManagementSystemImpl();
+      dataManagementSystem = new DataManagementSystemImpl();
+   }
    
 }// End Class

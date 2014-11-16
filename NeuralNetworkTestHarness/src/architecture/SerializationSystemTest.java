@@ -7,10 +7,14 @@
  */
 package architecture;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.File;
 
 import model.network.Perceptron;
 import model.singleton.Neuron;
+import model.singleton.Singleton;
+import model.singleton.Synapse;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,6 +22,7 @@ import org.junit.Test;
 import representation.xml.wrapper.XmlPerceptronWrapper;
 import temporary.TemporaryFiles;
 import utility.Comparison;
+import architecture.event.system.ManagementSystem;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
 
@@ -27,6 +32,12 @@ import architecture.serialization.SerializationSystem;
  */
 public class SerializationSystemTest {
    
+   /** The number of {@link Neuron}s in the input layer. **/
+   private static final int INPUT_NEURON_COUNT = 20;
+   /** The number of {@link Neuron}s in the output layer. **/
+   private static final int OUTPUT_NEURON_COUNT = 10;
+   /** The number of {@link Neuron}s used as bias. **/
+   private static final int BIAS_NEURON_COUNT = 1;
    /** The name of the output file to test writing and reading.**/
    private static final String OUTPUT_FILE = "XML_PERCEPTRON.xml";
    /** The constructed {@link Perceptron} to write, and validate against.**/
@@ -37,11 +48,27 @@ public class SerializationSystemTest {
     * writing it to the output file in XML.
     */
    @BeforeClass public static void initialise() {
-      initialPerceptron = new Perceptron( 20, 10 );
+      ManagementSystem.reset();
+      
+      initialPerceptron = new Perceptron( INPUT_NEURON_COUNT, OUTPUT_NEURON_COUNT );
       XmlPerceptronWrapper wrapper = new XmlPerceptronWrapper( initialPerceptron );
       File file = new File( TemporaryFiles.TEMPORARY_DIRECTORY + OUTPUT_FILE );
       SerializationSystem.saveToFile( wrapper, file );
       SerializationSystem.loadSingletonsFromFile( XmlPerceptronWrapper.class, file );
+   }// End Method
+   
+   /**
+    * Method to test that the correct number of {@link Singleton}s have been created.
+    */
+   @Test public void CreationCountTest(){
+      assertEquals( 
+               ( int )RequestSystem.retrieveAll( Neuron.class, test -> { return true; } ).count(),
+               INPUT_NEURON_COUNT + OUTPUT_NEURON_COUNT + BIAS_NEURON_COUNT
+      );
+      assertEquals( 
+               ( int )RequestSystem.retrieveAll( Synapse.class, test -> { return true; } ).count(),
+               OUTPUT_NEURON_COUNT * ( BIAS_NEURON_COUNT + INPUT_NEURON_COUNT )
+      );
    }// End Method
    
    /**
@@ -58,6 +85,19 @@ public class SerializationSystemTest {
          Neuron storedNeuron = RequestSystem.retrieve( Neuron.class, neuron.getIdentification() );
          Comparison.assertEqual( neuron, storedNeuron );
       } );
+   }// End Method
+   
+   /**
+    * Method to test that the {@link Synapse}s in the {@link Perceptron} are written, read back
+    * in and correctly constructed.
+    */
+   @Test public void SynapseExistenceTest(){
+      initialPerceptron.getOutputLayer().iterator().forEachRemaining( neuron -> {
+         neuron.inputSynapseIterator().forEachRemaining( synapse -> {
+            Synapse storedSynapse = RequestSystem.retrieve( Synapse.class, synapse.getIdentification() );
+            Comparison.assertEqual( synapse, storedSynapse );
+         });
+      });
    }// End Method
 
 }// End Class
