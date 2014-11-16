@@ -12,8 +12,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.Iterator;
 
 import model.data.SerializableNeuron;
+import model.data.SerializableSynapse;
 import model.singleton.Neuron;
+import model.singleton.Synapse;
 import representation.xml.model.XmlNeuron;
+import representation.xml.model.XmlSynapse;
 
 /**
  * {@link Comparison} provides assertion helper methods for comparing objects and primitives.
@@ -64,5 +67,24 @@ public class Comparison {
       
       assertEquals( serializableA.getThresholdFunction(), serializableB.getThresholdFunction() );
       doubleAssert( serializableA.getCurrentOutput(), serializableB.getCurrentOutput() );
+   }// End Method
+   
+   /**
+    * Method to assert that the given {@link Synapse}s are equal. This is done by converting them
+    * to a {@link SerializableSynapse} and comparing the data.
+    * @param synapseA the first {@link Synapse}.
+    * @param synapseB the second {@link Synapse}.
+    */
+   public static void assertEqual( Synapse synapseA, Synapse synapseB ){
+      SerializableSynapse serializableA = synapseA.write( XmlSynapse.class );
+      SerializableSynapse serializableB = synapseB.write( XmlSynapse.class );
+      
+      assertEquals( serializableA.getIdentification(), serializableB.getIdentification() );
+      assertEquals( serializableA.getInputNeuron(), serializableB.getInputNeuron() );
+      assertEquals( serializableA.getOutputNeuron(), serializableB.getOutputNeuron() );
+      assertEquals( serializableA.getLearningRule(), serializableB.getLearningRule() );
+      doubleAssert( serializableA.getLearningRate(), serializableB.getLearningRate() );
+      doubleAssert( serializableA.getLastFiredOutput(), serializableB.getLastFiredOutput() );
+      doubleAssert( serializableA.getWeight(), serializableB.getWeight() );
    }// End Method
 }// End Class

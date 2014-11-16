@@ -8,16 +8,17 @@
 package architecture.request;
 
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import model.singleton.Singleton;
 import architecture.data.DataManagementSystem;
-import architecture.event.system.System;
+import architecture.event.system.ManagementSystem;
 
 /**
  * The {@link RequestSystem} provides an interface to the management systems that provide access
  * to {@link Object}s being used in the system.
  */
-public class RequestSystem extends System {
+public class RequestSystem extends ManagementSystem {
    
    /**
     * {@link DataManagementSystem#store(Object)}.
@@ -44,6 +45,13 @@ public class RequestSystem extends System {
       return dataSystem().retrieve( clazz, test -> {
          return test.getIdentification().equals( identification );
       } );
+   }// End Method
+   
+   /**
+    * {@link DataManagementSystem#retrieveAll(Class, Predicate)}.
+    */
+   public static < T > Stream< T > retrieveAll( Class< T > clazz, Predicate< T > criteria ){
+      return dataSystem().retrieveAll( clazz, criteria );
    }// End Method
    
 }// End Class
