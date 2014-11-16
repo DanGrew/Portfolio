@@ -60,6 +60,18 @@ public class Perceptron {
       );
       connectLayers();
    }// End Constructor
+   
+   /**
+    * Constructs a new {@link Perceptron}.
+    * @param bias the {@link Neuron} providing the bias.
+    * @param inputLayer the {@link NeuronLayer} providing the input.
+    * @param outputLayer the {@link NeuronLayer} providing the output.
+    */
+   public Perceptron( Neuron bias, NeuronLayer inputLayer, NeuronLayer outputLayer ){
+      this.bias = bias;
+      this.inputLayer = inputLayer;
+      this.outputLayer = outputLayer;
+   }// End Constructor
 
    /**
     * Method to connect the {@link Neuron}s in the {@link Perceptron}. This will connect

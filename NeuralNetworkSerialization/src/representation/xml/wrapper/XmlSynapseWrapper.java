@@ -53,7 +53,11 @@ public class XmlSynapseWrapper extends XmlCollectionWrapper< Synapse, Serializab
    @Override public void resolveSingletons() {
       objects.forEach( object -> {
          Synapse synapse = RequestSystem.retrieve( Synapse.class, object.getIdentification() );
-         synapse.read( object );
+         if ( synapse == null ){
+            throw new NullPointerException( "Synapse does not exist: " + object.getIdentification() + "." );
+         } else {
+            synapse.read( object );
+         }
       } );
    }// End Method
    

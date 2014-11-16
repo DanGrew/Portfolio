@@ -15,6 +15,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import architecture.utility.UnmodifiableIterator;
+
 /**
  * The {@link CollectionWrapper} provides a generic wrapper for {@link Object}s to be written to
  * and XML file.
@@ -74,6 +76,14 @@ public class CollectionWrapper< T > {
     */
    public void addObject( T object ){
       objects.add( object );
+   }// End Method
+   
+   /**
+    * Method to get an {@link Iterator} of {@link Object}s in this {@link CollectionWrapper}.
+    * @return the {@link Iterator} of {@link Object}s.
+    */
+   public Iterator< T > iterator(){
+      return new UnmodifiableIterator< T >( objects.iterator() );
    }// End Method
 
 }// End Class

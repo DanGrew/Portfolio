@@ -31,7 +31,7 @@ public class NeuronLayer {
    /** The {@link List} of {@link Neuron}s in the {@link NeuronLayer}. **/
    private List< Neuron > neurons;
    /** The number of {@link Neuron}s in the {@link NeuronLayer}.**/
-   private final int capacity;
+   private int capacity;
 
    /**
     * The {@link NeuronLayerBuilder} provides a method of building a {@link NeuronLayer} by configuring
@@ -39,6 +39,8 @@ public class NeuronLayer {
     */
    public static class NeuronLayerBuilder {
 
+      /** {@link Collection} of {@link Neuron}s to use in the layer. **/
+      private Collection< Neuron > neurons;
       /** The number of {@link Neuron}s in the {@link NeuronLayer}.**/
       private int numberOfNeurons;
       /** The {@link Class} of the {@link ThresholdFunction} to use.**/
@@ -50,6 +52,16 @@ public class NeuronLayer {
        * Constructs a new {@link NeuronLayerBuilder}.
        */
       public NeuronLayerBuilder(){}
+      
+      /**
+       * Method to configure the {@link Neuron}s to use in the layer.
+       * @param neurons the {@link Collection} of {@link Neuron}s.
+       * @return the {@link NeuronLayerBuilder} configured.
+       */
+      public NeuronLayerBuilder neurons( Collection< Neuron > neurons ){
+         this.neurons = neurons;
+         return this;
+      }// End Method
 
       /**
        * Method to configure the number of {@link Neuron}s in the {@link NeuronLayer}.
@@ -89,9 +101,14 @@ public class NeuronLayer {
     */
    public NeuronLayer( NeuronLayerBuilder builder ){
       thresholdFunction = builder.thresholdFunction;
-      capacity = builder.numberOfNeurons;
-      neurons = new ArrayList< Neuron >( capacity );
-      constructNeurons( builder.layer );
+      if ( builder.neurons == null ){
+         capacity = builder.numberOfNeurons;
+         neurons = new ArrayList< Neuron >( capacity );
+         constructNeurons( builder.layer );
+      } else {
+         neurons = new ArrayList< Neuron >( builder.neurons.size() );
+         includeNeurons( builder.neurons );
+      }
    }// End Constructor
 
    /**
@@ -104,6 +121,15 @@ public class NeuronLayer {
          Neuron neuron = new Neuron( new NetworkPosition( layer, i ), function );
          addNeuron( neuron );
       }
+   }// End Method
+   
+   /**
+    * Method to include the {@link Collection} of {@link Neuron}s in the {@link NeuronLayer}.
+    * @param neurons the {@link Collection} of {@link Neuron}s.
+    */
+   private void includeNeurons( Collection< Neuron > neurons ){
+      capacity = neurons.size();
+      neurons.forEach( neuron -> addNeuron( neuron ) );
    }// End Method
 
    /**
@@ -141,6 +167,22 @@ public class NeuronLayer {
       } else {
          return neurons.get( position.index );
       }
+   }// End Method
+   
+   /**
+    * Method to get the capacity of the {@link NeuronLayer}.
+    * @return the int capacity.
+    */
+   public int getCapacity(){
+      return capacity;
+   }// End Method
+   
+   /**
+    * Method to get the {@link ThresholdFunction} {@link Class} used by the {@link NeuronLayer}.
+    * @return the {@link ThresholdFunction}.
+    */
+   public Class< ? extends ThresholdFunction > getThresholdFunction(){
+      return thresholdFunction;
    }// End Method
 
    /**

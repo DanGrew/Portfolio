@@ -13,8 +13,10 @@ import java.util.Iterator;
 
 import model.data.SerializableNeuron;
 import model.data.SerializableSynapse;
+import model.function.threshold.ThresholdFunction;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
+import model.structure.NeuronLayer;
 import representation.xml.model.XmlNeuron;
 import representation.xml.model.XmlSynapse;
 
@@ -61,7 +63,9 @@ public class Comparison {
       Iterator< String > outputA = serializableA.outgoingSynapseIterator();
       Iterator< String > outputB = serializableB.outgoingSynapseIterator();
       while ( outputA.hasNext() && outputB.hasNext() ){
-         assertEquals( outputA.next(), outputB.next() );
+         String nextA = outputA.next();
+         String nextB = outputB.next();
+         assertEquals( nextA, nextB );
       }
       assertEquals( outputA.hasNext(), outputB.hasNext() );
       
@@ -86,5 +90,19 @@ public class Comparison {
       doubleAssert( serializableA.getLearningRate(), serializableB.getLearningRate() );
       doubleAssert( serializableA.getLastFiredOutput(), serializableB.getLastFiredOutput() );
       doubleAssert( serializableA.getWeight(), serializableB.getWeight() );
+   }// End Method
+   
+   /**
+    * Method to assert that two {@link NeuronLayer}s are that same. This will check the bias, {@link ThresholdFunction}
+    * and {@link Neuron}s in the layer.
+    * @param layerA the first {@link NeuronLayer}.
+    * @param layerB the second {@link NeuronLayer}.
+    */
+   public static void assertEqual( NeuronLayer layerA, NeuronLayer layerB ){
+      assertEquals( layerA.getCapacity(), layerB.getCapacity() );
+      assertEquals( layerA.getThresholdFunction(), layerB.getThresholdFunction() );
+      layerA.iterator().forEachRemaining( neuronA -> {
+         assertEqual( neuronA, layerB.getNeuronAtPosition( neuronA.getPosition() ) );
+      } );
    }// End Method
 }// End Class

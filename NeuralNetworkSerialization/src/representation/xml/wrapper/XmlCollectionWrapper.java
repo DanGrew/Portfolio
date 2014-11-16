@@ -14,6 +14,7 @@ import model.singleton.Singleton;
 import architecture.representation.SingletonContainer;
 import architecture.request.RequestSystem;
 
+
 /**
  * The {@link XmlCollectionWrapper} provides an extension to the {@link CollectionWrapper} that manages
  * the wrapping of {@link Singleton}s.
@@ -35,6 +36,7 @@ public abstract class XmlCollectionWrapper
     */
    public XmlCollectionWrapper( Iterator< S > iterator ){
       super();
+      iterator.forEachRemaining( object -> addUnwrapped( object ) );
    }// End Constructor
    
    /**
@@ -56,10 +58,7 @@ public abstract class XmlCollectionWrapper
     * {@link SerializableSingleton#unwrap()}s and {@link RequestSystem#store(Object)}s it.
     */
    @Override public void constructSingletons(){
-      objects.forEach( object -> {
-         S unwrapped = object.unwrap();
-         RequestSystem.store( unwrapped );
-      } );
+      objects.forEach( object -> object.unwrap() );
    }// End Method
   
 }// End Class

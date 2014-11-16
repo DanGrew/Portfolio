@@ -9,6 +9,7 @@ package architecture.data;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -50,6 +51,15 @@ public class DataManagementSystemImpl implements DataManagementSystem {
    @Override public < T > Stream< T > retrieveAll( Class< T > clazz, Predicate< T > criteria ){
       DataManager< T > manager = getDataManager( clazz );
       return manager.retrieveAll( criteria );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public < T > void process( Class< T > clazz, Predicate< T > criteria, Consumer< T > process ){
+      DataManager< T > manager = getDataManager( clazz );
+      Stream< T > object = manager.retrieveAll( criteria );
+      object.forEach( process );
    }// End Method
    
    /**

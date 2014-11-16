@@ -7,6 +7,7 @@
  */
 package architecture.data;
 
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -39,6 +40,15 @@ public interface DataManagementSystem {
     * @return the matching {@link Stream} of {@link Object}s.
     */
    public < T > Stream< T > retrieveAll( Class< T > clazz, Predicate< T > criteria );
+   
+   /**
+    * Method to {@link #retrieveAll(Class, Predicate)} {@link Object}s matching the {@link Predicate}
+    * and process them using the {@link Consumer}.
+    * @param clazz the {@link Class} of the {@link Object} to retrieve.
+    * @param criteria the {@link Predicate} to match the {@link Object}s.
+    * @param process the {@link Consumer} to process.
+    */
+   public < T > void process( Class< T > clazz, Predicate< T > criteria, Consumer< T > process );
 
 }// End Interface
 

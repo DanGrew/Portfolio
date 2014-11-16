@@ -22,6 +22,7 @@ import org.junit.Test;
 import representation.xml.wrapper.XmlPerceptronWrapper;
 import temporary.TemporaryFiles;
 import utility.Comparison;
+import utility.Resolution;
 import architecture.event.system.ManagementSystem;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
@@ -42,6 +43,8 @@ public class SerializationSystemTest {
    private static final String OUTPUT_FILE = "XML_PERCEPTRON.xml";
    /** The constructed {@link Perceptron} to write, and validate against.**/
    private static Perceptron initialPerceptron;
+   /** The {@link Perceptron} constructed from the {@link File}. **/
+   private static Perceptron constructedPerceptron;
 
    /**
     * Method to initialise the tests by constructing the {@link Perceptron} and 
@@ -54,7 +57,7 @@ public class SerializationSystemTest {
       XmlPerceptronWrapper wrapper = new XmlPerceptronWrapper( initialPerceptron );
       File file = new File( TemporaryFiles.TEMPORARY_DIRECTORY + OUTPUT_FILE );
       SerializationSystem.saveToFile( wrapper, file );
-      SerializationSystem.loadSingletonsFromFile( XmlPerceptronWrapper.class, file );
+      constructedPerceptron = SerializationSystem.loadStructure( XmlPerceptronWrapper.class, file );
    }// End Method
    
    /**
@@ -99,5 +102,24 @@ public class SerializationSystemTest {
          });
       });
    }// End Method
-
+   
+   /**
+    * Method to test that the {@link #initialPerceptron} matches the {@link #constructedPerceptron}.
+    */
+   @Test public void ConstructionTest(){
+      Comparison.assertEqual( initialPerceptron.getBias(), constructedPerceptron.getBias() );
+      Comparison.assertEqual( initialPerceptron.getInputLayer(), constructedPerceptron.getInputLayer() );
+      Comparison.assertEqual( initialPerceptron.getOutputLayer(), constructedPerceptron.getOutputLayer() );
+   }// End Method
+   
+   /**
+    * Method to test that the {@link #constructedPerceptron} references all {@link Singleton}s in 
+    * the {@link RequestSystem}.
+    */
+   @Test public void ResolutionTest(){
+      Resolution.assertResolved( constructedPerceptron.getInputLayer() );
+      Resolution.assertResolved( constructedPerceptron.getOutputLayer() );
+      Resolution.assertResolved( constructedPerceptron.getBias(), Neuron.class );
+   }// End Method
+   
 }// End Class

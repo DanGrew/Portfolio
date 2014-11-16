@@ -22,6 +22,7 @@ import model.singleton.Neuron;
 import model.singleton.Synapse;
 import model.structure.NetworkPosition;
 import representation.xml.wrapper.XmlSingletonWrapper;
+import architecture.request.RequestSystem;
 
 /**
  * The {@link XmlNeuron} provides an implementation of the {@link SerializableNeuron} and {@link SerializedNeuron}
@@ -122,7 +123,12 @@ public class XmlNeuron extends XmlSingletonWrapper< Neuron > implements Serializ
    }
 
    @Override public Neuron unwrap() {
-      return new Neuron( position );
+      Neuron neuron = RequestSystem.retrieve( Neuron.class, identification );
+      if ( neuron == null ){
+         neuron = new Neuron( position );
+         RequestSystem.store( neuron );
+      }
+      return neuron;
    }
 
 }// End Class

@@ -9,6 +9,7 @@ package representation.xml.model;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import architecture.request.RequestSystem;
 import model.data.SerializableSynapse;
 import model.function.learning.PerceptronLearningRule;
 import model.singleton.Neuron;
@@ -48,9 +49,12 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
       inputNeuron = input.getIdentificationProperty().get();
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
    @Override public String getInputNeuron(){
       return inputNeuron;
-   }
+   }// End Method
 
    /**
     * {@inheritDoc}
@@ -59,9 +63,12 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
       outputNeuron = output.getIdentificationProperty().get();
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
    @Override public String getOutputNeuron(){
       return outputNeuron;
-   }
+   }// End Method
 
    /**
     * {@inheritDoc}
@@ -70,9 +77,12 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
       this.learningRule = learningRule;
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
    @Override public Class< ? extends PerceptronLearningRule > getLearningRule(){
       return learningRule;
-   }
+   }// End Method
 
    /**
     * {@inheritDoc}
@@ -81,9 +91,12 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
       this.learningRate = learningRate;
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
    @Override public double getLearningRate(){
       return learningRate;
-   }
+   }// End Method
 
    /**
     * {@inheritDoc}
@@ -92,9 +105,12 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
       this.lastFiredOutput = lastFiredOutput;
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
    @Override public Double getLastFiredOutput(){
       return lastFiredOutput;
-   }
+   }// End Method
 
    /**
     * {@inheritDoc}
@@ -103,12 +119,23 @@ public class XmlSynapse extends XmlSingletonWrapper< Synapse > implements Serial
       this.currentWeight = weight;
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
    @Override public Double getWeight(){
       return currentWeight;
-   }
+   }// End Method
 
+   /**
+    * {@inheritDoc}
+    */
    @Override public Synapse unwrap() {
-      return new Synapse( Synapse.generateIdentification( inputNeuron, outputNeuron ) );
-   }
+      Synapse synapse = RequestSystem.retrieve( Synapse.class, identification );
+      if ( synapse == null ){
+         synapse = new Synapse( identification );
+         RequestSystem.store( synapse );
+      }
+      return synapse;
+   }// End Method
    
 }// End Class
