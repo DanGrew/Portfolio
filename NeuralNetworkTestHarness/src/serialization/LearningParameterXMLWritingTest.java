@@ -8,15 +8,19 @@
 package serialization;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.data.SerializableLearningParameter;
 import model.singleton.LearningParameter;
 import model.singleton.LearningParameter.NeuronValue;
+import model.structure.LearningParameters;
 import model.structure.NetworkPosition;
 
 import org.junit.Test;
 
 import representation.xml.model.XmlLearningParameter;
+import representation.xml.wrapper.XmlLearningParametersWrapper;
 import temporary.TemporaryFiles;
 import utility.Comparison;
 import architecture.serialization.SerializationSystem;
@@ -54,6 +58,34 @@ public class LearningParameterXMLWritingTest {
       SerializationSystem.saveToFile( serialized, file );
       LearningParameter constructed = SerializationSystem.loadWrappedSingleton( XmlLearningParameter.class, file );
       Comparison.assertEqual( parameter, constructed );
+   }// End Method
+   
+   /**
+    * Method to test the reading and writing of the {@link XmlLearningParametersWrapper}.
+    */
+   @Test public void WrapperReadAndWriteTest() {
+      List< LearningParameter > list = new ArrayList< LearningParameter >();
+      
+      for ( int i = 0; i < 6; i++ ){
+         LearningParameter parameter = new LearningParameter( "Parameter" + i );
+         parameter.inputParameters( 
+                  ObjectGenerator.newRandom(), 
+                  ObjectGenerator.newRandom(), 
+                  ObjectGenerator.newRandom() 
+         );
+         parameter.targetParameters( 
+                  new NeuronValue( new NetworkPosition( 1, 0 ), ObjectGenerator.newRandom() ), 
+                  new NeuronValue( new NetworkPosition( 1, 1 ), ObjectGenerator.newRandom() ),
+                  new NeuronValue( new NetworkPosition( 1, 2 ), ObjectGenerator.newRandom() )
+         );
+         list.add( parameter );
+      }
+      
+      File file = new File( TemporaryFiles.TEMPORARY_DIRECTORY + OUTPUT_FILE ); 
+      
+      SerializationSystem.saveToFile( new XmlLearningParametersWrapper( list.iterator() ), file );
+      LearningParameters parameters = SerializationSystem.loadStructure( XmlLearningParametersWrapper.class, file );
+      Comparison.assertEqual( list.iterator(), parameters.iterator(), ( a, b ) -> { Comparison.assertEqual( a, b ); return 0; } );
    }// End Method
 
 }// End Class

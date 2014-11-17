@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
@@ -21,9 +19,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import model.network.Perceptron;
 import model.singleton.LearningParameter;
+import model.structure.LearningParameters;
 import neuralnetwork.creator.NetworkViewer;
 import neuralnetwork.creator.view.module.LearningProcessor;
+import representation.xml.wrapper.XmlLearningParametersWrapper;
 import representation.xml.wrapper.XmlPerceptronWrapper;
+import utility.Alerts;
 import architecture.event.EventSystem;
 import architecture.serialization.SerializationSystem;
 
@@ -33,6 +34,14 @@ import architecture.serialization.SerializationSystem;
  */
 public class NetworkViewerController {
 
+   /** Enum defining the events the controller can raise. **/
+   public enum Events {
+      /** Indicates a {@link Perceptron} has been loaded. Source = {@link Perceptron}.**/
+      PerceptronLoaded,
+      /** Indicates {@link LearningParameters} have been loaded. Source = {@link LearningParameters}.**/
+      LearningParametersLoaded;
+   }// End Enum
+   
    private Perceptron perceptron;
    @FXML private AnchorPane networkViewer;
    @FXML private NetworkOverviewController networkOverviewController;
@@ -46,6 +55,8 @@ public class NetworkViewerController {
    private FileChooser fileChooser;
    @FXML private MenuItem loadXMLPerceptronMenu;
    @FXML private MenuItem saveXMLPerceptronMenu;
+   @FXML private MenuItem loadXMLLearningParametersMenu;
+   @FXML private MenuItem saveXMLLearningParametersMenu;
    
    /**
     * Method to initialise the graphics and events in the window.
@@ -63,19 +74,39 @@ public class NetworkViewerController {
         File chosen = fileChooser.showSaveDialog( null ); 
         if ( chosen != null ){
             boolean saved = SerializationSystem.saveToFile( new XmlPerceptronWrapper( perceptron ), chosen );
-            if ( saved ){
-               Alert alert = new Alert( AlertType.INFORMATION );
-               alert.setTitle( "Save Progress" );
-               alert.setHeaderText( "Marshalling XML to file." );
-               alert.setContentText( "Process Complete." );
-               alert.showAndWait();
+            String message = ( saved ? "Success: written to file. " : "Failed: Not writtent to file." );
+            Alerts.completionAlert( 
+                     "Perceptron Save", 
+                     "Marshalling Perceptron as XML to file.", 
+                     message
+            );
+         }
+      } );
+      loadXMLLearningParametersMenu.setOnAction( event -> {
+         File chosen = fileChooser.showOpenDialog( null );
+         if ( chosen != null ){
+            LearningParameters learningParameters = SerializationSystem.loadStructure( XmlLearningParametersWrapper.class, chosen );
+            if ( learningParameters == null ){
+               Alerts.completionAlert( 
+                        "Learning Parameters Load", 
+                        "Unmarshalling XML into structure.", 
+                        "Failed: Structure could not be created."
+               );
             } else {
-               Alert alert = new Alert( AlertType.INFORMATION );
-               alert.setTitle( "Save Progress" );
-               alert.setHeaderText( "Marshalling XML to file." );
-               alert.setContentText( "Marshalling has failed." );
-               alert.showAndWait();
+               EventSystem.raiseEvent( Events.LearningParametersLoaded, learningParameters );
             }
+         }
+      } );
+      saveXMLLearningParametersMenu.setOnAction( event -> {
+        File chosen = fileChooser.showSaveDialog( null ); 
+        if ( chosen != null ){
+            boolean saved = SerializationSystem.saveToFile( new XmlPerceptronWrapper( perceptron ), chosen );
+            String message = saved ? "Success: Written to file." : "Failed: Not written to file."; 
+            Alerts.completionAlert( 
+                     "Learning Parameters Save", 
+                     "Marshalling Learning Parameters as XML to file.", 
+                     message
+            );
          }
       } );
    }// End Method
