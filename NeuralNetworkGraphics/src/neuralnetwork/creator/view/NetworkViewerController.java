@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import model.network.Perceptron;
-import model.structure.LearningParameter;
+import model.singleton.LearningParameter;
 import neuralnetwork.creator.NetworkViewer;
 import neuralnetwork.creator.view.module.LearningProcessor;
 import representation.xml.wrapper.XmlPerceptronWrapper;

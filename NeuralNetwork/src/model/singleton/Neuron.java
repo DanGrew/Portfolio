@@ -17,7 +17,7 @@ import javafx.beans.property.StringProperty;
 import model.data.SerializableNeuron;
 import model.function.threshold.McCullochPittsFunction;
 import model.function.threshold.ThresholdFunction;
-import model.structure.LearningParameter.NeuronValue;
+import model.singleton.LearningParameter.NeuronValue;
 import model.structure.NetworkPosition;
 import architecture.request.RequestSystem;
 import architecture.utility.ObjectGenerator;

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xmlLearningParameter>
+    <identification>Parameter</identification>
+    <targets>
+        <target>
+            <layer>0</layer>
+            <index>0</index>
+            <input>0.12297730211168556</input>
+            <target>0.0</target>
+        </target>
+        <target>
+            <layer>0</layer>
+            <index>1</index>
+            <input>0.08555788561326694</input>
+            <target>0.0</target>
+        </target>
+        <target>
+            <layer>0</layer>
+            <index>2</index>
+            <input>0.9080192474505937</input>
+            <target>0.0</target>
+        </target>
+        <target>
+            <layer>1</layer>
+            <index>0</index>
+            <input>0.0</input>
+            <target>0.9713355334530079</target>
+        </target>
+        <target>
+            <layer>1</layer>
+            <index>1</index>
+            <input>0.0</input>
+            <target>0.1724495096274642</target>
+        </target>
+        <target>
+            <layer>1</layer>
+            <index>2</index>
+            <input>0.0</input>
+            <target>0.276790806675949</target>
+        </target>
+    </targets>
+</xmlLearningParameter>

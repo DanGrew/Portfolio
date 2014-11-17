@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import model.singleton.LearningParameter;
 import javafx.collections.ObservableList;
 
 /**

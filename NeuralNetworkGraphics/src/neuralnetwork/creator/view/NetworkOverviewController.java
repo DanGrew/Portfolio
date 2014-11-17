@@ -19,11 +19,11 @@ import javafx.scene.control.TableView;
 import model.network.Perceptron;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
+import model.sort.NeuronComparator;
+import model.sort.SynapseComparator;
 import model.structure.NeuronLayer;
 import neuralnetwork.creator.NetworkViewer;
 import neuralnetwork.creator.view.component.ProgressBarController;
-import neuralnetwork.creator.view.ordering.NeuronComparator;
-import neuralnetwork.creator.view.ordering.SynapseComparator;
 
 /**
  * The {@link NetworkOverviewController} is responsible for providing the controller to the
@@ -104,7 +104,7 @@ public class NetworkOverviewController {
          }
       }
       
-      Collections.sort( synapses, SynapseComparator.NETWORK_POSITION_COMPARATOR );
+      Collections.sort( synapses, SynapseComparator.POSITION_COMPARATOR );
       Collections.sort( inputNeurons, NeuronComparator.NETWORK_POSITION_COMPARATOR );
       Collections.sort( outputNeurons, NeuronComparator.NETWORK_POSITION_COMPARATOR );
    }// End Method

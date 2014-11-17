@@ -33,9 +33,17 @@ public class ReadOnlyArray < T > implements Iterable< T >{
    public ReadOnlyArray( T... values ){
       array = new ArrayList< ReadOnlyObjectProperty< T > >();
       for ( T value : values ){
-         array.add( new SimpleObjectProperty< T >( value ) );
+         add( value );
       }
    }// End Constructor
+   
+   /**
+    * Method to add a value to the {@link ReadOnlyArray}.
+    * @param value the T {@link Object} to add.
+    */
+   protected void add( T value ){
+      array.add( new SimpleObjectProperty< T >( value ) );
+   }// End Method
 
    /**
     * Method to get the {@link Double} value at the given index in the array.

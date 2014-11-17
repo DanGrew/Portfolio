@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package model.structure;
+package model.singleton;
 
 import javafx.beans.property.Property;
 import javafx.beans.property.ReadOnlyDoubleProperty;
@@ -13,15 +13,17 @@ import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.data.SerializableLearningParameter;
 import model.network.Perceptron;
-import model.singleton.Neuron;
+import model.structure.NetworkPosition;
+import model.structure.NeuronValueArray;
 import architecture.utility.ReadOnlyArray;
 
 /**
  * The {@link LearningParameter} is responsible for defining a set of input parameters
  * to a network and the corresponding target outputs.
  */
-public class LearningParameter {
+public class LearningParameter extends Singleton< SerializableLearningParameter >{
 
    /** Array of input values to the network. **/
    private NeuronValueArray inputParameters;
@@ -64,6 +66,7 @@ public class LearningParameter {
     * @param description the description of the parameter.
     */
    public LearningParameter( String description ){
+      super( description );
       descriptionProperty = new SimpleStringProperty( description );
    }// End Constructor
 
@@ -95,6 +98,11 @@ public class LearningParameter {
       return this;
    }// End Method
    
+   /**
+    * Configures the {@link LearningParameter} with the target output values.
+    * @param targets the target values the network should achieve for the input.
+    * @return the {@link LearningParameter}.
+    */
    public LearningParameter targetParameters( Number... targets ){
       targetParameters = new NeuronValueArray( targets );
       return this;
@@ -134,5 +142,22 @@ public class LearningParameter {
     */
    public ReadOnlyStringProperty getDescriptionProperty(){
       return descriptionProperty;
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void writeSingleton( SerializableLearningParameter serializable ) {
+      serializable.addAllInputParameters( inputParameters.iterator() );
+      serializable.addAllTargetParameters( targetParameters.iterator() );
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void readSingleton( SerializableLearningParameter serialized ) {
+      descriptionProperty = new SimpleStringProperty( identification );
+      inputParameters = new NeuronValueArray( serialized.inputParametersIterator() );
+      targetParameters = new NeuronValueArray( serialized.targetParametersIterator() );
    }// End Method
 }// End Class

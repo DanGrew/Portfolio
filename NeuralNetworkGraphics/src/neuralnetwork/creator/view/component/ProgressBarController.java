@@ -8,7 +8,7 @@
 package neuralnetwork.creator.view.component;
 
 import javafx.scene.control.ProgressBar;
-import model.structure.LearningParameter;
+import model.singleton.LearningParameter;
 import model.structure.LearningParameters;
 import neuralnetwork.creator.view.NetworkOverviewController;
 import neuralnetwork.creator.view.module.LearningProcessor;

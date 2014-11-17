@@ -13,7 +13,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
 import model.network.Perceptron;
-import model.structure.LearningParameter;
+import model.singleton.LearningParameter;
 import model.structure.LearningParameters;
 import architecture.event.EventSystem;
 

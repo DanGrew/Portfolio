@@ -9,6 +9,7 @@ package architecture.serialization;
 
 import java.io.File;
 
+import model.data.SerializableSingleton;
 import model.singleton.Singleton;
 import architecture.representation.SingletonContainer;
 import architecture.representation.StructuralRepresentation;
@@ -25,8 +26,8 @@ public class SerializationSystem {
    /**
     * {@link DataSerializationSystem#loadFromFile(Class, File)}.
     */
-   public static < T > void loadFromFile( Class< T > clazz, File file ) {
-      dataSerializationSystem.loadFromFile( clazz, file );
+   public static < T > T loadFromFile( Class< T > clazz, File file ) {
+      return dataSerializationSystem.loadFromFile( clazz, file );
    }// End Method
    
    /**
@@ -52,6 +53,20 @@ public class SerializationSystem {
    public static < S, T extends StructuralRepresentation< S > > S loadStructure( Class< T > clazz, File file ){
       T loaded = loadSingletonsFromFile( clazz, file );
       return loaded.makeStructure();
+   }// End Method
+   
+   /**
+    * Method to load the given {@link SerializableSingleton}, unwrap it, read the data from the 
+    * wrapper, and return the resulting {@link Singleton}.
+    * @param clazz the {@link Class} of the wrapper.
+    * @param file the {@link File} to read from.
+    * @return the resulting {@link Singleton}.
+    */
+   public static < U extends SerializableSingleton< S >, S extends Singleton< U >, T extends U > S loadWrappedSingleton( Class< T > clazz, File file ){
+      T loaded = loadFromFile( clazz, file );
+      S unwrapped = loaded.unwrap();
+      unwrapped.read( loaded );
+      return unwrapped;
    }// End Method
 
    /**

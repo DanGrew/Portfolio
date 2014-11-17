@@ -7,8 +7,10 @@
  */
 package model.structure;
 
+import java.util.Iterator;
+
+import model.singleton.LearningParameter.NeuronValue;
 import model.singleton.Neuron;
-import model.structure.LearningParameter.NeuronValue;
 import architecture.utility.ReadOnlyArray;
 
 /**
@@ -32,6 +34,15 @@ public class NeuronValueArray extends ReadOnlyArray< NeuronValue >{
     */
    public NeuronValueArray( NeuronValue... values ){
       super( values );
+   }// End Constructor
+   
+   /**
+    * Constructs a new {@link NeuronValueArray}.
+    * @param iterator an {@link Iterator} of {@link NeuronValue}s to add.
+    */
+   public NeuronValueArray( Iterator< NeuronValue > iterator ){
+      super();
+      iterator.forEachRemaining( object -> add( object ) );
    }// End Constructor
    
    /**

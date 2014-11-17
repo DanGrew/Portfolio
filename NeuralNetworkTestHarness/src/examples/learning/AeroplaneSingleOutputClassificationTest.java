@@ -9,8 +9,8 @@ package examples.learning;
 
 import static org.junit.Assert.assertTrue;
 import model.network.Perceptron;
+import model.singleton.LearningParameter;
 import model.singleton.Neuron;
-import model.structure.LearningParameter;
 import model.structure.LearningParameters;
 
 import org.junit.BeforeClass;

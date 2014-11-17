@@ -16,7 +16,7 @@ import java.util.List;
 import model.function.threshold.ThresholdFunction;
 import model.singleton.Neuron;
 import model.singleton.Synapse;
-import model.structure.LearningParameter.NeuronValue;
+import model.singleton.LearningParameter.NeuronValue;
 import architecture.utility.ObjectGenerator;
 import architecture.utility.ReadOnlyArray;
 

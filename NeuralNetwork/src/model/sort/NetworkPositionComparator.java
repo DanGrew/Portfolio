@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package neuralnetwork.creator.view.ordering;
+package model.sort;
 
 import java.util.Comparator;
 
@@ -13,31 +13,28 @@ import model.singleton.Neuron;
 import model.structure.NetworkPosition;
 
 /**
- * The {@link NeuronComparator} is responsible for providing comparators to order {@link Neuron}s.
+ * The {@link NetworkPositionComparator} is responsible for providing comparators to order {@link NetworkPosition}s.
  */
-public class NeuronComparator {
+public class NetworkPositionComparator {
 
    private static final int SMALLER = -1;
    private static final int EQUAL = 0;
    private static final int GREATER = 1;
    
-   /** {@link Comparator} for {@link Neuron}s that orders based on position, where layer is ordered
+   /** {@link Comparator} for {@link NetworkPosition}s that orders based on position, where layer is ordered
     * ascending, then index. **/
-   public static final Comparator< Neuron > NETWORK_POSITION_COMPARATOR = new NetworkPositionComparator();
+   public static final Comparator< NetworkPosition > POSITION_COMPARATOR = new PositionComparator();
    
    /**
-    * The {@link NeuronComparator} is responsible for defining a {@link Comparator} to order {@link Neuron}s
+    * The {@link NetworkPositionComparator} is responsible for defining a {@link Comparator} to order {@link NetworkPosition}s
     * by position, ascending by layer then index.
     */
-   private static class NetworkPositionComparator implements Comparator< Neuron > {
+   private static class PositionComparator implements Comparator< NetworkPosition > {
 
       /**
        * {@inheritDoc}
        */
-      @Override public int compare( Neuron neuronA, Neuron neuronB ) {
-         NetworkPosition positionA = neuronA.getPosition();
-         NetworkPosition positionB = neuronB.getPosition();
-         
+      @Override public int compare( NetworkPosition positionA, NetworkPosition positionB ) {
          if ( positionA.layer < positionB.layer ){
             return SMALLER;
          } else if ( positionA.layer > positionB.layer ){
@@ -53,4 +50,4 @@ public class NeuronComparator {
       
    }// End Class
    
-}// End Constructor
+}// End Class
