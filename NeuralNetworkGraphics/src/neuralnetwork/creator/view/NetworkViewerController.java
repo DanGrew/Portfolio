@@ -7,19 +7,25 @@
  */
 package neuralnetwork.creator.view;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import architecture.event.EventSystem;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
 import model.network.Perceptron;
 import model.structure.LearningParameter;
 import neuralnetwork.creator.NetworkViewer;
 import neuralnetwork.creator.view.module.LearningProcessor;
+import representation.xml.wrapper.XmlPerceptronWrapper;
+import architecture.event.EventSystem;
+import architecture.serialization.SerializationSystem;
 
 /**
  * The {@link NetworkViewerController} is responsible for controlling the overall {@link NetworkViewer},
@@ -37,7 +43,42 @@ public class NetworkViewerController {
    @FXML private MenuItem batchLearning;
    private Map< LearningParameter, MenuItem > parameterMenuItems;
    
-   @FXML private void initialize(){}
+   private FileChooser fileChooser;
+   @FXML private MenuItem loadXMLPerceptronMenu;
+   @FXML private MenuItem saveXMLPerceptronMenu;
+   
+   /**
+    * Method to initialise the graphics and events in the window.
+    */
+   @FXML private void initialize(){
+      fileChooser = new FileChooser();
+      loadXMLPerceptronMenu.setOnAction( event -> {
+         File chosen = fileChooser.showOpenDialog( null );
+         if ( chosen != null ){
+            Perceptron perceptron = SerializationSystem.loadStructure( XmlPerceptronWrapper.class, chosen );
+            setPerceptron( perceptron );
+         }
+      } );
+      saveXMLPerceptronMenu.setOnAction( event -> {
+        File chosen = fileChooser.showSaveDialog( null ); 
+        if ( chosen != null ){
+            boolean saved = SerializationSystem.saveToFile( new XmlPerceptronWrapper( perceptron ), chosen );
+            if ( saved ){
+               Alert alert = new Alert( AlertType.INFORMATION );
+               alert.setTitle( "Save Progress" );
+               alert.setHeaderText( "Marshalling XML to file." );
+               alert.setContentText( "Process Complete." );
+               alert.showAndWait();
+            } else {
+               Alert alert = new Alert( AlertType.INFORMATION );
+               alert.setTitle( "Save Progress" );
+               alert.setHeaderText( "Marshalling XML to file." );
+               alert.setContentText( "Marshalling has failed." );
+               alert.showAndWait();
+            }
+         }
+      } );
+   }// End Method
    
    /**
     * Method to apply the center of the component to the given {@link BorderPane}.

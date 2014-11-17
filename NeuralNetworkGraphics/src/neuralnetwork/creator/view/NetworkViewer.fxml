@@ -37,7 +37,29 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File" />
+          <Menu mnemonicParsing="false" text="File">
+               <items>
+                  <Menu mnemonicParsing="false" text="Load">
+                     <items>
+                        <Menu mnemonicParsing="false" text="XML">
+                          <items>
+                            <MenuItem fx:id="loadXMLPerceptronMenu" mnemonicParsing="false" text="Perceptron" />
+                              <MenuItem mnemonicParsing="false" text="Learning Parameters" />
+                          </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Save">
+                     <items>
+                        <Menu mnemonicParsing="false" text="XML">
+                          <items>
+                            <MenuItem fx:id="saveXMLPerceptronMenu" mnemonicParsing="false" text="Perceptron" />
+                              <MenuItem mnemonicParsing="false" text="Learning Parameters" />
+                          </items>
+                        </Menu>
+                     </items>
+                  </Menu>
+               </items></Menu>
             <Menu mnemonicParsing="false" text="Learning">
                <items>
                   <Menu fx:id="learningMenu" mnemonicParsing="false" text="Learn">

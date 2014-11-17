@@ -72,6 +72,10 @@ public class NetworkOverviewController {
       outputPositionColumn.setCellValueFactory( cellData -> cellData.getValue().getOutput().getIdentificationProperty() );
       weightColumn.setCellValueFactory( cellData -> cellData.getValue().getWeightProperty() );
       
+      synapseTable.setItems( synapses );
+      inputTable.setItems( inputNeurons );
+      outputTable.setItems( outputNeurons );
+      
       new ProgressBarController( learningProgressBar );
    }// End Method
    
@@ -80,6 +84,10 @@ public class NetworkOverviewController {
     * @param perceptron the {@link Perceptron} being displayed.
     */
    public void setPerceptron( Perceptron perceptron ){
+      inputNeurons.clear();
+      outputNeurons.clear();
+      synapses.clear();
+      
       inputNeurons.add( perceptron.getBias() );
       NeuronLayer inputLayer = perceptron.getInputLayer();
       for ( Iterator< Neuron > neurons = inputLayer.iterator(); neurons.hasNext(); ){
@@ -97,12 +105,7 @@ public class NetworkOverviewController {
       }
       
       Collections.sort( synapses, SynapseComparator.NETWORK_POSITION_COMPARATOR );
-      synapseTable.setItems( synapses );
-      
       Collections.sort( inputNeurons, NeuronComparator.NETWORK_POSITION_COMPARATOR );
-      inputTable.setItems( inputNeurons );
-      
       Collections.sort( outputNeurons, NeuronComparator.NETWORK_POSITION_COMPARATOR );
-      outputTable.setItems( outputNeurons );
    }// End Method
 }// End Class

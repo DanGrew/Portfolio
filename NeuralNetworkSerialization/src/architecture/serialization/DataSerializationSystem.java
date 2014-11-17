@@ -30,7 +30,8 @@ public interface DataSerializationSystem {
     * Method to save the given {@link Object} to the given {@link File} as XML.
     * @param object the {@link Object} to save that has XML mappable properties.
     * @param file the {@link File} to save to.
+    * @return true if saved correctly, false otherwise.
     */
-   public void saveToFile( Object object, File file );
+   public boolean saveToFile( Object object, File file );
    
 }// End Interface

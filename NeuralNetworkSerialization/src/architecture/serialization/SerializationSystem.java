@@ -57,8 +57,8 @@ public class SerializationSystem {
    /**
     * {@link DataSerializationSystem#saveToFile(Object, File)}.
     */
-   public static void saveToFile( Object object, File file ) {
-     dataSerializationSystem.saveToFile( object, file );
+   public static boolean saveToFile( Object object, File file ) {
+     return dataSerializationSystem.saveToFile( object, file );
    }// End Method
 
 }// End Class

@@ -37,15 +37,17 @@ public class DataSerializationSystemImpl implements DataSerializationSystem {
    /**
     * {@inheritDoc}
     */
-   public void saveToFile( Object object, File file ) {
+   public boolean saveToFile( Object object, File file ) {
       try {
          JAXBContext context = JAXBContext.newInstance( object.getClass() );
          Marshaller m = context.createMarshaller();
          m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
          m.marshal( object, file );
+         return true;
       } catch ( Exception e ) {
          e.printStackTrace();
          System.out.println( "Unable to save perceptron." );
+         return false;
       }
    }// End Method
 
