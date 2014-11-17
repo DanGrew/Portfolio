@@ -31,15 +31,12 @@ public class NetworkViewer extends Application {
    private BorderPane rootLayout;
    /** The {@link NetworkViewerController} for the application. **/
    private NetworkViewerController controller;
-   /** The {@link Perceptron} being displayed.**/
-   private Perceptron perceptron;
 
    /**
     * Constructs a new {@link NetworkViewer}.
     */
    public NetworkViewer() {
       super();
-      perceptron = new Perceptron( 3, 3 );
    }// End Constructor
 
    /**
@@ -75,7 +72,6 @@ public class NetworkViewer extends Application {
     */
    public void showNetworkOverview() {
       controller.applySceneCenter( rootLayout );
-      controller.setPerceptron( perceptron );
       controller.populate();
    }// End Method
 

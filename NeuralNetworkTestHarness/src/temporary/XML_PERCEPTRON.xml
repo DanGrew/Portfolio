@@ -810,7 +810,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.882154119846995</currentWeight>
+            <currentWeight>0.406369981897982</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 0 )</identification>
@@ -819,7 +819,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6311545951362736</currentWeight>
+            <currentWeight>0.372064074507114</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 0 )</identification>
@@ -828,7 +828,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.913877763558856</currentWeight>
+            <currentWeight>0.42629577804170715</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 0 )</identification>
@@ -837,7 +837,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9024294812753247</currentWeight>
+            <currentWeight>0.9991344110766966</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 0 )</identification>
@@ -846,7 +846,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6477720199467192</currentWeight>
+            <currentWeight>0.9823085669589569</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 0 )</identification>
@@ -855,7 +855,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6188683038281615</currentWeight>
+            <currentWeight>0.23159483868377562</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 0 )</identification>
@@ -864,7 +864,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.37455836735504033</currentWeight>
+            <currentWeight>0.28395424057660446</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 0 )</identification>
@@ -873,7 +873,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.09285860420962566</currentWeight>
+            <currentWeight>0.2966278345607559</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 0 )</identification>
@@ -882,7 +882,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9964333025254536</currentWeight>
+            <currentWeight>0.9780007940777535</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 0 )</identification>
@@ -891,7 +891,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9942157811762341</currentWeight>
+            <currentWeight>0.2935912946188439</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 0 )</identification>
@@ -900,7 +900,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.29763210000533236</currentWeight>
+            <currentWeight>0.1846211243000787</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 0 )</identification>
@@ -909,7 +909,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.11460738711184748</currentWeight>
+            <currentWeight>0.3969769066943465</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 0 )</identification>
@@ -918,7 +918,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7755113121643805</currentWeight>
+            <currentWeight>0.7849725628847546</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 0 )</identification>
@@ -927,7 +927,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8024257769136554</currentWeight>
+            <currentWeight>0.127174514378383</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 0 )</identification>
@@ -936,7 +936,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4965943436086445</currentWeight>
+            <currentWeight>0.5706538402278352</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 0 )</identification>
@@ -945,7 +945,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5886397259225699</currentWeight>
+            <currentWeight>0.305379575793702</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 0 )</identification>
@@ -954,7 +954,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.37211190139311545</currentWeight>
+            <currentWeight>0.9620708057294217</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 0 )</identification>
@@ -963,7 +963,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5231563209729457</currentWeight>
+            <currentWeight>0.5246748435109052</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 0 )</identification>
@@ -972,7 +972,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.49756812778158543</currentWeight>
+            <currentWeight>0.2527419653403419</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 0 )</identification>
@@ -981,7 +981,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9912244025595097</currentWeight>
+            <currentWeight>0.219317663742578</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 0 )</identification>
@@ -990,7 +990,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4508640902950585</currentWeight>
+            <currentWeight>0.5865753630673549</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 1 )</identification>
@@ -999,7 +999,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.23760481594079685</currentWeight>
+            <currentWeight>0.28506209920774417</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 1 )</identification>
@@ -1008,7 +1008,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6358079880362979</currentWeight>
+            <currentWeight>0.6346265386536682</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 1 )</identification>
@@ -1017,7 +1017,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7852472542183176</currentWeight>
+            <currentWeight>0.8144782464522106</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 1 )</identification>
@@ -1026,7 +1026,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.0958037863015746</currentWeight>
+            <currentWeight>0.3310947869632198</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 1 )</identification>
@@ -1035,7 +1035,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6338962042390829</currentWeight>
+            <currentWeight>0.12463123410971355</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 1 )</identification>
@@ -1044,7 +1044,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.27450719547913827</currentWeight>
+            <currentWeight>0.8538552292711311</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 1 )</identification>
@@ -1053,7 +1053,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5510500762387798</currentWeight>
+            <currentWeight>0.8400305681561847</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 1 )</identification>
@@ -1062,7 +1062,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.3264510623541481</currentWeight>
+            <currentWeight>0.8240424340032898</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 1 )</identification>
@@ -1071,7 +1071,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.3649362279780277</currentWeight>
+            <currentWeight>0.1517081679743244</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 1 )</identification>
@@ -1080,7 +1080,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.08006575434452479</currentWeight>
+            <currentWeight>0.915258036211907</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 1 )</identification>
@@ -1089,7 +1089,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9386607620401477</currentWeight>
+            <currentWeight>0.04869745809778192</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 1 )</identification>
@@ -1098,7 +1098,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6106187933810098</currentWeight>
+            <currentWeight>0.7507379848659326</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 1 )</identification>
@@ -1107,7 +1107,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9712158170274187</currentWeight>
+            <currentWeight>0.8912117633070218</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 1 )</identification>
@@ -1116,7 +1116,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.48534448139308084</currentWeight>
+            <currentWeight>0.2453601864091458</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 1 )</identification>
@@ -1125,7 +1125,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.33223926324992303</currentWeight>
+            <currentWeight>0.49511402247741665</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 1 )</identification>
@@ -1134,7 +1134,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8645914826734002</currentWeight>
+            <currentWeight>0.9374593030441422</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 1 )</identification>
@@ -1143,7 +1143,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6375580687976721</currentWeight>
+            <currentWeight>0.7472092817166799</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 1 )</identification>
@@ -1152,7 +1152,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.29101983203980564</currentWeight>
+            <currentWeight>0.45497981796468034</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 1 )</identification>
@@ -1161,7 +1161,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.02254669501895923</currentWeight>
+            <currentWeight>0.020891416152872377</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 1 )</identification>
@@ -1170,7 +1170,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.24887845400895847</currentWeight>
+            <currentWeight>0.5104989156178237</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 1 )</identification>
@@ -1179,7 +1179,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.3203316457346038</currentWeight>
+            <currentWeight>0.9116747735002952</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 2 )</identification>
@@ -1188,7 +1188,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.009072133606362054</currentWeight>
+            <currentWeight>0.6065807719549434</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 2 )</identification>
@@ -1197,7 +1197,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4301740117398981</currentWeight>
+            <currentWeight>0.321650923666135</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 2 )</identification>
@@ -1206,7 +1206,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9483888462448959</currentWeight>
+            <currentWeight>0.43186654232201516</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 2 )</identification>
@@ -1215,7 +1215,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9147365190469403</currentWeight>
+            <currentWeight>0.8860078514004026</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 2 )</identification>
@@ -1224,7 +1224,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.2362545479912862</currentWeight>
+            <currentWeight>0.13334541035143022</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 2 )</identification>
@@ -1233,7 +1233,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.68926338691333</currentWeight>
+            <currentWeight>0.5276851411107478</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 2 )</identification>
@@ -1242,7 +1242,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.01210263443605164</currentWeight>
+            <currentWeight>0.37058830551165256</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 2 )</identification>
@@ -1251,7 +1251,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.029863648755788508</currentWeight>
+            <currentWeight>0.9366991455589005</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 2 )</identification>
@@ -1260,7 +1260,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9717114368842501</currentWeight>
+            <currentWeight>0.99868429411914</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 2 )</identification>
@@ -1269,7 +1269,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8759689255556173</currentWeight>
+            <currentWeight>0.4134601409662434</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 2 )</identification>
@@ -1278,7 +1278,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.19786145737318406</currentWeight>
+            <currentWeight>0.06673556862834185</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 2 )</identification>
@@ -1287,7 +1287,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8607972032186587</currentWeight>
+            <currentWeight>0.6144994661420577</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 2 )</identification>
@@ -1296,7 +1296,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.024285252898104126</currentWeight>
+            <currentWeight>0.00793336868664074</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 2 )</identification>
@@ -1305,7 +1305,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7800695266141</currentWeight>
+            <currentWeight>0.742331856233367</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 2 )</identification>
@@ -1314,7 +1314,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8327837126631171</currentWeight>
+            <currentWeight>0.13096435219932023</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 2 )</identification>
@@ -1323,7 +1323,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9724086320395038</currentWeight>
+            <currentWeight>0.6714137350985895</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 2 )</identification>
@@ -1332,7 +1332,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8030399802781496</currentWeight>
+            <currentWeight>0.7447788480706713</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 2 )</identification>
@@ -1341,7 +1341,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7559512114798203</currentWeight>
+            <currentWeight>0.46722922020872215</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 2 )</identification>
@@ -1350,7 +1350,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8846626490771407</currentWeight>
+            <currentWeight>0.4987522919021843</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 2 )</identification>
@@ -1359,7 +1359,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.315704641486072</currentWeight>
+            <currentWeight>0.005534673833070158</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 2 )</identification>
@@ -1368,7 +1368,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5109889385859336</currentWeight>
+            <currentWeight>0.770270732421554</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 3 )</identification>
@@ -1377,7 +1377,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.1727248405171916</currentWeight>
+            <currentWeight>0.8929799073922933</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 3 )</identification>
@@ -1386,7 +1386,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.08724703474391027</currentWeight>
+            <currentWeight>0.11972088926775237</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 3 )</identification>
@@ -1395,7 +1395,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.13661596931901954</currentWeight>
+            <currentWeight>0.7640630221632735</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 3 )</identification>
@@ -1404,7 +1404,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5044843791754177</currentWeight>
+            <currentWeight>0.6895734473095827</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 3 )</identification>
@@ -1413,7 +1413,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7581185762999811</currentWeight>
+            <currentWeight>0.949874435853161</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 3 )</identification>
@@ -1422,7 +1422,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.48611228859382094</currentWeight>
+            <currentWeight>0.4198864453378137</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 3 )</identification>
@@ -1431,7 +1431,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7813681950588479</currentWeight>
+            <currentWeight>0.06990667322170996</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 3 )</identification>
@@ -1440,7 +1440,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7208246533372273</currentWeight>
+            <currentWeight>0.10542960074554109</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 3 )</identification>
@@ -1449,7 +1449,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6521673135148943</currentWeight>
+            <currentWeight>0.9106716862361116</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 3 )</identification>
@@ -1458,7 +1458,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.09138911534949479</currentWeight>
+            <currentWeight>0.3052304041639531</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 3 )</identification>
@@ -1467,7 +1467,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5204138389011854</currentWeight>
+            <currentWeight>0.8742837607856477</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 3 )</identification>
@@ -1476,7 +1476,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.2655998469374897</currentWeight>
+            <currentWeight>0.28996370445969044</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 3 )</identification>
@@ -1485,7 +1485,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9357921449682866</currentWeight>
+            <currentWeight>0.6050128959268422</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 3 )</identification>
@@ -1494,7 +1494,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6026926148614116</currentWeight>
+            <currentWeight>0.4695609885383655</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 3 )</identification>
@@ -1503,7 +1503,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.016669773856136105</currentWeight>
+            <currentWeight>0.09783314554020373</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 3 )</identification>
@@ -1512,7 +1512,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6677308661460323</currentWeight>
+            <currentWeight>0.5938302592989859</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 3 )</identification>
@@ -1521,7 +1521,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.42423089647464474</currentWeight>
+            <currentWeight>0.9334965503332878</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 3 )</identification>
@@ -1530,7 +1530,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8109944405049572</currentWeight>
+            <currentWeight>0.49561711918491314</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 3 )</identification>
@@ -1539,7 +1539,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7238779369820998</currentWeight>
+            <currentWeight>0.534664320030216</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 3 )</identification>
@@ -1548,7 +1548,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5194017878384102</currentWeight>
+            <currentWeight>0.3960387135835618</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 3 )</identification>
@@ -1557,7 +1557,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9659324130478725</currentWeight>
+            <currentWeight>0.5876264077724449</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 4 )</identification>
@@ -1566,7 +1566,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8356017353930343</currentWeight>
+            <currentWeight>0.8584267745280557</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 4 )</identification>
@@ -1575,7 +1575,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4967732962329635</currentWeight>
+            <currentWeight>0.5088963383994249</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 4 )</identification>
@@ -1584,7 +1584,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7873325057859056</currentWeight>
+            <currentWeight>0.8440708823066291</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 4 )</identification>
@@ -1593,7 +1593,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.17241927912267352</currentWeight>
+            <currentWeight>0.5745851953123672</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 4 )</identification>
@@ -1602,7 +1602,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4449694375322445</currentWeight>
+            <currentWeight>0.5355794730225617</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 4 )</identification>
@@ -1611,7 +1611,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.020706164831834628</currentWeight>
+            <currentWeight>0.1370795080840379</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 4 )</identification>
@@ -1620,7 +1620,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.3182465734555623</currentWeight>
+            <currentWeight>0.027165639765398986</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 4 )</identification>
@@ -1629,7 +1629,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6100352220624934</currentWeight>
+            <currentWeight>0.5203355192373061</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 4 )</identification>
@@ -1638,7 +1638,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.21482357572619115</currentWeight>
+            <currentWeight>0.5264858655174646</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 4 )</identification>
@@ -1647,7 +1647,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6583131463517988</currentWeight>
+            <currentWeight>0.9767593201238923</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 4 )</identification>
@@ -1656,7 +1656,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.42955584764304333</currentWeight>
+            <currentWeight>0.7591047312441025</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 4 )</identification>
@@ -1665,7 +1665,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8679325761894873</currentWeight>
+            <currentWeight>0.5992497711539342</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 4 )</identification>
@@ -1674,7 +1674,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5290069992153948</currentWeight>
+            <currentWeight>0.15188748370171945</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 4 )</identification>
@@ -1683,7 +1683,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.0972779422778125</currentWeight>
+            <currentWeight>0.8022289101791638</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 4 )</identification>
@@ -1692,7 +1692,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5398311482635597</currentWeight>
+            <currentWeight>0.319676181428171</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 4 )</identification>
@@ -1701,7 +1701,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7271166762909695</currentWeight>
+            <currentWeight>0.5532217540773379</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 4 )</identification>
@@ -1710,7 +1710,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.1855557892813101</currentWeight>
+            <currentWeight>0.8122809269500554</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 4 )</identification>
@@ -1719,7 +1719,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9914068485156419</currentWeight>
+            <currentWeight>0.4370166979613246</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 4 )</identification>
@@ -1728,7 +1728,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.06629703891179473</currentWeight>
+            <currentWeight>0.3288171754261209</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 4 )</identification>
@@ -1737,7 +1737,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.2920526800086183</currentWeight>
+            <currentWeight>0.8844376158534092</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 4 )</identification>
@@ -1746,7 +1746,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9259381020385212</currentWeight>
+            <currentWeight>0.856420545804964</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 5 )</identification>
@@ -1755,7 +1755,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7893519381667073</currentWeight>
+            <currentWeight>0.4293688170723403</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 5 )</identification>
@@ -1764,7 +1764,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8566427756640911</currentWeight>
+            <currentWeight>0.5633428674059533</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 5 )</identification>
@@ -1773,7 +1773,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5813272371957678</currentWeight>
+            <currentWeight>0.6378128215224627</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 5 )</identification>
@@ -1782,7 +1782,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.05740138881977319</currentWeight>
+            <currentWeight>0.8330542414343657</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 5 )</identification>
@@ -1791,7 +1791,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.21915420904159721</currentWeight>
+            <currentWeight>0.47705115143511734</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 5 )</identification>
@@ -1800,7 +1800,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.1581745486168762</currentWeight>
+            <currentWeight>0.022635604564334888</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 5 )</identification>
@@ -1809,7 +1809,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5125743004645396</currentWeight>
+            <currentWeight>0.6782539989465451</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 5 )</identification>
@@ -1818,7 +1818,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.2518500397140878</currentWeight>
+            <currentWeight>0.9645709154731076</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 5 )</identification>
@@ -1827,7 +1827,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.41817390041354063</currentWeight>
+            <currentWeight>0.5840850491194888</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 5 )</identification>
@@ -1836,7 +1836,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8125478951999684</currentWeight>
+            <currentWeight>0.2508825416817676</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 5 )</identification>
@@ -1845,7 +1845,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.3808569111803918</currentWeight>
+            <currentWeight>0.15987942249265552</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 5 )</identification>
@@ -1854,7 +1854,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.22770733186106007</currentWeight>
+            <currentWeight>0.7133816615254387</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 5 )</identification>
@@ -1863,7 +1863,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7650400004477851</currentWeight>
+            <currentWeight>0.9675176570455881</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 5 )</identification>
@@ -1872,7 +1872,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4878573538645333</currentWeight>
+            <currentWeight>0.012074711694004758</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 5 )</identification>
@@ -1881,7 +1881,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.26100655422146446</currentWeight>
+            <currentWeight>0.15449760053652684</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 5 )</identification>
@@ -1890,7 +1890,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7988118052886114</currentWeight>
+            <currentWeight>0.3422835382786482</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 5 )</identification>
@@ -1899,7 +1899,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.22345055555896787</currentWeight>
+            <currentWeight>0.7277353347489526</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 5 )</identification>
@@ -1908,7 +1908,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.19831997161604498</currentWeight>
+            <currentWeight>0.6550097712255165</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 5 )</identification>
@@ -1917,7 +1917,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.1492416773373959</currentWeight>
+            <currentWeight>0.631626152599668</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 5 )</identification>
@@ -1926,7 +1926,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5092039681416537</currentWeight>
+            <currentWeight>0.03507536143342882</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 5 )</identification>
@@ -1935,7 +1935,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7514428065221229</currentWeight>
+            <currentWeight>0.3998972535364901</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 6 )</identification>
@@ -1944,7 +1944,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6915925188492361</currentWeight>
+            <currentWeight>0.45615344492917853</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 6 )</identification>
@@ -1953,7 +1953,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.45540890856175364</currentWeight>
+            <currentWeight>0.343086224417812</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 6 )</identification>
@@ -1962,7 +1962,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6721536338124487</currentWeight>
+            <currentWeight>0.8095239939271277</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 6 )</identification>
@@ -1971,7 +1971,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4517454901894802</currentWeight>
+            <currentWeight>0.5966788001477686</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 6 )</identification>
@@ -1980,7 +1980,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9164992866645452</currentWeight>
+            <currentWeight>0.6041464030563868</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 6 )</identification>
@@ -1989,7 +1989,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.04054308183183086</currentWeight>
+            <currentWeight>0.9781861992052696</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 6 )</identification>
@@ -1998,7 +1998,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.815956741767572</currentWeight>
+            <currentWeight>0.32854727639414816</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 6 )</identification>
@@ -2007,7 +2007,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9186821261463899</currentWeight>
+            <currentWeight>0.1628019843966595</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 6 )</identification>
@@ -2016,7 +2016,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7487245576458325</currentWeight>
+            <currentWeight>0.846719870907632</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 6 )</identification>
@@ -2025,7 +2025,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.3589586584437249</currentWeight>
+            <currentWeight>0.17774805157863638</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 6 )</identification>
@@ -2034,7 +2034,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.569077555826893</currentWeight>
+            <currentWeight>0.9565167774881798</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 6 )</identification>
@@ -2043,7 +2043,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.24970137226194578</currentWeight>
+            <currentWeight>0.6453895908013995</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 6 )</identification>
@@ -2052,7 +2052,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.3563875869327193</currentWeight>
+            <currentWeight>0.31342949168269507</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 6 )</identification>
@@ -2061,7 +2061,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7942621516142434</currentWeight>
+            <currentWeight>0.5837541587917615</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 6 )</identification>
@@ -2070,7 +2070,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6012168045796186</currentWeight>
+            <currentWeight>0.22210459112823078</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 6 )</identification>
@@ -2079,7 +2079,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.25109501593677097</currentWeight>
+            <currentWeight>0.33455306233093074</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 6 )</identification>
@@ -2088,7 +2088,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.09801491134938822</currentWeight>
+            <currentWeight>0.8776282233020255</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 6 )</identification>
@@ -2097,7 +2097,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.10895465328927278</currentWeight>
+            <currentWeight>0.32573642272578285</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 6 )</identification>
@@ -2106,7 +2106,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.06395190442400778</currentWeight>
+            <currentWeight>0.8886097466572309</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 6 )</identification>
@@ -2115,7 +2115,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.34174588499892444</currentWeight>
+            <currentWeight>0.6256133847046995</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 6 )</identification>
@@ -2124,7 +2124,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.25341698793414746</currentWeight>
+            <currentWeight>0.16409595308514968</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 7 )</identification>
@@ -2133,7 +2133,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7392676071270121</currentWeight>
+            <currentWeight>0.16585192921128422</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 7 )</identification>
@@ -2142,7 +2142,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8941812151880918</currentWeight>
+            <currentWeight>0.9534555450511225</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 7 )</identification>
@@ -2151,7 +2151,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5674903922201369</currentWeight>
+            <currentWeight>0.22290047749750552</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 7 )</identification>
@@ -2160,7 +2160,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.20066545589811247</currentWeight>
+            <currentWeight>0.5708043674673968</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 7 )</identification>
@@ -2169,7 +2169,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.442296337292702</currentWeight>
+            <currentWeight>0.2673770279777429</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 7 )</identification>
@@ -2178,7 +2178,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.19832072710145343</currentWeight>
+            <currentWeight>0.26903717674793326</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 7 )</identification>
@@ -2187,7 +2187,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.40709436201867233</currentWeight>
+            <currentWeight>0.09902691531278662</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 7 )</identification>
@@ -2196,7 +2196,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6620106882302923</currentWeight>
+            <currentWeight>0.4691447225355613</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 7 )</identification>
@@ -2205,7 +2205,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7144084115603745</currentWeight>
+            <currentWeight>0.8888377494618397</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 7 )</identification>
@@ -2214,7 +2214,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6860214701987594</currentWeight>
+            <currentWeight>0.20272344779892892</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 7 )</identification>
@@ -2223,7 +2223,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8680770175653029</currentWeight>
+            <currentWeight>0.8110880978983782</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 7 )</identification>
@@ -2232,7 +2232,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4382485355201534</currentWeight>
+            <currentWeight>0.04763567842365313</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 7 )</identification>
@@ -2241,7 +2241,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.28702315220701347</currentWeight>
+            <currentWeight>0.8147373913076125</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 7 )</identification>
@@ -2250,7 +2250,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4116434520267048</currentWeight>
+            <currentWeight>0.10865860653490134</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 7 )</identification>
@@ -2259,7 +2259,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.008635670069882306</currentWeight>
+            <currentWeight>0.5057167220772731</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 7 )</identification>
@@ -2268,7 +2268,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4750380256799517</currentWeight>
+            <currentWeight>0.025049714808288104</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 7 )</identification>
@@ -2277,7 +2277,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.013793966984223749</currentWeight>
+            <currentWeight>0.034651912299798915</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 7 )</identification>
@@ -2286,7 +2286,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.4303772222751946</currentWeight>
+            <currentWeight>0.02456013210852037</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 7 )</identification>
@@ -2295,7 +2295,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.005566847893624716</currentWeight>
+            <currentWeight>0.13454976979329836</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 7 )</identification>
@@ -2304,7 +2304,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.03339184963278541</currentWeight>
+            <currentWeight>0.29342684827638743</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 7 )</identification>
@@ -2313,7 +2313,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7236170614976357</currentWeight>
+            <currentWeight>0.7029791398273615</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 8 )</identification>
@@ -2322,7 +2322,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.033357224784058004</currentWeight>
+            <currentWeight>0.8465337833147835</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 8 )</identification>
@@ -2331,7 +2331,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.7762971916809844</currentWeight>
+            <currentWeight>0.776363765500722</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 8 )</identification>
@@ -2340,7 +2340,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9941327008348945</currentWeight>
+            <currentWeight>0.9408093736584983</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 8 )</identification>
@@ -2349,7 +2349,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.2937829822642267</currentWeight>
+            <currentWeight>0.9680322243692924</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 8 )</identification>
@@ -2358,7 +2358,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.1838808861821325</currentWeight>
+            <currentWeight>0.42901221240358056</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 8 )</identification>
@@ -2367,7 +2367,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.044868080680695255</currentWeight>
+            <currentWeight>0.6649704499009205</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 8 )</identification>
@@ -2376,7 +2376,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8989309067413791</currentWeight>
+            <currentWeight>0.6473225406772894</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 8 )</identification>
@@ -2385,7 +2385,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.34392069487774646</currentWeight>
+            <currentWeight>0.21330193317407276</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 8 )</identification>
@@ -2394,7 +2394,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8093499953557087</currentWeight>
+            <currentWeight>0.4087084210369809</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 8 )</identification>
@@ -2403,7 +2403,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6927225116702335</currentWeight>
+            <currentWeight>0.7719189763218595</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 8 )</identification>
@@ -2412,7 +2412,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.49793166939490063</currentWeight>
+            <currentWeight>0.9723993293672134</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 8 )</identification>
@@ -2421,7 +2421,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5671889529253998</currentWeight>
+            <currentWeight>0.20230633003727772</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 8 )</identification>
@@ -2430,7 +2430,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.37391950369589644</currentWeight>
+            <currentWeight>0.11137295851067608</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 8 )</identification>
@@ -2439,7 +2439,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.626289665710427</currentWeight>
+            <currentWeight>0.8731189165914943</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 8 )</identification>
@@ -2448,7 +2448,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.619507041932911</currentWeight>
+            <currentWeight>0.17453185549477357</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 8 )</identification>
@@ -2457,7 +2457,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.36976054260243574</currentWeight>
+            <currentWeight>0.5317152778351475</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 8 )</identification>
@@ -2466,7 +2466,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.06364468669347245</currentWeight>
+            <currentWeight>0.35060137431139804</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 8 )</identification>
@@ -2475,7 +2475,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.26413833036669665</currentWeight>
+            <currentWeight>0.5746778073197457</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 8 )</identification>
@@ -2484,7 +2484,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.12768517222117592</currentWeight>
+            <currentWeight>0.5907799828978698</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 8 )</identification>
@@ -2493,7 +2493,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.6066495743875133</currentWeight>
+            <currentWeight>0.29935093370966237</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 8 )</identification>
@@ -2502,7 +2502,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.23739830363923464</currentWeight>
+            <currentWeight>0.8971732945178682</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 0 )_( 1, 9 )</identification>
@@ -2511,7 +2511,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8714593490453415</currentWeight>
+            <currentWeight>0.5687929191333005</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 20 )_( 1, 9 )</identification>
@@ -2520,7 +2520,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.378382731116488</currentWeight>
+            <currentWeight>0.5283650796386675</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 1 )_( 1, 9 )</identification>
@@ -2529,7 +2529,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8006189529210053</currentWeight>
+            <currentWeight>0.824993608260677</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 2 )_( 1, 9 )</identification>
@@ -2538,7 +2538,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.018478621100700976</currentWeight>
+            <currentWeight>0.2594877435927764</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 3 )_( 1, 9 )</identification>
@@ -2547,7 +2547,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.27770737883740404</currentWeight>
+            <currentWeight>0.9624948800014281</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 4 )_( 1, 9 )</identification>
@@ -2556,7 +2556,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.15599372145112267</currentWeight>
+            <currentWeight>0.6366939832070224</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 5 )_( 1, 9 )</identification>
@@ -2565,7 +2565,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.28509156865493446</currentWeight>
+            <currentWeight>0.7977337737013003</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 6 )_( 1, 9 )</identification>
@@ -2574,7 +2574,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.2862038782113958</currentWeight>
+            <currentWeight>0.12994902350236326</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 7 )_( 1, 9 )</identification>
@@ -2583,7 +2583,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.815177198737042</currentWeight>
+            <currentWeight>0.7000715586316757</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 8 )_( 1, 9 )</identification>
@@ -2592,7 +2592,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.04383146888421985</currentWeight>
+            <currentWeight>0.42020248290114515</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 9 )_( 1, 9 )</identification>
@@ -2601,7 +2601,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.23285125109816096</currentWeight>
+            <currentWeight>0.7460374244442927</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 10 )_( 1, 9 )</identification>
@@ -2610,7 +2610,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.787015668644114</currentWeight>
+            <currentWeight>0.09731445201154443</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 11 )_( 1, 9 )</identification>
@@ -2619,7 +2619,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.32514660628127645</currentWeight>
+            <currentWeight>0.8946795724751838</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 12 )_( 1, 9 )</identification>
@@ -2628,7 +2628,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.8450055407170161</currentWeight>
+            <currentWeight>0.42064235144000883</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 13 )_( 1, 9 )</identification>
@@ -2637,7 +2637,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.01747142862012019</currentWeight>
+            <currentWeight>0.9320203359304974</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 14 )_( 1, 9 )</identification>
@@ -2646,7 +2646,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.004683624267360242</currentWeight>
+            <currentWeight>0.5772471664462206</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 15 )_( 1, 9 )</identification>
@@ -2655,7 +2655,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.9634348109423674</currentWeight>
+            <currentWeight>0.7041466479302815</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 16 )_( 1, 9 )</identification>
@@ -2664,7 +2664,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5679514514587435</currentWeight>
+            <currentWeight>0.08225078906123884</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 17 )_( 1, 9 )</identification>
@@ -2673,7 +2673,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.46529982166994643</currentWeight>
+            <currentWeight>0.40846694169301945</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 18 )_( 1, 9 )</identification>
@@ -2682,7 +2682,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.5620080118470665</currentWeight>
+            <currentWeight>0.2158754122532207</currentWeight>
         </objects>
         <objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xmlSynapse">
             <identification>( 0, 19 )_( 1, 9 )</identification>
@@ -2691,7 +2691,7 @@
             <learningRule>model.function.learning.PerceptronLearningRule</learningRule>
             <learningRate>0.1</learningRate>
             <lastFiredOutput>0.0</lastFiredOutput>
-            <currentWeight>0.43209533941644196</currentWeight>
+            <currentWeight>0.96266573478177</currentWeight>
         </objects>
     </synapseWrapper>
 </xmlPerceptronWrapper>

@@ -44,7 +44,7 @@
                         <Menu mnemonicParsing="false" text="XML">
                           <items>
                             <MenuItem fx:id="loadXMLPerceptronMenu" mnemonicParsing="false" text="Perceptron" />
-                              <MenuItem mnemonicParsing="false" text="Learning Parameters" />
+                              <MenuItem fx:id="loadXMLLearningParametersMenu" mnemonicParsing="false" text="Learning Parameters" />
                           </items>
                         </Menu>
                      </items>
@@ -54,7 +54,7 @@
                         <Menu mnemonicParsing="false" text="XML">
                           <items>
                             <MenuItem fx:id="saveXMLPerceptronMenu" mnemonicParsing="false" text="Perceptron" />
-                              <MenuItem mnemonicParsing="false" text="Learning Parameters" />
+                              <MenuItem fx:id="saveXMLLearningParametersMenu" mnemonicParsing="false" text="Learning Parameters" />
                           </items>
                         </Menu>
                      </items>

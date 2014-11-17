@@ -56,6 +56,15 @@ public class LearningProcessor {
                ( event, object ) -> startLearning( ( LearningParameters )object )
       );
    }// End Constructor
+   
+   /**
+    * Method to set the {@link Perceptron}. The set {@link Perceptron} will have the learning
+    * performed on it.
+    * @param perceptron the {@link Perceptron} to be taught.
+    */
+   public void setPerceptron( Perceptron perceptron ){
+      this.perceptron = perceptron;
+   }// End Method
 
    /**
     * Method to start the learning process with {@link LearningParameters}.
@@ -72,12 +81,14 @@ public class LearningProcessor {
     */
    private void timedLearn( LearningParameters parameters ) {
       Iterator< LearningParameter > iterator = parameters.iterator();
-      Timeline timeline = new Timeline( new KeyFrame( 
-               Duration.millis( 500 ), 
-               event -> learn( iterator.next() ) 
-      ) );
-      timeline.setCycleCount( parameters.size() );
-      timeline.play();
+      if ( iterator.hasNext() ){
+         Timeline timeline = new Timeline( new KeyFrame( 
+                  Duration.millis( 500 ), 
+                  event -> learn( iterator.next() ) 
+         ) );
+         timeline.setCycleCount( parameters.size() );
+         timeline.play();
+      }
    }// End Method
    
    /**

@@ -7,7 +7,6 @@
  */
 package neuralnetwork.creator.view;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,17 +15,13 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.FileChooser;
 import model.network.Perceptron;
 import model.singleton.LearningParameter;
-import model.structure.LearningParameters;
 import neuralnetwork.creator.NetworkViewer;
+import neuralnetwork.creator.view.module.FileManager;
 import neuralnetwork.creator.view.module.LearningProcessor;
-import representation.xml.wrapper.XmlLearningParametersWrapper;
 import representation.xml.wrapper.XmlPerceptronWrapper;
-import utility.Alerts;
 import architecture.event.EventSystem;
-import architecture.serialization.SerializationSystem;
 
 /**
  * The {@link NetworkViewerController} is responsible for controlling the overall {@link NetworkViewer},
@@ -36,13 +31,19 @@ public class NetworkViewerController {
 
    /** Enum defining the events the controller can raise. **/
    public enum Events {
-      /** Indicates a {@link Perceptron} has been loaded. Source = {@link Perceptron}.**/
-      PerceptronLoaded,
-      /** Indicates {@link LearningParameters} have been loaded. Source = {@link LearningParameters}.**/
-      LearningParametersLoaded;
+      /** Indicates a request has been made to load a {@link Perceptron}.**/
+      RequestPerceptronLoad,
+      /** Indicates a request has been made to load {@link LearningParameters}.**/
+      RequestLearningParametersLoad,
+      /** Indicates a request has been made to save a {@link Perceptron}.**/
+      RequestPerceptronSave,
+      /** Indicates a request has been made to save a {@link LearningParameters}.**/
+      RequestLearningParametersSave;
    }// End Enum
    
    private Perceptron perceptron;
+   private LearningProcessor learningProcessor;
+   private FileManager< Perceptron, XmlPerceptronWrapper > perceptronManager;
    @FXML private AnchorPane networkViewer;
    @FXML private NetworkOverviewController networkOverviewController;
    @FXML private PerceptronLearnerController perceptronLearnerController;
@@ -52,7 +53,6 @@ public class NetworkViewerController {
    @FXML private MenuItem batchLearning;
    private Map< LearningParameter, MenuItem > parameterMenuItems;
    
-   private FileChooser fileChooser;
    @FXML private MenuItem loadXMLPerceptronMenu;
    @FXML private MenuItem saveXMLPerceptronMenu;
    @FXML private MenuItem loadXMLLearningParametersMenu;
@@ -62,53 +62,10 @@ public class NetworkViewerController {
     * Method to initialise the graphics and events in the window.
     */
    @FXML private void initialize(){
-      fileChooser = new FileChooser();
-      loadXMLPerceptronMenu.setOnAction( event -> {
-         File chosen = fileChooser.showOpenDialog( null );
-         if ( chosen != null ){
-            Perceptron perceptron = SerializationSystem.loadStructure( XmlPerceptronWrapper.class, chosen );
-            setPerceptron( perceptron );
-         }
-      } );
-      saveXMLPerceptronMenu.setOnAction( event -> {
-        File chosen = fileChooser.showSaveDialog( null ); 
-        if ( chosen != null ){
-            boolean saved = SerializationSystem.saveToFile( new XmlPerceptronWrapper( perceptron ), chosen );
-            String message = ( saved ? "Success: written to file. " : "Failed: Not writtent to file." );
-            Alerts.completionAlert( 
-                     "Perceptron Save", 
-                     "Marshalling Perceptron as XML to file.", 
-                     message
-            );
-         }
-      } );
-      loadXMLLearningParametersMenu.setOnAction( event -> {
-         File chosen = fileChooser.showOpenDialog( null );
-         if ( chosen != null ){
-            LearningParameters learningParameters = SerializationSystem.loadStructure( XmlLearningParametersWrapper.class, chosen );
-            if ( learningParameters == null ){
-               Alerts.completionAlert( 
-                        "Learning Parameters Load", 
-                        "Unmarshalling XML into structure.", 
-                        "Failed: Structure could not be created."
-               );
-            } else {
-               EventSystem.raiseEvent( Events.LearningParametersLoaded, learningParameters );
-            }
-         }
-      } );
-      saveXMLLearningParametersMenu.setOnAction( event -> {
-        File chosen = fileChooser.showSaveDialog( null ); 
-        if ( chosen != null ){
-            boolean saved = SerializationSystem.saveToFile( new XmlPerceptronWrapper( perceptron ), chosen );
-            String message = saved ? "Success: Written to file." : "Failed: Not written to file."; 
-            Alerts.completionAlert( 
-                     "Learning Parameters Save", 
-                     "Marshalling Learning Parameters as XML to file.", 
-                     message
-            );
-         }
-      } );
+      loadXMLPerceptronMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestPerceptronLoad, null ) );
+      saveXMLPerceptronMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestPerceptronSave, null ) );
+      loadXMLLearningParametersMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestLearningParametersLoad, null ) );
+      saveXMLLearningParametersMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestLearningParametersSave, null ) );
    }// End Method
    
    /**
@@ -124,7 +81,7 @@ public class NetworkViewerController {
     */
    public void populate(){
       parameterMenuItems = new HashMap< LearningParameter, MenuItem >();
-      new LearningProcessor( perceptron );
+      learningProcessor = new LearningProcessor( perceptron );
       
       EventSystem.registerForList( 
          PerceptronLearnerController.Observables.LearningParameters,
@@ -149,6 +106,14 @@ public class NetworkViewerController {
          }
       );
       
+      perceptronManager = new FileManager< Perceptron, XmlPerceptronWrapper >(
+               Events.RequestPerceptronLoad, 
+               Events.RequestPerceptronSave, 
+               Perceptron.class, 
+               XmlPerceptronWrapper.class, 
+               object -> { return new XmlPerceptronWrapper( object ); }
+      );
+      EventSystem.registerForEvent( FileManager.Events.Loaded, ( type, object ) -> setPerceptron( ( Perceptron )object ) ); 
       onlineLearning.setOnAction( event -> EventSystem.raiseEvent( PerceptronLearnerController.Events.RequestOnlineLearning, null ) );
    }// End Method
    
@@ -159,5 +124,7 @@ public class NetworkViewerController {
    public void setPerceptron( Perceptron perceptron ){
       this.perceptron = perceptron;
       networkOverviewController.setPerceptron( perceptron );
+      learningProcessor.setPerceptron( perceptron );
+      perceptronManager.manage( perceptron );
    }// End Method
 }// End Class
