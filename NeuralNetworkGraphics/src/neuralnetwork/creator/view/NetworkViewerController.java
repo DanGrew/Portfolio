@@ -38,7 +38,11 @@ public class NetworkViewerController {
       /** Indicates a request has been made to save a {@link Perceptron}.**/
       RequestPerceptronSave,
       /** Indicates a request has been made to save a {@link LearningParameters}.**/
-      RequestLearningParametersSave;
+      RequestLearningParametersSave,
+      /** Indicates a {@link Perceptron} has been loaded into the {@link NetworkViewer}. **/
+      PerceptronLoaded,
+      /** Indicates a {@link Perceptron} has been saved.**/
+      PerceptronSaved;
    }// End Enum
    
    private Perceptron perceptron;
@@ -108,12 +112,15 @@ public class NetworkViewerController {
       
       perceptronManager = new FileManager< Perceptron, XmlPerceptronWrapper >(
                Events.RequestPerceptronLoad, 
-               Events.RequestPerceptronSave, 
+               Events.PerceptronLoaded,
+               Events.RequestPerceptronSave,
+               Events.PerceptronSaved,
                Perceptron.class, 
                XmlPerceptronWrapper.class, 
                object -> { return new XmlPerceptronWrapper( object ); }
       );
-      EventSystem.registerForEvent( FileManager.Events.Loaded, ( type, object ) -> setPerceptron( ( Perceptron )object ) ); 
+      EventSystem.registerForEvent( Events.PerceptronLoaded, ( type, object ) -> setPerceptron( ( Perceptron )object ) ); 
+      
       onlineLearning.setOnAction( event -> EventSystem.raiseEvent( PerceptronLearnerController.Events.RequestOnlineLearning, null ) );
    }// End Method
    

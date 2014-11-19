@@ -40,7 +40,9 @@ public class FileManagerTest {
    /** Enum defining the events used for this test. **/
    private enum TestEvents {
       LoadRequest,
-      SaveRequest;
+      SaveRequest,
+      Loaded,
+      Saved;
    }// End Enum
    
    /**
@@ -49,7 +51,9 @@ public class FileManagerTest {
    @BeforeClass public static void initialise(){
       fileManager = new FileManager< Perceptron, XmlPerceptronWrapper >( 
                TestEvents.LoadRequest, 
-               TestEvents.SaveRequest, 
+               TestEvents.Loaded,
+               TestEvents.SaveRequest,
+               TestEvents.Saved,
                Perceptron.class, 
                XmlPerceptronWrapper.class, 
                object -> { return new XmlPerceptronWrapper( object ); }
@@ -65,7 +69,7 @@ public class FileManagerTest {
       fileManager.manage( perceptron );
       
       List< Object > objects = new ArrayList< Object >();
-      EventSystem.registerForEvent( FileManager.Events.Saved, ( type, object ) -> {
+      EventSystem.registerForEvent( TestEvents.Saved, ( type, object ) -> {
          objects.add( type );
          objects.add( object );
       } );
@@ -74,7 +78,7 @@ public class FileManagerTest {
                TestEvents.SaveRequest, 
                new File( TemporaryFiles.TEMPORARY_DIRECTORY + OUTPUT_FILE ) 
       );
-      assertEquals( FileManager.Events.Saved, objects.remove( 0 ) );
+      assertEquals( TestEvents.Saved, objects.remove( 0 ) );
       assertEquals( perceptron, objects.remove( 0 ) );
    }// End Method
    
@@ -86,13 +90,13 @@ public class FileManagerTest {
       File file = new File( TestData.TEST_DATA_DIRECTORY + TEST_PERCEPTRON_FILE );
       
       List< Object > objects = new ArrayList< Object >();
-      EventSystem.registerForEvent( FileManager.Events.Loaded, ( type, object ) -> {
+      EventSystem.registerForEvent( TestEvents.Loaded, ( type, object ) -> {
          objects.add( type );
          objects.add( object );
       } );
       
       EventSystem.raiseEvent( TestEvents.LoadRequest, file );
-      assertEquals( FileManager.Events.Loaded, objects.remove( 0 ) );
+      assertEquals( TestEvents.Loaded, objects.remove( 0 ) );
       Object loaded = objects.remove( 0 );
       assertTrue( loaded instanceof Perceptron );
    }// End Method

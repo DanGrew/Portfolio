@@ -22,14 +22,11 @@ import architecture.serialization.SerializationSystem;
  * of {@link Object}s into and from XML in response to external events.
  */
 public class FileManager< S, T extends StructuralRepresentation< S > > {
-
-   public enum Events {
-      Loaded,
-      Saved;
-   }
    
    private S singleton;
    private FileChooser fileChooser;
+   private Enum< ? > loadedEvent;
+   private Enum< ? > savedEvent;
    private Class< S > singletonClass;
    private Class< T > structureClass;
    private Function< S, T > wrapper;
@@ -37,19 +34,25 @@ public class FileManager< S, T extends StructuralRepresentation< S > > {
    /**
     * Constructs a new {@link FileManager}.
     * @param loadRequest the {@link Enum} defining the request to load event.
+    * @param loadedEvent the {@link Enum} defining the resulting loaded event.
     * @param saveRequest the {@link Enum} defining the request to save event.
+    * @param savedEvent the {@link Enum} defining the resulting saved event.
     * @param sClazz the {@link Class} of the {@link Singleton}.
     * @param tClazz the {@link Class} of the XML wrapper.
     * @param wrapper the {@link Function} to create the wrapper.
     */
    public FileManager( 
-            Enum< ? > loadRequest, 
-            Enum< ? > saveRequest, 
+            Enum< ? > loadRequest,
+            Enum< ? > loadedEvent,
+            Enum< ? > saveRequest,
+            Enum< ? > savedEvent,
             Class< S > sClazz, 
             Class< T > tClazz,
             Function< S, T > wrapper
    ){
       fileChooser = new FileChooser();
+      this.loadedEvent = loadedEvent;
+      this.savedEvent = savedEvent;
       singletonClass = sClazz;
       structureClass = tClazz;
       this.wrapper = wrapper;
@@ -90,7 +93,7 @@ public class FileManager< S, T extends StructuralRepresentation< S > > {
          S loaded = SerializationSystem.loadStructure( structureClass, chosen );
          if ( loaded != null ){
             manage( loaded );
-            EventSystem.raiseEvent( Events.Loaded, loaded );
+            EventSystem.raiseEvent( loadedEvent, loaded );
          } else {
             Alerts.completionAlert( 
                      "Loading " + singletonClass.getName(), 
@@ -114,7 +117,7 @@ public class FileManager< S, T extends StructuralRepresentation< S > > {
       }
       if ( chosen != null ){
           boolean saved = SerializationSystem.saveToFile( wrapper.apply( singleton ), chosen );
-          EventSystem.raiseEvent( Events.Saved, singleton );
+          EventSystem.raiseEvent( savedEvent, singleton );
           String message = ( saved ? "Success: written to file. " : "Failed: Not writtent to file." );
 //          Alerts.completionAlert( 
 //                   "Perceptron Save", 

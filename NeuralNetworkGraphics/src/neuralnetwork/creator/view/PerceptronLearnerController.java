@@ -9,7 +9,6 @@ package neuralnetwork.creator.view;
 
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ListChangeListener.Change;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -20,7 +19,9 @@ import model.singleton.LearningParameter;
 import model.singleton.LearningParameter.NeuronValue;
 import model.structure.LearningParameters;
 import model.structure.NetworkPosition;
+import neuralnetwork.creator.view.module.FileManager;
 import neuralnetwork.creator.view.module.LearningProcessor;
+import representation.xml.wrapper.XmlLearningParametersWrapper;
 import architecture.event.EventSystem;
 import architecture.utility.ObjectGenerator;
 import constructs.view.tableitemcontrols.TableItemControls;
@@ -36,14 +37,20 @@ public class PerceptronLearnerController implements TableItemControls{
       LearningParameters;
    }
    
-   /** Enumdefining the events that this {@link PerceptronLearnerController} can receive
+   /** Enum defining the events that this {@link PerceptronLearnerController} can receive
     * as requests. */
    public enum Events {
-      RequestOnlineLearning;
+      /** Event to request that online learning is performed. **/
+      RequestOnlineLearning,
+      /** Indicates {@link LearningParameters} have been leaded. **/
+      LearningParametersLoaded,
+      /** Indicates {@link LearningParameters} have been saved. **/
+      LearningParametersSaved;
    }// End Enum
    
    @FXML private AnchorPane tableControls;
    @FXML private TableItemControlsControllerImpl tableControlsController;
+   private FileManager< LearningParameters, XmlLearningParametersWrapper > fileManager;
    
    @FXML private TableView< LearningParameter > parameterTable;
    @FXML private TableColumn< LearningParameter, String > parameterDescriptionColumn;
@@ -64,14 +71,6 @@ public class PerceptronLearnerController implements TableItemControls{
     */
    @FXML private void initialize(){      
       tableControlsController.setExternalController( this );
-      EventSystem.observeList( Observables.LearningParameters, learningParameters );
-      EventSystem.registerForEvent( 
-               Events.RequestOnlineLearning, 
-               ( event, object ) -> EventSystem.raiseEvent( 
-                        LearningProcessor.Events.RequestOnlineLearning, 
-                        new LearningParameters( learningParameters ) 
-               ) 
-      );
 
       parmeterInputPositionColumn.setCellValueFactory( cellData -> cellData.getValue().getValue().position.getRepresentationProperty() );
       parmeterInputColumn.setCellValueFactory( cellData -> cellData.getValue().getValue().value );
@@ -92,7 +91,41 @@ public class PerceptronLearnerController implements TableItemControls{
             }
          }
       );
-   }
+      
+      EventSystem.observeList( Observables.LearningParameters, learningParameters );
+      EventSystem.registerForEvent( 
+               Events.RequestOnlineLearning, 
+               ( event, object ) -> EventSystem.raiseEvent( 
+                        LearningProcessor.Events.RequestOnlineLearning, 
+                        new LearningParameters( learningParameters ) 
+               ) 
+      );
+      
+      fileManager = new FileManager< LearningParameters, XmlLearningParametersWrapper >( 
+               NetworkViewerController.Events.RequestLearningParametersLoad, 
+               Events.LearningParametersLoaded, 
+               NetworkViewerController.Events.RequestLearningParametersSave, 
+               Events.LearningParametersSaved, 
+               LearningParameters.class, 
+               XmlLearningParametersWrapper.class, 
+               object -> { return new XmlLearningParametersWrapper( object.iterator() ); } 
+      );
+      EventSystem.registerForEvent( Events.LearningParametersLoaded, ( type, object ) -> {
+         setLearningParameters( ( LearningParameters )object );
+      } );
+      EventSystem.registerForList( Observables.LearningParameters, LearningParameter.class, change -> {
+         fileManager.manage( new LearningParameters( learningParameters ) );
+      } );
+   }// End Method
+   
+   /**
+    * Method to reset the {@link LearningParameters} to the {@link LearningParameters} provided.
+    * @param parameters the {@link LearningParameters} to be used.
+    */
+   private void setLearningParameters( LearningParameters parameters ){
+      learningParameters.clear();
+      parameters.iterator().forEachRemaining( object -> learningParameters.add( object ) );
+   }// End Method
 
    /**
     * {@inheritDoc}
@@ -152,7 +185,7 @@ public class PerceptronLearnerController implements TableItemControls{
             learningParameters.set( index + 1, parameterAtIndex );
             learningParameters.set( index, parameterAfterIndex );
          }
-         parameterTable.getSelectionModel().select( selection.get( 0 ) + 1);
+         parameterTable.getSelectionModel().select( selection.get( 0 ) + 1 );
       }
    }// End Method
 
