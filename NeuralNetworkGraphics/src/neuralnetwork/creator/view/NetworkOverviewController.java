@@ -10,6 +10,7 @@ package neuralnetwork.creator.view;
 import java.util.Collections;
 import java.util.Iterator;
 
+import architecture.event.EventSystem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import model.sort.NeuronComparator;
 import model.sort.SynapseComparator;
 import model.structure.NeuronLayer;
 import neuralnetwork.creator.NetworkViewer;
+import neuralnetwork.creator.view.NetworkViewerController.Events;
 import neuralnetwork.creator.view.component.ProgressBarController;
 
 /**
@@ -77,13 +79,14 @@ public class NetworkOverviewController {
       outputTable.setItems( outputNeurons );
       
       new ProgressBarController( learningProgressBar );
+      EventSystem.registerForEvent( Events.PerceptronLoaded, ( type, object ) -> setPerceptron( ( Perceptron )object ) );
    }// End Method
    
    /**
     * Method to set the {@link Perceptron} populating the structures being displayed in the viewer.
     * @param perceptron the {@link Perceptron} being displayed.
     */
-   public void setPerceptron( Perceptron perceptron ){
+   private void setPerceptron( Perceptron perceptron ){
       inputNeurons.clear();
       outputNeurons.clear();
       synapses.clear();

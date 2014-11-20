@@ -128,9 +128,8 @@ public class NetworkViewerController {
     * Method to set the {@link Perceptron} being used for this viewer.
     * @param perceptron the {@link Perceptron}.
     */
-   public void setPerceptron( Perceptron perceptron ){
+   private void setPerceptron( Perceptron perceptron ){
       this.perceptron = perceptron;
-      networkOverviewController.setPerceptron( perceptron );
       learningProcessor.setPerceptron( perceptron );
       perceptronManager.manage( perceptron );
    }// End Method
