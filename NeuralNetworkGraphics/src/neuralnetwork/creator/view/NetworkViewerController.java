@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import model.network.Perceptron;
 import model.singleton.LearningParameter;
 import neuralnetwork.creator.NetworkViewer;
+import neuralnetwork.creator.processing.LearnerTasks;
 import neuralnetwork.creator.view.module.FileManager;
 import neuralnetwork.creator.view.module.LearningProcessor;
 import representation.xml.wrapper.XmlPerceptronWrapper;
@@ -45,8 +46,6 @@ public class NetworkViewerController {
       PerceptronSaved;
    }// End Enum
    
-   private Perceptron perceptron;
-   private LearningProcessor learningProcessor;
    private FileManager< Perceptron, XmlPerceptronWrapper > perceptronManager;
    @FXML private AnchorPane networkViewer;
    @FXML private NetworkOverviewController networkOverviewController;
@@ -70,6 +69,7 @@ public class NetworkViewerController {
       saveXMLPerceptronMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestPerceptronSave, null ) );
       loadXMLLearningParametersMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestLearningParametersLoad, null ) );
       saveXMLLearningParametersMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestLearningParametersSave, null ) );
+      new LearnerTasks();
    }// End Method
    
    /**
@@ -85,7 +85,6 @@ public class NetworkViewerController {
     */
    public void populate(){
       parameterMenuItems = new HashMap< LearningParameter, MenuItem >();
-      learningProcessor = new LearningProcessor( perceptron );
       
       EventSystem.registerForList( 
          PerceptronLearnerController.Observables.LearningParameters,
@@ -119,18 +118,15 @@ public class NetworkViewerController {
                XmlPerceptronWrapper.class, 
                object -> { return new XmlPerceptronWrapper( object ); }
       );
-      EventSystem.registerForEvent( Events.PerceptronLoaded, ( type, object ) -> setPerceptron( ( Perceptron )object ) ); 
+      EventSystem.registerForEvent( 
+               Events.PerceptronLoaded, 
+               ( type, object ) -> perceptronManager.manage( ( Perceptron )object )
+      ); 
       
-      onlineLearning.setOnAction( event -> EventSystem.raiseEvent( PerceptronLearnerController.Events.RequestOnlineLearning, null ) );
+      onlineLearning.setOnAction( event -> EventSystem.raiseEvent( 
+               PerceptronLearnerController.Events.RequestOnlineLearning, 
+               null 
+      ) );
    }// End Method
    
-   /**
-    * Method to set the {@link Perceptron} being used for this viewer.
-    * @param perceptron the {@link Perceptron}.
-    */
-   private void setPerceptron( Perceptron perceptron ){
-      this.perceptron = perceptron;
-      learningProcessor.setPerceptron( perceptron );
-      perceptronManager.manage( perceptron );
-   }// End Method
 }// End Class

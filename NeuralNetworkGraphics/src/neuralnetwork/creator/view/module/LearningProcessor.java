@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import model.network.Perceptron;
 import model.singleton.LearningParameter;
 import model.structure.LearningParameters;
+import neuralnetwork.creator.view.NetworkViewerController;
 import architecture.event.EventSystem;
 
 /**
@@ -43,17 +44,11 @@ public class LearningProcessor {
 
    /**
     * Constructs a new {@link LearningProcessor}.
-    * @param perceptron the {@link Perceptron} that learns.
     */
-   public LearningProcessor( Perceptron perceptron ) {
-      this.perceptron = perceptron;
+   public LearningProcessor() {
       EventSystem.registerForEvent( 
-               Events.RequestLearnParameter, 
-               ( event, object ) -> startLearning( ( LearningParameter ) object ) 
-      );
-      EventSystem.registerForEvent( 
-               Events.RequestOnlineLearning,
-               ( event, object ) -> startLearning( ( LearningParameters )object )
+               NetworkViewerController.Events.PerceptronLoaded, 
+               ( type, object ) -> setPerceptron( ( Perceptron )object ) 
       );
    }// End Constructor
    
@@ -70,7 +65,7 @@ public class LearningProcessor {
     * Method to start the learning process with {@link LearningParameters}.
     * @param parameters the {@link LearningParameters} to learn.
     */
-   private void startLearning( LearningParameters parameters ){
+   public void startLearning( LearningParameters parameters ){
       EventSystem.raiseEvent( Events.OnlineLearning, parameters );
       timedLearn( parameters );
    }// End Method
@@ -95,7 +90,7 @@ public class LearningProcessor {
     * Method to process the request to teach the {@link Perceptron}.
     * @param parameter the {@link LearningParameter} to learn.
     */
-   private void startLearning( LearningParameter parameter ) {
+   public void startLearning( LearningParameter parameter ) {
       EventSystem.raiseEvent( Events.LearningParameter, parameter );
       timedLearn( parameter );
    }// End Method
