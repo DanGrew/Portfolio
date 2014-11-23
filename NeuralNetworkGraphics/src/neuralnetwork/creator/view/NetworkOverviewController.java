@@ -33,7 +33,6 @@ import neuralnetwork.creator.view.component.ProgressBarController;
  */
 public class NetworkOverviewController {
 
-   private Perceptron perceptron;
    @FXML private TableView< Synapse > synapseTable;
    @FXML private TableColumn< Synapse, String > inputPositionColumn;
    @FXML private TableColumn< Synapse, String > outputPositionColumn;

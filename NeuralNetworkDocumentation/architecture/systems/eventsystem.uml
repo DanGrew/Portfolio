@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ivojgHQdEeShTbn3-BVgGg" name="NewModel">
+  <ownedComment xmi:id="_DSDQYHQfEeShTbn3-BVgGg" annotatedElement="_ivojgHQdEeShTbn3-BVgGg">
+    <body>Observe</body>
+  </ownedComment>
+  <ownedComment xmi:id="_HDF5EHQfEeShTbn3-BVgGg" annotatedElement="_ivojgHQdEeShTbn3-BVgGg">
+    <body>Notify Observers</body>
+  </ownedComment>
+  <ownedComment xmi:id="_LB5Q8HQfEeShTbn3-BVgGg" annotatedElement="_ivojgHQdEeShTbn3-BVgGg">
+    <body>Receive</body>
+  </ownedComment>
+  <ownedComment xmi:id="_QySiQHQfEeShTbn3-BVgGg" annotatedElement="_ivojgHQdEeShTbn3-BVgGg">
+    <body>Raise Event</body>
+  </ownedComment>
+  <ownedComment xmi:id="_VhBiQHQfEeShTbn3-BVgGg" annotatedElement="_ivojgHQdEeShTbn3-BVgGg">
+    <body>Observe</body>
+  </ownedComment>
+  <ownedComment xmi:id="_YToz0HQfEeShTbn3-BVgGg" annotatedElement="_ivojgHQdEeShTbn3-BVgGg">
+    <body>Observable Changed</body>
+  </ownedComment>
+  <ownedComment xmi:id="_uxyb4HQfEeShTbn3-BVgGg" annotatedElement="_ivojgHQdEeShTbn3-BVgGg _-2QP8HQdEeShTbn3-BVgGg">
+    <body>Singleton</body>
+  </ownedComment>
+  <ownedComment xmi:id="_0a9q4HQfEeShTbn3-BVgGg" annotatedElement="_ivojgHQdEeShTbn3-BVgGg _qPBGMHQdEeShTbn3-BVgGg">
+    <body>Mediator, Facade</body>
+  </ownedComment>
+  <packagedElement xmi:type="uml:Class" xmi:id="_qPBGMHQdEeShTbn3-BVgGg" name="EventSystem">
+    <generalization xmi:id="_D5Rd4HQeEeShTbn3-BVgGg" general="_wUIDQHQdEeShTbn3-BVgGg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wUIDQHQdEeShTbn3-BVgGg" name="System"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_1P718HQdEeShTbn3-BVgGg" name="EventManagementSystem"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_369RwHQdEeShTbn3-BVgGg" name="EventManagementSystemImpl">
+    <interfaceRealization xmi:id="_DGHioHQeEeShTbn3-BVgGg" client="_369RwHQdEeShTbn3-BVgGg" supplier="_1P718HQdEeShTbn3-BVgGg" contract="_1P718HQdEeShTbn3-BVgGg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_-2QP8HQdEeShTbn3-BVgGg" name="Systems" memberEnd="_-2QP8XQdEeShTbn3-BVgGg _-2ncUnQdEeShTbn3-BVgGg" navigableOwnedEnd="_-2ncUnQdEeShTbn3-BVgGg">
+    <ownedEnd xmi:id="_-2QP8XQdEeShTbn3-BVgGg" name="systems" type="_wUIDQHQdEeShTbn3-BVgGg" association="_-2QP8HQdEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-2ncUHQdEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-2ncUXQdEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_-2ncUnQdEeShTbn3-BVgGg" name="eventManagementSystems" type="_1P718HQdEeShTbn3-BVgGg" association="_-2QP8HQdEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-24iEHQdEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-24iEXQdEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_H-nioHQeEeShTbn3-BVgGg" name="Observable"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_JZZekHQeEeShTbn3-BVgGg" name="Observer"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_O4s_4HQeEeShTbn3-BVgGg" name="Observables" memberEnd="_O4tm8HQeEeShTbn3-BVgGg _O5BI8HQeEeShTbn3-BVgGg" navigableOwnedEnd="_O5BI8HQeEeShTbn3-BVgGg">
+    <ownedEnd xmi:id="_O4tm8HQeEeShTbn3-BVgGg" name="observables" type="_H-nioHQeEeShTbn3-BVgGg" association="_O4s_4HQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O5Ah4HQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_O5Ah4XQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_O5BI8HQeEeShTbn3-BVgGg" name="eventSystems" type="_qPBGMHQdEeShTbn3-BVgGg" association="_O4s_4HQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O5SOsHQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_O5SOsXQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_QV1FMHQeEeShTbn3-BVgGg" name="EventSystems" memberEnd="_QV1FMXQeEeShTbn3-BVgGg _QV26YHQeEeShTbn3-BVgGg" navigableOwnedEnd="_QV26YHQeEeShTbn3-BVgGg">
+    <ownedEnd xmi:id="_QV1FMXQeEeShTbn3-BVgGg" name="eventSystems" type="_qPBGMHQdEeShTbn3-BVgGg" association="_QV1FMHQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QV2TUHQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QV2TUXQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_QV26YHQeEeShTbn3-BVgGg" name="observers" type="_JZZekHQeEeShTbn3-BVgGg" association="_QV1FMHQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QV26YXQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QV26YnQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_TKygIHQeEeShTbn3-BVgGg" name="ObservableList"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_XXrXUHQeEeShTbn3-BVgGg" name="ListChangeListener"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_bH5goHQeEeShTbn3-BVgGg" name="ObservableLists" memberEnd="_bH6HsHQeEeShTbn3-BVgGg _bH6uwnQeEeShTbn3-BVgGg" navigableOwnedEnd="_bH6uwnQeEeShTbn3-BVgGg">
+    <ownedEnd xmi:id="_bH6HsHQeEeShTbn3-BVgGg" name="observableLists" type="_TKygIHQeEeShTbn3-BVgGg" association="_bH5goHQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bH6uwHQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bH6uwXQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_bH6uwnQeEeShTbn3-BVgGg" name="eventSystems" type="_qPBGMHQdEeShTbn3-BVgGg" association="_bH5goHQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bH7V0HQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bH784HQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_dSoS0HQeEeShTbn3-BVgGg" name="EventSystems" memberEnd="_dSo54HQeEeShTbn3-BVgGg _dSpg8XQeEeShTbn3-BVgGg" navigableOwnedEnd="_dSpg8XQeEeShTbn3-BVgGg">
+    <ownedEnd xmi:id="_dSo54HQeEeShTbn3-BVgGg" name="eventSystems" type="_qPBGMHQdEeShTbn3-BVgGg" association="_dSoS0HQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dSo54XQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dSpg8HQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_dSpg8XQeEeShTbn3-BVgGg" name="listChangeListeners" type="_XXrXUHQeEeShTbn3-BVgGg" association="_dSoS0HQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dSrWIHQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dSr9MHQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_vokIUHQeEeShTbn3-BVgGg" name="Object"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_1VPXQHQeEeShTbn3-BVgGg" name="EventReceiver"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_3glNcHQeEeShTbn3-BVgGg" name="Objects" memberEnd="_3gl0gHQeEeShTbn3-BVgGg _3gl0g3QeEeShTbn3-BVgGg" navigableOwnedEnd="_3gl0g3QeEeShTbn3-BVgGg">
+    <ownedEnd xmi:id="_3gl0gHQeEeShTbn3-BVgGg" name="objects" type="_vokIUHQeEeShTbn3-BVgGg" association="_3glNcHQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3gl0gXQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3gl0gnQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_3gl0g3QeEeShTbn3-BVgGg" name="eventSystems" type="_qPBGMHQdEeShTbn3-BVgGg" association="_3glNcHQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3gmbkHQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3gmbkXQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_728JsHQeEeShTbn3-BVgGg" name="EventSystems" memberEnd="_728JsXQeEeShTbn3-BVgGg _728wwnQeEeShTbn3-BVgGg" navigableOwnedEnd="_728wwnQeEeShTbn3-BVgGg">
+    <ownedEnd xmi:id="_728JsXQeEeShTbn3-BVgGg" name="eventSystems" type="_qPBGMHQdEeShTbn3-BVgGg" association="_728JsHQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_728wwHQeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_728wwXQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_728wwnQeEeShTbn3-BVgGg" name="class9s" type="_1VPXQHQeEeShTbn3-BVgGg" association="_728JsHQeEeShTbn3-BVgGg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_728ww3QeEeShTbn3-BVgGg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_728wxHQeEeShTbn3-BVgGg" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
