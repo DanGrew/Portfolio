@@ -15,7 +15,8 @@ import architecture.utility.ObjectGenerator;
  * The {@link Singleton} provides the base definition for a single {@link Object} that exists in
  * its own right and can be serialized.
  */
-public abstract class Singleton< S extends SerializableSingleton< ? > > implements SingletonSerialization< S >{
+public abstract class Singleton< S extends SerializableSingleton< ? > > 
+                                implements SingletonSerialization< S >, SerializableSingleton< S >{
 
    /** The unique identification for this {@link Singleton}. **/
    protected String identification;
@@ -32,8 +33,15 @@ public abstract class Singleton< S extends SerializableSingleton< ? > > implemen
     * Method to get the {@link String} identification of the {@link Singleton}.
     * @return the {@link String} identification.
     */
-   public String getIdentification(){
+   @Override public String getIdentification(){
       return identification;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void setIdentification( String identification ){
+      this.identification = identification;
    }// End Method
    
    /**
@@ -65,6 +73,13 @@ public abstract class Singleton< S extends SerializableSingleton< ? > > implemen
     * @param serialized the {@link SerializedSingleton} providing the data to populate.
     */
    protected abstract void readSingleton( S serialized );
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public S unwrap(){
+      return null;
+   }// End Method
    
 }// End Class
 
