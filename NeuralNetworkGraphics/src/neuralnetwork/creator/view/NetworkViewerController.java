@@ -56,6 +56,7 @@ public class NetworkViewerController {
    @FXML private MenuItem batchLearning;
    private Map< LearningParameter, MenuItem > parameterMenuItems;
    
+   @FXML private MenuItem newPerceptronMenu;
    @FXML private MenuItem loadXMLPerceptronMenu;
    @FXML private MenuItem saveXMLPerceptronMenu;
    @FXML private MenuItem loadXMLLearningParametersMenu;
@@ -65,6 +66,7 @@ public class NetworkViewerController {
     * Method to initialise the graphics and events in the window.
     */
    @FXML private void initialize(){
+      newPerceptronMenu.setOnAction( event -> EventSystem.raiseEvent( Events.PerceptronLoaded, new Perceptron( 3, 3 ) ) );
       loadXMLPerceptronMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestPerceptronLoad, null ) );
       saveXMLPerceptronMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestPerceptronSave, null ) );
       loadXMLLearningParametersMenu.setOnAction( event -> EventSystem.raiseEvent( Events.RequestLearningParametersLoad, null ) );

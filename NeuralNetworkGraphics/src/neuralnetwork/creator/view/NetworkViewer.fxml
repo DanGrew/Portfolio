@@ -39,6 +39,11 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
                <items>
+                  <Menu mnemonicParsing="false" text="New">
+                    <items>
+                      <MenuItem fx:id="newPerceptronMenu" mnemonicParsing="false" text="Perceptron" />
+                    </items>
+                  </Menu>
                   <Menu mnemonicParsing="false" text="Load">
                      <items>
                         <Menu mnemonicParsing="false" text="XML">
