@@ -6,5 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/NeuralNetwork"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/NeuralNetworkSerialization"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/NeuralNetworkGraphics"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKit"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
