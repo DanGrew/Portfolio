@@ -62,13 +62,7 @@ public class EventManagementSystemImpl implements EventManagementSystem {
          ) );
       } else {
          utilObservables.put( observable, observableReference );
-//         Java 8.
-//         observable.addObserver( ( observableObject, object ) -> notifyUtilObservers( observableObject, object ) );
-         observable.addObserver( new Observer() {
-            @Override public void update( Observable observableObject, Object object ) {
-               notifyUtilObservers( observableObject, object );
-            }
-         } );
+         observable.addObserver( ( observableObject, object ) -> notifyUtilObservers( observableObject, object ) );
       }
    }// End Method
    
