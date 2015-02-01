@@ -46,9 +46,16 @@ public class RequestSystem extends ManagementSystem {
     * @param identification the {@link String} identification of the {@link Singleton}.
     * @return true if the {@link Object} is present, false otherwise.
     */
-   public static < T extends Singleton< ? > > boolean contains( Class< T > clazz, String identification ){
-      return dataSystem().retrieveAll( clazz, test -> {
-         return test.getIdentification().equals( identification );
+   public static < T extends Singleton< ? > > boolean contains( Class< T > clazz, final String identification ){
+//      Java 8.
+//      return dataSystem().retrieveAll( clazz, test -> {
+//         return test.getIdentification().equals( identification );
+//      } ).count() > 0;
+      
+      return dataSystem().retrieveAll( clazz, new Predicate< T >() {
+         @Override public boolean test( T test ) {
+            return test.getIdentification().equals( identification );
+         }
       } ).count() > 0;
    }// End Method
    
