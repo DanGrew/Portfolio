@@ -24,12 +24,13 @@ public class CommandTest {
    @Test public void basicInstructionCommand() {
       Command< Boolean > command = CommonCommands.TRUE_COMMAND;
       Assert.assertTrue( command.matches( "   " ) );
-      Assert.assertTrue( command.matches( "   Test" ) );
-      Assert.assertTrue( command.matches( "   Te" ) );
-      Assert.assertTrue( command.matches( "Test" ) );
-      Assert.assertTrue( command.matches( "Te" ) );
+      Assert.assertTrue( command.matches( "   True" ) );
+      Assert.assertTrue( command.matches( "   Tr" ) );
+      Assert.assertTrue( command.matches( "True" ) );
+      Assert.assertTrue( command.matches( "true" ) );
+      Assert.assertTrue( command.matches( "Tr" ) );
       Assert.assertFalse( command.matches( "Something Else" ) );
-      Assert.assertTrue( command.matches( "Test something" ) );
+      Assert.assertTrue( command.matches( "True something" ) );
       Assert.assertTrue( command.execute() );
    }// End Method
    
@@ -37,7 +38,6 @@ public class CommandTest {
     * Method to test a basic {@link ParameterizedCommandImpl}.
     */
    @Test public void basicParameterizedCommand() {
-      CommandParameter parameter = CommonCommands.DEFAULT_PARAMETER;
       Command< Boolean > command = CommonCommands.INVERT_BOOLEAN_COMMAND;
       Assert.assertTrue( command.matches( "   " ) );
       Assert.assertTrue( command.matches( "   Invert" ) );
@@ -45,11 +45,7 @@ public class CommandTest {
       Assert.assertTrue( command.matches( "Invert" ) );
       Assert.assertTrue( command.matches( "In" ) );
       Assert.assertFalse( command.matches( "Something Else" ) );
-      Assert.assertTrue( command.matches( "Invert something" ) );
-      command.parameterize( parameter, false );
-      Assert.assertTrue( command.execute() );
-      command.parameterize( parameter, true );
-      Assert.assertFalse( command.execute() );
+      Assert.assertFalse( command.matches( "Invert something" ) );
    }// End Method
 
 }// End Class

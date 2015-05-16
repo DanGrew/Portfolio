@@ -7,6 +7,7 @@
  */
 package defaults;
 
+import parameter.BooleanParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterImpl;
 import parameter.CommandParameters;
@@ -22,30 +23,45 @@ public class CommonCommands {
    public static final CommandParameter DEFAULT_PARAMETER = new CommandParameterImpl();
    
    public static final Command< Boolean > TRUE_COMMAND = new InstructionCommandImpl< Boolean >( 
-            "True Command", 
+            "True", 
             "Command to simply return true.",
             ( CommandParameters params ) -> { 
                return true;
             } 
    );
    
+   private static final CommandParameter INVERT_PARAMETER = new BooleanParameterImpl();
    public static final Command< Boolean > INVERT_BOOLEAN_COMMAND = new ParameterizedCommandImpl< Boolean >(
             "Invert Boolean",
             "Function to invert the boolean parameter given.",
             ( CommandParameters params ) -> {
-               return !params.getExpectedParameter( DEFAULT_PARAMETER, Boolean.class );
+               return !params.getExpectedParameter( INVERT_PARAMETER, Boolean.class );
             },
-            DEFAULT_PARAMETER
+            INVERT_PARAMETER
    );
    
    public static final Command< String > INVERT_STRING_CASE_COMMAND = new ParameterizedCommandImpl< String >(
-            "Invert Sring",
+            "Invert String",
             "Function to invert the case of the given String.",
             ( CommandParameters params ) -> {
                String value = params.getExpectedParameter( DEFAULT_PARAMETER, String.class );
                return convertCase( value );
             },
-            DEFAULT_PARAMETER
+            new CommandParameterImpl()
+   );
+   
+   private static final CommandParameter FIRST_OR_PARAMETER = new BooleanParameterImpl();
+   private static final CommandParameter SECOND_OR_PARAMETER = new BooleanParameterImpl();
+   public static final Command< Boolean > BINARY_OR_COMMAND = new ParameterizedCommandImpl< Boolean >(
+            "BinaryOr", 
+            "Function to perform the binary OR operation.", 
+            ( CommandParameters params ) -> {
+               Boolean first = params.getExpectedParameter( FIRST_OR_PARAMETER, Boolean.class );
+               Boolean second = params.getExpectedParameter( SECOND_OR_PARAMETER, Boolean.class );
+               return first || second;
+            },
+            FIRST_OR_PARAMETER,
+            SECOND_OR_PARAMETER
    );
    
    /**

@@ -50,17 +50,17 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    protected Function< CommandParameters, ReturnT > getFunction(){
       return function;
    }// End Method
-   
+
    /**
     * {@inheritDoc}
     */
    @Override public boolean matches( String expression ) {
       String trimmedExpression = expression.trim();
       String[] splitExpression = trimmedExpression.split( " " );
-      if ( splitExpression [ 0 ].length() == 0 ) {
+      if ( splitExpression[ 0 ].length() == 0 ) {
          return true;
       }
-      return getKey().startsWith( splitExpression[ 0 ] );
+      return getKey().toLowerCase().startsWith( splitExpression[ 0 ].toLowerCase() );
    }// End Method
    
    /**
@@ -71,9 +71,27 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    /**
     * {@inheritDoc}
     */
+   @Override public void parameterize( String expression ) {}
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public ReturnT execute( String expression ) {
+      parameterize( expression );
+      return execute();
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public ReturnT execute() {
       return function.apply( null );
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void resetParameters() {}
    
    /**
     * {@inheritDoc}

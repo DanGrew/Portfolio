@@ -7,8 +7,10 @@
  */
 package parameter;
 
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Function;
 
 import command.Command;
@@ -27,6 +29,17 @@ public class CommandParameters {
    public CommandParameters(){
       parameters = new LinkedHashMap< CommandParameter, Object >();
    }// End Constructor
+   
+   /**
+    * Method to apply the given {@link CommandParameter}s to this {@link CommandParameters}. This will assume
+    * null values until parameterized.
+    * @param parameters the array of {@link CommandParameter}s.
+    */
+   public void applyParameters( CommandParameter... parameters ) {
+      for ( CommandParameter parameter : parameters ) {
+         setParameter( parameter, null );
+      }
+   }// End Method
    
    /**
     * Setter for the value associated with the given {@link CommandParameter}.
@@ -56,6 +69,75 @@ public class CommandParameters {
    @SuppressWarnings("unchecked") 
    public < TypeT > TypeT getExpectedParameter( CommandParameter parameter, Class< TypeT > expected ) {
       return ( TypeT )getParameter( parameter );
+   }// End Method
+   
+   /**
+    * Method to determine whether the separated parts of the expression match the {@link CommandParameter}s
+    * associated.
+    * @param expressionParts the {@link String} parts of the expression.
+    * @return true if all parts completely match other than the last which only has to partially match.
+    */
+   public boolean partialMatches( String[] expressionParts ) {
+      if ( expressionParts.length == 0 ) {
+         return true;
+      } else if ( expressionParts.length > parameters.size() ) {
+         return false;
+      } else {
+         Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
+         for ( int i = 0; i < expressionParts.length - 1; i++ ) {
+            CommandParameter parameter = paramIterator.next();
+            if ( !parameter.completeMatches( expressionParts[ i ] ) ) {
+               return false;
+            }
+         }
+         CommandParameter parameter = paramIterator.next();
+         if ( !parameter.partialMatches( expressionParts[ expressionParts.length - 1 ] ) ) {
+            return false;
+         }
+         return true;
+      }
+   }// End Method
+   
+   /**
+    * Method to parameterize the {@link CommandParameter}s with the parts of the expression input.
+    * @param expressionParts the {@link String} parts of the expression providing the parameters.
+    */
+   public void parameterize( String[] expressionParts ) {
+      if ( expressionParts.length == 0 ) {
+         return;
+      } else if ( expressionParts.length > parameters.size() ) {
+         return;
+      } else {
+         Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
+         for ( int i = 0; i < expressionParts.length; i++ ) {
+            CommandParameter parameter = paramIterator.next();
+            Object value = parameter.parseObject( expressionParts[ i ] );
+            setParameter( parameter, value );
+         }
+      }
+   }// End Method
+   
+   /**
+    * Method to determine whether the {@link CommandParameters} has complete values for {@link CommandParameter}s
+    * associated.
+    * @return true if all {@link CommandParameter}s are parameterized.
+    */
+   public boolean isComplete(){
+      for ( Entry< CommandParameter, Object > entry : parameters.entrySet() ) {
+         if ( entry.getValue() == null ) {
+            return false;
+         }
+      }
+      return true;
+   }// End Method
+   
+   /**
+    * Method to reset all values associated with {@link CommandParameter}s.
+    */
+   public void reset(){
+      for ( Entry< CommandParameter, Object > entry : parameters.entrySet() ) {
+         entry.setValue( null );
+      }
    }// End Method
 
 }// End Class

@@ -36,7 +36,32 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    ) {
       super( key, description, function );
       this.parameters = new CommandParameters();
+      this.parameters.applyParameters( parameters );
    }// End Constructor
+   
+   /**
+    * Method to identify the {@link CommandParameter}s provided in the given {@link String}
+    * expression input.
+    * @param expression the input provided that should match the {@link Command} syntax.
+    * @return an array of {@link String} parameters.
+    */
+   private String[] identifyParameters( String expression ) {
+      String[] parts = expression.trim().split( " " );
+      String[] parameterValues = new String[ parts.length - 1 ];
+      System.arraycopy( parts, 1, parameterValues, 0, parameterValues.length );
+      return parameterValues;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean matches( String expression ) {
+      if ( super.matches( expression ) ) {
+         String[] parameterValues = identifyParameters( expression );
+         return parameters.partialMatches( parameterValues );
+      }
+      return false;
+   }// End Method
    
    /**
     * {@inheritDoc}
@@ -49,8 +74,29 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    /**
     * {@inheritDoc}
     */
+   @Override public void parameterize( String expression ) {
+      super.parameterize( expression );
+      String[] parameterValues = identifyParameters( expression );
+      parameters.parameterize( parameterValues );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public ReturnT execute() {
-      return getFunction().apply( parameters );
+      if ( parameters.isComplete() ) {
+         return getFunction().apply( parameters );
+      } else {
+         return null;
+      }
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void resetParameters() {
+      super.resetParameters();
+      parameters.reset();
    }// End Method
 
 }// End Class

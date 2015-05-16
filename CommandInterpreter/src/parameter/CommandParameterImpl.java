@@ -13,4 +13,25 @@ package parameter;
  */
 public class CommandParameterImpl implements CommandParameter{
 
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean partialMatches( String expression ) {
+      return true;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean completeMatches( String expression ) {
+      return true;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Object parseObject( String expression ) {
+      return null;
+   }// End Method
+
 }// End Class

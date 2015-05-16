@@ -24,6 +24,12 @@ public interface Command< ReturnT > {
    public boolean matches( String expression );
    
    /**
+    * Method to parameterize the {@link Command} by parsing the input and setting the values.
+    * @param expression the {@link String} expression provided as input.
+    */
+   public void parameterize( String expression );
+   
+   /**
     * Method to parameterize the {@link Command} by setting the associated parameter.
     * @param parameter the {@link CommandParameter} to set.
     * @param value the value for the {@link CommandParameter}.
@@ -31,9 +37,21 @@ public interface Command< ReturnT > {
    public void parameterize( CommandParameter parameter, Object value );
    
    /**
+    * Method to execute the given {@link String} input expression.
+    * @param expression the input to parse, parameterize and execute.
+    * @return the result, null if the expression is not sufficient.
+    */
+   public ReturnT execute( String expression );
+   
+   /**
     * Method to execute the {@link Command} and return the result.
     * @return the result of the {@link Command}.
     */
    public ReturnT execute();
+   
+   /**
+    * Method to reset the {@link CommandParameter}s to default and not configured.
+    */
+   public void resetParameters();
 
 }// End Interface
