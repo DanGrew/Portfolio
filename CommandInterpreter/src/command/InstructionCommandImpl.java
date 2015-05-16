@@ -20,15 +20,18 @@ import parameter.CommandParameters;
 public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
 
    private String key;
+   private String description;
    private Function< CommandParameters, ReturnT > function;
    
    /**
     * Constructs a new {@link InstructionCommandImpl}.
     * @param key the {@link String} key that must be matched.
+    * @param description a user friendly description of the {@link Command}.
     * @param function the {@link Function} to execute.
     */
-   public InstructionCommandImpl( String key, Function< CommandParameters, ReturnT > function ) {
+   public InstructionCommandImpl( String key, String description, Function< CommandParameters, ReturnT > function ) {
       this.key = key;
+      this.description = description;
       this.function = function;
    }// End Constructor
    
@@ -53,7 +56,11 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     */
    @Override public boolean matches( String expression ) {
       String trimmedExpression = expression.trim();
-      return trimmedExpression.startsWith( getKey() );
+      String[] splitExpression = trimmedExpression.split( " " );
+      if ( splitExpression [ 0 ].length() == 0 ) {
+         return true;
+      }
+      return getKey().startsWith( splitExpression[ 0 ] );
    }// End Method
    
    /**
@@ -66,6 +73,17 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     */
    @Override public ReturnT execute() {
       return function.apply( null );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String toString() {
+      if ( description == null ) {
+         return getKey();
+      } else {
+         return getKey() + ": " + description;
+      }
    }// End Method
 
 }// End Class

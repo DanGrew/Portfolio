@@ -32,9 +32,13 @@ public class DataManagementSystemImpl implements DataManagementSystem {
    /**
     * {@inheritDoc}
     */
-   @Override public < T > void store( T object ) {
+   @Override public < T > void store( T object, Class< ? >... classes ) {
       DataManager< T > manager = getDataManager( object.getClass() );
       manager.store( object );
+      for ( Class< ? > clazz : classes ) {
+         manager = getDataManager( clazz );
+         manager.store( object );   
+      }
    }// End Method
 
    /**

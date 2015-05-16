@@ -23,10 +23,10 @@ import architecture.utility.IdentificationMatcher;
 public class RequestSystem extends ManagementSystem {
    
    /**
-    * {@link DataManagementSystem#store(Object)}.
+    * {@link DataManagementSystem#store(Object, Class...)}.
     */
-   public static < T > void store( T object ){
-      dataSystem().store( object);
+   public static < T > void store( T object, Class< ? >... classes ){
+      dataSystem().store( object, classes );
    }// End Method
    
    /**

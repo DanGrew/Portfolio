@@ -24,11 +24,17 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    /**
     * Constructs a new {@link ParameterizedCommandImpl}.
     * @param key the key to be matched for the {@link Command}.
+    * @param description a user friendly description of the {@link Command}.
     * @param function the {@link Function} to be executed.
     * @param parameters the {@link CommandParameter} that must be provided to execute the {@link Function}.
     */
-   public ParameterizedCommandImpl( String key, Function< CommandParameters, ReturnT > function, CommandParameter... parameters ) {
-      super( key, function );
+   public ParameterizedCommandImpl( 
+            String key, 
+            String description, 
+            Function< CommandParameters, ReturnT > function, 
+            CommandParameter... parameters 
+   ) {
+      super( key, description, function );
       this.parameters = new CommandParameters();
    }// End Constructor
    

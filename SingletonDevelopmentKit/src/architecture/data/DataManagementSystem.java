@@ -20,8 +20,10 @@ public interface DataManagementSystem {
    /**
     * Method to store the given {@link Object} for access by other elements in the system.
     * @param object the {@link Object} to store.
+    * @param classes array of {@link Class}es that the object should be stored as. This could
+    * include supertypes or interfaces.
     */
-   public < T > void store( T object );
+   public < T > void store( T object, Class< ? >... classes );
    
    /**
     * Method to retrieve the {@link Object} of the given {@link Class} matching
