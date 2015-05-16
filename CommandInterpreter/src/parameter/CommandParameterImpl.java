@@ -31,6 +31,13 @@ public class CommandParameterImpl implements CommandParameter{
     * {@inheritDoc}
     */
    @Override public Object parseObject( String expression ) {
+      return expression;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String autoComplete( String expression ) {
       return null;
    }// End Method
 

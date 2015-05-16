@@ -19,9 +19,17 @@ public interface Command< ReturnT > {
    /**
     * Method to determine whether the given expression matches the key for the {@link Command}.
     * @param expression the {@link String} expression to match.
-    * @return true if the {@link Command} is appropriate for the expression.
+    * @return true if the {@link Command} is appropriate for the expression, during construction.
     */
-   public boolean matches( String expression );
+   public boolean partialMatches( String expression );
+   
+   /**
+    * Method to determine whether the {@link String} expression completely matches the {@link Command} c
+    * and can therefore be used to parameterize the {@link Command}.
+    * @param expression the {@link String} expression to check.
+    * @return true if the expression is complete for the {@link Command}.
+    */
+   public boolean completeMatches( String expression );
    
    /**
     * Method to parameterize the {@link Command} by parsing the input and setting the values.
@@ -35,6 +43,13 @@ public interface Command< ReturnT > {
     * @param value the value for the {@link CommandParameter}.
     */
    public void parameterize( CommandParameter parameter, Object value );
+   
+   /**
+    * Method to determine a suggestion for auto completing the given expression.
+    * @param expression the {@link String} expression to auto complete.
+    * @return the suggestion.
+    */
+   public String autoComplete( String expression );
    
    /**
     * Method to execute the given {@link String} input expression.

@@ -16,6 +16,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import architecture.event.EventSystem;
+import defaults.CommandActions;
 
 /**
  * The {@link CommandInput} represents the element of the gui that accepts input from the user.
@@ -56,7 +57,14 @@ public class CommandInput extends JPanel {
       } );
       add( textArea, BorderLayout.CENTER );
       
-      JButton executeButton = new JButton( "Execute" );
+      EventSystem.registerForEvent( 
+               CommandAutoComplete.Events.AutoCompletSuggestion, 
+               ( object, source ) -> {
+                  textArea.setText( source.toString() );
+               } 
+      );
+      
+      JButton executeButton = new JButton( CommandActions.EXECUTE_ACTION );
       add( executeButton, BorderLayout.EAST );
    }// End Constructor
 }// End Class

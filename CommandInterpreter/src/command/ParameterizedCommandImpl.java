@@ -55,10 +55,21 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    /**
     * {@inheritDoc}
     */
-   @Override public boolean matches( String expression ) {
-      if ( super.matches( expression ) ) {
+   @Override public boolean partialMatches( String expression ) {
+      if ( super.partialMatches( expression ) ) {
          String[] parameterValues = identifyParameters( expression );
          return parameters.partialMatches( parameterValues );
+      }
+      return false;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean completeMatches( String expression ) {
+      if ( super.partialMatches( expression ) ) {
+         String[] parameterValues = identifyParameters( expression );
+         return parameters.completeMatches( parameterValues );
       }
       return false;
    }// End Method
@@ -78,6 +89,25 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
       super.parameterize( expression );
       String[] parameterValues = identifyParameters( expression );
       parameters.parameterize( parameterValues );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String autoComplete( String expression ) {
+      String[] expressionParts = expression.trim().split( " " );
+      if ( expressionParts.length > 1 ) {
+         String[] parameterValues = identifyParameters( expression );
+         String suggestion = parameters.autoComplete( parameterValues );
+         if ( suggestion == null ) {
+            return expression;
+         } else {
+            expressionParts[ expressionParts.length - 1 ] = suggestion;
+            return String.join( " ", expressionParts );
+         } 
+      } else {
+         return super.autoComplete( expression );
+      }
    }// End Method
    
    /**

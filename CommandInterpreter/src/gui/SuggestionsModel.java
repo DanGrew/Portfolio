@@ -26,13 +26,15 @@ import defaults.CommonCommands;
 public class SuggestionsModel extends AbstractListModel< Command< ? > >{
 
    private static final long serialVersionUID = 1L;
+   private JList< Command< ? > > parent;
    private List< Command< ? > > data;
    
    /**
     * Constructs a new {@link SuggestionsModel}.
     */
-   public SuggestionsModel() {
+   public SuggestionsModel( JList< Command< ? > > parent ) {
       data = new ArrayList< Command< ? > >();
+      this.parent = parent;
       
       RequestSystem.store( CommonCommands.TRUE_COMMAND, Command.class );
       RequestSystem.store( CommonCommands.INVERT_BOOLEAN_COMMAND, Command.class );
@@ -40,12 +42,28 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
       RequestSystem.store( CommonCommands.BINARY_OR_COMMAND, Command.class );
       
       EventSystem.registerForEvent( CommandInput.Events.TextInput, ( object, source ) -> {
-         data.clear();
-         Stream< Command > commands = RequestSystem.retrieveAll( Command.class, command -> { return command.matches( source.toString() ); } );
-         commands.forEach( command -> data.add( command ) );
-         fireContentsChanged( this, 0, data.size() );
+         inputChanged( source.toString() );
       } );
    }// End Constructor
+   
+   private void inputChanged( String input ) {
+      Command< ? > selected = parent.getSelectedValue();
+      
+      data.clear();
+      Stream< Command > commands = RequestSystem.retrieveAll( 
+               Command.class, 
+               command -> { return command.partialMatches( input ); } 
+      );
+      commands.forEach( command -> data.add( command ) );
+      fireContentsChanged( this, 0, data.size() );
+      
+      parent.setSelectedIndex( -1 );
+      if ( data.contains( selected ) ) {
+         parent.setSelectedValue( selected, true );
+      } else {
+         parent.setSelectedIndex( 0 );
+      }
+   }
    
    /**
     * {@inheritDoc} 
@@ -58,7 +76,11 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
     * {@inheritDoc}
     */
    @Override public Command< ? > getElementAt( int index ) {
-      return data.get( index );
+      if ( index < 0 || index >= data.size() ) {
+         return null;
+      } else {
+         return data.get( index );
+      }
    }// End Method
 
 }// End Class

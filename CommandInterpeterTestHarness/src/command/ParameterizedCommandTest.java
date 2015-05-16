@@ -24,15 +24,15 @@ public class ParameterizedCommandTest {
     */
    @Test public void invertParameterAcceptanceTest() {
       Command< Boolean > command = CommonCommands.INVERT_BOOLEAN_COMMAND;
-      Assert.assertTrue( command.matches( "invert " ) );
-      Assert.assertTrue( command.matches( "invert t" ) );
-      Assert.assertTrue( command.matches( "invert true" ) );
-      Assert.assertFalse( command.matches( "invert truel" ) );
-      Assert.assertTrue( command.matches( "invert fa" ) );
-      Assert.assertTrue( command.matches( "invert false" ) );
-      Assert.assertFalse( command.matches( "invert falser" ) );
-      Assert.assertFalse( command.matches( "invert anything" ) );
-      Assert.assertFalse( command.matches( "invert 1234" ) );
+      Assert.assertTrue( command.partialMatches( "invert " ) );
+      Assert.assertTrue( command.partialMatches( "invert t" ) );
+      Assert.assertTrue( command.partialMatches( "invert true" ) );
+      Assert.assertFalse( command.partialMatches( "invert truel" ) );
+      Assert.assertTrue( command.partialMatches( "invert fa" ) );
+      Assert.assertTrue( command.partialMatches( "invert false" ) );
+      Assert.assertFalse( command.partialMatches( "invert falser" ) );
+      Assert.assertFalse( command.partialMatches( "invert anything" ) );
+      Assert.assertFalse( command.partialMatches( "invert 1234" ) );
    }// End Method
    
    /**
@@ -68,18 +68,12 @@ public class ParameterizedCommandTest {
     */
    @Test public void binaryOrParameterAcceptanceTest() {
       Command< Boolean > command = CommonCommands.BINARY_OR_COMMAND;
-      Assert.assertTrue( command.matches( "BinaryOr true" ) );
-      command.resetParameters();
-      Assert.assertTrue( command.matches( "BinaryOr true false" ) );
-      command.resetParameters();
-      Assert.assertTrue( command.matches( "BinaryOr tr" ) );
-      command.resetParameters();
-      Assert.assertFalse( command.matches( "BinaryOr tr fa" ) );
-      command.resetParameters();
-      Assert.assertFalse( command.matches( "BinaryOr anything" ) );
-      command.resetParameters();
-      Assert.assertFalse( command.matches( "or anything else" ) );
-      command.resetParameters();
+      Assert.assertTrue( command.partialMatches( "BinaryOr true" ) );
+      Assert.assertTrue( command.partialMatches( "BinaryOr true false" ) );
+      Assert.assertTrue( command.partialMatches( "BinaryOr tr" ) );
+      Assert.assertFalse( command.partialMatches( "BinaryOr tr fa" ) );
+      Assert.assertFalse( command.partialMatches( "BinaryOr anything" ) );
+      Assert.assertFalse( command.partialMatches( "BinaryOr anything else" ) );
    }// End Method
    
    /**
@@ -105,7 +99,43 @@ public class ParameterizedCommandTest {
       command.resetParameters();
       Assert.assertNull( command.execute( "BinaryOr anything" ) );
       command.resetParameters();
-      Assert.assertNull( command.execute( "or anything else" ) );
+      Assert.assertNull( command.execute( "BinaryOr anything else" ) );
+      command.resetParameters();
+   }// End Method
+   
+   /**
+    * Method to test that {@link CommonCommands#INVERT_STRING_CASE_COMMAND} accepts and matches
+    * the correct input.
+    */
+   @Test public void invertStringParameterAcceptanceTest() {
+      Command< String > command = CommonCommands.INVERT_STRING_CASE_COMMAND;
+      Assert.assertTrue( command.partialMatches( "invertstring test" ) );
+      Assert.assertTrue( command.partialMatches( "invertstring " ) );
+      Assert.assertFalse( command.partialMatches( "invertstring tr fa" ) );
+      Assert.assertFalse( command.partialMatches( "invertstring anything else" ) );
+   }// End Method
+   
+   /**
+    * Method to test that {@link CommonCommands#INVERT_STRING_CASE_COMMAND} executes the correct data
+    * and produces the correct result. 
+    */
+   @Test public void executeInvertStringTest() {
+      Command< String > command = CommonCommands.INVERT_STRING_CASE_COMMAND;
+      Assert.assertEquals( "TEST", command.execute( "invertstring test" ) );
+      command.resetParameters();
+      Assert.assertEquals( "test", command.execute( "invertstring TEST" ) );
+      command.resetParameters();
+      Assert.assertEquals( "1234", command.execute( "invertstring 1234" ) );
+      command.resetParameters();
+      Assert.assertEquals( "TEST", command.execute( "invertstring tEST" ) );
+      command.resetParameters();
+      Assert.assertEquals( "test", command.execute( "invertstring Test" ) );
+      command.resetParameters();
+      Assert.assertNull( command.execute( "invertstring " ) );
+      command.resetParameters();
+      Assert.assertNull( command.execute( "invertstring tr fa" ) );
+      command.resetParameters();
+      Assert.assertNull( command.execute( "invertstring anything else" ) );
       command.resetParameters();
    }// End Method
 

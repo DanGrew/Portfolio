@@ -11,10 +11,14 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import command.Command;
+import defaults.CommandActions;
 
 /**
  * The {@link CommandPrompt} represents the overall panel for using {@link Command}s.
@@ -36,10 +40,21 @@ public class CommandPrompt extends JPanel {
                new Suggestions() 
       );
       add( split, BorderLayout.CENTER );
+      
+      new CommandExecutor();
+      new CommandAutoComplete();
    }// End Constructor
    
    public static void main( String[] args ) {
       JFrame frame = new JFrame();
+      
+      JMenuBar menuBar = new JMenuBar();
+      JMenu menu = new JMenu( "Menu" );
+      menu.add( new JMenuItem( CommandActions.EXECUTE_ACTION ) );
+      menu.add( new JMenuItem( CommandActions.AUTO_COMPLETE_ACTION ) );
+      menuBar.add( menu );
+      
+      frame.setJMenuBar( menuBar );
       frame.add( new CommandPrompt() );
       frame.setPreferredSize( new Dimension( 500, 400 ) );
       frame.pack();

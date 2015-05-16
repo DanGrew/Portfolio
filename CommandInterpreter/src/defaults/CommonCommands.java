@@ -20,8 +20,6 @@ import command.ParameterizedCommandImpl;
  */
 public class CommonCommands {
 
-   public static final CommandParameter DEFAULT_PARAMETER = new CommandParameterImpl();
-   
    public static final Command< Boolean > TRUE_COMMAND = new InstructionCommandImpl< Boolean >( 
             "True", 
             "Command to simply return true.",
@@ -32,7 +30,7 @@ public class CommonCommands {
    
    private static final CommandParameter INVERT_PARAMETER = new BooleanParameterImpl();
    public static final Command< Boolean > INVERT_BOOLEAN_COMMAND = new ParameterizedCommandImpl< Boolean >(
-            "Invert Boolean",
+            "InvertBoolean",
             "Function to invert the boolean parameter given.",
             ( CommandParameters params ) -> {
                return !params.getExpectedParameter( INVERT_PARAMETER, Boolean.class );
@@ -40,14 +38,15 @@ public class CommonCommands {
             INVERT_PARAMETER
    );
    
+   public static final CommandParameter INVERT_STRING_PARAMETER = new CommandParameterImpl();
    public static final Command< String > INVERT_STRING_CASE_COMMAND = new ParameterizedCommandImpl< String >(
-            "Invert String",
+            "InvertString",
             "Function to invert the case of the given String.",
             ( CommandParameters params ) -> {
-               String value = params.getExpectedParameter( DEFAULT_PARAMETER, String.class );
+               String value = params.getExpectedParameter( INVERT_STRING_PARAMETER, String.class );
                return convertCase( value );
             },
-            new CommandParameterImpl()
+            INVERT_STRING_PARAMETER
    );
    
    private static final CommandParameter FIRST_OR_PARAMETER = new BooleanParameterImpl();

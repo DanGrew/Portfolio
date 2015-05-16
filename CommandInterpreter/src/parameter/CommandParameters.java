@@ -99,6 +99,29 @@ public class CommandParameters {
    }// End Method
    
    /**
+    * Method to determine whether the separated parts of the expression match the {@link CommandParameter}s
+    * associated exactly.
+    * @param expressionParts the {@link String} parts of the expression.
+    * @return true if all parts completely match.
+    */
+   public boolean completeMatches( String[] expressionParts ) {
+      if ( expressionParts.length == 0 ) {
+         return false;
+      } else if ( expressionParts.length != parameters.size() ) {
+         return false;
+      } else {
+         Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
+         for ( int i = 0; i < expressionParts.length; i++ ) {
+            CommandParameter parameter = paramIterator.next();
+            if ( !parameter.completeMatches( expressionParts[ i ] ) ) {
+               return false;
+            }
+         }
+         return true;
+      }
+   }// End Method
+   
+   /**
     * Method to parameterize the {@link CommandParameter}s with the parts of the expression input.
     * @param expressionParts the {@link String} parts of the expression providing the parameters.
     */
@@ -114,6 +137,27 @@ public class CommandParameters {
             Object value = parameter.parseObject( expressionParts[ i ] );
             setParameter( parameter, value );
          }
+      }
+   }// End Method
+   
+   /**
+    * Method to suggest a auto completion for the given parameters. This specifically looks at the
+    * last parameters and attempts to auto complete that.
+    * @param parameterValues the {@link String} parameters input.
+    * @return the suggestion.
+    */
+   public String autoComplete( String[] parameterValues ) {
+      if ( parameterValues.length == 0 ) {
+         return null;
+      } else if ( parameterValues.length > parameters.size() ) {
+         return null;
+      } else {
+         Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
+         for ( int i = 0; i < parameterValues.length - 1; i++ ) {
+            paramIterator.next();
+         }
+         CommandParameter parameter = paramIterator.next();
+         return parameter.autoComplete( parameterValues[ parameterValues.length - 1 ] );
       }
    }// End Method
    

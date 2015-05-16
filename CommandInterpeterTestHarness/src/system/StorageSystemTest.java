@@ -26,7 +26,10 @@ public class StorageSystemTest {
     */
    @Test public void basicStorageTest() {
       RequestSystem.store( CommonCommands.INVERT_BOOLEAN_COMMAND, Command.class );
-      Stream< Command > result = RequestSystem.retrieveAll( Command.class, ( Command command ) -> command.matches( "Invert" ) );
+      Stream< Command > result = RequestSystem.retrieveAll( 
+               Command.class, 
+               ( Command command ) -> command.partialMatches( "Invert" ) 
+      );
       Assert.assertEquals( 1, result.count() );
    }// End Method
 

@@ -23,14 +23,14 @@ public class CommandTest {
     */
    @Test public void basicInstructionCommand() {
       Command< Boolean > command = CommonCommands.TRUE_COMMAND;
-      Assert.assertTrue( command.matches( "   " ) );
-      Assert.assertTrue( command.matches( "   True" ) );
-      Assert.assertTrue( command.matches( "   Tr" ) );
-      Assert.assertTrue( command.matches( "True" ) );
-      Assert.assertTrue( command.matches( "true" ) );
-      Assert.assertTrue( command.matches( "Tr" ) );
-      Assert.assertFalse( command.matches( "Something Else" ) );
-      Assert.assertTrue( command.matches( "True something" ) );
+      Assert.assertTrue( command.partialMatches( "   " ) );
+      Assert.assertTrue( command.partialMatches( "   True" ) );
+      Assert.assertTrue( command.partialMatches( "   Tr" ) );
+      Assert.assertTrue( command.partialMatches( "True" ) );
+      Assert.assertTrue( command.partialMatches( "true" ) );
+      Assert.assertTrue( command.partialMatches( "Tr" ) );
+      Assert.assertFalse( command.partialMatches( "Something Else" ) );
+      Assert.assertTrue( command.partialMatches( "True something" ) );
       Assert.assertTrue( command.execute() );
    }// End Method
    
@@ -39,13 +39,13 @@ public class CommandTest {
     */
    @Test public void basicParameterizedCommand() {
       Command< Boolean > command = CommonCommands.INVERT_BOOLEAN_COMMAND;
-      Assert.assertTrue( command.matches( "   " ) );
-      Assert.assertTrue( command.matches( "   Invert" ) );
-      Assert.assertTrue( command.matches( "   In" ) );
-      Assert.assertTrue( command.matches( "Invert" ) );
-      Assert.assertTrue( command.matches( "In" ) );
-      Assert.assertFalse( command.matches( "Something Else" ) );
-      Assert.assertFalse( command.matches( "Invert something" ) );
+      Assert.assertTrue( command.partialMatches( "   " ) );
+      Assert.assertTrue( command.partialMatches( "   Invert" ) );
+      Assert.assertTrue( command.partialMatches( "   In" ) );
+      Assert.assertTrue( command.partialMatches( "Invert" ) );
+      Assert.assertTrue( command.partialMatches( "In" ) );
+      Assert.assertFalse( command.partialMatches( "Something Else" ) );
+      Assert.assertFalse( command.partialMatches( "Invert something" ) );
    }// End Method
 
 }// End Class

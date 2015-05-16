@@ -54,7 +54,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    /**
     * {@inheritDoc}
     */
-   @Override public boolean matches( String expression ) {
+   @Override public boolean partialMatches( String expression ) {
       String trimmedExpression = expression.trim();
       String[] splitExpression = trimmedExpression.split( " " );
       if ( splitExpression[ 0 ].length() == 0 ) {
@@ -66,12 +66,49 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    /**
     * {@inheritDoc}
     */
+   @Override public boolean completeMatches( String expression ) {
+      String trimmedExpression = expression.trim();
+      String[] splitExpression = trimmedExpression.split( " " );
+      if ( splitExpression[ 0 ].length() == 0 ) {
+         return false;
+      }
+      return getKey().toLowerCase().equals( splitExpression[ 0 ].toLowerCase() );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public void parameterize( CommandParameter parameter, Object value ) {}
    
    /**
     * {@inheritDoc}
     */
    @Override public void parameterize( String expression ) {}
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String autoComplete( String expression ) {
+      if ( partialMatches( expression ) ) {
+         return suggestKey( expression );
+      } else {
+         return null;
+      }
+   }// End Method
+   
+   /**
+    * Method to suggest the auto complete for the key if appropriate.
+    * @param expression the {@link String} expression to auto complete.
+    * @return the suggested auto completion.
+    */
+   protected String suggestKey( String expression ) {
+      String[] expressionParts = expression.trim().split( " " );
+      if ( expressionParts.length == 1 ){
+         return getKey();
+      } else {
+         return null;
+      }
+   }// End Method
    
    /**
     * {@inheritDoc}

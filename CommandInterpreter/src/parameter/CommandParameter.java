@@ -38,6 +38,14 @@ public interface CommandParameter {
     * @return the parsed {@link Object}, or null if expression does not match.
     */
    public Object parseObject( String expression );
+   
+   /**
+    * Method to suggest an auto completion for the given {@link String} expression for this
+    * {@link CommandParameter}.
+    * @param expression the {@link String} expression to suggest for.
+    * @return the suggested auto completion.
+    */
+   public String autoComplete( String expression );
 
 }// End Interface
 

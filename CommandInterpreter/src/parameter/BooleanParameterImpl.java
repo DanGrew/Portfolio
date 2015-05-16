@@ -44,5 +44,18 @@ public class BooleanParameterImpl implements CommandParameter {
          return null;
       }
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String autoComplete( String expression ) {
+      if ( TRUE.toLowerCase().startsWith( expression.toLowerCase() ) ) {
+         return TRUE;
+      } else if ( FALSE.toLowerCase().startsWith( expression.toLowerCase() ) ) {
+         return FALSE;
+      } else {
+         return null;
+      }
+   }// End Method
 
 }// End Class
