@@ -8,6 +8,8 @@
 package gui;
 
 import gui.action.ExecuteAction;
+import gui.console.ConsoleMessage;
+import gui.console.ConsoleModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +20,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import architecture.event.EventSystem;
-
 import command.Command;
-
 import defaults.CommonCommands;
 
 /**
@@ -35,7 +35,7 @@ public class CommandExecutorTest {
     * Method to initialise the registration for the test.
     */
    @BeforeClass public static void registration(){
-      EventSystem.registerForEvent( CommandExecutor.Events.CommandExecuted, ( event, object ) ->
+      EventSystem.registerForEvent( ConsoleModel.Events.NewMessage, ( event, object ) ->
          results.add( object )
       );
    }// End Method
@@ -58,8 +58,8 @@ public class CommandExecutorTest {
       EventSystem.raiseEvent( ExecuteAction.Events.ExecuteAction, null );
       
       Assert.assertEquals( 1, results.size() );
-      CommandExecutorResult result = ( CommandExecutorResult )results.get( 0 );
-      Assert.assertEquals( "true", result.getResultString() );
+      ConsoleMessage result = ( ConsoleMessage )results.get( 0 );
+      Assert.assertEquals( "Executed BinaryOr with binaryor true true resulting in true", result.getDisplayableMessage() );
    }// End Method
    
    /**
@@ -71,8 +71,8 @@ public class CommandExecutorTest {
       EventSystem.raiseEvent( ExecuteAction.Events.ExecuteAction, null );
       
       Assert.assertEquals( 1, results.size() );
-      CommandExecutorResult result = ( CommandExecutorResult )results.get( 0 );
-      Assert.assertEquals( CommandExecutorResult.INVALID_INPUT.getResultString(), result.getResultString() );
+      ConsoleMessage result = ( ConsoleMessage )results.get( 0 );
+      Assert.assertEquals( CommandExecutor.INVALID_INPUT.getDisplayableMessage(), result.getDisplayableMessage() );
    }// End Method
    
    /**
@@ -83,8 +83,8 @@ public class CommandExecutorTest {
       EventSystem.raiseEvent( ExecuteAction.Events.ExecuteAction, null );
       
       Assert.assertEquals( 1, results.size() );
-      CommandExecutorResult result = ( CommandExecutorResult )results.get( 0 );
-      Assert.assertEquals( CommandExecutorResult.INVALID_COMMAND.getResultString(), result.getResultString() );
+      ConsoleMessage result = ( ConsoleMessage )results.get( 0 );
+      Assert.assertEquals( CommandExecutor.INVALID_COMMAND.getDisplayableMessage(), result.getDisplayableMessage() );
    }// End Method
 
 }// End Class

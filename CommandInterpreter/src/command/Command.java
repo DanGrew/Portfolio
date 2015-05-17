@@ -16,6 +16,12 @@ import parameter.CommandParameter;
  */
 public interface Command< ReturnT > {
    
+   /** 
+    * Getter for the key associated with the {@link Command}.
+    * @return the {@link String} key.
+    */
+   public String getKey();
+   
    /**
     * Method to determine whether the given expression matches the key for the {@link Command}.
     * @param expression the {@link String} expression to match.

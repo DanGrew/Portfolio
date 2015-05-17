@@ -19,7 +19,7 @@ import command.Command;
  * The {@link CommandParameters} provides a wrapper for the {@link CommandParameter}s needed for a {@link Command}.
  * This is used for executing {@link Function}s and providing controlled access to the {@link CommandParameter}s.
  */
-public class CommandParameters {
+public class CommandParameters implements Iterable< CommandParameter >{
    
    private Map< CommandParameter, Object > parameters;
    
@@ -183,5 +183,13 @@ public class CommandParameters {
          entry.setValue( null );
       }
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Iterator< CommandParameter > iterator() {
+      return parameters.keySet().iterator();
+   }// End Method
+   
 
 }// End Class

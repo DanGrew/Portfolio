@@ -41,6 +41,8 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
       RequestSystem.store( CommonCommands.INVERT_BOOLEAN_COMMAND, Command.class );
       RequestSystem.store( CommonCommands.INVERT_STRING_CASE_COMMAND, Command.class );
       RequestSystem.store( CommonCommands.BINARY_OR_COMMAND, Command.class );
+      RequestSystem.store( CommonCommands.BINARY_XOR_COMMAND, Command.class );
+      RequestSystem.store( CommonCommands.ADDITION_COMMAND, Command.class );
       
       EventSystem.registerForEvent( CommandInput.Events.TextInput, ( object, source ) -> {
          inputChanged( source.toString() );

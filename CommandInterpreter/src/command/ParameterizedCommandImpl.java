@@ -128,5 +128,21 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
       super.resetParameters();
       parameters.reset();
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String toString() {
+      StringBuffer buffer = new StringBuffer();
+      buffer.append( getKey() );
+      for ( CommandParameter parameter : parameters ) {
+         buffer.append( " " );
+         buffer.append( "<" ).append( parameter.getParameterType() ).append( ">" );
+      }
+      if ( getDescription() != null ) {
+         buffer.append( ": " ).append( getDescription() );
+      }
+      return buffer.toString();
+   }// End Method
 
 }// End Class

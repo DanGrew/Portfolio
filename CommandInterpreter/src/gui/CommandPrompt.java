@@ -7,8 +7,9 @@
  */
 package gui;
 
+import gui.console.Console;
+
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import command.Command;
+
 import defaults.CommandActions;
 
 /**
@@ -39,6 +41,7 @@ public class CommandPrompt extends JPanel {
                new Console(), 
                new Suggestions() 
       );
+      split.setDividerLocation( 0.5 );
       add( split, BorderLayout.CENTER );
       
       new CommandExecutor();
@@ -58,7 +61,6 @@ public class CommandPrompt extends JPanel {
       
       frame.setJMenuBar( menuBar );
       frame.add( new CommandPrompt() );
-      frame.setPreferredSize( new Dimension( 500, 400 ) );
       frame.pack();
       frame.setVisible( true );
    }// End Method

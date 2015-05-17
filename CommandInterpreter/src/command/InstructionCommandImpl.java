@@ -36,11 +36,18 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    }// End Constructor
    
    /**
-    * Getter for the key to match to this {@link Command}.
-    * @return the {@link String} key.
+    * {@inheritDoc}
     */
-   private String getKey(){
+   public String getKey(){
       return key;
+   }// End Method
+   
+   /**
+    * Getter for the description associated with the {@link Command}.
+    * @return a {@link String} description of the {@link Command}.
+    */
+   protected String getDescription(){
+      return description;
    }// End Method
    
    /**

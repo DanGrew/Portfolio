@@ -11,6 +11,8 @@ import parameter.BooleanParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterImpl;
 import parameter.CommandParameters;
+import parameter.NumberParameterImpl;
+
 import command.Command;
 import command.InstructionCommandImpl;
 import command.ParameterizedCommandImpl;
@@ -61,6 +63,32 @@ public class CommonCommands {
             },
             FIRST_OR_PARAMETER,
             SECOND_OR_PARAMETER
+   );
+   
+   public static final Command< Boolean > BINARY_XOR_COMMAND = new ParameterizedCommandImpl< Boolean >(
+            "BinaryXor", 
+            "Function to perform the binary XOR operation.", 
+            ( CommandParameters params ) -> {
+               Boolean first = params.getExpectedParameter( FIRST_OR_PARAMETER, Boolean.class );
+               Boolean second = params.getExpectedParameter( SECOND_OR_PARAMETER, Boolean.class );
+               return first ^ second;
+            },
+            FIRST_OR_PARAMETER,
+            SECOND_OR_PARAMETER
+   );
+   
+   private static final CommandParameter FIRST_NUMBER_PARAMETER = new NumberParameterImpl();
+   private static final CommandParameter SECOND_NUMBER_PARAMETER = new NumberParameterImpl();
+   public static final Command< Number > ADDITION_COMMAND = new ParameterizedCommandImpl< Number >(
+            "Add",
+            "Function to add two numbers together.", 
+            ( CommandParameters params ) -> {
+               Number first = params.getExpectedParameter( FIRST_NUMBER_PARAMETER, Number.class );
+               Number second = params.getExpectedParameter( SECOND_NUMBER_PARAMETER, Number.class );
+               return first.doubleValue() + second.doubleValue();
+            },
+            FIRST_NUMBER_PARAMETER,
+            SECOND_NUMBER_PARAMETER
    );
    
    /**

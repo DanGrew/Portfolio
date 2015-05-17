@@ -11,6 +11,7 @@ import gui.action.ScrollDownAction;
 import gui.action.ScrollUpAction;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -39,6 +40,7 @@ public class Suggestions extends JPanel {
     */
    public Suggestions() {
       setLayout( new BorderLayout() );
+      setPreferredSize( new Dimension( 450, 400 ) );
       JList< Command< ? > > list = new JList< Command< ? > >();
       list.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
       list.setModel( new SuggestionsModel( list ) );

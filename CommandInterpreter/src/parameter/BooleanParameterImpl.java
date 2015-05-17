@@ -19,6 +19,13 @@ public class BooleanParameterImpl implements CommandParameter {
    /**
     * {@inheritDoc}
     */
+   @Override public String getParameterType() {
+      return "boolean";
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public boolean partialMatches( String expression ) {
       return TRUE.toLowerCase().startsWith( expression.toLowerCase() ) ||
              FALSE.toLowerCase().startsWith( expression.toLowerCase() );

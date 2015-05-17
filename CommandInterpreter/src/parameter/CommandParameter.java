@@ -16,6 +16,13 @@ import command.Command;
 public interface CommandParameter {
    
    /**
+    * Method to get a {@link String} description of the type of {@link CommandParameter} being
+    * applied.
+    * @return a {@link String} description of the {@link CommandParameter}.
+    */
+   public String getParameterType();
+   
+   /**
     * Method to determine whether the given {@link String} expression partial matches the 
     * {@link CommandParameter}. 
     * @param expression the {@link String} expression input.

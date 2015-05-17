@@ -138,5 +138,38 @@ public class ParameterizedCommandTest {
       Assert.assertNull( command.execute( "invertstring anything else" ) );
       command.resetParameters();
    }// End Method
+   
+   /**
+    * Method to test that {@link CommonCommands#ADDITION_COMMAND} accepts and matches
+    * the correct input.
+    */
+   @Test public void additionAcceptanceTest() {
+      Command< Number > command = CommonCommands.ADDITION_COMMAND;
+      Assert.assertFalse( command.partialMatches( "add test" ) );
+      Assert.assertTrue( command.partialMatches( "add 234 " ) );
+      Assert.assertTrue( command.partialMatches( "add 1 3" ) );
+      Assert.assertFalse( command.partialMatches( "add 4 g" ) );
+      Assert.assertFalse( command.partialMatches( "add 4g" ) );
+   }// End Method
+   
+   /**
+    * Method to test that {@link CommonCommands#ADDITION_COMMAND} executes the correct data
+    * and produces the correct result. 
+    */
+   @Test public void executeAdditionTest() {
+      Command< Number > command = CommonCommands.ADDITION_COMMAND;
+      Assert.assertEquals( 10.0, command.execute( "add 3 7" ) );
+      command.resetParameters();
+      Assert.assertEquals( 2.5, command.execute( "add 1.0 1.5" ) );
+      command.resetParameters();
+      Assert.assertNull( command.execute( "add " ) );
+      command.resetParameters();
+      Assert.assertNull( command.execute( "add 8" ) );
+      command.resetParameters();
+      Assert.assertNull( command.execute( "add 7 h" ) );
+      command.resetParameters();
+      Assert.assertNull( command.execute( "add 7h 9" ) );
+      command.resetParameters();
+   }// End Method
 
 }// End Class

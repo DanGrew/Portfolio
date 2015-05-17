@@ -8,12 +8,12 @@
 package gui;
 
 import gui.action.ExecuteAction;
-
-import javax.swing.JOptionPane;
+import gui.console.ConsoleMessage;
+import gui.console.ConsoleMessageImpl;
+import gui.console.ConsoleModel;
+import architecture.event.EventSystem;
 
 import command.Command;
-
-import architecture.event.EventSystem;
 
 /**
  * The {@link CommandExecutor} is responsible for executing {@link Command}s in response to 
@@ -21,11 +21,11 @@ import architecture.event.EventSystem;
  */
 public class CommandExecutor extends CommandMonitor{
    
-   public enum Events {
-      /** Event fired when a {@link Command} has been executed.**/
-      CommandExecuted;
-   }// End Enum
-   
+   public static final ConsoleMessage INVALID_COMMAND = new ConsoleMessageImpl( 
+            "Command not specified." );
+   public static final ConsoleMessage INVALID_INPUT = new ConsoleMessageImpl( 
+            "Input not valid for command." );
+     
    /**
     * Constructs a {@link CommandExecutor}.
     */
@@ -42,21 +42,14 @@ public class CommandExecutor extends CommandMonitor{
     */
    private void execute(){
       if ( currentCommand == null ) {
-         EventSystem.raiseEvent( Events.CommandExecuted, CommandExecutorResult.INVALID_COMMAND );
-         JOptionPane.showMessageDialog( null, CommandExecutorResult.INVALID_COMMAND.getResultString() );
+         EventSystem.raiseEvent( ConsoleModel.Events.NewMessage, INVALID_COMMAND );
       } else if ( currentInput == null || currentInput.length() == 0 || !currentCommand.completeMatches( currentInput ) ) {
-         EventSystem.raiseEvent( Events.CommandExecuted, CommandExecutorResult.INVALID_INPUT );
-         JOptionPane.showMessageDialog( null, CommandExecutorResult.INVALID_INPUT.getResultString() );
+         EventSystem.raiseEvent( ConsoleModel.Events.NewMessage, INVALID_INPUT );
       } else {
          Object result = currentCommand.execute( currentInput );
+         CommandExecutorResult executorResult = new CommandExecutorResult( currentCommand, currentInput, result );
          currentCommand.resetParameters();
-         if ( result == null ) {
-            toString();
-         }
-         CommandExecutorResult executorResult = new CommandExecutorResult( result );
-         EventSystem.raiseEvent( Events.CommandExecuted, executorResult );
-         
-         JOptionPane.showMessageDialog( null, executorResult.getResultString() );
+         EventSystem.raiseEvent( ConsoleModel.Events.NewMessage, executorResult );
       }
    }// End Method
    
