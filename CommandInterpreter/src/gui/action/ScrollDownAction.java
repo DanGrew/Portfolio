@@ -8,43 +8,43 @@
 package gui.action;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
 
+import architecture.event.EventSystem;
+
 import command.Command;
 
-import architecture.event.EventSystem;
-import defaults.CommandActions;
-
 /**
- * THe {@link ExecuteAction} defines the action taken when a {@link Command} is requested 
- * to be executed.
+ * THe {@link ScrollDownAction} defines the action taken when the list of {@link Command}s
+ * should be scrolled.
  */
-public class ExecuteAction extends AbstractAction {
+public class ScrollDownAction extends AbstractAction {
    
    private static final long serialVersionUID = 1L;
 
    public enum Events {
       /** Event raised when a {@link Command} should be executed.**/
-      ExecuteAction;
+      ScrollDown;
    }// End Enum
    
    /**
-    * Constructs a new {@link ExecuteAction}.
+    * Constructs a new {@link ScrollDownAction}.
     */
-   public ExecuteAction() {
+   public ScrollDownAction() {
       super();
-      putValue( NAME, "Execute" );
-      putValue( ACCELERATOR_KEY, KeyStroke.getKeyStroke( KeyEvent.VK_ENTER, CommandActions.MENU_KEY_MASK ) );
+      putValue( NAME, "Scroll Down" );
+      putValue( ACCELERATOR_KEY, KeyStroke.getKeyStroke( KeyEvent.VK_DOWN, InputEvent.ALT_DOWN_MASK ) );
    }// End Constructor
 
    /**
     * {@inheritDoc}
     */
    @Override public void actionPerformed( ActionEvent e ) {
-      EventSystem.raiseEvent( Events.ExecuteAction, null );
+      EventSystem.raiseEvent( Events.ScrollDown, null );
    }// End Method
 
 }// End Class

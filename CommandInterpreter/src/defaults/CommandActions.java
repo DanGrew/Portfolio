@@ -9,6 +9,8 @@ package defaults;
 
 import gui.action.AutoCompleteAction;
 import gui.action.ExecuteAction;
+import gui.action.ScrollDownAction;
+import gui.action.ScrollUpAction;
 
 import java.awt.Toolkit;
 
@@ -23,5 +25,7 @@ public class CommandActions {
    public static final int MENU_KEY_MASK = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
    public static final Action EXECUTE_ACTION = new ExecuteAction();
    public static final Action AUTO_COMPLETE_ACTION = new AutoCompleteAction();
+   public static final Action SCROLL_UP_ACTION = new ScrollUpAction();
+   public static final Action SCROLL_DOWN_ACTION = new ScrollDownAction();
 
 }// End Class

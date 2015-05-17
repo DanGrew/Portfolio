@@ -31,6 +31,7 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
    
    /**
     * Constructs a new {@link SuggestionsModel}.
+    * @param parent the {@link JList} being modelled.
     */
    public SuggestionsModel( JList< Command< ? > > parent ) {
       data = new ArrayList< Command< ? > >();
@@ -46,6 +47,10 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
       } );
    }// End Constructor
    
+   /**
+    * Method to handle the changing of the input.
+    * @param input the new input {@link String}.
+    */
    private void inputChanged( String input ) {
       Command< ? > selected = parent.getSelectedValue();
       
@@ -63,7 +68,7 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
       } else {
          parent.setSelectedIndex( 0 );
       }
-   }
+   }// End Method
    
    /**
     * {@inheritDoc} 

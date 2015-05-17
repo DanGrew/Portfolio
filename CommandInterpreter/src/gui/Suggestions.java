@@ -7,6 +7,9 @@
  */
 package gui;
 
+import gui.action.ScrollDownAction;
+import gui.action.ScrollUpAction;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JList;
@@ -16,7 +19,6 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 import architecture.event.EventSystem;
-
 import command.Command;
 
 /**
@@ -58,6 +60,25 @@ public class Suggestions extends JPanel {
          }
       } );
       add( list, BorderLayout.CENTER );
+      
+      EventSystem.registerForEvent( 
+               ScrollUpAction.Events.ScrollUp, 
+               ( event, source ) -> {
+                  int currentSelection = list.getSelectedIndex();
+                  if ( currentSelection > 0 ) {
+                     list.setSelectedIndex( currentSelection - 1 );
+                  }
+               }
+      );
+      EventSystem.registerForEvent( 
+               ScrollDownAction.Events.ScrollDown, 
+               ( event, source ) -> {
+                  int currentSelection = list.getSelectedIndex();
+                  if ( currentSelection < list.getModel().getSize() - 1 ) {
+                     list.setSelectedIndex( currentSelection + 1 );
+                  }
+               }
+      );
    }// End Constructor
    
    /**
