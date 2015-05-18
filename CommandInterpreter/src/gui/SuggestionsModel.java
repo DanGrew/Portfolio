@@ -50,7 +50,7 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
       Command< ? > selected = parent.getSelectedValue();
       
       data.clear();
-      Stream< Command > commands = RequestSystem.retrieveAll( 
+      List< Command > commands = RequestSystem.retrieveAll( 
                Command.class, 
                command -> { return command.partialMatches( input ); } 
       );

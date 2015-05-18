@@ -37,7 +37,7 @@ public class BuilderTypeCommands {
             ADD_PROPERTY_COMMAND_KEY, 
             ADD_PROPERTY_COMMAND_DESCRIPTION, 
             BuilderTypeCommandFunctions.ADD_PROPERTY_FUNCTION, 
-            BuilderTypeCommandParameters.STRING_PARAMETER,
-            BuilderTypeCommandParameters.STRING_PARAMETER_2
+            BuilderTypeCommandParameters.BUILDER_TYPE_REFERENCE_PARAMETER,
+            BuilderTypeCommandParameters.PROPERTY_TYPE_REFERENCE_PARAMETER
    );
 }// End Class

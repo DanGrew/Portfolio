@@ -7,9 +7,9 @@
  */
 package architecture.request;
 
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import model.singleton.Singleton;
 import architecture.data.DataManagementSystem;
@@ -38,7 +38,7 @@ public class RequestSystem extends ManagementSystem {
     * @return true if the {@link Object} is present, false otherwise.
     */
    public static < T > boolean contains( Class< T > clazz, Predicate< T > criteria ){
-      return dataSystem().retrieveAll( clazz, criteria ).count() > 0;
+      return dataSystem().retrieveAll( clazz, criteria ).size() > 0;
    }// End Method
    
    /**
@@ -50,7 +50,7 @@ public class RequestSystem extends ManagementSystem {
    public static < T extends Singleton< ? > > boolean contains( Class< T > clazz, final String identification ){
       return dataSystem().retrieveAll( clazz, test -> {
          return test.getIdentification().equals( identification );
-      } ).count() > 0;
+      } ).size() > 0;
    }// End Method
    
    /**
@@ -74,7 +74,7 @@ public class RequestSystem extends ManagementSystem {
    /**
     * {@link DataManagementSystem#retrieveAll(Class, Predicate)}.
     */
-   public static < T > Stream< T > retrieveAll( Class< T > clazz, Predicate< T > criteria ){
+   public static < T > List< T > retrieveAll( Class< T > clazz, Predicate< T > criteria ){
       return dataSystem().retrieveAll( clazz, criteria );
    }// End Method
    
