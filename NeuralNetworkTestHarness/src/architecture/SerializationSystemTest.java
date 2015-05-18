@@ -65,11 +65,11 @@ public class SerializationSystemTest {
     */
    @Test public void CreationCountTest(){
       assertEquals( 
-               ( int )RequestSystem.retrieveAll( Neuron.class, test -> { return true; } ).count(),
+               ( int )RequestSystem.retrieveAll( Neuron.class, test -> { return true; } ).size(),
                INPUT_NEURON_COUNT + OUTPUT_NEURON_COUNT + BIAS_NEURON_COUNT
       );
       assertEquals( 
-               ( int )RequestSystem.retrieveAll( Synapse.class, test -> { return true; } ).count(),
+               ( int )RequestSystem.retrieveAll( Synapse.class, test -> { return true; } ).size(),
                OUTPUT_NEURON_COUNT * ( BIAS_NEURON_COUNT + INPUT_NEURON_COUNT )
       );
    }// End Method

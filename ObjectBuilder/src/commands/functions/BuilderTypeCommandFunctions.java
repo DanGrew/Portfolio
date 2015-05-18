@@ -43,13 +43,11 @@ public class BuilderTypeCommandFunctions {
        * {@inheritDoc}
        */
       @Override public BuilderType apply( CommandParameters parameters ) {
-         String builder = parameters.getExpectedParameter( BuilderTypeCommandParameters.STRING_PARAMETER, String.class );
-         BuilderType builderType = RequestSystem.retrieve( BuilderType.class, builder );
+         BuilderType builderType = parameters.getExpectedParameter( BuilderTypeCommandParameters.BUILDER_TYPE_REFERENCE_PARAMETER, BuilderType.class );
          if ( builderType == null ) {
             return null;
          }
-         String property = parameters.getExpectedParameter( BuilderTypeCommandParameters.STRING_PARAMETER_2, String.class );
-         PropertyType propertyType = RequestSystem.retrieve( PropertyType.class, property );
+         PropertyType propertyType = parameters.getExpectedParameter( BuilderTypeCommandParameters.PROPERTY_TYPE_REFERENCE_PARAMETER, PropertyType.class );
          if ( propertyType == null ) {
             return null;
          }

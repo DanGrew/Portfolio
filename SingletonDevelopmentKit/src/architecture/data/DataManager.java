@@ -8,9 +8,11 @@
 package architecture.data;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -54,10 +56,10 @@ public class DataManager< T > {
    /**
     * Method to retrieve all {@link Object}s that match the {@link Predicate} criteria.
     * @param matcher the {@link Predicate} defining the criteria for matching.
-    * @return a {@link Stream} of matching {@link Object}s.
+    * @return a {@link List} of matching {@link Object}s.
     */
-   public Stream< T > retrieveAll( Predicate< T > matcher ){
-      return data.stream().filter( matcher );
+   public List< T > retrieveAll( Predicate< T > matcher ){
+      return data.stream().filter( matcher ).collect( Collectors.toList() );
    }// End Method
    
    /**

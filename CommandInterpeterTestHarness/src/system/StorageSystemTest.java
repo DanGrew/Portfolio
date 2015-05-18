@@ -7,13 +7,15 @@
  */
 package system;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import architecture.request.RequestSystem;
+
 import command.Command;
+
 import defaults.CommonCommands;
 
 /**
@@ -26,11 +28,11 @@ public class StorageSystemTest {
     */
    @Test public void basicStorageTest() {
       RequestSystem.store( CommonCommands.INVERT_BOOLEAN_COMMAND, Command.class );
-      Stream< Command > result = RequestSystem.retrieveAll( 
+      List< Command > result = RequestSystem.retrieveAll( 
                Command.class, 
                ( Command command ) -> command.partialMatches( "Invert" ) 
       );
-      Assert.assertEquals( 1, result.count() );
+      Assert.assertEquals( 1, result.size() );
    }// End Method
 
 }// End Class
