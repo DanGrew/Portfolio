@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import propertytype.PropertyType;
+import architecture.request.RequestSystem;
 
 import command.Command;
 
@@ -30,6 +31,9 @@ public class PropertyTypeCommandsTest {
       Assert.assertTrue( command.partialMatches( "CreatePropertyType 1234" ) );
       
       Assert.assertFalse( command.partialMatches( "CreatePropertyType anything notAClass" ) );
+      Assert.assertFalse( command.completeMatches( "CreatePropertyType anything" ) );
+      Assert.assertFalse( command.completeMatches( "CreatePropertyType " ) );
+      Assert.assertFalse( command.completeMatches( "CreatePropertyType anyt" ) );
    }// End Method
 
    /**
@@ -41,6 +45,23 @@ public class PropertyTypeCommandsTest {
       Assert.assertNotNull( type );
       Assert.assertEquals( String.class, type.getTypeClass() );
       Assert.assertEquals( "anything", type.getDisplayName() );
+      Assert.assertNotNull( RequestSystem.retrieve( PropertyType.class, "anything" ) );
+      command.resetParameters();
+      
+      type = command.execute( "CreatePropertyType anything" );
+      Assert.assertNull( type );
+      command.resetParameters();
+      
+      type = command.execute( "CreatePropertyType anything hh" );
+      Assert.assertNull( type );
+      command.resetParameters();
+      
+      type = command.execute( "CreatePropertyType anything Str" );
+      Assert.assertNull( type );
+      command.resetParameters();
+      
+      type = command.execute( "CreatePropertyType " );
+      Assert.assertNull( type );
       command.resetParameters();
    }// End Method
 }// End Class

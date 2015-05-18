@@ -26,7 +26,7 @@ public class BuilderObjectTest {
     * that it stores and provides the correct information.
     */
    @Test public void basicConstructionTest() {
-      BuilderType type = new BuilderTypeImpl();
+      BuilderType type = new BuilderTypeImpl( "Test" );
       
       final String stringDisplay = "StringValue";
       final Class< ? > stringClass = String.class;

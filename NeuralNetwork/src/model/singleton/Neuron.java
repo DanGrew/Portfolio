@@ -26,7 +26,7 @@ import architecture.utility.UnmodifiableIterator;
 /**
  * The {@link Neuron} represents a single {@link Neuron} in the Neural Network.
  */
-public class Neuron extends Singleton< SerializableNeuron >{
+public class Neuron extends SingletonImpl< SerializableNeuron >{
 
    /** The {@link NetworkPosition} describing where this {@link Neuron} is located. **/
    private NetworkPosition position;

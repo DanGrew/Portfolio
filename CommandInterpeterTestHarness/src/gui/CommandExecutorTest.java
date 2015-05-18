@@ -59,7 +59,7 @@ public class CommandExecutorTest {
       
       Assert.assertEquals( 1, results.size() );
       ConsoleMessage result = ( ConsoleMessage )results.get( 0 );
-      Assert.assertEquals( "Executed BinaryOr with binaryor true true resulting in true", result.getDisplayableMessage() );
+      Assert.assertEquals( "Execution Result: true [BinaryOr with \"binaryor true true\"]", result.getDisplayableMessage() );
    }// End Method
    
    /**

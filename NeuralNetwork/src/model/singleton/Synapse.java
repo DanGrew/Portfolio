@@ -19,7 +19,7 @@ import model.function.threshold.ThresholdFunction;
   * The {@link Synapse} is responsible for connecting two {@link Neuron}s and weighting
   * the output between them.
   */
-public class Synapse extends Singleton< SerializableSynapse >{
+public class Synapse extends SingletonImpl< SerializableSynapse >{
 
    /** The input {@link Neuron} providing the output value to this {@link Synapse}.**/
    private Neuron inputNeuron;

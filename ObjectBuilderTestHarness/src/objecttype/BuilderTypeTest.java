@@ -22,7 +22,7 @@ public class BuilderTypeTest {
     * Method to test adding a {@link PropertyType} to to a {@link BuilderType}.
     */
    @Test public void addPropertyTest() {
-      BuilderType object = new BuilderTypeImpl();
+      BuilderType object = new BuilderTypeImpl( "Test" );
       PropertyType propertyType = new PropertyTypeImpl( null, null );
       object.addPropertyType( propertyType );
       Assert.assertTrue( object.hasProperty( propertyType ) );

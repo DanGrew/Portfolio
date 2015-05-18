@@ -36,7 +36,7 @@ public class CommandExecutorResult implements ConsoleMessage {
     * {@inheritDoc}
     */
    @Override public String getDisplayableMessage(){
-      return "Execution Result: " + result.toString() + " [" + command.getKey() + " with \"" + input + "\"]" ;
+      return "Execution Result: " + result.toString() + " [" + command.getKey() + " with \"" + input + "\"]";
    }// End Method
    
    /**
