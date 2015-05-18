@@ -10,6 +10,7 @@ package object;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.singleton.SingletonImpl;
 import objecttype.BuilderType;
 import property.Property;
 import property.PropertyImpl;
@@ -18,7 +19,7 @@ import propertytype.PropertyType;
 /**
  * Implementation of the {@link BuilderObject}.
  */
-public class BuilderObjectImpl implements BuilderObject {
+public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject >implements BuilderObject {
    
    private BuilderType type;
    private Map< PropertyType, Property > propertyValues;
@@ -26,8 +27,10 @@ public class BuilderObjectImpl implements BuilderObject {
    /**
     * Constructs a new {@link BuilderObjectImpl}.
     * @param type the {@link BuilderType} this object is representing.
+    * @param name the identification for the {@link BuilderObject}.
     */
-   public BuilderObjectImpl( BuilderType type ) {
+   public BuilderObjectImpl( BuilderType type, String name ) {
+      super( name );
       this.type = type;
       propertyValues = new HashMap< PropertyType, Property >();
    }// End Constructor
@@ -72,6 +75,20 @@ public class BuilderObjectImpl implements BuilderObject {
          propertyValues.put( propertyType, property );
       }
       return property;
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void writeSingleton( SerializableBuilderObject serializable ) {
+      throw new UnsupportedOperationException( "Not implement yet." );
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void readSingleton( SerializableBuilderObject serialized ) {
+      throw new UnsupportedOperationException( "Not implement yet." );
    }// End Method
 
 }// End Class

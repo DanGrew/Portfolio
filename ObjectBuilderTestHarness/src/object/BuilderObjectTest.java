@@ -40,7 +40,7 @@ public class BuilderObjectTest {
       type.addPropertyType( number );
       Assert.assertTrue( type.hasProperty( number ) );  
       
-      BuilderObject object = new BuilderObjectImpl( type );
+      BuilderObject object = new BuilderObjectImpl( type, "Test" );
       Assert.assertNull( object.get( string ) );
       Assert.assertNull( object.get( number ) );
       
