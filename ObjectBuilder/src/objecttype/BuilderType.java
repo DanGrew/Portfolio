@@ -7,13 +7,14 @@
  */
 package objecttype;
 
+import model.singleton.Singleton;
 import propertytype.PropertyType;
 
 /**
  * The {@link BuilderType} provides the interface for specification of an object, holding the
  * property types the object should define.
  */
-public interface BuilderType {
+public interface BuilderType extends Singleton< SerializableBuilderType > {
 
    /**
     * Method to add a {@link PropertyType} to the {@link BuilderType}.

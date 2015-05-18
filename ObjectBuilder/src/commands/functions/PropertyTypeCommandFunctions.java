@@ -9,6 +9,7 @@ package commands.functions;
 
 import java.util.function.Function;
 
+import architecture.request.RequestSystem;
 import commands.PropertyTypeCommands;
 import commands.parameters.PropertyTypeCommandParameters;
 import parameter.CommandParameters;
@@ -29,6 +30,7 @@ public class PropertyTypeCommandFunctions {
          String name = parameters.getExpectedParameter( PropertyTypeCommandParameters.STRING_PARAMETER, String.class );
          Class< ? > clazzType = parameters.getExpectedParameter( PropertyTypeCommandParameters.CLASS_TYPE_PARAMETER, Class.class );
          PropertyType propertyType = new PropertyTypeImpl( name, clazzType );
+         RequestSystem.store( propertyType, PropertyType.class );
          return propertyType;
       }// End Method
    };

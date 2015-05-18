@@ -23,7 +23,7 @@ import architecture.utility.ReadOnlyArray;
  * The {@link LearningParameter} is responsible for defining a set of input parameters
  * to a network and the corresponding target outputs.
  */
-public class LearningParameter extends Singleton< SerializableLearningParameter >{
+public class LearningParameter extends SingletonImpl< SerializableLearningParameter >{
 
    /** Array of input values to the network. **/
    private NeuronValueArray inputParameters;

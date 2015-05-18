@@ -7,12 +7,13 @@
  */
 package propertytype;
 
+import model.singleton.SingletonImpl;
+
 /**
  * Implementation of the {@link PropertyType}.
  */
-public class PropertyTypeImpl implements PropertyType {
+public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > implements PropertyType {
 
-   private String displayName;
    private Class< ? > typeClass;
 
    /**
@@ -21,8 +22,8 @@ public class PropertyTypeImpl implements PropertyType {
     * @param clazz the {@link Class} associated with the type.
     */
    public PropertyTypeImpl( String displayName, Class< ? > clazz ) {
+      super( displayName );
       this.typeClass = clazz;
-      this.displayName = displayName;
    }// End Class
    
    /**
@@ -43,7 +44,7 @@ public class PropertyTypeImpl implements PropertyType {
     * {@inheritDoc}
     */
    @Override public String getDisplayName() {
-      return displayName;
+      return getIdentification();
    }// End Method
 
    /**
@@ -52,7 +53,7 @@ public class PropertyTypeImpl implements PropertyType {
    @Override public int hashCode() {
       final int prime = 31;
       int result = 1;
-      result = prime * result + ( ( displayName == null ) ? 0 : displayName.hashCode() );
+      result = prime * result + ( ( getIdentification() == null ) ? 0 : getIdentification().hashCode() );
       result = prime * result + ( ( typeClass == null ) ? 0 : typeClass.hashCode() );
       return result;
    }// End Method
@@ -79,6 +80,20 @@ public class PropertyTypeImpl implements PropertyType {
     */
    @Override public String toString() {
       return getDisplayName();
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void writeSingleton( SerializablePropertyType serializable ) {
+      throw new UnsupportedOperationException( "Not implemented yet." );
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void readSingleton( SerializablePropertyType serialized ) {
+      throw new UnsupportedOperationException( "Not implemented yet." );
    }// End Method
 
 }// End Class

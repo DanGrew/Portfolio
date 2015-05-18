@@ -7,13 +7,14 @@
  */
 package propertytype;
 
+import model.singleton.Singleton;
 import property.Property;
 
 /**
  * {@link PropertyType} defines the basic structure of a {@link Property} defining the
  * {@link Class} associated and a unique identifier for its display name,
  */
-public interface PropertyType {
+public interface PropertyType extends Singleton< SerializablePropertyType >{
    
    /**
     * Getter for the {@link Class} associated with the data type.
