@@ -48,20 +48,4 @@ public class CommandPrompt extends JPanel {
       new CommandAutoComplete();
    }// End Constructor
    
-   public static void main( String[] args ) {
-      JFrame frame = new JFrame();
-      
-      JMenuBar menuBar = new JMenuBar();
-      JMenu menu = new JMenu( "Menu" );
-      menu.add( new JMenuItem( CommandActions.EXECUTE_ACTION ) );
-      menu.add( new JMenuItem( CommandActions.AUTO_COMPLETE_ACTION ) );
-      menu.add( new JMenuItem( CommandActions.SCROLL_UP_ACTION ) );
-      menu.add( new JMenuItem( CommandActions.SCROLL_DOWN_ACTION ) );
-      menuBar.add( menu );
-      
-      frame.setJMenuBar( menuBar );
-      frame.add( new CommandPrompt() );
-      frame.pack();
-      frame.setVisible( true );
-   }// End Method
 }// End Class

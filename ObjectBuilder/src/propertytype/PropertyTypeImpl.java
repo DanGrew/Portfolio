@@ -73,5 +73,12 @@ public class PropertyTypeImpl implements PropertyType {
       }
       return false;
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String toString() {
+      return getDisplayName();
+   }// End Method
 
 }// End Class

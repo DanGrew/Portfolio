@@ -36,8 +36,16 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    ) {
       super( key, description, function );
       this.parameters = new CommandParameters();
-      this.parameters.applyParameters( parameters );
+      applyParameters( parameters );
    }// End Constructor
+   
+   /**
+    * Method to apply {@link CommandParameter}s to the {@link Command}.
+    * @param parameters the {@link CommandParameter}s to apply.
+    */
+   protected void applyParameters( CommandParameter... parameters ) {
+      this.parameters.applyParameters( parameters );
+   }// End Method
    
    /**
     * Method to identify the {@link CommandParameter}s provided in the given {@link String}
