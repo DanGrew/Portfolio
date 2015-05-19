@@ -21,9 +21,9 @@ public class DataSerializationSystemImpl implements DataSerializationSystem {
    /**
     * {@inheritDoc}
     */
-   public < T > T loadFromFile( Class< T > clazz, File file ) {
+   public < T > T loadFromFile( Class< T > clazz, File file, Class< ? >... instanceClasses ) {
       try {
-         JAXBContext context = JAXBContext.newInstance( clazz );
+         JAXBContext context = JAXBContext.newInstance( instanceClasses );
          Unmarshaller um = context.createUnmarshaller();
          T object = clazz.cast( um.unmarshal( file ) );
          return object;
@@ -37,9 +37,9 @@ public class DataSerializationSystemImpl implements DataSerializationSystem {
    /**
     * {@inheritDoc}
     */
-   public boolean saveToFile( Object object, File file ) {
+   public boolean saveToFile( Object object, File file, Class< ? >... instanceClasses ) {
       try {
-         JAXBContext context = JAXBContext.newInstance( object.getClass() );
+         JAXBContext context = JAXBContext.newInstance( instanceClasses );
          Marshaller m = context.createMarshaller();
          m.setProperty( Marshaller.JAXB_FORMATTED_OUTPUT, true );
          m.marshal( object, file );

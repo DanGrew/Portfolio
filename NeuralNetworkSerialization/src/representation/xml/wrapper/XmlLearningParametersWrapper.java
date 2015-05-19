@@ -9,6 +9,7 @@ package representation.xml.wrapper;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -74,6 +75,13 @@ public class XmlLearningParametersWrapper extends XmlCollectionWrapper< Learning
          parameters.addLearningParameter( parameter );
       } );
       return parameters;
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< LearningParameter > retrieveSingletons() {
+      return super.retrieveSingletons( LearningParameter.class );
    }// End Method
 
 }// End Method

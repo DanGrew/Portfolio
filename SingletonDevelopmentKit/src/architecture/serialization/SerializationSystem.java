@@ -35,10 +35,11 @@ public class SerializationSystem {
     * {@link SingletonContainer#constructSingletons()} and {@link SingletonContainer#resolveSingletons()}.
     * @param clazz the {@link Class} of the {@link Object} to load that implements {@link SingletonContainer}.
     * @param file the {@link File} to load from.
+    * @param instanceClasses the {@link Class}es used to instantiate {@link JAXB}.
     * @return the loaded {@link Object}.
     */
-   public static < T extends SingletonContainer > T loadSingletonsFromFile( Class< T > clazz, File file ){
-      T loaded = dataSerializationSystem.loadFromFile( clazz, file );
+   public static < T extends SingletonContainer > T loadSingletonsFromFile( Class< T > clazz, File file, Class< ? >... instanceClasses ){
+      T loaded = dataSerializationSystem.loadFromFile( clazz, file, instanceClasses );
       loaded.constructSingletons();
       loaded.resolveSingletons();
       return loaded;
@@ -72,8 +73,8 @@ public class SerializationSystem {
    /**
     * {@link DataSerializationSystem#saveToFile(Object, File)}.
     */
-   public static boolean saveToFile( Object object, File file ) {
-     return dataSerializationSystem.saveToFile( object, file );
+   public static boolean saveToFile( Object object, File file, Class< ? >... instanceClasses ) {
+     return dataSerializationSystem.saveToFile( object, file, instanceClasses );
    }// End Method
 
 }// End Class

@@ -7,6 +7,8 @@
  */
 package objecttype;
 
+import java.util.List;
+
 import model.singleton.Singleton;
 import propertytype.PropertyType;
 
@@ -28,4 +30,10 @@ public interface BuilderType extends Singleton< SerializableBuilderType > {
     * @return true if the {@link PropertyType} is held by the object.
     */
    public boolean hasProperty( PropertyType property );
+   
+   /**
+    * Getter for a defensive copy of the {@link PropertyType}s associated.
+    * @return a {@link List} of {@link PropertyType}s.
+    */
+   public List< PropertyType > getPropertyTypes();
 }// End Interface

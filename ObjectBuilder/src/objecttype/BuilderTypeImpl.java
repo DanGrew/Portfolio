@@ -7,11 +7,12 @@
  */
 package objecttype;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 import model.singleton.SingletonImpl;
-import property.Property;
 import propertytype.PropertyType;
 
 /**
@@ -48,15 +49,22 @@ public class BuilderTypeImpl extends SingletonImpl< SerializableBuilderType > im
    /**
     * {@inheritDoc}
     */
+   @Override public List< PropertyType > getPropertyTypes() {
+      return new ArrayList< PropertyType >( properties );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override protected void writeSingleton( SerializableBuilderType serializable ) {
-      throw new UnsupportedOperationException( "Not implemented yet." );
+      serializable.addAllPropertyTypes( properties );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Override protected void readSingleton( SerializableBuilderType serialized ) {
-      throw new UnsupportedOperationException( "Not implemented yet." );
+      properties = serialized.resolvePropertyTypes();
    }// End Method
 
 }// End Class

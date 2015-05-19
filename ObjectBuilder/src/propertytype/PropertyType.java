@@ -35,4 +35,5 @@ public interface PropertyType extends Singleton< SerializablePropertyType >{
     * @return true if appropriate.
     */
    public boolean isCorrectType( Object value );
+   
 }// End Interface

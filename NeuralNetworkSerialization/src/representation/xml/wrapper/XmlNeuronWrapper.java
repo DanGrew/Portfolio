@@ -8,14 +8,15 @@
 package representation.xml.wrapper;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 
-import architecture.request.RequestSystem;
 import model.data.SerializableNeuron;
 import model.singleton.Neuron;
 import representation.xml.model.XmlNeuron;
+import architecture.request.RequestSystem;
 
 /**
  * The {@link XmlNeuronWrapper} provides an extension to the {@link XmlCollectionWrapper} to
@@ -58,6 +59,13 @@ public class XmlNeuronWrapper extends XmlCollectionWrapper< Neuron, Serializable
             neuron.read( object );
          }
       } );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< Neuron > retrieveSingletons() {
+      return super.retrieveSingletons( Neuron.class );
    }// End Method
    
 }// End Class

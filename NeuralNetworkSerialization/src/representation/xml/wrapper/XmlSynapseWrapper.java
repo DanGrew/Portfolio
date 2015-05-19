@@ -8,6 +8,7 @@
 package representation.xml.wrapper;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -59,6 +60,13 @@ public class XmlSynapseWrapper extends XmlCollectionWrapper< Synapse, Serializab
             synapse.read( object );
          }
       } );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< Synapse > retrieveSingletons() {
+      return super.retrieveSingletons( Synapse.class );
    }// End Method
    
 }// End Class

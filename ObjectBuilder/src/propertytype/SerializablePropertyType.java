@@ -14,4 +14,16 @@ import model.data.SerializableSingleton;
  */
 public interface SerializablePropertyType extends SerializableSingleton< PropertyType >{
 
-}
+   /**
+    * Method to set the {@link Class} associated with the {@link PropertyType}.
+    * @param clazz the {@link Class}.
+    */
+   public void setTypeClass( Class< ? > clazz );
+   
+   /**
+    * Getter for the {@link Class} associated with the {@link PropertyType}.
+    * @return the {@link Class}.s
+    */
+   public Class< ? > getTypeClass();
+   
+}// End Interface

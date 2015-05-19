@@ -25,5 +25,5 @@ public interface SingletonContainer {
     * Method to resolve the references between {@link Singleton}s that are wrapped.
     */
    public void resolveSingletons();
-
+   
 }

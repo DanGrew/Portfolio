@@ -14,11 +14,12 @@ import object.BuilderObjectImpl;
 import objecttype.BuilderType;
 import parameter.CommandParameters;
 import architecture.request.RequestSystem;
-import commands.BuilderTypeCommands;
+
+import commands.BuilderObjectCommands;
 import commands.parameters.BuilderObjectCommandParameters;
 
 /**
- * {@link Class} to hold the {@link Function}s associated with {@link BuilderTypeCommands}.
+ * {@link Class} to hold the {@link Function}s associated with {@link BuilderObjectCommands}.
  */
 public class BuilderObjectCommandFunctions {
 

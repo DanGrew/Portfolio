@@ -86,14 +86,14 @@ public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > 
     * {@inheritDoc}
     */
    @Override protected void writeSingleton( SerializablePropertyType serializable ) {
-      throw new UnsupportedOperationException( "Not implemented yet." );
+      serializable.setTypeClass( getTypeClass() );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Override protected void readSingleton( SerializablePropertyType serialized ) {
-      throw new UnsupportedOperationException( "Not implemented yet." );
+      typeClass = serialized.getTypeClass();
    }// End Method
 
 }// End Class
