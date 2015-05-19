@@ -80,8 +80,8 @@ public class BuilderTypeCommandsTest {
       Command< BuilderType > command = BuilderTypeCommands.ADD_PROPERTY_COMMAND;
       Assert.assertTrue( command.partialMatches( "AddProperty " + TEST_BUILDER_TYPE ) );
       Assert.assertTrue( command.partialMatches( "AddProperty " + TEST_BUILDER_TYPE + " " + TEST_PROPERTY_TYPE ) );
-      Assert.assertTrue( command.partialMatches( "AddProperty 1234 1234" ) );
       
+      Assert.assertFalse( command.partialMatches( "AddProperty 1234 1234" ) );
       Assert.assertFalse( command.partialMatches( "CreateBuilderType anything something else" ) );
       Assert.assertFalse( command.completeMatches( "CreateBuilderType" ) );
    }// End Method
