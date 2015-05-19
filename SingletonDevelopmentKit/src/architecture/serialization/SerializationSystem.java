@@ -9,6 +9,8 @@ package architecture.serialization;
 
 import java.io.File;
 
+import javax.xml.bind.JAXB;
+
 import model.data.SerializableSingleton;
 import model.singleton.Singleton;
 import architecture.representation.SingletonContainer;
@@ -26,8 +28,26 @@ public class SerializationSystem {
    /**
     * {@link DataSerializationSystem#loadFromFile(Class, File)}.
     */
-   public static < T > T loadFromFile( Class< T > clazz, File file ) {
-      return dataSerializationSystem.loadFromFile( clazz, file );
+   public static < T > T loadFromFile( Class< T > clazz, File file, Class< ? >... instanceClasses ) {
+      return dataSerializationSystem.loadFromFile( clazz, file, instanceClasses );
+   }// End Method
+   
+   /**
+    * Method to load the given {@link Class} of {@link StructuralRepresentation} from the given {@link File}. This
+    * {@link StructuralRepresentation} does not construct anything, only wraps {@link Singleton}s.
+    * @param clazz the {@link Class} to load.
+    * @param file the {@link File} to read from.
+    * @param instanceClasses the {@link Class}es {@link JAXB} should be aware of.
+    * @param <StructureT> the {@link Class} of the {@link StructuralRepresentation}.
+    * @return the parsed {@link StructuralRepresentation}.
+    */
+   public static < StructureT extends StructuralRepresentation< Object > > StructureT loadWrapperFromFile( 
+            Class< StructureT > clazz, File file, Class< ? >... instanceClasses 
+   ) {
+      StructureT structure = dataSerializationSystem.loadFromFile( clazz, file, instanceClasses );
+      structure.constructSingletons();
+      structure.resolveSingletons();
+      return structure;
    }// End Method
    
    /**

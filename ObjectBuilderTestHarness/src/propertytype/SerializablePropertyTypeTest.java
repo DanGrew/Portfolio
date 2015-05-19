@@ -52,7 +52,15 @@ public class SerializablePropertyTypeTest {
                XmlPropertyTypeWrapper.class, testFile, XmlPropertyTypeWrapper.class, XmlPropertyTypeImpl.class );
       Assert.assertNotNull( parsedPropertyType );
       List< PropertyType > parsedTypes = parsedPropertyType.retrieveSingletons();
-      
+      assertPropertyTypeLists( actualTypes, parsedTypes );
+   }// End Method
+   
+   /**
+    * Method to assert that two {@link List} of {@link PropertyType}s are identical.
+    * @param actualTypes the original {@link PropertyType}s.
+    * @param parsedTypes the parsed {@link PropertyType}s.
+    */
+   public static void assertPropertyTypeLists( List< PropertyType > actualTypes, List< PropertyType > parsedTypes){
       Assert.assertEquals( actualTypes.size(), parsedTypes.size() );
       for ( int i = 0; i < actualTypes.size(); i++ ) {
          PropertyType expected = actualTypes.get( 0 );

@@ -61,7 +61,15 @@ public class SerializableBuilderTypeTest {
                XmlBuilderTypeWrapper.class, testFile, XmlBuilderTypeWrapper.class, XmlBuilderTypeImpl.class );
       Assert.assertNotNull( parsedBuilderType );
       List< BuilderType > parsedTypes = parsedBuilderType.retrieveSingletons();
-      
+      assertBuiderTypes( actualTypes, parsedTypes );
+   }// End Method
+   
+   /**
+    * Method to assert that two {@link List} of {@link BuilderType}s are identical.
+    * @param actualTypes the original {@link BuilderType}s.
+    * @param parsedTypes the parsed {@link BuilderType}s.
+    */
+   public static void assertBuiderTypes( List< BuilderType > actualTypes, List< BuilderType > parsedTypes ) {
       Assert.assertEquals( actualTypes.size(), parsedTypes.size() );
       for ( int i = 0; i < actualTypes.size(); i++ ) {
          BuilderType expected = actualTypes.get( 0 );
