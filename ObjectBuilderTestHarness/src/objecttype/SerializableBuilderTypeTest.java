@@ -65,6 +65,45 @@ public class SerializableBuilderTypeTest {
    }// End Method
    
    /**
+    * Method to test the overwriting of {@link BuilderType}s when loading from {@link File}.
+    */
+   @Test public void overwriteTest() throws IOException {
+      PropertyType testType1 = new PropertyTypeImpl( "type1", String.class );
+      RequestSystem.store( testType1, PropertyType.class );
+      PropertyType testType2 = new PropertyTypeImpl( "type2", Number.class );
+      RequestSystem.store( testType2, PropertyType.class );
+      
+      final String builderName = "BuilderName";
+      BuilderType writableBuilder = new BuilderTypeImpl( builderName );
+      writableBuilder.addPropertyType( testType1 );
+      
+      BuilderType existingBuilder = new BuilderTypeImpl( builderName );
+      existingBuilder.addPropertyType( testType2 );
+      existingBuilder.addPropertyType( testType1 );
+      RequestSystem.store( existingBuilder, BuilderType.class );
+      
+      XmlBuilderTypeWrapper serializedCollection = new XmlBuilderTypeWrapper();
+      serializedCollection.addUnwrapped( writableBuilder );
+      
+      File testFile = folder.newFile();
+      SerializationSystem.saveToFile( serializedCollection, testFile, XmlBuilderTypeWrapper.class, XmlBuilderTypeImpl.class );
+      
+      BuilderType retrieved = RequestSystem.retrieve( BuilderType.class, builderName );
+      Assert.assertEquals( retrieved, existingBuilder );
+      Assert.assertTrue( retrieved.hasProperty( testType1 ) );
+      Assert.assertTrue( retrieved.hasProperty( testType2 ) );
+      
+      XmlBuilderTypeWrapper parsedBuilderType = SerializationSystem.loadSingletonsFromFile( 
+               XmlBuilderTypeWrapper.class, testFile, XmlBuilderTypeWrapper.class, XmlBuilderTypeImpl.class );
+      Assert.assertNotNull( parsedBuilderType );
+      
+      retrieved = RequestSystem.retrieve( BuilderType.class, builderName );
+      Assert.assertEquals( retrieved, existingBuilder );
+      Assert.assertTrue( retrieved.hasProperty( testType1 ) );
+      Assert.assertFalse( retrieved.hasProperty( testType2 ) );
+   }// End Method
+   
+   /**
     * Method to assert that two {@link List} of {@link BuilderType}s are identical.
     * @param actualTypes the original {@link BuilderType}s.
     * @param parsedTypes the parsed {@link BuilderType}s.
