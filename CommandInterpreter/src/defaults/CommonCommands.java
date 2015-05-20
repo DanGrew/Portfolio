@@ -27,7 +27,7 @@ public class CommonCommands {
             "True", 
             "Command to simply return true.",
             ( CommandParameters params ) -> { 
-               return new CommandResultImpl< Boolean >( true );
+               return new CommandResultImpl< Boolean >( "true", true );
             } 
    );
    
@@ -36,7 +36,8 @@ public class CommonCommands {
             "InvertBoolean",
             "Function to invert the boolean parameter given.",
             ( CommandParameters params ) -> {
-               return new CommandResultImpl< Boolean >( !params.getExpectedParameter( INVERT_PARAMETER, Boolean.class ) );
+               Boolean result = !params.getExpectedParameter( INVERT_PARAMETER, Boolean.class );
+               return new CommandResultImpl< Boolean >( result.toString(), result );
             },
             INVERT_PARAMETER
    );
@@ -47,7 +48,8 @@ public class CommonCommands {
             "Function to invert the case of the given String.",
             ( CommandParameters params ) -> {
                String value = params.getExpectedParameter( INVERT_STRING_PARAMETER, String.class );
-               return new CommandResultImpl< String >( convertCase( value ) );
+               String result = convertCase( value );
+               return new CommandResultImpl< String >( result, result );
             },
             INVERT_STRING_PARAMETER
    );
@@ -60,7 +62,8 @@ public class CommonCommands {
             ( CommandParameters params ) -> {
                Boolean first = params.getExpectedParameter( FIRST_OR_PARAMETER, Boolean.class );
                Boolean second = params.getExpectedParameter( SECOND_OR_PARAMETER, Boolean.class );
-               return new CommandResultImpl< Boolean >( first || second );
+               Boolean result = first || second; 
+               return new CommandResultImpl< Boolean >( result.toString(), result );
             },
             FIRST_OR_PARAMETER,
             SECOND_OR_PARAMETER
@@ -72,7 +75,8 @@ public class CommonCommands {
             ( CommandParameters params ) -> {
                Boolean first = params.getExpectedParameter( FIRST_OR_PARAMETER, Boolean.class );
                Boolean second = params.getExpectedParameter( SECOND_OR_PARAMETER, Boolean.class );
-               return new CommandResultImpl< Boolean >( first ^ second );
+               Boolean result = first ^ second;
+               return new CommandResultImpl< Boolean >( result.toString(), result );
             },
             FIRST_OR_PARAMETER,
             SECOND_OR_PARAMETER
@@ -86,7 +90,8 @@ public class CommonCommands {
             ( CommandParameters params ) -> {
                Number first = params.getExpectedParameter( FIRST_NUMBER_PARAMETER, Number.class );
                Number second = params.getExpectedParameter( SECOND_NUMBER_PARAMETER, Number.class );
-               return new CommandResultImpl< Number >( first.doubleValue() + second.doubleValue() );
+               Double result = first.doubleValue() + second.doubleValue();
+               return new CommandResultImpl< Number >( result.toString(), result );
             },
             FIRST_NUMBER_PARAMETER,
             SECOND_NUMBER_PARAMETER
