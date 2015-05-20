@@ -1,7 +1,7 @@
 package object;
 
-import model.data.SerializableSingleton;
+import model.data.SerializedSingleton;
 
-public interface SerializableBuilderObject extends SerializableSingleton< BuilderObject > {
+public interface SerializableBuilderObject extends SerializedSingleton< BuilderObject > {
 
 }

@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import serialization.XmlPropertyTypeWrapper;
+import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
 
 /**
@@ -53,6 +54,34 @@ public class SerializablePropertyTypeTest {
       Assert.assertNotNull( parsedPropertyType );
       List< PropertyType > parsedTypes = parsedPropertyType.retrieveSingletons();
       assertPropertyTypeLists( actualTypes, parsedTypes );
+   }// End Method
+   
+   /**
+    * Method to test that when reading a {@link PropertyType} that already exists, it is overwritten. 
+    */
+   @Test public void overwriteTest() throws IOException{
+      final String typeName = "Type";
+      PropertyType writableType = new PropertyTypeImpl( typeName, String.class );
+      
+      PropertyType existingType = new PropertyTypeImpl( typeName, Number.class );
+      RequestSystem.store( existingType, PropertyType.class );
+      
+      Assert.assertEquals( existingType, RequestSystem.retrieve( PropertyType.class, typeName ) );
+      Assert.assertNotEquals( writableType, RequestSystem.retrieve( PropertyType.class, typeName ) );
+      
+      XmlPropertyTypeWrapper serializedCollection = new XmlPropertyTypeWrapper();
+      serializedCollection.addUnwrapped( writableType );
+      
+      File testFile = folder.newFile();
+      SerializationSystem.saveToFile( serializedCollection, testFile, XmlPropertyTypeWrapper.class, XmlPropertyTypeImpl.class );
+      
+      XmlPropertyTypeWrapper parsedPropertyType = SerializationSystem.loadSingletonsFromFile( 
+               XmlPropertyTypeWrapper.class, testFile, XmlPropertyTypeWrapper.class, XmlPropertyTypeImpl.class );
+      Assert.assertNotNull( parsedPropertyType );
+      
+      PropertyType resultingVersion = RequestSystem.retrieve( PropertyType.class, typeName );
+      Assert.assertNotNull( resultingVersion );
+      Assert.assertEquals( writableType.getTypeClass(), resultingVersion.getTypeClass() );
    }// End Method
    
    /**

@@ -15,7 +15,7 @@ import model.singleton.Synapse;
  * The {@link SerializableSynapse} interface provides the interface that should be implemented to
  * serialize a {@link Synapse}.
  */
-public interface SerializableSynapse extends SerializableSingleton< Synapse > {
+public interface SerializableSynapse extends SerializedSingleton< Synapse > {
 
    /**
     * Method to set the input {@link Neuron} to the {@link Synapse}.

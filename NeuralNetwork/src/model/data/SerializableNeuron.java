@@ -19,7 +19,7 @@ import model.structure.NetworkPosition;
  * The {@link SerializableNeuron} provides the interface required to serialize a {@link Neuron} and
  * store all of its data to recreate it.
  */
-public interface SerializableNeuron extends Serializable, SerializableSingleton< Neuron > {
+public interface SerializableNeuron extends Serializable, SerializedSingleton< Neuron > {
 
    /**
     * Method to set the {@link NetworkPosition} of the {@link Neuron}.

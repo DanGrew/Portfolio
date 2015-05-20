@@ -7,12 +7,12 @@
  */
 package propertytype;
 
-import model.data.SerializableSingleton;
+import model.data.SerializedSingleton;
 
 /**
- * {@link SerializableSingleton} for the {@link PropertyType}.
+ * {@link SerializedSingleton} for the {@link PropertyType}.
  */
-public interface SerializablePropertyType extends SerializableSingleton< PropertyType >{
+public interface SerializablePropertyType extends SerializedSingleton< PropertyType >{
 
    /**
     * Method to set the {@link Class} associated with the {@link PropertyType}.

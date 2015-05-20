@@ -10,9 +10,9 @@ package model.data;
 import model.singleton.Singleton;
 
 /**
- * The {@link SerializableSingleton} provides the interface required to serialize a {@link Singleton}.
+ * The {@link SerializedSingleton} provides the interface required to serialize a {@link Singleton}.
  */
-public interface SerializableSingleton< S > {
+public interface SerializedSingleton< S > {
 
    /**
     * Method to get the {@link String} identification of the {@link Singleton}.
@@ -31,5 +31,10 @@ public interface SerializableSingleton< S > {
     * @return the unwrapped {@link Singleton}.
     */
    public S unwrap();
+   
+   /**
+    * Method to resolve the {@link Singleton}, typically by reading the data from the {@link SerializedSingleton}.
+    */
+   public void resolve();
    
 }// End Interface

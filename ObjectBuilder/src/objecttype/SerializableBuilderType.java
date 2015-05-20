@@ -9,7 +9,7 @@ package objecttype;
 
 import java.util.Collection;
 
-import model.data.SerializableSingleton;
+import model.data.SerializedSingleton;
 import model.singleton.Singleton;
 import propertytype.PropertyType;
 
@@ -17,7 +17,7 @@ import propertytype.PropertyType;
  * The {@link SerializableBuilderType} provides a interface defining how to serialize a 
  * {@link BuilderType} {@link Singleton}.
  */
-public interface SerializableBuilderType extends SerializableSingleton< BuilderType > {
+public interface SerializableBuilderType extends SerializedSingleton< BuilderType > {
 
    /**
     * Method to add all {@link PropertyType}s given to the {@link SerializableBuilderType}.

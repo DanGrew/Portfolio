@@ -16,7 +16,7 @@ import model.singleton.LearningParameter.NeuronValue;
  * The {@link SerializableLearningParameter} interface defines the methods to implement in
  * order to support the serialization of a {@link LearningParameter}.
  */
-public interface SerializableLearningParameter extends SerializableSingleton< LearningParameter >{
+public interface SerializableLearningParameter extends SerializedSingleton< LearningParameter >{
 
    /**
     * Method to add a {@link NeuronValue} as an input parameter.

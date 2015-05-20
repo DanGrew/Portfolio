@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.data.SerializableSingleton;
+import model.data.SerializedSingleton;
 import model.singleton.Singleton;
 import architecture.representation.SingletonContainer;
 import architecture.request.RequestSystem;
@@ -22,7 +22,7 @@ import architecture.request.RequestSystem;
  * the wrapping of {@link Singleton}s.
  */
 public abstract class XmlCollectionWrapper
-         < S extends Singleton< A >, A extends SerializableSingleton< S > > extends CollectionWrapper< A > implements SingletonContainer
+         < S extends Singleton< A >, A extends SerializedSingleton< S > > extends CollectionWrapper< A > implements SingletonContainer
 {
 
    /**
@@ -57,10 +57,17 @@ public abstract class XmlCollectionWrapper
    
    /**
     * {@inheritDoc}
-    * {@link SerializableSingleton#unwrap()}s and {@link RequestSystem#store(Object)}s it.
+    * {@link SerializedSingleton#unwrap()}s and {@link RequestSystem#store(Object)}s it.
     */
    @Override public void constructSingletons(){
       objects.forEach( object -> object.unwrap() );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void resolveSingletons() {
+      objects.forEach( object -> object.resolve() );
    }// End Method
    
    /**

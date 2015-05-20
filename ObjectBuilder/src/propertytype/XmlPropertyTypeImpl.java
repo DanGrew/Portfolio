@@ -44,5 +44,17 @@ public class XmlPropertyTypeImpl extends XmlSingletonWrapper< PropertyType > imp
       }
       return type;
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void resolve() {
+      PropertyType type = RequestSystem.retrieve( PropertyType.class, getIdentification() ); 
+      if ( type == null ) {
+         throw new IllegalStateException( "PropertyType must exist at this point." );
+      } else {
+         type.read( this );
+      }
+   }// End Method
 
 }// End Class

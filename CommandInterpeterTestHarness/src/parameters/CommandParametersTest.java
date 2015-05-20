@@ -7,6 +7,7 @@
  */
 package parameters;
 
+import model.data.SerializedSingleton;
 import model.singleton.Singleton;
 import model.singleton.SingletonImpl;
 
@@ -28,7 +29,7 @@ public class CommandParametersTest {
    private static TestSingleton TEST_SINGLETON_OBJECT;
    
    /** Interface for a testable {@link Singleton}.**/
-   private static interface TestSingleton extends Singleton< TestSingleton >{}
+   private static interface TestSingleton extends Singleton< TestSingleton >, SerializedSingleton< TestSingletonImpl >{}
    
    /** Implementation for a testable {@link Singleton}.**/
    private static class TestSingletonImpl extends SingletonImpl< TestSingleton > implements TestSingleton {
@@ -43,6 +44,12 @@ public class CommandParametersTest {
 
       @Override protected void writeSingleton( TestSingleton serializable ) {}
       @Override protected void readSingleton( TestSingleton serialized ) {}
+
+      @Override public TestSingletonImpl unwrap() {
+         return null;
+      }
+
+      @Override public void resolve() {}
       
    }// End Class
    

@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
-import model.data.SerializableSingleton;
+import model.data.SerializedSingleton;
 import model.singleton.Singleton;
 
 /**
@@ -19,7 +19,7 @@ import model.singleton.Singleton;
  * XML output.
  */
 @XmlAccessorType( XmlAccessType.FIELD )
-public abstract class XmlSingletonWrapper< T > implements SerializableSingleton< T > {
+public abstract class XmlSingletonWrapper< T > implements SerializedSingleton< T > {
 
    /** The identification of the {@link Singleton}.**/
    @XmlElement protected String identification;
@@ -42,5 +42,10 @@ public abstract class XmlSingletonWrapper< T > implements SerializableSingleton<
    @Override public String getIdentification() {
       return identification;
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void resolve() {}
    
 }// End Class

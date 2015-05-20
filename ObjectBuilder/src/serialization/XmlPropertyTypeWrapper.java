@@ -26,11 +26,6 @@ public class XmlPropertyTypeWrapper extends XmlCollectionWrapper< PropertyType, 
    /**
     * {@inheritDoc}
     */
-   @Override public void resolveSingletons() {}
-
-   /**
-    * {@inheritDoc}
-    */
    @Override public void addUnwrapped( PropertyType object ) {
       SerializablePropertyType serialized = object.write( XmlPropertyTypeImpl.class );
       super.addObject( serialized );

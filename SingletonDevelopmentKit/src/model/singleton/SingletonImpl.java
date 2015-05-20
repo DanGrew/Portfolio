@@ -7,15 +7,14 @@
  */
 package model.singleton;
 
-import model.data.SerializableSingleton;
-import model.data.SingletonSerialization;
+import model.data.SerializedSingleton;
 import architecture.utility.ObjectGenerator;
 
 /**
  * The {@link SingletonImpl} provides the base definition for a single {@link Object} that exists in
  * its own right and can be serialized.
  */
-public abstract class SingletonImpl< S extends SerializableSingleton< ? > > 
+public abstract class SingletonImpl< S extends SerializedSingleton< ? > > 
                                 implements Singleton< S >{
 
    /** The unique identification for this {@link SingletonImpl}. **/
@@ -55,8 +54,8 @@ public abstract class SingletonImpl< S extends SerializableSingleton< ? > >
    }// End Method
    
    /**
-    * Method to populate the {@link SerializableSingleton} with the {@link SingletonImpl}s data.
-    * @param serializable the {@link SerializableSingleton} to populate.
+    * Method to populate the {@link SerializedSingleton} with the {@link SingletonImpl}s data.
+    * @param serializable the {@link SerializedSingleton} to populate.
     */
    protected abstract void writeSingleton( S serializable );
    
@@ -73,13 +72,6 @@ public abstract class SingletonImpl< S extends SerializableSingleton< ? > >
     * @param serialized the {@link SerializedSingleton} providing the data to populate.
     */
    protected abstract void readSingleton( S serialized );
-   
-   /**
-    * {@inheritDoc}
-    */
-   @Override public S unwrap(){
-      return null;
-   }// End Method
    
 }// End Class
 
