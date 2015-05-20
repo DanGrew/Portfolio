@@ -21,7 +21,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
 
    private String key;
    private String description;
-   private Function< CommandParameters, ReturnT > function;
+   private Function< CommandParameters, CommandResult< ReturnT > > function;
    
    /**
     * Constructs a new {@link InstructionCommandImpl}.
@@ -29,7 +29,11 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     * @param description a user friendly description of the {@link Command}.
     * @param function the {@link Function} to execute.
     */
-   public InstructionCommandImpl( String key, String description, Function< CommandParameters, ReturnT > function ) {
+   public InstructionCommandImpl( 
+            String key, 
+            String description, 
+            Function< CommandParameters, CommandResult< ReturnT > > function 
+   ) {
       this.key = key;
       this.description = description;
       this.function = function;
@@ -54,7 +58,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     * Getter for the {@link Function} to execute when this {@link Command} is matched.
     * @return the {@link Function} to execute.
     */
-   protected Function< CommandParameters, ReturnT > getFunction(){
+   protected Function< CommandParameters, CommandResult< ReturnT > > getFunction(){
       return function;
    }// End Method
 
@@ -120,7 +124,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    /**
     * {@inheritDoc}
     */
-   @Override public ReturnT execute( String expression ) {
+   @Override public CommandResult< ReturnT > execute( String expression ) {
       parameterize( expression );
       return execute();
    }// End Method
@@ -128,7 +132,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    /**
     * {@inheritDoc}
     */
-   @Override public ReturnT execute() {
+   @Override public CommandResult< ReturnT > execute() {
       return function.apply( null );
    }// End Method
    

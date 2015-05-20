@@ -21,6 +21,7 @@ import propertytype.PropertyTypeImpl;
 import architecture.request.RequestSystem;
 
 import command.Command;
+import command.CommandResult;
 
 /**
  * Test for the {@link BuilderObjectCommands}.
@@ -63,14 +64,14 @@ public class BuilderObjectCommandsTest {
     */
    @Test public void executeCreateBuilderTypeTest(){
       Command< BuilderObject > command = BuilderObjectCommands.CREATE_BUILDER_OBJECT_COMMAND;
-      BuilderObject object = command.execute( "CreateObject newObject " + TEST_BUILDER_TYPE );
+      BuilderObject object = command.execute( "CreateObject newObject " + TEST_BUILDER_TYPE ).getResult();
       Assert.assertNotNull( object );
       Assert.assertEquals( "newObject", object.getIdentification() );
       Assert.assertNotNull( RequestSystem.retrieve( BuilderObject.class, "newObject" ) );
       command.resetParameters();
       
-      object = command.execute( "CreateObject" );
-      Assert.assertNull( object );
+      CommandResult< BuilderObject > result = command.execute( "CreateObject" );
+      Assert.assertNull( result );
       command.resetParameters();
    }// End Method
 

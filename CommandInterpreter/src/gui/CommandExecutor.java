@@ -12,8 +12,8 @@ import gui.console.ConsoleMessage;
 import gui.console.ConsoleMessageImpl;
 import gui.console.ConsoleModel;
 import architecture.event.EventSystem;
-
 import command.Command;
+import command.CommandResult;
 
 /**
  * The {@link CommandExecutor} is responsible for executing {@link Command}s in response to 
@@ -46,7 +46,7 @@ public class CommandExecutor extends CommandMonitor{
       } else if ( currentInput == null || currentInput.length() == 0 || !currentCommand.completeMatches( currentInput ) ) {
          EventSystem.raiseEvent( ConsoleModel.Events.NewMessage, INVALID_INPUT );
       } else {
-         Object result = currentCommand.execute( currentInput );
+         CommandResult< ? > result = currentCommand.execute( currentInput );
          CommandExecutorResult executorResult = new CommandExecutorResult( currentCommand, currentInput, result );
          currentCommand.resetParameters();
          EventSystem.raiseEvent( ConsoleModel.Events.NewMessage, executorResult );

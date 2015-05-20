@@ -18,7 +18,9 @@ import org.junit.Test;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import architecture.request.RequestSystem;
+
 import command.Command;
+import command.CommandResult;
 
 /**
  * Test for the {@link BuilderTypeCommands}.
@@ -61,14 +63,14 @@ public class BuilderTypeCommandsTest {
     */
    @Test public void executeCreateBuilderTypeTest(){
       Command< BuilderType > command = BuilderTypeCommands.CREATE_BUILDER_TYPE_COMMAND;
-      BuilderType type = command.execute( "CreateBuilderType newBuilderType" );
+      BuilderType type = command.execute( "CreateBuilderType newBuilderType" ).getResult();
       Assert.assertNotNull( type );
       Assert.assertEquals( "newBuilderType", type.getIdentification() );
       Assert.assertNotNull( RequestSystem.retrieve( BuilderType.class, "newBuilderType" ) );
       command.resetParameters();
       
-      type = command.execute( "CreateBuilderType" );
-      Assert.assertNull( type );
+      CommandResult< BuilderType > result = command.execute( "CreateBuilderType" );
+      Assert.assertNull( result );
       command.resetParameters();
    }// End Method
    
@@ -92,17 +94,17 @@ public class BuilderTypeCommandsTest {
     */
    @Test public void executeAddPropertyTest(){
       Command< BuilderType > command = BuilderTypeCommands.ADD_PROPERTY_COMMAND;
-      BuilderType type = command.execute( "AddProperty " + TEST_BUILDER_TYPE + " " + TEST_PROPERTY_TYPE );
+      BuilderType type = command.execute( "AddProperty " + TEST_BUILDER_TYPE + " " + TEST_PROPERTY_TYPE ).getResult();
       Assert.assertNotNull( type );
       Assert.assertTrue( type.hasProperty( TEST_PROPERTY_TYPE_OBJECT ) );
       command.resetParameters();
       
-      type = command.execute( "CreateBuilderType" );
-      Assert.assertNull( type );
+      CommandResult< BuilderType > result = command.execute( "CreateBuilderType" );
+      Assert.assertNull( result );
       command.resetParameters();
       
-      type = command.execute( "CreateBuilderType doesntExist " + TEST_PROPERTY_TYPE );
-      Assert.assertNull( type );
+      result = command.execute( "CreateBuilderType doesntExist " + TEST_PROPERTY_TYPE );
+      Assert.assertNull( result );
       command.resetParameters();
    }// End Method
 

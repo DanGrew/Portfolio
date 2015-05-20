@@ -14,7 +14,8 @@ import objecttype.BuilderTypeImpl;
 import parameter.CommandParameters;
 import propertytype.PropertyType;
 import architecture.request.RequestSystem;
-
+import command.CommandResult;
+import command.CommandResultImpl;
 import commands.BuilderTypeCommands;
 import commands.parameters.BuilderTypeCommandParameters;
 
@@ -23,26 +24,28 @@ import commands.parameters.BuilderTypeCommandParameters;
  */
 public class BuilderTypeCommandFunctions {
 
-   public static final Function< CommandParameters, BuilderType > CREATE_BUILDER_TYPE_FUNCTION = new Function< CommandParameters, BuilderType >() {
+   public static final Function< CommandParameters, CommandResult< BuilderType > > CREATE_BUILDER_TYPE_FUNCTION = 
+            new Function< CommandParameters, CommandResult< BuilderType > >() {
 
       /**
        * {@inheritDoc}
        */
-      @Override public BuilderType apply( CommandParameters parameters ) {
+      @Override public CommandResult< BuilderType > apply( CommandParameters parameters ) {
          //TODO check existence.
          String name = parameters.getExpectedParameter( BuilderTypeCommandParameters.STRING_PARAMETER, String.class );
          BuilderType builderType = new BuilderTypeImpl( name );
          RequestSystem.store( builderType, BuilderType.class );
-         return builderType;
+         return new CommandResultImpl< BuilderType >( "Created " + name, builderType );
       }// End Method
    };
    
-   public static final Function< CommandParameters, BuilderType > ADD_PROPERTY_FUNCTION = new Function< CommandParameters, BuilderType >() {
+   public static final Function< CommandParameters, CommandResult< BuilderType > > ADD_PROPERTY_FUNCTION = 
+            new Function< CommandParameters, CommandResult< BuilderType > >() {
 
       /**
        * {@inheritDoc}
        */
-      @Override public BuilderType apply( CommandParameters parameters ) {
+      @Override public CommandResult< BuilderType > apply( CommandParameters parameters ) {
          BuilderType builderType = parameters.getExpectedParameter( BuilderTypeCommandParameters.BUILDER_TYPE_REFERENCE_PARAMETER, BuilderType.class );
          if ( builderType == null ) {
             return null;
@@ -52,7 +55,10 @@ public class BuilderTypeCommandFunctions {
             return null;
          }
          builderType.addPropertyType( propertyType );
-         return builderType;
+         return new CommandResultImpl< BuilderType >( 
+                  "Added " + propertyType.getDisplayName() + " to " + builderType.getIdentification(), 
+                  builderType 
+         );
       }// End Method
    };
 }// End Class

@@ -31,7 +31,7 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    public ParameterizedCommandImpl( 
             String key, 
             String description, 
-            Function< CommandParameters, ReturnT > function, 
+            Function< CommandParameters, CommandResult< ReturnT > > function, 
             CommandParameter... parameters 
    ) {
       super( key, description, function );
@@ -121,7 +121,7 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    /**
     * {@inheritDoc}
     */
-   @Override public ReturnT execute() {
+   @Override public CommandResult< ReturnT > execute() {
       if ( parameters.isComplete() ) {
          return getFunction().apply( parameters );
       } else {

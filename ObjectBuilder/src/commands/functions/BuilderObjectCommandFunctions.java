@@ -14,7 +14,8 @@ import object.BuilderObjectImpl;
 import objecttype.BuilderType;
 import parameter.CommandParameters;
 import architecture.request.RequestSystem;
-
+import command.CommandResult;
+import command.CommandResultImpl;
 import commands.BuilderObjectCommands;
 import commands.parameters.BuilderObjectCommandParameters;
 
@@ -23,12 +24,13 @@ import commands.parameters.BuilderObjectCommandParameters;
  */
 public class BuilderObjectCommandFunctions {
 
-   public static final Function< CommandParameters, BuilderObject > CREATE_BUILDER_OBJECT_FUNCTION = new Function< CommandParameters, BuilderObject >() {
+   public static final Function< CommandParameters, CommandResult< BuilderObject > > CREATE_BUILDER_OBJECT_FUNCTION = 
+            new Function< CommandParameters, CommandResult< BuilderObject > >() {
 
       /**
        * {@inheritDoc}
        */
-      @Override public BuilderObject apply( CommandParameters parameters ) {
+      @Override public CommandResult< BuilderObject > apply( CommandParameters parameters ) {
          //TODO check existence.
          String name = parameters.getExpectedParameter( BuilderObjectCommandParameters.STRING_PARAMETER, String.class );
          BuilderType builderType = parameters.getExpectedParameter( 
@@ -36,7 +38,7 @@ public class BuilderObjectCommandFunctions {
          );
          BuilderObject object = new BuilderObjectImpl( builderType, name );
          RequestSystem.store( object, BuilderObject.class );
-         return object;
+         return new CommandResultImpl< BuilderObject >( "Created " + name, object );
       }// End Method
    };
    

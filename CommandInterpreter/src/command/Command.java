@@ -62,13 +62,13 @@ public interface Command< ReturnT > {
     * @param expression the input to parse, parameterize and execute.
     * @return the result, null if the expression is not sufficient.
     */
-   public ReturnT execute( String expression );
+   public CommandResult< ReturnT > execute( String expression );
    
    /**
     * Method to execute the {@link Command} and return the result.
     * @return the result of the {@link Command}.
     */
-   public ReturnT execute();
+   public CommandResult< ReturnT > execute();
    
    /**
     * Method to reset the {@link CommandParameter}s to default and not configured.

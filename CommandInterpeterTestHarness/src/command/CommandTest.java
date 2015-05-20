@@ -31,7 +31,7 @@ public class CommandTest {
       Assert.assertTrue( command.partialMatches( "Tr" ) );
       Assert.assertFalse( command.partialMatches( "Something Else" ) );
       Assert.assertTrue( command.partialMatches( "True something" ) );
-      Assert.assertTrue( command.execute() );
+      Assert.assertTrue( command.execute().getResult() );
    }// End Method
    
    /**

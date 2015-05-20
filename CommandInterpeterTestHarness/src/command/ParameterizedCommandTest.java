@@ -41,9 +41,9 @@ public class ParameterizedCommandTest {
     */
    @Test public void executeInvertTest(){
       Command< Boolean > command = CommonCommands.INVERT_BOOLEAN_COMMAND;
-      Assert.assertFalse( command.execute( "invert true" ) );
+      Assert.assertFalse( command.execute( "invert true" ).getResult() );
       command.resetParameters();
-      Assert.assertTrue( command.execute( "invert false" ) );
+      Assert.assertTrue( command.execute( "invert false" ).getResult() );
       command.resetParameters();
       
       Assert.assertNull( command.execute( "invert " ) );
@@ -82,13 +82,13 @@ public class ParameterizedCommandTest {
     */
    @Test public void executeBinaryOrTest() {
       Command< Boolean > command = CommonCommands.BINARY_OR_COMMAND;
-      Assert.assertTrue( command.execute( "BinaryOr true false" ) );
+      Assert.assertTrue( command.execute( "BinaryOr true false" ).getResult() );
       command.resetParameters();
-      Assert.assertTrue( command.execute( "BinaryOr true true" ) );
+      Assert.assertTrue( command.execute( "BinaryOr true true" ).getResult() );
       command.resetParameters();
-      Assert.assertFalse( command.execute( "BinaryOr false false" ) );
+      Assert.assertFalse( command.execute( "BinaryOr false false" ).getResult() );
       command.resetParameters();
-      Assert.assertTrue( command.execute( "BinaryOr false true" ) );
+      Assert.assertTrue( command.execute( "BinaryOr false true" ).getResult() );
       command.resetParameters();
       
       Assert.assertNull( command.execute( "BinaryOr true" ) );
@@ -121,15 +121,15 @@ public class ParameterizedCommandTest {
     */
    @Test public void executeInvertStringTest() {
       Command< String > command = CommonCommands.INVERT_STRING_CASE_COMMAND;
-      Assert.assertEquals( "TEST", command.execute( "invertstring test" ) );
+      Assert.assertEquals( "TEST", command.execute( "invertstring test" ).getResult() );
       command.resetParameters();
-      Assert.assertEquals( "test", command.execute( "invertstring TEST" ) );
+      Assert.assertEquals( "test", command.execute( "invertstring TEST" ).getResult() );
       command.resetParameters();
-      Assert.assertEquals( "1234", command.execute( "invertstring 1234" ) );
+      Assert.assertEquals( "1234", command.execute( "invertstring 1234" ).getResult() );
       command.resetParameters();
-      Assert.assertEquals( "TEST", command.execute( "invertstring tEST" ) );
+      Assert.assertEquals( "TEST", command.execute( "invertstring tEST" ).getResult() );
       command.resetParameters();
-      Assert.assertEquals( "test", command.execute( "invertstring Test" ) );
+      Assert.assertEquals( "test", command.execute( "invertstring Test" ).getResult() );
       command.resetParameters();
       Assert.assertNull( command.execute( "invertstring " ) );
       command.resetParameters();
@@ -158,9 +158,9 @@ public class ParameterizedCommandTest {
     */
    @Test public void executeAdditionTest() {
       Command< Number > command = CommonCommands.ADDITION_COMMAND;
-      Assert.assertEquals( 10.0, command.execute( "add 3 7" ) );
+      Assert.assertEquals( 10.0, command.execute( "add 3 7" ).getResult() );
       command.resetParameters();
-      Assert.assertEquals( 2.5, command.execute( "add 1.0 1.5" ) );
+      Assert.assertEquals( 2.5, command.execute( "add 1.0 1.5" ).getResult() );
       command.resetParameters();
       Assert.assertNull( command.execute( "add " ) );
       command.resetParameters();

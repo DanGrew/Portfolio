@@ -7,6 +7,8 @@
  */
 package commands.functions;
 
+import gui.console.ConsoleMessageImpl;
+
 import java.util.List;
 import java.util.function.Function;
 
@@ -21,6 +23,8 @@ import serialization.XmlObjectBuilderSystemWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
 
+import command.CommandResult;
+import command.CommandResultImpl;
 import commands.SystemCommands;
 
 /**
@@ -28,12 +32,13 @@ import commands.SystemCommands;
  */
 public class SystemCommandFunctions {
 
-   public static final Function< CommandParameters, Void > SAVE_FUNCTION = new Function< CommandParameters, Void >() {
+   public static final Function< CommandParameters, CommandResult< Void > > SAVE_FUNCTION = 
+            new Function< CommandParameters, CommandResult< Void > >() {
 
       /**
        * {@inheritDoc}
        */
-      @Override public Void apply( CommandParameters parameters ) {
+      @Override public CommandResult< Void > apply( CommandParameters parameters ) {
          JFileChooser chooser = new JFileChooser();
          int result = chooser.showSaveDialog( null );
          if ( result == JFileChooser.APPROVE_OPTION ) {
@@ -49,17 +54,23 @@ public class SystemCommandFunctions {
                      XmlPropertyTypeImpl.class, 
                      XmlBuilderTypeImpl.class 
             );
+            return new CommandResultImpl< Void >( 
+                     new ConsoleMessageImpl( "Successfully saved!" ) 
+            );
          }
-         return null;
+         return new CommandResultImpl< Void >( 
+                  new ConsoleMessageImpl( "Failed to save data." )
+         );
       }// End Method
    };
    
-   public static final Function< CommandParameters, Void > LOAD_FUNCTION = new Function< CommandParameters, Void >() {
+   public static final Function< CommandParameters, CommandResult< Void > > LOAD_FUNCTION = 
+            new Function< CommandParameters, CommandResult< Void > >() {
 
       /**
        * {@inheritDoc}
        */
-      @Override public Void apply( CommandParameters parameters ) {
+      @Override public CommandResult< Void > apply( CommandParameters parameters ) {
          JFileChooser chooser = new JFileChooser();
          int result = chooser.showOpenDialog( null );
          if ( result == JFileChooser.APPROVE_OPTION ) {
@@ -70,8 +81,13 @@ public class SystemCommandFunctions {
                      XmlPropertyTypeImpl.class, 
                      XmlBuilderTypeImpl.class 
             );
+            return new CommandResultImpl< Void >( 
+                     new ConsoleMessageImpl( "Successfully loaded data!" ) 
+            );
          }
-         return null;
+         return new CommandResultImpl< Void >( 
+                  new ConsoleMessageImpl( "Failed to load data." )
+         );
       }// End Method
    };
 }// End Class

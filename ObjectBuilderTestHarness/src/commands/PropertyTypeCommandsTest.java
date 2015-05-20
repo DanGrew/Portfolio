@@ -14,6 +14,7 @@ import propertytype.PropertyType;
 import architecture.request.RequestSystem;
 
 import command.Command;
+import command.CommandResult;
 
 /**
  * Test for {@link Command}s associated with {@link PropertyType}s.
@@ -41,27 +42,27 @@ public class PropertyTypeCommandsTest {
     */
    @Test public void executeCreatePropertyTypeTest(){
       Command< PropertyType > command = PropertyTypeCommands.CREATE_PROPERTY_TYPE_COMMAND;
-      PropertyType type = command.execute( "CreatePropertyType anything String" );
+      PropertyType type = command.execute( "CreatePropertyType anything String" ).getResult();
       Assert.assertNotNull( type );
       Assert.assertEquals( String.class, type.getTypeClass() );
       Assert.assertEquals( "anything", type.getDisplayName() );
       Assert.assertNotNull( RequestSystem.retrieve( PropertyType.class, "anything" ) );
       command.resetParameters();
       
-      type = command.execute( "CreatePropertyType anything" );
-      Assert.assertNull( type );
+      CommandResult< PropertyType > result = command.execute( "CreatePropertyType anything" );
+      Assert.assertNull( result );
       command.resetParameters();
       
-      type = command.execute( "CreatePropertyType anything hh" );
-      Assert.assertNull( type );
+      result = command.execute( "CreatePropertyType anything hh" );
+      Assert.assertNull( result );
       command.resetParameters();
       
-      type = command.execute( "CreatePropertyType anything Str" );
-      Assert.assertNull( type );
+      result = command.execute( "CreatePropertyType anything Str" );
+      Assert.assertNull( result );
       command.resetParameters();
       
-      type = command.execute( "CreatePropertyType " );
-      Assert.assertNull( type );
+      result = command.execute( "CreatePropertyType " );
+      Assert.assertNull( result );
       command.resetParameters();
    }// End Method
 }// End Class
