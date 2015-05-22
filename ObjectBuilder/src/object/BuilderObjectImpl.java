@@ -81,14 +81,14 @@ public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject 
     * {@inheritDoc}
     */
    @Override protected void writeSingleton( SerializableBuilderObject serializable ) {
-      throw new UnsupportedOperationException( "Not implement yet." );
+      serializable.setBuilderType( getBuilderType() );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Override protected void readSingleton( SerializableBuilderObject serialized ) {
-      throw new UnsupportedOperationException( "Not implement yet." );
+      type = serialized.getBuilderType();
    }// End Method
 
 }// End Class

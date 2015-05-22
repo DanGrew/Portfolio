@@ -7,6 +7,9 @@
  */
 package commands.functions;
 
+import gui.PropertyTypeViewer;
+import gui.console.ConsoleMessageImpl;
+
 import java.util.function.Function;
 
 import parameter.CommandParameters;
@@ -35,6 +38,18 @@ public class PropertyTypeCommandFunctions {
          PropertyType propertyType = new PropertyTypeImpl( name, clazzType );
          RequestSystem.store( propertyType, PropertyType.class );
          return new CommandResultImpl< PropertyType >( "Created " + name, propertyType );
+      }// End Method
+   };
+   
+   public static final Function< CommandParameters, CommandResult< Void > > VIEW_PROPERTY_TYPES_FUNCTION = 
+            new Function< CommandParameters, CommandResult< Void > >() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override public CommandResult< Void > apply( CommandParameters parameters ) {
+         new PropertyTypeViewer();
+         return new CommandResultImpl< Void >( new ConsoleMessageImpl( "Viewer launched." ) );
       }// End Method
    };
 }// End Class

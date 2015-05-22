@@ -8,9 +8,9 @@
 package commands;
 
 import objecttype.BuilderType;
-import propertytype.PropertyType;
 
 import command.Command;
+import command.InstructionCommandImpl;
 import command.ParameterizedCommandImpl;
 import commands.functions.BuilderTypeCommandFunctions;
 import commands.parameters.BuilderTypeCommandParameters;
@@ -39,5 +39,13 @@ public class BuilderTypeCommands {
             BuilderTypeCommandFunctions.ADD_PROPERTY_FUNCTION, 
             BuilderTypeCommandParameters.BUILDER_TYPE_REFERENCE_PARAMETER,
             BuilderTypeCommandParameters.PROPERTY_TYPE_REFERENCE_PARAMETER
+   );
+   
+   private static final String VIEW_COMMAND_KEY = "ViewBuilderTypes";
+   private static final String VIEW_COMMAND_DESCRIPTION = "Function to view all Builder Types.";
+   public static final Command< Void > VIEW_BUILDER_TYPES_COMMAND = new InstructionCommandImpl< Void >(
+            VIEW_COMMAND_KEY, 
+            VIEW_COMMAND_DESCRIPTION, 
+            BuilderTypeCommandFunctions.VIEW_BUILDER_TYPES_FUNCTION 
    );
 }// End Class

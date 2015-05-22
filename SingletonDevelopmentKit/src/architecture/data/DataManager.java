@@ -7,13 +7,13 @@
  */
 package architecture.data;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * The {@link DataManager} is responsible for managing {@link Object}s of the associated 
@@ -59,7 +59,11 @@ public class DataManager< T > {
     * @return a {@link List} of matching {@link Object}s.
     */
    public List< T > retrieveAll( Predicate< T > matcher ){
-      return data.stream().filter( matcher ).collect( Collectors.toList() );
+      if ( matcher == null ) {
+         return new ArrayList<>( data );
+      } else {
+         return data.stream().filter( matcher ).collect( Collectors.toList() );
+      }
    }// End Method
    
    /**

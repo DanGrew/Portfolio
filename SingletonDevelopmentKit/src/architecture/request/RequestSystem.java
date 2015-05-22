@@ -79,6 +79,13 @@ public class RequestSystem extends ManagementSystem {
    }// End Method
    
    /**
+    * {@link DataManagementSystem#retrieveAll(Class, Predicate)}.
+    */
+   public static < T > List< T > retrieveAll( Class< T > clazz ){
+      return dataSystem().retrieveAll( clazz, null );
+   }// End Method
+   
+   /**
     * {@link DataManagementSystem#process(Class, Predicate, Consumer)}.
     */
    public static < T > void process( Class< T > clazz, Predicate< T > criteria, Consumer< T > process ){

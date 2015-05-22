@@ -8,8 +8,8 @@
 package commands;
 
 import propertytype.PropertyType;
-
 import command.Command;
+import command.InstructionCommandImpl;
 import command.ParameterizedCommandImpl;
 import commands.functions.PropertyTypeCommandFunctions;
 import commands.parameters.PropertyTypeCommandParameters;
@@ -28,5 +28,13 @@ public class PropertyTypeCommands {
             PropertyTypeCommandFunctions.CREATE_PROPERTY_TYPE_FUNCTION, 
             PropertyTypeCommandParameters.STRING_PARAMETER,
             PropertyTypeCommandParameters.CLASS_TYPE_PARAMETER
+   );
+   
+   private static final String VIEW_COMMAND_KEY = "ViewPropertyTypes";
+   private static final String VIEW_COMMAND_DESCRIPTION = "Function to view all Property Types.";
+   public static final Command< Void > VIEW_PROPERTY_TYPES_COMMAND = new InstructionCommandImpl< Void >(
+            VIEW_COMMAND_KEY, 
+            VIEW_COMMAND_DESCRIPTION, 
+            PropertyTypeCommandFunctions.VIEW_PROPERTY_TYPES_FUNCTION 
    );
 }// End Class

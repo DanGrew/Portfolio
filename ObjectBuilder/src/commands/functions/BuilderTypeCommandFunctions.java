@@ -7,6 +7,9 @@
  */
 package commands.functions;
 
+import gui.BuilderTypeViewer;
+import gui.console.ConsoleMessageImpl;
+
 import java.util.function.Function;
 
 import objecttype.BuilderType;
@@ -14,6 +17,7 @@ import objecttype.BuilderTypeImpl;
 import parameter.CommandParameters;
 import propertytype.PropertyType;
 import architecture.request.RequestSystem;
+
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.BuilderTypeCommands;
@@ -59,6 +63,18 @@ public class BuilderTypeCommandFunctions {
                   "Added " + propertyType.getDisplayName() + " to " + builderType.getIdentification(), 
                   builderType 
          );
+      }// End Method
+   };
+   
+   public static final Function< CommandParameters, CommandResult< Void > > VIEW_BUILDER_TYPES_FUNCTION = 
+            new Function< CommandParameters, CommandResult< Void > >() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override public CommandResult< Void > apply( CommandParameters parameters ) {
+         new BuilderTypeViewer();
+         return new CommandResultImpl< Void >( new ConsoleMessageImpl( "Viewer launched." ) );
       }// End Method
    };
 }// End Class
