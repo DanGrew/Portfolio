@@ -21,6 +21,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import propertytype.PropertyType;
+import propertytype.PropertyTypeImpl;
 import serialization.XmlBuilderObjectWrapper;
 import serialization.XmlPropertyTypeWrapper;
 import architecture.request.RequestSystem;
@@ -39,11 +40,22 @@ public class SerializableBuilderObjectTest {
    @Test public void collectionSerializationTest() throws IOException {
       List< BuilderObject > actualTypes = new ArrayList< BuilderObject >();
       
+      PropertyType name = new PropertyTypeImpl( "Name", String.class );
+      RequestSystem.store( name, PropertyType.class );
+      PropertyType age = new PropertyTypeImpl( "Age", Number.class );
+      RequestSystem.store( age, PropertyType.class );
+      
       BuilderType testType1 = new BuilderTypeImpl( "builder" );
+      testType1.addPropertyType( name );
+      testType1.addPropertyType( age );
       RequestSystem.store( testType1, BuilderType.class );
+      
       BuilderObject testObject1 = new BuilderObjectImpl( testType1, "TestObject1" );
+      testObject1.set( name, "NameA" );
       actualTypes.add( testObject1 );
       BuilderObject testObject2 = new BuilderObjectImpl( testType1, "TestObject2" );
+      testObject2.set( name, "NameB" );
+      testObject2.set( age, 10 );
       actualTypes.add( testObject2 );
       
       XmlBuilderObjectWrapper serializedCollection = new XmlBuilderObjectWrapper();
@@ -57,8 +69,6 @@ public class SerializableBuilderObjectTest {
       Assert.assertNotNull( parsedPropertyType );
       List< BuilderObject > parsedTypes = parsedPropertyType.retrieveSingletons();
       assertBuilderObjectLists( actualTypes, parsedTypes );
-      
-      Assert.fail( "Not setting parameter." );
    }// End Method
    
    /**
