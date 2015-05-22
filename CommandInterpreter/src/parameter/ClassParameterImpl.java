@@ -7,30 +7,15 @@
  */
 package parameter;
 
+import parameter.classparameter.ClassParameterType;
+import parameter.classparameter.ClassParameterTypes;
+
 /**
  * The {@link ClassParameterImpl} provides a {@link CommandParameter} that accepts simple
  * {@link Class} names as defined by {@link SupportedClasses}.
  */
 public class ClassParameterImpl implements CommandParameter {
    
-   /**
-    * {@link Enum} of {@link Class}es supported by the {@link CommandParameter}.
-    */
-   private enum SupportedClasses {
-      STRING( String.class ),
-      NUMBER( Number.class );
-      
-      private Class< ? > clazz;
-      
-      /**
-       * Constructs a new {@link SupportedClasses}.
-       * @param clazz the {@link Class} associated.
-       */
-      private SupportedClasses( Class< ? > clazz ) {
-         this.clazz = clazz;
-      }
-   }// End Enum
-
    /**
     * {@inheritDoc}
     */
@@ -42,8 +27,8 @@ public class ClassParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
-      for ( SupportedClasses clazz : SupportedClasses.values() ) {
-         if ( clazz.toString().toUpperCase().startsWith( expression.toUpperCase() ) ) {
+      for ( ClassParameterType clazz : ClassParameterTypes.types() ) {
+         if ( clazz.getName().startsWith( expression ) ) {
             return true;
          }
       }
@@ -55,8 +40,8 @@ public class ClassParameterImpl implements CommandParameter {
     */
    @Override public boolean completeMatches( String expression ) {
       try {
-         SupportedClasses.valueOf( expression.toUpperCase() );
-         return true;
+         ClassParameterType type = ClassParameterTypes.valueOf( expression );
+         return type != null;
       } catch ( IllegalArgumentException exception ) {
          return false;
       }
@@ -67,8 +52,8 @@ public class ClassParameterImpl implements CommandParameter {
     */
    @Override public Object parseObject( String expression ) {
       try {
-         SupportedClasses match = SupportedClasses.valueOf( expression.toUpperCase() );
-         return match.clazz;
+         ClassParameterType match = ClassParameterTypes.valueOf( expression );
+         return match;
       } catch ( IllegalArgumentException exception ) {
          return null;
       }
@@ -78,8 +63,8 @@ public class ClassParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public String autoComplete( String expression ) {
-      for ( SupportedClasses clazz : SupportedClasses.values() ) {
-         if ( clazz.toString().toLowerCase().startsWith( expression.toLowerCase() ) ) {
+      for ( ClassParameterType clazz : ClassParameterTypes.types() ) {
+         if ( clazz.getName().startsWith( expression ) ) {
             return clazz.toString().toLowerCase();
          }
       }

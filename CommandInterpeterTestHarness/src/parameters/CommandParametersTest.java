@@ -78,7 +78,7 @@ public class CommandParametersTest {
     */
    @Test public void classParameterTest() {
       CommandParameter parameter = new ClassParameterImpl();
-      Assert.assertTrue( parameter.partialMatches( "str" ) );
+      Assert.assertTrue( parameter.partialMatches( "Str" ) );
       
       Assert.assertTrue( parameter.completeMatches( "String" ) );
       Assert.assertTrue( parameter.completeMatches( "Number" ) );

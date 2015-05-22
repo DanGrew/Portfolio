@@ -27,6 +27,13 @@ public abstract class ClassParameterTypeImpl< TypeT > implements ClassParameterT
    /**
     * {@inheritDoc}
     */
+   @Override public String getName() {
+      return classType.getSimpleName();
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public Class< ? > getTypeClass() {
       return classType;
    }// End Method

@@ -23,7 +23,7 @@ public class BuilderTypeTest {
     */
    @Test public void addPropertyTest() {
       BuilderType object = new BuilderTypeImpl( "Test" );
-      PropertyType propertyType = new PropertyTypeImpl( null, null );
+      PropertyType propertyType = new PropertyTypeImpl( null, String.class );
       object.addPropertyType( propertyType );
       Assert.assertTrue( object.hasProperty( propertyType ) );
    }// End Method

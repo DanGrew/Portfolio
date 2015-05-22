@@ -9,6 +9,8 @@ package propertytype;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import parameter.classparameter.ClassParameterType;
+import parameter.classparameter.ClassParameterTypes;
 import representation.xml.wrapper.XmlSingletonWrapper;
 import architecture.request.RequestSystem;
 
@@ -22,15 +24,15 @@ public class XmlPropertyTypeImpl extends XmlSingletonWrapper< PropertyType > imp
    /**
     * {@inheritDoc}
     */
-   @Override public void setTypeClass( Class< ? > clazz ) {
-      this.typeClass = clazz;
+   @Override public void setTypeClass( ClassParameterType clazz ) {
+      this.typeClass = clazz.getTypeClass();
    }// End Method
 
    /**
     * {@inheritDoc}
     */
-   @Override public Class< ? > getTypeClass() {
-      return typeClass;
+   @Override public ClassParameterType getTypeClass() {
+      return ClassParameterTypes.valueOf( typeClass );
    }// End Method
    
    /**

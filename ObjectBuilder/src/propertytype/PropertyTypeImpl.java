@@ -7,6 +7,8 @@
  */
 package propertytype;
 
+import parameter.classparameter.ClassParameterType;
+import parameter.classparameter.ClassParameterTypes;
 import model.singleton.SingletonImpl;
 
 /**
@@ -14,7 +16,7 @@ import model.singleton.SingletonImpl;
  */
 public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > implements PropertyType {
 
-   private Class< ? > typeClass;
+   private ClassParameterType typeClass;
 
    /**
     * Constructs a new {@link PropertyTypeImpl}.
@@ -23,6 +25,19 @@ public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > 
     */
    public PropertyTypeImpl( String displayName, Class< ? > clazz ) {
       super( displayName );
+      this.typeClass = ClassParameterTypes.valueOf( clazz.getSimpleName() );
+      if ( typeClass == null ) {
+         throw new IllegalArgumentException( "Unsupported class provided." );
+      }
+   }// End Class
+   
+   /**
+    * Constructs a new {@link PropertyTypeImpl}.
+    * @param displayName the {@link String} display name of the {@link PropertyType}.
+    * @param clazz the {@link ClassParameterType} associated with the type.
+    */
+   public PropertyTypeImpl( String displayName, ClassParameterType clazz ) {
+      super( displayName );
       this.typeClass = clazz;
    }// End Class
    
@@ -30,14 +45,14 @@ public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > 
     * {@inheritDoc}
     */
    @Override public Class< ? > getTypeClass() {
-      return typeClass;
+      return typeClass.getTypeClass();
    }// End Method
    
    /**
     * {@inheritDoc}
     */
    @Override public boolean isCorrectType( Object value ) {
-      return typeClass.isAssignableFrom( value.getClass() );
+      return typeClass.getTypeClass().isAssignableFrom( value.getClass() );
    }// End Method
    
    /**
@@ -86,7 +101,7 @@ public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > 
     * {@inheritDoc}
     */
    @Override protected void writeSingleton( SerializablePropertyType serializable ) {
-      serializable.setTypeClass( getTypeClass() );
+      serializable.setTypeClass( typeClass );
    }// End Method
 
    /**

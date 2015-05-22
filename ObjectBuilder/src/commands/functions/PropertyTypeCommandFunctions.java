@@ -13,6 +13,7 @@ import gui.console.ConsoleMessageImpl;
 import java.util.function.Function;
 
 import parameter.CommandParameters;
+import parameter.classparameter.ClassParameterType;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import architecture.request.RequestSystem;
@@ -34,7 +35,7 @@ public class PropertyTypeCommandFunctions {
        */
       @Override public CommandResult< PropertyType > apply( CommandParameters parameters ) {
          String name = parameters.getExpectedParameter( PropertyTypeCommandParameters.STRING_PARAMETER, String.class );
-         Class< ? > clazzType = parameters.getExpectedParameter( PropertyTypeCommandParameters.CLASS_TYPE_PARAMETER, Class.class );
+         ClassParameterType clazzType = parameters.getExpectedParameter( PropertyTypeCommandParameters.CLASS_TYPE_PARAMETER, ClassParameterType.class );
          PropertyType propertyType = new PropertyTypeImpl( name, clazzType );
          RequestSystem.store( propertyType, PropertyType.class );
          return new CommandResultImpl< PropertyType >( "Created " + name, propertyType );

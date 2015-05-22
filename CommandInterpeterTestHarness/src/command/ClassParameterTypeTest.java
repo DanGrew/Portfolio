@@ -14,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import parameter.classparameter.ClassParameterType;
+import parameter.classparameter.ClassParameterTypes;
 import parameter.classparameter.NumberClassParameterTypeImpl;
 import parameter.classparameter.StringClassParameterTypeImpl;
 
@@ -32,8 +33,11 @@ public class ClassParameterTypeTest {
       );
       Assert.assertEquals( 
                expected,
-               ClassParameterType.types
+               ClassParameterTypes.types()
       );
+      
+      Assert.assertEquals( new StringClassParameterTypeImpl(), ClassParameterTypes.valueOf( "String" ) );
+      Assert.assertEquals( new NumberClassParameterTypeImpl(), ClassParameterTypes.valueOf( "Number" ) );
    }// End Method
    
    /**

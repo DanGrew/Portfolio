@@ -7,6 +7,7 @@
  */
 package propertytype;
 
+import parameter.classparameter.ClassParameterType;
 import model.data.SerializedSingleton;
 
 /**
@@ -15,15 +16,15 @@ import model.data.SerializedSingleton;
 public interface SerializablePropertyType extends SerializedSingleton< PropertyType >{
 
    /**
-    * Method to set the {@link Class} associated with the {@link PropertyType}.
-    * @param clazz the {@link Class}.
+    * Method to set the {@link ClassParameterType} associated with the {@link PropertyType}.
+    * @param clazz the {@link ClassParameterType}.
     */
-   public void setTypeClass( Class< ? > clazz );
+   public void setTypeClass( ClassParameterType clazz );
    
    /**
-    * Getter for the {@link Class} associated with the {@link PropertyType}.
-    * @return the {@link Class}.s
+    * Getter for the {@link ClassParameterType} associated with the {@link PropertyType}.
+    * @return the {@link ClassParameterType}.
     */
-   public Class< ? > getTypeClass();
+   public ClassParameterType getTypeClass();
    
 }// End Interface

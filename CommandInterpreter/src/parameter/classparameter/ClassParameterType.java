@@ -19,11 +19,11 @@ import command.Command;
  */
 public interface ClassParameterType {
    
-   /** Static {@link List} of all {@link ClassParameterType}s. */
-   public static final List< ClassParameterType > types = Arrays.asList( 
-            new StringClassParameterTypeImpl(),
-            new NumberClassParameterTypeImpl()
-   );
+   /**
+    * Getter for the name associated with this {@link ClassParameterType}.
+    * @return the {@link Class} associated's {@link Class#getSimpleName()}.
+    */
+   public String getName();
    
    /**
     * Getter for the {@link Class} associated.
