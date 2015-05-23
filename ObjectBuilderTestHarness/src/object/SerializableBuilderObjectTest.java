@@ -80,29 +80,33 @@ public class SerializableBuilderObjectTest {
     * Method to test that when reading a {@link PropertyType} that already exists, it is overwritten. 
     */
    @Test public void overwriteTest() throws IOException{
-//      final String typeName = "Type";
-//      PropertyType writableType = new PropertyTypeImpl( typeName, String.class );
-//      
-//      PropertyType existingType = new PropertyTypeImpl( typeName, Number.class );
-//      RequestSystem.store( existingType, PropertyType.class );
-//      
-//      Assert.assertEquals( existingType, RequestSystem.retrieve( PropertyType.class, typeName ) );
-//      Assert.assertNotEquals( writableType, RequestSystem.retrieve( PropertyType.class, typeName ) );
-//      
-//      XmlPropertyTypeWrapper serializedCollection = new XmlPropertyTypeWrapper();
-//      serializedCollection.addUnwrapped( writableType );
-//      
-//      File testFile = folder.newFile();
-//      SerializationSystem.saveToFile( serializedCollection, testFile, XmlPropertyTypeWrapper.class, XmlPropertyTypeImpl.class );
-//      
-//      XmlPropertyTypeWrapper parsedPropertyType = SerializationSystem.loadSingletonsFromFile( 
-//               XmlPropertyTypeWrapper.class, testFile, XmlPropertyTypeWrapper.class, XmlPropertyTypeImpl.class );
-//      Assert.assertNotNull( parsedPropertyType );
-//      
-//      PropertyType resultingVersion = RequestSystem.retrieve( PropertyType.class, typeName );
-//      Assert.assertNotNull( resultingVersion );
-//      Assert.assertEquals( writableType.getTypeClass(), resultingVersion.getTypeClass() );
-      Assert.fail();
+      PropertyType name = new PropertyTypeImpl( "Name", String.class );
+      RequestSystem.store( name, PropertyType.class );
+      
+      BuilderType testType1 = new BuilderTypeImpl( "builder" );
+      testType1.addPropertyType( name );
+      RequestSystem.store( testType1, BuilderType.class );
+      
+      BuilderObject toWrite = new BuilderObjectImpl( testType1, "TestObject1" );
+      toWrite.set( name, "NameC" );
+      
+      BuilderObject toOverwrite = new BuilderObjectImpl( testType1, "TestObject1" );
+      toWrite.set( name, "NameB" );
+      RequestSystem.store( toOverwrite, BuilderObject.class );
+      
+      XmlBuilderObjectWrapper serializedCollection = new XmlBuilderObjectWrapper();
+      serializedCollection.addUnwrapped( toWrite );
+      
+      File testFile = folder.newFile();
+      SerializationSystem.saveToFile( serializedCollection, testFile, XmlBuilderObjectWrapper.class, XmlBuilderObjectImpl.class );
+      
+      XmlBuilderObjectWrapper parsedPropertyType = SerializationSystem.loadSingletonsFromFile( 
+               XmlBuilderObjectWrapper.class, testFile, XmlBuilderObjectWrapper.class, XmlBuilderObjectImpl.class );
+      Assert.assertNotNull( parsedPropertyType );
+      
+      BuilderObject systemVersion = RequestSystem.retrieve( BuilderObject.class, toOverwrite.getIdentification() );
+      Assert.assertEquals( toOverwrite, systemVersion );
+      Assert.assertEquals( toWrite.get( name ), systemVersion.get( name ) );
    }// End Method
    
    /**
