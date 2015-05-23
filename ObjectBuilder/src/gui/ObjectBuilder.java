@@ -13,6 +13,7 @@ import commands.BuilderObjectCommands;
 import commands.BuilderTypeCommands;
 import commands.PropertyTypeCommands;
 import commands.SystemCommands;
+import commands.parameters.ObjectBuilderClassParameterTypes;
 
 /**
  * The {@link ObjectBuilder} provides a launcher for the {@link CommandInterpreter} with
@@ -28,8 +29,10 @@ public class ObjectBuilder {
       RequestSystem.store( BuilderTypeCommands.VIEW_BUILDER_TYPES_COMMAND, Command.class );
       RequestSystem.store( BuilderObjectCommands.CREATE_BUILDER_OBJECT_COMMAND, Command.class );
       RequestSystem.store( BuilderObjectCommands.SET_PROPERTY_COMMAND, Command.class );
+      RequestSystem.store( BuilderObjectCommands.VIEW_OBJECTS_COMMAND, Command.class );
       RequestSystem.store( SystemCommands.SAVE_COMMAND, Command.class );
       RequestSystem.store( SystemCommands.LOAD_COMMAND, Command.class );
+      ObjectBuilderClassParameterTypes.initialiseTypes();
       new CommandInterpreter();
    }// End Method
    

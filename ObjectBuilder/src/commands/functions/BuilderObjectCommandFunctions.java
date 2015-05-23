@@ -7,6 +7,9 @@
  */
 package commands.functions;
 
+import gui.BuilderObjectViewer;
+import gui.console.ConsoleMessageImpl;
+
 import java.util.function.Function;
 
 import object.BuilderObject;
@@ -15,6 +18,7 @@ import objecttype.BuilderType;
 import parameter.CommandParameters;
 import propertytype.PropertyType;
 import architecture.request.RequestSystem;
+
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.BuilderObjectCommands;
@@ -64,6 +68,18 @@ public class BuilderObjectCommandFunctions {
          );
          object.set( type, value );
          return new CommandResultImpl< BuilderObject >( "Value set.", object );
+      }// End Method
+   };
+   
+   public static final Function< CommandParameters, CommandResult< Void > > VIEW_OBJECTS_FUNCTION = 
+            new Function< CommandParameters, CommandResult< Void > >() {
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override public CommandResult< Void > apply( CommandParameters parameters ) {
+         new BuilderObjectViewer();
+         return new CommandResultImpl< Void >( new ConsoleMessageImpl( "Viewer launched." ) );
       }// End Method
    };
    

@@ -65,7 +65,7 @@ public class ClassParameterImpl implements CommandParameter {
    @Override public String autoComplete( String expression ) {
       for ( ClassParameterType clazz : ClassParameterTypes.types() ) {
          if ( clazz.getName().startsWith( expression ) ) {
-            return clazz.toString().toLowerCase();
+            return clazz.getName();
          }
       }
       return null;

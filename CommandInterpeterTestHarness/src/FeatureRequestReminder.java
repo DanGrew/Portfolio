@@ -23,4 +23,19 @@ public class FeatureRequestReminder {
       fail( "Not yet implemented" );
    }
    
+   @Test public void parameterSetNotString() {
+      fail( "Not yet implemented" );
+   }
+   
+   @Test public void multipleTypesWithSameName() {
+      fail( "Not yet implemented" );
+   }
+   
+   @Test public void settingNumbersAsParameters() {
+      fail( "Not yet implemented" );
+   }
+   
+   @Test public void readStringDescriptionsNotJustSingleWord() {
+      fail( "Not yet implemented" );
+   }
 }

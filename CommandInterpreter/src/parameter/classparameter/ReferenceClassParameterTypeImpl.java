@@ -20,6 +20,13 @@ public class ReferenceClassParameterTypeImpl< SingletonS extends Singleton< ? > 
    private Class< SingletonS > singletonType;
    
    /**
+    * {@inheritDoc}
+    */
+   @Override public String getName() {
+      return singletonType.getSimpleName();
+   }// End Method
+   
+   /**
     * Constructs a new {@link ReferenceClassParameterTypeImpl}.
     */
    public ReferenceClassParameterTypeImpl( Class< SingletonS > singletonType ) {
@@ -42,7 +49,11 @@ public class ReferenceClassParameterTypeImpl< SingletonS extends Singleton< ? > 
     * {@inheritDoc}
     */
    @Override public Object deserialize( Serializable object ) {
-      return RequestSystem.retrieve( singletonType, object.toString() );
+      if ( object != null ) {
+         return RequestSystem.retrieve( singletonType, object.toString() );
+      } else {
+         return null;
+      }
    }// End Method
 
 }// End Class

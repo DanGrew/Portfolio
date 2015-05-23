@@ -7,6 +7,8 @@
  */
 package gui;
 
+import object.BuilderObject;
+import object.BuilderObjectImpl;
 import objecttype.BuilderType;
 import objecttype.BuilderTypeImpl;
 import propertytype.PropertyType;
@@ -42,8 +44,24 @@ public class FunctionalTableTest {
       builderC.addPropertyType( typeC );
       RequestSystem.store( builderC, BuilderType.class );
       
+      BuilderObject builderObjectA = new BuilderObjectImpl( builderC, "Object1" );
+      builderObjectA.set( typeA, "ThisIsAValue" );
+      builderObjectA.set( typeC, "ThisIsAnotherValue" );
+      RequestSystem.store( builderObjectA, BuilderObject.class );
+      
+      BuilderObject builderObjectB = new BuilderObjectImpl( builderC, "Object2" );
+      builderObjectB.set( typeA, "ThisIsAValue" );
+      builderObjectB.set( typeB, 1000.1 );
+      RequestSystem.store( builderObjectB, BuilderObject.class );
+      
+      BuilderObject builderObjectC = new BuilderObjectImpl( builderB, "Object1" );
+      builderObjectC.set( typeB, 10 );
+      builderObjectC.set( typeC, "ThisIsAnotherValue" );
+      RequestSystem.store( builderObjectC, BuilderObject.class );
+      
       new PropertyTypeViewer();
       new BuilderTypeViewer();
+      new BuilderObjectViewer();
    }// End Method
 
 }// End Class

@@ -23,16 +23,25 @@ public class ClassParameterTypes {
    private static List< ClassParameterType > types = new ArrayList< ClassParameterType >();
    
    static {
-      types.add( STRING_PARAMETER_TYPE );
-      types.add( NUMBER_PARAMETER_TYPE );
+      initialiseTypes();
    }
    
    /**
-    * Method to add a {@link ClassParameterType} to the supported types.
-    * @param type the {@link ClassParameterType} supported.
+    * Method to initialise the {@link ClassParameterTypes}.
     */
-   public static void addParameterType( ClassParameterType type ) {
-      types.add( type );
+   public static void initialiseTypes(){
+      if ( types.isEmpty() ) {
+         types.add( STRING_PARAMETER_TYPE );
+         types.add( NUMBER_PARAMETER_TYPE );
+      }
+   }// End Method
+   
+   /**
+    * Method to add a {@link ClassParameterType} to the supported types.
+    * @param typesToAdd the {@link ClassParameterType}s supported.
+    */
+   public static void addParameterTypes( List< ClassParameterType > typesToAdd ) {
+      types.addAll( typesToAdd );
    }// End Method
    
    /**
