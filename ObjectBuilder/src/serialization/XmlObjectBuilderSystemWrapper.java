@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import model.singleton.Singleton;
+import object.BuilderObject;
 import objecttype.BuilderType;
 import propertytype.PropertyType;
 import architecture.representation.SingletonContainer;
@@ -30,6 +31,7 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
 
    @XmlElement private XmlPropertyTypeWrapper propertyTypes;
    @XmlElement private XmlBuilderTypeWrapper builderTypes;
+   @XmlElement private XmlBuilderObjectWrapper builderObjects;
    
    /**
     * Constructs a new {@link XmlObjectBuilderSystemWrapper}.
@@ -37,6 +39,7 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
    public XmlObjectBuilderSystemWrapper() {
       propertyTypes = new XmlPropertyTypeWrapper();
       builderTypes = new XmlBuilderTypeWrapper();
+      builderObjects = new XmlBuilderObjectWrapper();
    }// End Constructor
    
    /**
@@ -55,6 +58,10 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
       builderTypes.forEach( object -> this.builderTypes.addUnwrapped( object ) );
    }// End Method
    
+   public void addAllBuilderObjects( List< BuilderObject > builderObjects ) {
+      builderObjects.forEach( object -> this.builderObjects.addUnwrapped( object ) );
+   }
+   
    /**
     * {@inheritDoc}
     */
@@ -68,6 +75,7 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
    @Override public void constructSingletons() {
       propertyTypes.constructSingletons();
       builderTypes.constructSingletons();
+      builderObjects.constructSingletons();
    }// End Method
 
    /**
@@ -76,6 +84,7 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
    @Override public void resolveSingletons() {
       propertyTypes.resolveSingletons();
       builderTypes.resolveSingletons();
+      builderObjects.resolveSingletons();
    }// End Method
    
    /**
@@ -94,6 +103,15 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
     */
    public List< BuilderType > retrieveBuilderTypes(){
       return builderTypes.retrieveSingletons();
+   }// End Method
+   
+   /**
+    * Method to retrieve the {@link BuilderObject}s stored in the {@link RequestSystem} from the parsing
+    * of this object.
+    * @return a {@link List} of {@link BuilderObject}s resolved with the {@link RequestSystem}.
+    */
+   public List< BuilderObject > retrieveBuilderObjects() {
+      return builderObjects.retrieveSingletons();
    }// End Method
 
 }// End Class

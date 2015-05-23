@@ -7,20 +7,33 @@
  */
 package parameter.classparameter;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * {@link ClassParameterTypes} provides a similar interface to an {@link Enum} for the {@link ClassParameterType}s
- * that can be ussed.
+ * that can be used.
  */
 public class ClassParameterTypes {
 
+   public static final ClassParameterType STRING_PARAMETER_TYPE = new StringClassParameterTypeImpl();
+   public static final ClassParameterType NUMBER_PARAMETER_TYPE = new NumberClassParameterTypeImpl();
+   
    /** Static {@link List} of all {@link ClassParameterType}s. */
-   private static final List< ClassParameterType > types = Arrays.asList( 
-            new StringClassParameterTypeImpl(),
-            new NumberClassParameterTypeImpl()
-   );
+   private static List< ClassParameterType > types = new ArrayList< ClassParameterType >();
+   
+   static {
+      types.add( STRING_PARAMETER_TYPE );
+      types.add( NUMBER_PARAMETER_TYPE );
+   }
+   
+   /**
+    * Method to add a {@link ClassParameterType} to the supported types.
+    * @param type the {@link ClassParameterType} supported.
+    */
+   public static void addParameterType( ClassParameterType type ) {
+      types.add( type );
+   }// End Method
    
    /**
     * Method to get the {@link ClassParameterType} for the given {@link Class} name.

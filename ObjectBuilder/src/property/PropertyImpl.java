@@ -7,6 +7,8 @@
  */
 package property;
 
+import java.io.Serializable;
+
 import propertytype.PropertyType;
 
 /**
@@ -62,5 +64,12 @@ public class PropertyImpl implements Property {
    @Override public String getDisplayName() {
       return type.getDisplayName();
    }// End Method
-
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Serializable serializeValue() {
+      return type.serialize( getValue() );
+   }// End Method
+   
 }// End Class

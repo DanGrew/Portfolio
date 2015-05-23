@@ -7,7 +7,10 @@
  */
 package propertytype;
 
+import java.io.Serializable;
+
 import model.singleton.Singleton;
+import parameter.classparameter.ClassParameterTypes;
 import property.Property;
 
 /**
@@ -35,5 +38,19 @@ public interface PropertyType extends Singleton< SerializablePropertyType >{
     * @return true if appropriate.
     */
    public boolean isCorrectType( Object value );
+   
+   /**
+    * Method to serialize the given {@link Object} according to the associated {@link ClassParameterType}.
+    * @param value the value to serialize.
+    * @return the serialized version of the {@link Object}.
+    */
+   public Serializable serialize( Object value );
+   
+   /**
+    * Method to deserialize the given serialized {@link Object}.
+    * @param value the serialized {@link Object}.
+    * @return the deserialized version of the object.
+    */
+   public Object deserialize( Serializable value );
    
 }// End Interface

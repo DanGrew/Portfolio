@@ -7,9 +7,13 @@
  */
 package object;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlElement;
 
 import objecttype.BuilderType;
+import property.Property;
 import representation.xml.wrapper.XmlSingletonWrapper;
 import architecture.request.RequestSystem;
 
@@ -19,6 +23,14 @@ import architecture.request.RequestSystem;
 public class XmlBuilderObjectImpl extends XmlSingletonWrapper< BuilderObject > implements SerializableBuilderObject {
 
    @XmlElement private String builderType;
+   @XmlElement private List< XmlPropertyValue > values;
+   
+   /**
+    * Constructs a new {@link XmlBuilderObjectImpl}.
+    */
+   public XmlBuilderObjectImpl() {
+      values = new ArrayList< XmlPropertyValue >();
+   }// End Class
    
    /**
     * {@inheritDoc}
@@ -32,6 +44,25 @@ public class XmlBuilderObjectImpl extends XmlSingletonWrapper< BuilderObject > i
     */
    @Override public BuilderType getBuilderType() {
       return RequestSystem.retrieve( BuilderType.class, builderType );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void setValue( Property property ) {
+      XmlPropertyValue value = new XmlPropertyValue( property );
+      values.add( value );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< Property > getValues() {
+      List< Property > properties = new ArrayList<>();
+      for ( XmlPropertyValue value : values ) {
+         properties.add( value.deserialize() );
+      }
+      return properties;
    }// End Method
    
    /**

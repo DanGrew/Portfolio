@@ -20,6 +20,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import commands.parameters.ObjectBuilderClassParameterTypes;
+
+import property.Property;
+import property.PropertyImpl;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import serialization.XmlBuilderObjectWrapper;
@@ -44,10 +48,13 @@ public class SerializableBuilderObjectTest {
       RequestSystem.store( name, PropertyType.class );
       PropertyType age = new PropertyTypeImpl( "Age", Number.class );
       RequestSystem.store( age, PropertyType.class );
+      PropertyType reference = new PropertyTypeImpl( "Age", ObjectBuilderClassParameterTypes.PROPERTY_TYPE_PARAMETER_TYPE );
+      RequestSystem.store( reference, PropertyType.class );
       
       BuilderType testType1 = new BuilderTypeImpl( "builder" );
       testType1.addPropertyType( name );
       testType1.addPropertyType( age );
+      testType1.addPropertyType( reference );
       RequestSystem.store( testType1, BuilderType.class );
       
       BuilderObject testObject1 = new BuilderObjectImpl( testType1, "TestObject1" );
@@ -56,6 +63,7 @@ public class SerializableBuilderObjectTest {
       BuilderObject testObject2 = new BuilderObjectImpl( testType1, "TestObject2" );
       testObject2.set( name, "NameB" );
       testObject2.set( age, 10 );
+      testObject2.set( reference, testType1 );
       actualTypes.add( testObject2 );
       
       XmlBuilderObjectWrapper serializedCollection = new XmlBuilderObjectWrapper();

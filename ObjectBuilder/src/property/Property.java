@@ -7,6 +7,8 @@
  */
 package property;
 
+import java.io.Serializable;
+
 import propertytype.PropertyType;
 
 /**
@@ -42,9 +44,15 @@ public interface Property {
    /**
     * Method to determine whether the given value is appropriate for this {@link Property} and its
     * {@link PropertyType}.
-    * @param value the {@link Object} vaue.
+    * @param value the {@link Object} value.
     * @return true if appropriate.
     */
    public boolean isCorrectType( Object value );
+   
+   /**
+    * Method to serialize the value associated with the {@link Property}.
+    * @return the serialized value.
+    */
+   public Serializable serializeValue();
    
 }// End Interface

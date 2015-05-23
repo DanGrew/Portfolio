@@ -82,6 +82,9 @@ public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject 
     */
    @Override protected void writeSingleton( SerializableBuilderObject serializable ) {
       serializable.setBuilderType( getBuilderType() );
+      for ( Property property : propertyValues.values() ) {
+         serializable.setValue( property );
+      }
    }// End Method
 
    /**
@@ -89,6 +92,9 @@ public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject 
     */
    @Override protected void readSingleton( SerializableBuilderObject serialized ) {
       type = serialized.getBuilderType();
+      for ( Property property : serialized.getValues() ) {
+         set( property.getType(), property.getValue() );
+      }
    }// End Method
 
 }// End Class

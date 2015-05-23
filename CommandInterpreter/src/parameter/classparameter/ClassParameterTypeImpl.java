@@ -12,15 +12,15 @@ import java.io.Serializable;
 /**
  * Base implementation of the {@link ClassParameterType}.
  */
-public abstract class ClassParameterTypeImpl< TypeT > implements ClassParameterType {
+public abstract class ClassParameterTypeImpl implements ClassParameterType {
 
-   private Class< TypeT > classType;
+   private Class< ? > classType;
 
    /**
     * Constructs a {@link ClassParameterTypeImpl} with the given {@link Class} associated.
     * @param classType the {@link Class} associated.
     */
-   protected ClassParameterTypeImpl( Class< TypeT > classType ) {
+   protected ClassParameterTypeImpl( Class< ? > classType ) {
       this.classType = classType;
    }// End Constructor
 

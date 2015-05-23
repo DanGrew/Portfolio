@@ -14,6 +14,7 @@ import java.util.function.Function;
 
 import javax.swing.JFileChooser;
 
+import object.BuilderObject;
 import objecttype.BuilderType;
 import objecttype.XmlBuilderTypeImpl;
 import parameter.CommandParameters;
@@ -22,7 +23,6 @@ import propertytype.XmlPropertyTypeImpl;
 import serialization.XmlObjectBuilderSystemWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
-
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.SystemCommands;
@@ -43,10 +43,13 @@ public class SystemCommandFunctions {
          int result = chooser.showSaveDialog( null );
          if ( result == JFileChooser.APPROVE_OPTION ) {
             XmlObjectBuilderSystemWrapper serializedCollection = new XmlObjectBuilderSystemWrapper();
-            List< PropertyType > propertyTypes = RequestSystem.retrieveAll( PropertyType.class, object -> { return true; } );
+            List< PropertyType > propertyTypes = RequestSystem.retrieveAll( PropertyType.class );
             serializedCollection.addAllPropertyTypes( propertyTypes );
-            List< BuilderType > builderTypes = RequestSystem.retrieveAll( BuilderType.class, object -> { return true; } );
+            List< BuilderType > builderTypes = RequestSystem.retrieveAll( BuilderType.class );
             serializedCollection.addAllBuilderTypes( builderTypes );
+            List< BuilderObject > builderObjects = RequestSystem.retrieveAll( BuilderObject.class );
+            serializedCollection.addAllBuilderObjects( builderObjects );
+            
             SerializationSystem.saveToFile( 
                      serializedCollection, 
                      chooser.getSelectedFile(), 

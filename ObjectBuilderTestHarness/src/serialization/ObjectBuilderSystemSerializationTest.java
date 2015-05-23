@@ -15,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.singleton.Singleton;
+import object.BuilderObject;
+import object.BuilderObjectImpl;
+import object.SerializableBuilderObjectTest;
+import object.XmlBuilderObjectImpl;
 import objecttype.BuilderType;
 import objecttype.BuilderTypeImpl;
 import objecttype.SerializableBuilderTypeTest;
@@ -60,15 +64,37 @@ public class ObjectBuilderSystemSerializationTest {
       builder2.addPropertyType( testType1 );
       actualBuilderTypes.add( builder2 );
       
+      List< BuilderObject > actualObjects = new ArrayList<>();
+      BuilderObject object1 = new BuilderObjectImpl( builder1, "object1" );
+      object1.set( testType1, "TestString" );
+      actualObjects.add( object1 );
+      BuilderObject object2 = new BuilderObjectImpl( builder2, "object2" );
+      object2.set( testType2, 67988.1298 );
+      actualObjects.add( object2 );
+      
       XmlObjectBuilderSystemWrapper serializedCollection = new XmlObjectBuilderSystemWrapper();
       serializedCollection.addAllPropertyTypes( actualPropertyTypes );
       serializedCollection.addAllBuilderTypes( actualBuilderTypes );
+      serializedCollection.addAllBuilderObjects( actualObjects );
       
       File testFile = folder.newFile();
-      SerializationSystem.saveToFile( serializedCollection, testFile, XmlObjectBuilderSystemWrapper.class, XmlPropertyTypeImpl.class, XmlBuilderTypeImpl.class );
+      SerializationSystem.saveToFile( 
+               serializedCollection, 
+               testFile, 
+               XmlObjectBuilderSystemWrapper.class, 
+               XmlPropertyTypeImpl.class, 
+               XmlBuilderTypeImpl.class, 
+               XmlBuilderObjectImpl.class 
+      );
       
       XmlObjectBuilderSystemWrapper parsedSystem = SerializationSystem.loadWrapperFromFile( 
-               XmlObjectBuilderSystemWrapper.class, testFile, XmlObjectBuilderSystemWrapper.class, XmlPropertyTypeImpl.class, XmlBuilderTypeImpl.class );
+               XmlObjectBuilderSystemWrapper.class, 
+               testFile, 
+               XmlObjectBuilderSystemWrapper.class, 
+               XmlPropertyTypeImpl.class, 
+               XmlBuilderTypeImpl.class,
+               XmlBuilderObjectImpl.class
+      );
       Assert.assertNotNull( parsedSystem );
       
       List< PropertyType > parsedPropertyTypes = parsedSystem.retrievePropertyTypes();
@@ -76,6 +102,9 @@ public class ObjectBuilderSystemSerializationTest {
 
       List< BuilderType > parsedBuilderTypes = parsedSystem.retrieveBuilderTypes();
       SerializableBuilderTypeTest.assertBuiderTypes( actualBuilderTypes, parsedBuilderTypes );
+      
+      List< BuilderObject > parsedBuilderObjects = parsedSystem.retrieveBuilderObjects();
+      SerializableBuilderObjectTest.assertBuilderObjectLists( actualObjects, parsedBuilderObjects );
    }// End Method
 
 }// End Class

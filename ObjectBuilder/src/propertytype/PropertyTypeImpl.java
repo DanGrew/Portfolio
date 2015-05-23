@@ -7,6 +7,8 @@
  */
 package propertytype;
 
+import java.io.Serializable;
+
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
 import model.singleton.SingletonImpl;
@@ -52,7 +54,11 @@ public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > 
     * {@inheritDoc}
     */
    @Override public boolean isCorrectType( Object value ) {
-      return typeClass.getTypeClass().isAssignableFrom( value.getClass() );
+      if ( value != null ) {
+         return typeClass.getTypeClass().isAssignableFrom( value.getClass() );
+      } else {
+         return false;
+      }
    }// End Method
    
    /**
@@ -88,6 +94,20 @@ public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > 
          return true;
       }
       return false;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Serializable serialize( Object value ) {
+      return typeClass.serialize( value );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Object deserialize( Serializable value ) {
+      return typeClass.deserialize( value );
    }// End Method
    
    /**

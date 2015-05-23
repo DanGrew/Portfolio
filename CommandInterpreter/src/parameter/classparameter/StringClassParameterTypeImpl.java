@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * Extension of {@link ClassParameterType} for {@link String}s.
  */
-public class StringClassParameterTypeImpl extends ClassParameterTypeImpl< String > {
+public class StringClassParameterTypeImpl extends ClassParameterTypeImpl {
 
    /**
     * Constructs a new {@link StringClassParameterTypeImpl}.

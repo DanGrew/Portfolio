@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * {@link Number} extension for the {@link ClassParameterType}.
  */
-public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl< Number > {
+public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl {
 
    /**
     * Constructs a new {@link NumberClassParameterTypeImpl}.
@@ -32,7 +32,11 @@ public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl< Number
     * {@inheritDoc}
     */
    @Override public Object deserialize( Serializable object ) {
-      return Double.valueOf( object.toString() );
+      if ( object != null ) {
+         return Double.valueOf( object.toString() );
+      } else {
+         return null;
+      }
    }// End Method
 
 }// End Class
