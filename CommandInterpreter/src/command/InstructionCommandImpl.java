@@ -10,7 +10,7 @@ package command;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
-import parameter.CommandParameters;
+import parameter.wrapper.CommandParameters;
 
 /**
  * The {@link InstructionCommandImpl} provides an implementaton of the {@link Command} to 

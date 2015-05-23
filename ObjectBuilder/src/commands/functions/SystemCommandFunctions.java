@@ -18,12 +18,13 @@ import object.BuilderObject;
 import object.XmlBuilderObjectImpl;
 import objecttype.BuilderType;
 import objecttype.XmlBuilderTypeImpl;
-import parameter.CommandParameters;
+import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
 import propertytype.XmlPropertyTypeImpl;
 import serialization.XmlObjectBuilderSystemWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
+
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.SystemCommands;

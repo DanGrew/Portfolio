@@ -113,5 +113,18 @@ public class BuilderObjectCommandsTest {
       Assert.assertNull( result );
       command.resetParameters();
    }// End Method
+   
+   /**
+    * Method to test the setting of a {@link Number} {@link PropertyType}.
+    */
+   @Test public void executeSetNumberPropertyTest(){
+      final Number testValue = 26;
+      Command< BuilderObject > command = BuilderObjectCommands.SET_PROPERTY_COMMAND;
+      BuilderObject resultObject = command.execute( 
+               "SetProperty " + TEST_OBJECT_TYPE + " " + TEST_PROPERTY_TYPE_OBJECT + " " + testValue ).getResult();  
+      Assert.assertNotNull( resultObject );
+      Assert.assertEquals( TEST_OBJECT_TYPE_OBJECT, resultObject );
+      Assert.assertEquals( testValue, resultObject.get( TEST_PROPERTY_TYPE_OBJECT ) );
+   }// End Method
 
 }// End Class

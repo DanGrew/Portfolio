@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package parameter;
+package parameter.wrapper;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -13,71 +13,59 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
 
+import parameter.CommandParameter;
 import command.Command;
 
 /**
- * The {@link CommandParameters} provides a wrapper for the {@link CommandParameter}s needed for a {@link Command}.
+ * The {@link LinkedMapParametersImpl} provides a wrapper for the {@link CommandParameter}s needed for a {@link Command}.
  * This is used for executing {@link Function}s and providing controlled access to the {@link CommandParameter}s.
  */
-public class CommandParameters implements Iterable< CommandParameter >{
+public class LinkedMapParametersImpl implements CommandParameters{
    
    private Map< CommandParameter, Object > parameters;
    
    /**
-    * Constructs a new {@link CommandParameters}.
+    * Constructs a new {@link LinkedMapParametersImpl}.
     */
-   public CommandParameters(){
+   public LinkedMapParametersImpl(){
       parameters = new LinkedHashMap< CommandParameter, Object >();
    }// End Constructor
    
    /**
-    * Method to apply the given {@link CommandParameter}s to this {@link CommandParameters}. This will assume
-    * null values until parameterized.
-    * @param parameters the array of {@link CommandParameter}s.
+    * {@inheritDoc}
     */
-   public void applyParameters( CommandParameter... parameters ) {
+   @Override public void applyParameters( CommandParameter... parameters ) {
       for ( CommandParameter parameter : parameters ) {
          setParameter( parameter, null );
       }
    }// End Method
    
    /**
-    * Setter for the value associated with the given {@link CommandParameter}.
-    * @param parameter the {@link CommandParameter} to set.
-    * @param value the value of the {@link CommandParameter}.
+    * {@inheritDoc}
     */
-   public void setParameter( CommandParameter parameter, Object value ){
+   @Override public void setParameter( CommandParameter parameter, Object value ){
       parameters.put( parameter, value );
    }// End Method
    
    /**
-    * Getter for the value associated with the given {@link CommandParameter}.
-    * @param parameter the {@link CommandParameter} in question.
-    * @return the associated value.
+    * {@inheritDoc}
     */
-   public Object getParameter( CommandParameter parameter ) {
+   @Override public Object getParameter( CommandParameter parameter ) {
       return parameters.get( parameter );
    }// End Method
    
    /**
-    * Getter for the value associated with the given {@link CommandParameter} when the exact type
-    * is known.
-    * @param parameter the {@link CommandParameter} in quesiton.
-    * @param expected the expected {@link Class} of the value.
-    * @return the associated value in the correct type.
+    * {@inheritDoc}
     */
    @SuppressWarnings("unchecked") 
-   public < TypeT > TypeT getExpectedParameter( CommandParameter parameter, Class< TypeT > expected ) {
+   @Override public < TypeT > TypeT getExpectedParameter( CommandParameter parameter, Class< TypeT > expected ) {
       return ( TypeT )getParameter( parameter );
    }// End Method
    
    /**
-    * Method to determine whether the separated parts of the expression match the {@link CommandParameter}s
-    * associated.
-    * @param expressionParts the {@link String} parts of the expression.
-    * @return true if all parts completely match other than the last which only has to partially match.
+    * {@inheritDoc}
     */
-   public boolean partialMatches( String[] expressionParts ) {
+   @Override public boolean partialMatches( String[] expressionParts ) {
       if ( expressionParts.length == 0 ) {
          return true;
       } else if ( expressionParts.length > parameters.size() ) {
@@ -99,12 +87,9 @@ public class CommandParameters implements Iterable< CommandParameter >{
    }// End Method
    
    /**
-    * Method to determine whether the separated parts of the expression match the {@link CommandParameter}s
-    * associated exactly.
-    * @param expressionParts the {@link String} parts of the expression.
-    * @return true if all parts completely match.
+    * {@inheritDoc}
     */
-   public boolean completeMatches( String[] expressionParts ) {
+   @Override public boolean completeMatches( String[] expressionParts ) {
       if ( expressionParts.length == 0 ) {
          return false;
       } else if ( expressionParts.length != parameters.size() ) {
@@ -122,10 +107,9 @@ public class CommandParameters implements Iterable< CommandParameter >{
    }// End Method
    
    /**
-    * Method to parameterize the {@link CommandParameter}s with the parts of the expression input.
-    * @param expressionParts the {@link String} parts of the expression providing the parameters.
+    * {@inheritDoc}
     */
-   public void parameterize( String[] expressionParts ) {
+   @Override public void parameterize( String[] expressionParts ) {
       if ( expressionParts.length == 0 ) {
          return;
       } else if ( expressionParts.length > parameters.size() ) {
@@ -141,12 +125,9 @@ public class CommandParameters implements Iterable< CommandParameter >{
    }// End Method
    
    /**
-    * Method to suggest a auto completion for the given parameters. This specifically looks at the
-    * last parameters and attempts to auto complete that.
-    * @param parameterValues the {@link String} parameters input.
-    * @return the suggestion.
+    * {@inheritDoc}
     */
-   public String autoComplete( String[] parameterValues ) {
+   @Override public String autoComplete( String[] parameterValues ) {
       if ( parameterValues.length == 0 ) {
          return null;
       } else if ( parameterValues.length > parameters.size() ) {
@@ -162,11 +143,9 @@ public class CommandParameters implements Iterable< CommandParameter >{
    }// End Method
    
    /**
-    * Method to determine whether the {@link CommandParameters} has complete values for {@link CommandParameter}s
-    * associated.
-    * @return true if all {@link CommandParameter}s are parameterized.
+    * {@inheritDoc}
     */
-   public boolean isComplete(){
+   @Override public boolean isComplete(){
       for ( Entry< CommandParameter, Object > entry : parameters.entrySet() ) {
          if ( entry.getValue() == null ) {
             return false;
@@ -176,9 +155,9 @@ public class CommandParameters implements Iterable< CommandParameter >{
    }// End Method
    
    /**
-    * Method to reset all values associated with {@link CommandParameter}s.
+    * {@inheritDoc}
     */
-   public void reset(){
+   @Override public void reset(){
       for ( Entry< CommandParameter, Object > entry : parameters.entrySet() ) {
          entry.setValue( null );
       }

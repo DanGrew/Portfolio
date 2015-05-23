@@ -10,8 +10,8 @@ package defaults;
 import parameter.BooleanParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterImpl;
-import parameter.CommandParameters;
 import parameter.NumberParameterImpl;
+import parameter.wrapper.CommandParameters;
 
 import command.Command;
 import command.CommandResultImpl;

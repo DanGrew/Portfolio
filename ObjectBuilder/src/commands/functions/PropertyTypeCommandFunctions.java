@@ -12,11 +12,12 @@ import gui.console.ConsoleMessageImpl;
 
 import java.util.function.Function;
 
-import parameter.CommandParameters;
 import parameter.classparameter.ClassParameterType;
+import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import architecture.request.RequestSystem;
+
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.PropertyTypeCommands;

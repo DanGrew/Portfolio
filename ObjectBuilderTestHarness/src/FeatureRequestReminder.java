@@ -16,8 +16,4 @@ public class FeatureRequestReminder {
       fail( "Not yet implemented" );
    }
    
-   @Test public void builtObjectViewer() {
-      fail( "Not yet implemented" );
-   }
-   
 }

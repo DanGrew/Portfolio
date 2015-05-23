@@ -10,7 +10,8 @@ package command;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
-import parameter.CommandParameters;
+import parameter.wrapper.CommandParameters;
+import parameter.wrapper.LinkedMapParametersImpl;
 
 /**
  * The {@link ParameterizedCommandImpl} provides an implementation of the {@link Command} interface
@@ -35,7 +36,7 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
             CommandParameter... parameters 
    ) {
       super( key, description, function );
-      this.parameters = new CommandParameters();
+      this.parameters = new LinkedMapParametersImpl();
       applyParameters( parameters );
    }// End Constructor
    

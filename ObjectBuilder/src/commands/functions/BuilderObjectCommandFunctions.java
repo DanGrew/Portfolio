@@ -15,7 +15,7 @@ import java.util.function.Function;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.BuilderType;
-import parameter.CommandParameters;
+import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
 import architecture.request.RequestSystem;
 
