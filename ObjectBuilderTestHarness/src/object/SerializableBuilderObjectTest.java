@@ -20,16 +20,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import commands.parameters.ObjectBuilderClassParameterTypes;
-
-import property.Property;
-import property.PropertyImpl;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import serialization.XmlBuilderObjectWrapper;
-import serialization.XmlPropertyTypeWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
+
+import commands.parameters.ObjectBuilderClassParameterTypes;
 
 /**
  * Test for the {@link SerializableBuilderObject}.

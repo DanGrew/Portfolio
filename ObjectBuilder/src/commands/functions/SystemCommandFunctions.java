@@ -15,6 +15,7 @@ import java.util.function.Function;
 import javax.swing.JFileChooser;
 
 import object.BuilderObject;
+import object.XmlBuilderObjectImpl;
 import objecttype.BuilderType;
 import objecttype.XmlBuilderTypeImpl;
 import parameter.CommandParameters;
@@ -55,7 +56,8 @@ public class SystemCommandFunctions {
                      chooser.getSelectedFile(), 
                      XmlObjectBuilderSystemWrapper.class, 
                      XmlPropertyTypeImpl.class, 
-                     XmlBuilderTypeImpl.class 
+                     XmlBuilderTypeImpl.class,
+                     XmlBuilderObjectImpl.class
             );
             return new CommandResultImpl< Void >( 
                      new ConsoleMessageImpl( "Successfully saved!" ) 
@@ -82,7 +84,8 @@ public class SystemCommandFunctions {
                      chooser.getSelectedFile(), 
                      XmlObjectBuilderSystemWrapper.class, 
                      XmlPropertyTypeImpl.class, 
-                     XmlBuilderTypeImpl.class 
+                     XmlBuilderTypeImpl.class,
+                     XmlBuilderObjectImpl.class
             );
             return new CommandResultImpl< Void >( 
                      new ConsoleMessageImpl( "Successfully loaded data!" ) 
