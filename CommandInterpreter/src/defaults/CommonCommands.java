@@ -14,6 +14,7 @@ import parameter.NumberParameterImpl;
 import parameter.wrapper.CommandParameters;
 
 import command.Command;
+import command.CommandKeyImpl;
 import command.CommandResultImpl;
 import command.InstructionCommandImpl;
 import command.ParameterizedCommandImpl;
@@ -33,7 +34,7 @@ public class CommonCommands {
    
    private static final CommandParameter INVERT_PARAMETER = new BooleanParameterImpl();
    public static final Command< Boolean > INVERT_BOOLEAN_COMMAND = new ParameterizedCommandImpl< Boolean >(
-            "InvertBoolean",
+            new CommandKeyImpl( "InvertBoolean" ),
             "Function to invert the boolean parameter given.",
             ( CommandParameters params ) -> {
                Boolean result = !params.getExpectedParameter( INVERT_PARAMETER, Boolean.class );
@@ -44,7 +45,7 @@ public class CommonCommands {
    
    public static final CommandParameter INVERT_STRING_PARAMETER = new CommandParameterImpl();
    public static final Command< String > INVERT_STRING_CASE_COMMAND = new ParameterizedCommandImpl< String >(
-            "InvertString",
+            new CommandKeyImpl( "InvertString" ),
             "Function to invert the case of the given String.",
             ( CommandParameters params ) -> {
                String value = params.getExpectedParameter( INVERT_STRING_PARAMETER, String.class );
@@ -57,7 +58,7 @@ public class CommonCommands {
    private static final CommandParameter FIRST_OR_PARAMETER = new BooleanParameterImpl();
    private static final CommandParameter SECOND_OR_PARAMETER = new BooleanParameterImpl();
    public static final Command< Boolean > BINARY_OR_COMMAND = new ParameterizedCommandImpl< Boolean >(
-            "BinaryOr", 
+            new CommandKeyImpl( "BinaryOr" ), 
             "Function to perform the binary OR operation.", 
             ( CommandParameters params ) -> {
                Boolean first = params.getExpectedParameter( FIRST_OR_PARAMETER, Boolean.class );
@@ -70,7 +71,7 @@ public class CommonCommands {
    );
    
    public static final Command< Boolean > BINARY_XOR_COMMAND = new ParameterizedCommandImpl< Boolean >(
-            "BinaryXor", 
+            new CommandKeyImpl( "BinaryXor" ), 
             "Function to perform the binary XOR operation.", 
             ( CommandParameters params ) -> {
                Boolean first = params.getExpectedParameter( FIRST_OR_PARAMETER, Boolean.class );
@@ -85,7 +86,7 @@ public class CommonCommands {
    private static final CommandParameter FIRST_NUMBER_PARAMETER = new NumberParameterImpl();
    private static final CommandParameter SECOND_NUMBER_PARAMETER = new NumberParameterImpl();
    public static final Command< Number > ADDITION_COMMAND = new ParameterizedCommandImpl< Number >(
-            "Add",
+            new CommandKeyImpl( "Add" ),
             "Function to add two numbers together.", 
             ( CommandParameters params ) -> {
                Number first = params.getExpectedParameter( FIRST_NUMBER_PARAMETER, Number.class );

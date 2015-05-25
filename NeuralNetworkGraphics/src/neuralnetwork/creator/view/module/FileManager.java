@@ -116,9 +116,9 @@ public class FileManager< S, T extends StructuralRepresentation< S > > {
          chosen = fileChooser.showSaveDialog( null ); 
       }
       if ( chosen != null ){
-          boolean saved = SerializationSystem.saveToFile( wrapper.apply( singleton ), chosen );
+          /*boolean saved = */SerializationSystem.saveToFile( wrapper.apply( singleton ), chosen );
           EventSystem.raiseEvent( savedEvent, singleton );
-          String message = ( saved ? "Success: written to file. " : "Failed: Not writtent to file." );
+//          String message = ( saved ? "Success: written to file. " : "Failed: Not writtent to file." );
 //          Alerts.completionAlert( 
 //                   "Perceptron Save", 
 //                   "Marshalling Perceptron as XML to file.", 

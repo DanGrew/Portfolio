@@ -10,7 +10,6 @@ package architecture.data;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * The {@link DataManagementSystem} provides the interface defining access to the {@link Object}s

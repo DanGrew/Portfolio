@@ -19,7 +19,7 @@ import parameter.wrapper.CommandParameters;
  */
 public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
 
-   private String key;
+   private CommandKey key;
    private String description;
    private Function< CommandParameters, CommandResult< ReturnT > > function;
    
@@ -34,6 +34,20 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
             String description, 
             Function< CommandParameters, CommandResult< ReturnT > > function 
    ) {
+      this( new CommandKeyImpl( key ), description, function );
+   }// End Constructor
+   
+   /**
+    * Constructs a new {@link InstructionCommandImpl}.
+    * @param key the {@link CommandKey} key that must be matched.
+    * @param description a user friendly description of the {@link Command}.
+    * @param function the {@link Function} to execute.
+    */
+   public InstructionCommandImpl( 
+            CommandKey key, 
+            String description, 
+            Function< CommandParameters, CommandResult< ReturnT > > function 
+   ) {
       this.key = key;
       this.description = description;
       this.function = function;
@@ -43,7 +57,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     * {@inheritDoc}
     */
    public String getKey(){
-      return key;
+      return key.getStringKey();
    }// End Method
    
    /**
@@ -66,24 +80,14 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
-      String trimmedExpression = expression.trim();
-      String[] splitExpression = trimmedExpression.split( " " );
-      if ( splitExpression[ 0 ].length() == 0 ) {
-         return true;
-      }
-      return getKey().toLowerCase().startsWith( splitExpression[ 0 ].toLowerCase() );
+      return key.partialMatches( expression );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
-      String trimmedExpression = expression.trim();
-      String[] splitExpression = trimmedExpression.split( " " );
-      if ( splitExpression[ 0 ].length() == 0 ) {
-         return false;
-      }
-      return getKey().toLowerCase().equals( splitExpression[ 0 ].toLowerCase() );
+      return key.completeMatches( expression );
    }// End Method
    
    /**
@@ -101,21 +105,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     */
    @Override public String autoComplete( String expression ) {
       if ( partialMatches( expression ) ) {
-         return suggestKey( expression );
-      } else {
-         return null;
-      }
-   }// End Method
-   
-   /**
-    * Method to suggest the auto complete for the key if appropriate.
-    * @param expression the {@link String} expression to auto complete.
-    * @return the suggested auto completion.
-    */
-   protected String suggestKey( String expression ) {
-      String[] expressionParts = expression.trim().split( " " );
-      if ( expressionParts.length == 1 ){
-         return getKey();
+         return key.autoComplete( expression );
       } else {
          return null;
       }

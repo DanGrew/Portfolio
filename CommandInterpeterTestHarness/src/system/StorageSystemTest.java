@@ -13,9 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import architecture.request.RequestSystem;
-
 import command.Command;
-
 import defaults.CommonCommands;
 
 /**
@@ -26,7 +24,7 @@ public class StorageSystemTest {
    /**
     * Method to test that a {@link Command} can be stored and retrieved.
     */
-   @Test public void basicStorageTest() {
+   @SuppressWarnings("rawtypes") @Test public void basicStorageTest() {
       RequestSystem.store( CommonCommands.INVERT_BOOLEAN_COMMAND, Command.class );
       List< Command > result = RequestSystem.retrieveAll( 
                Command.class, 

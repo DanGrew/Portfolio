@@ -236,7 +236,6 @@ public class Perceptron {
     * Method to get the array of output values from the output layer.
     * @return the {@link Double} {@link ReadOnlyArray} of output.
     */
-   @Deprecated
    public ReadOnlyArray< Double > getOutputArray(){
       Double[] output = new Double[ outputLayer.size() ];
       int outputCount = 0;

@@ -16,4 +16,8 @@ public class FeatureRequestReminder {
       fail( "Not yet implemented" );
    }
    
+   @Test public void testCoverage(){
+      fail( "Not yet implemented" );
+   }
+   
 }

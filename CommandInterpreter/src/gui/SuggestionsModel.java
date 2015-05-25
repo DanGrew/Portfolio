@@ -9,15 +9,14 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JList;
 
 import architecture.event.EventSystem;
 import architecture.request.RequestSystem;
+
 import command.Command;
-import defaults.CommonCommands;
 
 /**
  * The {@link SuggestionsModel} supports the {@link JList} providing suggestions to the user
@@ -50,7 +49,7 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
       Command< ? > selected = parent.getSelectedValue();
       
       data.clear();
-      List< Command > commands = RequestSystem.retrieveAll( 
+      @SuppressWarnings("rawtypes") List< Command > commands = RequestSystem.retrieveAll( 
                Command.class, 
                command -> { return command.partialMatches( input ); } 
       );

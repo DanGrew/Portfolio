@@ -30,7 +30,7 @@ public class ReadOnlyArray < T > implements Iterable< T >{
     * Constructs a new {@link ReadOnlyArray} from the T objects.
     * @param values the values to use.
     */
-   public ReadOnlyArray( T... values ){
+   @SafeVarargs public ReadOnlyArray( T... values ){
       array = new ArrayList< ReadOnlyObjectProperty< T > >();
       for ( T value : values ){
          add( value );

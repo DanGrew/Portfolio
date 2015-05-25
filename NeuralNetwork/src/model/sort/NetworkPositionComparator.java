@@ -9,7 +9,6 @@ package model.sort;
 
 import java.util.Comparator;
 
-import model.singleton.Neuron;
 import model.structure.NetworkPosition;
 
 /**

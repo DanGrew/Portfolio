@@ -8,8 +8,6 @@
 package parameter.classparameter;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 
 import command.Command;
 

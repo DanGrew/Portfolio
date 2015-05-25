@@ -10,7 +10,6 @@ package command;
 import org.junit.Assert;
 import org.junit.Test;
 
-import parameter.CommandParameter;
 import defaults.CommonCommands;
 
 /**

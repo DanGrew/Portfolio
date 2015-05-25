@@ -55,7 +55,7 @@ public interface CommandParameters extends Iterable< CommandParameter >{
     * @param expressionParts the {@link String} parts of the expression.
     * @return true if all parts completely match other than the last which only has to partially match.
     */
-   public boolean partialMatches( String[] expressionParts );
+   public boolean partialMatches( String... expressionParts );
    
    /**
     * Method to determine whether the separated parts of the expression match the {@link CommandParameter}s
@@ -63,13 +63,13 @@ public interface CommandParameters extends Iterable< CommandParameter >{
     * @param expressionParts the {@link String} parts of the expression.
     * @return true if all parts completely match.
     */
-   public boolean completeMatches( String[] expressionParts );
+   public boolean completeMatches( String... expressionParts );
    
    /**
     * Method to parameterize the {@link CommandParameter}s with the parts of the expression input.
     * @param expressionParts the {@link String} parts of the expression providing the parameters.
     */
-   public void parameterize( String[] expressionParts );
+   public void parameterize( String... expressionParts );
    
    /**
     * Method to suggest a auto completion for the given parameters. This specifically looks at the
@@ -77,7 +77,7 @@ public interface CommandParameters extends Iterable< CommandParameter >{
     * @param parameterValues the {@link String} parameters input.
     * @return the suggestion.
     */
-   public String autoComplete( String[] parameterValues );
+   public String autoComplete( String... parameterValues );
    
    /**
     * Method to determine whether the {@link CommandParameters} has complete values for {@link CommandParameter}s

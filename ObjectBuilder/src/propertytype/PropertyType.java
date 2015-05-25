@@ -10,7 +10,7 @@ package propertytype;
 import java.io.Serializable;
 
 import model.singleton.Singleton;
-import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.ClassParameterType;
 import property.Property;
 
 /**

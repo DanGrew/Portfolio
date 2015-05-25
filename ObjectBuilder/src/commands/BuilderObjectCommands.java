@@ -8,8 +8,9 @@
 package commands;
 
 import object.BuilderObject;
-
 import command.Command;
+import command.CommandKey;
+import command.CommandKeyImpl;
 import command.InstructionCommandImpl;
 import command.ParameterizedCommandImpl;
 import commands.functions.BuilderObjectCommandFunctions;
@@ -20,7 +21,7 @@ import commands.parameters.BuilderObjectCommandParameters;
  */
 public class BuilderObjectCommands {
 
-   private static final String CREATE_COMMAND_KEY = "CreateObject";
+   private static final CommandKey CREATE_COMMAND_KEY = new CommandKeyImpl( "CreateObject" );
    private static final String CREATE_COMMAND_DESCRIPTION = "Function to create a new Object using a BuilderType.";
    
    public static final Command< BuilderObject > CREATE_BUILDER_OBJECT_COMMAND = new ParameterizedCommandImpl< BuilderObject >(
@@ -31,7 +32,7 @@ public class BuilderObjectCommands {
             BuilderObjectCommandParameters.BUILDER_TYPE_REFERENCE_PARAMETER
    );
    
-   private static final String SET_PROPERTY_COMMAND_KEY = "SetProperty";
+   private static final CommandKey SET_PROPERTY_COMMAND_KEY = new CommandKeyImpl( "SetProperty" );
    private static final String SET_PROPERTY_COMMAND_DESCRIPTION = "Function to set the value for a property.";
    
    public static final Command< BuilderObject > SET_PROPERTY_COMMAND = new ParameterizedCommandImpl< BuilderObject >(

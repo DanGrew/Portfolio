@@ -65,7 +65,7 @@ public class LinkedMapParametersImpl implements CommandParameters{
    /**
     * {@inheritDoc}
     */
-   @Override public boolean partialMatches( String[] expressionParts ) {
+   @Override public boolean partialMatches( String... expressionParts ) {
       if ( expressionParts.length == 0 ) {
          return true;
       } else if ( expressionParts.length > parameters.size() ) {
@@ -89,7 +89,7 @@ public class LinkedMapParametersImpl implements CommandParameters{
    /**
     * {@inheritDoc}
     */
-   @Override public boolean completeMatches( String[] expressionParts ) {
+   @Override public boolean completeMatches( String... expressionParts ) {
       if ( expressionParts.length == 0 ) {
          return false;
       } else if ( expressionParts.length != parameters.size() ) {
@@ -109,7 +109,7 @@ public class LinkedMapParametersImpl implements CommandParameters{
    /**
     * {@inheritDoc}
     */
-   @Override public void parameterize( String[] expressionParts ) {
+   @Override public void parameterize( String... expressionParts ) {
       if ( expressionParts.length == 0 ) {
          return;
       } else if ( expressionParts.length > parameters.size() ) {
@@ -127,7 +127,7 @@ public class LinkedMapParametersImpl implements CommandParameters{
    /**
     * {@inheritDoc}
     */
-   @Override public String autoComplete( String[] parameterValues ) {
+   @Override public String autoComplete( String... parameterValues ) {
       if ( parameterValues.length == 0 ) {
          return null;
       } else if ( parameterValues.length > parameters.size() ) {

@@ -11,16 +11,10 @@ import gui.console.Console;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
 import command.Command;
-
-import defaults.CommandActions;
 
 /**
  * The {@link CommandPrompt} represents the overall panel for using {@link Command}s.
