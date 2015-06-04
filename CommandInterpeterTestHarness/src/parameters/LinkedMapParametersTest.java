@@ -69,15 +69,15 @@ public class LinkedMapParametersTest {
       Mockito.when( testParameter2.partialMatches( Mockito.anyString() ) ).thenReturn( true );
       
       Assert.assertFalse( parameters.partialMatches( "Anything" ) );
-      Assert.assertFalse( parameters.partialMatches( "" ) );
-      Assert.assertFalse( parameters.partialMatches( "Anything", "Twice" ) );
+      Assert.assertTrue( parameters.partialMatches( "" ) );
+      Assert.assertFalse( parameters.partialMatches( "Anything Twice" ) );
 
       Mockito.when( testParameter1.partialMatches( Mockito.anyString() ) ).thenReturn( true );
       Mockito.when( testParameter1.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       
       Assert.assertTrue( parameters.partialMatches( "Anything" ) );
       Assert.assertTrue( parameters.partialMatches( "" ) );
-      Assert.assertTrue( parameters.partialMatches( "Anything", "Twice" ) );
+      Assert.assertTrue( parameters.partialMatches( "Anything Twice" ) );
    }// End Method
    
    /**
@@ -89,7 +89,7 @@ public class LinkedMapParametersTest {
       
       Assert.assertFalse( parameters.completeMatches( "Anything" ) );
       Assert.assertFalse( parameters.completeMatches( "" ) );
-      Assert.assertFalse( parameters.completeMatches( "Anything", "Twice" ) );
+      Assert.assertFalse( parameters.completeMatches( "Anything Twice" ) );
 
       Mockito.when( testParameter1.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       
@@ -98,7 +98,7 @@ public class LinkedMapParametersTest {
       //No input
       Assert.assertFalse( parameters.completeMatches( "" ) );
       //Complete for requirements of params.
-      Assert.assertTrue( parameters.completeMatches( "Anything", "Twice" ) );
+      Assert.assertTrue( parameters.completeMatches( "Anything Twice" ) );
    }// End Method
    
    /**
@@ -113,7 +113,7 @@ public class LinkedMapParametersTest {
       
       Assert.assertEquals( SUGGESTION, parameters.autoComplete( "Anything" ) );
       Assert.assertEquals( SUGGESTION, parameters.autoComplete( "" ) );
-      Assert.assertEquals( SUGGESTION2, parameters.autoComplete( "Anything", "Twice" ) );
+      Assert.assertEquals( SUGGESTION2, parameters.autoComplete( "Anything Twice" ) );
    }// End Method
    
    /**
@@ -125,7 +125,7 @@ public class LinkedMapParametersTest {
       
       final String FIRST_VALUE = "Anything";
       final String SECOND_VALUE = "Twice";
-      parameters.parameterize( FIRST_VALUE, SECOND_VALUE );
+      parameters.parameterize( FIRST_VALUE + " " + SECOND_VALUE );
       Assert.assertEquals( FIRST_VALUE, parameters.getParameter( testParameter1 ) );
       Assert.assertEquals( SECOND_VALUE, parameters.getParameter( testParameter2 ) );
    }// End Method

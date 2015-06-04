@@ -111,8 +111,8 @@ public class SerializableBuilderTypeTest {
    public static void assertBuiderTypes( List< BuilderType > actualTypes, List< BuilderType > parsedTypes ) {
       Assert.assertEquals( actualTypes.size(), parsedTypes.size() );
       for ( int i = 0; i < actualTypes.size(); i++ ) {
-         BuilderType expected = actualTypes.get( 0 );
-         BuilderType parsed = parsedTypes.get( 0 );
+         BuilderType expected = actualTypes.get( i );
+         BuilderType parsed = parsedTypes.get( i );
          Assert.assertEquals( expected.getIdentification(), parsed.getIdentification() );
          
          List< PropertyType > expectedPropertyTypes = expected.getPropertyTypes();

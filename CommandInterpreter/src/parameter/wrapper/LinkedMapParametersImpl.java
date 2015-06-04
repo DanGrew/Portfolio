@@ -32,6 +32,19 @@ public class LinkedMapParametersImpl implements CommandParameters{
    }// End Constructor
    
    /**
+    * Method to identify the {@link CommandParameter}s provided in the given {@link String}
+    * expression input.
+    * @param expression the input provided that should match the {@link Command} syntax.
+    * @return an array of {@link String} parameters.
+    */
+   private String[] identifyParameters( String expression ) {
+      String[] parts = expression.trim().split( " " );
+      String[] parameterValues = new String[ parts.length ];
+      System.arraycopy( parts, 0, parameterValues, 0, parameterValues.length );
+      return parameterValues;
+   }// End Method
+   
+   /**
     * {@inheritDoc}
     */
    @Override public void applyParameters( CommandParameter... parameters ) {
@@ -57,16 +70,18 @@ public class LinkedMapParametersImpl implements CommandParameters{
    /**
     * {@inheritDoc}
     */
-   @SuppressWarnings("unchecked") 
    @Override public < TypeT > TypeT getExpectedParameter( CommandParameter parameter, Class< TypeT > expected ) {
-      return ( TypeT )getParameter( parameter );
+      return expected.cast( getParameter( parameter ) );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public boolean partialMatches( String... expressionParts ) {
+   @Override public boolean partialMatches( String expression ) {
+      String[] expressionParts = identifyParameters( expression );
       if ( expressionParts.length == 0 ) {
+         return true;
+      } else if ( expressionParts.length == 1 && expressionParts[ 0 ].isEmpty() ) {
          return true;
       } else if ( expressionParts.length > parameters.size() ) {
          return false;
@@ -89,7 +104,8 @@ public class LinkedMapParametersImpl implements CommandParameters{
    /**
     * {@inheritDoc}
     */
-   @Override public boolean completeMatches( String... expressionParts ) {
+   @Override public boolean completeMatches( String expression ) {
+      String[] expressionParts = identifyParameters( expression );
       if ( expressionParts.length == 0 ) {
          return false;
       } else if ( expressionParts.length != parameters.size() ) {
@@ -109,7 +125,8 @@ public class LinkedMapParametersImpl implements CommandParameters{
    /**
     * {@inheritDoc}
     */
-   @Override public void parameterize( String... expressionParts ) {
+   @Override public void parameterize( String expression ) {
+      String[] expressionParts = identifyParameters( expression );
       if ( expressionParts.length == 0 ) {
          return;
       } else if ( expressionParts.length > parameters.size() ) {
@@ -127,18 +144,19 @@ public class LinkedMapParametersImpl implements CommandParameters{
    /**
     * {@inheritDoc}
     */
-   @Override public String autoComplete( String... parameterValues ) {
-      if ( parameterValues.length == 0 ) {
+   @Override public String autoComplete( String expression ) {
+      String[] expressionParts = identifyParameters( expression );
+      if ( expressionParts.length == 0 ) {
          return null;
-      } else if ( parameterValues.length > parameters.size() ) {
+      } else if ( expressionParts.length > parameters.size() ) {
          return null;
       } else {
          Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
-         for ( int i = 0; i < parameterValues.length - 1; i++ ) {
+         for ( int i = 0; i < expressionParts.length - 1; i++ ) {
             paramIterator.next();
          }
          CommandParameter parameter = paramIterator.next();
-         return parameter.autoComplete( parameterValues[ parameterValues.length - 1 ] );
+         return parameter.autoComplete( expressionParts[ expressionParts.length - 1 ] );
       }
    }// End Method
    

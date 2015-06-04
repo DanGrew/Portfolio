@@ -16,6 +16,7 @@ import org.junit.Test;
 import parameter.BooleanParameterImpl;
 import parameter.ClassParameterImpl;
 import parameter.CommandParameter;
+import parameter.NumberParameterImpl;
 import parameter.SingletonReferenceParameterImpl;
 import test.model.TestObjects.AnotherTestSingletonImpl;
 import test.model.TestObjects.TestSingleton;
@@ -42,7 +43,7 @@ public class CommandParametersTest {
     * Method to test that a {@link BooleanParameterImpl} uses {@link Class}es correctly.
     */
    @Test public void booleanParameterTest() {
-      CommandParameter parameter = new ClassParameterImpl();
+      CommandParameter parameter = new BooleanParameterImpl();
       Assert.assertTrue( parameter.partialMatches( "Tr" ) );
       
       Assert.assertTrue( parameter.completeMatches( "True" ) );
@@ -67,7 +68,7 @@ public class CommandParametersTest {
     * Method to test that a {@link NumberParameterImpl} uses {@link Class}es correctly.
     */
    @Test public void numberParameterTest() {
-      CommandParameter parameter = new ClassParameterImpl();
+      CommandParameter parameter = new NumberParameterImpl();
       Assert.assertTrue( parameter.partialMatches( "12345" ) );
       
       Assert.assertTrue( parameter.completeMatches( "123" ) );

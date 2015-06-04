@@ -131,7 +131,7 @@ public class ParameterizedCommandsTest {
       command.resetParameters();
       Assert.assertEquals( "test", command.execute( "invertstring Test" ).getResult() );
       command.resetParameters();
-      Assert.assertNull( command.execute( "invertstring " ) );
+      Assert.assertNotNull( command.execute( "invertstring " ) );
       command.resetParameters();
       Assert.assertNull( command.execute( "invertstring tr fa" ) );
       command.resetParameters();

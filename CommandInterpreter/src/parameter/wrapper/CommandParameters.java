@@ -52,32 +52,32 @@ public interface CommandParameters extends Iterable< CommandParameter >{
    /**
     * Method to determine whether the separated parts of the expression match the {@link CommandParameter}s
     * associated.
-    * @param expressionParts the {@link String} parts of the expression.
+    * @param expression the {@link String} expression containing only the remaining {@link CommandParameter}s to parse.
     * @return true if all parts completely match other than the last which only has to partially match.
     */
-   public boolean partialMatches( String... expressionParts );
+   public boolean partialMatches( String expression );
    
    /**
     * Method to determine whether the separated parts of the expression match the {@link CommandParameter}s
     * associated exactly.
-    * @param expressionParts the {@link String} parts of the expression.
+    * @param expression the {@link String} expression containing only the remaining {@link CommandParameter}s to parse.
     * @return true if all parts completely match.
     */
-   public boolean completeMatches( String... expressionParts );
+   public boolean completeMatches( String expression );
    
    /**
     * Method to parameterize the {@link CommandParameter}s with the parts of the expression input.
-    * @param expressionParts the {@link String} parts of the expression providing the parameters.
+    * @param expression the {@link String} expression containing only the remaining {@link CommandParameter}s to parse.
     */
-   public void parameterize( String... expressionParts );
+   public void parameterize( String expression );
    
    /**
     * Method to suggest a auto completion for the given parameters. This specifically looks at the
     * last parameters and attempts to auto complete that.
-    * @param parameterValues the {@link String} parameters input.
+    * @param expression the {@link String} expression containing only the remaining {@link CommandParameter}s to parse.
     * @return the suggestion.
     */
-   public String autoComplete( String... parameterValues );
+   public String autoComplete( String expression );
    
    /**
     * Method to determine whether the {@link CommandParameters} has complete values for {@link CommandParameter}s

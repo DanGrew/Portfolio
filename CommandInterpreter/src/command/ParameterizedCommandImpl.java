@@ -41,6 +41,19 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    }// End Constructor
    
    /**
+    * Simple method to extract the key from the given expression. This should be revisited 
+    * to use the {@link CommandKey}.
+    * @param expression the {@link String} expression to extract from.
+    * @return the {@link String} expression without the key.
+    */
+   private String extractKey( String expression ) {
+      String[] parts = expression.trim().split( " " );
+      String[] parameterValues = new String[ parts.length - 1 ];
+      System.arraycopy( parts, 1, parameterValues, 0, parameterValues.length );
+      return String.join( " ", parameterValues );
+   }// End Method
+   
+   /**
     * Method to apply {@link CommandParameter}s to the {@link Command}.
     * @param parameters the {@link CommandParameter}s to apply.
     */
@@ -49,25 +62,11 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    }// End Method
    
    /**
-    * Method to identify the {@link CommandParameter}s provided in the given {@link String}
-    * expression input.
-    * @param expression the input provided that should match the {@link Command} syntax.
-    * @return an array of {@link String} parameters.
-    */
-   private String[] identifyParameters( String expression ) {
-      String[] parts = expression.trim().split( " " );
-      String[] parameterValues = new String[ parts.length - 1 ];
-      System.arraycopy( parts, 1, parameterValues, 0, parameterValues.length );
-      return parameterValues;
-   }// End Method
-   
-   /**
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
       if ( super.partialMatches( expression ) ) {
-         String[] parameterValues = identifyParameters( expression );
-         return parameters.partialMatches( parameterValues );
+         return parameters.partialMatches( extractKey( expression ) );
       }
       return false;
    }// End Method
@@ -76,9 +75,8 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
-      if ( super.partialMatches( expression ) ) {
-         String[] parameterValues = identifyParameters( expression );
-         return parameters.completeMatches( parameterValues );
+      if ( super.completeMatches( expression ) ) {
+         return parameters.completeMatches( extractKey( expression ) );
       }
       return false;
    }// End Method
@@ -96,8 +94,7 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     */
    @Override public void parameterize( String expression ) {
       super.parameterize( expression );
-      String[] parameterValues = identifyParameters( expression );
-      parameters.parameterize( parameterValues );
+      parameters.parameterize( extractKey( expression ) );
    }// End Method
    
    /**
@@ -106,8 +103,7 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    @Override public String autoComplete( String expression ) {
       String[] expressionParts = expression.trim().split( " " );
       if ( expressionParts.length > 1 ) {
-         String[] parameterValues = identifyParameters( expression );
-         String suggestion = parameters.autoComplete( parameterValues );
+         String suggestion = parameters.autoComplete( extractKey( expression ) );
          if ( suggestion == null ) {
             return expression;
          } else {
