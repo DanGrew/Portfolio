@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import parameter.BooleanParameterImpl;
 import parameter.ClassParameterImpl;
 import parameter.CommandParameter;
 import parameter.SingletonReferenceParameterImpl;
@@ -38,6 +39,19 @@ public class CommandParametersTest {
    }// End Method
 
    /**
+    * Method to test that a {@link BooleanParameterImpl} uses {@link Class}es correctly.
+    */
+   @Test public void booleanParameterTest() {
+      CommandParameter parameter = new ClassParameterImpl();
+      Assert.assertTrue( parameter.partialMatches( "Tr" ) );
+      
+      Assert.assertTrue( parameter.completeMatches( "True" ) );
+      Assert.assertTrue( parameter.completeMatches( "true" ) );
+      Assert.assertFalse( parameter.completeMatches( "alse" ) );
+      Assert.assertFalse( parameter.completeMatches( "Fjalse" ) );
+   }// End Method
+   
+   /**
     * Method to test that a {@link ClassParameterImpl} uses {@link Class}es correctly.
     */
    @Test public void classParameterTest() {
@@ -47,6 +61,19 @@ public class CommandParametersTest {
       Assert.assertTrue( parameter.completeMatches( "String" ) );
       Assert.assertTrue( parameter.completeMatches( "Number" ) );
       Assert.assertFalse( parameter.completeMatches( "dsjdn" ) );
+   }// End Method
+   
+   /**
+    * Method to test that a {@link NumberParameterImpl} uses {@link Class}es correctly.
+    */
+   @Test public void numberParameterTest() {
+      CommandParameter parameter = new ClassParameterImpl();
+      Assert.assertTrue( parameter.partialMatches( "12345" ) );
+      
+      Assert.assertTrue( parameter.completeMatches( "123" ) );
+      Assert.assertTrue( parameter.completeMatches( "54.56" ) );
+      Assert.assertFalse( parameter.completeMatches( "false" ) );
+      Assert.assertFalse( parameter.completeMatches( "something" ) );
    }// End Method
 
    /**

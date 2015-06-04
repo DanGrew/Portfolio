@@ -1,4 +1,4 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -47,11 +47,6 @@ public class FeatureRequestReminder {
    }
    
    @Test public void interfaceForCommonPartialCompleteAutoMethods(){
-      fail( "Not yet implemented" );
-   }
-   
-   @Test public void testCoverage(){
-      //ParameterizedCommandImpl onwards.
       fail( "Not yet implemented" );
    }
 }

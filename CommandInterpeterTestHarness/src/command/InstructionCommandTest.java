@@ -48,11 +48,9 @@ public class InstructionCommandTest {
    @Test public void assertPartialMatches(){
       Mockito.when( key.partialMatches( Mockito.anyString() ) ).thenReturn( true );
       Assert.assertTrue( command.partialMatches( "Anything" ) );
-      Assert.assertTrue( command.partialMatches( "Something Else" ) );
       
       Mockito.when( key.partialMatches( Mockito.anyString() ) ).thenReturn( false );
       Assert.assertFalse( command.partialMatches( "Anything" ) );
-      Assert.assertFalse( command.partialMatches( "Something Else" ) );
    }// End Method
    
    /**
@@ -61,11 +59,9 @@ public class InstructionCommandTest {
    @Test public void assertCompleteMatches(){
       Mockito.when( key.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       Assert.assertTrue( command.completeMatches( "Anything" ) );
-      Assert.assertTrue( command.completeMatches( "Something Else" ) );
       
       Mockito.when( key.completeMatches( Mockito.anyString() ) ).thenReturn( false );
       Assert.assertFalse( command.completeMatches( "Anything" ) );
-      Assert.assertFalse( command.completeMatches( "Something Else" ) );
    }// End Method
 
    /**
