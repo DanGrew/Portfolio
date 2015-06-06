@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import parameter.CommandParameter;
 import parameter.ReferenceObjectParameterImpl;
-import parameter.SingletonReferenceParameterImpl;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
 import architecture.request.RequestSystem;
