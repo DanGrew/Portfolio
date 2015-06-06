@@ -25,4 +25,8 @@ public class ReferenceObjectParameterImpl implements CommandParameter {
       return null;
    }
 
+   @Override public String extractInput( String expression ) {
+      return null;
+   }
+
 }

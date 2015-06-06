@@ -51,9 +51,10 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
       for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
          List< ? extends Singleton< ? > > matching = RequestSystem.retrieveAll( 
-                  clazz, object -> object.getIdentification().startsWith( expression ) 
+                  clazz, object -> object.getIdentification().startsWith( parameter ) 
          );
          boolean exists = matching.size() > 0;
          if ( exists ){
@@ -67,9 +68,10 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
       for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
          Singleton< ? > match = RequestSystem.retrieve( 
-                  clazz, expression 
+                  clazz, parameter 
          );
          if ( match != null ){
             return true;
@@ -82,9 +84,10 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public Object parseObject( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
       for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
          Singleton< ? > match = RequestSystem.retrieve( 
-                  clazz, expression 
+                  clazz, parameter 
          );
          if ( match != null ){
             return match;
@@ -97,9 +100,13 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public String autoComplete( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      if ( parameter.length() == 0 ) {
+         return null;
+      }
       for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
          List< ? extends Singleton< ? > > matching = RequestSystem.retrieveAll( 
-                  clazz, object -> object.getIdentification().startsWith( expression ) 
+                  clazz, object -> object.getIdentification().startsWith( parameter ) 
          );
          boolean exactMatch = matching.size() == 1;
          if ( exactMatch ){
@@ -107,6 +114,14 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
          }
       }
       return null;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String extractInput( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return CommandParameterParseUtilities.reduce( expression, parameter );
    }// End Method
 
 }// End Class
