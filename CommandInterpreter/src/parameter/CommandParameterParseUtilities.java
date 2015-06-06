@@ -46,6 +46,11 @@ public class CommandParameterParseUtilities {
          String[] parameters = new String[ expectedParameters ];
          System.arraycopy( parts, 0, parameters, 0, expectedParameters );
          return parameters;
+      } else if ( parts.length < expectedParameters ){
+         String[] parameters = new String[ expectedParameters ];
+         System.arraycopy( parts, 0, parameters, 0, parts.length );
+         Arrays.fill( parameters, parts.length, expectedParameters, "" );
+         return parameters;
       } else {
          String[] result = new String[ expectedParameters ];
          Arrays.fill( result, "" );

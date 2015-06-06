@@ -80,6 +80,23 @@ public class CommandParameterParseUtilitiesTest {
    }// End Method
    
    /**
+    * Method to test that the parameters available should be identified even when not all are available.
+    */
+   @Test public void shouldIdentifyParametersWhenNotAllProvided(){
+      String[] result = CommandParameterParseUtilities.parseParameters( 
+               CommandParameterParseUtilities.delimiter(), 
+               4, 
+               "not enough parameters"
+      );
+      Assert.assertNotNull( result );
+      Assert.assertEquals( 4, result.length );
+      Assert.assertEquals( "not", result[ 0 ] );
+      Assert.assertEquals( "enough", result[ 1 ] );
+      Assert.assertEquals( "parameters", result[ 2 ] );
+      Assert.assertEquals( "", result[ 3 ] );
+   }// End Method
+   
+   /**
     * Method to test that the parameters parsed match the input.
     * @param numberOfParameters the number of parameters to parse.
     * @param parameters the parameters in the input.
@@ -110,8 +127,13 @@ public class CommandParameterParseUtilitiesTest {
       );
       Assert.assertNotNull( result );
       Assert.assertEquals( numberOfParameters, result.length );
-      for ( int i = 0; i < numberOfParameters; i++ ) {
-         Assert.assertEquals( "", result[ i ] );
+      
+      int count = 0;
+      for ( ; count < parameters.length; count++ ) {
+         Assert.assertEquals( parameters[ count ], result[ count ] );
+      }
+      for ( ; count < numberOfParameters; count ++ ) {
+         Assert.assertEquals( "", result[ count ] );
       }
    }// End Method
 

@@ -59,7 +59,10 @@ public interface CommandParameter {
     * @param expression the input entered for the {@link Command}.
     * @return the expression minus the parameter values for this {@link CommandParameter}.
     */
-   public String extractInput( String expression );
+   public default String extractInput( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return CommandParameterParseUtilities.reduce( expression, parameter );
+   }// End Method
 
 }// End Interface
 
