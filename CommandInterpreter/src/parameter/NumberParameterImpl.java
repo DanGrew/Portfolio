@@ -24,8 +24,9 @@ public class NumberParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
       try {
-         Double.valueOf( expression );
+         Double.valueOf( parameter );
          return true;
       } catch ( NumberFormatException exception ) {
          return false;
@@ -43,8 +44,9 @@ public class NumberParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public Object parseObject( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
       try {
-         Double value = Double.valueOf( expression );
+         Double value = Double.valueOf( parameter );
          return value;
       } catch ( NumberFormatException exception ) {
          return null;
@@ -56,6 +58,14 @@ public class NumberParameterImpl implements CommandParameter {
     */
    @Override public String autoComplete( String expression ) {
       return null;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String extractInput( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return CommandParameterParseUtilities.reduce( expression, parameter );
    }// End Method
 
 }// End Class
