@@ -27,25 +27,30 @@ public class BooleanParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
-      return TRUE.toLowerCase().startsWith( expression.toLowerCase() ) ||
-             FALSE.toLowerCase().startsWith( expression.toLowerCase() );
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return TRUE.toLowerCase().startsWith( parameter.toLowerCase() ) ||
+             FALSE.toLowerCase().startsWith( parameter.toLowerCase() );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
-      return TRUE.toLowerCase().equals( expression.toLowerCase() ) ||
-             FALSE.toLowerCase().equals( expression.toLowerCase() );
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return TRUE.toLowerCase().equals( parameter.toLowerCase() ) ||
+             FALSE.toLowerCase().equals( parameter.toLowerCase() );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
    @Override public Object parseObject( String expression ) {
-      if ( expression.toLowerCase().equals( TRUE.toLowerCase() ) ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      if ( parameter.length() == 0 ) {
+         return null;
+      } else if ( parameter.toLowerCase().equals( TRUE.toLowerCase() ) ) {
          return true;
-      } else if ( expression.toLowerCase().equals( FALSE.toLowerCase() ) ) {
+      } else if ( parameter.toLowerCase().equals( FALSE.toLowerCase() ) ) {
          return false;
       } else {
          return null;
@@ -56,13 +61,24 @@ public class BooleanParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public String autoComplete( String expression ) {
-      if ( TRUE.toLowerCase().startsWith( expression.toLowerCase() ) ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      if ( parameter.length() == 0 ) {
+         return null;
+      } else if ( TRUE.toLowerCase().startsWith( parameter.toLowerCase() ) ) {
          return TRUE;
-      } else if ( FALSE.toLowerCase().startsWith( expression.toLowerCase() ) ) {
+      } else if ( FALSE.toLowerCase().startsWith( parameter.toLowerCase() ) ) {
          return FALSE;
       } else {
          return null;
       }
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String extractInput( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return CommandParameterParseUtilities.reduce( expression, parameter );
    }// End Method
 
 }// End Class

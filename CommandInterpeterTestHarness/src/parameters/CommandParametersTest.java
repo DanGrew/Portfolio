@@ -40,19 +40,6 @@ public class CommandParametersTest {
    }// End Method
 
    /**
-    * Method to test that a {@link BooleanParameterImpl} uses {@link Class}es correctly.
-    */
-   @Test public void booleanParameterTest() {
-      CommandParameter parameter = new BooleanParameterImpl();
-      Assert.assertTrue( parameter.partialMatches( "Tr" ) );
-      
-      Assert.assertTrue( parameter.completeMatches( "True" ) );
-      Assert.assertTrue( parameter.completeMatches( "true" ) );
-      Assert.assertFalse( parameter.completeMatches( "alse" ) );
-      Assert.assertFalse( parameter.completeMatches( "Fjalse" ) );
-   }// End Method
-   
-   /**
     * Method to test that a {@link ClassParameterImpl} uses {@link Class}es correctly.
     */
    @Test public void classParameterTest() {

@@ -54,5 +54,12 @@ public interface CommandParameter {
     */
    public String autoComplete( String expression );
 
+   /**
+    * Method to extract the parameter values from the given expression.
+    * @param expression the input entered for the {@link Command}.
+    * @return the expression minus the parameter values for this {@link CommandParameter}.
+    */
+   public String extractInput( String expression );
+
 }// End Interface
 

@@ -1,0 +1,103 @@
+/*
+ * ----------------------------------------
+ *           Command Interpreter
+ * ----------------------------------------
+ *          Produced by Dan Grew
+ * ----------------------------------------
+ */
+package parameter;
+
+import java.util.Arrays;
+
+import command.Command;
+
+/**
+ * {@link CommandParameterParseUtilities} is responsible for providing common methods of manipulting
+ * input for {@link Command}s and {@link CommandParameter}s.
+ */
+public class CommandParameterParseUtilities {
+   
+   private static final String COMMAND_DELIMITER = " ";
+   private static final String SPACE_REGEX = "\\s+";
+   
+   /**
+    * Method to get the delimiter for {@link Command}s.
+    * @return the {@link String} delimiter.
+    */
+   public static String delimiter(){
+      return COMMAND_DELIMITER;
+   }// End Method
+   
+   /**
+    * Method to parse the parameter values for the given expression, using the given delimiter.
+    * @param delimiter the delimiter for the expression.
+    * @param expectedParameters the number of parameters expected.
+    * @param expression the expression to parse.
+    * @return an array of {@link String} values, equal to the number of expected parameters. If 
+    * not parameter value specified "" is returned in the array.
+    */
+   public static final String[] parseParameters( String delimiter, int expectedParameters, String expression ) {
+      if ( expression.startsWith( delimiter ) ) {
+         expression = expression.replaceFirst( SPACE_REGEX, "" );
+      }
+      expression = expression.replaceAll( SPACE_REGEX, " " );
+      String[] parts = expression.split( delimiter );
+      if ( parts.length >= expectedParameters ) {
+         String[] parameters = new String[ expectedParameters ];
+         System.arraycopy( parts, 0, parameters, 0, expectedParameters );
+         return parameters;
+      } else {
+         String[] result = new String[ expectedParameters ];
+         Arrays.fill( result, "" );
+         return result;
+      }
+   }// End Method
+   
+   /**
+    * Method to parse the parameter values from the given expression using the default delimiter.
+    * @param expectedParameters the number of parameters expected.
+    * @param expression the expression to parse.
+    * @return an array of {@link String} values, equal to the number of expected parameters. If 
+    * not parameter value specified "" is returned in the array.
+    * 
+    * @see CommandParameterParseUtilities#parseParameters(String, int, String).
+    * @see CommandParameterParseUtilities#delimiter().
+    */
+   public static final String[] parseParameters( int expectedParameters, String expression ) {
+      return parseParameters( delimiter(), expectedParameters, expression );
+   }// End Method
+   
+   /**
+    * Method to parse the parameter values from the given expression using the default delimiter
+    * where only one parameter is expected.
+    * @param expression the expression to parse.
+    * @return an array of {@link String} values, equal to the number of expected parameters. If 
+    * not parameter value specified "" is returned in the array.
+    * 
+    * @see CommandParameterParseUtilities#parseParameters(int, String).
+    * @see CommandParameterParseUtilities#delimiter().
+    */
+   public static final String parseSingle( String expression ) {
+      String[] result = parseParameters( 1, expression );
+      if ( result == null ) {
+         return null;
+      } else {
+         return result[ 0 ];
+      }
+   }// End Method
+   
+   /**
+    * Method to reduce the given expression by removing the given parameters.
+    * @param expression the expression containing the parameters.
+    * @param parameters the parameters to remove.
+    * @return the expression minus the given parameters.
+    */
+   public static final String reduce( String expression, String... parameters ) {
+      for ( String parameter : parameters ) {
+         expression = expression.replaceFirst( parameter, "" );
+         expression = expression.replaceFirst( SPACE_REGEX, "" );
+      }
+      return expression;
+   }// End Method
+
+}// End Class

@@ -28,6 +28,7 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
    @SuppressWarnings("unchecked") @Override public void setup() {
       key = Mockito.mock( CommandKey.class );
       function = Mockito.mock( Function.class );
+      //Mock a simple parameter and have it match anything.
       parameter = Mockito.mock( CommandParameter.class );
       Mockito.when( parameter.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       command = new ParameterizedCommandImpl< String >( key, DESCRIPTION, function, parameter );
