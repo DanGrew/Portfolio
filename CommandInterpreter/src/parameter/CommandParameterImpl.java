@@ -38,7 +38,8 @@ public class CommandParameterImpl implements CommandParameter{
     * {@inheritDoc}
     */
    @Override public Object parseObject( String expression ) {
-      return expression;
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return parameter;
    }// End Method
    
    /**
@@ -46,6 +47,14 @@ public class CommandParameterImpl implements CommandParameter{
     */
    @Override public String autoComplete( String expression ) {
       return null;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String extractInput( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return CommandParameterParseUtilities.reduce( expression, parameter );
    }// End Method
 
 }// End Class
