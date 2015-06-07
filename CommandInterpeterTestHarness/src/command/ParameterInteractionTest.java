@@ -35,6 +35,12 @@ public class ParameterInteractionTest {
       
       String suggestion = command.autoComplete( "key tr anything fa" );
       Assert.assertEquals( "Key true anything false", suggestion );
+      
+      suggestion = command.autoComplete( "k tr anything fa" );
+      Assert.assertEquals( "Key true anything false", suggestion );
+      
+      suggestion = command.autoComplete( "f tr anything fa" );
+      Assert.assertNull( suggestion );
    }// End Method
 
 }// End Class

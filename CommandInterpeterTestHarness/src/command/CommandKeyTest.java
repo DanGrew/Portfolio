@@ -68,7 +68,7 @@ public class CommandKeyTest {
       final String stringKey = "SomeCommand";
       CommandKey key = new CommandKeyImpl( stringKey );
       
-      Assert.assertNull( key.removeKeyFromInput( "Some" ) );
+      Assert.assertEquals( "", key.removeKeyFromInput( "Some" ) );
       Assert.assertEquals( "extraBit", key.removeKeyFromInput( "SomeCommand extraBit" ) );
       Assert.assertEquals( "", key.removeKeyFromInput( "SomeCommand " ) );
    }// End Method

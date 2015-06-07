@@ -110,10 +110,10 @@ public class CommandKeyImpl implements CommandKey {
     */
    @Override public String removeKeyFromInput( String expression ) {
       String keyExtract = extractKeyExpression( expression );
-      if ( completeMatchesKeyExtract( keyExtract ) ) {
-         return expression.replaceFirst( keyExtract, "" ).trim();
-      } else {
+      if ( keyExtract == null ) {
          return null;
+      } else {
+         return expression.replaceFirst( keyExtract, "" ).trim();
       }
    }// End Method
 }// End Class

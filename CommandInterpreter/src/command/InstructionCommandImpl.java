@@ -54,6 +54,14 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    }// End Constructor
    
    /**
+    * Protected method to gain access to the {@link CommandKey}.
+    * @return the {@link CommandKey}.
+    */
+   protected CommandKey getCommandKey(){
+      return key;
+   }// End Method
+   
+   /**
     * {@inheritDoc}
     */
    public String getKey(){

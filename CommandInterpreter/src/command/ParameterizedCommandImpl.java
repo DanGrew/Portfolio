@@ -42,19 +42,6 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    }// End Constructor
    
    /**
-    * Simple method to extract the key from the given expression. This should be revisited 
-    * to use the {@link CommandKey}.
-    * @param expression the {@link String} expression to extract from.
-    * @return the {@link String} expression without the key.
-    */
-   private String extractKey( String expression ) {
-      String[] parts = expression.trim().split( " " );
-      String[] parameterValues = new String[ parts.length - 1 ];
-      System.arraycopy( parts, 1, parameterValues, 0, parameterValues.length );
-      return String.join( " ", parameterValues );
-   }// End Method
-   
-   /**
     * Method to apply {@link CommandParameter}s to the {@link Command}.
     * @param parameters the {@link CommandParameter}s to apply.
     */
@@ -67,7 +54,8 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     */
    @Override public boolean partialMatches( String expression ) {
       if ( super.partialMatches( expression ) ) {
-         return parameters.partialMatches( extractKey( expression ) );
+         expression = getCommandKey().removeKeyFromInput( expression );
+         return parameters.partialMatches( expression );
       }
       return false;
    }// End Method
@@ -77,7 +65,8 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     */
    @Override public boolean completeMatches( String expression ) {
       if ( super.completeMatches( expression ) ) {
-         return parameters.completeMatches( extractKey( expression ) );
+         expression = getCommandKey().removeKeyFromInput( expression );
+         return parameters.completeMatches( expression );
       }
       return false;
    }// End Method
@@ -96,7 +85,8 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
    @Override public void parameterize( String expression ) {
       if ( completeMatches( expression ) ) {
          super.parameterize( expression );
-         parameters.parameterize( extractKey( expression ) );
+         expression = getCommandKey().removeKeyFromInput( expression );
+         parameters.parameterize( expression );
       }
    }// End Method
    
@@ -104,17 +94,17 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     * {@inheritDoc}
     */
    @Override public String autoComplete( String expression ) {
-      String[] expressionParts = expression.trim().split( " " );
-      if ( expressionParts.length > 1 ) {
-         String suggestion = parameters.autoComplete( extractKey( expression ) );
-         if ( suggestion == null ) {
-            return expression;
-         } else {
-            return getKey() + CommandParameterParseUtilities.delimiter() + suggestion; 
-         } 
-      } else {
-         return super.autoComplete( expression );
+      expression = getCommandKey().removeKeyFromInput( expression );
+      if ( expression == null ) {
+         //Does not match key.
+         return null;
       }
+      String suggestion = parameters.autoComplete( expression );
+      if ( suggestion == null ) {
+         return getKey();
+      } else {
+         return getKey() + CommandParameterParseUtilities.delimiter() + suggestion; 
+      } 
    }// End Method
    
    /**

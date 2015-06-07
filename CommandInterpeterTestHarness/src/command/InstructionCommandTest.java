@@ -31,6 +31,7 @@ public class InstructionCommandTest {
     */
    @SuppressWarnings("unchecked") @Before public void setup(){
       key = Mockito.mock( CommandKey.class );
+      
       function = Mockito.mock( Function.class );
       command = new InstructionCommandImpl< String >( key, DESCRIPTION, function );
    }// End Method
@@ -71,6 +72,7 @@ public class InstructionCommandTest {
       final String SUGGESTION = "SUGGESTION";
       Mockito.when( key.partialMatches( Mockito.anyString() ) ).thenReturn( true );
       Mockito.when( key.autoComplete( Mockito.anyString() ) ).thenReturn( SUGGESTION );
+      Mockito.when( key.getStringKey() ).thenReturn( SUGGESTION );
       Assert.assertEquals( SUGGESTION, command.autoComplete( "Anything" ) );
       Assert.assertEquals( SUGGESTION, command.autoComplete( "SomethingElse" ) );
    }// End Method

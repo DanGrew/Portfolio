@@ -29,6 +29,7 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
    @SuppressWarnings("unchecked") @Override public void setup() {
       key = Mockito.mock( CommandKey.class );
       Mockito.when( key.completeMatches( Mockito.anyString() ) ).thenReturn( true );
+      Mockito.when( key.removeKeyFromInput( Mockito.anyString() ) ).thenAnswer( TestFunctions.singleParameterExtractor() );
       function = Mockito.mock( Function.class );
       //Mock a simple parameter and have it match anything.
       parameter = Mockito.mock( CommandParameter.class );
@@ -40,7 +41,6 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
     * Method to test that a {@link Command} successfully identifies complete matches.
     */
    @Test public void assertCompleteMatches(){
-      Mockito.when( key.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       Mockito.when( parameter.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       Mockito.when( parameter.extractInput( Mockito.anyString() ) ).thenAnswer( TestFunctions.singleParameterExtractor() );
       Assert.assertTrue( command.completeMatches( "Anything withParam" ) );
@@ -66,4 +66,13 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
       Mockito.verify( function, Mockito.times( 2 ) ).apply( Mockito.anyObject() );
    }// End Method
 
+   /**
+    * Method to test that the {@link Command} auto completes.
+    */
+   @Test public void shouldAutoComplete(){
+      Mockito.when( key.getStringKey() ).thenReturn( "Anything" );
+      Mockito.when( parameter.autoComplete( Mockito.anyString() ) ).thenReturn( null );
+      Assert.assertEquals( "Anything ", command.autoComplete( "Anything f" ) );
+   }// End Method
+   
 }// End Class
