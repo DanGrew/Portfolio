@@ -52,8 +52,8 @@ public class BuilderTypeCommandsTest {
       Assert.assertTrue( command.partialMatches( "CreateBuilderType newBuilderType" ) );
       Assert.assertTrue( command.partialMatches( "CreateBuilderType " ) );
       Assert.assertTrue( command.partialMatches( "CreateBuilderType 1234" ) );
-      Assert.assertTrue( command.completeMatches( "CreateBuilderType" ) );
       
+      Assert.assertFalse( command.completeMatches( "CreateBuilderType" ) );
       Assert.assertFalse( command.partialMatches( "CreateBuilderType anything something" ) );
    }// End Method
    
@@ -70,7 +70,7 @@ public class BuilderTypeCommandsTest {
       command.resetParameters();
       
       CommandResult< BuilderType > result = command.execute( "CreateBuilderType" );
-      Assert.assertNotNull( result );
+      Assert.assertNull( result );
       command.resetParameters();
    }// End Method
    

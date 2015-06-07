@@ -70,7 +70,7 @@ public class CommandAutoCompleteTest {
       EventSystem.raiseEvent( AutoCompleteAction.Events.AutoComplete, null );
       
       Assert.assertEquals( 1, results.size() );
-      Assert.assertEquals( "binaryor true", results.get( 0 ) );
+      Assert.assertEquals( "BinaryOr true", results.get( 0 ) );
    }// End Method
    
    /**
@@ -83,7 +83,7 @@ public class CommandAutoCompleteTest {
       EventSystem.raiseEvent( AutoCompleteAction.Events.AutoComplete, null );
       
       Assert.assertEquals( 1, results.size() );
-      Assert.assertEquals( "binaryor true false", results.get( 0 ) );
+      Assert.assertEquals( "BinaryOr true false", results.get( 0 ) );
    }// End Method
    
    /**

@@ -10,6 +10,7 @@ package command;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
+import parameter.CommandParameterParseUtilities;
 import parameter.wrapper.CommandParameters;
 import parameter.wrapper.LinkedMapParametersImpl;
 
@@ -93,8 +94,10 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     * {@inheritDoc}
     */
    @Override public void parameterize( String expression ) {
-      super.parameterize( expression );
-      parameters.parameterize( extractKey( expression ) );
+      if ( completeMatches( expression ) ) {
+         super.parameterize( expression );
+         parameters.parameterize( extractKey( expression ) );
+      }
    }// End Method
    
    /**
@@ -107,8 +110,7 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
          if ( suggestion == null ) {
             return expression;
          } else {
-            expressionParts[ expressionParts.length - 1 ] = suggestion;
-            return String.join( " ", expressionParts );
+            return getKey() + CommandParameterParseUtilities.delimiter() + suggestion; 
          } 
       } else {
          return super.autoComplete( expression );

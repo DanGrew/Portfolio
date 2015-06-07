@@ -14,6 +14,8 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
+import parameter.CommandParameterParseUtilities;
+
 import command.Command;
 
 /**
@@ -78,26 +80,24 @@ public class LinkedMapParametersImpl implements CommandParameters{
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
-      String[] expressionParts = identifyParameters( expression );
-      if ( expressionParts.length == 0 ) {
+      if ( expression.trim().isEmpty() ) {
          return true;
-      } else if ( expressionParts.length == 1 && expressionParts[ 0 ].isEmpty() ) {
+      }
+      for ( CommandParameter parameter : parameters.keySet() ) {
+         if ( parameter.completeMatches( expression ) ) {
+            expression = parameter.extractInput( expression );
+            continue;
+         } else if ( parameter.partialMatches( expression ) ) {
+            expression = parameter.extractInput( expression );
+            break;
+         } else {
+            break;
+         }
+      }
+      if ( expression.trim().isEmpty() ) {
          return true;
-      } else if ( expressionParts.length > parameters.size() ) {
-         return false;
       } else {
-         Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
-         for ( int i = 0; i < expressionParts.length - 1; i++ ) {
-            CommandParameter parameter = paramIterator.next();
-            if ( !parameter.completeMatches( expressionParts[ i ] ) ) {
-               return false;
-            }
-         }
-         CommandParameter parameter = paramIterator.next();
-         if ( !parameter.partialMatches( expressionParts[ expressionParts.length - 1 ] ) ) {
-            return false;
-         }
-         return true;
+         return false;
       }
    }// End Method
    
@@ -105,20 +105,20 @@ public class LinkedMapParametersImpl implements CommandParameters{
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
-      String[] expressionParts = identifyParameters( expression );
-      if ( expressionParts.length == 0 ) {
-         return false;
-      } else if ( expressionParts.length != parameters.size() ) {
-         return false;
-      } else {
-         Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
-         for ( int i = 0; i < expressionParts.length; i++ ) {
-            CommandParameter parameter = paramIterator.next();
-            if ( !parameter.completeMatches( expressionParts[ i ] ) ) {
-               return false;
-            }
+      for ( CommandParameter parameter : parameters.keySet() ) {
+         if ( expression.trim().isEmpty() ) {
+            return false;
+         } else if ( parameter.completeMatches( expression ) ) {
+            expression = parameter.extractInput( expression );
+            continue;
+         } else {
+            break;
          }
+      }
+      if ( expression.trim().isEmpty() ) {
          return true;
+      } else {
+         return false;
       }
    }// End Method
    
@@ -126,18 +126,10 @@ public class LinkedMapParametersImpl implements CommandParameters{
     * {@inheritDoc}
     */
    @Override public void parameterize( String expression ) {
-      String[] expressionParts = identifyParameters( expression );
-      if ( expressionParts.length == 0 ) {
-         return;
-      } else if ( expressionParts.length > parameters.size() ) {
-         return;
-      } else {
-         Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
-         for ( int i = 0; i < expressionParts.length; i++ ) {
-            CommandParameter parameter = paramIterator.next();
-            Object value = parameter.parseObject( expressionParts[ i ] );
-            setParameter( parameter, value );
-         }
+      for ( CommandParameter parameter : parameters.keySet() ) {
+         Object value = parameter.parseObject( expression );
+         setParameter( parameter, value );
+         expression = parameter.extractInput( expression );
       }
    }// End Method
    
@@ -145,19 +137,28 @@ public class LinkedMapParametersImpl implements CommandParameters{
     * {@inheritDoc}
     */
    @Override public String autoComplete( String expression ) {
-      String[] expressionParts = identifyParameters( expression );
-      if ( expressionParts.length == 0 ) {
+      if ( expression.trim().isEmpty() ) {
          return null;
-      } else if ( expressionParts.length > parameters.size() ) {
-         return null;
-      } else {
-         Iterator< CommandParameter > paramIterator = parameters.keySet().iterator();
-         for ( int i = 0; i < expressionParts.length - 1; i++ ) {
-            paramIterator.next();
-         }
-         CommandParameter parameter = paramIterator.next();
-         return parameter.autoComplete( expressionParts[ expressionParts.length - 1 ] );
       }
+      StringBuffer buffer = new StringBuffer();
+      for ( CommandParameter parameter : parameters.keySet() ) {
+         if ( expression.isEmpty() ) {
+            break;
+         } else if ( parameter.partialMatches( expression ) ) {
+            String suggestion = parameter.autoComplete( expression );
+            if ( suggestion == null ) {
+               //Safe escape, if can't suggestion one, don't suggest any.
+               return null;
+            } else {
+               buffer.append( suggestion );
+               buffer.append( CommandParameterParseUtilities.delimiter() );
+               expression = parameter.extractInput( expression );
+            }
+         } else {
+            break;
+         }
+      }
+      return buffer.toString().trim();
    }// End Method
    
    /**

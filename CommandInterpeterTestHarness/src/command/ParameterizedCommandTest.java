@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import parameter.CommandParameter;
+import utility.TestFunctions;
 
 /**
  * Test for the {@link ParameterizedCommandImpl}.
@@ -27,6 +28,7 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
     */
    @SuppressWarnings("unchecked") @Override public void setup() {
       key = Mockito.mock( CommandKey.class );
+      Mockito.when( key.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       function = Mockito.mock( Function.class );
       //Mock a simple parameter and have it match anything.
       parameter = Mockito.mock( CommandParameter.class );
@@ -40,6 +42,7 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
    @Test public void assertCompleteMatches(){
       Mockito.when( key.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       Mockito.when( parameter.completeMatches( Mockito.anyString() ) ).thenReturn( true );
+      Mockito.when( parameter.extractInput( Mockito.anyString() ) ).thenAnswer( TestFunctions.singleParameterExtractor() );
       Assert.assertTrue( command.completeMatches( "Anything withParam" ) );
       
       Mockito.when( key.completeMatches( Mockito.anyString() ) ).thenReturn( false );
@@ -53,7 +56,9 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
    @Test public void assertExecuteAndParameterizeTest(){
       Mockito.verifyZeroInteractions( function );
       
+      Mockito.when( parameter.completeMatches( Mockito.anyString() ) ).thenReturn( true );
       Mockito.when( parameter.parseObject( Mockito.anyString() ) ).thenReturn( "notNullValue" );
+      Mockito.when( parameter.extractInput( Mockito.anyString() ) ).thenReturn( "" );
       command.execute( "Something parameterized" );
       Mockito.verify( function, Mockito.times( 1 ) ).apply( Mockito.anyObject() );
       

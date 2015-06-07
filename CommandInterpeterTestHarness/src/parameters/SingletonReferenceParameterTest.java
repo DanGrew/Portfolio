@@ -32,6 +32,7 @@ public class SingletonReferenceParameterTest {
     * Method to initialise the test {@link Singleton}s to use.
     */
    @BeforeClass public static void storageInitialisation(){
+      RequestSystem.reset();
       TEST_SINGLETON_OBJECT = new TestSingletonImpl( TEST_SINGLETON );
       RequestSystem.store( TEST_SINGLETON_OBJECT, TestSingleton.class );
       parameter = new SingletonReferenceParameterImpl( TestSingleton.class );

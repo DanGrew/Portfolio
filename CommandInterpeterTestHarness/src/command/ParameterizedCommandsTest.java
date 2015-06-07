@@ -41,24 +41,24 @@ public class ParameterizedCommandsTest {
     */
    @Test public void executeInvertTest(){
       Command< Boolean > command = CommonCommands.INVERT_BOOLEAN_COMMAND;
-      Assert.assertFalse( command.execute( "invert true" ).getResult() );
+      Assert.assertFalse( command.execute( "InvertBoolean true" ).getResult() );
       command.resetParameters();
-      Assert.assertTrue( command.execute( "invert false" ).getResult() );
+      Assert.assertTrue( command.execute( "InvertBoolean false" ).getResult() );
       command.resetParameters();
       
-      Assert.assertNull( command.execute( "invert " ) );
+      Assert.assertNull( command.execute( "InvertBoolean " ) );
       command.resetParameters();
-      Assert.assertNull( command.execute( "invert t" ) );
+      Assert.assertNull( command.execute( "InvertBoolean t" ) );
       command.resetParameters();
-      Assert.assertNull( command.execute( "invert truel" ) );
+      Assert.assertNull( command.execute( "InvertBoolean truel" ) );
       command.resetParameters();
-      Assert.assertNull( command.execute( "invert fa" ) );
+      Assert.assertNull( command.execute( "InvertBoolean fa" ) );
       command.resetParameters();
-      Assert.assertNull( command.execute( "invert falser" ) );
+      Assert.assertNull( command.execute( "InvertBoolean falser" ) );
       command.resetParameters();
-      Assert.assertNull( command.execute( "invert anything" ) );
+      Assert.assertNull( command.execute( "InvertBoolean anything" ) );
       command.resetParameters();
-      Assert.assertNull( command.execute( "invert 1234" ) );
+      Assert.assertNull( command.execute( "InvertBoolean 1234" ) );
       command.resetParameters();
    }// End Method
    
@@ -131,7 +131,7 @@ public class ParameterizedCommandsTest {
       command.resetParameters();
       Assert.assertEquals( "test", command.execute( "invertstring Test" ).getResult() );
       command.resetParameters();
-      Assert.assertNotNull( command.execute( "invertstring " ) );
+      Assert.assertNull( command.execute( "invertstring " ) );
       command.resetParameters();
       Assert.assertNull( command.execute( "invertstring tr fa" ) );
       command.resetParameters();
