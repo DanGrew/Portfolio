@@ -96,7 +96,7 @@ public class CommandAutoCompleteTest {
       EventSystem.raiseEvent( AutoCompleteAction.Events.AutoComplete, null );
       
       Assert.assertEquals( 1, results.size() );
-      Assert.assertEquals( "invertString test", results.get( 0 ) );
+      Assert.assertEquals( "InvertString test", results.get( 0 ) );
    }// End Method
 
 }// End Class

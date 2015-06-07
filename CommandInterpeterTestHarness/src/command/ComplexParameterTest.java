@@ -66,7 +66,7 @@ public class ComplexParameterTest {
    }// End Method
    
    @Test public void shouldNotPartialMatch() {
-      
+      Assert.fail();
    }
    
    /**
@@ -81,7 +81,7 @@ public class ComplexParameterTest {
    }// End Method
    
    @Test public void shouldNotCompleteMatch() {
-      
+      Assert.fail();
    }
 
 }// End Class

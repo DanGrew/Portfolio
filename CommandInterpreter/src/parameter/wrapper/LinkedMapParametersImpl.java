@@ -34,19 +34,6 @@ public class LinkedMapParametersImpl implements CommandParameters{
    }// End Constructor
    
    /**
-    * Method to identify the {@link CommandParameter}s provided in the given {@link String}
-    * expression input.
-    * @param expression the input provided that should match the {@link Command} syntax.
-    * @return an array of {@link String} parameters.
-    */
-   private String[] identifyParameters( String expression ) {
-      String[] parts = expression.trim().split( " " );
-      String[] parameterValues = new String[ parts.length ];
-      System.arraycopy( parts, 0, parameterValues, 0, parameterValues.length );
-      return parameterValues;
-   }// End Method
-   
-   /**
     * {@inheritDoc}
     */
    @Override public void applyParameters( CommandParameter... parameters ) {
@@ -147,13 +134,17 @@ public class LinkedMapParametersImpl implements CommandParameters{
          } else if ( parameter.partialMatches( expression ) ) {
             String suggestion = parameter.autoComplete( expression );
             if ( suggestion == null ) {
-               //Safe escape, if can't suggestion one, don't suggest any.
-               return null;
+               if ( parameter.completeMatches( expression ) ) {
+                  buffer.append( parameter.parseObject( expression ) );
+               } else {
+                  //Safe escape, if can't suggestion one, don't suggest any.
+                  return null;
+               }
             } else {
                buffer.append( suggestion );
-               buffer.append( CommandParameterParseUtilities.delimiter() );
-               expression = parameter.extractInput( expression );
             }
+            buffer.append( CommandParameterParseUtilities.delimiter() );
+            expression = parameter.extractInput( expression );
          } else {
             break;
          }
