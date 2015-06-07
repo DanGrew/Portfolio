@@ -149,7 +149,12 @@ public class LinkedMapParametersImpl implements CommandParameters{
             break;
          }
       }
-      return buffer.toString().trim();
+      String suggestion = buffer.toString().trim();
+      if ( suggestion.isEmpty() ) {
+         return null;
+      } else {
+         return suggestion;
+      }
    }// End Method
    
    /**

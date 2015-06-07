@@ -72,7 +72,7 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
    @Test public void shouldAutoComplete(){
       Mockito.when( key.getStringKey() ).thenReturn( "Anything" );
       Mockito.when( parameter.autoComplete( Mockito.anyString() ) ).thenReturn( null );
-      Assert.assertEquals( "Anything ", command.autoComplete( "Anything f" ) );
+      Assert.assertEquals( "Anything f", command.autoComplete( "Anything f" ) );
    }// End Method
    
 }// End Class

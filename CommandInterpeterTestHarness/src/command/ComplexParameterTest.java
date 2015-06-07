@@ -88,7 +88,7 @@ public class ComplexParameterTest {
     * Method to test that the {@link Command} auto completes.
     */
    @Test public void shouldAutoComplete(){
-      Assert.assertEquals( COMMAND_KEY + " ", command.autoComplete( COMMAND_KEY + " gh" ) );
+      Assert.assertEquals( COMMAND_KEY + " gh", command.autoComplete( COMMAND_KEY + " gh" ) );
    }// End Method
 
 }// End Class

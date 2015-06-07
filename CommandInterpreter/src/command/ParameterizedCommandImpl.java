@@ -101,7 +101,8 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
       }
       String suggestion = parameters.autoComplete( expression );
       if ( suggestion == null ) {
-         return getKey();
+         //Note expression may be empty.
+         return ( getKey() + CommandParameterParseUtilities.delimiter() + expression ).trim();
       } else {
          return getKey() + CommandParameterParseUtilities.delimiter() + suggestion; 
       } 
