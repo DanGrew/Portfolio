@@ -8,6 +8,10 @@
 package parameter;
 
 import java.util.Arrays;
+import java.util.List;
+
+import model.singleton.Singleton;
+import architecture.request.RequestSystem;
 
 import command.Command;
 
@@ -103,6 +107,34 @@ public class CommandParameterParseUtilities {
          expression = expression.replaceFirst( SPACE_REGEX, "" );
       }
       return expression;
+   }// End Method
+   
+   /**
+    * Method to retrieve the {@link List} of {@link Singleton}s that partially match the given identification and {@link Class}.
+    * @param name the partial name.
+    * @param clazz the {@link Class} of the {@link Singleton} to match.
+    * @return a {@link List} of matches.
+    */
+   public static < SingletonT extends Singleton< ? > > List< SingletonT > partialMatchesSingleton( String name, Class< SingletonT > clazz ) {
+      List< SingletonT > matches = RequestSystem.retrieveAll( clazz, object -> {
+        return object.getIdentification().startsWith( name ); 
+      } );
+      return matches;
+   }// End Method
+   
+   /**
+    * Method to retrieve the first {@link Singleton} that partially match the given identification and {@link Class}.
+    * @param name the partial name.
+    * @param clazz the {@link Class} of the {@link Singleton} to match.
+    * @return the first match.
+    */
+   public static < SingletonT extends Singleton< ? > > SingletonT firstPartialMatchesSingleton( String name, Class< SingletonT > clazz ) {
+      List< SingletonT > result = partialMatchesSingleton( name, clazz );
+      if ( result.isEmpty() ) {
+         return null;
+      } else {
+         return result.get( 0 );
+      }
    }// End Method
 
 }// End Class

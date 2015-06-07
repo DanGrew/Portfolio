@@ -33,7 +33,11 @@ public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl {
     */
    @Override public Object deserialize( Serializable object ) {
       if ( object != null ) {
-         return Double.valueOf( object.toString() );
+         try { 
+            return Double.valueOf( object.toString() );
+         } catch ( NumberFormatException exception ) {
+            return null;
+         }
       } else {
          return null;
       }

@@ -32,18 +32,24 @@ public class BuilderObjectCommandsTest {
    private static BuilderObject TEST_OBJECT_TYPE_OBJECT;
    private static final String TEST_BUILDER_TYPE = "TestBuilder";
    private static BuilderType TEST_BUILDER_TYPE_OBJECT;
-   private static final String TEST_PROPERTY_TYPE = "TestProperty";
-   private static PropertyType TEST_PROPERTY_TYPE_OBJECT;
+   private static final String TEST_PROPERTY_TYPE_STRING = "TestPropertyString";
+   private static PropertyType TEST_PROPERTY_TYPE_STRING_OBJECT;
+   private static final String TEST_PROPERTY_TYPE_NUMBER = "TestPropertyNumber";
+   private static PropertyType TEST_PROPERTY_TYPE_NUMBER_OBJECT;
    
    /**
     * Method to initialise the test {@link Singleton}s to use.
     */
    @BeforeClass public static void storageInitialisation(){
-      TEST_PROPERTY_TYPE_OBJECT = new PropertyTypeImpl( TEST_PROPERTY_TYPE, String.class );
-      RequestSystem.store( TEST_PROPERTY_TYPE_OBJECT, PropertyType.class );
+      TEST_PROPERTY_TYPE_STRING_OBJECT = new PropertyTypeImpl( TEST_PROPERTY_TYPE_STRING, String.class );
+      RequestSystem.store( TEST_PROPERTY_TYPE_STRING_OBJECT, PropertyType.class );
+      
+      TEST_PROPERTY_TYPE_NUMBER_OBJECT = new PropertyTypeImpl( TEST_PROPERTY_TYPE_NUMBER, Number.class );
+      RequestSystem.store( TEST_PROPERTY_TYPE_NUMBER_OBJECT, PropertyType.class );
       
       TEST_BUILDER_TYPE_OBJECT = new BuilderTypeImpl( TEST_BUILDER_TYPE );
-      TEST_BUILDER_TYPE_OBJECT.addPropertyType( TEST_PROPERTY_TYPE_OBJECT );
+      TEST_BUILDER_TYPE_OBJECT.addPropertyType( TEST_PROPERTY_TYPE_STRING_OBJECT );
+      TEST_BUILDER_TYPE_OBJECT.addPropertyType( TEST_PROPERTY_TYPE_NUMBER_OBJECT );
       RequestSystem.store( TEST_BUILDER_TYPE_OBJECT, BuilderType.class );
       
       TEST_OBJECT_TYPE_OBJECT = new BuilderObjectImpl( TEST_BUILDER_TYPE_OBJECT, TEST_OBJECT_TYPE );
@@ -87,7 +93,7 @@ public class BuilderObjectCommandsTest {
     */
    @Test public void setPropertyAcceptanceTest() {
       Command< BuilderObject > command = BuilderObjectCommands.SET_PROPERTY_COMMAND;
-      Assert.assertTrue( command.partialMatches( "SetProperty " + TEST_OBJECT_TYPE +  " " + TEST_PROPERTY_TYPE_OBJECT + " stringValue" ) );
+      Assert.assertTrue( command.partialMatches( "SetProperty " + TEST_OBJECT_TYPE +  " " + TEST_PROPERTY_TYPE_STRING_OBJECT + " stringValue" ) );
       Assert.assertTrue( command.partialMatches( "SetProperty " ) );
       Assert.assertTrue( command.partialMatches( "SetProperty " + TEST_OBJECT_TYPE ) );
       
@@ -103,10 +109,10 @@ public class BuilderObjectCommandsTest {
       final String testValue = "stringValue";
       Command< BuilderObject > command = BuilderObjectCommands.SET_PROPERTY_COMMAND;
       BuilderObject resultObject = command.execute( 
-               "SetProperty " + TEST_OBJECT_TYPE + " " + TEST_PROPERTY_TYPE_OBJECT + " " + testValue ).getResult();
+               "SetProperty " + TEST_OBJECT_TYPE + " " + TEST_PROPERTY_TYPE_STRING_OBJECT + " " + testValue ).getResult();
       Assert.assertNotNull( resultObject );
       Assert.assertEquals( TEST_OBJECT_TYPE_OBJECT, resultObject );
-      Assert.assertEquals( testValue, resultObject.get( TEST_PROPERTY_TYPE_OBJECT ) );
+      Assert.assertEquals( testValue, resultObject.get( TEST_PROPERTY_TYPE_STRING_OBJECT ) );
       command.resetParameters();
       
       CommandResult< BuilderObject > result = command.execute( "SetProperty" );
@@ -118,13 +124,13 @@ public class BuilderObjectCommandsTest {
     * Method to test the setting of a {@link Number} {@link PropertyType}.
     */
    @Test public void executeSetNumberPropertyTest(){
-      final Number testValue = 26;
+      final Number testValue = 26.0;
       Command< BuilderObject > command = BuilderObjectCommands.SET_PROPERTY_COMMAND;
       BuilderObject resultObject = command.execute( 
-               "SetProperty " + TEST_OBJECT_TYPE + " " + TEST_PROPERTY_TYPE_OBJECT + " " + testValue ).getResult();  
+               "SetProperty " + TEST_OBJECT_TYPE + " " + TEST_PROPERTY_TYPE_NUMBER_OBJECT + " " + testValue ).getResult();  
       Assert.assertNotNull( resultObject );
       Assert.assertEquals( TEST_OBJECT_TYPE_OBJECT, resultObject );
-      Assert.assertEquals( testValue, resultObject.get( TEST_PROPERTY_TYPE_OBJECT ) );
+      Assert.assertEquals( testValue, resultObject.get( TEST_PROPERTY_TYPE_NUMBER_OBJECT ) );
    }// End Method
 
 }// End Class

@@ -40,8 +40,7 @@ public class BuilderObjectCommands {
             SET_PROPERTY_COMMAND_DESCRIPTION, 
             BuilderObjectCommandFunctions.SET_PROPERTY_FUNCTION, 
             BuilderObjectCommandParameters.BUILDER_OBJECT_REFERENCE_PARAMETER,
-            BuilderObjectCommandParameters.PROPERTY_TYPE_REFERENCE_PARAMETER,
-            BuilderObjectCommandParameters.STRING_PARAMETER
+            BuilderObjectCommandParameters.BUILDER_OBJECT_VALUE_PARAMETER
    );
    
    private static final String VIEW_COMMAND_KEY = "ViewObjects";

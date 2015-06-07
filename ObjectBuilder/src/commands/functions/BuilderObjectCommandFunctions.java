@@ -18,11 +18,11 @@ import objecttype.BuilderType;
 import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
 import architecture.request.RequestSystem;
-
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.BuilderObjectCommands;
 import commands.parameters.BuilderObjectCommandParameters;
+import commands.parameters.extensions.PropertyTypeAndValue;
 
 /**
  * {@link Class} to hold the {@link Function}s associated with {@link BuilderObjectCommands}.
@@ -58,15 +58,11 @@ public class BuilderObjectCommandFunctions {
                   BuilderObjectCommandParameters.BUILDER_OBJECT_REFERENCE_PARAMETER, 
                   BuilderObject.class 
          );
-         PropertyType type = parameters.getExpectedParameter( 
-                  BuilderObjectCommandParameters.PROPERTY_TYPE_REFERENCE_PARAMETER, 
-                  PropertyType.class 
+         PropertyTypeAndValue type = parameters.getExpectedParameter( 
+                  BuilderObjectCommandParameters.BUILDER_OBJECT_VALUE_PARAMETER, 
+                  PropertyTypeAndValue.class 
          );
-         String value = parameters.getExpectedParameter( 
-                  BuilderObjectCommandParameters.STRING_PARAMETER, 
-                  String.class 
-         );
-         object.set( type, value );
+         object.set( type.getPropertyType(), type.getValue() );
          return new CommandResultImpl< BuilderObject >( "Value set.", object );
       }// End Method
    };

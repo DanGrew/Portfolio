@@ -15,6 +15,7 @@ import parameter.SingletonReferenceParameterImpl;
 import propertytype.PropertyType;
 import commands.BuilderObjectCommands;
 import commands.functions.BuilderTypeCommandFunctions;
+import commands.parameters.extensions.PropertyTypeAndValueParameterImpl;
 
 /**
  * {@link Class} to hold {@link CommandParameter}s for {@link BuilderObjectCommands} and
@@ -26,5 +27,6 @@ public class BuilderObjectCommandParameters {
    public static final CommandParameter BUILDER_TYPE_REFERENCE_PARAMETER = new SingletonReferenceParameterImpl( BuilderType.class );
    public static final CommandParameter PROPERTY_TYPE_REFERENCE_PARAMETER = new SingletonReferenceParameterImpl( PropertyType.class );
    public static final CommandParameter BUILDER_OBJECT_REFERENCE_PARAMETER = new SingletonReferenceParameterImpl( BuilderObject.class );
+   public static final CommandParameter BUILDER_OBJECT_VALUE_PARAMETER = new PropertyTypeAndValueParameterImpl();
 
 }// End Class
