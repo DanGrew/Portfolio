@@ -116,12 +116,4 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
       return null;
    }// End Method
    
-   /**
-    * {@inheritDoc}
-    */
-   @Override public String extractInput( String expression ) {
-      String parameter = CommandParameterParseUtilities.parseSingle( expression );
-      return CommandParameterParseUtilities.reduce( expression, parameter );
-   }// End Method
-
 }// End Class

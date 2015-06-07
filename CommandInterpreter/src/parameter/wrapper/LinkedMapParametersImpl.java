@@ -135,7 +135,7 @@ public class LinkedMapParametersImpl implements CommandParameters{
             String suggestion = parameter.autoComplete( expression );
             if ( suggestion == null ) {
                if ( parameter.completeMatches( expression ) ) {
-                  buffer.append( parameter.parseObject( expression ) );
+                  buffer.append( parameter.parseParameter( expression ) );
                } else {
                   //Safe escape, if can't suggestion one, don't suggest any.
                   return null;

@@ -60,8 +60,20 @@ public interface CommandParameter {
     * @return the expression minus the parameter values for this {@link CommandParameter}.
     */
    public default String extractInput( String expression ) {
-      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      String parameter = parseParameter( expression );
       return CommandParameterParseUtilities.reduce( expression, parameter );
+   }// End Method
+   
+   /**
+    * Method to parse the value in the expression that relates to the parameter values of this
+    * {@link CommandParameter}. 
+    * @param expression the expression containing the parameters.
+    * @return the {@link String} representation of the parameter values defined in the expression,
+    * as they are in the expression.
+    */
+   public default String parseParameter( String expression ) {
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      return parameter;
    }// End Method
 
 }// End Interface
