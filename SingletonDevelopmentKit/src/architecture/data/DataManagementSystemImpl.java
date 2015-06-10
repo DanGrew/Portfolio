@@ -7,11 +7,18 @@
  */
 package architecture.data;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
+
+import architecture.event.EventSystem;
 
 /**
  * The {@link DataManagementSystemImpl} provides the implementation to the {@link DataManagementSystem}
@@ -39,6 +46,10 @@ public class DataManagementSystemImpl implements DataManagementSystem {
          manager = getDataManager( clazz );
          manager.store( object );   
       }
+      EventSystem.raiseEvent( 
+               DataManagementSystem.Events.ObjectStored, 
+               new SingletonStoredSource( object, classes ) 
+      );
    }// End Method
 
    /**
@@ -55,6 +66,22 @@ public class DataManagementSystemImpl implements DataManagementSystem {
    @Override public < T > List< T > retrieveAll( Class< T > clazz, Predicate< T > criteria ){
       DataManager< T > manager = getDataManager( clazz );
       return manager.retrieveAll( criteria );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public < MinimumParentT > List< MinimumParentT > retrieveAll( 
+            Class< MinimumParentT > minimumParent,
+            Predicate< Class< ? >> classMatcher, 
+            Predicate< MinimumParentT > objectMatcher 
+   ) {
+      Set< MinimumParentT > matches = new LinkedHashSet<>();
+      Collection< DataManager< MinimumParentT > > relevantManagers = getAllDataManagersAssignedFrom( minimumParent, classMatcher );
+      for ( DataManager< MinimumParentT > manager : relevantManagers ) {
+         matches.addAll( manager.retrieveAll( objectMatcher ) );
+      }
+      return new ArrayList<>( matches );
    }// End Method
    
    /**
@@ -79,6 +106,34 @@ public class DataManagementSystemImpl implements DataManagementSystem {
          dataManagers.put( clazz, manager );
       }
       return manager;
+   }// End Method
+   
+   /**
+    * Method to get all {@link DataManager}s that match the given parent {@link Class} and the {@link Predicate} for
+    * the matching.
+    * @param parent the {@link Class} of the parent.
+    * @param classMatcher the {@link Predicate} to match the {@link Class} associated with the {@link DataManager}.
+    * @return a {@link Collection} of {@link DataManager}s appropriate for the parent type and {@link Predicate}.
+    */
+   private < MinimumParentT > Collection< DataManager< MinimumParentT > > getAllDataManagersAssignedFrom( 
+            Class< MinimumParentT > parent,
+            Predicate< Class< ? > > classMatcher 
+   ) {
+      Set< DataManager< MinimumParentT  > > matchingManagers = new LinkedHashSet<>();
+      for ( Entry< Class< ? >, DataManager< ? > > entry : dataManagers.entrySet() ) {
+         if ( parent.isAssignableFrom( entry.getKey() ) ) {
+            
+            @SuppressWarnings("unchecked") //Verified by assign method directly above. 
+            DataManager< MinimumParentT > manager = ( DataManager< MinimumParentT > )entry.getValue();
+            
+            if ( classMatcher == null ) {
+               matchingManagers.add( manager );
+            } else if ( classMatcher.test( entry.getKey() ) ){
+               matchingManagers.add( manager );
+            }
+         }
+      }
+      return matchingManagers;
    }// End Method
 
 }// End Class

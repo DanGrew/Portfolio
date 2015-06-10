@@ -86,6 +86,21 @@ public class RequestSystem extends ManagementSystem {
    }// End Method
    
    /**
+    * {@link DataManagementSystem#retrieveAll(Class, Predicate, Predicate)}.
+    */
+   public static < MinimumParentT > List< MinimumParentT > retrieveAll( 
+            Class< MinimumParentT > minimumParent, 
+            Predicate< Class< ? > > classMatcher, 
+            Predicate< MinimumParentT > objectMatcher 
+   ) {
+      return dataSystem().retrieveAll( 
+               minimumParent, 
+               classMatcher, 
+               objectMatcher 
+      );
+   }// End Method
+   
+   /**
     * {@link DataManagementSystem#process(Class, Predicate, Consumer)}.
     */
    public static < T > void process( Class< T > clazz, Predicate< T > criteria, Consumer< T > process ){
