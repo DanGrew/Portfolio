@@ -30,9 +30,12 @@ public class CommandKeyImpl implements CommandKey {
    }// End Method
    
    /**
-    * {@inheritDoc}
+    * Method to determine whether the given {@link String} expression partially matches only the 
+    * key with no other input.
+    * @param expression the input in question.
+    * @return true if the key is partially matched.
     */
-   @Override public boolean partialMatchesKeyExtract( String expression ) {
+   public boolean partialMatchesKeyExtract( String expression ) {
       if ( expression == null || expression.length() == 0 ) {
          return true;
       } else {
@@ -41,9 +44,12 @@ public class CommandKeyImpl implements CommandKey {
    }// End Method
    
    /**
-    * {@inheritDoc}
+    * Method to determine whether the given {@link String} expression completely matches only the 
+    * key with no other input.
+    * @param expression the input in question.
+    * @return true if the key is partially matched.
     */
-   @Override public boolean completeMatchesKeyExtract( String expression ) {
+   public boolean completeMatchesKeyExtract( String expression ) {
       if ( expression == null || expression.length() == 0 ) {
          return false;
       } else {
@@ -91,6 +97,9 @@ public class CommandKeyImpl implements CommandKey {
     * {@inheritDoc}
     */
    @Override public String extractKeyExpression( String expression ) {
+      if ( expression == null ) {
+         return null;
+      }
       String trimmedExpression = expression.trim();
       String[] splitExpression = trimmedExpression.split( " " );
       if ( splitExpression[ 0 ].length() == 0 ) {

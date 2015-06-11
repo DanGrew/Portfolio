@@ -23,20 +23,7 @@ public class FeatureRequestReminder {
       fail( "Not yet implemented" );
    }
    
-   @Test public void parameterSetNotString() {
-      //Such as references and numbers. This should follow on from numbers to test references.
-      fail( "Not yet implemented" );
-   }
-   
    @Test public void multipleTypesWithSameName() {
-      fail( "Not yet implemented" );
-   }
-   
-   @Test public void settingNumbersAsParameters() {
-      /* Implementing refactor of parameterized command so that CommandParameters
-       * remove the necessary information from the input then pass to the next.
-       * Following this a parameter is needed to look at the type behind.
-       * Then a new parameter will be created to take a reference and a name.*/
       fail( "Not yet implemented" );
    }
    
@@ -47,6 +34,10 @@ public class FeatureRequestReminder {
    }
    
    @Test public void interfaceForCommonPartialCompleteAutoMethods(){
+      fail( "Not yet implemented" );
+   }
+   
+   @Test public void suggestionsPanelWithAllOptionsFromCurrentInput(){
       fail( "Not yet implemented" );
    }
 }

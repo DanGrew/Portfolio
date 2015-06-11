@@ -22,10 +22,10 @@ public class CommandKeyTest {
       final String stringKey = "SomeCommand";
       CommandKey key = new CommandKeyImpl( stringKey );
       
-      Assert.assertTrue( key.partialMatchesKeyExtract( stringKey ) );
-      Assert.assertTrue( key.partialMatchesKeyExtract( "Som" ) );
-      Assert.assertTrue( key.partialMatchesKeyExtract( "" ) );
-      Assert.assertTrue( key.partialMatchesKeyExtract( null ) );
+      Assert.assertTrue( key.partialMatches( stringKey ) );
+      Assert.assertTrue( key.partialMatches( "Som" ) );
+      Assert.assertTrue( key.partialMatches( "" ) );
+      Assert.assertFalse( key.partialMatches( null ) );
    }// End Method
    
    /**
@@ -35,11 +35,8 @@ public class CommandKeyTest {
       final String stringKey = "SomeCommand";
       CommandKey key = new CommandKeyImpl( stringKey );
       
-      Assert.assertTrue( key.completeMatchesKeyExtract( stringKey ) );
-      Assert.assertFalse( key.completeMatchesKeyExtract( stringKey + " other parameters" ) );
-      Assert.assertFalse( key.completeMatchesKeyExtract( "Som" ) );
-      Assert.assertFalse( key.completeMatchesKeyExtract( "" ) );
-      Assert.assertFalse( key.completeMatchesKeyExtract( null ) );
+      Assert.assertFalse( key.completeMatches( "" ) );
+      Assert.assertFalse( key.completeMatches( null ) );
       
       Assert.assertTrue( key.completeMatches( stringKey ) );
       Assert.assertTrue( key.completeMatches( stringKey + " other parameters" ) );
