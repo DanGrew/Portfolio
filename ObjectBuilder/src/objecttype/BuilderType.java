@@ -9,14 +9,14 @@ package objecttype;
 
 import java.util.List;
 
-import model.singleton.Singleton;
+import model.data.SingletonSerialization;
 import propertytype.PropertyType;
 
 /**
  * The {@link BuilderType} provides the interface for specification of an object, holding the
  * property types the object should define.
  */
-public interface BuilderType extends Singleton< SerializableBuilderType > {
+public interface BuilderType extends SingletonSerialization< SerializableBuilderType > {
 
    /**
     * Method to add a {@link PropertyType} to the {@link BuilderType}.

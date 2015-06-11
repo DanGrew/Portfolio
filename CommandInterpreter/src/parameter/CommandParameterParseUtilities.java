@@ -115,7 +115,7 @@ public class CommandParameterParseUtilities {
     * @param clazz the {@link Class} of the {@link Singleton} to match.
     * @return a {@link List} of matches.
     */
-   public static < SingletonT extends Singleton< ? > > List< SingletonT > partialMatchesSingleton( String name, Class< SingletonT > clazz ) {
+   public static < SingletonT extends Singleton > List< SingletonT > partialMatchesSingleton( String name, Class< SingletonT > clazz ) {
       List< SingletonT > matches = RequestSystem.retrieveAll( clazz, object -> {
         return object.getIdentification().startsWith( name ); 
       } );
@@ -128,7 +128,7 @@ public class CommandParameterParseUtilities {
     * @param clazz the {@link Class} of the {@link Singleton} to match.
     * @return the first match.
     */
-   public static < SingletonT extends Singleton< ? > > SingletonT firstPartialMatchesSingleton( String name, Class< SingletonT > clazz ) {
+   public static < SingletonT extends Singleton > SingletonT firstPartialMatchesSingleton( String name, Class< SingletonT > clazz ) {
       List< SingletonT > result = partialMatchesSingleton( name, clazz );
       if ( result.isEmpty() ) {
          return null;

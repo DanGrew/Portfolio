@@ -24,13 +24,13 @@ public interface CaliDataManagement {
     * @param testSingletonName the {@link Singleton#getIdentification()}.
     * @return all {@link Singleton}s that partially match the name.
     */
-   public List< Singleton< ? > > partialMatch( String testSingletonName );
+   public List< Singleton > partialMatch( String testSingletonName );
 
    /**
     * Method to retrieve all {@link Singleton}s associated with the given {@link Singleton#getIdentification()}.
     * @param testSingletonName the {@link Singleton#getIdentification()}.
     * @return all {@link Singleton}s that completely match the name.
     */
-   public List< Singleton< ? > > completeMatch( String testSingletonName );
+   public List< Singleton > completeMatch( String testSingletonName );
 
 }// End Interface

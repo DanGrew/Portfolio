@@ -8,6 +8,7 @@
 package model.singleton;
 
 import model.data.SerializedSingleton;
+import model.data.SingletonSerialization;
 import architecture.utility.ObjectGenerator;
 
 /**
@@ -15,7 +16,7 @@ import architecture.utility.ObjectGenerator;
  * its own right and can be serialized.
  */
 public abstract class SingletonImpl< S extends SerializedSingleton< ? > > 
-                                implements Singleton< S >{
+                                implements SingletonSerialization< S >{
 
    /** The unique identification for this {@link SingletonImpl}. **/
    protected String identification;

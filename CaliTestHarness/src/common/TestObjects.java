@@ -19,7 +19,7 @@ public class TestObjects {
 
    /** Interface for a testable {@link Singleton}.**/
    @Cali
-   public static interface TestAnnotatedSingleton extends Singleton< TestAnnotatedSingleton >, SerializedSingleton< TestAnnotatedSingletonImpl >{}
+   public static interface TestAnnotatedSingleton extends Singleton, SerializedSingleton< TestAnnotatedSingletonImpl >{}
    
    /** Implementation for a testable {@link Singleton}.**/
    @Cali

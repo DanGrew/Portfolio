@@ -25,7 +25,7 @@ public class Resolution {
     * @param object the {@link Object} to assert.
     * @param clazz the {@link Class} of the {@link Singleton}.
     */
-   public static < T extends Singleton< ? > > void assertResolved( T object, Class< T > clazz ){
+   public static < T extends Singleton > void assertResolved( T object, Class< T > clazz ){
       T resolvedObject = RequestSystem.retrieve( clazz, object.getIdentification() );
       assertEquals( resolvedObject, object );
    }// End Method
@@ -34,7 +34,7 @@ public class Resolution {
     * Method to assert that a {@link NeuronLayer} is resolved correctly in the {@link RequestSystem}.
     * @param layer the {@link NeuronLayer} to assert, asserting each {@link Neuron} and {@link Synapse}.
     */
-   public static < T extends Singleton< ? > > void assertResolved( NeuronLayer layer ){
+   public static < T extends Singleton > void assertResolved( NeuronLayer layer ){
       layer.iterator().forEachRemaining( neuron -> { 
          Resolution.assertResolved( neuron, Neuron.class );
          neuron.inputSynapseIterator().forEachRemaining( synapse -> {

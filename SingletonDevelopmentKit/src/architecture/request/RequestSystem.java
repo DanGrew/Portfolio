@@ -47,7 +47,7 @@ public class RequestSystem extends ManagementSystem {
     * @param identification the {@link String} identification of the {@link Singleton}.
     * @return true if the {@link Object} is present, false otherwise.
     */
-   public static < T extends Singleton< ? > > boolean contains( Class< T > clazz, final String identification ){
+   public static < T extends Singleton > boolean contains( Class< T > clazz, final String identification ){
       return dataSystem().retrieveAll( clazz, test -> {
          return test.getIdentification().equals( identification );
       } ).size() > 0;
@@ -67,7 +67,7 @@ public class RequestSystem extends ManagementSystem {
     * @param identification the identification of the {@link Singleton}.
     * @return the matching {@link Singleton}.
     */
-   public static < T extends Singleton< ? > > T retrieve( Class< T > clazz, String identification ){
+   public static < T extends Singleton > T retrieve( Class< T > clazz, String identification ){
       return dataSystem().retrieve( clazz, new IdentificationMatcher< T >( identification ) );
    }// End Method
    
@@ -114,7 +114,7 @@ public class RequestSystem extends ManagementSystem {
     * @param identification the identification of the {@link Singleton}.
     * @param process the {@link Consumer} to process on the matching {@link Object}s.
     */
-   public static < T extends Singleton< ? > > void process( Class< T > clazz, String identification, Consumer< T > process ){
+   public static < T extends Singleton > void process( Class< T > clazz, String identification, Consumer< T > process ){
       dataSystem().process( clazz, new IdentificationMatcher< T >( identification ), process );
    }// End Method
    

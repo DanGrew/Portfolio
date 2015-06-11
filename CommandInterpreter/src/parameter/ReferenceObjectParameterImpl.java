@@ -20,18 +20,18 @@ import model.singleton.Singleton;
  */
 public class ReferenceObjectParameterImpl implements CommandParameter {
 
-   private List< Class< ? extends Singleton< ? > > > referencedTypes;
+   private List< Class< ? extends Singleton > > referencedTypes;
    
    /**
     * Constructs a new {@link ReferenceObjectParameterImpl}.
     * @param referenceTypes the {@link Class}es of {@link Singleton} supported by the {@link CommandParameter}.
     */
    @SafeVarargs 
-   public ReferenceObjectParameterImpl( Class< ? extends Singleton< ? > >... referenceTypes ) {
+   public ReferenceObjectParameterImpl( Class< ? extends Singleton >... referenceTypes ) {
       if ( referenceTypes.length == 0 ) {
          throw new IllegalArgumentException( "Must supply reference types." );
       }
-      this.referencedTypes = new ArrayList< Class<? extends Singleton<?>> >();
+      this.referencedTypes = new ArrayList< Class<? extends Singleton > >();
       this.referencedTypes.addAll( Arrays.asList( referenceTypes ) );
    }// End Constructor
 
@@ -57,9 +57,9 @@ public class ReferenceObjectParameterImpl implements CommandParameter {
             }
          }
       } else {
-         for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
+         for ( Class< ? extends Singleton > clazz : referencedTypes ) {
             if ( clazz.getSimpleName().equals( className ) ) {
-               Singleton< ? > singleton = RequestSystem.retrieve( 
+               Singleton singleton = RequestSystem.retrieve( 
                         clazz, object -> { return object.getIdentification().startsWith( reference ); } 
                );
                if ( singleton == null ) {
@@ -85,9 +85,9 @@ public class ReferenceObjectParameterImpl implements CommandParameter {
       if ( reference.isEmpty() ) {
          return false;
       } else {
-         for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
+         for ( Class< ? extends Singleton > clazz : referencedTypes ) {
             if ( clazz.getSimpleName().equals( className ) ) {
-               Singleton< ? > singleton = RequestSystem.retrieve( clazz, reference );
+               Singleton singleton = RequestSystem.retrieve( clazz, reference );
                if ( singleton == null ) {
                   return false;
                } else {
@@ -111,9 +111,9 @@ public class ReferenceObjectParameterImpl implements CommandParameter {
       if ( reference.isEmpty() ) {
          return null;
       } else {
-         for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
+         for ( Class< ? extends Singleton > clazz : referencedTypes ) {
             if ( clazz.getSimpleName().equals( className ) ) {
-               Singleton< ? > singleton = RequestSystem.retrieve( clazz, reference );
+               Singleton singleton = RequestSystem.retrieve( clazz, reference );
                return singleton;
             }
          }
@@ -140,9 +140,9 @@ public class ReferenceObjectParameterImpl implements CommandParameter {
             }
          }
       } else {
-         for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
+         for ( Class< ? extends Singleton > clazz : referencedTypes ) {
             if ( clazz.getSimpleName().equals( className ) ) {
-               Singleton< ? > singleton = RequestSystem.retrieve( 
+               Singleton singleton = RequestSystem.retrieve( 
                         clazz, object -> { return object.getIdentification().startsWith( reference ); } 
                );
                if ( singleton == null ) {

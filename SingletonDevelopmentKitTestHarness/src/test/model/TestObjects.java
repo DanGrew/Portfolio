@@ -10,7 +10,7 @@ import model.singleton.SingletonImpl;
 public class TestObjects {
 
    /** Interface for a testable {@link Singleton}.**/
-   public static interface TestSingleton extends Singleton< TestSingleton >, SerializedSingleton< TestSingletonImpl >{}
+   public static interface TestSingleton extends Singleton, SerializedSingleton< TestSingletonImpl >{}
    
    /** Implementation for a testable {@link Singleton}.**/
    public static class TestSingletonImpl extends SingletonImpl< TestSingleton > implements TestSingleton {

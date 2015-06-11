@@ -11,7 +11,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import parameter.BooleanParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import parameter.classparameter.ClassParameterTypes;

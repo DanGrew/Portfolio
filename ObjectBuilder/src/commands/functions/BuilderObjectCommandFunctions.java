@@ -16,8 +16,8 @@ import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.BuilderType;
 import parameter.wrapper.CommandParameters;
-import propertytype.PropertyType;
 import architecture.request.RequestSystem;
+
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.BuilderObjectCommands;

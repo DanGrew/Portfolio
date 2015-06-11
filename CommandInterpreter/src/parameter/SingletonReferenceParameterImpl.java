@@ -20,18 +20,18 @@ import architecture.request.RequestSystem;
  */
 public class SingletonReferenceParameterImpl implements CommandParameter {
 
-   private List< Class< ? extends Singleton< ? > > > referencedTypes;
+   private List< Class< ? extends Singleton > > referencedTypes;
    
    /**
     * Constructs a new {@link SingletonReferenceParameterImpl}.
     * @param referenceTypes the type of {@link Class} that can be referenced.
     */
    @SafeVarargs 
-   public SingletonReferenceParameterImpl( Class< ? extends Singleton< ? > >... referenceTypes ) {
+   public SingletonReferenceParameterImpl( Class< ? extends Singleton >... referenceTypes ) {
       if ( referenceTypes.length == 0 ) {
          throw new IllegalArgumentException( "Must supply reference types." );
       }
-      this.referencedTypes = new ArrayList< Class<? extends Singleton<?>> >();
+      this.referencedTypes = new ArrayList< Class<? extends Singleton> >();
       this.referencedTypes.addAll( Arrays.asList( referenceTypes ) );
    }// End Constructor
    
@@ -40,7 +40,7 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public String getParameterType() {
       StringBuffer buffer = new StringBuffer( "REF[ ");
-      for ( Class< ? extends Singleton< ? > > type : referencedTypes ) {
+      for ( Class< ? extends Singleton > type : referencedTypes ) {
          buffer.append( type.getSimpleName() ).append( " " );
       }
       buffer.append( "] " );
@@ -52,8 +52,8 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public boolean partialMatches( String expression ) {
       String parameter = CommandParameterParseUtilities.parseSingle( expression );
-      for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
-         List< ? extends Singleton< ? > > matching = RequestSystem.retrieveAll( 
+      for ( Class< ? extends Singleton > clazz : referencedTypes ) {
+         List< ? extends Singleton > matching = RequestSystem.retrieveAll( 
                   clazz, object -> object.getIdentification().startsWith( parameter ) 
          );
          boolean exists = matching.size() > 0;
@@ -69,8 +69,8 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public boolean completeMatches( String expression ) {
       String parameter = CommandParameterParseUtilities.parseSingle( expression );
-      for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
-         Singleton< ? > match = RequestSystem.retrieve( 
+      for ( Class< ? extends Singleton > clazz : referencedTypes ) {
+         Singleton match = RequestSystem.retrieve( 
                   clazz, parameter 
          );
          if ( match != null ){
@@ -85,8 +85,8 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public Object parseObject( String expression ) {
       String parameter = CommandParameterParseUtilities.parseSingle( expression );
-      for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
-         Singleton< ? > match = RequestSystem.retrieve( 
+      for ( Class< ? extends Singleton > clazz : referencedTypes ) {
+         Singleton match = RequestSystem.retrieve( 
                   clazz, parameter 
          );
          if ( match != null ){
@@ -104,8 +104,8 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
       if ( parameter.length() == 0 ) {
          return null;
       }
-      for ( Class< ? extends Singleton< ? > > clazz : referencedTypes ) {
-         List< ? extends Singleton< ? > > matching = RequestSystem.retrieveAll( 
+      for ( Class< ? extends Singleton > clazz : referencedTypes ) {
+         List< ? extends Singleton > matching = RequestSystem.retrieveAll( 
                   clazz, object -> object.getIdentification().startsWith( parameter ) 
          );
          boolean exactMatch = matching.size() == 1;

@@ -13,7 +13,7 @@ import model.singleton.Singleton;
  * The {@link SingletonSerialization} interface represents the interface that should be implemented
  * to serialize a {@link Singleton}.
  */
-public interface SingletonSerialization< S extends SerializedSingleton< ? > > {
+public interface SingletonSerialization< S extends SerializedSingleton< ? > > extends Singleton {
    
    /** 
     * Method to write the {@link Singleton} to a {@link SerializedSingleton} {@link Object}.

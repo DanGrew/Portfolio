@@ -15,7 +15,7 @@ import model.singleton.Singleton;
  * The {@link IdentificationMatcher} implements the {@link Predicate} interface that
  * matches {@link Singleton}s to their identification.
  */
-public class IdentificationMatcher< T extends Singleton< ? > > implements Predicate< T >{
+public class IdentificationMatcher< T extends Singleton > implements Predicate< T >{
 
    /** {@link String} identification of the {@link Singleton}. **/
    private String identification;

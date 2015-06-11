@@ -9,7 +9,7 @@ package propertytype;
 
 import java.io.Serializable;
 
-import model.singleton.Singleton;
+import model.data.SingletonSerialization;
 import parameter.classparameter.ClassParameterType;
 import property.Property;
 
@@ -17,7 +17,7 @@ import property.Property;
  * {@link PropertyType} defines the basic structure of a {@link Property} defining the
  * {@link Class} associated and a unique identifier for its display name,
  */
-public interface PropertyType extends Singleton< SerializablePropertyType >{
+public interface PropertyType extends SingletonSerialization< SerializablePropertyType > {
    
    /**
     * Getter for the {@link Class} associated with the data type.

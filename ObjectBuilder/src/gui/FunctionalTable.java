@@ -19,7 +19,7 @@ import model.singleton.Singleton;
  * The {@link FunctionalTable} is responsible for displaying the associated {@link Singleton}s
  * in a {@link JTable} using the configured {@link Function}s.
  */
-public class FunctionalTable< SingletonT extends Singleton< ? > > extends JTable {
+public class FunctionalTable< SingletonT extends Singleton > extends JTable {
 
    private static final long serialVersionUID = 1L;
    private FunctionalTableModel< SingletonT > model;

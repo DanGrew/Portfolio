@@ -18,7 +18,7 @@ import model.singleton.Singleton;
  * The {@link FunctionalTableModel} provides an {@link AbstractTableModel} that is configured with
  * {@link Function}s that determine its behaviour.
  */
-public class FunctionalTableModel< SingletonT extends Singleton< ? > > extends AbstractTableModel {
+public class FunctionalTableModel< SingletonT extends Singleton > extends AbstractTableModel {
 
    private static final long serialVersionUID = 1L;
    private static final int UNDEFINED = -1;

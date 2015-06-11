@@ -22,7 +22,7 @@ import architecture.request.RequestSystem;
  * the wrapping of {@link Singleton}s.
  */
 public abstract class XmlCollectionWrapper
-         < S extends Singleton< A >, A extends SerializedSingleton< S > > extends CollectionWrapper< A > implements SingletonContainer
+         < S extends Singleton, A extends SerializedSingleton< S > > extends CollectionWrapper< A > implements SingletonContainer
 {
 
    /**

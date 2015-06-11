@@ -24,14 +24,14 @@ public class CaliSystem {
    /**
     * {@link CaliDataManagement#completeMatch(String)}.
     */
-   public static List< Singleton< ? > > completeMatch( String testSingletonName ) {
+   public static List< Singleton > completeMatch( String testSingletonName ) {
       return caliDataManagement.completeMatch( testSingletonName );
    }// End Method
 
    /**
     * {@link CaliDataManagement#partialMatch(String)}.
     */
-   public static List< Singleton< ? > > partialMatch( String testSingletonName ) {
+   public static List< Singleton > partialMatch( String testSingletonName ) {
       return caliDataManagement.partialMatch( testSingletonName );
    }// End Method
 

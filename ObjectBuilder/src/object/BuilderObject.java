@@ -7,7 +7,7 @@
  */
 package object;
 
-import model.singleton.Singleton;
+import model.data.SingletonSerialization;
 import objecttype.BuilderType;
 import property.Property;
 import propertytype.PropertyType;
@@ -17,7 +17,7 @@ import propertytype.PropertyType;
  * range of {@link PropertyType}s defined by a {@link BuilderType}. This object will 
  * hold the {@link Property}s representing those types.
  */
-public interface BuilderObject extends Singleton< SerializableBuilderObject > {
+public interface BuilderObject extends SingletonSerialization< SerializableBuilderObject > {
 
    /**
     * Getter for the {@link PropertyType} given.

@@ -12,6 +12,7 @@ import java.io.File;
 import javax.xml.bind.JAXB;
 
 import model.data.SerializedSingleton;
+import model.data.SingletonSerialization;
 import model.singleton.Singleton;
 import architecture.representation.SingletonContainer;
 import architecture.representation.StructuralRepresentation;
@@ -83,7 +84,7 @@ public class SerializationSystem {
     * @param file the {@link File} to read from.
     * @return the resulting {@link Singleton}.
     */
-   public static < U extends SerializedSingleton< S >, S extends Singleton< U >, T extends U > S loadWrappedSingleton( Class< T > clazz, File file ){
+   public static < U extends SerializedSingleton< S >, S extends SingletonSerialization< U >, T extends U > S loadWrappedSingleton( Class< T > clazz, File file ){
       T loaded = loadFromFile( clazz, file );
       S unwrapped = loaded.unwrap();
       unwrapped.read( loaded );

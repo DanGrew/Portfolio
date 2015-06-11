@@ -15,7 +15,7 @@ import model.singleton.Singleton;
 /**
  * Extension of {@link ClassParameterType} for {@link String}s.
  */
-public class ReferenceClassParameterTypeImpl< SingletonS extends Singleton< ? > > extends ClassParameterTypeImpl {
+public class ReferenceClassParameterTypeImpl< SingletonS extends Singleton > extends ClassParameterTypeImpl {
 
    private Class< SingletonS > singletonType;
    
