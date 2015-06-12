@@ -33,6 +33,7 @@ public class CaliSystemTest {
     * Method to set up the test, initialising some test objects.
     */
    @BeforeClass public static void setup(){
+      RequestSystem.reset();
       TEST_SINGLETON_OBJECT = new TestSingletonImpl( TEST_SINGLETON_NAME );
       RequestSystem.store( TEST_SINGLETON_OBJECT, TestSingleton.class );
       TEST_ANNOTATED_SINGLETON_OBJECT = new TestAnnotatedSingletonImpl( TEST_ANNOTATED_SINGLETON_NAME );
@@ -43,22 +44,25 @@ public class CaliSystemTest {
     * Method to assert that names that do not match are identified as such.
     */
    @Test public void shouldNotCompleteMatch() {
-      Assert.assertNull( CaliSystem.completeMatch( TEST_SINGLETON_NAME ) );
+      Assert.assertTrue( CaliSystem.completeMatch( TEST_SINGLETON_NAME ).isEmpty() );
    }// End Method
    
    /**
     * Method to test that names that completely match identify the appropriate objects.
     */
    @Test public void shouldCompleteMatch() {
-      Assert.assertEquals( TEST_ANNOTATED_SINGLETON_OBJECT, CaliSystem.completeMatch( TEST_ANNOTATED_SINGLETON_NAME ) );
+      Assert.assertEquals( 
+               Arrays.asList( TEST_ANNOTATED_SINGLETON_OBJECT ), 
+               CaliSystem.completeMatch( TEST_ANNOTATED_SINGLETON_NAME ) 
+      );
    }// End Method
    
    /**
     * Method to assert that names that do not partially match are identified as such.
     */
    @Test public void shouldNotPartialMatch() {
-      Assert.assertNull( CaliSystem.partialMatch( TEST_SINGLETON_NAME ) );
-      Assert.assertNull( CaliSystem.partialMatch( "anything" ) );
+      Assert.assertTrue( CaliSystem.partialMatch( TEST_SINGLETON_NAME ).isEmpty() );
+      Assert.assertTrue( CaliSystem.partialMatch( "anything" ).isEmpty() );
    }// End Method
    
    /**

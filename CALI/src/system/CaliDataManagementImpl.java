@@ -47,8 +47,15 @@ public class CaliDataManagementImpl implements CaliDataManagement {
       );
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
    @Override public List< Singleton > completeMatch( String testSingletonName ) {
-      return null;
-   }
+      return RequestSystem.retrieveAllSingletons( 
+               Singleton.class, 
+               CLASS_MATCHER, 
+               testSingletonName
+      );
+   }// End Method
 
 }// End Class

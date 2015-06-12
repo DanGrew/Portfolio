@@ -101,6 +101,40 @@ public class RequestSystem extends ManagementSystem {
    }// End Method
    
    /**
+    * Method to retrieve all {@link Singleton}s matching the given class matcher and singleton name.
+    * @param minimumParent the minimum parent type of the {@link Singleton}s.
+    * @param classMatcher the {@link Predicate} to match the {@link Class} of the {@link Singleton}.
+    * @param singletonName the exact name to match.
+    * @param <MinimumParentT> the minimum type of the {@link Singleton} to return as, and match as.
+    * @return a {@link List} of minimum parent types matching.
+    */
+   public static < MinimumParentT extends Singleton > List< MinimumParentT > retrieveAllSingletons( 
+            Class< MinimumParentT > minimumParent, 
+            Predicate< Class< ? > > classMatcher, 
+            String singletonName 
+   ) {
+      return dataSystem().retrieveAll( 
+               minimumParent, 
+               classMatcher, 
+               object -> { return object.getIdentification().equals( singletonName ); }
+      );
+   }// End Method
+   
+   /**
+    * {@link DataManagementSystem#retrieveAll(Class, Predicate, Predicate)} with third parameter null.
+    */
+   public static < MinimumParentT extends Singleton > List< MinimumParentT > retrieveAllMatchingClass( 
+            Class< MinimumParentT > minimumParent, 
+            Predicate< Class< ? > > classMatcher
+   ) {
+      return dataSystem().retrieveAll( 
+               minimumParent, 
+               classMatcher, 
+               null
+      );
+   }// End Method
+   
+   /**
     * {@link DataManagementSystem#process(Class, Predicate, Consumer)}.
     */
    public static < T > void process( Class< T > clazz, Predicate< T > criteria, Consumer< T > process ){
