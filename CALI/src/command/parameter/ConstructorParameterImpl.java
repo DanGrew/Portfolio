@@ -69,6 +69,7 @@ public class ConstructorParameterImpl implements CommandParameter {
          Arrays.fill( parameterTypes, String.class );
          for ( Class< ? > clazz : objectClasses ) {
             try {
+               //Needs to be in CaliSystem, and check annotation!
                clazz.getConstructor( parameterTypes );
                return true;
             } catch ( NoSuchMethodException | SecurityException e ) {
@@ -134,7 +135,7 @@ public class ConstructorParameterImpl implements CommandParameter {
       if ( !objectClasses.isEmpty() ) {
          expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
          if ( expression.isEmpty() ) {
-            return true;
+            return false;
          }
          
          //Remove open brackets.
@@ -144,19 +145,19 @@ public class ConstructorParameterImpl implements CommandParameter {
          expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.regexOpen() ).trim();
          
          if ( expression.isEmpty() ) {
-            return true;
+            return false;
          }
          
          //Cannot match partial constructor, allow any parameters before defining end bracket.
          if ( !expression.contains( CaliAnnotationSyntax.close() ) ) {
-            return true;
+            return false;
          }
          
          //Get parameters.
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
                   CaliAnnotationSyntax.regexClose(), 
-                  CommandParameterParseUtilities.delimiter() 
+                  CaliAnnotationSyntax.delimiter() 
          );
          
          //Fill types, default assumed string.
