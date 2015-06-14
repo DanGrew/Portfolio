@@ -46,7 +46,7 @@ public class CaliSystem {
    /**
     * {@link CaliDatabase#partialMatch(String)}.
     */
-   public static Class< ? > partialMatchClass( String simpleName ) {
+   public static List< Class< ? > > partialMatchClass( String simpleName ) {
       return database.partialMatch( simpleName );
    }// End Method
 

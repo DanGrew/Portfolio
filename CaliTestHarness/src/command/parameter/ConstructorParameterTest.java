@@ -11,13 +11,13 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import parameter.BooleanParameterImpl;
 import parameter.CommandParameter;
 import system.CaliSystem;
-import test.model.TestObjects.TestSingleton;
+import test.model.TestObjects.TestSingletonImpl;
 import annotation.CaliAnnotationSyntax;
 
 import common.TestObjects.TestAnnotatedSingletonImpl;
+import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
 
 /**
  * Test for the {@link ConstructorParameterImpl}.
@@ -31,6 +31,7 @@ public class ConstructorParameterTest {
     */
    @BeforeClass public static void setup(){
       CaliSystem.register( TestAnnotatedSingletonImpl.class );
+      CaliSystem.register( TestAnotherAnnotatedSingletonImpl.class );
       parameter = new ConstructorParameterImpl();
    }// End Method
    
@@ -45,6 +46,11 @@ public class ConstructorParameterTest {
       Assert.assertTrue( parameter.partialMatches( 
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + "anything" + CaliAnnotationSyntax.close() ) 
       );
+      Assert.assertTrue( parameter.partialMatches( "TestAn(" ) );
+      Assert.assertTrue( parameter.partialMatches( 
+               "Test" + CaliAnnotationSyntax.open() + 
+               " name, anything " + CaliAnnotationSyntax.close() 
+      ) );
    }// End Method
    
    /**
@@ -52,8 +58,11 @@ public class ConstructorParameterTest {
     */
    @Test public void shouldNotPartialMatch() {
       Assert.assertFalse( parameter.partialMatches( "anything" ) );
-      Assert.assertFalse( parameter.partialMatches( TestSingleton.class.getSimpleName() ) );
-      Assert.assertTrue( parameter.partialMatches( "TestAn(" ) );
+      Assert.assertFalse( parameter.partialMatches( TestSingletonImpl.class.getSimpleName() ) );
+      Assert.assertFalse( parameter.partialMatches( 
+               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
+               " name, anything " + CaliAnnotationSyntax.close() 
+      ) );
    }// End Method
    
    /**
@@ -79,6 +88,10 @@ public class ConstructorParameterTest {
       ) );
       Assert.assertFalse( parameter.completeMatches( 
                TestAnnotatedSingletonImpl.class.getSimpleName()
+      ) );
+      Assert.assertFalse( parameter.completeMatches( 
+               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
+               " name, anything " + CaliAnnotationSyntax.close() 
       ) );
    }// End Method
    

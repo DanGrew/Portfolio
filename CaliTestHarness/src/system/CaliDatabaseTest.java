@@ -7,12 +7,13 @@
  */
 package system;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import test.model.TestObjects.TestSingleton;
-
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 
@@ -66,16 +67,16 @@ public class CaliDatabaseTest {
    @Test public void shouldPartialMatch() {
       database.register( TestAnnotatedSingletonImpl.class );
       
-      Assert.assertEquals( TestAnnotatedSingletonImpl.class, database.partialMatch( TestAnnotatedSingletonImpl.class.getSimpleName() ) );
-      Assert.assertEquals( TestAnnotatedSingletonImpl.class, database.partialMatch( "TestAnn" ) );
+      Assert.assertEquals( Arrays.asList( TestAnnotatedSingletonImpl.class ), database.partialMatch( TestAnnotatedSingletonImpl.class.getSimpleName() ) );
+      Assert.assertEquals( Arrays.asList( TestAnnotatedSingletonImpl.class ), database.partialMatch( "TestAnn" ) );
    }// End Method
    
    /**
     * {@link CaliDatabase#partialMatch(String)} reject test.
     */
    @Test public void shouldNotPartialMatchEmptyDatabase() {
-      Assert.assertNull( database.partialMatch( TestAnnotatedSingletonImpl.class.getSimpleName() ) );
-      Assert.assertNull( database.partialMatch( "TestAnn" ) );
+      Assert.assertTrue( database.partialMatch( TestAnnotatedSingletonImpl.class.getSimpleName() ).isEmpty() );
+      Assert.assertTrue( database.partialMatch( "TestAnn" ).isEmpty() );
    }// End Method
 
 }// End Class

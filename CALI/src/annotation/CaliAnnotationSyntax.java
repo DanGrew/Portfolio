@@ -14,6 +14,7 @@ public class CaliAnnotationSyntax {
    private static final String REGEX_PREFIX = "\\";
    private static final String PARAMETERS_OPEN = "(";
    private static final String PARAMETERS_CLOSE = ")";
+   private static final String PARAMETERS_DELIMITER = ",";
    
    /**
     * Getter for the open tag in {@link Cali} {@link Command}s.
@@ -47,6 +48,14 @@ public class CaliAnnotationSyntax {
     */
    public static String regexClose(){
       return REGEX_PREFIX + close();
+   }// End Method
+   
+   /**
+    * Getter for the delimiter tag in {@link Cali} {@link Command}s.
+    * @return the delimiter tag for a statement.
+    */
+   public static String delimiter(){
+      return PARAMETERS_DELIMITER;
    }// End Method
 
 }// End Class

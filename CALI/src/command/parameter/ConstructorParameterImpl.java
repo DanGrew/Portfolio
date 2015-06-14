@@ -9,6 +9,7 @@ package command.parameter;
 
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
+import java.util.List;
 
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
@@ -34,8 +35,8 @@ public class ConstructorParameterImpl implements CommandParameter {
     */
    @Override public boolean partialMatches( String expression ) {
       String objectNamePart = extractObjectType( expression );
-      Class< ? > objectClazz = parseObjectClass( objectNamePart );
-      if ( objectClazz != null ) {
+      List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
+      if ( !objectClasses.isEmpty() ) {
          expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
          if ( expression.isEmpty() ) {
             return true;
@@ -60,17 +61,19 @@ public class ConstructorParameterImpl implements CommandParameter {
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
                   CaliAnnotationSyntax.regexClose(), 
-                  CommandParameterParseUtilities.delimiter() 
+                  CaliAnnotationSyntax.delimiter()
          );
          
          //Fill types, default assumed string.
          Class< ? >[] parameterTypes = new Class< ? >[ parameters.length ];
          Arrays.fill( parameterTypes, String.class );
-         try {
-            objectClazz.getConstructor( parameterTypes );
-            return true;
-         } catch ( NoSuchMethodException | SecurityException e ) {
-            return false;
+         for ( Class< ? > clazz : objectClasses ) {
+            try {
+               clazz.getConstructor( parameterTypes );
+               return true;
+            } catch ( NoSuchMethodException | SecurityException e ) {
+               //Does not exist, and there is no hasConstructor.
+            }
          }
       }
       return false;
@@ -111,13 +114,13 @@ public class ConstructorParameterImpl implements CommandParameter {
     * @param value the value extracted from the expression.
     * @return the matching {@link Cali} {@link Class}.
     */
-   private Class< ? > parseObjectClass( String value ){
+   private List< Class< ? > > parseObjectClass( String value ){
       if ( value == null ) {
          return null;
       }
-      Class< ? > clazz = CaliSystem.partialMatchClass( value );
-      if ( clazz != null ) {
-         return clazz;
+      List< Class< ? > > classes = CaliSystem.partialMatchClass( value );
+      if ( classes != null ) {
+         return classes;
       }
       return null;
    }// End Method
@@ -126,6 +129,48 @@ public class ConstructorParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
+      String objectNamePart = extractObjectType( expression );
+      List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
+      if ( !objectClasses.isEmpty() ) {
+         expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
+         if ( expression.isEmpty() ) {
+            return true;
+         }
+         
+         //Remove open brackets.
+         if ( !expression.startsWith( CaliAnnotationSyntax.open() ) ) {
+            return false;
+         }
+         expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.regexOpen() ).trim();
+         
+         if ( expression.isEmpty() ) {
+            return true;
+         }
+         
+         //Cannot match partial constructor, allow any parameters before defining end bracket.
+         if ( !expression.contains( CaliAnnotationSyntax.close() ) ) {
+            return true;
+         }
+         
+         //Get parameters.
+         String[] parameters = CommandParameterParseUtilities.parseUpTo( 
+                  expression, 
+                  CaliAnnotationSyntax.regexClose(), 
+                  CommandParameterParseUtilities.delimiter() 
+         );
+         
+         //Fill types, default assumed string.
+         Class< ? >[] parameterTypes = new Class< ? >[ parameters.length ];
+         Arrays.fill( parameterTypes, String.class );
+         for ( Class< ? > clazz : objectClasses ) {
+            try {
+               clazz.getConstructor( parameterTypes );
+               return true;
+            } catch ( NoSuchMethodException | SecurityException e ) {
+               //Does not exist, and there is no hasConstructor.
+            }
+         }
+      }
       return false;
    }// End Method
 

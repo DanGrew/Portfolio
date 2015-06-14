@@ -45,13 +45,14 @@ public class TestObjects {
    }// End Class
    
    /** Another class of testable {@link Singleton}. */
-   public static class AnotherTestAnnotatedSingletonImpl extends TestAnnotatedSingletonImpl {
+   public static class TestAnotherAnnotatedSingletonImpl extends TestAnnotatedSingletonImpl {
 
       /**
-       * Constructs a new {@link AnotherTestAnnotatedSingletonImpl}.
+       * Constructs a new {@link TestAnotherAnnotatedSingletonImpl}.
        * @param identification the name.
+       * @param anotherValue another value.
        */
-      public AnotherTestAnnotatedSingletonImpl( String identification ) {
+      public TestAnotherAnnotatedSingletonImpl( String identification, String anotherValue ) {
          super( identification );
       }// End Constructor
    }// End Class

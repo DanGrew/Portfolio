@@ -7,7 +7,9 @@
  */
 package system;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import annotation.Cali;
@@ -25,7 +27,7 @@ public class CaliDatabase {
     * Constructs a new {@link CaliDatabase}.
     */
    public CaliDatabase() {
-      caliClasses = new HashSet<>();
+      caliClasses = new LinkedHashSet<>();
    }// End Constructor
 
    /**
@@ -54,15 +56,16 @@ public class CaliDatabase {
     * Method to partially match the given part of a {@link Class} name to the
     * {@link Class} stored in the {@link CaliDatabase}.
     * @param simpleName the partial simple name.
-    * @return the {@link Class} matching.
+    * @return the {@link Class}es matching.
     */
-   public Class< ? > partialMatch( String simpleName ) {
+   public List< Class< ? > > partialMatch( String simpleName ) {
+      List< Class< ? > > allMatches = new ArrayList< Class<?> >();
       for ( Class< ? > clazz : caliClasses ) {
          if ( clazz.getSimpleName().startsWith( simpleName ) ) {
-            return clazz;
+            allMatches.add( clazz );
          }
       }
-      return null;
+      return allMatches;
    }// End Method
 
    /**
