@@ -20,6 +20,7 @@ import model.singleton.Singleton;
 public class CaliSystem {
    
    private static CaliDataManagement caliDataManagement = new CaliDataManagementImpl();
+   private static CaliDatabase database = new CaliDatabase();
 
    /**
     * {@link CaliDataManagement#completeMatch(String)}.
@@ -31,8 +32,22 @@ public class CaliSystem {
    /**
     * {@link CaliDataManagement#partialMatch(String)}.
     */
-   public static List< Singleton > partialMatch( String testSingletonName ) {
+   public static List< Singleton > partialMatchSingletons( String testSingletonName ) {
       return caliDataManagement.partialMatch( testSingletonName );
+   }// End Method
+   
+   /**
+    * {@link CaliDatabase#register(Class)}.
+    */
+   public static void register( Class< ? > clazz ) {
+      database.register( clazz );
+   }// End Method
+   
+   /**
+    * {@link CaliDatabase#partialMatch(String)}.
+    */
+   public static Class< ? > partialMatchClass( String simpleName ) {
+      return database.partialMatch( simpleName );
    }// End Method
 
 }// End Class

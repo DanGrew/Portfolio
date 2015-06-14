@@ -97,6 +97,40 @@ public class CommandParameterParseUtilitiesTest {
    }// End Method
    
    /**
+    * {@link CommandParameterParseUtilities#parseUpTo(String, String, String)} acceptance test.
+    */
+   @Test public void shouldParseUpTo(){
+      String[] result = CommandParameterParseUtilities.parseUpTo( 
+               "anything stuff filled here )",
+               "\\)",
+               CommandParameterParseUtilities.delimiter()
+      );
+      Assert.assertEquals( "anything", result[ 0 ] );
+      Assert.assertEquals( "stuff", result[ 1 ] );
+      Assert.assertEquals( "filled", result[ 2 ] );
+      Assert.assertEquals( "here", result[ 3 ] );
+      
+      result = CommandParameterParseUtilities.parseUpTo( 
+               "anything stuff fi)lled here )",
+               "\\)",
+               CommandParameterParseUtilities.delimiter()
+      );
+      Assert.assertEquals( "anything", result[ 0 ] );
+      Assert.assertEquals( "stuff", result[ 1 ] );
+      Assert.assertEquals( "fi", result[ 2 ] );
+      
+      result = CommandParameterParseUtilities.parseUpTo( 
+               "anything stuff filled here ",
+               "\\)",
+               CommandParameterParseUtilities.delimiter()
+      );
+      Assert.assertEquals( "anything", result[ 0 ] );
+      Assert.assertEquals( "stuff", result[ 1 ] );
+      Assert.assertEquals( "filled", result[ 2 ] );
+      Assert.assertEquals( "here", result[ 3 ] );
+   }// End Method
+   
+   /**
     * Method to test that the parameters parsed match the input.
     * @param numberOfParameters the number of parameters to parse.
     * @param parameters the parameters in the input.

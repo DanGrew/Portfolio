@@ -32,7 +32,7 @@ public class TestObjects {
       public TestAnnotatedSingletonImpl( String identification ) {
          super( identification );
       }// End Constructor
-
+      
       @Override protected void writeSingleton( TestAnnotatedSingleton serializable ) {}
       @Override protected void readSingleton( TestAnnotatedSingleton serialized ) {}
 

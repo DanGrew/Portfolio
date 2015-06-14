@@ -96,6 +96,19 @@ public class CommandParameterParseUtilities {
    }// End Method
    
    /**
+    * Method to parse all values up to the given value.
+    * @param expression the expression to parse from.
+    * @param searchFor the value to parse up to.
+    * @param delimiter the delimiter for separating the values.
+    * @return an array of parts in the expression up to the given.
+    */
+   public static final String[] parseUpTo( String expression, String searchFor, String delimiter ) {
+      String[] parts = expression.split( searchFor );
+      String[] partsToReturn = parts[ 0 ].split( delimiter );
+      return partsToReturn;
+   }// End Method
+   
+   /**
     * Method to reduce the given expression by removing the given parameters.
     * @param expression the expression containing the parameters.
     * @param parameters the parameters to remove.

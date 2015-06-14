@@ -61,16 +61,16 @@ public class CaliSystemTest {
     * Method to assert that names that do not partially match are identified as such.
     */
    @Test public void shouldNotPartialMatch() {
-      Assert.assertTrue( CaliSystem.partialMatch( TEST_SINGLETON_NAME ).isEmpty() );
-      Assert.assertTrue( CaliSystem.partialMatch( "anything" ).isEmpty() );
+      Assert.assertTrue( CaliSystem.partialMatchSingletons( TEST_SINGLETON_NAME ).isEmpty() );
+      Assert.assertTrue( CaliSystem.partialMatchSingletons( "anything" ).isEmpty() );
    }// End Method
    
    /**
     * Method to test that names that partially match identify the appropriate objects.
     */
    @Test public void shouldPartialMatch() {
-      Assert.assertEquals( Arrays.asList( TEST_ANNOTATED_SINGLETON_OBJECT ), CaliSystem.partialMatch( TEST_ANNOTATED_SINGLETON_NAME ) );
-      Assert.assertEquals( Arrays.asList( TEST_ANNOTATED_SINGLETON_OBJECT ), CaliSystem.partialMatch( "TestAn" ) );
+      Assert.assertEquals( Arrays.asList( TEST_ANNOTATED_SINGLETON_OBJECT ), CaliSystem.partialMatchSingletons( TEST_ANNOTATED_SINGLETON_NAME ) );
+      Assert.assertEquals( Arrays.asList( TEST_ANNOTATED_SINGLETON_OBJECT ), CaliSystem.partialMatchSingletons( "TestAn" ) );
    }// End Method
 
 }// End Class

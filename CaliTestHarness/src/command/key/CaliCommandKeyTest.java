@@ -21,7 +21,7 @@ import common.TestObjects.TestAnnotatedSingletonImpl;
 /**
  * Test for the {@link CaliCommandKeyImpl}.
  */
-public class CaliKeyTest {
+public class CaliCommandKeyTest {
 
    private static final String TEST_SINGLETON_NAME = "TestSingleton";
    private static TestSingleton TEST_SINGLETON_OBJECT;
