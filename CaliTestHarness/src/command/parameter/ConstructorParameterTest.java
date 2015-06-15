@@ -15,13 +15,14 @@ import parameter.CommandParameter;
 import system.CaliSystem;
 import test.model.TestObjects.TestSingletonImpl;
 import annotation.CaliAnnotationSyntax;
+import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
 
 /**
  * Test for the {@link ConstructorParameterImpl}.
  */
-public class ConstructorParameterTest {
+public class ConstructorParameterTest implements CommandParameterVerifier {
 
    private static CommandParameter parameter;
    
@@ -37,7 +38,7 @@ public class ConstructorParameterTest {
    /**
     * {@link ConstructorParameterImpl#partialMatches(String)} acceptance test.
     */
-   @Test public void shouldPartialMatch() {
+   @Test @Override public void shouldPartialMatch() {
       Assert.assertTrue( parameter.partialMatches( TestAnnotatedSingletonImpl.class.getSimpleName() ) );
       Assert.assertTrue( parameter.partialMatches( "TestAn" ) );
       Assert.assertTrue( parameter.partialMatches( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() ) );
@@ -56,7 +57,7 @@ public class ConstructorParameterTest {
    /**
     * {@link ConstructorParameterImpl#partialMatches(String)} reject test.
     */
-   @Test public void shouldNotPartialMatch() {
+   @Test @Override public void shouldNotPartialMatch() {
       Assert.assertFalse( parameter.partialMatches( "anything" ) );
       Assert.assertFalse( parameter.partialMatches( TestSingletonImpl.class.getSimpleName() ) );
       Assert.assertFalse( parameter.partialMatches( 
@@ -68,7 +69,7 @@ public class ConstructorParameterTest {
    /**
     * {@link ConstructorParameterImpl#completeMatches(String)} acceptance test.
     */
-   @Test public void shouldCompleteMatch() {
+   @Test @Override public void shouldCompleteMatch() {
       Assert.assertTrue( parameter.completeMatches( 
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
                "name" + CaliAnnotationSyntax.close() 
@@ -78,7 +79,7 @@ public class ConstructorParameterTest {
    /**
     * {@link ConstructorParameterImpl#completeMatches(String)} reject test.
     */
-   @Test public void shouldNotCompleteMatch() {
+   @Test @Override public void shouldNotCompleteMatch() {
       Assert.assertFalse( parameter.completeMatches( "anything" ) );
       Assert.assertFalse( parameter.completeMatches( 
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + "name" 
@@ -98,7 +99,7 @@ public class ConstructorParameterTest {
    /**
     * {@link ConstructorParameterImpl#extractInput(String)} acceptance test.
     */
-   @Test public void shouldExtract() {
+   @Test @Override public void shouldExtract() {
       Assert.assertEquals( "anything", parameter.extractInput( "anything" ) );
       Assert.assertEquals( "", parameter.extractInput( 
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + "name" 
@@ -163,7 +164,7 @@ public class ConstructorParameterTest {
     * @throws SecurityException 
     * @throws NoSuchMethodException 
     */
-   @Test public void shouldNotParse() throws NoSuchMethodException, SecurityException {
+   @Test @Override public void shouldNotParse() {
       Assert.assertNull( parameter.parseObject( "anything" ) );
       
       final String testParameter2 = "name";
@@ -179,7 +180,7 @@ public class ConstructorParameterTest {
    /**
     * {@link ConstructorParameterImpl#autoComplete(String)} acceptance test.
     */
-   @Test public void shouldAutoComplete() {
+   @Test @Override public void shouldAutoComplete() {
       Assert.assertEquals( 
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open(),
                parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() ) 
@@ -201,7 +202,7 @@ public class ConstructorParameterTest {
    /**
     * {@link ConstructorParameterImpl#autoComplete(String)} reject test.
     */
-   @Test public void shouldNotAutoComplete() {
+   @Test @Override public void shouldNotAutoComplete() {
       Assert.assertNull( parameter.autoComplete( "anything" ) );
       Assert.assertNull( parameter.autoComplete( "" ) );
       Assert.assertNull( parameter.autoComplete( " " ) );
