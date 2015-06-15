@@ -15,7 +15,6 @@ import parameter.CommandParameter;
 import system.CaliSystem;
 import test.model.TestObjects.TestSingletonImpl;
 import annotation.CaliAnnotationSyntax;
-
 import common.TestObjects.TestAnnotatedSingletonImpl;
 import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
 
@@ -51,6 +50,7 @@ public class ConstructorParameterTest {
                "Test" + CaliAnnotationSyntax.open() + 
                " name, anything " + CaliAnnotationSyntax.close() 
       ) );
+      Assert.assertTrue( parameter.partialMatches( "TestAnotherAnnotatedSingletonImpl( testName, 567.06 )" ) );
    }// End Method
    
    /**
@@ -99,7 +99,7 @@ public class ConstructorParameterTest {
     * {@link ConstructorParameterImpl#extractInput(String)} acceptance test.
     */
    @Test public void shouldExtract() {
-      Assert.assertEquals( "", parameter.extractInput( "anything" ) );
+      Assert.assertEquals( "anything", parameter.extractInput( "anything" ) );
       Assert.assertEquals( "", parameter.extractInput( 
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + "name" 
       ) );
@@ -115,6 +115,14 @@ public class ConstructorParameterTest {
                "name" + CaliAnnotationSyntax.close() + 
                "anythingElse"
       ) );
+      
+      Assert.assertEquals( "anythingElse", parameter.extractInput( 
+               TestAnotherAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
+               "name, something" + CaliAnnotationSyntax.close() + 
+               "anythingElse"
+      ) );
+      Assert.assertEquals( "", parameter.extractInput( "TestAnotherAnnotatedSingletonImpl( testName, 567.06 )" ) );
+      Assert.assertEquals( "", parameter.extractInput( "TestAnotherAnnotatedSingletonImpl( testName, " ) );
    }// End Method
    
    /**
@@ -126,32 +134,46 @@ public class ConstructorParameterTest {
       final String testParameter = "name";
       ConstructorParameterValue constructorValue = new ConstructorParameterValue();
       constructorValue.setConstructor( TestAnnotatedSingletonImpl.class.getConstructor( String.class ) );
-      constructorValue.addParameter( testParameter );
+      constructorValue.addParameters( testParameter );
       Assert.assertEquals( 
                constructorValue, 
                parameter.parseObject( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
-               testParameter + CaliAnnotationSyntax.close() 
-      ) );
+                        TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
+                        testParameter + CaliAnnotationSyntax.close() 
+               ) 
+      );
       
       final String testParameter2 = "name";
-      final double testParameter3 = 20.0;
+      final String testParameter3 = "20.0";
       constructorValue = new ConstructorParameterValue();
-      constructorValue.setConstructor( TestAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ) );
-      constructorValue.addParameter( testParameter );
+      constructorValue.setConstructor( TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, String.class ) );
+      constructorValue.addParameters( testParameter2 );
+      constructorValue.addParameters( testParameter3 );
       Assert.assertEquals( 
                constructorValue, 
                parameter.parseObject( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
-               testParameter2 + ", " + testParameter3 + CaliAnnotationSyntax.close() 
-      ) );
+                        TestAnotherAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
+                        testParameter2 + ", " + testParameter3 + CaliAnnotationSyntax.close() 
+               ) 
+      );
    }// End Method
    
    /**
     * {@link ConstructorParameterImpl#parseObject(String)} reject test.
+    * @throws SecurityException 
+    * @throws NoSuchMethodException 
     */
-   @Test public void shouldNotParse() {
+   @Test public void shouldNotParse() throws NoSuchMethodException, SecurityException {
       Assert.assertNull( parameter.parseObject( "anything" ) );
+      
+      final String testParameter2 = "name";
+      final double testParameter3 = 20.0;
+      Assert.assertNull( 
+               parameter.parseObject( 
+                        TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + 
+                        testParameter2 + ", " + testParameter3 + CaliAnnotationSyntax.close() 
+               ) 
+      );
    }// End Method
    
    /**
@@ -161,17 +183,17 @@ public class ConstructorParameterTest {
       Assert.assertEquals( 
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open(),
                parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() ) 
-       );
+      );
       Assert.assertEquals(
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open(),
-               parameter.autoComplete( "TestAn" ) 
+               parameter.autoComplete( "TestAnn" ) 
       );
       Assert.assertEquals( 
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open(),
                parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() ) 
       );
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + "anything",
+               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + " anything",
                parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + "anything" ) 
       );
    }// End Method

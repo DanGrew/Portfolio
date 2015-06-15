@@ -7,6 +7,7 @@
  */
 package system;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 
 import annotation.Cali;
@@ -32,5 +33,13 @@ public interface CaliDataManagement {
     * @return all {@link Singleton}s that completely match the name.
     */
    public List< Singleton > completeMatch( String testSingletonName );
+
+   /**
+    * Method to match the given {@link Class}es to the parameter {@link Class} types.
+    * @param objectClasses the possible {@link Class}es to match.
+    * @param classes the {@link Class}es of the parameters.
+    * @return the {@link Constructor} if found.
+    */
+   public Constructor< ? > matchConstructor( List< Class< ? > > objectClasses, Class< ? >[] classes );
 
 }// End Interface

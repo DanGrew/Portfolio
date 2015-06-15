@@ -7,6 +7,7 @@
  */
 package system;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -56,6 +57,24 @@ public class CaliDataManagementImpl implements CaliDataManagement {
                CLASS_MATCHER, 
                testSingletonName
       );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Constructor< ? > matchConstructor( List< Class< ? > > matches, Class< ? >[] classes ) {
+      for ( Class< ? > match : matches ) {
+         try {
+            Constructor< ? > constructor = match.getConstructor( classes );
+            if ( constructor.isAnnotationPresent( Cali.class ) ) {
+               return constructor;
+            }
+         } catch ( NoSuchMethodException | SecurityException e ) {
+            //No match.
+            continue;
+         }
+      }
+      return null;
    }// End Method
 
 }// End Class

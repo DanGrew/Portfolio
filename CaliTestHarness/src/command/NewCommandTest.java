@@ -8,25 +8,31 @@
 package command;
 
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import system.CaliSystem;
 
 import command.key.CaliNewCommandKeyImpl;
 import command.pattern.CommandVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
+import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
 
 /**
  * Test for the {@link NewCommandImpl}.
  */
 public class NewCommandTest implements CommandVerifier {
 
-   private Command< Object > command;
+   private static Command< Object > command;
    
    /**
     * Method to set up the test.
     */
-   @Before public void setup(){
+   @BeforeClass public static void setup(){
       command = new NewCommandImpl();
+      
+      CaliSystem.register( TestAnnotatedSingletonImpl.class );
+      CaliSystem.register( TestAnotherAnnotatedSingletonImpl.class );
    }// End Method
    
    /**
@@ -40,9 +46,9 @@ public class NewCommandTest implements CommandVerifier {
     * {@inheritDoc}
     */
    @Test @Override public void shouldPartialMatch() {
-      Assert.assertTrue( command.partialMatches( "new TestAnnotatedSingleton( testName, 567.06 )" ) );
-      Assert.assertTrue( command.partialMatches( "new TestAnnotatedSingleton( testName )" ) );
-      Assert.assertTrue( command.partialMatches( "new TestAnnotatedSingleton( test" ) );
+      Assert.assertTrue( command.partialMatches( "new TestAnotherAnnotatedSingletonImpl( testName, 567.06 )" ) );
+      Assert.assertTrue( command.partialMatches( "new TestAnnotatedSingletonImpl( testName )" ) );
+      Assert.assertTrue( command.partialMatches( "new TestAnnotatedSingletonImpl( test" ) );
       Assert.assertTrue( command.partialMatches( "new TestAnnotated" ) );
       Assert.assertTrue( command.partialMatches( "ne" ) );
       Assert.assertTrue( command.partialMatches( "" ) );
@@ -52,35 +58,35 @@ public class NewCommandTest implements CommandVerifier {
     * {@inheritDoc}
     */
    @Test @Override public void shouldNotPartialMatch() {
-      Assert.assertTrue( command.partialMatches( "anything" ) );
+      Assert.assertFalse( command.partialMatches( "anything" ) );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Test @Override public void shouldCompleteMatch() {
-      Assert.assertTrue( command.completeMatches( "new TestAnnotatedSingleton( testName )" ) );
-      Assert.assertTrue( command.completeMatches( "new TestAnnotatedSingleton( testName, 495.987 )" ) );
+      Assert.assertTrue( command.completeMatches( "new TestAnnotatedSingletonImpl( testName )" ) );
+      Assert.assertTrue( command.completeMatches( "new TestAnotherAnnotatedSingletonImpl( testName, 495.987 )" ) );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Test @Override public void shouldNotCompleteMatch() {
-      Assert.assertTrue( command.completeMatches( "new TestAnnotatedSingleton( testNa" ) );
-      Assert.assertTrue( command.completeMatches( "new TestAnnotatedSingleto" ) );
-      Assert.assertTrue( command.completeMatches( "new " ) );
-      Assert.assertTrue( command.completeMatches( "n" ) );
-      Assert.assertTrue( command.completeMatches( "" ) );
+      Assert.assertFalse( command.completeMatches( "new TestAnnotatedSingletonImpl( testNa" ) );
+      Assert.assertFalse( command.completeMatches( "new TestAnnotatedSingleto" ) );
+      Assert.assertFalse( command.completeMatches( "new " ) );
+      Assert.assertFalse( command.completeMatches( "n" ) );
+      Assert.assertFalse( command.completeMatches( "" ) );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Test @Override public void shouldAutoComplete() {
-      Assert.assertEquals( "new TestAnnotatedSingleton( testName", command.autoComplete( "new TestAnnotatedSingleton( testName }" ) );
-      Assert.assertEquals( "new TestAnnotatedSingleton(", command.autoComplete( "new TestAnnotatedSingleton(" ) );
-      Assert.assertEquals( "new TestAnnotatedSingleton(", command.autoComplete( "new TestAnnotated" ) );
+      Assert.assertEquals( "new TestAnnotatedSingletonImpl( testName", command.autoComplete( "new TestAnnotatedSingletonImpl( testName" ) );
+      Assert.assertEquals( "new TestAnnotatedSingletonImpl(", command.autoComplete( "new TestAnnotatedSingletonImpl(" ) );
+      Assert.assertEquals( "new TestAnnotatedSingletonImpl(", command.autoComplete( "new TestAnnotated" ) );
       Assert.assertEquals( "new", command.autoComplete( "n" ) );
    }// End Method
 
@@ -95,14 +101,14 @@ public class NewCommandTest implements CommandVerifier {
     * {@inheritDoc}
     */
    @Test @Override public void shouldExecuteAndParameterize() {
-      Assert.assertEquals( new TestAnnotatedSingletonImpl( "testName"), command.autoComplete( "new TestAnnotatedSingleton( testName )" ) );
+      Assert.assertEquals( new TestAnnotatedSingletonImpl( "testName" ), command.execute( "new TestAnnotatedSingletonImpl( testName )" ).getResult() );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Test @Override public void shouldNotExecuteAndParameterize() {
-      Assert.assertEquals( new TestAnnotatedSingletonImpl( "testName"), command.autoComplete( "new TestAnnotatedSingleton( " ) );
+      Assert.assertNull( command.execute( "new TestAnnotatedSingletonImpl( " ) );
    }// End Method
 
 }// End Class

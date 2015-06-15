@@ -7,11 +7,12 @@
  */
 package system;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 
+import model.singleton.Singleton;
 import annotation.Cali;
 import architecture.request.RequestSystem;
-import model.singleton.Singleton;
 
 /**
  * The {@link CaliSystem} is responsible for providing access to the {@link RequestSystem}
@@ -48,6 +49,15 @@ public class CaliSystem {
     */
    public static List< Class< ? > > partialMatchClass( String simpleName ) {
       return database.partialMatch( simpleName );
+   }// End Method
+
+   /**
+    * {@link CaliDatabase#partialMatch(String)},
+    * {@link CaliDataManagement#matchConstructor(List, Class[])}
+    */
+   public static Constructor< ? > matchConstructor( String object, Class< ? >... classes ) {
+      List< Class< ? > > matches = partialMatchClass( object );
+      return caliDataManagement.matchConstructor( matches, classes );
    }// End Method
 
 }// End Class

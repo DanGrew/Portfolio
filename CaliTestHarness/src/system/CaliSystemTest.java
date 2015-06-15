@@ -18,6 +18,7 @@ import test.model.TestObjects.TestSingletonImpl;
 import architecture.request.RequestSystem;
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
+import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
 
 /**
  * Test for the {@link CaliSystem}.
@@ -38,6 +39,9 @@ public class CaliSystemTest {
       RequestSystem.store( TEST_SINGLETON_OBJECT, TestSingleton.class );
       TEST_ANNOTATED_SINGLETON_OBJECT = new TestAnnotatedSingletonImpl( TEST_ANNOTATED_SINGLETON_NAME );
       RequestSystem.store( TEST_ANNOTATED_SINGLETON_OBJECT, TestAnnotatedSingleton.class );
+      
+      CaliSystem.register( TestAnnotatedSingletonImpl.class );
+      CaliSystem.register( TestAnotherAnnotatedSingletonImpl.class );
    }// End Method
 
    /**
@@ -71,6 +75,33 @@ public class CaliSystemTest {
    @Test public void shouldPartialMatch() {
       Assert.assertEquals( Arrays.asList( TEST_ANNOTATED_SINGLETON_OBJECT ), CaliSystem.partialMatchSingletons( TEST_ANNOTATED_SINGLETON_NAME ) );
       Assert.assertEquals( Arrays.asList( TEST_ANNOTATED_SINGLETON_OBJECT ), CaliSystem.partialMatchSingletons( "TestAn" ) );
+   }// End Method
+   
+   /**
+    * {@link CaliSystem#matchConstructor(String, Class...)} acceptance test.
+    */
+   @Test public void shouldMatchConstructor() throws NoSuchMethodException, SecurityException {
+      
+      Assert.assertEquals( 
+               TestAnnotatedSingletonImpl.class.getConstructor( String.class ),
+               CaliSystem.matchConstructor( "TestAnnotatedSingletonImpl", String.class ) 
+      );
+      Assert.assertEquals( 
+               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, String.class ), 
+               CaliSystem.matchConstructor( "TestAnotherAnnotatedSingletonImpl", String.class, String.class ) 
+      );
+   }// End Method
+   
+   /**
+    * {@link CaliSystem#matchConstructor(String, Class...)} reject test.
+    */
+   @Test public void shouldNotMatchConstructor() {
+      Assert.assertNull( 
+               CaliSystem.matchConstructor( "TestAnnotatedSingletonImpl", String.class, String.class ) 
+      );
+      Assert.assertNull( 
+               CaliSystem.matchConstructor( "TestAnotherAnnotatedSingletonImpl", String.class, String.class, String.class ) 
+      );
    }// End Method
 
 }// End Class

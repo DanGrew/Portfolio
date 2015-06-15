@@ -37,7 +37,10 @@ public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
          Constructor< ? > constructor = value.getConstructor();
          try {
             Object object = constructor.newInstance( value.getParameters() );
-            return new CommandResultImpl< Object >( object );
+            return new CommandResultImpl< Object >( 
+                     "Successfully created " + constructor.getDeclaringClass().getSimpleName() + ".",
+                     object 
+            );
          } catch ( InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception ) {
             exception.printStackTrace();
             return new CommandResultImpl< Object >( "Failed to create object, Constructor does not match.", null );

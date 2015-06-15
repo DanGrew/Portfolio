@@ -29,7 +29,11 @@ public class TestObjects {
        * Constructs a new {@link TestAnnotatedSingletonImpl}.
        * @param identification the name.
        */
-      public TestAnnotatedSingletonImpl( String identification ) {
+      @Cali public TestAnnotatedSingletonImpl( String identification ) {
+         super( identification );
+      }// End Constructor
+      
+      public TestAnnotatedSingletonImpl( String identification, String anotherValue ) {
          super( identification );
       }// End Constructor
       
@@ -41,6 +45,40 @@ public class TestObjects {
       }
 
       @Override public void resolve() {}
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override public int hashCode() {
+         final int prime = 31;
+         int result = 1;
+         result = prime * result + ( ( identification == null ) ? 0 : identification.hashCode() );
+         return result;
+      }// End Method
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override public boolean equals( Object obj ) {
+         if ( this == obj ) {
+            return true;
+         }
+         if ( obj == null ){
+            return false;
+         }
+         if ( getClass() != obj.getClass() ){
+            return false;
+         }
+         TestAnnotatedSingletonImpl other = ( TestAnnotatedSingletonImpl ) obj;
+         if ( identification == null ) {
+            if ( other.identification != null ){
+               return false;
+            }
+         } else if ( !identification.equals( other.identification ) ){
+            return false;
+         }
+         return true;
+      }// End Method
       
    }// End Class
    
@@ -52,7 +90,7 @@ public class TestObjects {
        * @param identification the name.
        * @param anotherValue another value.
        */
-      public TestAnotherAnnotatedSingletonImpl( String identification, String anotherValue ) {
+      @Cali public TestAnotherAnnotatedSingletonImpl( String identification, String anotherValue ) {
          super( identification );
       }// End Constructor
    }// End Class
