@@ -15,6 +15,7 @@ public class CaliAnnotationSyntax {
    private static final String PARAMETERS_OPEN = "(";
    private static final String PARAMETERS_CLOSE = ")";
    private static final String PARAMETERS_DELIMITER = ",";
+   private static final String STATEMENT_DELIMITER = ".";
    
    /**
     * Getter for the open tag in {@link Cali} {@link Command}s.
@@ -51,11 +52,19 @@ public class CaliAnnotationSyntax {
    }// End Method
    
    /**
-    * Getter for the delimiter tag in {@link Cali} {@link Command}s.
+    * Getter for the parameter delimiter tag in {@link Cali} {@link Command}s.
+    * @return the delimiter tag for parameters.
+    */
+   public static String parameterDelimiter(){
+      return PARAMETERS_DELIMITER;
+   }// End Method
+   
+   /**
+    * Getter for the statement delimiter tag in {@link Cali} {@link Command}s.
     * @return the delimiter tag for a statement.
     */
-   public static String delimiter(){
-      return PARAMETERS_DELIMITER;
+   public static String statementDelimiter(){
+      return STATEMENT_DELIMITER;
    }// End Method
 
 }// End Class

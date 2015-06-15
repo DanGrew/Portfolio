@@ -62,7 +62,7 @@ public class ConstructorParameterImpl implements CommandParameter {
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
                   CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.delimiter()
+                  CaliAnnotationSyntax.parameterDelimiter()
          );
          
          //Fill types, default assumed string.
@@ -153,7 +153,7 @@ public class ConstructorParameterImpl implements CommandParameter {
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
                   CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.delimiter() 
+                  CaliAnnotationSyntax.parameterDelimiter() 
          );
          
          //Fill types, default assumed string.
@@ -200,7 +200,7 @@ public class ConstructorParameterImpl implements CommandParameter {
          Object[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
                   CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.delimiter() 
+                  CaliAnnotationSyntax.parameterDelimiter() 
          );
          
          //Fill types, default assumed string.
@@ -257,7 +257,7 @@ public class ConstructorParameterImpl implements CommandParameter {
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
                   CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.delimiter()
+                  CaliAnnotationSyntax.parameterDelimiter()
          );
          
          //Fill types, default assumed string.
@@ -270,10 +270,10 @@ public class ConstructorParameterImpl implements CommandParameter {
             autoCorrect.append( CaliAnnotationSyntax.open() );
             autoCorrect.append( CommandParameterParseUtilities.delimiter() );
             for ( String parameter : parameters ) {
-               autoCorrect.append( parameter ).append( CaliAnnotationSyntax.delimiter() );
+               autoCorrect.append( parameter ).append( CaliAnnotationSyntax.parameterDelimiter() );
                autoCorrect.append( CommandParameterParseUtilities.delimiter() );
             }
-            autoCorrect.deleteCharAt( autoCorrect.lastIndexOf( CaliAnnotationSyntax.delimiter() ) );
+            autoCorrect.deleteCharAt( autoCorrect.lastIndexOf( CaliAnnotationSyntax.parameterDelimiter() ) );
             autoCorrect.append( CaliAnnotationSyntax.close() );
             
             autoCorrect.append( CommandParameterParseUtilities.delimiter() );
@@ -333,13 +333,13 @@ public class ConstructorParameterImpl implements CommandParameter {
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
                   CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.delimiter() 
+                  CaliAnnotationSyntax.parameterDelimiter() 
          );
          
          for ( String parameter : parameters ) {
             expression = CommandParameterParseUtilities.reduce( expression, parameter.trim() );
-            if ( expression.startsWith( CaliAnnotationSyntax.delimiter() ) ) {
-               expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.delimiter() );
+            if ( expression.startsWith( CaliAnnotationSyntax.parameterDelimiter() ) ) {
+               expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.parameterDelimiter() );
             }
          }
          
