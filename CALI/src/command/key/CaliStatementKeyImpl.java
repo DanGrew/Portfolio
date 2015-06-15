@@ -9,7 +9,7 @@ package command.key;
 
 import command.CommandKey;
 
-public class CaliCommandKeyImpl implements CommandKey {
+public class CaliStatementKeyImpl implements CommandKey {
 
    @Override public String getStringKey() {
       return null;

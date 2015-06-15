@@ -19,9 +19,9 @@ import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 
 /**
- * Test for the {@link CaliCommandKeyImpl}.
+ * Test for the {@link CaliStatementKeyImpl}.
  */
-public class CaliCommandKeyTest {
+public class CaliStatementCommandKeyTest {
 
    private static final String TEST_SINGLETON_NAME = "TestSingleton";
    private static TestSingleton TEST_SINGLETON_OBJECT;
@@ -38,11 +38,11 @@ public class CaliCommandKeyTest {
       TEST_ANNOTATED_SINGLETON_OBJECT = new TestAnnotatedSingletonImpl( TEST_ANNOTATED_SINGLETON_NAME );
       RequestSystem.store( TEST_ANNOTATED_SINGLETON_OBJECT, TestAnnotatedSingleton.class );
       
-      caliKey = new CaliCommandKeyImpl();
+      caliKey = new CaliStatementKeyImpl();
    }// End Method   
    
    /**
-    * Method to test {@link CaliCommandKeyImpl#partialMatches(String)} acceptance.
+    * Method to test {@link CaliStatementKeyImpl#partialMatches(String)} acceptance.
     */
    @Test public void shouldPartialMatch() {
       Assert.assertTrue( caliKey.partialMatches( TEST_ANNOTATED_SINGLETON_NAME ) );
@@ -51,7 +51,7 @@ public class CaliCommandKeyTest {
    }// End Method
    
    /**
-    * Method to test {@link CaliCommandKeyImpl#partialMatches(String)} rejecting.
+    * Method to test {@link CaliStatementKeyImpl#partialMatches(String)} rejecting.
     */
    @Test public void shouldNotPartialMatch() {
       Assert.assertFalse( caliKey.partialMatches( TEST_SINGLETON_NAME ) );

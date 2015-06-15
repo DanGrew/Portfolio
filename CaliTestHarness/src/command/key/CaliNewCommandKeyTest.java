@@ -14,7 +14,7 @@ import org.junit.Test;
 import command.CommandKey;
 
 /**
- * Test for the {@link CaliCommandKeyImpl}.
+ * Test for the {@link CaliStatementKeyImpl}.
  */
 public class CaliNewCommandKeyTest {
    
