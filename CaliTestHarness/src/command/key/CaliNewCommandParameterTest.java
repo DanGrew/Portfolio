@@ -11,20 +11,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import command.CommandKey;
+import parameter.CommandParameter;
 
 /**
- * Test for the {@link CaliStatementKeyImpl}.
+ * Test for the {@link CaliStatementParameterImpl}.
  */
-public class CaliNewCommandKeyTest {
+public class CaliNewCommandParameterTest {
    
-   private CommandKey newKey;
+   private CommandParameter newKey;
 
    /**
     * Method to set up the test.
     */
    @Before public void setup(){
-      newKey = new CaliNewCommandKeyImpl();
+      newKey = new CaliNewCommandParameterImpl();
    }// End Method
    
    /**
@@ -64,33 +64,33 @@ public class CaliNewCommandKeyTest {
     * {@link CommandKey#autoComplete(String)} acceptance test.
     */
    @Test public void shouldAutoComplete() {
-      Assert.assertEquals( CaliNewCommandKeyImpl.key(), newKey.autoComplete( "new" ) );
-      Assert.assertEquals( CaliNewCommandKeyImpl.key(), newKey.autoComplete( "n" ) );
-      Assert.assertEquals( CaliNewCommandKeyImpl.key(), newKey.autoComplete( "" ) );
-      Assert.assertEquals( CaliNewCommandKeyImpl.key(), newKey.autoComplete( "NE" ) );
+      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.autoComplete( "new" ) );
+      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.autoComplete( "n" ) );
+      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.autoComplete( "" ) );
+      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.autoComplete( "NE" ) );
    }// End Method
    
    /**
     * {@link CommandKey#autoComplete(String)} reject test.
     */
    @Test public void shouldNotAutoComplete() {
-      Assert.assertEquals( CaliNewCommandKeyImpl.key(), newKey.autoComplete( "anything" ) );
+      Assert.assertNull( newKey.autoComplete( "anything" ) );
    }// End Method
    
    /**
     * {@link CommandKey#extractKeyExpression(String)} acceptance test.
     */
    @Test public void shouldExtractKey() {
-      Assert.assertEquals( CaliNewCommandKeyImpl.key(), newKey.extractKeyExpression( "new" ) );
-      Assert.assertEquals( CaliNewCommandKeyImpl.key().toUpperCase(), newKey.extractKeyExpression( "NEW" ) );
-      Assert.assertEquals( "n", newKey.extractKeyExpression( "n" ) );
+      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.parseParameter( "new" ) );
+      Assert.assertEquals( CaliNewCommandParameterImpl.key().toUpperCase(), newKey.parseParameter( "NEW" ) );
+      Assert.assertEquals( "n", newKey.parseParameter( "n" ) );
    }// End Method
    
    /**
     * {@link CommandKey#removeKeyFromInput(String)} acceptance test.
     */
    @Test public void shouldRemoveKey() {
-      Assert.assertEquals( "anything", newKey.removeKeyFromInput( "new anything" ) );
-      Assert.assertEquals( "anything", newKey.removeKeyFromInput( "ne anything" ) );
+      Assert.assertEquals( "anything", newKey.extractInput( "new anything" ) );
+      Assert.assertEquals( "anything", newKey.extractInput( "ne anything" ) );
    }// End Method
 }// End Class

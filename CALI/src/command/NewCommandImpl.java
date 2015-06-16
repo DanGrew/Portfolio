@@ -15,7 +15,7 @@ import annotation.Cali;
 import parameter.CommandParameter;
 import parameter.FixedValueParameterImpl;
 import parameter.wrapper.CommandParameters;
-import command.key.CaliNewCommandKeyImpl;
+import command.key.CaliNewCommandParameterImpl;
 import command.parameter.ConstructorParameterImpl;
 import command.parameter.ConstructorParameterValue;
 
@@ -25,8 +25,8 @@ import command.parameter.ConstructorParameterValue;
  */
 public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
 
-   private static final CommandParameter NEW_KEY = new FixedValueParameterImpl( CaliNewCommandKeyImpl.key() );
    private static final String DESCRIPTION = "Command to create a new Object.";
+   private static final CommandParameter KEY_PARAMETER = new FixedValueParameterImpl( CaliNewCommandParameterImpl.key() );
    private static final CommandParameter CONSTRUCTOR_PARAMETER = new ConstructorParameterImpl();
    private static final Function< CommandParameters, CommandResult< Object > > FUNCTION = new Function< CommandParameters, CommandResult<Object> >() {
 
@@ -56,7 +56,7 @@ public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
       super( 
                DESCRIPTION, 
                FUNCTION, 
-               NEW_KEY, 
+               KEY_PARAMETER, 
                CONSTRUCTOR_PARAMETER 
       );
    }// End Constructor

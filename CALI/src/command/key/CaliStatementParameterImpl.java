@@ -10,25 +10,24 @@ package command.key;
 import java.util.List;
 
 import model.singleton.Singleton;
+import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import system.CaliSystem;
 import annotation.CaliAnnotationSyntax;
 
-import command.CommandKey;
-
 /**
- * {@link CaliStatementKeyImpl} is the variable {@link CommandKey} that matches
+ * {@link CaliStatementParameterImpl} is the variable {@link CommandParameter} that matches
  * {@link Singleton}s by {@link Singleton#getIdentification()}.
  */
-public class CaliStatementKeyImpl implements CommandKey {
+public class CaliStatementParameterImpl implements CommandParameter {
 
    /**
     * {@inheritDoc}
     */
-   @Override public String getStringKey() {
-      return "<singleton>.";
+   @Override public String getParameterType() {
+      return "<statment>";
    }// End Method
-
+   
    /**
     * {@inheritDoc}
     */
@@ -74,17 +73,22 @@ public class CaliStatementKeyImpl implements CommandKey {
    /**
     * {@inheritDoc}
     */
-   @Override public String extractKeyExpression( String expression ) {
-      String key = CommandParameterParseUtilities.parseSingle( expression );
-      return key;
+   @Override public Object parseObject( String expression ) {
+      if ( completeMatches( expression ) ) {
+         String key = CommandParameterParseUtilities.parseSingle( expression );
+         if ( key.endsWith( CaliAnnotationSyntax.statementDelimiter() ) ) {
+            key = key.substring( 0, key.length() - 1 );
+         }
+         List< Singleton > matches = CaliSystem.partialMatchSingletons( key );
+         if ( matches.isEmpty() || matches.size() > 1 ) {
+            return null;
+         } else {
+            return matches.get( 0 );
+         }
+      } else {
+         return null;
+      }
    }// End Method
 
-   /**
-    * {@inheritDoc}
-    */
-   @Override public String removeKeyFromInput( String expression ) {
-      String key = CommandParameterParseUtilities.parseSingle( expression );
-      return CommandParameterParseUtilities.reduce( expression, key );
-   }// End Method
 
 }// End Class

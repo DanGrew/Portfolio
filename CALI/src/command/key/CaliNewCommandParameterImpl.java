@@ -7,21 +7,21 @@
  */
 package command.key;
 
-import command.CommandKey;
-import command.CommandKeyImpl;
+import parameter.CommandParameter;
+import parameter.FixedValueParameterImpl;
 import command.NewCommandImpl;
 
 /**
- * The {@link CaliNewCommandKeyImpl} defines the {@link CommandKey} for {@link NewCommandImpl}.
+ * The {@link CaliNewCommandParameterImpl} defines the {@link CommandParameter} for {@link NewCommandImpl}.
  */
-public class CaliNewCommandKeyImpl extends CommandKeyImpl implements CommandKey {
+public class CaliNewCommandParameterImpl extends FixedValueParameterImpl {
    
    private static final String KEY = "new";
 
    /**
-    * Constructs a new {@link CaliNewCommandKeyImpl}.
+    * Constructs a new {@link CaliNewCommandParameterImpl}.
     */
-   public CaliNewCommandKeyImpl() {
+   public CaliNewCommandParameterImpl() {
       super( key() );
    }// End Constructor
 

@@ -14,7 +14,7 @@ import parameter.FixedValueParameterImpl;
 import parameter.wrapper.CommandParameters;
 
 /**
- * The {@link InstructionCommandImpl} provides an implementaton of the {@link Command} to 
+ * The {@link InstructionCommandImpl} provides an implementation of the {@link Command} to 
  * support a simple instruction where no {@link CommandParameter}s are required.
  * @param <ReturnT> the type of the return value of the {@link Command}.
  */
@@ -40,7 +40,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    
    /**
     * Constructs a new {@link InstructionCommandImpl}.
-    * @param key the {@link CommandKey} key that must be matched.
+    * @param key the {@link CommandParameter} key that must be matched.
     * @param description a user friendly description of the {@link Command}.
     * @param function the {@link Function} to execute.
     */
