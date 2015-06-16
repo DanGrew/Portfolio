@@ -10,7 +10,6 @@ package command;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
-import parameter.CommandParameterParseUtilities;
 import parameter.wrapper.CommandParameters;
 import parameter.wrapper.LinkedMapParametersImpl;
 
@@ -19,8 +18,10 @@ import parameter.wrapper.LinkedMapParametersImpl;
  * that requires {@link CommandParameter}s in order for its {@link Function} to be executed.
  * @param <ReturnT> the type of the result when executed.
  */
-public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl< ReturnT > implements Command< ReturnT >{
+public class ParameterizedCommandImpl< ReturnT > implements Command< ReturnT >{
 
+   private String description;
+   private Function< CommandParameters, CommandResult< ReturnT > > function;
    private CommandParameters parameters;
    
    /**
@@ -31,15 +32,22 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     * @param parameters the {@link CommandParameter} that must be provided to execute the {@link Function}.
     */
    public ParameterizedCommandImpl( 
-            CommandKey key, 
             String description, 
             Function< CommandParameters, CommandResult< ReturnT > > function, 
             CommandParameter... parameters 
    ) {
-      super( key, description, function );
+      this.description = description;
+      this.function = function;
       this.parameters = new LinkedMapParametersImpl();
       applyParameters( parameters );
    }// End Constructor
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String getDescription() {
+      return description;
+   }// End Method
    
    /**
     * Method to apply {@link CommandParameter}s to the {@link Command}.
@@ -53,29 +61,20 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
-      if ( super.partialMatches( expression ) ) {
-         expression = getCommandKey().removeKeyFromInput( expression );
-         return parameters.partialMatches( expression );
-      }
-      return false;
+      return parameters.partialMatches( expression );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
-      if ( super.completeMatches( expression ) ) {
-         expression = getCommandKey().removeKeyFromInput( expression );
-         return parameters.completeMatches( expression );
-      }
-      return false;
+      return parameters.completeMatches( expression );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
    @Override public void parameterize( CommandParameter parameter, Object value ) {
-      super.parameterize( parameter, value );
       parameters.setParameter( parameter, value );
    }// End Method
    
@@ -84,8 +83,6 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     */
    @Override public void parameterize( String expression ) {
       if ( completeMatches( expression ) ) {
-         super.parameterize( expression );
-         expression = getCommandKey().removeKeyFromInput( expression );
          parameters.parameterize( expression );
       }
    }// End Method
@@ -94,7 +91,6 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     * {@inheritDoc}
     */
    @Override public String autoComplete( String expression ) {
-      expression = getCommandKey().removeKeyFromInput( expression );
       if ( expression == null ) {
          //Does not match key.
          return null;
@@ -102,10 +98,22 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
       String suggestion = parameters.autoComplete( expression );
       if ( suggestion == null ) {
          //Note expression may be empty.
-         return ( getKey() + CommandParameterParseUtilities.delimiter() + expression ).trim();
+         return expression.trim();
       } else {
-         return getKey() + CommandParameterParseUtilities.delimiter() + suggestion; 
+         return suggestion; 
       } 
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public CommandResult< ReturnT > execute( String expression ) {
+      if ( completeMatches( expression ) ) {
+         parameterize( expression );
+         return execute();
+      } else {
+         return null;
+      }
    }// End Method
    
    /**
@@ -113,7 +121,7 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     */
    @Override public CommandResult< ReturnT > execute() {
       if ( parameters.isComplete() ) {
-         return getFunction().apply( parameters );
+         return function.apply( parameters );
       } else {
          return null;
       }
@@ -123,7 +131,6 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     * {@inheritDoc}
     */
    @Override public void resetParameters() {
-      super.resetParameters();
       parameters.reset();
    }// End Method
    
@@ -132,13 +139,10 @@ public class ParameterizedCommandImpl< ReturnT > extends InstructionCommandImpl<
     */
    @Override public String toString() {
       StringBuffer buffer = new StringBuffer();
-      buffer.append( getKey() );
+      buffer.append( description );
       for ( CommandParameter parameter : parameters ) {
          buffer.append( " " );
          buffer.append( "<" ).append( parameter.getParameterType() ).append( ">" );
-      }
-      if ( getDescription() != null ) {
-         buffer.append( ": " ).append( getDescription() );
       }
       return buffer.toString();
    }// End Method

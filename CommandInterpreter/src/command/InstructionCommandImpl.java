@@ -10,6 +10,7 @@ package command;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
+import parameter.FixedValueParameterImpl;
 import parameter.wrapper.CommandParameters;
 
 /**
@@ -19,7 +20,7 @@ import parameter.wrapper.CommandParameters;
  */
 public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
 
-   private CommandKey key;
+   private CommandParameter key;
    private String description;
    private Function< CommandParameters, CommandResult< ReturnT > > function;
    
@@ -34,7 +35,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
             String description, 
             Function< CommandParameters, CommandResult< ReturnT > > function 
    ) {
-      this( new CommandKeyImpl( key ), description, function );
+      this( new FixedValueParameterImpl( key ), description, function );
    }// End Constructor
    
    /**
@@ -44,7 +45,7 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     * @param function the {@link Function} to execute.
     */
    public InstructionCommandImpl( 
-            CommandKey key, 
+            CommandParameter key, 
             String description, 
             Function< CommandParameters, CommandResult< ReturnT > > function 
    ) {
@@ -54,25 +55,9 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
    }// End Constructor
    
    /**
-    * Protected method to gain access to the {@link CommandKey}.
-    * @return the {@link CommandKey}.
-    */
-   protected CommandKey getCommandKey(){
-      return key;
-   }// End Method
-   
-   /**
     * {@inheritDoc}
     */
-   public String getKey(){
-      return key.getStringKey();
-   }// End Method
-   
-   /**
-    * Getter for the description associated with the {@link Command}.
-    * @return a {@link String} description of the {@link Command}.
-    */
-   protected String getDescription(){
+   @Override public String getDescription(){
       return description;
    }// End Method
    
@@ -144,9 +129,9 @@ public class InstructionCommandImpl< ReturnT > implements Command< ReturnT > {
     */
    @Override public String toString() {
       if ( description == null ) {
-         return getKey();
+         return "Command";
       } else {
-         return getKey() + ": " + description;
+         return description;
       }
    }// End Method
 

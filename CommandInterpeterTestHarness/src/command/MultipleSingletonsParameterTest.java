@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import parameter.CommandParameterParseUtilities;
+import parameter.FixedValueParameterImpl;
 import parameter.SingletonReferenceParameterImpl;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
@@ -26,7 +27,7 @@ import architecture.request.RequestSystem;
 public class MultipleSingletonsParameterTest {
    
    private static final String DELIMITER = CommandParameterParseUtilities.delimiter();
-   private static final String COMMAND_KEY = "Key";
+   private static final String KEY_PARAMETER = "Key";
    private static final String TEST_SINGLETON = "TestSingleton";
    private static TestSingleton TEST_SINGLETON_OBJECT;
    private static final String TEST_SINGLETON_2 = "SameStart";
@@ -47,9 +48,9 @@ public class MultipleSingletonsParameterTest {
       TEST_SINGLETON_OBJECT_3 = new TestSingletonImpl( TEST_SINGLETON_3 );
       RequestSystem.store( TEST_SINGLETON_OBJECT_3, TestSingleton.class );
       command = new ParameterizedCommandImpl< String >( 
-               new CommandKeyImpl( COMMAND_KEY ), 
                "", 
                null, 
+               new FixedValueParameterImpl( KEY_PARAMETER ), 
                new SingletonReferenceParameterImpl( TestSingleton.class )
       );
    }// End Method
@@ -59,8 +60,8 @@ public class MultipleSingletonsParameterTest {
     */
    @Test public void shouldAutoCompleteName(){
       Assert.assertEquals( 
-               COMMAND_KEY + DELIMITER + TEST_SINGLETON_3, 
-               command.autoComplete( COMMAND_KEY + DELIMITER + "SameStartS" ) 
+               KEY_PARAMETER + DELIMITER + TEST_SINGLETON_3, 
+               command.autoComplete( KEY_PARAMETER + DELIMITER + "SameStartS" ) 
       );
    }// End Method
    
@@ -70,8 +71,8 @@ public class MultipleSingletonsParameterTest {
     */
    @Test public void shouldAutoCompleteNameContainedInAnother(){
       Assert.assertEquals( 
-               COMMAND_KEY + DELIMITER + TEST_SINGLETON_2, 
-               command.autoComplete( COMMAND_KEY + DELIMITER + "SameStart" ) 
+               KEY_PARAMETER + DELIMITER + TEST_SINGLETON_2, 
+               command.autoComplete( KEY_PARAMETER + DELIMITER + "SameStart" ) 
       );
    }// End Method
    

@@ -13,6 +13,7 @@ import org.junit.Test;
 import parameter.BooleanParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterImpl;
+import parameter.FixedValueParameterImpl;
 
 /**
  * Test for ensuring the interactions between {@link CommandParameter}s work correctly. For example,
@@ -25,9 +26,9 @@ public class ParameterInteractionTest {
     */
    @Test public void shouldAutoCompleteAllButStrings() {
       Command< String > command = new ParameterizedCommandImpl<>( 
-               new CommandKeyImpl( "Key" ), 
                "", 
                null, 
+               new FixedValueParameterImpl( "Key" ), 
                new BooleanParameterImpl(),
                new CommandParameterImpl(),
                new BooleanParameterImpl()
@@ -40,7 +41,7 @@ public class ParameterInteractionTest {
       Assert.assertEquals( "Key true anything false", suggestion );
       
       suggestion = command.autoComplete( "f tr anything fa" );
-      Assert.assertNull( suggestion );
+      Assert.assertEquals( "f tr anything fa", suggestion );
    }// End Method
 
 }// End Class

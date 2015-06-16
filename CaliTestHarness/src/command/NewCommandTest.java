@@ -13,7 +13,6 @@ import org.junit.Test;
 
 import system.CaliSystem;
 
-import command.key.CaliNewCommandKeyImpl;
 import command.pattern.CommandVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
@@ -39,7 +38,7 @@ public class NewCommandTest implements CommandVerifier {
     * {@inheritDoc}
     */
    @Test @Override public void basicConstructionTest() {
-      Assert.assertEquals( CaliNewCommandKeyImpl.key(), command.getKey() );
+      Assert.assertNotNull( command );
    }// End Method
 
    /**
@@ -94,7 +93,7 @@ public class NewCommandTest implements CommandVerifier {
     * {@inheritDoc}
     */
    @Test @Override public void shouldNotAutoComplete() {
-      Assert.assertNull( command.autoComplete( "anything" ) );
+      Assert.assertEquals( "anything", command.autoComplete( "anything" ) );
    }// End Method
 
    /**

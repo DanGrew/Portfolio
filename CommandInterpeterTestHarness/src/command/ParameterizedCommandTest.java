@@ -27,14 +27,24 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
     * {@inheritDoc}
     */
    @SuppressWarnings("unchecked") @Override public void setup() {
-      key = Mockito.mock( CommandKey.class );
+      key = Mockito.mock( CommandParameter.class );
       Mockito.when( key.completeMatches( Mockito.anyString() ) ).thenReturn( true );
-      Mockito.when( key.removeKeyFromInput( Mockito.anyString() ) ).thenAnswer( TestFunctions.singleParameterExtractor() );
+      Mockito.when( key.extractInput( Mockito.anyString() ) ).thenAnswer( TestFunctions.singleParameterExtractor() );
+      
       function = Mockito.mock( Function.class );
       //Mock a simple parameter and have it match anything.
       parameter = Mockito.mock( CommandParameter.class );
+      Mockito.when( parameter.extractInput( Mockito.anyString() ) ).thenAnswer( TestFunctions.singleParameterExtractor() );
       Mockito.when( parameter.completeMatches( Mockito.anyString() ) ).thenReturn( true );
-      command = new ParameterizedCommandImpl< String >( key, DESCRIPTION, function, parameter );
+      command = new ParameterizedCommandImpl< String >( DESCRIPTION, function, key, parameter );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void assertPartialMatches() {
+      Mockito.when( parameter.extractInput( Mockito.anyString() ) ).thenAnswer( TestFunctions.firstArgument() );
+      super.assertPartialMatches();
    }// End Method
    
    /**
@@ -70,7 +80,6 @@ public class ParameterizedCommandTest extends InstructionCommandTest{
     * Method to test that the {@link Command} auto completes.
     */
    @Test public void shouldAutoComplete(){
-      Mockito.when( key.getStringKey() ).thenReturn( "Anything" );
       Mockito.when( parameter.autoComplete( Mockito.anyString() ) ).thenReturn( null );
       Assert.assertEquals( "Anything f", command.autoComplete( "Anything f" ) );
    }// End Method

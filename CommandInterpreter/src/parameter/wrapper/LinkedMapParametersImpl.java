@@ -76,7 +76,6 @@ public class LinkedMapParametersImpl implements CommandParameters{
             continue;
          } else if ( parameter.partialMatches( expression ) ) {
             expression = parameter.extractInput( expression );
-            break;
          } else {
             break;
          }
@@ -149,6 +148,7 @@ public class LinkedMapParametersImpl implements CommandParameters{
             break;
          }
       }
+      buffer.append( expression );
       String suggestion = buffer.toString().trim();
       if ( suggestion.isEmpty() ) {
          return null;
@@ -162,7 +162,7 @@ public class LinkedMapParametersImpl implements CommandParameters{
     */
    @Override public boolean isComplete(){
       for ( Entry< CommandParameter, Object > entry : parameters.entrySet() ) {
-         if ( entry.getValue() == null ) {
+         if ( entry.getKey().requiresValue() && entry.getValue() == null ) {
             return false;
          }
       }

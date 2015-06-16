@@ -40,6 +40,11 @@ public interface CommandParameterVerifier {
     * {@link CommandParameter#extractInput(String)} acceptance test.
     */
    @Test public void shouldExtract();
+
+   /**
+    * {@link CommandParameter#parseParameter(String)} acceptance test.
+    */
+   @Test public void shouldParseParameters();
    
    /**
     * {@link CommandParameter#parseObject(String)} acceptance test.
@@ -64,5 +69,6 @@ public interface CommandParameterVerifier {
     * {@link CommandParameter#autoComplete(String)} reject test.
     */
    @Test public void shouldNotAutoComplete();
+
 
 }// End Interface

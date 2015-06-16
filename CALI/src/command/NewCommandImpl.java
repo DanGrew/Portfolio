@@ -13,6 +13,7 @@ import java.util.function.Function;
 
 import annotation.Cali;
 import parameter.CommandParameter;
+import parameter.FixedValueParameterImpl;
 import parameter.wrapper.CommandParameters;
 import command.key.CaliNewCommandKeyImpl;
 import command.parameter.ConstructorParameterImpl;
@@ -24,7 +25,7 @@ import command.parameter.ConstructorParameterValue;
  */
 public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
 
-   private static final CommandKey NEW_KEY = new CaliNewCommandKeyImpl();
+   private static final CommandParameter NEW_KEY = new FixedValueParameterImpl( CaliNewCommandKeyImpl.key() );
    private static final String DESCRIPTION = "Command to create a new Object.";
    private static final CommandParameter CONSTRUCTOR_PARAMETER = new ConstructorParameterImpl();
    private static final Function< CommandParameters, CommandResult< Object > > FUNCTION = new Function< CommandParameters, CommandResult<Object> >() {
@@ -53,9 +54,9 @@ public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
     */
    public NewCommandImpl() {
       super( 
-               NEW_KEY, 
                DESCRIPTION, 
                FUNCTION, 
+               NEW_KEY, 
                CONSTRUCTOR_PARAMETER 
       );
    }// End Constructor

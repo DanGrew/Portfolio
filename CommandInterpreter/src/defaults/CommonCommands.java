@@ -10,11 +10,11 @@ package defaults;
 import parameter.BooleanParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterImpl;
+import parameter.FixedValueParameterImpl;
 import parameter.NumberParameterImpl;
 import parameter.wrapper.CommandParameters;
 
 import command.Command;
-import command.CommandKeyImpl;
 import command.CommandResultImpl;
 import command.InstructionCommandImpl;
 import command.ParameterizedCommandImpl;
@@ -34,31 +34,30 @@ public class CommonCommands {
    
    private static final CommandParameter INVERT_PARAMETER = new BooleanParameterImpl();
    public static final Command< Boolean > INVERT_BOOLEAN_COMMAND = new ParameterizedCommandImpl< Boolean >(
-            new CommandKeyImpl( "InvertBoolean" ),
             "Function to invert the boolean parameter given.",
             ( CommandParameters params ) -> {
                Boolean result = !params.getExpectedParameter( INVERT_PARAMETER, Boolean.class );
                return new CommandResultImpl< Boolean >( result.toString(), result );
             },
+            new FixedValueParameterImpl( "InvertBoolean" ),
             INVERT_PARAMETER
    );
    
    public static final CommandParameter INVERT_STRING_PARAMETER = new CommandParameterImpl();
    public static final Command< String > INVERT_STRING_CASE_COMMAND = new ParameterizedCommandImpl< String >(
-            new CommandKeyImpl( "InvertString" ),
             "Function to invert the case of the given String.",
             ( CommandParameters params ) -> {
                String value = params.getExpectedParameter( INVERT_STRING_PARAMETER, String.class );
                String result = convertCase( value );
                return new CommandResultImpl< String >( result, result );
             },
+            new FixedValueParameterImpl( "InvertString" ),
             INVERT_STRING_PARAMETER
    );
    
    private static final CommandParameter FIRST_OR_PARAMETER = new BooleanParameterImpl();
    private static final CommandParameter SECOND_OR_PARAMETER = new BooleanParameterImpl();
    public static final Command< Boolean > BINARY_OR_COMMAND = new ParameterizedCommandImpl< Boolean >(
-            new CommandKeyImpl( "BinaryOr" ), 
             "Function to perform the binary OR operation.", 
             ( CommandParameters params ) -> {
                Boolean first = params.getExpectedParameter( FIRST_OR_PARAMETER, Boolean.class );
@@ -66,12 +65,12 @@ public class CommonCommands {
                Boolean result = first || second; 
                return new CommandResultImpl< Boolean >( result.toString(), result );
             },
+            new FixedValueParameterImpl( "BinaryOr" ), 
             FIRST_OR_PARAMETER,
             SECOND_OR_PARAMETER
    );
    
    public static final Command< Boolean > BINARY_XOR_COMMAND = new ParameterizedCommandImpl< Boolean >(
-            new CommandKeyImpl( "BinaryXor" ), 
             "Function to perform the binary XOR operation.", 
             ( CommandParameters params ) -> {
                Boolean first = params.getExpectedParameter( FIRST_OR_PARAMETER, Boolean.class );
@@ -79,6 +78,7 @@ public class CommonCommands {
                Boolean result = first ^ second;
                return new CommandResultImpl< Boolean >( result.toString(), result );
             },
+            new FixedValueParameterImpl( "BinaryXor" ), 
             FIRST_OR_PARAMETER,
             SECOND_OR_PARAMETER
    );
@@ -86,7 +86,6 @@ public class CommonCommands {
    private static final CommandParameter FIRST_NUMBER_PARAMETER = new NumberParameterImpl();
    private static final CommandParameter SECOND_NUMBER_PARAMETER = new NumberParameterImpl();
    public static final Command< Number > ADDITION_COMMAND = new ParameterizedCommandImpl< Number >(
-            new CommandKeyImpl( "Add" ),
             "Function to add two numbers together.", 
             ( CommandParameters params ) -> {
                Number first = params.getExpectedParameter( FIRST_NUMBER_PARAMETER, Number.class );
@@ -94,6 +93,7 @@ public class CommonCommands {
                Double result = first.doubleValue() + second.doubleValue();
                return new CommandResultImpl< Number >( result.toString(), result );
             },
+            new FixedValueParameterImpl( "Add" ),
             FIRST_NUMBER_PARAMETER,
             SECOND_NUMBER_PARAMETER
    );

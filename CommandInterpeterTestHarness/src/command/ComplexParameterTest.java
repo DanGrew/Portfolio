@@ -16,6 +16,7 @@ import org.junit.Test;
 import parameter.BooleanParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
+import parameter.FixedValueParameterImpl;
 import parameter.ReferenceObjectParameterImpl;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
@@ -29,7 +30,7 @@ public class ComplexParameterTest {
 
    private static final String DELIMITER = CommandParameterParseUtilities.delimiter();
    private static final String TRUE = "TRUE";
-   private static final String COMMAND_KEY = "key";
+   private static final String KEY_PARAMETER = "key";
    private static final String RESULT_SUCCESS = "Success";
    private static final String TEST_SINGLETON = "TestInstance";
    private static TestSingleton TEST_SINGLETON_OBJECT;
@@ -43,9 +44,9 @@ public class ComplexParameterTest {
       RequestSystem.store( TEST_SINGLETON_OBJECT, TestSingleton.class );
       
       command = new ParameterizedCommandImpl< String >( 
-               new CommandKeyImpl( COMMAND_KEY ), 
                "", 
                object -> { return new CommandResultImpl< String >( "", RESULT_SUCCESS ); }, 
+               new FixedValueParameterImpl( KEY_PARAMETER ), 
                new BooleanParameterImpl(),
                new ReferenceObjectParameterImpl( TestSingleton.class ),
                new BooleanParameterImpl()
@@ -56,10 +57,10 @@ public class ComplexParameterTest {
     * Method to test that {@link Command#partialMatches(String)} accepts correctly.
     */
    @Test public void shouldPartialMatch() {
-      Assert.assertTrue( command.partialMatches( COMMAND_KEY + DELIMITER + TRUE ) );
-      Assert.assertTrue( command.partialMatches( COMMAND_KEY + DELIMITER + TRUE + DELIMITER + TestSingleton.class.getSimpleName() ) );
+      Assert.assertTrue( command.partialMatches( KEY_PARAMETER + DELIMITER + TRUE ) );
+      Assert.assertTrue( command.partialMatches( KEY_PARAMETER + DELIMITER + TRUE + DELIMITER + TestSingleton.class.getSimpleName() ) );
       Assert.assertTrue( command.partialMatches( 
-               COMMAND_KEY + DELIMITER + TRUE + DELIMITER + 
+               KEY_PARAMETER + DELIMITER + TRUE + DELIMITER + 
                TestSingleton.class.getSimpleName() + DELIMITER + TEST_SINGLETON + 
                DELIMITER + TRUE ) 
       );
@@ -74,7 +75,7 @@ public class ComplexParameterTest {
     */
    @Test public void shouldCompleteMatch() {
       Assert.assertTrue( command.partialMatches( 
-               COMMAND_KEY + DELIMITER + TRUE + DELIMITER + 
+               KEY_PARAMETER + DELIMITER + TRUE + DELIMITER + 
                TestSingleton.class.getSimpleName() + DELIMITER + TEST_SINGLETON + 
                DELIMITER + TRUE ) 
       );
@@ -88,7 +89,7 @@ public class ComplexParameterTest {
     * Method to test that the {@link Command} auto completes.
     */
    @Test public void shouldAutoComplete(){
-      Assert.assertEquals( COMMAND_KEY + " gh", command.autoComplete( COMMAND_KEY + " gh" ) );
+      Assert.assertEquals( KEY_PARAMETER + " gh", command.autoComplete( KEY_PARAMETER + " gh" ) );
    }// End Method
 
 }// End Class

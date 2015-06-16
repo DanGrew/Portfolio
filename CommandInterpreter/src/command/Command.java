@@ -16,11 +16,11 @@ import parameter.CommandParameter;
  */
 public interface Command< ReturnT > {
    
-   /** 
-    * Getter for the key associated with the {@link Command}.
-    * @return the {@link String} key.
+   /**
+    * Method to get a description of the {@link Command}.
+    * @return a {@link String} description.
     */
-   public String getKey();
+   public String getDescription();
    
    /**
     * Method to determine whether the given expression matches the key for the {@link Command}.

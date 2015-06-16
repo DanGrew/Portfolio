@@ -127,6 +127,13 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
    }// End Method
    
    /**
+    * {@inheritDoc}
+    */
+   @Override public void shouldParseParameters() {
+      Assert.fail();
+   }// End Method
+   
+   /**
     * {@link ConstructorParameterImpl#parseObject(String)} acceptance test.
     * @throws SecurityException 
     * @throws NoSuchMethodException 

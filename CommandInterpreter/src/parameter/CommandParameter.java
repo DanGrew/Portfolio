@@ -23,6 +23,15 @@ public interface CommandParameter {
    public String getParameterType();
    
    /**
+    * Method to determine whether the {@link CommandParameter} requires some information to be
+    * set for it.
+    * @return true if a value must be set, false otherwise.
+    */
+   public default boolean requiresValue() {
+      return true;
+   }// End Method
+   
+   /**
     * Method to determine whether the given {@link String} expression partial matches the 
     * {@link CommandParameter}. 
     * @param expression the {@link String} expression input.

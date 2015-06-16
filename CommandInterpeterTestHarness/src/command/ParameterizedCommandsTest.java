@@ -71,7 +71,7 @@ public class ParameterizedCommandsTest {
       Assert.assertTrue( command.partialMatches( "BinaryOr true" ) );
       Assert.assertTrue( command.partialMatches( "BinaryOr true false" ) );
       Assert.assertTrue( command.partialMatches( "BinaryOr tr" ) );
-      Assert.assertFalse( command.partialMatches( "BinaryOr tr fa" ) );
+      Assert.assertTrue( command.partialMatches( "BinaryOr tr fa" ) );
       Assert.assertFalse( command.partialMatches( "BinaryOr anything" ) );
       Assert.assertFalse( command.partialMatches( "BinaryOr anything else" ) );
    }// End Method

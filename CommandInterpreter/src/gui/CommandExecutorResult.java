@@ -40,7 +40,7 @@ public class CommandExecutorResult implements ConsoleMessage {
    @Override public String getDisplayableMessage(){
       return "Execution Result: " + 
                result.getConsoleMessage().getDisplayableMessage() + 
-                  " [" + command.getKey() + " with \"" + input + "\"]";
+                  " [" + command.getDescription() + " with \"" + input + "\"]";
    }// End Method
    
    /**

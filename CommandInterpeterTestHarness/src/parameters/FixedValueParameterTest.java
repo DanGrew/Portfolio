@@ -37,6 +37,7 @@ public class FixedValueParameterTest implements CommandParameterVerifier{
       Assert.assertTrue( parameter.partialMatches( VALUE ) );
       Assert.assertTrue( parameter.partialMatches( "" ) );
       Assert.assertTrue( parameter.partialMatches( "any" ) );
+      Assert.assertTrue( parameter.partialMatches( "Any" ) );
    }// End Method
 
    /**
@@ -51,6 +52,7 @@ public class FixedValueParameterTest implements CommandParameterVerifier{
     */
    @Test @Override public void shouldCompleteMatch() {
       Assert.assertTrue( parameter.completeMatches( VALUE ) );
+      Assert.assertTrue( parameter.partialMatches( "Anything" ) );
    }// End Method
 
    /**
@@ -65,9 +67,18 @@ public class FixedValueParameterTest implements CommandParameterVerifier{
     * {@inheritDoc}
     */
    @Test @Override public void shouldExtract() {
-      Assert.assertEquals( VALUE, parameter.extractInput( "anything else at all" ) );
-      Assert.assertEquals( VALUE, parameter.extractInput( "anything" ) );
-      Assert.assertEquals( "any", parameter.extractInput( "any else at all" ) );
+      Assert.assertEquals( "else at all", parameter.extractInput( "anything else at all" ) );
+      Assert.assertEquals( "", parameter.extractInput( "anything" ) );
+      Assert.assertEquals( "else at all", parameter.extractInput( "any else at all" ) );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Test @Override public void shouldParseParameters() {
+      Assert.assertEquals( VALUE, parameter.parseParameter( "anything else at all" ) );
+      Assert.assertEquals( VALUE, parameter.parseParameter( "anything" ) );
+      Assert.assertEquals( "any", parameter.parseParameter( "any else at all" ) );
    }// End Method
 
    /**
@@ -91,7 +102,7 @@ public class FixedValueParameterTest implements CommandParameterVerifier{
       Assert.assertEquals( VALUE, parameter.autoComplete( "an" ) );
       Assert.assertEquals( VALUE, parameter.autoComplete( "anythin" ) );
       Assert.assertEquals( VALUE, parameter.autoComplete( "anything" ) );
-      Assert.assertEquals( VALUE + " else at all", parameter.autoComplete( "anythin else at all" ) );
+      Assert.assertEquals( VALUE, parameter.autoComplete( "anythin else at all" ) );
    }// End Method
 
    /**

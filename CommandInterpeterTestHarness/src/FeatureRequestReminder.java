@@ -40,4 +40,8 @@ public class FeatureRequestReminder {
    @Test public void suggestionsPanelWithAllOptionsFromCurrentInput(){
       fail( "Not yet implemented" );
    }
+   
+   @Test public void appropriateMethodOfDisplayingNameOfCommand(){
+      fail( "Not yet implemented" );
+   }
 }

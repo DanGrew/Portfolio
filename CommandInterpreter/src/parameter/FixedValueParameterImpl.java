@@ -21,6 +21,13 @@ public class FixedValueParameterImpl implements CommandParameter {
    public FixedValueParameterImpl( String value ) {
       this.value = value;
    }// End Constructor
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean requiresValue() {
+      return false;
+   }// End Method
 
    /**
     * {@inheritDoc}
@@ -33,16 +40,16 @@ public class FixedValueParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
-      String firstPart = extractInput( expression );
-      return value.startsWith( firstPart );
+      String firstPart = parseParameter( expression );
+      return value.toLowerCase().startsWith( firstPart.toLowerCase() );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
-      String firstPart = extractInput( expression );
-      return value.equals( firstPart );
+      String firstPart = parseParameter( expression );
+      return value.toLowerCase().equals( firstPart.toLowerCase() );
    }// End Method
 
    /**
@@ -57,10 +64,7 @@ public class FixedValueParameterImpl implements CommandParameter {
     */
    @Override public String autoComplete( String expression ) {
       if ( partialMatches( expression ) ) {
-         String firstPart = extractInput( expression );
-         expression = CommandParameterParseUtilities.reduce( expression, firstPart );
-         String autoComplete = value + CommandParameterParseUtilities.delimiter() + expression;
-         return autoComplete.trim();
+         return value;
       }
       return null;
    }// End Method
