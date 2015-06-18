@@ -105,6 +105,9 @@ public class CommandParameterParseUtilities {
    public static final String[] parseUpTo( String expression, String searchFor, String delimiter ) {
       String[] parts = expression.split( searchFor );
       String[] partsToReturn = parts[ 0 ].split( delimiter );
+      for ( int i = 0; i < partsToReturn.length; i++ ) {
+         partsToReturn[ i ] = partsToReturn[ i ].trim();
+      }
       return partsToReturn;
    }// End Method
    

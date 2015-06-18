@@ -7,9 +7,10 @@
  */
 package annotation;
 
+import parameter.CommandParameterParseUtilities;
 import command.Command;
 
-public class CaliAnnotationSyntax {
+public class CaliParserUtilities {
    
    private static final String REGEX_PREFIX = "\\";
    private static final String PARAMETERS_OPEN = "(";
@@ -66,5 +67,45 @@ public class CaliAnnotationSyntax {
    public static String statementDelimiter(){
       return STATEMENT_DELIMITER;
    }// End Method
+   
+   /**
+    * Method to extract the type of object from the expression.
+    * @param expression the expression to parse from.
+    * @return the {@link String} part of the expression for the  object type.
+    */
+   public static String extractObjectType( String expression ) {
+      String[] objectNameParts = CommandParameterParseUtilities.parseUpTo( 
+               expression, 
+               CaliParserUtilities.regexOpen(), 
+               CommandParameterParseUtilities.delimiter() 
+      );
+      if ( objectNameParts.length > 1 ) {
+         return null;
+      }
+      
+      String objectName = objectNameParts[ 0 ].trim();
+      if ( objectName.endsWith( CaliParserUtilities.open() ) ) {
+         //Object cannot have ( in the name, safe to assume replacement.
+         objectName = objectName.replaceAll( CaliParserUtilities.regexOpen(), CommandParameterParseUtilities.delimiter() );
+         objectName = objectName.trim();
+      }
+      String[] split = objectName.split( CommandParameterParseUtilities.delimiter() );
+      //Object cannot have spaces in the name.
+      if ( split.length == 1 ) {
+         String objectCompleteName = split[ 0 ];
+         return objectCompleteName;
+      }
+      return null;
+   }// End Method
+
+   /**
+    * Method to extract the code parameters from the given expression following a strict formatting.
+    * See {@link CodeParameterParser#parseCodeParameters(String)}.
+    * @param expression the expression to extract from.
+    * @return the {@link CodeParametersResult} describing the result.
+    */
+   public static CodeParametersResult extractParameters( String expression ) {
+      return CodeParameterParser.parseCodeParameters( expression );
+   }
 
 }// End Class

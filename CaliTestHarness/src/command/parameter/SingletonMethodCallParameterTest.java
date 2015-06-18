@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import annotation.CaliAnnotationSyntax;
+import annotation.CaliParserUtilities;
 
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
@@ -142,20 +142,20 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
       super.shouldAutoComplete();
       
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open(),
+               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
                parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() ) 
       );
       Assert.assertEquals(
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open(),
+               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
                parameter.autoComplete( "TestAnn" ) 
       );
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open(),
-               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() ) 
+               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
+               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() ) 
       );
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + " anything",
-               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliAnnotationSyntax.open() + "anything" ) 
+               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() + " anything",
+               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() + "anything" ) 
       );
    }// End Method
    

@@ -13,7 +13,7 @@ import model.singleton.Singleton;
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import system.CaliSystem;
-import annotation.CaliAnnotationSyntax;
+import annotation.CaliParserUtilities;
 
 /**
  * {@link SingletonReferenceParameterImpl} is the variable {@link CommandParameter} that matches
@@ -33,7 +33,7 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public boolean partialMatches( String expression ) {
       String key = CommandParameterParseUtilities.parseSingle( expression );
-      if ( key.endsWith( CaliAnnotationSyntax.statementDelimiter() ) ) {
+      if ( key.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
          key = key.substring( 0, key.length() - 1 );
       }
       List< Singleton > matches = CaliSystem.partialMatchSingletons( key );
@@ -45,7 +45,7 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public boolean completeMatches( String expression ) {
       String key = CommandParameterParseUtilities.parseSingle( expression );
-      if ( key.endsWith( CaliAnnotationSyntax.statementDelimiter() ) ) {
+      if ( key.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
          key = key.substring( 0, key.length() - 1 );
       } else {
          return false;
@@ -59,14 +59,14 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public String autoComplete( String expression ) {
       String key = CommandParameterParseUtilities.parseSingle( expression );
-      if ( key.endsWith( CaliAnnotationSyntax.statementDelimiter() ) ) {
+      if ( key.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
          key = key.substring( 0, key.length() - 1 );
       }
       List< Singleton > matches = CaliSystem.partialMatchSingletons( key );
       if ( matches.isEmpty() || matches.size() > 1 ) {
          return null;
       } else {
-         return matches.get( 0 ).getIdentification() + CaliAnnotationSyntax.statementDelimiter();
+         return matches.get( 0 ).getIdentification() + CaliParserUtilities.statementDelimiter();
       }
    }// End Method
 
@@ -76,7 +76,7 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
    @Override public Object parseObject( String expression ) {
       if ( completeMatches( expression ) ) {
          String key = CommandParameterParseUtilities.parseSingle( expression );
-         if ( key.endsWith( CaliAnnotationSyntax.statementDelimiter() ) ) {
+         if ( key.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
             key = key.substring( 0, key.length() - 1 );
          }
          List< Singleton > matches = CaliSystem.partialMatchSingletons( key );

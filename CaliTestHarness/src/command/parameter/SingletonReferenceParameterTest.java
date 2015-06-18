@@ -15,7 +15,7 @@ import org.junit.Test;
 import parameter.CommandParameter;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
-import annotation.CaliAnnotationSyntax;
+import annotation.CaliParserUtilities;
 import architecture.request.RequestSystem;
 import command.Command;
 import command.pattern.CommandParameterVerifier;
@@ -62,7 +62,7 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
       Assert.assertTrue( parameter.partialMatches( "TestAnot" ) );
       Assert.assertTrue( parameter.partialMatches( "" ) );
       
-      Assert.assertTrue( parameter.partialMatches( TEST_ANNOTATED_SINGLETON_NAME + CaliAnnotationSyntax.statementDelimiter() ) );
+      Assert.assertTrue( parameter.partialMatches( TEST_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter() ) );
       Assert.assertTrue( parameter.partialMatches( "TestA." ) );
       Assert.assertTrue( parameter.partialMatches( "TestAnnot." ) );
       Assert.assertTrue( parameter.partialMatches( "TestAnot." ) );
@@ -82,8 +82,8 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
     * {@link Command#completeMatches(String)} acceptance test.
     */
    @Test @Override public void shouldCompleteMatch() {
-      Assert.assertTrue( parameter.completeMatches( TEST_ANNOTATED_SINGLETON_NAME + CaliAnnotationSyntax.statementDelimiter() ) );
-      Assert.assertTrue( parameter.completeMatches( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + CaliAnnotationSyntax.statementDelimiter() ) );
+      Assert.assertTrue( parameter.completeMatches( TEST_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter() ) );
+      Assert.assertTrue( parameter.completeMatches( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter() ) );
    }// End Method
    
    /**
@@ -100,8 +100,8 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
     * {@link Command#autoComplete(String)} acceptance test.
     */
    @Test @Override public void shouldAutoComplete() {
-      Assert.assertEquals( TEST_ANNOTATED_SINGLETON_NAME + CaliAnnotationSyntax.statementDelimiter(), parameter.autoComplete( "TestAnno" ) );
-      Assert.assertEquals( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + CaliAnnotationSyntax.statementDelimiter(), parameter.autoComplete( "TestAno" ) );
+      Assert.assertEquals( TEST_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter(), parameter.autoComplete( "TestAnno" ) );
+      Assert.assertEquals( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter(), parameter.autoComplete( "TestAno" ) );
    }// End Method
    
    /**
@@ -120,7 +120,7 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
    @Test @Override public void shouldParseParameters(){
       Assert.assertEquals( "TestAnno", parameter.parseParameter( "TestAnno" ) );
       Assert.assertEquals( TEST_ANNOTATED_SINGLETON_NAME, parameter.parseParameter( TEST_ANNOTATED_SINGLETON_NAME ) );
-      Assert.assertEquals( TEST_ANNOTATED_SINGLETON_NAME + CaliAnnotationSyntax.statementDelimiter(), parameter.parseParameter( TEST_ANNOTATED_SINGLETON_NAME + ". anything else" ) );
+      Assert.assertEquals( TEST_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter(), parameter.parseParameter( TEST_ANNOTATED_SINGLETON_NAME + ". anything else" ) );
    }// End Method
    
    /**

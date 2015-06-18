@@ -16,7 +16,8 @@ import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import system.CaliSystem;
 import annotation.Cali;
-import annotation.CaliAnnotationSyntax;
+import annotation.CaliParserUtilities;
+import annotation.CodeParametersResult;
 
 /**
  * The {@link ConstructorParameterImpl} provides a {@link CommandParameter} capable of parsing 
@@ -35,75 +36,37 @@ public class ConstructorParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean partialMatches( String expression ) {
-      String objectNamePart = extractObjectType( expression );
+      String objectNamePart = CaliParserUtilities.extractObjectType( expression );
       List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
       if ( !objectClasses.isEmpty() ) {
          expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
-         if ( expression.isEmpty() ) {
-            return true;
+         
+         CodeParametersResult result = CaliParserUtilities.extractParameters( expression );
+         
+         switch ( result.getResult() ) {
+            case DOES_NOT_OPEN:
+               return false;
+            case EMPTY_NO_OPEN:
+               return true;
+            case OPEN_NO_PARAMETERS:
+               return true;
+            case PARAMETERS_NO_CLOSE:
+               return true;
+            case SUCCESS:
+               String[] parameters = result.getParameters();
+               //Fill types, default assumed string.
+               Class< ? >[] parameterTypes = new Class< ? >[ parameters.length ];
+               Arrays.fill( parameterTypes, String.class );
+               Constructor< ? > constructor = CaliSystem.matchConstructor( objectNamePart, parameterTypes );
+               if ( constructor != null ) {
+                  return true;
+               }
+            default:
+               return false;
          }
          
-         //Remove open brackets.
-         if ( !expression.startsWith( CaliAnnotationSyntax.open() ) ) {
-            return false;
-         }
-         expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.regexOpen() ).trim();
-         
-         if ( expression.isEmpty() ) {
-            return true;
-         }
-         
-         //Cannot match partial constructor, allow any parameters before defining end bracket.
-         if ( !expression.contains( CaliAnnotationSyntax.close() ) ) {
-            return true;
-         }
-         
-         //Get parameters.
-         String[] parameters = CommandParameterParseUtilities.parseUpTo( 
-                  expression, 
-                  CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.parameterDelimiter()
-         );
-         
-         //Fill types, default assumed string.
-         Class< ? >[] parameterTypes = new Class< ? >[ parameters.length ];
-         Arrays.fill( parameterTypes, String.class );
-         Constructor< ? > constructor = CaliSystem.matchConstructor( objectNamePart, parameterTypes );
-         if ( constructor != null ) {
-            return true;
-         }
       }
       return false;
-   }// End Method
-   
-   /**
-    * Method to extract the type of object from the expression.
-    * @param expression the expression to parse from.
-    * @return the {@link String} part of the expression for the  object type.
-    */
-   private String extractObjectType( String expression ) {
-      String[] objectClassNameParts = CommandParameterParseUtilities.parseUpTo( 
-               expression, 
-               CaliAnnotationSyntax.regexOpen(), 
-               CommandParameterParseUtilities.delimiter() 
-      );
-      if ( objectClassNameParts.length > 1 ) {
-         return null;
-      }
-      
-      String objectClassName = objectClassNameParts[ 0 ].trim();
-      if ( objectClassName.endsWith( CaliAnnotationSyntax.open() ) ) {
-         //Object cannot have ( in the name, safe to assume replacement.
-         objectClassName = objectClassName.replaceAll( CaliAnnotationSyntax.regexOpen(), CommandParameterParseUtilities.delimiter() );
-         objectClassName = objectClassName.trim();
-      }
-      String[] split = objectClassName.split( CommandParameterParseUtilities.delimiter() );
-      //Object cannot have spaces in the name.
-      if ( split.length == 1 ) {
-         String objectName = split[ 0 ];
-         return objectName;
-      }
-      return null;
    }// End Method
    
    /**
@@ -126,7 +89,7 @@ public class ConstructorParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
-      String objectNamePart = extractObjectType( expression );
+      String objectNamePart = CaliParserUtilities.extractObjectType( expression );
       List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
       if ( !objectClasses.isEmpty() ) {
          expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
@@ -135,25 +98,25 @@ public class ConstructorParameterImpl implements CommandParameter {
          }
          
          //Remove open brackets.
-         if ( !expression.startsWith( CaliAnnotationSyntax.open() ) ) {
+         if ( !expression.startsWith( CaliParserUtilities.open() ) ) {
             return false;
          }
-         expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.regexOpen() ).trim();
+         expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.regexOpen() ).trim();
          
          if ( expression.isEmpty() ) {
             return false;
          }
          
          //Cannot match partial constructor, allow any parameters before defining end bracket.
-         if ( !expression.contains( CaliAnnotationSyntax.close() ) ) {
+         if ( !expression.contains( CaliParserUtilities.close() ) ) {
             return false;
          }
          
          //Get parameters.
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
-                  CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.parameterDelimiter() 
+                  CaliParserUtilities.regexClose(), 
+                  CaliParserUtilities.parameterDelimiter() 
          );
          
          //Fill types, default assumed string.
@@ -173,7 +136,7 @@ public class ConstructorParameterImpl implements CommandParameter {
    @Override public Object parseObject( String expression ) {
       ConstructorParameterValue value = new ConstructorParameterValue();
       
-      String objectNamePart = extractObjectType( expression );
+      String objectNamePart = CaliParserUtilities.extractObjectType( expression );
       List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
       if ( !objectClasses.isEmpty() ) {
          expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
@@ -182,25 +145,25 @@ public class ConstructorParameterImpl implements CommandParameter {
          }
          
          //Remove open brackets.
-         if ( !expression.startsWith( CaliAnnotationSyntax.open() ) ) {
+         if ( !expression.startsWith( CaliParserUtilities.open() ) ) {
             return null;
          }
-         expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.regexOpen() ).trim();
+         expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.regexOpen() ).trim();
          
          if ( expression.isEmpty() ) {
             return null;
          }
          
          //Cannot match partial constructor, allow any parameters before defining end bracket.
-         if ( !expression.contains( CaliAnnotationSyntax.close() ) ) {
+         if ( !expression.contains( CaliParserUtilities.close() ) ) {
             return null;
          }
          
          //Get parameters.
          Object[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
-                  CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.parameterDelimiter() 
+                  CaliParserUtilities.regexClose(), 
+                  CaliParserUtilities.parameterDelimiter() 
          );
          
          //Fill types, default assumed string.
@@ -224,7 +187,7 @@ public class ConstructorParameterImpl implements CommandParameter {
          return null;
       }
       
-      String objectNamePart = extractObjectType( expression );
+      String objectNamePart = CaliParserUtilities.extractObjectType( expression );
       List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
       if ( !objectClasses.isEmpty() ) {
          
@@ -239,25 +202,25 @@ public class ConstructorParameterImpl implements CommandParameter {
          }
          
          //Remove open brackets.
-         if ( !expression.startsWith( CaliAnnotationSyntax.open() ) ) {
+         if ( !expression.startsWith( CaliParserUtilities.open() ) ) {
             return autoCorrectUpToOpen( expression, onlyChoice );
          }
-         expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.regexOpen() ).trim();
+         expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.regexOpen() ).trim();
          
          if ( expression.isEmpty() ) {
             return autoCorrectUpToOpen( expression, onlyChoice );
          }
          
          //Cannot match partial constructor, allow any parameters before defining end bracket.
-         if ( !expression.contains( CaliAnnotationSyntax.close() ) ) {
+         if ( !expression.contains( CaliParserUtilities.close() ) ) {
             return autoCorrectUpToOpen( expression, onlyChoice );
          }
          
          //Get parameters.
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
-                  CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.parameterDelimiter()
+                  CaliParserUtilities.regexClose(), 
+                  CaliParserUtilities.parameterDelimiter()
          );
          
          //Fill types, default assumed string.
@@ -267,14 +230,14 @@ public class ConstructorParameterImpl implements CommandParameter {
          if ( constructor != null ) {
             StringBuffer autoCorrect = new StringBuffer();
             autoCorrect.append( constructor.getDeclaringClass().getSimpleName() );
-            autoCorrect.append( CaliAnnotationSyntax.open() );
+            autoCorrect.append( CaliParserUtilities.open() );
             autoCorrect.append( CommandParameterParseUtilities.delimiter() );
             for ( String parameter : parameters ) {
-               autoCorrect.append( parameter ).append( CaliAnnotationSyntax.parameterDelimiter() );
+               autoCorrect.append( parameter ).append( CaliParserUtilities.parameterDelimiter() );
                autoCorrect.append( CommandParameterParseUtilities.delimiter() );
             }
-            autoCorrect.deleteCharAt( autoCorrect.lastIndexOf( CaliAnnotationSyntax.parameterDelimiter() ) );
-            autoCorrect.append( CaliAnnotationSyntax.close() );
+            autoCorrect.deleteCharAt( autoCorrect.lastIndexOf( CaliParserUtilities.parameterDelimiter() ) );
+            autoCorrect.append( CaliParserUtilities.close() );
             
             autoCorrect.append( CommandParameterParseUtilities.delimiter() );
             autoCorrect.append( expression );
@@ -285,14 +248,14 @@ public class ConstructorParameterImpl implements CommandParameter {
    }// End Method
    
    /**
-    * Method to auto correct the expression up to the {@link CaliAnnotationSyntax#open()} tag.
+    * Method to auto correct the expression up to the {@link CaliParserUtilities#open()} tag.
     * @param expression the expression to auto correct.
     * @param onlyChoice the {@link Class} single choice available.
     * @return the auto corrected expression.
     */
    private String autoCorrectUpToOpen( String expression, Class< ? > onlyChoice ){
       if ( onlyChoice != null ) {
-         String autoCorrect = onlyChoice.getSimpleName() + CaliAnnotationSyntax.open() + CommandParameterParseUtilities.delimiter() + expression;
+         String autoCorrect = onlyChoice.getSimpleName() + CaliParserUtilities.open() + CommandParameterParseUtilities.delimiter() + expression;
          return autoCorrect.trim();
       } else if ( expression.isEmpty() ){
          return null;
@@ -305,7 +268,7 @@ public class ConstructorParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public String extractInput( String expression ) {
-      String objectNamePart = extractObjectType( expression );
+      String objectNamePart = CaliParserUtilities.extractObjectType( expression );
       List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
       if ( !objectClasses.isEmpty() ) {
          expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
@@ -314,17 +277,17 @@ public class ConstructorParameterImpl implements CommandParameter {
          }
          
          //Remove open brackets.
-         if ( !expression.startsWith( CaliAnnotationSyntax.open() ) ) {
+         if ( !expression.startsWith( CaliParserUtilities.open() ) ) {
             return expression;
          }
-         expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.regexOpen() ).trim();
+         expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.regexOpen() ).trim();
          
          if ( expression.isEmpty() ) {
             return expression;
          }
          
          //Cannot match partial constructor, allow any parameters before defining end bracket.
-         if ( !expression.contains( CaliAnnotationSyntax.close() ) ) {
+         if ( !expression.contains( CaliParserUtilities.close() ) ) {
             //Match everything until close specified.
             return "";
          }
@@ -332,19 +295,19 @@ public class ConstructorParameterImpl implements CommandParameter {
          //Get parameters.
          String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                   expression, 
-                  CaliAnnotationSyntax.regexClose(), 
-                  CaliAnnotationSyntax.parameterDelimiter() 
+                  CaliParserUtilities.regexClose(), 
+                  CaliParserUtilities.parameterDelimiter() 
          );
          
          for ( String parameter : parameters ) {
             expression = CommandParameterParseUtilities.reduce( expression, parameter.trim() );
-            if ( expression.startsWith( CaliAnnotationSyntax.parameterDelimiter() ) ) {
-               expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.parameterDelimiter() );
+            if ( expression.startsWith( CaliParserUtilities.parameterDelimiter() ) ) {
+               expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.parameterDelimiter() );
             }
          }
          
-         if ( expression.startsWith( CaliAnnotationSyntax.close() ) ) {
-            expression = CommandParameterParseUtilities.reduce( expression, CaliAnnotationSyntax.regexClose() ).trim();
+         if ( expression.startsWith( CaliParserUtilities.close() ) ) {
+            expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.regexClose() ).trim();
          }
       }
       return expression;
