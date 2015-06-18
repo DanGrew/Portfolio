@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package command.key;
+package command.parameter;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,9 +14,9 @@ import org.junit.Test;
 import parameter.CommandParameter;
 
 /**
- * Test for the {@link CaliStatementParameterImpl}.
+ * Test for the {@link SingletonReferenceParameterImpl}.
  */
-public class CaliNewCommandParameterTest {
+public class NewCommandParameterTest {
    
    private CommandParameter newKey;
 
@@ -24,7 +24,7 @@ public class CaliNewCommandParameterTest {
     * Method to set up the test.
     */
    @Before public void setup(){
-      newKey = new CaliNewCommandParameterImpl();
+      newKey = new NewCommandParameterImpl();
    }// End Method
    
    /**
@@ -64,10 +64,10 @@ public class CaliNewCommandParameterTest {
     * {@link CommandKey#autoComplete(String)} acceptance test.
     */
    @Test public void shouldAutoComplete() {
-      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.autoComplete( "new" ) );
-      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.autoComplete( "n" ) );
-      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.autoComplete( "" ) );
-      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.autoComplete( "NE" ) );
+      Assert.assertEquals( NewCommandParameterImpl.key(), newKey.autoComplete( "new" ) );
+      Assert.assertEquals( NewCommandParameterImpl.key(), newKey.autoComplete( "n" ) );
+      Assert.assertEquals( NewCommandParameterImpl.key(), newKey.autoComplete( "" ) );
+      Assert.assertEquals( NewCommandParameterImpl.key(), newKey.autoComplete( "NE" ) );
    }// End Method
    
    /**
@@ -81,8 +81,8 @@ public class CaliNewCommandParameterTest {
     * {@link CommandKey#extractKeyExpression(String)} acceptance test.
     */
    @Test public void shouldExtractKey() {
-      Assert.assertEquals( CaliNewCommandParameterImpl.key(), newKey.parseParameter( "new" ) );
-      Assert.assertEquals( CaliNewCommandParameterImpl.key().toUpperCase(), newKey.parseParameter( "NEW" ) );
+      Assert.assertEquals( NewCommandParameterImpl.key(), newKey.parseParameter( "new" ) );
+      Assert.assertEquals( NewCommandParameterImpl.key().toUpperCase(), newKey.parseParameter( "NEW" ) );
       Assert.assertEquals( "n", newKey.parseParameter( "n" ) );
    }// End Method
    

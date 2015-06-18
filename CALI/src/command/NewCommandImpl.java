@@ -15,9 +15,9 @@ import annotation.Cali;
 import parameter.CommandParameter;
 import parameter.FixedValueParameterImpl;
 import parameter.wrapper.CommandParameters;
-import command.key.CaliNewCommandParameterImpl;
 import command.parameter.ConstructorParameterImpl;
 import command.parameter.ConstructorParameterValue;
+import command.parameter.NewCommandParameterImpl;
 
 /**
  * The {@link NewCommandImpl} provides a {@link Command} that allows the user to create
@@ -26,7 +26,7 @@ import command.parameter.ConstructorParameterValue;
 public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
 
    private static final String DESCRIPTION = "Command to create a new Object.";
-   private static final CommandParameter KEY_PARAMETER = new FixedValueParameterImpl( CaliNewCommandParameterImpl.key() );
+   private static final CommandParameter KEY_PARAMETER = new FixedValueParameterImpl( NewCommandParameterImpl.key() );
    private static final CommandParameter CONSTRUCTOR_PARAMETER = new ConstructorParameterImpl();
    private static final Function< CommandParameters, CommandResult< Object > > FUNCTION = new Function< CommandParameters, CommandResult<Object> >() {
 

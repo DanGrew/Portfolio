@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package command.key;
+package command.parameter;
 
 import java.util.List;
 
@@ -16,10 +16,10 @@ import system.CaliSystem;
 import annotation.CaliAnnotationSyntax;
 
 /**
- * {@link CaliStatementParameterImpl} is the variable {@link CommandParameter} that matches
+ * {@link SingletonReferenceParameterImpl} is the variable {@link CommandParameter} that matches
  * {@link Singleton}s by {@link Singleton#getIdentification()}.
  */
-public class CaliStatementParameterImpl implements CommandParameter {
+public class SingletonReferenceParameterImpl implements CommandParameter {
 
    /**
     * {@inheritDoc}

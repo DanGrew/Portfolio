@@ -5,23 +5,23 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package command.key;
+package command.parameter;
 
 import parameter.CommandParameter;
 import parameter.FixedValueParameterImpl;
 import command.NewCommandImpl;
 
 /**
- * The {@link CaliNewCommandParameterImpl} defines the {@link CommandParameter} for {@link NewCommandImpl}.
+ * The {@link NewCommandParameterImpl} defines the {@link CommandParameter} for {@link NewCommandImpl}.
  */
-public class CaliNewCommandParameterImpl extends FixedValueParameterImpl {
+public class NewCommandParameterImpl extends FixedValueParameterImpl {
    
    private static final String KEY = "new";
 
    /**
-    * Constructs a new {@link CaliNewCommandParameterImpl}.
+    * Constructs a new {@link NewCommandParameterImpl}.
     */
-   public CaliNewCommandParameterImpl() {
+   public NewCommandParameterImpl() {
       super( key() );
    }// End Constructor
 
