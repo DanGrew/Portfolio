@@ -7,6 +7,8 @@
  */
 package annotation;
 
+import java.lang.reflect.AnnotatedElement;
+
 /**
  * The {@link CaliAnnotations} is responsible for providing methods to determine interactions
  * with the {@link Cali} annotation. 
@@ -14,12 +16,12 @@ package annotation;
 public class CaliAnnotations {
 
    /**
-    * Method to determine whether the given {@link Class} has the annotation.
-    * @param clazz the {@link Class} to test.
+    * Method to determine whether the given {@link AnnotatedElement} has the annotation.
+    * @param element the {@link AnnotatedElement} to test.
     * @return true if the annotation is present, false otherwise.
     */
-   public static boolean isAnnotationPresent( Class< ? > clazz ) {
-      return clazz.isAnnotationPresent( Cali.class );
+   public static boolean isAnnotationPresent( AnnotatedElement element ) {
+      return element.isAnnotationPresent( Cali.class );
    }// End Method
 
    /**
@@ -30,5 +32,5 @@ public class CaliAnnotations {
    public static boolean isAnnotationPresent( Object object ) {
       return isAnnotationPresent( object.getClass() );
    }// End Method
-
+   
 }// End Class

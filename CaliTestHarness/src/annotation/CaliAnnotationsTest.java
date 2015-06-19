@@ -9,12 +9,13 @@ package annotation;
 
 import static org.junit.Assert.fail;
 
+import java.lang.reflect.Method;
+
 import org.junit.Assert;
 import org.junit.Test;
 
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
-
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 
@@ -43,12 +44,20 @@ public class CaliAnnotationsTest {
       Assert.assertFalse( CaliAnnotations.isAnnotationPresent( testSingleton ) );
    }// End Method
    
-   @Test public void shouldHaveMethodAnnotion() {
-      fail( "Not yet implemented" );
-   }
+   /**
+    * Method to test that {@link Method}s with the annotation are matched.
+    */
+   @Test public void shouldHaveMethodAnnotion() throws NoSuchMethodException, SecurityException {
+      Assert.assertTrue( CaliAnnotations.isAnnotationPresent( TestAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class ) ) );
+      Assert.assertTrue( CaliAnnotations.isAnnotationPresent( TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class ) ) );
+      Assert.assertTrue( CaliAnnotations.isAnnotationPresent( TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class, String.class ) ) );
+   }// End Method
    
-   @Test public void shouldNotHaveMethodAnnotion() {
-      fail( "Not yet implemented" );
-   }
+   /**
+    * Method to test that {@link Method}s without the annotation are ignored.
+    */
+   @Test public void shouldNotHaveMethodAnnotion() throws NoSuchMethodException, SecurityException {
+      Assert.assertFalse( CaliAnnotations.isAnnotationPresent( TestAnnotatedSingletonImpl.class.getMethod( "nonCaliMethod", String.class ) ) );
+   }// End Method
    
 }// End Class

@@ -8,6 +8,9 @@
 package system;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -75,6 +78,38 @@ public class CaliDataManagementImpl implements CaliDataManagement {
          }
       }
       return null;
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< Method > matchMethodName( Class< ? > clazz, String methodName ) {
+      List< Method > matches = new ArrayList< Method >();
+      for ( Method method : clazz.getMethods() ) {
+         if ( CaliAnnotations.isAnnotationPresent( method ) ) {
+            if ( method.getName().startsWith( methodName ) ) {
+               matches.add( method );
+            }
+         }
+      }
+      return matches;
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Method matchMethodSignature( Class< ? > clazz, String methodPartialName, Class< ? >... parameterTypes ) {
+      try {
+         return clazz.getMethod( methodPartialName, parameterTypes );
+      } catch ( NoSuchMethodException | SecurityException e ) {
+         List< Method > matches = matchMethodName( clazz, methodPartialName );
+         for ( Method method : matches ) {
+            if ( Arrays.equals( method.getParameterTypes(), parameterTypes ) ) {
+               return method;
+            }
+         }
+         return null;
+      }
    }// End Method
 
 }// End Class

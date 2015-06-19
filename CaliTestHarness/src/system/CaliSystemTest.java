@@ -81,7 +81,6 @@ public class CaliSystemTest {
     * {@link CaliSystem#matchConstructor(String, Class...)} acceptance test.
     */
    @Test public void shouldMatchConstructor() throws NoSuchMethodException, SecurityException {
-      
       Assert.assertEquals( 
                TestAnnotatedSingletonImpl.class.getConstructor( String.class ),
                CaliSystem.matchConstructor( "TestAnnotatedSingletonImpl", String.class ) 
@@ -102,6 +101,60 @@ public class CaliSystemTest {
       Assert.assertNull( 
                CaliSystem.matchConstructor( "TestAnotherAnnotatedSingletonImpl", String.class, String.class, String.class ) 
       );
+   }// End Method
+   
+   /**
+    * {@link CaliSystem#partialMatchMethodName(Class, String)} acceptance test.
+    */
+   @Test public void shouldPartialMatchMethodName() throws NoSuchMethodException, SecurityException{
+      Assert.assertEquals(
+               Arrays.asList( TestAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class ) ),
+               CaliSystem.partialMatchMethodName( TestAnnotatedSingletonImpl.class, "testCaliMethod" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( TestAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class ) ),
+               CaliSystem.partialMatchMethodName( TestAnnotatedSingletonImpl.class, "testCaliMe" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( 
+                        TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class ),
+                        TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class, String.class )
+               ),
+               CaliSystem.partialMatchMethodName( TestAnnotatedSingletonImpl.class, "overloaded" ) 
+      );
+   }// End Method
+   
+   /**
+    * {@link CaliSystem#partialMatchMethodName(Class, String)} reject test.
+    */
+   @Test public void shouldNotPartialMatchMethodName(){
+      Assert.assertTrue( CaliSystem.partialMatchMethodName( TestSingletonImpl.class, "testCaliMethod" ).isEmpty() );
+      Assert.assertTrue( CaliSystem.partialMatchMethodName( TestAnnotatedSingletonImpl.class, "nonCaliMethod" ).isEmpty() );
+   }// End Method
+
+   /**
+    * {@link CaliSystem#matchMethodSignature(Class, String, Class...)} acceptance test.
+    */
+   @Test public void shouldMatchMethodSignature() throws NoSuchMethodException, SecurityException{
+      Assert.assertEquals( 
+               TestAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class ),
+               CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "testCaliMethod", String.class ) 
+      );
+      Assert.assertEquals( 
+               TestAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class ),
+               CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "testCaliMeth", String.class ) 
+      );
+   }// End Method
+   
+   /**
+    * {@link CaliSystem#matchMethodSignature(Class, String, Class...)} reject test.
+    */
+   @Test public void shouldNotMatchMethodSignature(){
+      Assert.assertNull( 
+               CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "anything", String.class ) 
+      );
+      Assert.assertNull( CaliSystem.matchMethodSignature( TestSingletonImpl.class, "testCaliMethod" ) );
+      Assert.assertNull( CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "nonCaliMethod" ) );
    }// End Method
 
 }// End Class

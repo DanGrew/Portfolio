@@ -8,6 +8,7 @@
 package system;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import annotation.Cali;
@@ -41,5 +42,22 @@ public interface CaliDataManagement {
     * @return the {@link Constructor} if found.
     */
    public Constructor< ? > matchConstructor( List< Class< ? > > objectClasses, Class< ? >[] classes );
+   
+   /**
+    * Method to match the partial {@link Method} name to the given {@link Class} of {@link Object}.
+    * @param clazz the {@link Class} to reflect on.
+    * @param methodName the partial {@link Method} name to match.
+    * @return all {@link Method}s that match the name.
+    */
+   public List< Method > matchMethodName( Class< ? > clazz, String methodName );
+
+   /**
+    * Method to match the single {@link Method} given by the partial {@link Method} name and parameters.
+    * @param clazz the {@link Class} to reflect on.
+    * @param methodPartialName the partial {@link Method} name.
+    * @param parameterTypes the {@link Class}es of parameters expected. Must be exact.
+    * @return the matching {@link Method} or null if not unique.
+    */
+   public Method matchMethodSignature( Class< ? > clazz, String methodPartialName, Class< ? >... parameterTypes );
 
 }// End Interface

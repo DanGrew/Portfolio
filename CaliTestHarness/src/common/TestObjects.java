@@ -7,6 +7,8 @@
  */
 package common;
 
+import java.lang.reflect.Method;
+
 import annotation.Cali;
 import model.data.SerializedSingleton;
 import model.singleton.Singleton;
@@ -36,6 +38,18 @@ public class TestObjects {
       public TestAnnotatedSingletonImpl( String identification, String anotherValue ) {
          super( identification );
       }// End Constructor
+      
+      /** Test {@link Method} for {@link Cali}.**/
+      @Cali public void testCaliMethod( String anything ){}
+      
+      /** Test {@link Method} overloaded for {@link Cali}.**/
+      @Cali public void overloaded( String anything ){}
+      
+      /** Test {@link Method} overloaded for {@link Cali}.**/
+      @Cali public void overloaded( String anything, String twice ){}
+      
+      /** Test {@link Method} overloaded for {@link Cali}, deliberately not {@link Cali}.**/
+      public void nonCaliMethod( String anything ){}
       
       @Override protected void writeSingleton( TestAnnotatedSingleton serializable ) {}
       @Override protected void readSingleton( TestAnnotatedSingleton serialized ) {}

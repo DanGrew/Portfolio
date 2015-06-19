@@ -8,6 +8,8 @@
 package system;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.singleton.Singleton;
@@ -58,6 +60,26 @@ public class CaliSystem {
    public static Constructor< ? > matchConstructor( String object, Class< ? >... classes ) {
       List< Class< ? > > matches = partialMatchClass( object );
       return caliDataManagement.matchConstructor( matches, classes );
+   }// End Method
+
+   /**
+    * {@link CaliDataManagement#matchMethodName(Class, String)}.
+    */
+   public static List< Method > partialMatchMethodName( Class< ? > clazz, String methodPartialName ) {
+      if ( database.contains( clazz ) ) {
+         return caliDataManagement.matchMethodName( clazz, methodPartialName );
+      }
+      return new ArrayList<>();
+   }// End Method
+
+   /**
+    * {@link CaliDataManagement#matchMethodSignature(Class, String, Class...)}.
+    */
+   public static Method matchMethodSignature( Class< ? > clazz, String methodPartialName, Class< ? >... parameterTypes ) {
+      if ( database.contains( clazz ) ) {
+         return caliDataManagement.matchMethodSignature( clazz, methodPartialName, parameterTypes );
+      }
+      return null;
    }// End Method
 
 }// End Class
