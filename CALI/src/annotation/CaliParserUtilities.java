@@ -69,6 +69,14 @@ public class CaliParserUtilities {
    }// End Method
    
    /**
+    * Getter for the {@link #statementDelimiter()} as a regex for {@link String} matching.
+    * @return the searchable regex.
+    */
+   public static String regexStatementDelimter(){
+      return REGEX_PREFIX + statementDelimiter();
+   }// End Method
+   
+   /**
     * Method to extract the type of object from the expression.
     * @param expression the expression to parse from.
     * @return the {@link String} part of the expression for the  object type.

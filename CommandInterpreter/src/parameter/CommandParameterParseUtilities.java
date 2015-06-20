@@ -120,7 +120,9 @@ public class CommandParameterParseUtilities {
    public static final String reduce( String expression, String... parameters ) {
       for ( String parameter : parameters ) {
          expression = expression.replaceFirst( parameter, "" );
-         expression = expression.replaceFirst( SPACE_REGEX, "" );
+         if ( expression.startsWith( COMMAND_DELIMITER ) ) {
+            expression = expression.replaceFirst( SPACE_REGEX, "" );
+         }
       }
       return expression;
    }// End Method

@@ -44,6 +44,8 @@ public class SingletonReferenceParameterTest {
    @Test public void shouldPartialMatch() {
       Assert.assertTrue( parameter.partialMatches( "Te" ) );
       Assert.assertTrue( parameter.partialMatches( "" ) );
+      Assert.assertTrue( parameter.partialMatches( TEST_SINGLETON + " anything" ) );
+      Assert.assertTrue( parameter.partialMatches( TEST_SINGLETON + ".anything" ) );
    }// End Method
    
    /**

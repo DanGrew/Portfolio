@@ -7,6 +7,8 @@
  */
 package annotation;
 
+import java.util.Arrays;
+
 /**
  * The {@link CodeParametersResult} provides the result of parsing coding parameters
  * from a {@link String} expression.
@@ -24,6 +26,7 @@ public class CodeParametersResult {
    private String resultingExpression;
    private Result result;
    private String[] parameters;
+   private Class< ? >[] parameterTypes;
    
    /**
     * Getter for the resulting expression, following parsing.
@@ -66,11 +69,21 @@ public class CodeParametersResult {
    }// End Method
    
    /**
+    * Getter for the {@link Class}es of the parameters parsed.
+    * @return an array of {@link Class} types.
+    */
+   public Class< ? >[] getParameterTypes(){
+      return this.parameterTypes;
+   }// End Method
+   
+   /**
     * Setter for the parameters parsed, see {@link #getParameters()}.
     * @param parameters the parameters parsed.
     */
    public void setParameters( String[] parameters ) {
       this.parameters = parameters;
+      this.parameterTypes = new Class< ? >[ parameters.length ];
+      Arrays.fill( parameterTypes, String.class );
    }// End Method
    
 }// End Class

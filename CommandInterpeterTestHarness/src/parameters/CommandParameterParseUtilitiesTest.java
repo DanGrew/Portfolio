@@ -77,6 +77,7 @@ public class CommandParameterParseUtilitiesTest {
       Assert.assertEquals( "this left", CommandParameterParseUtilities.reduce( "only this left", "only" ) );
       Assert.assertEquals( "this    left", CommandParameterParseUtilities.reduce( "   only     this    left", "only" ) );
       Assert.assertEquals( "left", CommandParameterParseUtilities.reduce( "only this left", "only", "this" ) );
+      Assert.assertEquals( "this left", CommandParameterParseUtilities.reduce( "onlythis left", "only" ) );
    }// End Method
    
    /**

@@ -61,6 +61,8 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
       Assert.assertTrue( parameter.partialMatches( "TestAnnot" ) );
       Assert.assertTrue( parameter.partialMatches( "TestAnot" ) );
       Assert.assertTrue( parameter.partialMatches( "" ) );
+      Assert.assertTrue( parameter.partialMatches( TEST_ANNOTATED_SINGLETON_NAME + " anything" ) );
+      Assert.assertTrue( parameter.partialMatches( TEST_ANNOTATED_SINGLETON_NAME + ".anything" ) );
       
       Assert.assertTrue( parameter.partialMatches( TEST_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter() ) );
       Assert.assertTrue( parameter.partialMatches( "TestA." ) );
@@ -83,6 +85,7 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
     */
    @Test @Override public void shouldCompleteMatch() {
       Assert.assertTrue( parameter.completeMatches( TEST_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter() ) );
+      Assert.assertTrue( parameter.completeMatches( TEST_ANNOTATED_SINGLETON_NAME + ".anything" ) );
       Assert.assertTrue( parameter.completeMatches( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter() ) );
    }// End Method
    
