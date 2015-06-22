@@ -50,8 +50,6 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
    @Test @Override public void shouldNotPartialMatch() {
       super.shouldNotPartialMatch();
       Assert.assertFalse( parameter.partialMatches( "anything" ) );
-      Assert.assertFalse( parameter.partialMatches( "" ) );
-      Assert.assertFalse( parameter.partialMatches( "TestAnnotated.testCali" ) );
       Assert.assertFalse( parameter.partialMatches( "TestAnnotated.nonCali" ) );
       Assert.assertFalse( parameter.partialMatches( "TestAnnotated.testCaliMethod( name, anything )" ) );
       Assert.assertFalse( parameter.partialMatches( "TestAnnotated.nonCaliMethod( name )" ) );
@@ -60,8 +58,15 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
    /**
     * {@inheritDoc}
     */
+   @Override public void shouldPartialMatchFurtherInput() {
+      Assert.assertTrue( parameter.partialMatches( "TestAnnotated.testCaliMethod( stringValue ).anything" ) );
+      Assert.assertTrue( parameter.partialMatches( "TestAnnotated.testCaliMethod( stringValue ) anything" ) );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Test @Override public void shouldCompleteMatch() {
-      super.shouldCompleteMatch();
       Assert.assertTrue( parameter.partialMatches( "TestAnnotated.testCaliMethod( stringValue )" ) );
    }// End Method
    

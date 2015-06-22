@@ -100,7 +100,12 @@ public class CaliDataManagementImpl implements CaliDataManagement {
     */
    @Override public Method matchMethodSignature( Class< ? > clazz, String methodPartialName, Class< ? >... parameterTypes ) {
       try {
-         return clazz.getMethod( methodPartialName, parameterTypes );
+         Method method = clazz.getMethod( methodPartialName, parameterTypes );
+         if ( method != null && CaliAnnotations.isAnnotationPresent( method ) ) {
+            return method;
+         } else {
+            return null;
+         }
       } catch ( NoSuchMethodException | SecurityException e ) {
          List< Method > matches = matchMethodName( clazz, methodPartialName );
          for ( Method method : matches ) {

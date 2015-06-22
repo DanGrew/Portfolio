@@ -55,6 +55,8 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
             return true;
          case PARTIAL_MATCHES_NO_SUGGESTION:
             return true;
+         case SINGLETON_DOES_NOT_MATCH:
+            return false;   
          case SINGLETON_PARSED:
             singleton = singletonResult.getSingleton();
          default:
@@ -110,9 +112,57 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
       }
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
    @Override public boolean completeMatches( String expression ) {
-      return false;
-   }
+      String reference = parseSingletonReference( expression );
+      if ( reference == null ) {
+         //No input to match.
+         return true;
+      }
+      
+      Singleton singleton = null;
+      SingletonReferenceParserResult singletonResult = new SingletonReferenceParserResult();
+      singletonResult.parse( reference, referenceParameter );
+      switch ( singletonResult.getResult() ) {
+         case COMPLETE_MATCHES_NO_SUGGESTION:
+            return false;
+         case PARTIAL_MATCHES_NO_SUGGESTION:
+            return false;
+         case SINGLETON_PARSED:
+            singleton = singletonResult.getSingleton();
+         default:
+            break;
+      }
+
+      MethodCallResult methodResult = new MethodCallResult();
+      methodResult.parse( singleton, expression, reference );
+      switch ( methodResult.getResult() ) {
+         case DOES_NOT_OPEN:
+            return false;
+         case EMPTY_NO_OPEN:
+            return false;
+         case METHOD_MATCHES:
+            return true;
+         case METHOD_SIGNATURE_DOES_NOT_MATCH:
+            return false;
+         case NO_METHOD_NAME:
+            return false;
+         case NO_PARAMETERS_METHOD_DOES_NOT_MATCH:
+            return false;
+         case NO_PARAMETERS_METHOD_MATCHES:
+            return false;
+         case OPEN_NO_PARAMETERS:
+            return false;
+         case PARAMETERS_NO_CLOSE:
+            return false;
+         case SINGELTON_NULL:
+            return false;
+         default:
+            return false;
+      }
+   }// End Method
 
    @Override public Object parseObject( String expression ) {
       return null;

@@ -155,6 +155,7 @@ public class CaliSystemTest {
       );
       Assert.assertNull( CaliSystem.matchMethodSignature( TestSingletonImpl.class, "testCaliMethod" ) );
       Assert.assertNull( CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "nonCaliMethod" ) );
+      Assert.assertNull( CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "nonCaliMethod", String.class ) );
    }// End Method
 
 }// End Class
