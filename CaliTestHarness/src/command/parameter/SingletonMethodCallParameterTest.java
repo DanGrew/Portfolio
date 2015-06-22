@@ -11,8 +11,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import system.CaliSystem;
 import annotation.CaliParserUtilities;
-
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 
@@ -26,6 +26,8 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
     */
    @Before @Override public void initialise(){
       parameter = new SingletonMethodCallParameterImpl();
+      
+      CaliSystem.register( TestAnnotatedSingletonImpl.class );
    }// End Method
    
    /**

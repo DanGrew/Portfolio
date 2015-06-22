@@ -129,6 +129,13 @@ public class CommandParameterParseUtilitiesTest {
       Assert.assertEquals( "stuff", result[ 1 ] );
       Assert.assertEquals( "filled", result[ 2 ] );
       Assert.assertEquals( "here", result[ 3 ] );
+      
+      result = CommandParameterParseUtilities.parseUpTo( 
+               ".",
+               "anything",
+               "."
+      );
+      Assert.assertEquals( 0, result.length );
    }// End Method
    
    /**

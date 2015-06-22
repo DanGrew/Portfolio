@@ -33,9 +33,7 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public boolean partialMatches( String expression ) {
       String key = CommandParameterParseUtilities.parseSingle( expression );
-      if ( key.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
-         key = key.substring( 0, key.length() - 1 );
-      }
+      key = parseForStatement( key );
       List< Singleton > matches = CaliSystem.partialMatchSingletons( key );
       return !matches.isEmpty();
    }// End Method
@@ -45,13 +43,31 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public boolean completeMatches( String expression ) {
       String key = CommandParameterParseUtilities.parseSingle( expression );
-      if ( key.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
-         key = key.substring( 0, key.length() - 1 );
-      } else {
+      key = parseForStatement( key );
+      if ( key == null ) {
          return false;
       }
       List< Singleton > matches = CaliSystem.partialMatchSingletons( key );
       return !matches.isEmpty();
+   }// End Method
+   
+   /**
+    * Method to parse the given expression based on the {@link CaliParserUtilities#statementDelimiter()}.
+    * @param expression the expression to parse.
+    * @return the reference having remove any parts following the delimiter.
+    */
+   private String parseForStatement( String expression ) {
+      if ( expression.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
+         expression = expression.substring( 0, expression.length() - 1 );
+      } else if ( expression.contains( CaliParserUtilities.statementDelimiter() ) ){
+         String[] result = CommandParameterParseUtilities.parseParameters( CaliParserUtilities.regexStatementDelimter(), 1, expression );
+         if ( result.length == 0 ) {
+            return null;
+         } else {
+            expression = result[ 0 ];
+         }
+      }
+      return expression;
    }// End Method
 
    /**

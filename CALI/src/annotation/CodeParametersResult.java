@@ -9,11 +9,14 @@ package annotation;
 
 import java.util.Arrays;
 
+import model.result.ComplexReturnResult;
+import annotation.CodeParametersResult.Result;
+
 /**
  * The {@link CodeParametersResult} provides the result of parsing coding parameters
  * from a {@link String} expression.
  */
-public class CodeParametersResult {
+public class CodeParametersResult extends ComplexReturnResult< Result >{
    
    public enum Result {
       EMPTY_NO_OPEN, 
@@ -24,7 +27,6 @@ public class CodeParametersResult {
    }
    
    private String resultingExpression;
-   private Result result;
    private String[] parameters;
    private Class< ? >[] parameterTypes;
    
@@ -42,22 +44,6 @@ public class CodeParametersResult {
     */
    public void setResultingExpression( String resultingExpression ) {
       this.resultingExpression = resultingExpression;
-   }// End Method
-   
-   /**
-    * Getter for the type of {@link Result}.
-    * @return the {@link Result}.
-    */
-   public Result getResult() {
-      return result;
-   }// End Method
-   
-   /**
-    * Setter for the type of {@link Result}, see {@link #getResult()}.
-    * @param result the {@link Result} type.
-    */
-   public void setResult( Result result ) {
-      this.result = result;
    }// End Method
    
    /**
