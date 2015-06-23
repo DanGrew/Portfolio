@@ -50,7 +50,7 @@ public class CodeParametersResult extends ComplexReturnResult< Result >{
     * Getter for the parsed parameters, as {@link String}s.
     * @return the array of parameters.
     */
-   public String[] getParameters() {
+   public Object[] getParameters() {
       return parameters;
    }// End Method
    

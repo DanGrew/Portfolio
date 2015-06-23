@@ -83,18 +83,23 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
     * {@inheritDoc}
     */
    @Test @Override public void shouldExtract() {
-      super.shouldExtract();
-      Assert.assertEquals( "", parameter.extractInput( "anything" ) );
+      Assert.assertEquals( "", parameter.extractInput( "TestAnno." ) );
+      Assert.assertEquals( "", parameter.extractInput( TEST_ANNOTATED_SINGLETON_NAME ) );
+      Assert.assertEquals( "anything", parameter.extractInput( "anything" ) );
       Assert.assertEquals( 
-               "TestAnnotated.testCaliMethod( name, anything )", 
+               "", 
                parameter.extractInput( "TestAnnotated.testCaliMethod( name )" ) 
       );
       Assert.assertEquals( 
-               "", 
+               "anything", 
+               parameter.extractInput( "TestAnnotated.testCaliMethod( name ) anything" ) 
+      );
+      Assert.assertEquals( 
+               "anything.anything( anything )", 
                parameter.extractInput( "anything.anything( anything )" ) 
       );
       Assert.assertEquals( 
-               "blah blah blah", 
+               "anything.anything( anything ) blah blah blah", 
                parameter.extractInput( "anything.anything( anything ) blah blah blah" ) 
       );
    }// End Method
@@ -106,7 +111,7 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
       super.shouldParseParameters();
       Assert.assertEquals( "anything", parameter.parseParameter( "anything" ) );
       Assert.assertEquals( 
-               "TestAnnotated.testCaliMethod( name, anything )", 
+               "TestAnnotated.testCaliMethod( name )", 
                parameter.parseParameter( "TestAnnotated.testCaliMethod( name )" ) 
       );
       Assert.assertEquals( 
@@ -114,17 +119,17 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
                parameter.parseParameter( "anything.anything( anything )" ) 
       );
       Assert.assertEquals( 
-               "anything.anything( anything )", 
+               "anything.anything( anything ) blah blah blah", 
                parameter.parseParameter( "anything.anything( anything ) blah blah blah" ) 
       );
+      Assert.assertEquals( "TestAnnotated.testCaliMethod( name )", parameter.parseParameter( "TestAnnotated.testCaliMethod( name )" ) );
+      Assert.assertEquals( "TestAnnotated.testCaliMethod( name )", parameter.parseParameter( "TestAnnotated.testCaliMethod( name ) anything" ) );
    }
    
    /**
     * {@inheritDoc}
     */
    @Test @Override public void shouldParse() throws NoSuchMethodException, SecurityException {
-      super.shouldParse();
-      
       final String testParameter = "name";
       SingletonMethodCallValue callValue = new SingletonMethodCallValue();
       callValue.setSingleton( TEST_ANNOTATED_SINGLETON_OBJECT );
@@ -149,20 +154,20 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
       super.shouldAutoComplete();
       
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
-               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() ) 
+               "TestAnnotated.testCaliMethod(",
+               parameter.autoComplete( "TestAnnotated.testC" ) 
       );
       Assert.assertEquals(
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
-               parameter.autoComplete( "TestAnn" ) 
+               "TestAnnotated.testCaliMethod(",
+               parameter.autoComplete( "TestAnn.testC" ) 
       );
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
-               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() ) 
+               "TestAnnotated.testCaliMethod(",
+               parameter.autoComplete( "TestAnnotated.testCaliMethod(" ) 
       );
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() + " anything",
-               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() + "anything" ) 
+               "TestAnnotated.testCaliMethod( anything",
+               parameter.autoComplete( "TestAnnotated.testCaliMethod( anything" ) 
       );
    }// End Method
    

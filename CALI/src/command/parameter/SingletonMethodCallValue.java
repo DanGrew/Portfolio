@@ -9,6 +9,7 @@ package command.parameter;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import model.singleton.Singleton;
@@ -39,6 +40,14 @@ public class SingletonMethodCallValue {
    }// End Method
 
    /**
+    * Getter for the {@link Method} parsed and matched.
+    * @return the {@link Method}.
+    */
+   public Method getMethod() {
+      return method;
+   }// End Method
+   
+   /**
     * Setter for the {@link Method}.
     * @param method the {@link Method} to execute.
     */
@@ -53,7 +62,15 @@ public class SingletonMethodCallValue {
    public void addParameter( Object parameter ) {
       this.parameters.add( parameter );
    }// End Method
-
+   
+   /**
+    * Method to add all {@link Object} parameters parsed.
+    * @param parameters the {@link Object} parameters.
+    */
+   public void addParameters( Object... parameters ) {
+      this.parameters.addAll( Arrays.asList( parameters ) );
+   }// End Method
+   
    /**
     * {@inheritDoc}
     */

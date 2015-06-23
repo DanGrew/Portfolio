@@ -29,13 +29,43 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
       SINGELTON_NULL, 
       NO_METHOD_NAME, 
       NO_PARAMETERS_METHOD_DOES_NOT_MATCH, 
-      NO_PARAMETERS_METHOD_MATCHES, 
       DOES_NOT_OPEN, EMPTY_NO_OPEN, 
       OPEN_NO_PARAMETERS, 
       PARAMETERS_NO_CLOSE, 
       METHOD_MATCHES, 
-      METHOD_SIGNATURE_DOES_NOT_MATCH
+      METHOD_SIGNATURE_DOES_NOT_MATCH, 
+      NO_PARAMETERS_EXACT_MATCH, 
+      NO_PARAMETERS_MULTIPLE_MATCHES, 
+      CANNOT_FIND_METHOD_NAME
    }// End Enum
+   
+   private Method method;
+   private Object[] parameters;
+   private String expression;
+   
+   public String getResultingExpression() {
+      return expression;
+   }
+   
+   private void setResultingExpression( String expression ) {
+      this.expression = expression;
+   }
+   
+   public Method getMethod() {
+      return method;
+   }
+   
+   private void setMethod( Method method ) {
+      this.method = method;
+   }
+   
+   private void setParameters( Object... objects ) {
+      this.parameters = objects;
+   }
+   
+   public Object[] getParameters() {
+      return parameters;
+   }
    
    /**
     * Method to parse the {@link Method} for the given {@link Singleton} and expression.
@@ -44,26 +74,41 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
     * @param reference the reference to the {@link Singleton} in the expression.
     */
    public void parse( Singleton singleton, String expression, String reference ){
+      setResultingExpression( expression );
       if ( singleton != null ) {
          expression = CommandParameterParseUtilities.reduce( expression, reference );
+         setResultingExpression( expression );
          if ( expression.isEmpty() ) {
             setResult( Result.NO_METHOD_NAME );
             return;
          }
          
          String methodNamePart = CaliParserUtilities.extractObjectType( expression );
+         if ( methodNamePart == null ) {
+            setResult( Result.CANNOT_FIND_METHOD_NAME );
+            return;
+         }
          expression = CommandParameterParseUtilities.reduce( expression, methodNamePart );
+         setResultingExpression( expression );
+         List< Method > matches = CaliSystem.partialMatchMethodName( singleton.getClass(), methodNamePart );
          if ( expression.isEmpty() ) {
-            List< Method > matches = CaliSystem.partialMatchMethodName( singleton.getClass(), methodNamePart );
             if ( matches.isEmpty() ) {
                setResult( Result.NO_PARAMETERS_METHOD_DOES_NOT_MATCH );
+            } else if ( matches.size() == 1 ){
+               setResult( Result.NO_PARAMETERS_EXACT_MATCH );
+               setMethod( matches.get( 0 ) );
             } else {
-               setResult( Result.NO_PARAMETERS_METHOD_MATCHES );
+               setResult( Result.NO_PARAMETERS_MULTIPLE_MATCHES );
             }
             return;
+         } else {
+            if ( matches.size() == 1 ) {
+               setMethod( matches.get( 0 ) );
+            }
          }
          
          CodeParametersResult result = CaliParserUtilities.extractParameters( expression );
+         setResultingExpression( result.getResultingExpression() );
          switch ( result.getResult() ) {
             case DOES_NOT_OPEN:
                setResult( Result.DOES_NOT_OPEN );
@@ -81,6 +126,8 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
                Method method = CaliSystem.matchMethodSignature( singleton.getClass(), methodNamePart, result.getParameterTypes() );
                if ( method != null ) {
                   setResult( Result.METHOD_MATCHES );
+                  setMethod( method );
+                  setParameters( result.getParameters() );
                } else {
                   setResult( Result.METHOD_SIGNATURE_DOES_NOT_MATCH );
                }

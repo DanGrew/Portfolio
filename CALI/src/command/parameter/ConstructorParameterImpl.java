@@ -53,7 +53,7 @@ public class ConstructorParameterImpl implements CommandParameter {
             case PARAMETERS_NO_CLOSE:
                return true;
             case SUCCESS:
-               String[] parameters = result.getParameters();
+               Object[] parameters = result.getParameters();
                return retrieveConstructor( objectNamePart, parameters ) != null;
             default:
                return false;
@@ -113,7 +113,7 @@ public class ConstructorParameterImpl implements CommandParameter {
             case PARAMETERS_NO_CLOSE:
                return false;
             case SUCCESS:
-               String[] parameters = result.getParameters();
+               Object[] parameters = result.getParameters();
                return retrieveConstructor( objectNamePart, parameters ) != null;
             default:
                return false;
@@ -194,14 +194,14 @@ public class ConstructorParameterImpl implements CommandParameter {
                expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.regexOpen() );
                return autoCorrectUpToOpen( expression, onlyChoice );
             case SUCCESS:
-               String[] parameters = result.getParameters();
+               Object[] parameters = result.getParameters();
                Constructor< ? > constructor = retrieveConstructor( objectNamePart, parameters );
                if ( constructor != null ) {
                   StringBuffer autoCorrect = new StringBuffer();
                   autoCorrect.append( constructor.getDeclaringClass().getSimpleName() );
                   autoCorrect.append( CaliParserUtilities.open() );
                   autoCorrect.append( CommandParameterParseUtilities.delimiter() );
-                  for ( String parameter : parameters ) {
+                  for ( Object parameter : parameters ) {
                      autoCorrect.append( parameter ).append( CaliParserUtilities.parameterDelimiter() );
                      autoCorrect.append( CommandParameterParseUtilities.delimiter() );
                   }
