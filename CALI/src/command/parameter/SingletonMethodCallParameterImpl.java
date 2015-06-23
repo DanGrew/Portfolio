@@ -283,7 +283,7 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
          case PARAMETERS_NO_CLOSE:
             return singleton.getIdentification() + CaliParserUtilities.statementDelimiter() +
                      methodResult.getMethod().getName() + CaliParserUtilities.open() + 
-                     CommandParameterParseUtilities.delimiter() + methodResult.getResultingExpression();
+                     CommandParameterParseUtilities.delimiter() + methodResult.constructParametersInput();
          case SINGELTON_NULL:
             return null;
          case CANNOT_FIND_METHOD_NAME:
@@ -323,7 +323,7 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
       expression = CommandParameterParseUtilities.reduce( expression, reference );
       MethodCallResult methodResult = new MethodCallResult();
       methodResult.parse( singleton, expression, reference );
-      return methodResult.getResultingExpression();
+      return methodResult.getResultingExpression().trim();
    }// End Method
    
    /**

@@ -95,6 +95,14 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
                parameter.extractInput( "TestAnnotated.testCaliMethod( name ) anything" ) 
       );
       Assert.assertEquals( 
+               "", 
+               parameter.extractInput( "TestAnnotated.testCaliMethod( name" ) 
+      );
+      Assert.assertEquals( 
+               "", 
+               parameter.extractInput( "TestAnnotated.testCaliMethod(" ) 
+      );
+      Assert.assertEquals( 
                "anything.anything( anything )", 
                parameter.extractInput( "anything.anything( anything )" ) 
       );

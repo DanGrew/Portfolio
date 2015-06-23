@@ -44,19 +44,20 @@ public class CodeParameterParser {
          return result;
       }
       
-      //Cannot match partial constructor, allow any parameters before defining end bracket.
-      if ( !expression.contains( CaliParserUtilities.close() ) ) {
-         result.setResultingExpression( expression );
-         result.setResult( Result.PARAMETERS_NO_CLOSE );
-         return result;
-      }
-      
       //Get parameters.
       String[] parameters = CommandParameterParseUtilities.parseUpTo( 
                expression, 
                CaliParserUtilities.regexClose(), 
                CaliParserUtilities.parameterDelimiter()
       );
+      
+      //Cannot match partial constructor, allow any parameters before defining end bracket.
+      if ( !expression.contains( CaliParserUtilities.close() ) ) {
+         result.setResultingExpression( expression );
+         result.setParameters( parameters );
+         result.setResult( Result.PARAMETERS_NO_CLOSE );
+         return result;
+      }
       
       for ( String parameter : parameters ) {
          expression = CommandParameterParseUtilities.reduce( expression, parameter.trim() );

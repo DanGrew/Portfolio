@@ -43,29 +43,71 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
    private Object[] parameters;
    private String expression;
    
+   /**
+    * Getter for the resulting expression when each part is parsed from it.
+    * @return the expression following parse.
+    */
    public String getResultingExpression() {
       return expression;
-   }
+   }// End Method
    
+   /**
+    * Setter for the resulting expression.
+    * @param expression the expression following parse.
+    */
    private void setResultingExpression( String expression ) {
       this.expression = expression;
-   }
+   }// End Method
    
+   /**
+    * Getter for the {@link Method} parsed.
+    * @return the {@link Method}.
+    */
    public Method getMethod() {
       return method;
-   }
+   }// End Method
    
+   /**
+    * Setter for the {@link Method} parsed.
+    * @param method the {@link Method} parsed.
+    */
    private void setMethod( Method method ) {
       this.method = method;
-   }
+   }// End Method
    
+   /**
+    * Setter for the parsed parameters.
+    * @param objects the {@link Object}s parsed.
+    */
    private void setParameters( Object... objects ) {
       this.parameters = objects;
-   }
+   }// End Method
    
+   /**
+    * Getter for the parsed parameters.
+    * @return the array of parameters.
+    */
    public Object[] getParameters() {
       return parameters;
-   }
+   }// End Method
+   
+   /**
+    * Method to construct the input provided for the parameters found.
+    * @return a {@link String} representation of the parameters typed.
+    */
+   public String constructParametersInput(){
+      if ( parameters == null ) {
+         return null;
+      }
+      StringBuffer buffer = new StringBuffer();
+      for ( Object object : parameters ) {
+         buffer.append( object.toString() )
+               .append( CaliParserUtilities.parameterDelimiter() )
+               .append( CommandParameterParseUtilities.delimiter() );
+      }
+      buffer.setLength( buffer.length() - 2 );
+      return buffer.toString();
+   }// End Method
    
    /**
     * Method to parse the {@link Method} for the given {@link Singleton} and expression.
@@ -121,6 +163,9 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
                return;
             case PARAMETERS_NO_CLOSE:
                setResult( Result.PARAMETERS_NO_CLOSE );
+               setParameters( result.getParameters() );
+               //Assume remainder are all parameters.
+               setResultingExpression( "" );
                return;
             case SUCCESS:
                Method method = CaliSystem.matchMethodSignature( singleton.getClass(), methodNamePart, result.getParameterTypes() );

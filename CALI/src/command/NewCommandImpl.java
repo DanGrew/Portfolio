@@ -11,7 +11,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
+import model.singleton.Singleton;
 import annotation.Cali;
+import architecture.request.RequestSystem;
 import parameter.CommandParameter;
 import parameter.FixedValueParameterImpl;
 import parameter.wrapper.CommandParameters;
@@ -38,6 +40,7 @@ public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
          Constructor< ? > constructor = value.getConstructor();
          try {
             Object object = constructor.newInstance( value.getParameters() );
+            RequestSystem.store( object, Singleton.class );
             return new CommandResultImpl< Object >( 
                      "Successfully created " + constructor.getDeclaringClass().getSimpleName() + ".",
                      object 
