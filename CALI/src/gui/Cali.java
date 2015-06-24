@@ -9,9 +9,12 @@
 package gui;
 
 import parameter.classparameter.ClassParameterTypes;
+import system.CaliSystem;
 import architecture.request.RequestSystem;
+import caliobjects.Calculator;
 
 import command.Command;
+import command.MethodCallCommandImpl;
 import command.NewCommandImpl;
 
 /**
@@ -22,6 +25,8 @@ public class Cali {
 
    public static void main( String[] args ) {
       RequestSystem.store( new NewCommandImpl(), Command.class );
+      RequestSystem.store( new MethodCallCommandImpl(), Command.class );
+      CaliSystem.register( Calculator.class );
       ClassParameterTypes.initialiseTypes();
       new CommandInterpreter();
    }// End Method

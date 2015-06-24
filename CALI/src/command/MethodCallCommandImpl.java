@@ -9,11 +9,13 @@ package command;
 
 import gui.console.ConsoleMessageImpl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
 import parameter.wrapper.CommandParameters;
 import command.parameter.SingletonMethodCallParameterImpl;
+import command.parameter.SingletonMethodCallValue;
 
 /**
  * The {@link MethodCallCommandImpl} is responsible for allowing the user to call methods on
@@ -29,8 +31,17 @@ public class MethodCallCommandImpl extends ParameterizedCommandImpl< Object >{
        * {@inheritDoc}
        */
       @Override public CommandResultImpl< Object > apply( CommandParameters parameters ) {
-         System.out.println( "Executing" );
-         return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Not implemented yet." ) );
+         SingletonMethodCallValue value = parameters.getExpectedParameter( METHOD_PARAMETER, SingletonMethodCallValue.class );
+         try {
+            Object returnedValue = value.getMethod().invoke( value.getSingleton(), value.getParameters() );
+            if ( returnedValue == null ) {
+               return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Executed." ) );
+            } else {
+               return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Result: " + returnedValue.toString() ), returnedValue );
+            }
+         } catch ( IllegalAccessException | IllegalArgumentException | InvocationTargetException e ) {
+            return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Error occured during execution." ) );
+         }
       }// End Method
    }; // End Class
    

@@ -38,6 +38,14 @@ public class SingletonMethodCallValue {
    public void setSingleton( Singleton singleton ) {
       this.singleton = singleton;
    }// End Method
+   
+   /**
+    * Getter for the {@link Singleton} identified for the call.
+    * @return the {@link Singleton} to call the {@link Method} on.
+    */
+   public Singleton getSingleton() {
+      return singleton;
+   }// End Method
 
    /**
     * Getter for the {@link Method} parsed and matched.
@@ -69,6 +77,14 @@ public class SingletonMethodCallValue {
     */
    public void addParameters( Object... parameters ) {
       this.parameters.addAll( Arrays.asList( parameters ) );
+   }// End Method
+   
+   /**
+    * Getter for the parameters to be given to the {@link Method}.
+    * @return the array of {@link Object} parameters.
+    */
+   public Object[] getParameters() {
+      return parameters.toArray();
    }// End Method
    
    /**
