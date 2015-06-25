@@ -116,5 +116,18 @@ public class CaliDataManagementImpl implements CaliDataManagement {
          return null;
       }
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Method matchMethodSignature( Class< ? > clazz, String methodPartialName, int parameterCountExpected ) {
+      List< Method > matches = matchMethodName( clazz, methodPartialName );
+      for ( Method method : matches ) {
+         if ( method.getParameterTypes().length == parameterCountExpected ) {
+            return method;
+         }
+      }
+      return null;
+   }// End Method
 
 }// End Class

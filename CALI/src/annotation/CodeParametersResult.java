@@ -7,6 +7,7 @@
  */
 package annotation;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import model.result.ComplexReturnResult;
@@ -28,7 +29,7 @@ public class CodeParametersResult extends ComplexReturnResult< Result >{
    
    private String resultingExpression;
    private String[] parameters;
-   private Class< ? >[] parameterTypes;
+   private int numberOfParameters;
    
    /**
     * Getter for the resulting expression, following parsing.
@@ -55,11 +56,11 @@ public class CodeParametersResult extends ComplexReturnResult< Result >{
    }// End Method
    
    /**
-    * Getter for the {@link Class}es of the parameters parsed.
-    * @return an array of {@link Class} types.
+    * Getter for the number parameters input.
+    * @return the int number of parameters in the {@link Method}.
     */
-   public Class< ? >[] getParameterTypes(){
-      return this.parameterTypes;
+   public int getNumberOfParameters() {
+      return numberOfParameters;
    }// End Method
    
    /**
@@ -68,8 +69,7 @@ public class CodeParametersResult extends ComplexReturnResult< Result >{
     */
    public void setParameters( String[] parameters ) {
       this.parameters = parameters;
-      this.parameterTypes = new Class< ? >[ parameters.length ];
-      Arrays.fill( parameterTypes, String.class );
+      numberOfParameters = parameters.length;
    }// End Method
-   
+
 }// End Class

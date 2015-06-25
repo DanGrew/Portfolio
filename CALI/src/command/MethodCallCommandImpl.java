@@ -14,6 +14,7 @@ import java.util.function.Function;
 
 import parameter.CommandParameter;
 import parameter.wrapper.CommandParameters;
+import redirect.ParameterRedirect;
 import command.parameter.SingletonMethodCallParameterImpl;
 import command.parameter.SingletonMethodCallValue;
 
@@ -25,6 +26,7 @@ public class MethodCallCommandImpl extends ParameterizedCommandImpl< Object >{
 
    private static final String DESCRIPTION = "Command to call a method on an existing Object.";
    private static final CommandParameter METHOD_PARAMETER = new SingletonMethodCallParameterImpl();
+   private static final ParameterRedirect METHOD_REDIRECT_PROXY = new ParameterRedirect();
    private static final Function< CommandParameters, CommandResult< Object > > FUNCTION = new Function< CommandParameters, CommandResult<Object> >() {
 
       /**
@@ -33,7 +35,7 @@ public class MethodCallCommandImpl extends ParameterizedCommandImpl< Object >{
       @Override public CommandResultImpl< Object > apply( CommandParameters parameters ) {
          SingletonMethodCallValue value = parameters.getExpectedParameter( METHOD_PARAMETER, SingletonMethodCallValue.class );
          try {
-            Object returnedValue = value.getMethod().invoke( value.getSingleton(), value.getParameters() );
+            Object returnedValue = METHOD_REDIRECT_PROXY.invoke( value.getSingleton(), value.getMethod(), value.getParameters() );
             if ( returnedValue == null ) {
                return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Executed." ) );
             } else {

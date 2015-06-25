@@ -81,5 +81,15 @@ public class CaliSystem {
       }
       return null;
    }// End Method
+   
+   /**
+    * {@link CaliDataManagement#matchMethodSignature(Class, String, Class...)}.
+    */
+   public static Method matchMethodSignature( Class< ? > clazz, String methodPartialName, int parameterCountExpected ) {
+      if ( database.contains( clazz ) ) {
+         return caliDataManagement.matchMethodSignature( clazz, methodPartialName, parameterCountExpected );
+      }
+      return null;
+   }// End Method
 
 }// End Class

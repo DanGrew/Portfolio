@@ -10,4 +10,7 @@ public class FeatureRequest {
       fail( "Not yet implemented" );
    }
 
+   @Test public void autoCompleteForOverloadedNamesInPart() {
+      fail( "Not yet implemented" );
+   }
 }

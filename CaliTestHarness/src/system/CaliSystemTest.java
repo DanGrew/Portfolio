@@ -157,5 +157,37 @@ public class CaliSystemTest {
       Assert.assertNull( CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "nonCaliMethod" ) );
       Assert.assertNull( CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "nonCaliMethod", String.class ) );
    }// End Method
+   
+   /**
+    * {@link CaliSystem#matchMethodSignature(Class, String, int)} acceptance test.
+    */
+   @Test public void shouldMatchMethodSignatureWithParamCount() throws NoSuchMethodException, SecurityException{
+      Assert.assertEquals( 
+               TestAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class ),
+               CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "testCaliMethod", 1 ) 
+      );
+      Assert.assertEquals( 
+               TestAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class ),
+               CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "testCaliMeth", 1 ) 
+      );
+      Assert.assertEquals( 
+               TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class ),
+               CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "overloaded", 1 ) 
+      );
+      Assert.assertEquals( 
+               TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class, String.class ),
+               CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "overloaded", 2 ) 
+      );
+   }// End Method
+   
+   /**
+    * {@link CaliSystem#matchMethodSignature(Class, String, int)} reject test.
+    */
+   @Test public void shouldNotMatchMethodSignatureWithParamCount(){
+      Assert.assertNull( 
+               CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "anything", 1 ) 
+      );
+      Assert.assertNull( CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "nonCaliMethod", 1 ) );
+   }// End Method
 
 }// End Class

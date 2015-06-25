@@ -59,5 +59,14 @@ public interface CaliDataManagement {
     * @return the matching {@link Method} or null if not unique.
     */
    public Method matchMethodSignature( Class< ? > clazz, String methodPartialName, Class< ? >... parameterTypes );
+   
+   /**
+    * Method to match the single {@link Method} given by the partial {@link Method} name and parameters.
+    * @param clazz the {@link Class} to reflect on.
+    * @param methodPartialName the partial {@link Method} name.
+    * @param parameterCountExpected the number of parameters expected.
+    * @return the matching {@link Method} or null if not unique.
+    */
+   public Method matchMethodSignature( Class< ? > clazz, String methodPartialName, int parameterCountExpected );
 
 }// End Interface

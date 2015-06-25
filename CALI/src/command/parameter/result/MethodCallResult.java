@@ -162,13 +162,13 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
                setResult( Result.OPEN_NO_PARAMETERS );
                return;
             case PARAMETERS_NO_CLOSE:
-               setResult( Result.PARAMETERS_NO_CLOSE );
+                setResult( Result.PARAMETERS_NO_CLOSE );
                setParameters( result.getParameters() );
                //Assume remainder are all parameters.
                setResultingExpression( "" );
                return;
             case SUCCESS:
-               Method method = CaliSystem.matchMethodSignature( singleton.getClass(), methodNamePart, result.getParameterTypes() );
+               Method method = CaliSystem.matchMethodSignature( singleton.getClass(), methodNamePart, result.getNumberOfParameters() );
                if ( method != null ) {
                   setResult( Result.METHOD_MATCHES );
                   setMethod( method );
