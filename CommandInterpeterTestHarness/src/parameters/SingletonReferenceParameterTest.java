@@ -45,7 +45,6 @@ public class SingletonReferenceParameterTest {
       Assert.assertTrue( parameter.partialMatches( "Te" ) );
       Assert.assertTrue( parameter.partialMatches( "" ) );
       Assert.assertTrue( parameter.partialMatches( TEST_SINGLETON + " anything" ) );
-      Assert.assertTrue( parameter.partialMatches( TEST_SINGLETON + ".anything" ) );
    }// End Method
    
    /**
@@ -53,6 +52,8 @@ public class SingletonReferenceParameterTest {
     */
    @Test public void shouldNotPartialMatch() {
       Assert.assertFalse( parameter.partialMatches( "anything" ) );
+      //Only accepts reference as separate parameters.
+      Assert.assertFalse( parameter.partialMatches( TEST_SINGLETON + ".anything" ) );
    }// End Method
    
    /**
