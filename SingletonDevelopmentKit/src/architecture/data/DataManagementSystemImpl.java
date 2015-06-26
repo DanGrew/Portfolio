@@ -42,6 +42,11 @@ public class DataManagementSystemImpl implements DataManagementSystem {
    @Override public < T > void store( T object, Class< ? >... classes ) {
       DataManager< T > manager = getDataManager( object.getClass() );
       manager.store( object );
+      Class< ? >[] interfaces = object.getClass().getInterfaces();
+      for ( Class< ? > interfaceClass : interfaces ) {
+         manager = getDataManager( interfaceClass );
+         manager.store( object );   
+      }
       for ( Class< ? > clazz : classes ) {
          manager = getDataManager( clazz );
          manager.store( object );   

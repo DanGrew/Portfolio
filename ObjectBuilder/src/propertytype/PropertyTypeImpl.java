@@ -9,14 +9,15 @@ package propertytype;
 
 import java.io.Serializable;
 
+import model.singleton.SingletonImpl;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
-import model.singleton.SingletonImpl;
+import annotation.Cali;
 
 /**
  * Implementation of the {@link PropertyType}.
  */
-public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > implements PropertyType {
+@Cali public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > implements PropertyType {
 
    private ClassParameterType typeClass;
 
@@ -41,6 +42,20 @@ public class PropertyTypeImpl extends SingletonImpl< SerializablePropertyType > 
    public PropertyTypeImpl( String displayName, ClassParameterType clazz ) {
       super( displayName );
       this.typeClass = clazz;
+   }// End Class
+   
+   /**
+    * Constructs a new {@link PropertyTypeImpl}.
+    * @param displayName the {@link String} display name of the {@link PropertyType}.
+    * @param clazz the {@link ClassParameterType} associated with the type.
+    * @throws CaliConstructionException 
+    */
+   @Cali public PropertyTypeImpl( String displayName, String parameterType ) {
+      super( displayName );
+      this.typeClass = ClassParameterTypes.valueOf( parameterType );
+      if ( typeClass == null ) {
+         this.typeClass = ClassParameterTypes.STRING_PARAMETER_TYPE;
+      }
    }// End Class
    
    /**

@@ -14,11 +14,12 @@ import java.util.List;
 
 import model.singleton.SingletonImpl;
 import propertytype.PropertyType;
+import annotation.Cali;
 
 /**
  * Implementation of the {@link BuilderType}.
  */
-public class BuilderTypeImpl extends SingletonImpl< SerializableBuilderType > implements BuilderType {
+@Cali public class BuilderTypeImpl extends SingletonImpl< SerializableBuilderType > implements BuilderType {
 
    private Collection< PropertyType > properties;
    
@@ -26,7 +27,7 @@ public class BuilderTypeImpl extends SingletonImpl< SerializableBuilderType > im
     * Constructs a new {@link BuilderTypeImpl}.
     * @param identification the {@link String} name of the {@link BuilderType}.
     */
-   public BuilderTypeImpl( String identification ) {
+   @Cali public BuilderTypeImpl( String identification ) {
       super( identification );
       properties = new LinkedHashSet< PropertyType >();
       this.identification = identification;
@@ -35,8 +36,10 @@ public class BuilderTypeImpl extends SingletonImpl< SerializableBuilderType > im
    /**
     * {@inheritDoc}
     */
-   @Override public void addPropertyType( PropertyType property ) {
-      properties.add( property );
+   @Cali @Override public void addPropertyType( PropertyType property ) {
+      if ( !properties.contains( property ) ) {
+         properties.add( property );
+      }
    }// End Method
 
    /**

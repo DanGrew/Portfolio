@@ -7,6 +7,7 @@
  */
 package redirect;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -31,13 +32,40 @@ public class ParameterRedirect {
                                                                                      IllegalArgumentException, 
                                                                                      InvocationTargetException 
    {
-      Object[] redirectedParameters = new Object[ parameters.length ];
       Class< ? >[] expectedParameterTypes = method.getParameterTypes();
-      for ( int i = 0; i < expectedParameterTypes.length; i++ ) {
-         redirectedParameters[ i ] = redirectParameter( parameters[ i ], expectedParameterTypes[ i ] );
-      }
-      
+      Object[] redirectedParameters = redirectParameters( expectedParameterTypes, parameters );
       return method.invoke( object, redirectedParameters );
+   }// End Method
+   
+   /**
+    * Method to invoke the given {@link Constructor}, having replaced the parameters with the 
+    * correct types.
+    * @param constructor the {@link Constructor} to invoke.
+    * @param parameters the parameters to convert to actual types.
+    * @return the {@link Object} constructed using the {@link Constructor}.
+    */
+   public Object construct( Constructor< ? > constructor, Object... parameters ) throws InstantiationException, 
+                                                                                        IllegalAccessException, 
+                                                                                        IllegalArgumentException, 
+                                                                                        InvocationTargetException 
+   {
+      Class< ? >[] expectedParameterTypes = constructor.getParameterTypes();
+      Object[] redirectedParameters = redirectParameters( expectedParameterTypes, parameters );
+      return constructor.newInstance( redirectedParameters );
+   }// End Method
+   
+   /**
+    * Method to redirect the parameters for the given expected types.
+    * @param parameterTypes the expected {@link Class}es of parameter.
+    * @param parameters the {@link Object} parameters to redirect.
+    * @return the array of redirected parameters.
+    */
+   private Object[] redirectParameters( Class< ? >[] parameterTypes, Object[] parameters ) {
+      Object[] redirectedParameters = new Object[ parameters.length ];
+      for ( int i = 0; i < parameterTypes.length; i++ ) {
+         redirectedParameters[ i ] = redirectParameter( parameters[ i ], parameterTypes[ i ] );
+      }
+      return redirectedParameters;
    }// End Method
    
    /**
@@ -51,8 +79,10 @@ public class ParameterRedirect {
          return redirectString( object );
       } else if ( expectedType.equals( Double.class ) ) {
          return redirectDouble( object );
-      } else if ( expectedType.equals( Singleton.class ) ) {
-         return redirectSingleton( object );
+      } else if ( Singleton.class.isAssignableFrom( expectedType ) ) {
+         @SuppressWarnings("unchecked") //Safe because isAssignableFrom checks. 
+         Class< ? extends Singleton > singletonClass = ( Class< ? extends Singleton > )expectedType;
+         return redirectSingleton( object, singletonClass );
       } else {
          return object;
       }
@@ -83,11 +113,12 @@ public class ParameterRedirect {
    
    /**
     * Method to redirect to a {@link Singleton} parameter.
-    * @param string the object to redirect.
+    * @param object the object to redirect.
+    * @param singletonClass the {@link Class} of the {@link Singleton} to use to look up.
     * @return the object in the correct format.
     */
-   private Object redirectSingleton( Object object ) {
-      return RequestSystem.retrieve( Singleton.class, object.toString() );
+   private Object redirectSingleton( Object object, Class< ? extends Singleton > singletonClass ) {
+      return RequestSystem.retrieve( singletonClass, object.toString() );
    }// End Method
 
 }// End Class

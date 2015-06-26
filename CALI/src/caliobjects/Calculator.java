@@ -17,7 +17,6 @@ import annotation.Cali;
 @Cali
 public class Calculator extends SingletonImpl< SerializableCalculator > {
 
-   private static final String NOT_EVALUATED = "NotEvaluated";
    private double result;
    
    /**

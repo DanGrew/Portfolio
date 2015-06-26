@@ -61,6 +61,15 @@ public class CaliSystem {
       List< Class< ? > > matches = partialMatchClass( object );
       return caliDataManagement.matchConstructor( matches, classes );
    }// End Method
+   
+   /**
+    * {@link CaliDatabase#partialMatch(String)},
+    * {@link CaliDataManagement#matchConstructor(List, int)}
+    */
+   public static Constructor< ? > matchConstructor( String object, int expectedParameterNumber ) {
+      List< Class< ? > > matches = partialMatchClass( object );
+      return caliDataManagement.matchConstructor( matches, expectedParameterNumber );
+   }// End Method
 
    /**
     * {@link CaliDataManagement#matchMethodName(Class, String)}.

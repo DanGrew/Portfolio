@@ -44,6 +44,14 @@ public interface CaliDataManagement {
    public Constructor< ? > matchConstructor( List< Class< ? > > objectClasses, Class< ? >[] classes );
    
    /**
+    * Method to match the given {@link Class}es to the parameter {@link Class} types.
+    * @param objectClasses the possible {@link Class}es to match.
+    * @param classes the {@link Class}es of the parameters.
+    * @return the {@link Constructor} if found.
+    */
+   public Constructor< ? > matchConstructor( List< Class< ? > > objectClasses, int expectedParameterNumber );
+   
+   /**
     * Method to match the partial {@link Method} name to the given {@link Class} of {@link Object}.
     * @param clazz the {@link Class} to reflect on.
     * @param methodName the partial {@link Method} name to match.

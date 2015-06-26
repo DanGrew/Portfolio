@@ -13,4 +13,12 @@ public class FeatureRequest {
    @Test public void autoCompleteForOverloadedNamesInPart() {
       fail( "Not yet implemented" );
    }
+   
+   @Test public void handleMatchingSingletonsWithCommonName() {
+      fail( "Not yet implemented" );
+   }
+   
+   @Test public void constructorNewExceptionHandling() {
+      fail( "Not yet implemented" );
+   }
 }

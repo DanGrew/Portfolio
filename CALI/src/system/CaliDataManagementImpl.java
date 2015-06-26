@@ -79,6 +79,22 @@ public class CaliDataManagementImpl implements CaliDataManagement {
       }
       return null;
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Constructor< ? > matchConstructor( List< Class< ? > > matches, int expectedParameterNumber ) {
+      for ( Class< ? > match : matches ) {
+         for ( Constructor< ? > constructor : match.getConstructors() ) {
+            if ( constructor.isAnnotationPresent( Cali.class ) ) {
+               if ( constructor.getParameterCount() == expectedParameterNumber ) {
+                  return constructor;
+               }
+            }
+         }
+      }
+      return null;
+   }// End Method
 
    /**
     * {@inheritDoc}

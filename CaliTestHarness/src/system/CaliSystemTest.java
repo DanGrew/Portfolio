@@ -104,6 +104,32 @@ public class CaliSystemTest {
    }// End Method
    
    /**
+    * {@link CaliSystem#matchConstructor(String, Class...)} acceptance test.
+    */
+   @Test public void shouldMatchConstructorWithParameterNumber() throws NoSuchMethodException, SecurityException {
+      Assert.assertEquals( 
+               TestAnnotatedSingletonImpl.class.getConstructor( String.class ),
+               CaliSystem.matchConstructor( "TestAnnotatedSingletonImpl", 1 ) 
+      );
+      Assert.assertEquals( 
+               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, String.class ), 
+               CaliSystem.matchConstructor( "TestAnotherAnnotatedSingletonImpl", 2 ) 
+      );
+   }// End Method
+   
+   /**
+    * {@link CaliSystem#matchConstructor(String, Class...)} reject test.
+    */
+   @Test public void shouldNotMatchConstructorWithParameterNumber() {
+      Assert.assertNull( 
+               CaliSystem.matchConstructor( "TestAnnotatedSingletonImpl", 2 ) 
+      );
+      Assert.assertNull( 
+               CaliSystem.matchConstructor( "TestAnotherAnnotatedSingletonImpl", 3 ) 
+      );
+   }// End Method
+   
+   /**
     * {@link CaliSystem#partialMatchMethodName(Class, String)} acceptance test.
     */
    @Test public void shouldPartialMatchMethodName() throws NoSuchMethodException, SecurityException{

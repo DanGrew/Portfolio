@@ -12,11 +12,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
 import model.singleton.Singleton;
-import annotation.Cali;
-import architecture.request.RequestSystem;
 import parameter.CommandParameter;
 import parameter.FixedValueParameterImpl;
 import parameter.wrapper.CommandParameters;
+import redirect.ParameterRedirect;
+import annotation.Cali;
+import architecture.request.RequestSystem;
 import command.parameter.ConstructorParameterImpl;
 import command.parameter.ConstructorParameterValue;
 import command.parameter.NewCommandParameterImpl;
@@ -30,6 +31,7 @@ public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
    private static final String DESCRIPTION = "Command to create a new Object.";
    private static final CommandParameter KEY_PARAMETER = new FixedValueParameterImpl( NewCommandParameterImpl.key() );
    private static final CommandParameter CONSTRUCTOR_PARAMETER = new ConstructorParameterImpl();
+   private static final ParameterRedirect CONSTRUCTOR_REDIRECT = new ParameterRedirect();
    private static final Function< CommandParameters, CommandResult< Object > > FUNCTION = new Function< CommandParameters, CommandResult<Object> >() {
 
       /**
@@ -39,7 +41,7 @@ public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
          ConstructorParameterValue value = parameters.getExpectedParameter( CONSTRUCTOR_PARAMETER, ConstructorParameterValue.class );
          Constructor< ? > constructor = value.getConstructor();
          try {
-            Object object = constructor.newInstance( value.getParameters() );
+            Object object = CONSTRUCTOR_REDIRECT.construct( constructor, value.getParameters() );
             RequestSystem.store( object, Singleton.class );
             return new CommandResultImpl< Object >( 
                      "Successfully created " + constructor.getDeclaringClass().getSimpleName() + ".",

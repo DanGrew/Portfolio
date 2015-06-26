@@ -15,11 +15,12 @@ import objecttype.BuilderType;
 import property.Property;
 import property.PropertyImpl;
 import propertytype.PropertyType;
+import annotation.Cali;
 
 /**
  * Implementation of the {@link BuilderObject}.
  */
-public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject >implements BuilderObject {
+@Cali public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject >implements BuilderObject {
    
    private BuilderType type;
    private Map< PropertyType, Property > propertyValues;
@@ -29,7 +30,7 @@ public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject 
     * @param type the {@link BuilderType} this object is representing.
     * @param name the identification for the {@link BuilderObject}.
     */
-   public BuilderObjectImpl( BuilderType type, String name ) {
+   @Cali public BuilderObjectImpl( BuilderType type, String name ) {
       super( name );
       this.type = type;
       propertyValues = new HashMap< PropertyType, Property >();
@@ -38,14 +39,14 @@ public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject 
    /**
     * {@inheritDoc}
     */
-   @Override public BuilderType getBuilderType() {
+   @Cali @Override public BuilderType getBuilderType() {
       return type;
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public Object get( PropertyType propertyType ) {
+   @Cali @Override public Object get( PropertyType propertyType ) {
       if ( type.hasProperty( propertyType ) ) {
          Property property = retrieveProperty( propertyType );
          return property.getValue();
@@ -56,7 +57,7 @@ public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject 
    /**
     * {@inheritDoc}
     */
-   @Override public void set( PropertyType propertyType, Object value ) {
+   @Cali @Override public void set( PropertyType propertyType, Object value ) {
       if ( type.hasProperty( propertyType ) ) {
          Property property = retrieveProperty( propertyType );
          property.setValue( value );

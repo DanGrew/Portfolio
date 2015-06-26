@@ -57,5 +57,32 @@ public class PropertyTest {
       Assert.assertTrue( number.isCorrectType( 100.1 ) );
       Assert.assertTrue( number.isCorrectType( 0.1 ) );
    }// End Method
+   
+   /**
+    * Test to prove that setting an incompatible, but convertible, type is set.
+    */
+   @Test public void shouldAcceptSerialized(){
+      final String testName = "testName";
+      PropertyType type = new PropertyTypeImpl( testName, Number.class );
+      Property number = new PropertyImpl( type );
+      
+      final Double numberValue = 34.6;
+      final String numberString = numberValue.toString();
+      number.setValue( numberString );
+      Assert.assertEquals( numberValue, number.getValue() );
+   }// End Method
+   
+   /**
+    * Test to prove that setting an incompatible, and inconvertible, type is not set.
+    */
+   @Test public void shouldAcceptInconvertibleType(){
+      final String testName = "testName";
+      PropertyType type = new PropertyTypeImpl( testName, Number.class );
+      Property number = new PropertyImpl( type );
+      
+      final String numberString = "anytNonNumber";
+      number.setValue( numberString );
+      Assert.assertNull( number.getValue() );
+   }// End Method
 
 }// End Class

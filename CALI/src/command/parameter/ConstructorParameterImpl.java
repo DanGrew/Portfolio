@@ -85,10 +85,7 @@ public class ConstructorParameterImpl implements CommandParameter {
     * @param parameters the {@link Object} parameters.
     */
    private Constructor< ? > retrieveConstructor( String objectNamePart, Object[] parameters ){
-      //Fill types, default assumed string.
-      Class< ? >[] parameterTypes = new Class< ? >[ parameters.length ];
-      Arrays.fill( parameterTypes, String.class );
-      Constructor< ? > constructor = CaliSystem.matchConstructor( objectNamePart, parameterTypes );
+      Constructor< ? > constructor = CaliSystem.matchConstructor( objectNamePart, parameters.length );
       return constructor;
    }// End Method
    

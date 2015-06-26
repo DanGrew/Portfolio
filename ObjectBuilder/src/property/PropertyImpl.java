@@ -34,6 +34,9 @@ public class PropertyImpl implements Property {
    @Override public void setValue( Object value ) {
       if ( isCorrectType( value ) ) {
          this.value = value;
+      } else {
+         Object deserialized = type.deserialize( value.toString() );
+         this.value = deserialized;
       }
    }// End Method
 
