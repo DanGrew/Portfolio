@@ -19,7 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import object.BuilderObject;
-import objecttype.BuilderType;
+import objecttype.Definition;
 import propertytype.PropertyType;
 import architecture.request.RequestSystem;
 
@@ -38,10 +38,10 @@ public class BuilderObjectViewer extends JFrame {
       setLayout( new BorderLayout() );
 
       JPanel tablePanel = new JPanel();
-      List< BuilderType > builderTypes = RequestSystem.retrieveAll( BuilderType.class );
-      tablePanel.setLayout( new GridLayout( builderTypes.size(), 1 ) );
-      for ( BuilderType builderType : builderTypes ) {
-         JPanel panel = constructBuilderTypePanel( builderType );
+      List< Definition > definitions = RequestSystem.retrieveAll( Definition.class );
+      tablePanel.setLayout( new GridLayout( definitions.size(), 1 ) );
+      for ( Definition definition : definitions ) {
+         JPanel panel = constructDefinitionPanel( definition );
          tablePanel.add( panel );
       }
       add( tablePanel, BorderLayout.CENTER );
@@ -50,11 +50,11 @@ public class BuilderObjectViewer extends JFrame {
    }// End Constructor
    
    /**
-    * Method to construct a {@link JPanel} containing a {@link FunctionalTable} for the given {@link BuilderType}.
-    * @param type the {@link BuilderType} in question.
+    * Method to construct a {@link JPanel} containing a {@link FunctionalTable} for the given {@link Definition}.
+    * @param type the {@link Definition} in question.
     * @return the {@link JPanel} constructed.
     */
-   private JPanel constructBuilderTypePanel( BuilderType type ){
+   private JPanel constructDefinitionPanel( Definition type ){
       JPanel panel = new JPanel();
       panel.setLayout( new BorderLayout() );
       panel.add( new JLabel( type.getIdentification() ), BorderLayout.NORTH );
@@ -63,7 +63,7 @@ public class BuilderObjectViewer extends JFrame {
       
       List< BuilderObject > dataList = RequestSystem.retrieveAll( 
                BuilderObject.class, 
-               object -> { return object.getBuilderType().equals( type ); } 
+               object -> { return object.getDefinition().equals( type ); } 
       );
       
       builder.data( dataList );
@@ -82,7 +82,7 @@ public class BuilderObjectViewer extends JFrame {
       builder.columnHeaderFunction( ( data, row, column ) -> {
          switch ( column ) {
             case 0:
-               return "BuilderType";
+               return "Definition";
             default:
                List< PropertyType > types = type.getPropertyTypes();
                PropertyType columnType = types.get( column - 1 );

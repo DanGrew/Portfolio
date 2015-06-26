@@ -21,4 +21,8 @@ public class FeatureRequest {
    @Test public void constructorNewExceptionHandling() {
       fail( "Not yet implemented" );
    }
+   
+   @Test public void autoCorrectOnParameters() {
+      fail( "Not yet implemented" );
+   }
 }

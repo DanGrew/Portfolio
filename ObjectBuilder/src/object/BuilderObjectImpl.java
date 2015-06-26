@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.singleton.SingletonImpl;
-import objecttype.BuilderType;
+import objecttype.Definition;
 import property.Property;
 import property.PropertyImpl;
 import propertytype.PropertyType;
@@ -22,15 +22,15 @@ import annotation.Cali;
  */
 @Cali public class BuilderObjectImpl extends SingletonImpl< SerializableBuilderObject >implements BuilderObject {
    
-   private BuilderType type;
+   private Definition type;
    private Map< PropertyType, Property > propertyValues;
    
    /**
     * Constructs a new {@link BuilderObjectImpl}.
-    * @param type the {@link BuilderType} this object is representing.
+    * @param type the {@link Definition} this object is representing.
     * @param name the identification for the {@link BuilderObject}.
     */
-   @Cali public BuilderObjectImpl( BuilderType type, String name ) {
+   @Cali public BuilderObjectImpl( Definition type, String name ) {
       super( name );
       this.type = type;
       propertyValues = new HashMap< PropertyType, Property >();
@@ -39,7 +39,7 @@ import annotation.Cali;
    /**
     * {@inheritDoc}
     */
-   @Cali @Override public BuilderType getBuilderType() {
+   @Cali @Override public Definition getDefinition() {
       return type;
    }// End Method
    
@@ -82,7 +82,7 @@ import annotation.Cali;
     * {@inheritDoc}
     */
    @Override protected void writeSingleton( SerializableBuilderObject serializable ) {
-      serializable.setBuilderType( getBuilderType() );
+      serializable.setDefinition( getDefinition() );
       for ( Property property : propertyValues.values() ) {
          serializable.setValue( property );
       }
@@ -92,7 +92,7 @@ import annotation.Cali;
     * {@inheritDoc}
     */
    @Override protected void readSingleton( SerializableBuilderObject serialized ) {
-      type = serialized.getBuilderType();
+      type = serialized.getDefinition();
       for ( Property property : serialized.getValues() ) {
          set( property.getType(), property.getValue() );
       }

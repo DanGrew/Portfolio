@@ -28,11 +28,11 @@ public class XmlBuilderObjectWrapper extends XmlCollectionWrapper< BuilderObject
     */
    @Override public void resolveSingletons() {
       objects.forEach( object -> {
-         BuilderObject builderType = RequestSystem.retrieve( BuilderObject.class, object.getIdentification() );
-         if ( builderType == null ){
+         BuilderObject objectImpl = RequestSystem.retrieve( BuilderObject.class, object.getIdentification() );
+         if ( objectImpl == null ){
             throw new NullPointerException( object.getIdentification() + " does not exist." );
          } else {
-            builderType.read( object );
+            objectImpl.read( object );
          }
       } );
    }// End Method

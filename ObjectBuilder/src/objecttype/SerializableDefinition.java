@@ -14,14 +14,14 @@ import model.singleton.Singleton;
 import propertytype.PropertyType;
 
 /**
- * The {@link SerializableBuilderType} provides a interface defining how to serialize a 
- * {@link BuilderType} {@link Singleton}.
+ * The {@link SerializableDefinition} provides a interface defining how to serialize a 
+ * {@link Definition} {@link Singleton}.
  */
-public interface SerializableBuilderType extends SerializedSingleton< BuilderType > {
+public interface SerializableDefinition extends SerializedSingleton< Definition > {
 
    /**
-    * Method to add all {@link PropertyType}s given to the {@link SerializableBuilderType}.
-    * @param types the {@link PropertyType}s associated with the {@link BuilderType}.
+    * Method to add all {@link PropertyType}s given to the {@link SerializableDefinition}.
+    * @param types the {@link PropertyType}s associated with the {@link Definition}.
     */
    public void addAllPropertyTypes( Collection< PropertyType > types ) ;
    

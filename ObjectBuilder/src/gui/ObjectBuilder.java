@@ -8,7 +8,7 @@
 package gui;
 
 import object.BuilderObjectImpl;
-import objecttype.BuilderTypeImpl;
+import objecttype.DefinitionImpl;
 import propertytype.PropertyTypeImpl;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
@@ -17,7 +17,7 @@ import command.Command;
 import command.MethodCallCommandImpl;
 import command.NewCommandImpl;
 import commands.BuilderObjectCommands;
-import commands.BuilderTypeCommands;
+import commands.DefinitionCommands;
 import commands.PropertyTypeCommands;
 import commands.SystemCommands;
 import commands.parameters.ObjectBuilderClassParameterTypes;
@@ -31,9 +31,9 @@ public class ObjectBuilder {
    public static void main( String[] args ) {
       RequestSystem.store( PropertyTypeCommands.CREATE_PROPERTY_TYPE_COMMAND, Command.class );
       RequestSystem.store( PropertyTypeCommands.VIEW_PROPERTY_TYPES_COMMAND, Command.class );
-      RequestSystem.store( BuilderTypeCommands.CREATE_BUILDER_TYPE_COMMAND, Command.class );
-      RequestSystem.store( BuilderTypeCommands.ADD_PROPERTY_COMMAND, Command.class );
-      RequestSystem.store( BuilderTypeCommands.VIEW_BUILDER_TYPES_COMMAND, Command.class );
+      RequestSystem.store( DefinitionCommands.CREATE_DEFINITION_COMMAND, Command.class );
+      RequestSystem.store( DefinitionCommands.ADD_PROPERTY_COMMAND, Command.class );
+      RequestSystem.store( DefinitionCommands.VIEW_BUILDER_TYPES_COMMAND, Command.class );
       RequestSystem.store( BuilderObjectCommands.CREATE_BUILDER_OBJECT_COMMAND, Command.class );
       RequestSystem.store( BuilderObjectCommands.SET_PROPERTY_COMMAND, Command.class );
       RequestSystem.store( BuilderObjectCommands.VIEW_OBJECTS_COMMAND, Command.class );
@@ -44,7 +44,7 @@ public class ObjectBuilder {
       RequestSystem.store( new MethodCallCommandImpl(), Command.class );
       CaliSystem.register( BuilderObjectImpl.class );
       CaliSystem.register( PropertyTypeImpl.class );
-      CaliSystem.register( BuilderTypeImpl.class );
+      CaliSystem.register( DefinitionImpl.class );
       
       ObjectBuilderClassParameterTypes.initialiseTypes();
       new CommandInterpreter();

@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import model.singleton.Singleton;
 import object.BuilderObject;
-import objecttype.BuilderType;
+import objecttype.Definition;
 import propertytype.PropertyType;
 import architecture.representation.SingletonContainer;
 import architecture.representation.StructuralRepresentation;
@@ -30,7 +30,7 @@ import architecture.request.RequestSystem;
 public class XmlObjectBuilderSystemWrapper implements SingletonContainer, StructuralRepresentation< Object >{
 
    @XmlElement private XmlPropertyTypeWrapper propertyTypes;
-   @XmlElement private XmlBuilderTypeWrapper builderTypes;
+   @XmlElement private XmlDefinitionWrapper definitions;
    @XmlElement private XmlBuilderObjectWrapper builderObjects;
    
    /**
@@ -38,7 +38,7 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
     */
    public XmlObjectBuilderSystemWrapper() {
       propertyTypes = new XmlPropertyTypeWrapper();
-      builderTypes = new XmlBuilderTypeWrapper();
+      definitions = new XmlDefinitionWrapper();
       builderObjects = new XmlBuilderObjectWrapper();
    }// End Constructor
    
@@ -51,11 +51,11 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
    }// End Method
    
    /**
-    * Method to add all {@link BuilderType}s given.
-    * @param builderTypes the {@link BuilderType}s to add.
+    * Method to add all {@link Definition}s given.
+    * @param definitions the {@link Definition}s to add.
     */
-   public void addAllBuilderTypes( List< BuilderType > builderTypes ) {
-      builderTypes.forEach( object -> this.builderTypes.addUnwrapped( object ) );
+   public void addAllDefinitions( List< Definition > definitions ) {
+      definitions.forEach( object -> this.definitions.addUnwrapped( object ) );
    }// End Method
    
    public void addAllBuilderObjects( List< BuilderObject > builderObjects ) {
@@ -74,7 +74,7 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
     */
    @Override public void constructSingletons() {
       propertyTypes.constructSingletons();
-      builderTypes.constructSingletons();
+      definitions.constructSingletons();
       builderObjects.constructSingletons();
    }// End Method
 
@@ -83,7 +83,7 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
     */
    @Override public void resolveSingletons() {
       propertyTypes.resolveSingletons();
-      builderTypes.resolveSingletons();
+      definitions.resolveSingletons();
       builderObjects.resolveSingletons();
    }// End Method
    
@@ -97,12 +97,12 @@ public class XmlObjectBuilderSystemWrapper implements SingletonContainer, Struct
    }// End Method
    
    /**
-    * Method to retrieve the {@link BuilderType}s stored in the {@link RequestSystem} from the parsing
+    * Method to retrieve the {@link Definition}s stored in the {@link RequestSystem} from the parsing
     * of this object.
-    * @return a {@link List} of {@link BuilderType}s resolved with the {@link RequestSystem}.
+    * @return a {@link List} of {@link Definition}s resolved with the {@link RequestSystem}.
     */
-   public List< BuilderType > retrieveBuilderTypes(){
-      return builderTypes.retrieveSingletons();
+   public List< Definition > retrieveDefinitions(){
+      return definitions.retrieveSingletons();
    }// End Method
    
    /**

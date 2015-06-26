@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import model.data.SerializedSingleton;
-import objecttype.BuilderType;
+import objecttype.Definition;
 import property.Property;
 
 /**
@@ -21,16 +21,16 @@ import property.Property;
 public interface SerializableBuilderObject extends SerializedSingleton< BuilderObject > {
 
    /**
-    * Setter for the associated {@link BuilderType}.
-    * @param builderType the {@link BuilderType}.
+    * Setter for the associated {@link Definition}.
+    * @param definition the {@link Definition}.
     */
-   public void setBuilderType( BuilderType builderType );
+   public void setDefinition( Definition definition );
    
    /**
-    * Getter for the {@link BuilderType}.
-    * @return the {@link BuilderType}.
+    * Getter for the {@link Definition}.
+    * @return the {@link Definition}.
     */
-   public BuilderType getBuilderType();
+   public Definition getDefinition();
    
    /**
     * Method to set the value for the given {@link Property}.

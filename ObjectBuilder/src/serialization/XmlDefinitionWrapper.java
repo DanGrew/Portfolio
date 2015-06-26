@@ -11,28 +11,28 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import objecttype.BuilderType;
-import objecttype.SerializableBuilderType;
-import objecttype.XmlBuilderTypeImpl;
+import objecttype.Definition;
+import objecttype.SerializableDefinition;
+import objecttype.XmlDefinitionImpl;
 import representation.xml.wrapper.XmlCollectionWrapper;
 import architecture.request.RequestSystem;
 
 /**
- * The {@link XmlBuilderTypeWrapper} provides a wrapper for all {@link BuilderType}s in the system.
+ * The {@link XmlDefinitionWrapper} provides a wrapper for all {@link Definition}s in the system.
  */
 @XmlRootElement
-public class XmlBuilderTypeWrapper extends XmlCollectionWrapper< BuilderType, SerializableBuilderType >{
+public class XmlDefinitionWrapper extends XmlCollectionWrapper< Definition, SerializableDefinition >{
 
    /**
     * {@inheritDoc}
     */
    @Override public void resolveSingletons() {
       objects.forEach( object -> {
-         BuilderType builderType = RequestSystem.retrieve( BuilderType.class, object.getIdentification() );
-         if ( builderType == null ){
+         Definition definition = RequestSystem.retrieve( Definition.class, object.getIdentification() );
+         if ( definition == null ){
             throw new NullPointerException( object.getIdentification() + " does not exist." );
          } else {
-            builderType.read( object );
+            definition.read( object );
          }
       } );
    }// End Method
@@ -40,16 +40,16 @@ public class XmlBuilderTypeWrapper extends XmlCollectionWrapper< BuilderType, Se
    /**
     * {@inheritDoc} 
     */
-   @Override public void addUnwrapped( BuilderType object ) {
-      SerializableBuilderType serialized = object.write( XmlBuilderTypeImpl.class );
+   @Override public void addUnwrapped( Definition object ) {
+      SerializableDefinition serialized = object.write( XmlDefinitionImpl.class );
       super.addObject( serialized );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
-   @Override public List< BuilderType > retrieveSingletons() {
-      return super.retrieveSingletons( BuilderType.class );
+   @Override public List< Definition > retrieveSingletons() {
+      return super.retrieveSingletons( Definition.class );
    }// End Method
 
 }// End Class

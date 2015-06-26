@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import objecttype.BuilderType;
+import objecttype.Definition;
 import property.Property;
 import representation.xml.wrapper.XmlSingletonWrapper;
 import architecture.request.RequestSystem;
@@ -22,7 +22,7 @@ import architecture.request.RequestSystem;
  */
 public class XmlBuilderObjectImpl extends XmlSingletonWrapper< BuilderObject > implements SerializableBuilderObject {
 
-   @XmlElement private String builderType;
+   @XmlElement private String definition;
    @XmlElement private List< XmlPropertyValue > values;
    
    /**
@@ -35,15 +35,15 @@ public class XmlBuilderObjectImpl extends XmlSingletonWrapper< BuilderObject > i
    /**
     * {@inheritDoc}
     */
-   @Override public void setBuilderType( BuilderType builderType ) {
-      this.builderType = builderType.getIdentification();
+   @Override public void setDefinition( Definition definition ) {
+      this.definition = definition.getIdentification();
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public BuilderType getBuilderType() {
-      return RequestSystem.retrieve( BuilderType.class, builderType );
+   @Override public Definition getDefinition() {
+      return RequestSystem.retrieve( Definition.class, definition );
    }// End Method
    
    /**
@@ -71,10 +71,10 @@ public class XmlBuilderObjectImpl extends XmlSingletonWrapper< BuilderObject > i
    @Override public BuilderObject unwrap() {
       BuilderObject type = RequestSystem.retrieve( BuilderObject.class, getIdentification() ); 
       if ( type == null ) {
-         BuilderType builderType = RequestSystem.retrieve( BuilderType.class, this.builderType );
-         if ( builderType == null ) throw new NullPointerException( "Builder type " + this.builderType + " does not exist." );
+         Definition definition = RequestSystem.retrieve( Definition.class, this.definition );
+         if ( definition == null ) throw new NullPointerException( "Definition " + this.definition + " does not exist." );
          
-         type = new BuilderObjectImpl( builderType, getIdentification() );
+         type = new BuilderObjectImpl( definition, getIdentification() );
          RequestSystem.store( type, BuilderObject.class );
       }
       return type;

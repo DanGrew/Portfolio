@@ -9,8 +9,8 @@ package gui;
 
 import object.BuilderObject;
 import object.BuilderObjectImpl;
-import objecttype.BuilderType;
-import objecttype.BuilderTypeImpl;
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import architecture.request.RequestSystem;
@@ -29,20 +29,20 @@ public class FunctionalTableTest {
       PropertyType typeC = new PropertyTypeImpl( "TypeC", String.class );
       RequestSystem.store( typeC, PropertyType.class );
       
-      BuilderType builderA = new BuilderTypeImpl( "BuilderA" );
+      Definition builderA = new DefinitionImpl( "BuilderA" );
       builderA.addPropertyType( typeA );
-      RequestSystem.store( builderA, BuilderType.class );
+      RequestSystem.store( builderA, Definition.class );
       
-      BuilderType builderB = new BuilderTypeImpl( "BuilderB" );
+      Definition builderB = new DefinitionImpl( "BuilderB" );
       builderB.addPropertyType( typeC );
       builderB.addPropertyType( typeB );
-      RequestSystem.store( builderB, BuilderType.class );
+      RequestSystem.store( builderB, Definition.class );
       
-      BuilderType builderC = new BuilderTypeImpl( "BuilderC" );
+      Definition builderC = new DefinitionImpl( "BuilderC" );
       builderC.addPropertyType( typeA );
       builderC.addPropertyType( typeB );
       builderC.addPropertyType( typeC );
-      RequestSystem.store( builderC, BuilderType.class );
+      RequestSystem.store( builderC, Definition.class );
       
       BuilderObject builderObjectA = new BuilderObjectImpl( builderC, "Object1" );
       builderObjectA.set( typeA, "ThisIsAValue" );
@@ -60,7 +60,7 @@ public class FunctionalTableTest {
       RequestSystem.store( builderObjectC, BuilderObject.class );
       
       new PropertyTypeViewer();
-      new BuilderTypeViewer();
+      new DefinitionViewer();
       new BuilderObjectViewer();
    }// End Method
 

@@ -10,8 +10,8 @@ package commands;
 import model.singleton.Singleton;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
-import objecttype.BuilderType;
-import objecttype.BuilderTypeImpl;
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -31,7 +31,7 @@ public class BuilderObjectCommandsTest {
    private static final String TEST_OBJECT_TYPE = "TestObject";
    private static BuilderObject TEST_OBJECT_TYPE_OBJECT;
    private static final String TEST_BUILDER_TYPE = "TestBuilder";
-   private static BuilderType TEST_BUILDER_TYPE_OBJECT;
+   private static Definition TEST_BUILDER_TYPE_OBJECT;
    private static final String TEST_PROPERTY_TYPE_STRING = "TestPropertyString";
    private static PropertyType TEST_PROPERTY_TYPE_STRING_OBJECT;
    private static final String TEST_PROPERTY_TYPE_NUMBER = "TestPropertyNumber";
@@ -47,31 +47,31 @@ public class BuilderObjectCommandsTest {
       TEST_PROPERTY_TYPE_NUMBER_OBJECT = new PropertyTypeImpl( TEST_PROPERTY_TYPE_NUMBER, Number.class );
       RequestSystem.store( TEST_PROPERTY_TYPE_NUMBER_OBJECT, PropertyType.class );
       
-      TEST_BUILDER_TYPE_OBJECT = new BuilderTypeImpl( TEST_BUILDER_TYPE );
+      TEST_BUILDER_TYPE_OBJECT = new DefinitionImpl( TEST_BUILDER_TYPE );
       TEST_BUILDER_TYPE_OBJECT.addPropertyType( TEST_PROPERTY_TYPE_STRING_OBJECT );
       TEST_BUILDER_TYPE_OBJECT.addPropertyType( TEST_PROPERTY_TYPE_NUMBER_OBJECT );
-      RequestSystem.store( TEST_BUILDER_TYPE_OBJECT, BuilderType.class );
+      RequestSystem.store( TEST_BUILDER_TYPE_OBJECT, Definition.class );
       
       TEST_OBJECT_TYPE_OBJECT = new BuilderObjectImpl( TEST_BUILDER_TYPE_OBJECT, TEST_OBJECT_TYPE );
       RequestSystem.store( TEST_OBJECT_TYPE_OBJECT, BuilderObject.class );
    }// End Method
    
    /**
-    * Method to test that the {@link BuilderTypeCommands#CREATE_BUILDER_TYPE_COMMAND} accepts the correct
+    * Method to test that the {@link DefinitionCommands#CREATE_DEFINITION_COMMAND} accepts the correct
     * input.
     */
    @Test public void createBuilderObjectAcceptanceTest() {
       Command< BuilderObject > command = BuilderObjectCommands.CREATE_BUILDER_OBJECT_COMMAND;
-      Assert.assertTrue( command.partialMatches( "CreateObject newBuilderType" ) );
+      Assert.assertTrue( command.partialMatches( "CreateObject newDefinition" ) );
       Assert.assertTrue( command.partialMatches( "CreateObject " ) );
       Assert.assertTrue( command.partialMatches( "CreateObject 1234 " + TEST_BUILDER_TYPE ) );
       
-      Assert.assertFalse( command.partialMatches( "CreateBuilderType anything something" ) );
-      Assert.assertFalse( command.completeMatches( "CreateBuilderType" ) );
+      Assert.assertFalse( command.partialMatches( "CreateDefinition anything something" ) );
+      Assert.assertFalse( command.completeMatches( "CreateDefinition" ) );
    }// End Method
    
    /**
-    * Method to test that the {@link BuilderTypeCommands#CREATE_BUILDER_TYPE_COMMAND} is executed correctly
+    * Method to test that the {@link DefinitionCommands#CREATE_DEFINITION_COMMAND} is executed correctly
     * providing the correct output.
     */
    @Test public void executeCreateBuilderObjectTest(){
@@ -88,7 +88,7 @@ public class BuilderObjectCommandsTest {
    }// End Method
    
    /**
-    * Method to test that the {@link BuilderTypeCommands#SET_PROPERTY_COMMAND} accepts the correct
+    * Method to test that the {@link DefinitionCommands#SET_PROPERTY_COMMAND} accepts the correct
     * input.
     */
    @Test public void setPropertyAcceptanceTest() {
@@ -102,7 +102,7 @@ public class BuilderObjectCommandsTest {
    }// End Method
    
    /**
-    * Method to test that the {@link BuilderTypeCommands#SET_PROPERTY_COMMAND} is executed correctly
+    * Method to test that the {@link DefinitionCommands#SET_PROPERTY_COMMAND} is executed correctly
     * providing the correct output.
     */
    @Test public void executeSetPropertyTest(){

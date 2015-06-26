@@ -19,17 +19,17 @@ import representation.xml.wrapper.XmlSingletonWrapper;
 import architecture.request.RequestSystem;
 
 /**
- * The {@link XmlBuilderTypeImpl} defines a Xml form of a {@link BuilderType}.
+ * The {@link XmlDefinitionImpl} defines a Xml form of a {@link Definition}.
  */
-public class XmlBuilderTypeImpl extends XmlSingletonWrapper< BuilderType > implements SerializableBuilderType {
+public class XmlDefinitionImpl extends XmlSingletonWrapper< Definition > implements SerializableDefinition {
 
    @XmlElementWrapper( name = "property_types" ) @XmlElement( name = "property_type" ) 
    private List< String > propertyTypes;
    
    /**
-    * Constructs a new {@link XmlBuilderTypeImpl}.
+    * Constructs a new {@link XmlDefinitionImpl}.
     */
-   public XmlBuilderTypeImpl() {
+   public XmlDefinitionImpl() {
       super();
       propertyTypes = new ArrayList< String >();
    }// End Constructor
@@ -55,11 +55,11 @@ public class XmlBuilderTypeImpl extends XmlSingletonWrapper< BuilderType > imple
    /**
     * {@inheritDoc} 
     */
-   @Override public BuilderType unwrap() {
-      BuilderType type = RequestSystem.retrieve( BuilderType.class, getIdentification() ); 
+   @Override public Definition unwrap() {
+      Definition type = RequestSystem.retrieve( Definition.class, getIdentification() ); 
       if ( type == null ) {
-         type = new BuilderTypeImpl( getIdentification() );
-         RequestSystem.store( type, BuilderType.class );
+         type = new DefinitionImpl( getIdentification() );
+         RequestSystem.store( type, Definition.class );
       }
       return type;
    }// End Method

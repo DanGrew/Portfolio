@@ -15,27 +15,27 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 
-import objecttype.BuilderType;
+import objecttype.Definition;
 import propertytype.PropertyType;
 import architecture.request.RequestSystem;
 
 /**
- * {@link BuilderTypeViewer} is responsible for displaying a {@link JFrame} with the {@link BuilderType}s
+ * {@link DefinitionViewer} is responsible for displaying a {@link JFrame} with the {@link Definition}s
  * given.
  */
-public class BuilderTypeViewer extends JFrame {
+public class DefinitionViewer extends JFrame {
 
    private static final long serialVersionUID = 1L;
 
    /**
-    * Constructs a new {@link BuilderTypeViewer}.
+    * Constructs a new {@link DefinitionViewer}.
     */
-   public BuilderTypeViewer() {
-      FunctionalTableBuilder< BuilderType > builder = new FunctionalTableBuilder< BuilderType >();
+   public DefinitionViewer() {
+      FunctionalTableBuilder< Definition > builder = new FunctionalTableBuilder< Definition >();
       
-      List< BuilderType > dataList = RequestSystem.retrieveAll( BuilderType.class );
+      List< Definition > dataList = RequestSystem.retrieveAll( Definition.class );
       int maximumProperties = 0;
-      for ( BuilderType type : dataList ) {
+      for ( Definition type : dataList ) {
          maximumProperties = Math.max( maximumProperties, type.getPropertyTypes().size() );
       }
       
@@ -43,7 +43,7 @@ public class BuilderTypeViewer extends JFrame {
       builder.data( dataList );
       builder.columnCountFunction( data -> { return calculatedMaximum; } );
       builder.getValueFunction( ( data, row, column ) -> { 
-         BuilderType type = data.get( row );
+         Definition type = data.get( row );
          switch ( column ) {
             case 0:
                return type.getIdentification();
@@ -59,13 +59,13 @@ public class BuilderTypeViewer extends JFrame {
       builder.columnHeaderFunction( ( data, row, column ) -> {
          switch ( column ) {
             case 0:
-               return "BuilderType";
+               return "Definition";
             default:
                return "Property " + column;
          }
       } );
       
-      FunctionalTable< BuilderType > table = new FunctionalTable< BuilderType >( builder );
+      FunctionalTable< Definition > table = new FunctionalTable< Definition >( builder );
       setLayout( new BorderLayout() );
       add( new JScrollPane( table ), BorderLayout.CENTER );
       

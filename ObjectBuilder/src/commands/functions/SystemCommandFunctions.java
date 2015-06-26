@@ -16,8 +16,8 @@ import javax.swing.JFileChooser;
 
 import object.BuilderObject;
 import object.XmlBuilderObjectImpl;
-import objecttype.BuilderType;
-import objecttype.XmlBuilderTypeImpl;
+import objecttype.Definition;
+import objecttype.XmlDefinitionImpl;
 import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
 import propertytype.XmlPropertyTypeImpl;
@@ -47,8 +47,8 @@ public class SystemCommandFunctions {
             XmlObjectBuilderSystemWrapper serializedCollection = new XmlObjectBuilderSystemWrapper();
             List< PropertyType > propertyTypes = RequestSystem.retrieveAll( PropertyType.class );
             serializedCollection.addAllPropertyTypes( propertyTypes );
-            List< BuilderType > builderTypes = RequestSystem.retrieveAll( BuilderType.class );
-            serializedCollection.addAllBuilderTypes( builderTypes );
+            List< Definition > definitions = RequestSystem.retrieveAll( Definition.class );
+            serializedCollection.addAllDefinitions( definitions );
             List< BuilderObject > builderObjects = RequestSystem.retrieveAll( BuilderObject.class );
             serializedCollection.addAllBuilderObjects( builderObjects );
             
@@ -57,7 +57,7 @@ public class SystemCommandFunctions {
                      chooser.getSelectedFile(), 
                      XmlObjectBuilderSystemWrapper.class, 
                      XmlPropertyTypeImpl.class, 
-                     XmlBuilderTypeImpl.class,
+                     XmlDefinitionImpl.class,
                      XmlBuilderObjectImpl.class
             );
             return new CommandResultImpl< Void >( 
@@ -85,7 +85,7 @@ public class SystemCommandFunctions {
                      chooser.getSelectedFile(), 
                      XmlObjectBuilderSystemWrapper.class, 
                      XmlPropertyTypeImpl.class, 
-                     XmlBuilderTypeImpl.class,
+                     XmlDefinitionImpl.class,
                      XmlBuilderObjectImpl.class
             );
             return new CommandResultImpl< Void >( 

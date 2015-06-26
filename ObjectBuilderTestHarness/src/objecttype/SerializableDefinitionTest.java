@@ -19,53 +19,53 @@ import org.junit.rules.TemporaryFolder;
 
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
-import serialization.XmlBuilderTypeWrapper;
+import serialization.XmlDefinitionWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
 
 /**
- * Test for the {@link SerializableBuilderType}.
+ * Test for the {@link SerializableDefinition}.
  */
-public class SerializableBuilderTypeTest {
+public class SerializableDefinitionTest {
    
    @Rule public TemporaryFolder folder = new TemporaryFolder();
 
    /**
     * Method to test the serialization into and back out of a {@link File} using an
-    * {@link XmlBuilderTypeWrapper}.
+    * {@link XmlDefinitionWrapper}.
     */
    @Test public void collectionSerializationTest() throws IOException {
-      List< BuilderType > actualTypes = new ArrayList< BuilderType >();
+      List< Definition > actualTypes = new ArrayList< Definition >();
       
       PropertyType testType1 = new PropertyTypeImpl( "type1", String.class );
       RequestSystem.store( testType1, PropertyType.class );
       PropertyType testType2 = new PropertyTypeImpl( "type2", Number.class );
       RequestSystem.store( testType2, PropertyType.class );
       
-      BuilderType builder1 = new BuilderTypeImpl( "FirstBuilder" );
+      Definition builder1 = new DefinitionImpl( "FirstBuilder" );
       builder1.addPropertyType( testType1 );
       actualTypes.add( builder1 );
       
-      BuilderType builder2 = new BuilderTypeImpl( "SecondBuilder" );
+      Definition builder2 = new DefinitionImpl( "SecondBuilder" );
       builder2.addPropertyType( testType2 );
       builder2.addPropertyType( testType1 );
       actualTypes.add( builder2 );
       
-      XmlBuilderTypeWrapper serializedCollection = new XmlBuilderTypeWrapper();
+      XmlDefinitionWrapper serializedCollection = new XmlDefinitionWrapper();
       serializedCollection.addAllUnwrapped( actualTypes.iterator() );
       
       File testFile = folder.newFile();
-      SerializationSystem.saveToFile( serializedCollection, testFile, XmlBuilderTypeWrapper.class, XmlBuilderTypeImpl.class );
+      SerializationSystem.saveToFile( serializedCollection, testFile, XmlDefinitionWrapper.class, XmlDefinitionImpl.class );
       
-      XmlBuilderTypeWrapper parsedBuilderType = SerializationSystem.loadSingletonsFromFile( 
-               XmlBuilderTypeWrapper.class, testFile, XmlBuilderTypeWrapper.class, XmlBuilderTypeImpl.class );
-      Assert.assertNotNull( parsedBuilderType );
-      List< BuilderType > parsedTypes = parsedBuilderType.retrieveSingletons();
+      XmlDefinitionWrapper parsedDefinition = SerializationSystem.loadSingletonsFromFile( 
+               XmlDefinitionWrapper.class, testFile, XmlDefinitionWrapper.class, XmlDefinitionImpl.class );
+      Assert.assertNotNull( parsedDefinition );
+      List< Definition > parsedTypes = parsedDefinition.retrieveSingletons();
       assertBuiderTypes( actualTypes, parsedTypes );
    }// End Method
    
    /**
-    * Method to test the overwriting of {@link BuilderType}s when loading from {@link File}.
+    * Method to test the overwriting of {@link Definition}s when loading from {@link File}.
     */
    @Test public void overwriteTest() throws IOException {
       PropertyType testType1 = new PropertyTypeImpl( "type1", String.class );
@@ -74,45 +74,45 @@ public class SerializableBuilderTypeTest {
       RequestSystem.store( testType2, PropertyType.class );
       
       final String builderName = "BuilderName";
-      BuilderType writableBuilder = new BuilderTypeImpl( builderName );
+      Definition writableBuilder = new DefinitionImpl( builderName );
       writableBuilder.addPropertyType( testType1 );
       
-      BuilderType existingBuilder = new BuilderTypeImpl( builderName );
+      Definition existingBuilder = new DefinitionImpl( builderName );
       existingBuilder.addPropertyType( testType2 );
       existingBuilder.addPropertyType( testType1 );
-      RequestSystem.store( existingBuilder, BuilderType.class );
+      RequestSystem.store( existingBuilder, Definition.class );
       
-      XmlBuilderTypeWrapper serializedCollection = new XmlBuilderTypeWrapper();
+      XmlDefinitionWrapper serializedCollection = new XmlDefinitionWrapper();
       serializedCollection.addUnwrapped( writableBuilder );
       
       File testFile = folder.newFile();
-      SerializationSystem.saveToFile( serializedCollection, testFile, XmlBuilderTypeWrapper.class, XmlBuilderTypeImpl.class );
+      SerializationSystem.saveToFile( serializedCollection, testFile, XmlDefinitionWrapper.class, XmlDefinitionImpl.class );
       
-      BuilderType retrieved = RequestSystem.retrieve( BuilderType.class, builderName );
+      Definition retrieved = RequestSystem.retrieve( Definition.class, builderName );
       Assert.assertEquals( retrieved, existingBuilder );
       Assert.assertTrue( retrieved.hasProperty( testType1 ) );
       Assert.assertTrue( retrieved.hasProperty( testType2 ) );
       
-      XmlBuilderTypeWrapper parsedBuilderType = SerializationSystem.loadSingletonsFromFile( 
-               XmlBuilderTypeWrapper.class, testFile, XmlBuilderTypeWrapper.class, XmlBuilderTypeImpl.class );
-      Assert.assertNotNull( parsedBuilderType );
+      XmlDefinitionWrapper parsedDefinition = SerializationSystem.loadSingletonsFromFile( 
+               XmlDefinitionWrapper.class, testFile, XmlDefinitionWrapper.class, XmlDefinitionImpl.class );
+      Assert.assertNotNull( parsedDefinition );
       
-      retrieved = RequestSystem.retrieve( BuilderType.class, builderName );
+      retrieved = RequestSystem.retrieve( Definition.class, builderName );
       Assert.assertEquals( retrieved, existingBuilder );
       Assert.assertTrue( retrieved.hasProperty( testType1 ) );
       Assert.assertFalse( retrieved.hasProperty( testType2 ) );
    }// End Method
    
    /**
-    * Method to assert that two {@link List} of {@link BuilderType}s are identical.
-    * @param actualTypes the original {@link BuilderType}s.
-    * @param parsedTypes the parsed {@link BuilderType}s.
+    * Method to assert that two {@link List} of {@link Definition}s are identical.
+    * @param actualTypes the original {@link Definition}s.
+    * @param parsedTypes the parsed {@link Definition}s.
     */
-   public static void assertBuiderTypes( List< BuilderType > actualTypes, List< BuilderType > parsedTypes ) {
+   public static void assertBuiderTypes( List< Definition > actualTypes, List< Definition > parsedTypes ) {
       Assert.assertEquals( actualTypes.size(), parsedTypes.size() );
       for ( int i = 0; i < actualTypes.size(); i++ ) {
-         BuilderType expected = actualTypes.get( i );
-         BuilderType parsed = parsedTypes.get( i );
+         Definition expected = actualTypes.get( i );
+         Definition parsed = parsedTypes.get( i );
          Assert.assertEquals( expected.getIdentification(), parsed.getIdentification() );
          
          List< PropertyType > expectedPropertyTypes = expected.getPropertyTypes();

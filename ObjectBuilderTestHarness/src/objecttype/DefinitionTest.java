@@ -14,15 +14,15 @@ import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 
 /**
- * Test for the {@link BuilderType}.
+ * Test for the {@link Definition}.
  */
-public class BuilderTypeTest {
+public class DefinitionTest {
 
    /**
-    * Method to test adding a {@link PropertyType} to to a {@link BuilderType}.
+    * Method to test adding a {@link PropertyType} to to a {@link Definition}.
     */
    @Test public void addPropertyTest() {
-      BuilderType object = new BuilderTypeImpl( "Test" );
+      Definition object = new DefinitionImpl( "Test" );
       PropertyType propertyType = new PropertyTypeImpl( null, String.class );
       object.addPropertyType( propertyType );
       Assert.assertTrue( object.hasProperty( propertyType ) );

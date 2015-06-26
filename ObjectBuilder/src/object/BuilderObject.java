@@ -8,13 +8,13 @@
 package object;
 
 import model.data.SingletonSerialization;
-import objecttype.BuilderType;
+import objecttype.Definition;
 import property.Property;
 import propertytype.PropertyType;
 
 /**
  * THe {@link BuilderObject} defines the interface to an object created to support a 
- * range of {@link PropertyType}s defined by a {@link BuilderType}. This object will 
+ * range of {@link PropertyType}s defined by a {@link Definition}. This object will 
  * hold the {@link Property}s representing those types.
  */
 public interface BuilderObject extends SingletonSerialization< SerializableBuilderObject > {
@@ -34,9 +34,9 @@ public interface BuilderObject extends SingletonSerialization< SerializableBuild
    public void set( PropertyType type, Object value );
    
    /**
-    * Getter for the associated {@link BuilderType} for this {@link BuilderObject}.
-    * @return the {@link BuilderType}.
+    * Getter for the associated {@link Definition} for this {@link BuilderObject}.
+    * @return the {@link Definition}.
     */
-   public BuilderType getBuilderType();
+   public Definition getDefinition();
    
 }// End Interface

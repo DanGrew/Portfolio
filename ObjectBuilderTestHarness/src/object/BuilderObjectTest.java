@@ -7,8 +7,8 @@
  */
 package object;
 
-import objecttype.BuilderType;
-import objecttype.BuilderTypeImpl;
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -23,11 +23,11 @@ import propertytype.PropertyTypeImpl;
 public class BuilderObjectTest {
 
    /**
-    * Method to test the basic construction of a {@link BuilderObject} using a {@link BuilderType} proving
+    * Method to test the basic construction of a {@link BuilderObject} using a {@link Definition} proving
     * that it stores and provides the correct information.
     */
    @Test public void basicConstructionTest() {
-      BuilderType type = new BuilderTypeImpl( "Test" );
+      Definition type = new DefinitionImpl( "Test" );
       
       final String stringDisplay = "StringValue";
       final Class< ? > stringClass = String.class;
@@ -61,7 +61,7 @@ public class BuilderObjectTest {
       PropertyType testPropertyTypeA = Mockito.mock( PropertyType.class, "PropertyA" );
       Mockito.when( testPropertyTypeA.isCorrectType( Mockito.anyObject() ) ).thenReturn( true );
       
-      BuilderType testTypeA = Mockito.mock( BuilderType.class, "TypeA" );
+      Definition testTypeA = Mockito.mock( Definition.class, "TypeA" );
       Mockito.when( testTypeA.hasProperty( testPropertyTypeA ) ).thenReturn( true );
       
       BuilderObject testObject = new BuilderObjectImpl( testTypeA, "TestName" );

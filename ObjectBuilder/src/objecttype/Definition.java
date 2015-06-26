@@ -13,19 +13,19 @@ import model.data.SingletonSerialization;
 import propertytype.PropertyType;
 
 /**
- * The {@link BuilderType} provides the interface for specification of an object, holding the
+ * The {@link Definition} provides the interface for specification of an object, holding the
  * property types the object should define.
  */
-public interface BuilderType extends SingletonSerialization< SerializableBuilderType > {
+public interface Definition extends SingletonSerialization< SerializableDefinition > {
 
    /**
-    * Method to add a {@link PropertyType} to the {@link BuilderType}.
+    * Method to add a {@link PropertyType} to the {@link Definition}.
     * @param property the {@link PropertyType} to add.
     */
    public void addPropertyType( PropertyType property );
    
    /**
-    * Method to determine whether the {@link BuilderType} has the given {@link PropertyType}.
+    * Method to determine whether the {@link Definition} has the given {@link PropertyType}.
     * @param property the {@link PropertyType} in question.
     * @return true if the {@link PropertyType} is held by the object.
     */

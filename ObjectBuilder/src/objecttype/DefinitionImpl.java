@@ -17,17 +17,17 @@ import propertytype.PropertyType;
 import annotation.Cali;
 
 /**
- * Implementation of the {@link BuilderType}.
+ * Implementation of the {@link Definition}.
  */
-@Cali public class BuilderTypeImpl extends SingletonImpl< SerializableBuilderType > implements BuilderType {
+@Cali public class DefinitionImpl extends SingletonImpl< SerializableDefinition > implements Definition {
 
    private Collection< PropertyType > properties;
    
    /**
-    * Constructs a new {@link BuilderTypeImpl}.
-    * @param identification the {@link String} name of the {@link BuilderType}.
+    * Constructs a new {@link DefinitionImpl}.
+    * @param identification the {@link String} name of the {@link Definition}.
     */
-   @Cali public BuilderTypeImpl( String identification ) {
+   @Cali public DefinitionImpl( String identification ) {
       super( identification );
       properties = new LinkedHashSet< PropertyType >();
       this.identification = identification;
@@ -59,14 +59,14 @@ import annotation.Cali;
    /**
     * {@inheritDoc}
     */
-   @Override protected void writeSingleton( SerializableBuilderType serializable ) {
+   @Override protected void writeSingleton( SerializableDefinition serializable ) {
       serializable.addAllPropertyTypes( properties );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
-   @Override protected void readSingleton( SerializableBuilderType serialized ) {
+   @Override protected void readSingleton( SerializableDefinition serialized ) {
       properties = serialized.resolvePropertyTypes();
    }// End Method
 

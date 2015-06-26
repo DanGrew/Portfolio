@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import objecttype.BuilderType;
-import objecttype.BuilderTypeImpl;
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -48,11 +48,11 @@ public class SerializableBuilderObjectTest {
       PropertyType reference = new PropertyTypeImpl( "Age", ObjectBuilderClassParameterTypes.PROPERTY_TYPE_PARAMETER_TYPE );
       RequestSystem.store( reference, PropertyType.class );
       
-      BuilderType testType1 = new BuilderTypeImpl( "builder" );
+      Definition testType1 = new DefinitionImpl( "builder" );
       testType1.addPropertyType( name );
       testType1.addPropertyType( age );
       testType1.addPropertyType( reference );
-      RequestSystem.store( testType1, BuilderType.class );
+      RequestSystem.store( testType1, Definition.class );
       
       BuilderObject testObject1 = new BuilderObjectImpl( testType1, "TestObject1" );
       testObject1.set( name, "NameA" );
@@ -83,9 +83,9 @@ public class SerializableBuilderObjectTest {
       PropertyType name = new PropertyTypeImpl( "Name", String.class );
       RequestSystem.store( name, PropertyType.class );
       
-      BuilderType testType1 = new BuilderTypeImpl( "builder" );
+      Definition testType1 = new DefinitionImpl( "builder" );
       testType1.addPropertyType( name );
-      RequestSystem.store( testType1, BuilderType.class );
+      RequestSystem.store( testType1, Definition.class );
       
       BuilderObject toWrite = new BuilderObjectImpl( testType1, "TestObject1" );
       toWrite.set( name, "NameC" );
@@ -121,8 +121,8 @@ public class SerializableBuilderObjectTest {
          BuilderObject parsedObject = parsed.get( 0 );
          Assert.assertEquals( expected.getIdentification(), parsedObject.getIdentification() );
          
-         BuilderType expectedBuilder = expected.getBuilderType();
-         BuilderType parsedBuilder = expected.getBuilderType();
+         Definition expectedBuilder = expected.getDefinition();
+         Definition parsedBuilder = expected.getDefinition();
          Assert.assertEquals( expectedBuilder, parsedBuilder );
          
          for ( PropertyType type : expectedBuilder.getPropertyTypes() ) {

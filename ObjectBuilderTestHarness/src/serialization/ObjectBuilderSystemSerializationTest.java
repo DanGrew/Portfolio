@@ -19,10 +19,10 @@ import object.BuilderObject;
 import object.BuilderObjectImpl;
 import object.SerializableBuilderObjectTest;
 import object.XmlBuilderObjectImpl;
-import objecttype.BuilderType;
-import objecttype.BuilderTypeImpl;
-import objecttype.SerializableBuilderTypeTest;
-import objecttype.XmlBuilderTypeImpl;
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
+import objecttype.SerializableDefinitionTest;
+import objecttype.XmlDefinitionImpl;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -54,15 +54,15 @@ public class ObjectBuilderSystemSerializationTest {
       PropertyType testType2 = new PropertyTypeImpl( "type2", Number.class );
       actualPropertyTypes.add( testType2 );
       
-      List< BuilderType > actualBuilderTypes = new ArrayList< BuilderType >();
-      BuilderType builder1 = new BuilderTypeImpl( "FirstBuilder" );
+      List< Definition > actualDefinitions = new ArrayList< Definition >();
+      Definition builder1 = new DefinitionImpl( "FirstBuilder" );
       builder1.addPropertyType( testType1 );
-      actualBuilderTypes.add( builder1 );
+      actualDefinitions.add( builder1 );
       
-      BuilderType builder2 = new BuilderTypeImpl( "SecondBuilder" );
+      Definition builder2 = new DefinitionImpl( "SecondBuilder" );
       builder2.addPropertyType( testType2 );
       builder2.addPropertyType( testType1 );
-      actualBuilderTypes.add( builder2 );
+      actualDefinitions.add( builder2 );
       
       List< BuilderObject > actualObjects = new ArrayList<>();
       BuilderObject object1 = new BuilderObjectImpl( builder1, "object1" );
@@ -74,7 +74,7 @@ public class ObjectBuilderSystemSerializationTest {
       
       XmlObjectBuilderSystemWrapper serializedCollection = new XmlObjectBuilderSystemWrapper();
       serializedCollection.addAllPropertyTypes( actualPropertyTypes );
-      serializedCollection.addAllBuilderTypes( actualBuilderTypes );
+      serializedCollection.addAllDefinitions( actualDefinitions );
       serializedCollection.addAllBuilderObjects( actualObjects );
       
       File testFile = folder.newFile();
@@ -83,7 +83,7 @@ public class ObjectBuilderSystemSerializationTest {
                testFile, 
                XmlObjectBuilderSystemWrapper.class, 
                XmlPropertyTypeImpl.class, 
-               XmlBuilderTypeImpl.class, 
+               XmlDefinitionImpl.class, 
                XmlBuilderObjectImpl.class 
       );
       
@@ -92,7 +92,7 @@ public class ObjectBuilderSystemSerializationTest {
                testFile, 
                XmlObjectBuilderSystemWrapper.class, 
                XmlPropertyTypeImpl.class, 
-               XmlBuilderTypeImpl.class,
+               XmlDefinitionImpl.class,
                XmlBuilderObjectImpl.class
       );
       Assert.assertNotNull( parsedSystem );
@@ -100,8 +100,8 @@ public class ObjectBuilderSystemSerializationTest {
       List< PropertyType > parsedPropertyTypes = parsedSystem.retrievePropertyTypes();
       SerializablePropertyTypeTest.assertPropertyTypeLists( actualPropertyTypes, parsedPropertyTypes );
 
-      List< BuilderType > parsedBuilderTypes = parsedSystem.retrieveBuilderTypes();
-      SerializableBuilderTypeTest.assertBuiderTypes( actualBuilderTypes, parsedBuilderTypes );
+      List< Definition > parsedDefinitions = parsedSystem.retrieveDefinitions();
+      SerializableDefinitionTest.assertBuiderTypes( actualDefinitions, parsedDefinitions );
       
       List< BuilderObject > parsedBuilderObjects = parsedSystem.retrieveBuilderObjects();
       SerializableBuilderObjectTest.assertBuilderObjectLists( actualObjects, parsedBuilderObjects );
