@@ -74,5 +74,12 @@ public abstract class SingletonImpl< S extends SerializedSingleton< ? > >
     */
    protected abstract void readSingleton( S serialized );
    
+   /**
+    * {@inheritDoc}
+    */
+   @Override public String toString() {
+      return getIdentification();
+   }// End Method
+   
 }// End Class
 

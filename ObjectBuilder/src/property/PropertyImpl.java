@@ -32,7 +32,9 @@ public class PropertyImpl implements Property {
     * {@inheritDoc}
     */
    @Override public void setValue( Object value ) {
-      if ( isCorrectType( value ) ) {
+      if ( value == null ) {
+         this.value = value;
+      } else if ( isCorrectType( value ) ) {
          this.value = value;
       } else {
          Object deserialized = type.deserialize( value.toString() );
