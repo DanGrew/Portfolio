@@ -9,6 +9,7 @@ package command;
 
 import static org.junit.Assert.*;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class MethodCallCommandTest {
@@ -27,6 +28,10 @@ public class MethodCallCommandTest {
    
    @Test public void shouldNotExecute() {
       fail( "Not yet implemented" );
+   }
+   
+   @Test public void shouldRedirectParameters(){
+      Assert.fail();
    }
 
 }

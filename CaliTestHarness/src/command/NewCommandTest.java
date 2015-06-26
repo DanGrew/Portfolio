@@ -109,5 +109,9 @@ public class NewCommandTest implements CommandVerifier {
    @Test @Override public void shouldNotExecuteAndParameterize() {
       Assert.assertNull( command.execute( "new TestAnnotatedSingletonImpl( " ) );
    }// End Method
+   
+   @Test public void shouldRedirectConstructor(){
+      Assert.fail();
+   }
 
 }// End Class

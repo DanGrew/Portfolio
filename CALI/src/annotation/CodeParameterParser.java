@@ -51,6 +51,13 @@ public class CodeParameterParser {
                CaliParserUtilities.parameterDelimiter()
       );
       
+      for ( String parameter : parameters ) {
+         expression = CommandParameterParseUtilities.reduce( expression, parameter.trim() );
+         if ( expression.startsWith( CaliParserUtilities.parameterDelimiter() ) ) {
+            expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.parameterDelimiter() );
+         }
+      }
+      
       //Cannot match partial constructor, allow any parameters before defining end bracket.
       if ( !expression.contains( CaliParserUtilities.close() ) ) {
          result.setResultingExpression( expression );
@@ -59,12 +66,6 @@ public class CodeParameterParser {
          return result;
       }
       
-      for ( String parameter : parameters ) {
-         expression = CommandParameterParseUtilities.reduce( expression, parameter.trim() );
-         if ( expression.startsWith( CaliParserUtilities.parameterDelimiter() ) ) {
-            expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.parameterDelimiter() );
-         }
-      }
       expression = expression.replaceFirst( CaliParserUtilities.regexClose(), "" );
       
       result.setResultingExpression( expression );

@@ -7,7 +7,9 @@
  */
 package system;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -16,6 +18,7 @@ import org.junit.Test;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
 import architecture.request.RequestSystem;
+
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
@@ -141,13 +144,14 @@ public class CaliSystemTest {
                Arrays.asList( TestAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class ) ),
                CaliSystem.partialMatchMethodName( TestAnnotatedSingletonImpl.class, "testCaliMe" ) 
       );
-      Assert.assertEquals( 
-               Arrays.asList( 
-                        TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class ),
-                        TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class, String.class )
-               ),
-               CaliSystem.partialMatchMethodName( TestAnnotatedSingletonImpl.class, "overloaded" ) 
+      List< Method > expected = Arrays.asList( 
+               TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class ),
+               TestAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class, String.class )
       );
+      List< Method > actual = CaliSystem.partialMatchMethodName( TestAnnotatedSingletonImpl.class, "overloaded" );
+      Assert.assertEquals( expected.size(), actual.size() );
+      Assert.assertTrue( actual.containsAll( expected ) );
+      Assert.assertTrue( expected.containsAll( actual ) );
    }// End Method
    
    /**

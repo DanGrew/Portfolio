@@ -54,11 +54,11 @@ public class CodeParameterParserTest {
     * Test for the {@link Result#PARAMETERS_NO_CLOSE} result.
     */
    @Test public void shouldParametersNoClose() {
-      CodeParametersResult result = CodeParameterParser.parseCodeParameters( "( anything twice" );
+      CodeParametersResult result = CodeParameterParser.parseCodeParameters( "( anything, twice" );
       Assert.assertNotNull( result );
-      Assert.assertEquals( "anything twice", result.getResultingExpression() );
+      Assert.assertEquals( "", result.getResultingExpression() );
       Assert.assertEquals( Result.PARAMETERS_NO_CLOSE, result.getResult() );
-      Assert.assertNull( result.getParameters() );
+      Assert.assertArrayEquals( new String[]{ "anything", "twice" }, result.getParameters() );
    }// End Method
    
    /**

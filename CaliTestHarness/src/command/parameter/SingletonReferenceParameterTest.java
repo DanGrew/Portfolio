@@ -93,14 +93,15 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
       Assert.assertTrue( parameter.completeMatches( TEST_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter() ) );
       Assert.assertTrue( parameter.completeMatches( TEST_ANNOTATED_SINGLETON_NAME + ".anything" ) );
       Assert.assertTrue( parameter.completeMatches( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + CaliParserUtilities.statementDelimiter() ) );
+      //. is not needed for completion.
+      Assert.assertTrue( parameter.completeMatches( TEST_ANNOTATED_SINGLETON_NAME ) );
+      Assert.assertTrue( parameter.completeMatches( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME ) );
    }// End Method
    
    /**
     * {@link Command#completeMatches(String)} reject test.
     */
    @Test @Override public void shouldNotCompleteMatch() {
-      Assert.assertFalse( parameter.completeMatches( TEST_ANNOTATED_SINGLETON_NAME ) );
-      Assert.assertFalse( parameter.completeMatches( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME ) );
       Assert.assertFalse( parameter.completeMatches( "anything" ) );
       Assert.assertFalse( parameter.completeMatches( TEST_SINGLETON_NAME ) );
    }// End Method
