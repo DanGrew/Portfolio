@@ -10,9 +10,9 @@ package gui;
 import object.BuilderObjectImpl;
 import objecttype.DefinitionImpl;
 import propertytype.PropertyTypeImpl;
+import search.SearchImpl;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
-
 import command.Command;
 import command.MethodCallCommandImpl;
 import command.NewCommandImpl;
@@ -45,6 +45,7 @@ public class ObjectBuilder {
       CaliSystem.register( BuilderObjectImpl.class );
       CaliSystem.register( PropertyTypeImpl.class );
       CaliSystem.register( DefinitionImpl.class );
+      CaliSystem.register( SearchImpl.class );
       
       ObjectBuilderClassParameterTypes.initialiseTypes();
       new CommandInterpreter();

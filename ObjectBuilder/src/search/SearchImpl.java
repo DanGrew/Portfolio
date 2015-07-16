@@ -20,12 +20,13 @@ import model.singleton.SingletonImpl;
 import object.BuilderObject;
 import objecttype.Definition;
 import propertytype.PropertyType;
+import annotation.Cali;
 import architecture.request.RequestSystem;
 
 /**
  * Basic implementation of the {@link Search}.
  */
-public class SearchImpl extends SingletonImpl< SerializableSearch > implements Search {
+@Cali public class SearchImpl extends SingletonImpl< SerializableSearch > implements Search {
 
    private List< BuilderObject > matches;
    private Set< BuilderObject > filterInstances;
@@ -36,7 +37,7 @@ public class SearchImpl extends SingletonImpl< SerializableSearch > implements S
     * Constructs a new {@link SearchImpl}.
     * @param identification the {@link String} name of the {@link Search}, for reference.
     */
-   public SearchImpl( String identification ) {
+   @Cali public SearchImpl( String identification ) {
       super( identification );
       matches = new ArrayList< BuilderObject >();
       filterInstances = new HashSet<>();
@@ -47,7 +48,7 @@ public class SearchImpl extends SingletonImpl< SerializableSearch > implements S
    /**
     * {@inheritDoc}
     */
-   @Override public void identifyMatches() {
+   @Cali @Override public void identifyMatches() {
       matches.clear();
       Collection< BuilderObject > allObjects = RequestSystem.retrieveAll( BuilderObject.class );
       
@@ -71,49 +72,49 @@ public class SearchImpl extends SingletonImpl< SerializableSearch > implements S
    /**
     * {@inheritDoc}
     */
-   @Override public Collection< BuilderObject > getMostResultMatches() {
+   @Cali @Override public Collection< BuilderObject > getMostResultMatches() {
       return matches;
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public void filterInstance( BuilderObject object ) {
+   @Cali @Override public void filterInstance( BuilderObject object ) {
       filterInstances.add( object );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public void clearFilteredObjects() {
+   @Cali @Override public void clearFilteredObjects() {
       filterInstances.clear();
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public void filterDefinition( Definition definition ) {
+   @Cali @Override public void filterDefinition( Definition definition ) {
       filterDefinitions.add( definition );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public void clearFilteredDefinitions() {
+   @Cali @Override public void clearFilteredDefinitions() {
       filterDefinitions.clear();
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public void filterProperty( PropertyType propertyType, Object value ) {
+   @Cali @Override public void filterProperty( PropertyType propertyType, Object value ) {
       filteredProperties.put( propertyType, value );
    }// End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public void clearFilteredProperties() {
+   @Cali @Override public void clearFilteredProperties() {
       filteredProperties.clear();
    }// End Method
    
