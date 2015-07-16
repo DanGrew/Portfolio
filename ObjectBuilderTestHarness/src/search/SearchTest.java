@@ -197,5 +197,29 @@ public class SearchTest {
                matches 
       );
    }// End Method
+   
+   /**
+    * {@link SearchImpl#clearFilteredProperties()} test.
+    */
+   @Test public void shouldClearPropertyValue() {
+      Search search = new SearchImpl( "clearDefinitions" );
+      
+      search.filterProperty( ANY_PROPERTY, TEST_PROPERTY_VALUE );
+      search.identifyMatches();
+      
+      Collection< BuilderObject > matches = search.getMostResultMatches();
+      Assert.assertEquals( 
+               Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
+               matches 
+      );
+      
+      search.clearFilteredProperties();
+      search.identifyMatches();
+      matches = search.getMostResultMatches();
+      Assert.assertEquals( 
+               Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_TWO, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
+               matches 
+      );
+   }// End Method
 
 }// End Class

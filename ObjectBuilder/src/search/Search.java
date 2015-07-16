@@ -56,10 +56,15 @@ public interface Search extends Singleton {
    public void clearFilteredDefinitions();
 
    /**
-    * Method to filter the search by ecluding any {@link PropertyType} with the given value.
+    * Method to filter the search by excluding any {@link PropertyType} with the given value.
     * @param propertyType the {@link PropertyType} of the {@link Definition}.
     * @param value the value associated with the {@link PropertyType}.
     */
    public void filterProperty( PropertyType propertyType, Object value );
+
+   /**
+    * Method to clear the filtered properties.
+    */
+   public void clearFilteredProperties();
 
 }

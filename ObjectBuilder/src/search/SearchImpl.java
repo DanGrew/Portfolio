@@ -110,6 +110,13 @@ public class SearchImpl extends SingletonImpl< SerializableSearch > implements S
       filteredProperties.put( propertyType, value );
    }// End Method
    
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void clearFilteredProperties() {
+      filteredProperties.clear();
+   }// End Method
+   
    @Override protected void writeSingleton( SerializableSearch serializable ) {}
 
    @Override protected void readSingleton( SerializableSearch serialized ) {}
