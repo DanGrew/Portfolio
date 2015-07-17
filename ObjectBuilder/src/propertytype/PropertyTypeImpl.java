@@ -68,6 +68,13 @@ import annotation.Cali;
    /**
     * {@inheritDoc}
     */
+   @Override public ClassParameterType getParameterType() {
+      return typeClass;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public boolean isCorrectType( Object value ) {
       if ( value != null ) {
          return typeClass.getTypeClass().isAssignableFrom( value.getClass() );

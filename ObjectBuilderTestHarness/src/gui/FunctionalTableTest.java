@@ -44,17 +44,17 @@ public class FunctionalTableTest {
       builderC.addPropertyType( typeC );
       RequestSystem.store( builderC, Definition.class );
       
-      BuilderObject builderObjectA = new BuilderObjectImpl( builderC, "Object1" );
+      BuilderObject builderObjectA = new BuilderObjectImpl( "Object1", builderC );
       builderObjectA.set( typeA, "ThisIsAValue" );
       builderObjectA.set( typeC, "ThisIsAnotherValue" );
       RequestSystem.store( builderObjectA, BuilderObject.class );
       
-      BuilderObject builderObjectB = new BuilderObjectImpl( builderC, "Object2" );
+      BuilderObject builderObjectB = new BuilderObjectImpl( "Object2", builderC );
       builderObjectB.set( typeA, "ThisIsAValue" );
       builderObjectB.set( typeB, 1000.1 );
       RequestSystem.store( builderObjectB, BuilderObject.class );
       
-      BuilderObject builderObjectC = new BuilderObjectImpl( builderB, "Object1" );
+      BuilderObject builderObjectC = new BuilderObjectImpl( "Object1", builderB );
       builderObjectC.set( typeB, 10 );
       builderObjectC.set( typeC, "ThisIsAnotherValue" );
       RequestSystem.store( builderObjectC, BuilderObject.class );

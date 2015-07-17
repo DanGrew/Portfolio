@@ -74,7 +74,7 @@ public class XmlBuilderObjectImpl extends XmlSingletonWrapper< BuilderObject > i
          Definition definition = RequestSystem.retrieve( Definition.class, this.definition );
          if ( definition == null ) throw new NullPointerException( "Definition " + this.definition + " does not exist." );
          
-         type = new BuilderObjectImpl( definition, getIdentification() );
+         type = new BuilderObjectImpl( getIdentification(), definition );
          RequestSystem.store( type, BuilderObject.class );
       }
       return type;

@@ -41,7 +41,7 @@ public class BuilderObjectCommandFunctions {
          Definition definition = parameters.getExpectedParameter( 
                   BuilderObjectCommandParameters.DEFINITION_REFERENCE_PARAMETER, Definition.class 
          );
-         BuilderObject object = new BuilderObjectImpl( definition, name );
+         BuilderObject object = new BuilderObjectImpl( name, definition );
          RequestSystem.store( object, BuilderObject.class );
          return new CommandResultImpl< BuilderObject >( "Created " + name, object );
       }// End Method

@@ -41,7 +41,7 @@ public class BuilderObjectTest {
       type.addPropertyType( number );
       Assert.assertTrue( type.hasProperty( number ) );  
       
-      BuilderObject object = new BuilderObjectImpl( type, "Test" );
+      BuilderObject object = new BuilderObjectImpl( "Test", type );
       Assert.assertNull( object.get( string ) );
       Assert.assertNull( object.get( number ) );
       
@@ -64,7 +64,7 @@ public class BuilderObjectTest {
       Definition testTypeA = Mockito.mock( Definition.class, "TypeA" );
       Mockito.when( testTypeA.hasProperty( testPropertyTypeA ) ).thenReturn( true );
       
-      BuilderObject testObject = new BuilderObjectImpl( testTypeA, "TestName" );
+      BuilderObject testObject = new BuilderObjectImpl( "TestName", testTypeA );
       final Object testValue = "Anything";
       testObject.set( testPropertyTypeA, testValue );
       Object value = testObject.get( testPropertyTypeA );

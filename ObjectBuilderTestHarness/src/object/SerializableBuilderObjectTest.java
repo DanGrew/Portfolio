@@ -54,10 +54,10 @@ public class SerializableBuilderObjectTest {
       testType1.addPropertyType( reference );
       RequestSystem.store( testType1, Definition.class );
       
-      BuilderObject testObject1 = new BuilderObjectImpl( testType1, "TestObject1" );
+      BuilderObject testObject1 = new BuilderObjectImpl( "TestObject1", testType1 );
       testObject1.set( name, "NameA" );
       actualTypes.add( testObject1 );
-      BuilderObject testObject2 = new BuilderObjectImpl( testType1, "TestObject2" );
+      BuilderObject testObject2 = new BuilderObjectImpl( "TestObject2", testType1 );
       testObject2.set( name, "NameB" );
       testObject2.set( age, 10 );
       testObject2.set( reference, testType1 );
@@ -87,10 +87,10 @@ public class SerializableBuilderObjectTest {
       testType1.addPropertyType( name );
       RequestSystem.store( testType1, Definition.class );
       
-      BuilderObject toWrite = new BuilderObjectImpl( testType1, "TestObject1" );
+      BuilderObject toWrite = new BuilderObjectImpl( "TestObject1", testType1 );
       toWrite.set( name, "NameC" );
       
-      BuilderObject toOverwrite = new BuilderObjectImpl( testType1, "TestObject1" );
+      BuilderObject toOverwrite = new BuilderObjectImpl( "TestObject1", testType1 );
       toWrite.set( name, "NameB" );
       RequestSystem.store( toOverwrite, BuilderObject.class );
       

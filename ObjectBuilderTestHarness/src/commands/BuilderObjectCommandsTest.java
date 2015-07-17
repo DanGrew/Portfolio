@@ -52,7 +52,7 @@ public class BuilderObjectCommandsTest {
       TEST_BUILDER_TYPE_OBJECT.addPropertyType( TEST_PROPERTY_TYPE_NUMBER_OBJECT );
       RequestSystem.store( TEST_BUILDER_TYPE_OBJECT, Definition.class );
       
-      TEST_OBJECT_TYPE_OBJECT = new BuilderObjectImpl( TEST_BUILDER_TYPE_OBJECT, TEST_OBJECT_TYPE );
+      TEST_OBJECT_TYPE_OBJECT = new BuilderObjectImpl( TEST_OBJECT_TYPE, TEST_BUILDER_TYPE_OBJECT );
       RequestSystem.store( TEST_OBJECT_TYPE_OBJECT, BuilderObject.class );
    }// End Method
    

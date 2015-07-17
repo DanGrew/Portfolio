@@ -65,10 +65,10 @@ public class ObjectBuilderSystemSerializationTest {
       actualDefinitions.add( builder2 );
       
       List< BuilderObject > actualObjects = new ArrayList<>();
-      BuilderObject object1 = new BuilderObjectImpl( builder1, "object1" );
+      BuilderObject object1 = new BuilderObjectImpl( "object1", builder1 );
       object1.set( testType1, "TestString" );
       actualObjects.add( object1 );
-      BuilderObject object2 = new BuilderObjectImpl( builder2, "object2" );
+      BuilderObject object2 = new BuilderObjectImpl( "object2", builder2 );
       object2.set( testType2, 67988.1298 );
       actualObjects.add( object2 );
       

@@ -30,7 +30,7 @@ import annotation.Cali;
     * @param type the {@link Definition} this object is representing.
     * @param name the identification for the {@link BuilderObject}.
     */
-   @Cali public BuilderObjectImpl( Definition type, String name ) {
+   @Cali public BuilderObjectImpl( String name, Definition type ) {
       super( name );
       this.type = type;
       propertyValues = new HashMap< PropertyType, Property >();

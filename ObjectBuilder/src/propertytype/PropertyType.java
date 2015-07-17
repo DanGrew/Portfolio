@@ -26,6 +26,12 @@ public interface PropertyType extends SingletonSerialization< SerializableProper
    public Class< ? > getTypeClass();
    
    /**
+    * Getter for the {@link ClassParameterType} associated.
+    * @return the {@link ClassParameterType}.
+    */
+   public ClassParameterType getParameterType();
+   
+   /**
     * Getter for the display name to be used for the type.
     * @return the {@link String} display name.
     */

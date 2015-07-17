@@ -118,7 +118,11 @@ public class ParameterRedirect {
     * @return the object in the correct format.
     */
    private Object redirectSingleton( Object object, Class< ? extends Singleton > singletonClass ) {
-      return RequestSystem.retrieve( singletonClass, object.toString() );
+      Object singleton = RequestSystem.retrieve( singletonClass, object.toString() );
+      if ( singleton == null ) {
+         throw new NullPointerException( "No object defined for " + object.toString() + "." );
+      }
+      return singleton;
    }// End Method
 
 }// End Class
