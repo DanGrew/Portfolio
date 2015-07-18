@@ -108,7 +108,7 @@ public class SearchAllTest {
     * {@link SearchAll#filterInstance(BuilderObject)} test.
     */
    @Test public void shouldMatchFilterParticularObjects() {
-      Search search = new SearchAll( "objects" );
+      SearchAll search = new SearchAll( "objects" );
       search.filterInstance( ANY_OBJECT_TWO );
       search.filterInstance( ANY_OBJECT_ONE );
       search.identifyMatches();
@@ -124,7 +124,7 @@ public class SearchAllTest {
     * {@link SearchAll#clearFilteredObjects()} test.
     */
    @Test public void shouldClearFilteredObjects(){
-      Search search = new SearchAll( "clearObjects" );
+      SearchAll search = new SearchAll( "clearObjects" );
       search.filterInstance( ANY_OBJECT_TWO );
       search.filterInstance( ANY_OBJECT_ONE );
       search.identifyMatches();
@@ -148,7 +148,7 @@ public class SearchAllTest {
     * {@link SearchAll#filterDefinition(Definition)} test.
     */
    @Test public void shouldMatchFilterParticularDefinitions() {
-      Search search = new SearchAll( "definitions" );
+      SearchAll search = new SearchAll( "definitions" );
       search.filterDefinition( ANY_DEFINITION_TWO );
       search.identifyMatches();
       
@@ -163,7 +163,7 @@ public class SearchAllTest {
     * {@link SearchAll#clearFilteredDefinitions()} test.
     */
    @Test public void shouldClearFilteredDefinitions() {
-      Search search = new SearchAll( "clearDefinitions" );
+      SearchAll search = new SearchAll( "clearDefinitions" );
       search.filterDefinition( ANY_DEFINITION_TWO );
       search.identifyMatches();
       
@@ -186,7 +186,7 @@ public class SearchAllTest {
     * {@link SearchAll#filterProperty(PropertyType, Object)} test.
     */
    @Test public void shouldMatchEverythingWithPropertyValue() {
-      Search search = new SearchAll( "clearDefinitions" );
+      SearchAll search = new SearchAll( "clearDefinitions" );
       
       search.filterProperty( ANY_PROPERTY, TEST_PROPERTY_VALUE );
       search.identifyMatches();
@@ -202,7 +202,7 @@ public class SearchAllTest {
     * {@link SearchAll#clearFilteredProperties()} test.
     */
    @Test public void shouldClearPropertyValue() {
-      Search search = new SearchAll( "clearDefinitions" );
+      SearchAll search = new SearchAll( "clearDefinitions" );
       
       search.filterProperty( ANY_PROPERTY, TEST_PROPERTY_VALUE );
       search.identifyMatches();
