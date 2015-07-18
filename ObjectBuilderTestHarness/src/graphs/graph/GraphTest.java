@@ -5,8 +5,11 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package graphs.barchart;
+package graphs.graph;
 
+import graphs.graph.Graph;
+import graphs.graph.GraphError;
+import graphs.graph.GraphResult;
 import gui.ObjectBuilder;
 import model.singleton.Singleton;
 import object.BuilderObject;
@@ -28,7 +31,7 @@ import architecture.request.RequestSystem;
 /**
  * Test for the {@link Graph}.
  */
-public class BarChartTest {
+public class GraphTest {
    
    private static PropertyType VERT_PROPERTY_A;
    private static PropertyType VERT_PROPERTY_B;

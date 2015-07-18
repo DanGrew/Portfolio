@@ -7,7 +7,7 @@
  */
 package gui;
 
-import graphs.barchart.Graph;
+import graphs.graph.Graph;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import object.BuilderObjectImpl;
@@ -16,7 +16,6 @@ import propertytype.PropertyTypeImpl;
 import search.SearchImpl;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
-
 import command.Command;
 import command.MethodCallCommandImpl;
 import command.NewCommandImpl;

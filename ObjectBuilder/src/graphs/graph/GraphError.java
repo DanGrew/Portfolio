@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package graphs.barchart;
+package graphs.graph;
 
 /**
  * The {@link GraphError} provides the types of result returned with e {@link GraphResult}.

@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package graphs.barchart;
+package graphs.graph;
 
 import javafx.scene.chart.XYChart;
 
