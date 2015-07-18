@@ -308,8 +308,7 @@ import annotation.Cali;
             verticalAxis.setLabel( verticalAxisLabel );
 
             for ( Search search : dataSeries ) {
-               search.identifyMatches();
-               Collection< BuilderObject > matches = search.getMostResultMatches();
+               Collection< BuilderObject > matches = search.getMatches();
                
                for ( PropertyType type : verticalProperties ) {
                   Series< String, Number > series = new Series<>();

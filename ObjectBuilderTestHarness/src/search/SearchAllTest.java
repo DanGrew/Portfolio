@@ -28,14 +28,14 @@ import architecture.request.RequestSystem;
  */
 public class SearchAllTest {
    
-   private static final String TEST_PROPERTY_VALUE = "anySpecificValue";
-   private static PropertyType ANY_PROPERTY;
-   private static Definition ANY_DEFINITION_ONE;
-   private static Definition ANY_DEFINITION_TWO;
-   private static BuilderObject ANY_OBJECT_ONE;
-   private static BuilderObject ANY_OBJECT_TWO;
-   private static BuilderObject ANY_OBJECT_THREE;
-   private static BuilderObject ANY_OBJECT_FOUR;
+   protected static final String TEST_PROPERTY_VALUE = "anySpecificValue";
+   protected static PropertyType ANY_PROPERTY;
+   protected static Definition ANY_DEFINITION_ONE;
+   protected static Definition ANY_DEFINITION_TWO;
+   protected static BuilderObject ANY_OBJECT_ONE;
+   protected static BuilderObject ANY_OBJECT_TWO;
+   protected static BuilderObject ANY_OBJECT_THREE;
+   protected static BuilderObject ANY_OBJECT_FOUR;
    
    /**
     * Method to setup the {@link Singleton}s for the test.
@@ -80,12 +80,12 @@ public class SearchAllTest {
    /**
     * Test for initial matching.
     */
-   @Test public void shouldMatchNothingInitially(){
+   @Test public void shouldMatchInitially(){
       Search search = new SearchAll( "everything" );
       
-      Collection< BuilderObject > matches = new ArrayList<>( search.getMostResultMatches() );
+      Collection< BuilderObject > matches = new ArrayList<>( search.getMatches() );
       Assert.assertEquals( 
-               new ArrayList<>(), 
+               Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_TWO, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 
       );
    }// End Method
@@ -97,7 +97,7 @@ public class SearchAllTest {
       Search search = new SearchAll( "everything" );
       search.identifyMatches();
       
-      Collection< BuilderObject > matches = search.getMostResultMatches();
+      Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_TWO, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 
@@ -113,7 +113,7 @@ public class SearchAllTest {
       search.filterInstance( ANY_OBJECT_ONE );
       search.identifyMatches();
       
-      Collection< BuilderObject > matches = search.getMostResultMatches();
+      Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 
@@ -129,7 +129,7 @@ public class SearchAllTest {
       search.filterInstance( ANY_OBJECT_ONE );
       search.identifyMatches();
       
-      Collection< BuilderObject > matches = search.getMostResultMatches();
+      Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 
@@ -137,7 +137,7 @@ public class SearchAllTest {
       
       search.clearFilteredObjects();
       search.identifyMatches();
-      matches = search.getMostResultMatches();
+      matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_TWO, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 
@@ -152,7 +152,7 @@ public class SearchAllTest {
       search.filterDefinition( ANY_DEFINITION_TWO );
       search.identifyMatches();
       
-      Collection< BuilderObject > matches = search.getMostResultMatches();
+      Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_FOUR ), 
                matches 
@@ -167,7 +167,7 @@ public class SearchAllTest {
       search.filterDefinition( ANY_DEFINITION_TWO );
       search.identifyMatches();
       
-      Collection< BuilderObject > matches = search.getMostResultMatches();
+      Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_FOUR ), 
                matches 
@@ -175,7 +175,7 @@ public class SearchAllTest {
       
       search.clearFilteredDefinitions();
       search.identifyMatches();
-      matches = search.getMostResultMatches();
+      matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_TWO, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 
@@ -191,7 +191,7 @@ public class SearchAllTest {
       search.filterProperty( ANY_PROPERTY, TEST_PROPERTY_VALUE );
       search.identifyMatches();
       
-      Collection< BuilderObject > matches = search.getMostResultMatches();
+      Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 
@@ -207,7 +207,7 @@ public class SearchAllTest {
       search.filterProperty( ANY_PROPERTY, TEST_PROPERTY_VALUE );
       search.identifyMatches();
       
-      Collection< BuilderObject > matches = search.getMostResultMatches();
+      Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 
@@ -215,7 +215,7 @@ public class SearchAllTest {
       
       search.clearFilteredProperties();
       search.identifyMatches();
-      matches = search.getMostResultMatches();
+      matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_TWO, ANY_OBJECT_THREE, ANY_OBJECT_FOUR ), 
                matches 

@@ -26,9 +26,9 @@ public interface Search extends Singleton {
    public void identifyMatches();
 
    /**
-    * Method to get the most recent result of searching.
+    * Method to get the most recent result of searching, following {@link #identifyMatches()}.
     * @return a {@link Collection} of {@link BuilderObject}s found.
     */
-   public Collection< BuilderObject > getMostResultMatches();
+   public Collection< BuilderObject > getMatches();
 
 }

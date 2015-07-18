@@ -53,7 +53,8 @@ public abstract class SearchImpl< SerializableTypeT extends SerializedSingleton<
    /**
     * {@inheritDoc}
     */
-   @Cali @Override public Collection< BuilderObject > getMostResultMatches() {
+   @Cali @Override public Collection< BuilderObject > getMatches() {
+      identifyMatches();
       return matches;
    }// End Method
 
