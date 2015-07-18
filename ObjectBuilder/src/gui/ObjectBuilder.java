@@ -43,16 +43,13 @@ public class ObjectBuilder {
    }// End Method
    
    public static void main( String[] args ) {
-      RequestSystem.store( PropertyTypeCommands.CREATE_PROPERTY_TYPE_COMMAND, Command.class );
       RequestSystem.store( PropertyTypeCommands.VIEW_PROPERTY_TYPES_COMMAND, Command.class );
-      RequestSystem.store( DefinitionCommands.CREATE_DEFINITION_COMMAND, Command.class );
-      RequestSystem.store( DefinitionCommands.ADD_PROPERTY_COMMAND, Command.class );
       RequestSystem.store( DefinitionCommands.VIEW_BUILDER_TYPES_COMMAND, Command.class );
-      RequestSystem.store( BuilderObjectCommands.CREATE_BUILDER_OBJECT_COMMAND, Command.class );
-      RequestSystem.store( BuilderObjectCommands.SET_PROPERTY_COMMAND, Command.class );
       RequestSystem.store( BuilderObjectCommands.VIEW_OBJECTS_COMMAND, Command.class );
-      RequestSystem.store( SystemCommands.SAVE_COMMAND, Command.class );
-      RequestSystem.store( SystemCommands.LOAD_COMMAND, Command.class );
+      RequestSystem.store( SystemCommands.SAVE_MODEL_COMMAND, Command.class );
+      RequestSystem.store( SystemCommands.LOAD_MODEL_COMMAND, Command.class );
+      RequestSystem.store( SystemCommands.SAVE_ANALYSIS_COMMAND, Command.class );
+      RequestSystem.store( SystemCommands.LOAD_ANALYSIS_COMMAND, Command.class );
       
       RequestSystem.store( new NewCommandImpl(), Command.class );
       RequestSystem.store( new MethodCallCommandImpl(), Command.class );

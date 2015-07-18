@@ -25,7 +25,11 @@ public class StringClassParameterTypeImpl extends ClassParameterTypeImpl {
     * {@inheritDoc}
     */
    @Override public Serializable serialize( Object object ) {
-      return object.toString();
+      if ( object == null ) {
+         return null;
+      } else {
+         return object.toString();
+      }
    }// End Method
    
    /**

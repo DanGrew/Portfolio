@@ -18,11 +18,11 @@ import command.Command;
 public class SystemCommandsTest {
 
    /**
-    * Method to test that the {@link SystemCommands#SAVE_COMMAND} accepts the correct
+    * Method to test that the {@link SystemCommands#SAVE_MODEL_COMMAND} accepts the correct
     * input.
     */
    @Test public void saveAcceptanceTest() {
-      Command< Void > command = SystemCommands.SAVE_COMMAND;
+      Command< Void > command = SystemCommands.SAVE_MODEL_COMMAND;
       Assert.assertTrue( command.partialMatches( "Save" ) );
       Assert.assertTrue( command.partialMatches( "Sa " ) );
       
@@ -30,11 +30,11 @@ public class SystemCommandsTest {
    }// End Method
    
    /**
-    * Method to test that the {@link SystemCommands#LOAD_COMMAND} accepts the correct
+    * Method to test that the {@link SystemCommands#LOAD_MODEL_COMMAND} accepts the correct
     * input.
     */
    @Test public void loadAcceptanceTest() {
-      Command< Void > command = SystemCommands.LOAD_COMMAND;
+      Command< Void > command = SystemCommands.LOAD_MODEL_COMMAND;
       Assert.assertTrue( command.partialMatches( "Load" ) );
       Assert.assertTrue( command.partialMatches( "Lo " ) );
       
