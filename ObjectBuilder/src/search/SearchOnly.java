@@ -9,11 +9,11 @@ package search;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.List;
 
 import object.BuilderObject;
+import property.Property;
+import property.PropertyImpl;
 import propertytype.PropertyType;
 import annotation.Cali;
 import architecture.request.RequestSystem;
@@ -24,7 +24,7 @@ import architecture.request.RequestSystem;
  */
 @Cali public class SearchOnly extends SearchImpl< SerializableSearchOnly > implements Search{
 
-   private Map< PropertyType, Object > includePropertyValues;
+   private List< Property > includePropertyValues;
    
    /**
     * Constructs a new {@link SearchOnly}.
@@ -32,7 +32,7 @@ import architecture.request.RequestSystem;
     */
    @Cali public SearchOnly( String identification ) {
       super( identification );
-      includePropertyValues = new HashMap< PropertyType, Object >();
+      includePropertyValues = new ArrayList< Property >();
    }// End Constructor
 
    /**
@@ -44,11 +44,11 @@ import architecture.request.RequestSystem;
       Collection< BuilderObject > allObjects = RequestSystem.retrieveAll( BuilderObject.class );
       Collection< BuilderObject > matches = new ArrayList< BuilderObject >();
       allObjects.forEach( object -> {
-         for ( Entry< PropertyType, Object > entry : includePropertyValues.entrySet() ) {
-            if ( !object.getDefinition().hasProperty( entry.getKey() ) ) {
+         for ( Property entry : includePropertyValues ) {
+            if ( !object.getDefinition().hasProperty( entry.getType() ) ) {
                return;
             } else {
-               Object value = object.get( entry.getKey() );
+               Object value = object.get( entry.getType() );
                if ( value == null ) {
                   return;
                } else if ( !value.equals( entry.getValue() ) ){
@@ -67,12 +67,17 @@ import architecture.request.RequestSystem;
    /**
     * {@inheritDoc}
     */
-   @Override protected void writeSingleton( SerializableSearchOnly serializable ) {}
+   @Override protected void writeSingleton( SerializableSearchOnly serializable ) {
+      includePropertyValues.forEach( object -> serializable.addValue( object ) );
+   }
 
    /**
     * {@inheritDoc}
     */
-   @Override protected void readSingleton( SerializableSearchOnly serialized ) {}
+   @Override protected void readSingleton( SerializableSearchOnly serialized ) {
+      includePropertyValues.clear();
+      includePropertyValues.addAll( serialized.resolveValues() );
+   }
 
    /**
     * Method to include a {@link PropertyType} and value that should be matched.
@@ -80,7 +85,9 @@ import architecture.request.RequestSystem;
     * @param value the value the object should have for the {@link PropertyType}.
     */
    @Cali public void includePropertyValue( PropertyType propertyType, Object value ) {
-      includePropertyValues.put( propertyType, value );
+      Property property = new PropertyImpl( propertyType );
+      property.setValue( value );
+      includePropertyValues.add( property );
    }// End Method
 
    /**
@@ -88,6 +95,14 @@ import architecture.request.RequestSystem;
     */
    @Cali public void clearIncludedPropertyValues() {
       includePropertyValues.clear();
+   }// End Method
+
+   /**
+    * Method to get the included {@link Property}s.
+    * @return a {@link Collection} of the included {@link Property} rules.
+    */
+   public Collection< Property > getIncludedPropertyTypes() {
+      return new ArrayList<>( includePropertyValues );
    }// End Method
 
 }// End Class

@@ -14,6 +14,6 @@ import model.data.SerializedSingleton;
 /**
  * {@link Serializable} form of the {@link SearchAll}.
  */
-public interface SerializableSearchAll extends SerializedSingleton< Search >{
+public interface SerializableSearchAll extends SerializedSingleton< SearchAll >{
 
 }

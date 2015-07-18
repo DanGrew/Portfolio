@@ -76,5 +76,47 @@ public class PropertyImpl implements Property {
    @Override public Serializable serializeValue() {
       return type.serialize( getValue() );
    }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ( ( type == null ) ? 0 : type.getIdentification().hashCode() );
+      result = prime * result + ( ( value == null ) ? 0 : value.hashCode() );
+      return result;
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean equals( Object obj ) {
+      if ( this == obj ) {
+         return true;
+      }
+      if ( obj == null ){
+         return false;
+      }
+      if ( getClass() != obj.getClass() ){
+         return false;
+      }
+      PropertyImpl other = ( PropertyImpl ) obj;
+      if ( type == null ) {
+         if ( other.type != null ){
+            return false;
+         }
+      } else if ( !type.getIdentification().equals( other.type.getIdentification() ) ){
+         return false;
+      }
+      if ( value == null ) {
+         if ( other.value != null ){
+            return false;
+         }
+      } else if ( !value.equals( other.value ) ){
+         return false;
+      }
+      return true;
+   }// End Method
    
 }// End Class
