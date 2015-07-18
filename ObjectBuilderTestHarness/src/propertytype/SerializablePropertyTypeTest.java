@@ -92,8 +92,8 @@ public class SerializablePropertyTypeTest {
    public static void assertPropertyTypeLists( List< PropertyType > actualTypes, List< PropertyType > parsedTypes){
       Assert.assertEquals( actualTypes.size(), parsedTypes.size() );
       for ( int i = 0; i < actualTypes.size(); i++ ) {
-         PropertyType expected = actualTypes.get( 0 );
-         PropertyType parsed = parsedTypes.get( 0 );
+         PropertyType expected = actualTypes.get( i );
+         PropertyType parsed = parsedTypes.get( i );
          Assert.assertEquals( expected.getDisplayName(), parsed.getDisplayName() );
          Assert.assertEquals( expected.getTypeClass(), parsed.getTypeClass() );
       }

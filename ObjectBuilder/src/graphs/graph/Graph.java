@@ -47,7 +47,7 @@ import annotation.Cali;
    private static final String DEFAULT_UNDEFINED_STRING = "Unknown";
    private static final Dimension2D DEFAULT_DIMENSION = new Dimension2D( 800, 800 );
    private List< Search > dataSeries;
-   private List< PropertyType > verticalSeriesProperties;
+   private List< PropertyType > verticalProperties;
    private String verticalAxisLabel;
    private PropertyType horizontalProperty;
    private String horizontalAxisLabel;
@@ -61,13 +61,46 @@ import annotation.Cali;
     */
    @Cali public Graph( String identification ) {
       super( identification );
-      verticalSeriesProperties = new ArrayList< PropertyType >();
+      verticalProperties = new ArrayList< PropertyType >();
       dataSeries = new ArrayList<>();
    }// End Constructor
    
-   @Override protected void writeSingleton( SerializableGraph serializable ) {}
-   @Override protected void readSingleton( SerializableGraph serialized ) {}
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void writeSingleton( SerializableGraph serializable ) {
+      dataSeries.forEach( search -> serializable.addSearch( search ) );
+      verticalProperties.forEach( property -> serializable.addVerticalProperty( property ) );
+      serializable.setVerticalAxisLabel( verticalAxisLabel );
+      serializable.setHorizontalProperty( horizontalProperty );
+      serializable.setHorizontalAxisLabel( horizontalAxisLabel );
+      serializable.setUndefinedNumber( undefinedNumber );
+      serializable.setUndefinedString( undefinedString );
+      serializable.setDimension( dimension );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override protected void readSingleton( SerializableGraph serialized ) {
+      serialized.resolveSearches().forEach( search -> addDataSeries( search ) );
+      serialized.resolveVerticalProperties().forEach( property -> addVerticalProperty( property ) );
+      verticalAxisLabel = serialized.getVerticalAxisLabel();
+      horizontalProperty = serialized.getHorizontalProperty();
+      horizontalAxisLabel = serialized.getHorizontalAxisLabel();
+      undefinedNumber = serialized.getUndefinedNumber();
+      undefinedString = serialized.getUndefinedString();
+      dimension = serialized.getDimension();
+   }// End Method
 
+   /**
+    * Getter for the {@link List} of {@link Search}es associated.
+    * @return a {@link List} of {@link Search}es providing data for the {@link Graph}.
+    */
+   public List< Search > getDataSeries() {
+      return dataSeries;
+   }// End Method
+   
    /**
     * Method to specify the {@link Search} used to identify results.
     * @param search the {@link Search} used to collect information for the {@link Graph}.
@@ -76,6 +109,10 @@ import annotation.Cali;
       this.dataSeries.add( search );
    }// End Method
 
+   public String getHorizontalAxisLabel() {
+      return horizontalAxisLabel;
+   }
+   
    /**
     * Setter for the label of the horizontal axis.
     * @param horizontalAxisLabel the label.
@@ -83,6 +120,10 @@ import annotation.Cali;
    @Cali public void setHorizontalAxisLabel( String horizontalAxisLabel ) {
       this.horizontalAxisLabel = horizontalAxisLabel;
    }// End Method
+   
+   public PropertyType getHorizontalProperty() {
+      return horizontalProperty;
+   }
    
    /**
     * Method to set the {@link PropertyType} for the information displayed on the
@@ -93,6 +134,10 @@ import annotation.Cali;
       horizontalProperty = property;
    }// End Method
    
+   public List< PropertyType > getVerticalProperties() {
+      return verticalProperties;
+   }
+   
    /**
     * Method to add a vertical series to the graph.
     * @param property the {@link PropertyType}, required to be {@link ClassParameterTypes#NUMBER_PARAMETER_TYPE}.
@@ -101,12 +146,16 @@ import annotation.Cali;
     */
    @Cali public GraphResult addVerticalProperty( PropertyType property ) {
       if ( property.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ) ) {
-         verticalSeriesProperties.add( property );
+         verticalProperties.add( property );
          return GraphResult.SUCCESS;
       } else {
          return new GraphResult( GraphError.NonNumericalVerticalAxis, property );
       }
    }// End Method
+   
+   public String getVerticalAxisLabel() {
+      return verticalAxisLabel;
+   }
    
    /**
     * Setter for the label of the vertical axis.
@@ -115,6 +164,10 @@ import annotation.Cali;
    @Cali public void setVerticalAxisLabel( String verticalAxisLabel ) {
       this.verticalAxisLabel = verticalAxisLabel;
    }// End Method
+   
+   public Number getDefaultValueForUndefinedNumber() {
+      return DEFAULT_UNDEFINED_NUMBER;
+   }
    
    /**
     * Setter for the default {@link Number} value to be used for a {@link Property} that has no value, or
@@ -125,6 +178,10 @@ import annotation.Cali;
       this.undefinedNumber = undefinedNumber;
    }// End Method
    
+   public String getDefaultValueForUndefinedString() {
+      return undefinedString;
+   }
+   
    /**
     * Setter for the default {@link String} value to be used for a {@link Property} that has no value.
     * @param undefinedString the {@link String} to use by default.
@@ -132,6 +189,10 @@ import annotation.Cali;
    @Cali public void setDefaultValueForUndefinedString( String undefinedString ) {
       this.undefinedString = undefinedString;
    }// End Method
+   
+   public Dimension2D getDimension() {
+      return dimension;
+   }
    
    /**
     * Method to set the {@link Dimension2D} of the graph.
@@ -222,7 +283,7 @@ import annotation.Cali;
                search.identifyMatches();
                Collection< BuilderObject > matches = search.getMostResultMatches();
                
-               for ( PropertyType type : verticalSeriesProperties ) {
+               for ( PropertyType type : verticalProperties ) {
                   Series< String, Number > series = new Series<>();
                   series.setName( type.getDisplayName() );
                   for ( BuilderObject object : matches ) {
@@ -315,10 +376,10 @@ import annotation.Cali;
     * @return a {@link GraphResult} with the error, if an error exists, null otherwise.
     */
    private GraphResult verifyVerticalAxes(){
-      if ( verticalSeriesProperties.isEmpty() ) {
+      if ( verticalProperties.isEmpty() ) {
          return new GraphResult( GraphError.MissingVerticalSeries, null );
       }
-      for ( PropertyType type : verticalSeriesProperties ) {
+      for ( PropertyType type : verticalProperties ) {
          if ( !type.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ) ) {
             return new GraphResult( GraphError.NonNumericalVerticalAxis, type );
          }
