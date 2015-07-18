@@ -7,6 +7,7 @@
  */
 package graphs.barchart;
 
+import gui.ObjectBuilder;
 import model.singleton.Singleton;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
@@ -25,7 +26,7 @@ import search.SearchImpl;
 import architecture.request.RequestSystem;
 
 /**
- * Test for the {@link BarChartGraph}.
+ * Test for the {@link Graph}.
  */
 public class BarChartTest {
    
@@ -42,6 +43,8 @@ public class BarChartTest {
     * Method to setup the {@link Singleton}s for the test.
     */
    @BeforeClass public static void setup(){
+      ObjectBuilder.launchJavaFxForSwingEnvironment();
+      
       VERT_PROPERTY_A = new PropertyTypeImpl( "SOM", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
       RequestSystem.store( VERT_PROPERTY_A );
       VERT_PROPERTY_B = new PropertyTypeImpl( "Dying Light", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
@@ -85,78 +88,84 @@ public class BarChartTest {
       ANY_OBJECT_THREE.set( VERT_PROPERTY_B, 6.5 );
       ANY_OBJECT_FOUR.set( VERT_PROPERTY_B, 1.0 );
       
-      BarChartGraph barChart = new BarChartGraph( "sample" );
+      Graph barChart = new Graph( "sample" );
       
       Search search = new SearchImpl( "defaultSearch" );
       search.identifyMatches();
-      barChart.useSearch( search );
+      barChart.addDataSeries( search );
       
       barChart.setHorizontalProperty( HORIZ_PROPERTY );
-      barChart.addVerticalSeries( VERT_PROPERTY_A );
-      barChart.addVerticalSeries( VERT_PROPERTY_B );
+      barChart.addVerticalProperty( VERT_PROPERTY_A );
+      barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      barChart.show();
+      barChart.barChart();
       
       Thread.sleep( 5000 );
+      
+      //Make a subtle change and prove window is re-launched (note must manually close first).
+      barChart.setHorizontalAxisLabel( "ANYTHING" );
+      barChart.barChart();
+      
+      Thread.sleep( 500000 );
    }// End Method
    
    /**
     * Test that missing horizontal axis is identified.
     */
    @Test public void shouldNotShowAndReportMissingHorizontalProperty(){
-      BarChartGraph barChart = new BarChartGraph( "sample" );
+      Graph barChart = new Graph( "sample" );
       
       Search search = new SearchImpl( "defaultSearch" );
-      barChart.useSearch( search );
+      barChart.addDataSeries( search );
       
-      barChart.addVerticalSeries( VERT_PROPERTY_A );
-      barChart.addVerticalSeries( VERT_PROPERTY_B );
+      barChart.addVerticalProperty( VERT_PROPERTY_A );
+      barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      GraphResult result = barChart.show();
+      GraphResult result = barChart.barChart();
       Assert.assertNotNull( result );
-      Assert.assertEquals( result.getEnumeration(), BarChartError.MissingHorizontalAxis );
+      Assert.assertEquals( result.getEnumeration(), GraphError.MissingHorizontalAxis );
    }// End Method
    
    /**
     * Test that missing vertical data is missing.
     */
    @Test public void shouldNotShowAndReportMissingAnyVerticalProperties(){
-      BarChartGraph barChart = new BarChartGraph( "sample" );
+      Graph barChart = new Graph( "sample" );
       
       Search search = new SearchImpl( "defaultSearch" );
-      barChart.useSearch( search );
+      barChart.addDataSeries( search );
       
       barChart.setHorizontalProperty( HORIZ_PROPERTY );
       
-      GraphResult result = barChart.show();
+      GraphResult result = barChart.barChart();
       Assert.assertNotNull( result );
-      Assert.assertEquals( result.getEnumeration(), BarChartError.MissingVerticalSeries );
+      Assert.assertEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
    }// End Method
    
    /**
     * Test that missing {@link Search} is identified.
     */
    @Test public void shouldNotShowAndReportMissingSearch(){
-      BarChartGraph barChart = new BarChartGraph( "sample" );
+      Graph barChart = new Graph( "sample" );
       
       barChart.setHorizontalProperty( HORIZ_PROPERTY );
-      barChart.addVerticalSeries( VERT_PROPERTY_A );
-      barChart.addVerticalSeries( VERT_PROPERTY_B );
+      barChart.addVerticalProperty( VERT_PROPERTY_A );
+      barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      GraphResult result = barChart.show();
+      GraphResult result = barChart.barChart();
       Assert.assertNotNull( result );
-      Assert.assertEquals( result.getEnumeration(), BarChartError.MissingSearchCriteria );
+      Assert.assertEquals( result.getEnumeration(), GraphError.MissingSearchCriteria );
    }// End Method
    
    /**
     * Test that non number {@link PropertyType} cant be added.
     */
    @Test public void shouldNotAddNonNumberVerticalProperty(){
-      BarChartGraph barChart = new BarChartGraph( "sample" );
+      Graph barChart = new Graph( "sample" );
       
-      GraphResult result = barChart.addVerticalSeries( HORIZ_PROPERTY );;
+      GraphResult result = barChart.addVerticalProperty( HORIZ_PROPERTY );;
       Assert.assertNotNull( result );
-      Assert.assertEquals( result.getEnumeration(), BarChartError.NonNumericalVerticalAxis );
+      Assert.assertEquals( result.getEnumeration(), GraphError.NonNumericalVerticalAxis );
    }// End Method
    
    /**
@@ -164,17 +173,17 @@ public class BarChartTest {
     * to be found. The exception is caught in JFX so can't be verified.
     */
    @Test public void shouldDefendNullNumbers() {
-      BarChartGraph barChart = new BarChartGraph( "sample" );
+      Graph barChart = new Graph( "sample" );
       
       Search search = new SearchImpl( "defaultSearch" );
       search.identifyMatches();
-      barChart.useSearch( search );
+      barChart.addDataSeries( search );
       
       barChart.setHorizontalProperty( HORIZ_PROPERTY );
-      barChart.addVerticalSeries( VERT_PROPERTY_A );
-      barChart.addVerticalSeries( VERT_PROPERTY_B );
+      barChart.addVerticalProperty( VERT_PROPERTY_A );
+      barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      barChart.show();
+      barChart.barChart();
    }// End Method
    
 }// End Class

@@ -8,9 +8,9 @@
 package graphs.barchart;
 
 /**
- * The {@link BarChartError} provides the types of result returned with e {@link GraphResult}.
+ * The {@link GraphError} provides the types of result returned with e {@link GraphResult}.
  */
-public enum BarChartError {
+public enum GraphError {
 
    MissingHorizontalAxis( "Horizontal Axis not Defined" ), 
    MissingVerticalSeries( "No Properties defined for the Vertical Axis" ),
@@ -21,10 +21,10 @@ public enum BarChartError {
    private String message;
    
    /**
-    * Constructs a new {@link BarChartError}.
+    * Constructs a new {@link GraphError}.
     * @param message the associated message with the error.
     */
-   private BarChartError( String message ) {
+   private GraphError( String message ) {
       this.message = message;
    }// End Constructor
    

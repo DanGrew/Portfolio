@@ -12,8 +12,8 @@ import java.io.Serializable;
 import model.data.SerializedSingleton;
 
 /**
- * {@link Serializable} form of the {@link BarChartGraph}.
+ * {@link Serializable} form of the {@link Graph}.
  */
-public interface SerializableBarChart extends SerializedSingleton< BarChartGraph >{
+public interface SerializableGraph extends SerializedSingleton< Graph >{
 
 }// End Interface

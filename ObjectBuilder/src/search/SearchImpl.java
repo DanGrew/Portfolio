@@ -58,7 +58,7 @@ import architecture.request.RequestSystem;
          for ( Entry< PropertyType, Object > entry : filteredProperties.entrySet() ) {
             if ( object.getDefinition().hasProperty( entry.getKey() ) ) {
                //If defined to have property.
-               if ( object.get( entry.getKey() ) == entry.getValue() ) {
+               if ( object.get( entry.getKey() ).equals( entry.getValue() ) ){
                   //If value does not match for any, exclude.
                   return true;
                }

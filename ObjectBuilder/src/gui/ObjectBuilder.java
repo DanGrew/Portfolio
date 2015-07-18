@@ -7,12 +7,16 @@
  */
 package gui;
 
+import graphs.barchart.Graph;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import object.BuilderObjectImpl;
 import objecttype.DefinitionImpl;
 import propertytype.PropertyTypeImpl;
 import search.SearchImpl;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
+
 import command.Command;
 import command.MethodCallCommandImpl;
 import command.NewCommandImpl;
@@ -28,6 +32,15 @@ import commands.parameters.ObjectBuilderClassParameterTypes;
  */
 public class ObjectBuilder {
 
+   /**
+    * Method to perform the initialisation needed to launch JavaFX components.
+    * Note that this is not ideal and needs to be investigated.
+    */
+   public static void launchJavaFxForSwingEnvironment(){
+      new JFXPanel();
+      Platform.setImplicitExit( false );
+   }// End Method
+   
    public static void main( String[] args ) {
       RequestSystem.store( PropertyTypeCommands.CREATE_PROPERTY_TYPE_COMMAND, Command.class );
       RequestSystem.store( PropertyTypeCommands.VIEW_PROPERTY_TYPES_COMMAND, Command.class );
@@ -46,6 +59,7 @@ public class ObjectBuilder {
       CaliSystem.register( PropertyTypeImpl.class );
       CaliSystem.register( DefinitionImpl.class );
       CaliSystem.register( SearchImpl.class );
+      CaliSystem.register( Graph.class );
       
       ObjectBuilderClassParameterTypes.initialiseTypes();
       new CommandInterpreter();
