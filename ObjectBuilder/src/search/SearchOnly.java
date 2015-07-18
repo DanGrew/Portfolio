@@ -22,7 +22,7 @@ import architecture.request.RequestSystem;
  * {@link SearchOnly} provides a {@link Search} that the criteria adds matches to, an
  * inclusive search.
  */
-public class SearchOnly extends SearchImpl< SerializableSearchOnly > implements Search{
+@Cali public class SearchOnly extends SearchImpl< SerializableSearchOnly > implements Search{
 
    private Map< PropertyType, Object > includePropertyValues;
    
@@ -30,7 +30,7 @@ public class SearchOnly extends SearchImpl< SerializableSearchOnly > implements 
     * Constructs a new {@link SearchOnly}.
     * @param identification the unique id fo rthe {@link Search}.
     */
-   public SearchOnly( String identification ) {
+   @Cali public SearchOnly( String identification ) {
       super( identification );
       includePropertyValues = new HashMap< PropertyType, Object >();
    }// End Constructor
@@ -38,7 +38,7 @@ public class SearchOnly extends SearchImpl< SerializableSearchOnly > implements 
    /**
     * {@inheritDoc}
     */
-   @Override public void identifyMatches() {
+   @Cali @Override public void identifyMatches() {
       clearMatches();
       
       Collection< BuilderObject > allObjects = RequestSystem.retrieveAll( BuilderObject.class );
@@ -86,7 +86,7 @@ public class SearchOnly extends SearchImpl< SerializableSearchOnly > implements 
    /**
     * Method to clear the included {@link PropertyType} values.
     */
-   public void clearIncludedPropertyValues() {
+   @Cali public void clearIncludedPropertyValues() {
       includePropertyValues.clear();
    }// End Method
 

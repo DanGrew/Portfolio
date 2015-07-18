@@ -14,8 +14,10 @@ import object.BuilderObjectImpl;
 import objecttype.DefinitionImpl;
 import propertytype.PropertyTypeImpl;
 import search.SearchAll;
+import search.SearchOnly;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
+
 import command.Command;
 import command.MethodCallCommandImpl;
 import command.NewCommandImpl;
@@ -58,6 +60,7 @@ public class ObjectBuilder {
       CaliSystem.register( PropertyTypeImpl.class );
       CaliSystem.register( DefinitionImpl.class );
       CaliSystem.register( SearchAll.class );
+      CaliSystem.register( SearchOnly.class );
       CaliSystem.register( Graph.class );
       
       ObjectBuilderClassParameterTypes.initialiseTypes();
