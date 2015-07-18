@@ -109,9 +109,13 @@ import annotation.Cali;
       this.dataSeries.add( search );
    }// End Method
 
+   /**
+    * Getter for the horizontal axis' label.
+    * @return the {@link String} label.
+    */
    public String getHorizontalAxisLabel() {
       return horizontalAxisLabel;
-   }
+   }// End Method
    
    /**
     * Setter for the label of the horizontal axis.
@@ -121,9 +125,13 @@ import annotation.Cali;
       this.horizontalAxisLabel = horizontalAxisLabel;
    }// End Method
    
+   /**
+    * Getter for the horizontal {@link PropertyType}.
+    * @return the {@link PropertyType} used for the horizontal axis.
+    */
    public PropertyType getHorizontalProperty() {
       return horizontalProperty;
-   }
+   }// End Method
    
    /**
     * Method to set the {@link PropertyType} for the information displayed on the
@@ -134,9 +142,13 @@ import annotation.Cali;
       horizontalProperty = property;
    }// End Method
    
+   /**
+    * Getter for the {@link PropertyType}s used for the vertical axis.
+    * @return a {@link List} of {@link PropertyType}s on the vertical axis.
+    */
    public List< PropertyType > getVerticalProperties() {
       return verticalProperties;
-   }
+   }// End Method
    
    /**
     * Method to add a vertical series to the graph.
@@ -153,9 +165,13 @@ import annotation.Cali;
       }
    }// End Method
    
+   /**
+    * Getter for the label used for the vertical axis.
+    * @return the {@link String} label.
+    */
    public String getVerticalAxisLabel() {
       return verticalAxisLabel;
-   }
+   }// End Method
    
    /**
     * Setter for the label of the vertical axis.
@@ -165,9 +181,13 @@ import annotation.Cali;
       this.verticalAxisLabel = verticalAxisLabel;
    }// End Method
    
+   /**
+    * Getter for the number to use when no value is defined.
+    * @return the {@link Number} used by default.
+    */
    public Number getDefaultValueForUndefinedNumber() {
-      return DEFAULT_UNDEFINED_NUMBER;
-   }
+      return undefinedNumber;
+   }// End Method
    
    /**
     * Setter for the default {@link Number} value to be used for a {@link Property} that has no value, or
@@ -178,9 +198,13 @@ import annotation.Cali;
       this.undefinedNumber = undefinedNumber;
    }// End Method
    
+   /**
+    * Getter for the default value used when a value is not specified for a {@link String}.
+    * @return the {@link String} default.
+    */
    public String getDefaultValueForUndefinedString() {
       return undefinedString;
-   }
+   }// End Method
    
    /**
     * Setter for the default {@link String} value to be used for a {@link Property} that has no value.
@@ -190,9 +214,13 @@ import annotation.Cali;
       this.undefinedString = undefinedString;
    }// End Method
    
+   /**
+    * Getter for the {@link Dimension2D} of the {@link Graph}.
+    * @return the {@link Dimension2D}.
+    */
    public Dimension2D getDimension() {
       return dimension;
-   }
+   }// End Method
    
    /**
     * Method to set the {@link Dimension2D} of the graph.

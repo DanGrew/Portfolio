@@ -26,7 +26,7 @@ import architecture.request.RequestSystem;
 /**
  * Basic implementation of the {@link Search}.
  */
-@Cali public class SearchImpl extends SingletonImpl< SerializableSearch > implements Search {
+@Cali public class SearchAll extends SingletonImpl< SerializableSearch > implements Search {
 
    private List< BuilderObject > matches;
    private Set< BuilderObject > filterInstances;
@@ -34,10 +34,10 @@ import architecture.request.RequestSystem;
    private Map< PropertyType, Object > filteredProperties;
    
    /**
-    * Constructs a new {@link SearchImpl}.
+    * Constructs a new {@link SearchAll}.
     * @param identification the {@link String} name of the {@link Search}, for reference.
     */
-   @Cali public SearchImpl( String identification ) {
+   @Cali public SearchAll( String identification ) {
       super( identification );
       matches = new ArrayList< BuilderObject >();
       filterInstances = new HashSet<>();

@@ -13,7 +13,7 @@ import javafx.embed.swing.JFXPanel;
 import object.BuilderObjectImpl;
 import objecttype.DefinitionImpl;
 import propertytype.PropertyTypeImpl;
-import search.SearchImpl;
+import search.SearchAll;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
 import command.Command;
@@ -57,7 +57,7 @@ public class ObjectBuilder {
       CaliSystem.register( BuilderObjectImpl.class );
       CaliSystem.register( PropertyTypeImpl.class );
       CaliSystem.register( DefinitionImpl.class );
-      CaliSystem.register( SearchImpl.class );
+      CaliSystem.register( SearchAll.class );
       CaliSystem.register( Graph.class );
       
       ObjectBuilderClassParameterTypes.initialiseTypes();

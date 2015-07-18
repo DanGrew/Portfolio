@@ -24,9 +24,9 @@ import propertytype.PropertyType;
 import architecture.request.RequestSystem;
 
 /**
- * Test for the {@link SearchImpl}.
+ * Test for the {@link SearchAll}.
  */
-public class SearchTest {
+public class SearchAllTest {
    
    private static final String TEST_PROPERTY_VALUE = "anySpecificValue";
    private static PropertyType ANY_PROPERTY;
@@ -69,11 +69,11 @@ public class SearchTest {
    }// End Method
 
    /**
-    * Test to prove the {@link SearchImpl} constructs correctly.
+    * Test to prove the {@link SearchAll} constructs correctly.
     */
    @Test public void shouldConstruct(){
       final String searchName = "anySearchName";
-      Search search = new SearchImpl( searchName );
+      Search search = new SearchAll( searchName );
       Assert.assertEquals( searchName, search.getIdentification() );
    }// End Method
    
@@ -81,7 +81,7 @@ public class SearchTest {
     * Test for initial matching.
     */
    @Test public void shouldMatchNothingInitially(){
-      Search search = new SearchImpl( "everything" );
+      Search search = new SearchAll( "everything" );
       
       Collection< BuilderObject > matches = new ArrayList<>( search.getMostResultMatches() );
       Assert.assertEquals( 
@@ -94,7 +94,7 @@ public class SearchTest {
     * Test for initial match result.
     */
    @Test public void shouldMatchEverything() {
-      Search search = new SearchImpl( "everything" );
+      Search search = new SearchAll( "everything" );
       search.identifyMatches();
       
       Collection< BuilderObject > matches = search.getMostResultMatches();
@@ -105,10 +105,10 @@ public class SearchTest {
    }// End Method
    
    /**
-    * {@link SearchImpl#filterInstance(BuilderObject)} test.
+    * {@link SearchAll#filterInstance(BuilderObject)} test.
     */
    @Test public void shouldMatchFilterParticularObjects() {
-      Search search = new SearchImpl( "objects" );
+      Search search = new SearchAll( "objects" );
       search.filterInstance( ANY_OBJECT_TWO );
       search.filterInstance( ANY_OBJECT_ONE );
       search.identifyMatches();
@@ -121,10 +121,10 @@ public class SearchTest {
    }// End Method
    
    /**
-    * {@link SearchImpl#clearFilteredObjects()} test.
+    * {@link SearchAll#clearFilteredObjects()} test.
     */
    @Test public void shouldClearFilteredObjects(){
-      Search search = new SearchImpl( "clearObjects" );
+      Search search = new SearchAll( "clearObjects" );
       search.filterInstance( ANY_OBJECT_TWO );
       search.filterInstance( ANY_OBJECT_ONE );
       search.identifyMatches();
@@ -145,10 +145,10 @@ public class SearchTest {
    }// End Method
    
    /**
-    * {@link SearchImpl#filterDefinition(Definition)} test.
+    * {@link SearchAll#filterDefinition(Definition)} test.
     */
    @Test public void shouldMatchFilterParticularDefinitions() {
-      Search search = new SearchImpl( "definitions" );
+      Search search = new SearchAll( "definitions" );
       search.filterDefinition( ANY_DEFINITION_TWO );
       search.identifyMatches();
       
@@ -160,10 +160,10 @@ public class SearchTest {
    }// End Method
    
    /**
-    * {@link SearchImpl#clearFilteredDefinitions()} test.
+    * {@link SearchAll#clearFilteredDefinitions()} test.
     */
    @Test public void shouldClearFilteredDefinitions() {
-      Search search = new SearchImpl( "clearDefinitions" );
+      Search search = new SearchAll( "clearDefinitions" );
       search.filterDefinition( ANY_DEFINITION_TWO );
       search.identifyMatches();
       
@@ -183,10 +183,10 @@ public class SearchTest {
    }// End Method
    
    /**
-    * {@link SearchImpl#filterProperty(PropertyType, Object)} test.
+    * {@link SearchAll#filterProperty(PropertyType, Object)} test.
     */
    @Test public void shouldMatchEverythingWithPropertyValue() {
-      Search search = new SearchImpl( "clearDefinitions" );
+      Search search = new SearchAll( "clearDefinitions" );
       
       search.filterProperty( ANY_PROPERTY, TEST_PROPERTY_VALUE );
       search.identifyMatches();
@@ -199,10 +199,10 @@ public class SearchTest {
    }// End Method
    
    /**
-    * {@link SearchImpl#clearFilteredProperties()} test.
+    * {@link SearchAll#clearFilteredProperties()} test.
     */
    @Test public void shouldClearPropertyValue() {
-      Search search = new SearchImpl( "clearDefinitions" );
+      Search search = new SearchAll( "clearDefinitions" );
       
       search.filterProperty( ANY_PROPERTY, TEST_PROPERTY_VALUE );
       search.identifyMatches();
@@ -221,5 +221,5 @@ public class SearchTest {
                matches 
       );
    }// End Method
-
+   
 }// End Class
