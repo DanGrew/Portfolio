@@ -312,7 +312,7 @@ import annotation.Cali;
                
                for ( PropertyType type : verticalProperties ) {
                   Series< String, Number > series = new Series<>();
-                  series.setName( type.getDisplayName() );
+                  series.setName( search.getIdentification() + "|" + type.getDisplayName() );
                   for ( BuilderObject object : matches ) {
                      Number verticalValue = defendNumber( object.get( type ) );
                      String horizontalValue = defendString( object.get( horizontalProperty ) );

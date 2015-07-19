@@ -89,6 +89,24 @@ public class BuilderObjectViewer extends JFrame {
                return columnType.getDisplayName();
          }
       } );
+      builder.isEditableFunction( ( row, column ) -> {
+         switch ( column ) {
+            case 0:
+               return false;
+            default:
+               return true;
+         }
+      } );
+      builder.setValueFunction( ( data, value, row, column ) -> {
+         switch ( column ) {
+            case 0:
+               return;
+            default:
+               BuilderObject builderObject = data.get( row );
+               PropertyType propertyType = builderObject.getDefinition().getPropertyTypes().get( column - 1 );
+               builderObject.set( propertyType, value );
+         }
+      } );
       
       FunctionalTable< BuilderObject > table = new FunctionalTable< BuilderObject >( builder );
       panel.add( new JScrollPane( table ), BorderLayout.CENTER );

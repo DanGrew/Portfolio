@@ -32,6 +32,8 @@ public class FunctionalTableModel< SingletonT extends Singleton > extends Abstra
       private Function< List< SingletonT >, Integer > columnCountFunction;
       private GetValueFunction< SingletonT > getValueFunction;
       private GetValueFunction< SingletonT > columnHeaderFunction;
+      private SetValueFunction< SingletonT > setValueFunction;
+      private IsEditableFunction< SingletonT > isEditableFunction;
       
       /**
        * Setter for the {@link List} of {@link Singleton}s defining the data.
@@ -64,6 +66,22 @@ public class FunctionalTableModel< SingletonT extends Singleton > extends Abstra
       public void columnHeaderFunction( GetValueFunction< SingletonT > function ) {
          this.columnHeaderFunction = function;
       }// End Method
+      
+      /**
+       * Setter for the {@link Function} used to set data in the table.
+       * @param function the {@link Function}.
+       */
+      public void setValueFunction( SetValueFunction< SingletonT > function ) {
+         this.setValueFunction = function;
+      }// End Method
+      
+      /**
+       * Setter for the {@link Function} used to determine whether a cell is editable.
+       * @param function the {@link Function}.
+       */
+      public void isEditableFunction( IsEditableFunction< SingletonT > function ) {
+         this.isEditableFunction = function;
+      }// End Method
    }// End Class
    
    /**
@@ -93,6 +111,26 @@ public class FunctionalTableModel< SingletonT extends Singleton > extends Abstra
     */
    @Override public Object getValueAt( int rowIndex, int columnIndex ) {
       return structure.getValueFunction.getValue( structure.data, rowIndex, columnIndex );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void setValueAt( Object aValue, int rowIndex, int columnIndex ) {
+      if ( structure.setValueFunction != null ) {
+         structure.setValueFunction.setValue( structure.data, aValue, rowIndex, columnIndex );
+      }
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean isCellEditable( int rowIndex, int columnIndex ) {
+      if ( structure.isEditableFunction != null ) {
+         return structure.isEditableFunction.isCellEditable( rowIndex, columnIndex );
+      } else {
+         return super.isCellEditable( rowIndex, columnIndex );
+      }
    }// End Method
    
    /**
