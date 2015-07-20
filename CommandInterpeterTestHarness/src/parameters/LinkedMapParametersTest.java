@@ -166,7 +166,7 @@ public class LinkedMapParametersTest {
       
       //Pass both checks
       Mockito.when( testParameter2.completeMatches( Mockito.anyString() ) ).thenReturn( true );
-      Assert.assertEquals( Arrays.asList( LinkedMapParametersImpl.READY ), parameters.getSuggestions( "anything" ) );
+      Assert.assertEquals( Arrays.asList( CommandParameter.READY ), parameters.getSuggestions( "anything" ) );
    }// End Method
    
 }// End Class
