@@ -7,6 +7,8 @@
  */
 package command;
 
+import java.util.List;
+
 import parameter.CommandParameter;
 
 /**
@@ -21,6 +23,13 @@ public interface Command< ReturnT > {
     * @return a {@link String} description.
     */
    public String getDescription();
+   
+   /**
+    * Method to get a {@link List} of suggestions for the remainder of the {@link Command}.
+    * @param input the current input for the {@link Command}.
+    * @return a {@link List} of {@link String} options for the {@link Command}.
+    */
+   public List< String > getSuggestions( String input );
    
    /**
     * Method to determine whether the given expression matches the key for the {@link Command}.

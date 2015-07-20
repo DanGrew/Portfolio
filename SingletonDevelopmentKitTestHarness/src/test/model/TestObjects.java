@@ -45,4 +45,16 @@ public class TestObjects {
          super( identification );
       }// End Constructor
    }// End Class
+   
+   /** Alternate version class of testable {@link Singleton} with clashing name. */
+   public static class TestAnotherSingletonImpl extends TestSingletonImpl {
+
+      /**
+       * Constructs a new {@link TestAnotherSingletonImpl}.
+       * @param identification the name.
+       */
+      public TestAnotherSingletonImpl( String identification ) {
+         super( identification );
+      }// End Constructor
+   }// End Class
 }

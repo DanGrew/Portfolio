@@ -7,6 +7,8 @@
  */
 package parameters;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -103,5 +105,43 @@ public class ClassParameterTest {
       Assert.assertNull( parameter.autoComplete( "anything" ) );
       Assert.assertNull( parameter.autoComplete( "" ) );
       Assert.assertNull( parameter.autoComplete( " " ) );
+   }// End Method
+   
+   /**
+    * {@link ClassParameterImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.assertEquals( 
+               Arrays.asList( ClassParameterTypes.STRING_PARAMETER_TYPE.getName(), ClassParameterTypes.NUMBER_PARAMETER_TYPE.getName() ), 
+               parameter.getSuggestions( "" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( ClassParameterTypes.STRING_PARAMETER_TYPE.getName() ), 
+               parameter.getSuggestions( "STR" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( ClassParameterTypes.STRING_PARAMETER_TYPE.getName() ), 
+               parameter.getSuggestions( "strin" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( ClassParameterTypes.STRING_PARAMETER_TYPE.getName() ), 
+               parameter.getSuggestions( "String" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( ClassParameterTypes.NUMBER_PARAMETER_TYPE.getName() ), 
+               parameter.getSuggestions( "Num" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( ClassParameterTypes.NUMBER_PARAMETER_TYPE.getName() ), 
+               parameter.getSuggestions( "NUM" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( ClassParameterTypes.NUMBER_PARAMETER_TYPE.getName() ), 
+               parameter.getSuggestions( "numbe" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList(), 
+               parameter.getSuggestions( "anything" ) 
+      );
    }// End Method
 }// End Class

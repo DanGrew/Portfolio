@@ -7,12 +7,23 @@
  */
 package parameter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The {@link NumberParameterImpl} provides the implementation for the {@link CommandParameter} where
  * the only accepted input is a {@link Number} value.
  */
 public class NumberParameterImpl implements CommandParameter {
 
+   public static final String ANY_NUMBER = "<number>";
+   private static final List< String > SUGGESTIONS;
+   
+   static {
+      SUGGESTIONS = new ArrayList<>();
+      SUGGESTIONS.add( ANY_NUMBER );
+   }
+   
    /**
     * {@inheritDoc}
     */
@@ -23,8 +34,18 @@ public class NumberParameterImpl implements CommandParameter {
    /**
     * {@inheritDoc}
     */
+   @Override public List< String > getSuggestions( String expression ) {
+      return SUGGESTIONS;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public boolean partialMatches( String expression ) {
       String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      if ( parameter.isEmpty() ) {
+         return true;
+      }
       try {
          Double.valueOf( parameter );
          return true;
@@ -37,6 +58,9 @@ public class NumberParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public boolean completeMatches( String expression ) {
+      if ( expression.isEmpty() ) {
+         return false;
+      }
       return partialMatches( expression );
    }// End Method
    

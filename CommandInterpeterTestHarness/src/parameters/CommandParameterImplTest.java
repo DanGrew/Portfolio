@@ -7,6 +7,8 @@
  */
 package parameters;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -98,5 +100,12 @@ public class CommandParameterImplTest {
     */
    @Test public void shouldNotAutoComplete() {
       Assert.assertNull( parameter.autoComplete( "anything" ) );
+   }// End Method
+   
+   /**
+    * {@link CommandParameterImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.assertEquals( Arrays.asList(), parameter.getSuggestions( "anything" ) );
    }// End Method
 }// End Class

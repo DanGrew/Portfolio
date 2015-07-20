@@ -7,6 +7,7 @@
  */
 package command;
 
+import java.util.List;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
@@ -47,6 +48,13 @@ public class ParameterizedCommandImpl< ReturnT > implements Command< ReturnT >{
     */
    @Override public String getDescription() {
       return description;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String input ) {
+      return parameters.getSuggestions( input );
    }// End Method
    
    /**

@@ -41,6 +41,7 @@ public class SearchAllTest {
     * Method to setup the {@link Singleton}s for the test.
     */
    @BeforeClass public static void setup(){
+      RequestSystem.reset();
       ANY_PROPERTY = Mockito.mock( PropertyType.class );
       RequestSystem.store( ANY_PROPERTY );
       

@@ -20,6 +20,9 @@ import command.NewCommandImpl;
 /**
  * The {@link Cali} provides a launcher for the {@link CommandInterpreter} with
  * {@link Cali} {@link Command}s.
+ * 
+ * Requirements:
+ *  - No methods/constructors are overloaded with the same number of parameters.
  */
 public class Cali {
 

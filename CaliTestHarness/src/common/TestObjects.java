@@ -102,9 +102,17 @@ public class TestObjects {
       /**
        * Constructs a new {@link TestAnotherAnnotatedSingletonImpl}.
        * @param identification the name.
+       */
+      @Cali public TestAnotherAnnotatedSingletonImpl( String identification ) {
+         super( identification );
+      }// End Constructor
+      
+      /**
+       * Constructs a new {@link TestAnotherAnnotatedSingletonImpl}.
+       * @param identification the name.
        * @param anotherValue another value.
        */
-      @Cali public TestAnotherAnnotatedSingletonImpl( String identification, String anotherValue ) {
+      @Cali public TestAnotherAnnotatedSingletonImpl( String identification, Double anotherValue ) {
          super( identification );
       }// End Constructor
    }// End Class

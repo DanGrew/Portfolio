@@ -22,18 +22,18 @@ import command.Command;
  * The {@link SuggestionsModel} supports the {@link JList} providing suggestions to the user
  * based on their input.
  */
-public class SuggestionsModel extends AbstractListModel< Command< ? > >{
+public class SuggestionsModel extends AbstractListModel< CommandSuggestion >{
 
    private static final long serialVersionUID = 1L;
-   private JList< Command< ? > > parent;
-   private List< Command< ? > > data;
+   private JList< CommandSuggestion > parent;
+   private List< CommandSuggestion > data;
    
    /**
     * Constructs a new {@link SuggestionsModel}.
     * @param parent the {@link JList} being modelled.
     */
-   public SuggestionsModel( JList< Command< ? > > parent ) {
-      data = new ArrayList< Command< ? > >();
+   public SuggestionsModel( JList< CommandSuggestion > parent ) {
+      data = new ArrayList< CommandSuggestion >();
       this.parent = parent;
       
       EventSystem.registerForEvent( CommandInput.Events.TextInput, ( object, source ) -> {
@@ -46,14 +46,19 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
     * @param input the new input {@link String}.
     */
    private void inputChanged( String input ) {
-      Command< ? > selected = parent.getSelectedValue();
+      CommandSuggestion selected = parent.getSelectedValue();
       
       data.clear();
       @SuppressWarnings("rawtypes") List< Command > commands = RequestSystem.retrieveAll( 
                Command.class, 
                command -> { return command.partialMatches( input ); } 
       );
-      commands.forEach( command -> data.add( command ) );
+      commands.forEach( command -> {
+         List< String > suggestions = command.getSuggestions( input );
+         suggestions.forEach( suggestion -> {
+            data.add( new CommandSuggestion( command, suggestion ) );
+         } );
+      } );
       fireContentsChanged( this, 0, data.size() );
       
       parent.setSelectedIndex( -1 );
@@ -74,7 +79,7 @@ public class SuggestionsModel extends AbstractListModel< Command< ? > >{
    /**
     * {@inheritDoc}
     */
-   @Override public Command< ? > getElementAt( int index ) {
+   @Override public CommandSuggestion getElementAt( int index ) {
       if ( index < 0 || index >= data.size() ) {
          return null;
       } else {

@@ -7,10 +7,10 @@
  */
 package parameter.wrapper;
 
+import java.util.List;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
-
 import command.Command;
 
 /**
@@ -18,7 +18,14 @@ import command.Command;
  * This is used for executing {@link Function}s and providing controlled access to the {@link CommandParameter}s.
  */
 public interface CommandParameters extends Iterable< CommandParameter >{
-
+   
+   /**
+    * Method to get a {@link List} of suggestions for the remainder of the {@link CommandParameters}.
+    * @param input the current input for the {@link CommandParameters}.
+    * @return a {@link List} of {@link String} options for the {@link CommandParameters}.
+    */
+   public List< String > getSuggestions( String expression );
+   
    /**
     * Method to apply the given {@link CommandParameter}s to this {@link CommandParameters}. This will assume
     * null values until parameterized.

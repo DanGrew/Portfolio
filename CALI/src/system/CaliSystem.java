@@ -26,6 +26,13 @@ public class CaliSystem {
    private static CaliDatabase database = new CaliDatabase();
 
    /**
+    * @return {@link CaliDatabase#getCaliClasses()}.
+    */
+   public static List< Class< ? > > getCaliClasses(){
+      return database.getCaliClasses();
+   }// End Method
+   
+   /**
     * {@link CaliDataManagement#completeMatch(String)}.
     */
    public static List< Singleton > completeMatch( String testSingletonName ) {
@@ -99,6 +106,17 @@ public class CaliSystem {
          return caliDataManagement.matchMethodSignature( clazz, methodPartialName, parameterCountExpected );
       }
       return null;
+   }// End Method
+
+   /**
+    * @return {@link CaliDataManagement#findConstructors(Class, Integer)}.
+    */
+   public static List< Constructor< ? > > findConstructors( Class< ? > clazz, Integer numberOfParameterEntered ) {
+      if ( database.contains( clazz ) ) {
+         return caliDataManagement.findConstructors( clazz, numberOfParameterEntered );
+      } else {
+         return new ArrayList<>();
+      }
    }// End Method
 
 }// End Class

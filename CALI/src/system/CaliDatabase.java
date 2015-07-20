@@ -67,6 +67,14 @@ public class CaliDatabase {
       }
       return allMatches;
    }// End Method
+   
+   /**
+    * Method to get a {@link List} of all {@link Class}es currently managed by the {@link CaliDatabase}.
+    * @return a {@link List} of {@link Class}es using {@link Cali}.
+    */
+   public List< Class< ? > > getCaliClasses(){
+      return new ArrayList<>( caliClasses );
+   }// End Method
 
    /**
     * Method to reset the {@link CaliDatabase}.

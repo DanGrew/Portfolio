@@ -15,19 +15,19 @@ import model.singleton.Singleton;
 import architecture.request.RequestSystem;
 
 /**
- * The {@link SingletonReferenceParameterImpl} provides a {@link CommandParameter} for referencing
+ * The {@link SingletonNameAsReferenceParameterImpl} provides a {@link CommandParameter} for referencing
  * {@link Singleton}s stored in the {@link RequestSystem}.
  */
-public class SingletonReferenceParameterImpl implements CommandParameter {
+public class SingletonNameAsReferenceParameterImpl implements CommandParameter {
 
    private List< Class< ? extends Singleton > > referencedTypes;
    
    /**
-    * Constructs a new {@link SingletonReferenceParameterImpl}.
+    * Constructs a new {@link SingletonNameAsReferenceParameterImpl}.
     * @param referenceTypes the type of {@link Class} that can be referenced.
     */
    @SafeVarargs 
-   public SingletonReferenceParameterImpl( Class< ? extends Singleton >... referenceTypes ) {
+   public SingletonNameAsReferenceParameterImpl( Class< ? extends Singleton >... referenceTypes ) {
       if ( referenceTypes.length == 0 ) {
          throw new IllegalArgumentException( "Must supply reference types." );
       }
@@ -45,6 +45,21 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
       }
       buffer.append( "] " );
       return buffer.toString();
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      List< String > suggestions = new ArrayList<>();
+      String parameter = CommandParameterParseUtilities.parseSingle( expression );
+      for ( Class< ? extends Singleton > clazz : referencedTypes ) {
+         List< ? extends Singleton > matching = RequestSystem.retrieveAll( 
+                  clazz, object -> object.getIdentification().startsWith( parameter ) 
+         );
+         matching.forEach( singleton -> suggestions.add( singleton.getIdentification() ) );
+      }
+      return suggestions;
    }// End Method
 
    /**

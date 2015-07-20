@@ -7,6 +7,10 @@
  */
 package parameter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * {@link CommandParameter} that parses a single value.
  */
@@ -34,6 +38,17 @@ public class FixedValueParameterImpl implements CommandParameter {
     */
    @Override public String getParameterType() {
       return value;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      if ( value.toLowerCase().startsWith( expression.toLowerCase() ) ) {
+         return Arrays.asList( value );
+      } else {
+         return new ArrayList<>();
+      }
    }// End Method
 
    /**

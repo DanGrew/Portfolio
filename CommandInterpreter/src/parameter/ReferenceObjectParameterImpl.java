@@ -31,7 +31,7 @@ public class ReferenceObjectParameterImpl implements CommandParameter {
       if ( referenceTypes.length == 0 ) {
          throw new IllegalArgumentException( "Must supply reference types." );
       }
-      this.referencedTypes = new ArrayList< Class<? extends Singleton > >();
+      this.referencedTypes = new ArrayList< Class< ? extends Singleton > >();
       this.referencedTypes.addAll( Arrays.asList( referenceTypes ) );
    }// End Constructor
 
@@ -40,6 +40,66 @@ public class ReferenceObjectParameterImpl implements CommandParameter {
     */
    @Override public String getParameterType() {
       return "REF[ ?Singleton? ] + Singleton#getIdentification()";
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      String[] parameters = CommandParameterParseUtilities.parseParameters( 2, expression );
+      String className = parameters[ 0 ];
+      String reference = parameters[ 1 ];
+      
+      if ( completeMatchesClass( className ) ) {
+         return suggestSingletons( className, reference );
+      } else if ( reference.isEmpty() ) {
+         List< String > suggestions = new ArrayList<>();
+         for ( Class< ? > clazz : referencedTypes ) {
+            if ( clazz.getSimpleName().startsWith( className ) ) {
+               suggestions.add( clazz.getSimpleName() );
+            }
+         }
+         return suggestions;
+      } else {
+         return suggestSingletons( className, reference );
+      }
+   }// End Method
+   
+   /**
+    * Method to determine whether the given {@link Class} name matches any of the referenced
+    * types exactly.
+    * @param className the {@link Class} name input.
+    * @return true if completely matches any.
+    */
+   private boolean completeMatchesClass( String className ) {
+      for ( Class< ? extends Singleton > clazz : referencedTypes ) {
+         if ( clazz.getSimpleName().equals( className ) ) {
+            return true;
+         }
+      }
+      return false;
+   }// End Method
+   
+   /**
+    * Method to construct a {@link List} of suggestion for the given {@link Class} name and
+    * reference. 
+    * @param className the {@link Class} name, assumed complete.
+    * @param reference the partial name of the {@link Singleton}.
+    * @return a {@link List} of suggested {@link Singleton} names.
+    */
+   private List< String > suggestSingletons( String className, String reference ){
+      List< String > suggestions = new ArrayList<>();
+      for ( Class< ? extends Singleton > clazz : referencedTypes ) {
+         if ( clazz.getSimpleName().equals( className ) ) {
+            List< ? extends Singleton > singletons = RequestSystem.retrieveAll( 
+                     clazz, object -> { return object.getIdentification().startsWith( reference ); } 
+            );
+            if ( !singletons.isEmpty() ) {
+               singletons.forEach( singleton -> suggestions.add( singleton.getIdentification() ) );
+            }
+         }
+      }
+      return suggestions;
    }// End Method
    
    /**

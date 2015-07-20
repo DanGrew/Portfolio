@@ -7,6 +7,8 @@
  */
 package parameters;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,6 +34,7 @@ public class NumberParameterTest {
     * {@link NumberParameterImpl#partialMatches(String)} acceptance test.
     */
    @Test public void shouldPartialMatch() {
+      Assert.assertTrue( parameter.partialMatches( "" ) );
       Assert.assertTrue( parameter.partialMatches( "123" ) );
       Assert.assertTrue( parameter.partialMatches( "78.984" ) );
    }// End Method
@@ -56,7 +59,6 @@ public class NumberParameterTest {
     */
    @Test public void shouldNotCompleteMatch() {
       Assert.assertFalse( parameter.completeMatches( "" ) );
-      Assert.assertFalse( parameter.completeMatches( " " ) );
       Assert.assertFalse( parameter.completeMatches( "anything" ) );
    }// End Method
    
@@ -101,5 +103,12 @@ public class NumberParameterTest {
       Assert.assertNull( parameter.autoComplete( "anything" ) );
       Assert.assertNull( parameter.autoComplete( "" ) );
       Assert.assertNull( parameter.autoComplete( " " ) );
+   }// End Method
+   
+   /**
+    * {@link NumberParameterImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.assertEquals( Arrays.asList( NumberParameterImpl.ANY_NUMBER ), parameter.getSuggestions( "anything" ) );
    }// End Method
 }// End Class

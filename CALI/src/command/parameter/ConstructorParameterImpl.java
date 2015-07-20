@@ -31,6 +31,118 @@ public class ConstructorParameterImpl implements CommandParameter {
    @Override public String getParameterType() {
       return "Constructor( parameters )";
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      List< String > suggestions = new ArrayList<>();
+      
+      String objectNamePart = CaliParserUtilities.extractObjectType( expression );
+      List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
+      if ( !objectClasses.isEmpty() ) {
+         expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
+         
+         CodeParametersResult result = CaliParserUtilities.extractParameters( expression );
+         boolean completeParameter = expression.trim().endsWith( CaliParserUtilities.parameterDelimiter() );
+         
+         switch ( result.getResult() ) {
+            case DOES_NOT_OPEN:
+            case EMPTY_NO_OPEN:
+               suggestions.addAll( suggestAllClasses( objectClasses ) );
+               break;
+            case OPEN_NO_PARAMETERS:
+               suggestions.addAll( suggestOpenNoParameters( objectNamePart, objectClasses, null, completeParameter ) );
+               break;
+            case PARAMETERS_NO_CLOSE:
+               suggestions.addAll( suggestOpenNoParameters( 
+                        objectNamePart, 
+                        objectClasses, 
+                        result.getNumberOfParameters(),
+                        completeParameter
+               ) );
+               break;
+            case SUCCESS:
+               Object[] parameters = result.getParameters();
+               retrieveConstructor( objectNamePart, parameters );
+               break;
+            default:
+               break;
+         }
+      }
+      return suggestions;
+   }// End Method
+   
+   /**
+    * Method to construct suggestions for all of the identified {@link Class}es.
+    * @param classes the {@link Class}es that can be used with this {@link CommandParameter}.
+    * @return a {@link List} of {@link String} suggestions.
+    */
+   private List< String > suggestAllClasses( List< Class< ? > > classes ) {
+      List< String > suggestions = new ArrayList<>();
+      classes.forEach( clazz -> suggestions.add( clazz.getSimpleName() + CaliParserUtilities.open() ) );
+      return suggestions;
+   }// End Method
+   
+   /**
+    * Method to construct suggestions for the given name of the object and the {@link Class}es that 
+    * could represent it. If the name matches any exactly, the parameters are described, otherwise
+    * the list of objects are suggested.
+    * @param objectNamePart the name input, can be partial or empty.
+    * @param classes the {@link Class}es that could match the name.
+    * @param numberOfParametersEntered the number of parameters entered, can be null indicating none.
+    * @param completeParameter whether the expression has ended the last parameter.
+    * @return a {@link List} of suggestions for the given criteria.
+    */
+   private List< String > suggestOpenNoParameters( String objectNamePart, List< Class< ? > > classes, Integer numberOfParametersEntered, boolean completeParameter ) {
+      Class< ? > exactMatch = null;
+      for ( Class< ? > clazz : classes ) {
+         if ( objectNamePart.equals( clazz.getSimpleName() ) ) {
+            exactMatch = clazz;
+            break;
+         }
+      }
+      
+      if ( exactMatch == null ) {
+         return suggestAllClasses( classes );
+      } else {
+         return suggestAllConstructorsParameters( exactMatch, numberOfParametersEntered, completeParameter );
+      }
+   }// End Method
+   
+   /**
+    * Method to suggest the {@link Constructor} parameters given the criteria.
+    * @param clazz the {@link Class} of the object identified.
+    * @param numberOfParametersEntered the number of parameters entered for the {@link Constructor}.
+    * @param completeParameter whether the last parameter entered has been completed.
+    * @return a {@link List} of {@link String} suggestions of the parameter combinations.
+    */
+   private List< String > suggestAllConstructorsParameters( Class< ? > clazz, Integer numberOfParametersEntered, boolean completeParameter ){
+      List< String > suggestions = new ArrayList<>();
+      List< Constructor< ? > > constructors = CaliSystem.findConstructors( clazz, numberOfParametersEntered );
+      
+      if ( numberOfParametersEntered == null ) {
+         numberOfParametersEntered = 0;
+      } else if ( !completeParameter ) {
+         numberOfParametersEntered--;
+      }
+      for ( Constructor< ? > constructor : constructors ) {
+         StringBuffer buffer = new StringBuffer();
+         for ( int i = numberOfParametersEntered; i < constructor.getParameterCount(); i++ ) {
+            Class< ? > parameter = constructor.getParameterTypes()[ i ];
+            buffer.append( CaliParserUtilities.getDescriptionOfParameter( parameter ) );
+            buffer.append( CaliParserUtilities.parameterDelimiter() );
+            buffer.append( CommandParameterParseUtilities.delimiter() );
+         }
+         if ( buffer.length() > 0 ) {
+            buffer.setLength( buffer.length() - 2 );
+            buffer.append( CommandParameterParseUtilities.delimiter() );
+         }
+         buffer.append( CaliParserUtilities.close() );
+         suggestions.add( buffer.toString() );
+      }
+      return suggestions;
+   }// End Method
 
    /**
     * {@inheritDoc}

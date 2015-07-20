@@ -7,6 +7,9 @@
  */
 package parameter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
 
@@ -21,6 +24,19 @@ public class ClassParameterImpl implements CommandParameter {
     */
    @Override public String getParameterType() {
       return "class";
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      List< String > suggestions = new ArrayList<>();
+      for ( ClassParameterType clazz : ClassParameterTypes.types() ) {
+         if ( clazz.getName().toLowerCase().startsWith( expression.toLowerCase() ) ) {
+            suggestions.add( clazz.getName() );
+         }
+      }
+      return suggestions;
    }// End Method
 
    /**

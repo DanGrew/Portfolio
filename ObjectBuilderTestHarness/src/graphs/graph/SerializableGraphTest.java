@@ -23,7 +23,6 @@ import org.junit.rules.TemporaryFolder;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
-import serialization.XmlPropertyTypeWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
 

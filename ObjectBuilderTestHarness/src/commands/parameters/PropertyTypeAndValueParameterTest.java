@@ -123,5 +123,9 @@ public class PropertyTypeAndValueParameterTest {
    @Test public void shouldNotAutoComplete() {
       Assert.assertNull( parameter.autoComplete( "anything" + DELIMITER + 12 ) );
    }// End Method
+   
+   @Test public void shouldSuggest(){
+      Assert.fail();
+   }
 
 }// End Class

@@ -41,7 +41,7 @@ public class Suggestions extends JPanel {
    public Suggestions() {
       setLayout( new BorderLayout() );
       setPreferredSize( new Dimension( 450, 400 ) );
-      JList< Command< ? > > list = new JList< Command< ? > >();
+      JList< CommandSuggestion > list = new JList< CommandSuggestion >();
       list.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
       list.setModel( new SuggestionsModel( list ) );
       list.getSelectionModel().addListSelectionListener( event -> {
@@ -85,11 +85,15 @@ public class Suggestions extends JPanel {
    
    /**
     * Method to refresh the current selection in the {@link JList}.
-    * @param list the {@link JList} holding the {@link Command}s.
+    * @param list the {@link JList} holding the {@link CommandSuggestion}s.
     */
-   private void refreshSelection( JList< Command< ? > > list ){
-      Command< ? > selected = list.getSelectedValue();
-      EventSystem.raiseEvent( Events.CommandSelected, selected );
+   private void refreshSelection( JList< CommandSuggestion > list ){
+      CommandSuggestion selected = list.getSelectedValue();
+      if ( selected != null ) {
+         EventSystem.raiseEvent( Events.CommandSelected, selected.getCommand() );
+      } else {
+         EventSystem.raiseEvent( Events.CommandSelected, null );
+      }
    }// End Method
 
 }// End Class

@@ -7,10 +7,13 @@
  */
 package commands.parameters.extensions;
 
-import architecture.request.RequestSystem;
+import java.util.Arrays;
+import java.util.List;
+
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import propertytype.PropertyType;
+import architecture.request.RequestSystem;
 
 /**
  * The {@link PropertyTypeAndValueParameterImpl} is responsible for providing a {@link CommandParameter}
@@ -23,6 +26,13 @@ public class PropertyTypeAndValueParameterImpl implements CommandParameter {
     */
    @Override public String getParameterType() {
       return "REF[ PropertyType ] + value";
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      return Arrays.asList( getParameterType() );
    }// End Method
    
    /**

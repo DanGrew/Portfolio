@@ -7,6 +7,8 @@
  */
 package parameters;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -110,6 +112,17 @@ public class FixedValueParameterTest implements CommandParameterVerifier{
     */
    @Test @Override public void shouldNotAutoComplete() {
       Assert.assertNull( parameter.autoComplete( "no match" ) );
+   }// End Method
+   
+   /**
+    * {@link FixedValueParameterImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.assertEquals( Arrays.asList( VALUE ), parameter.getSuggestions( "any" ) );
+      Assert.assertEquals( Arrays.asList( VALUE ), parameter.getSuggestions( "" ) );
+      Assert.assertEquals( Arrays.asList( VALUE ), parameter.getSuggestions( "anything" ) );
+      Assert.assertEquals( Arrays.asList( VALUE ), parameter.getSuggestions( "ANY" ) );
+      Assert.assertEquals( Arrays.asList(), parameter.getSuggestions( "somethingElse" ) );
    }// End Method
 
 }// End Class

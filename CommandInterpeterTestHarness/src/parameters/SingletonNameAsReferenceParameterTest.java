@@ -7,6 +7,8 @@
  */
 package parameters;
 
+import java.util.Arrays;
+
 import model.singleton.Singleton;
 
 import org.junit.Assert;
@@ -14,15 +16,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import parameter.CommandParameter;
-import parameter.SingletonReferenceParameterImpl;
+import parameter.SingletonNameAsReferenceParameterImpl;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
 import architecture.request.RequestSystem;
 
 /**
- * Test for the {@link SingletonReferenceParameterImpl}.
+ * Test for the {@link SingletonNameAsReferenceParameterImpl}.
  */
-public class SingletonReferenceParameterTest {
+public class SingletonNameAsReferenceParameterTest {
    
    private static final String TEST_SINGLETON = "TestSingleton";
    private static TestSingleton TEST_SINGLETON_OBJECT;
@@ -35,11 +37,11 @@ public class SingletonReferenceParameterTest {
       RequestSystem.reset();
       TEST_SINGLETON_OBJECT = new TestSingletonImpl( TEST_SINGLETON );
       RequestSystem.store( TEST_SINGLETON_OBJECT, TestSingleton.class );
-      parameter = new SingletonReferenceParameterImpl( TestSingleton.class );
+      parameter = new SingletonNameAsReferenceParameterImpl( TestSingleton.class );
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#partialMatches(String)} acceptance test.
+    * {@link SingletonNameAsReferenceParameterImpl#partialMatches(String)} acceptance test.
     */
    @Test public void shouldPartialMatch() {
       Assert.assertTrue( parameter.partialMatches( "Te" ) );
@@ -48,7 +50,7 @@ public class SingletonReferenceParameterTest {
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#partialMatches(String)} reject test.
+    * {@link SingletonNameAsReferenceParameterImpl#partialMatches(String)} reject test.
     */
    @Test public void shouldNotPartialMatch() {
       Assert.assertFalse( parameter.partialMatches( "anything" ) );
@@ -57,14 +59,14 @@ public class SingletonReferenceParameterTest {
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#completeMatches(String)} acceptance test.
+    * {@link SingletonNameAsReferenceParameterImpl#completeMatches(String)} acceptance test.
     */
    @Test public void shouldCompleteMatch() {
       Assert.assertTrue( parameter.completeMatches( TEST_SINGLETON ) );
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#completeMatches(String)} reject test.
+    * {@link SingletonNameAsReferenceParameterImpl#completeMatches(String)} reject test.
     */
    @Test public void shouldNotCompleteMatch() {
       Assert.assertFalse( parameter.completeMatches( "" ) );
@@ -73,7 +75,7 @@ public class SingletonReferenceParameterTest {
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#extractInput(String)} acceptance test.
+    * {@link SingletonNameAsReferenceParameterImpl#extractInput(String)} acceptance test.
     */
    @Test public void shouldExtract() {
       final String testRemainder = "anything";
@@ -83,7 +85,7 @@ public class SingletonReferenceParameterTest {
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#parseObject(String)} acceptance test.
+    * {@link SingletonNameAsReferenceParameterImpl#parseObject(String)} acceptance test.
     */
    @Test public void shouldParse() {
       Assert.assertEquals( TEST_SINGLETON_OBJECT, parameter.parseObject( TEST_SINGLETON ) );
@@ -93,26 +95,44 @@ public class SingletonReferenceParameterTest {
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#parseObject(String)} reject test.
+    * {@link SingletonNameAsReferenceParameterImpl#parseObject(String)} reject test.
     */
    @Test public void shouldNotParse() {
       Assert.assertNull( parameter.parseObject( "anything" ) );
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#autoComplete(String)} acceptance test.
+    * {@link SingletonNameAsReferenceParameterImpl#autoComplete(String)} acceptance test.
     */
    @Test public void shouldAutoComplete() {
       Assert.assertEquals( TEST_SINGLETON, parameter.autoComplete( "Te" ) );
    }// End Method
    
    /**
-    * {@link SingletonReferenceParameterImpl#autoComplete(String)} reject test.
+    * {@link SingletonNameAsReferenceParameterImpl#autoComplete(String)} reject test.
     */
    @Test public void shouldNotAutoComplete() {
       Assert.assertNull( parameter.autoComplete( "tes" ) );
       Assert.assertNull( parameter.autoComplete( "anything" ) );
       Assert.assertNull( parameter.autoComplete( "" ) );
       Assert.assertNull( parameter.autoComplete( " " ) );
+   }// End Method
+   
+   /**
+    * {@link SingletonNameAsReferenceParameterImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.assertEquals( 
+               Arrays.asList( TEST_SINGLETON ),
+               parameter.getSuggestions( "" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList(),
+               parameter.getSuggestions( "anythingElse" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( TEST_SINGLETON ),
+               parameter.getSuggestions( "Test" ) 
+      );
    }// End Method
 }// End Class

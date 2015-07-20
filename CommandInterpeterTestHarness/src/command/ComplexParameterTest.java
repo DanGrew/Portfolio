@@ -7,6 +7,8 @@
  */
 package command;
 
+import java.util.Arrays;
+
 import model.singleton.Singleton;
 
 import org.junit.Assert;
@@ -74,7 +76,7 @@ public class ComplexParameterTest {
     * Method to test that {@link Command#completeMatches(String)} accepts correctly.
     */
    @Test public void shouldCompleteMatch() {
-      Assert.assertTrue( command.partialMatches( 
+      Assert.assertTrue( command.completeMatches( 
                KEY_PARAMETER + DELIMITER + TRUE + DELIMITER + 
                TestSingleton.class.getSimpleName() + DELIMITER + TEST_SINGLETON + 
                DELIMITER + TRUE ) 
@@ -90,6 +92,36 @@ public class ComplexParameterTest {
     */
    @Test public void shouldAutoComplete(){
       Assert.assertEquals( KEY_PARAMETER + " gh", command.autoComplete( KEY_PARAMETER + " gh" ) );
+   }// End Method
+   
+   /**
+    * {@link CommandParameter#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.assertEquals( 
+               Arrays.asList( KEY_PARAMETER ),
+               command.getSuggestions( "" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "true", "false" ),
+               command.getSuggestions( KEY_PARAMETER ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( TestSingleton.class.getSimpleName() ),
+               command.getSuggestions( KEY_PARAMETER + DELIMITER + TRUE ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( TEST_SINGLETON ),
+               command.getSuggestions( KEY_PARAMETER + DELIMITER + TRUE + DELIMITER + 
+                        TestSingleton.class.getSimpleName() 
+               )
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "true", "false" ),
+               command.getSuggestions( KEY_PARAMETER + DELIMITER + TRUE + DELIMITER + 
+                        TestSingleton.class.getSimpleName() + DELIMITER + TEST_SINGLETON 
+               )
+      );
    }// End Method
 
 }// End Class

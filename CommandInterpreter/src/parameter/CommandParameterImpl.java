@@ -7,17 +7,27 @@
  */
 package parameter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The {@link CommandParameterImpl} provides the implementation of the {@link CommandParameter}
  * interface.
  */
 public class CommandParameterImpl implements CommandParameter{
-
+   
    /**
     * {@inheritDoc}
     */
    @Override public String getParameterType() {
       return "string";
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      return new ArrayList< String >();
    }// End Method
    
    /**

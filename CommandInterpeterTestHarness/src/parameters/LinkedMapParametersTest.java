@@ -7,6 +7,9 @@
  */
 package parameters;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -140,4 +143,30 @@ public class LinkedMapParametersTest {
       Assert.assertEquals( SECOND_VALUE, parameters.getParameter( testParameter2 ) );
    }// End Method
 
+   /**
+    * {@link LinkedMapParametersImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      List< String > expectedFirstSuggestions = Arrays.asList( "firstSuggestion" );
+      Mockito.when( testParameter1.getSuggestions( Mockito.anyString() ) ).thenReturn( expectedFirstSuggestions );
+      List< String > expectedSecondSuggestions = Arrays.asList( "secondSuggestionA", "secondSuggestionB" );
+      Mockito.when( testParameter2.getSuggestions( Mockito.anyString() ) ).thenReturn( expectedSecondSuggestions );
+      
+      //Enter first parameters return.
+      Mockito.when( testParameter1.completeMatches( Mockito.anyString() ) ).thenReturn( false );
+      Mockito.when( testParameter1.partialMatches( Mockito.anyString() ) ).thenReturn( true );
+      Mockito.when( testParameter1.extractInput( Mockito.anyString() ) ).then( TestFunctions.singleParameterExtractor() );
+      Assert.assertEquals( expectedFirstSuggestions, parameters.getSuggestions( "anything" ) );
+      
+      //Enter second parameters return.
+      Mockito.when( testParameter1.completeMatches( Mockito.anyString() ) ).thenReturn( true );
+      Mockito.when( testParameter2.partialMatches( Mockito.anyString() ) ).thenReturn( true );
+      Mockito.when( testParameter2.extractInput( Mockito.anyString() ) ).then( TestFunctions.singleParameterExtractor() );
+      Assert.assertEquals( expectedSecondSuggestions, parameters.getSuggestions( "anything" ) );
+      
+      //Pass both checks
+      Mockito.when( testParameter2.completeMatches( Mockito.anyString() ) ).thenReturn( true );
+      Assert.assertEquals( Arrays.asList( LinkedMapParametersImpl.READY ), parameters.getSuggestions( "anything" ) );
+   }// End Method
+   
 }// End Class

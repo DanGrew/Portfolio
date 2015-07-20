@@ -44,7 +44,7 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
       RequestSystem.store( TEST_SINGLETON_OBJECT, TestSingleton.class );
       TEST_ANNOTATED_SINGLETON_OBJECT = new TestAnnotatedSingletonImpl( TEST_ANNOTATED_SINGLETON_NAME );
       RequestSystem.store( TEST_ANNOTATED_SINGLETON_OBJECT, TestAnnotatedSingleton.class );
-      TEST_ANOTHER_ANNOTATED_SINGLETON_OBJECT = new TestAnotherAnnotatedSingletonImpl( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME, "anything" );
+      TEST_ANOTHER_ANNOTATED_SINGLETON_OBJECT = new TestAnotherAnnotatedSingletonImpl( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME, 23.0 );
       RequestSystem.store( TEST_ANOTHER_ANNOTATED_SINGLETON_OBJECT, TestAnotherAnnotatedSingletonImpl.class );
    }// End Method   
    
@@ -159,5 +159,9 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
    @Test @Override public void shouldNotParse() {
       Assert.assertNull( parameter.parseObject( "anything" ) );
    }// End Method
+   
+   @Test public void shouldSuggest(){
+      Assert.fail();
+   }
 
 }// End Class

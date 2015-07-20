@@ -7,6 +7,7 @@
  */
 package system;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +19,6 @@ import org.junit.Test;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
 import architecture.request.RequestSystem;
-
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
@@ -89,8 +89,8 @@ public class CaliSystemTest {
                CaliSystem.matchConstructor( "TestAnnotatedSingletonImpl", String.class ) 
       );
       Assert.assertEquals( 
-               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, String.class ), 
-               CaliSystem.matchConstructor( "TestAnotherAnnotatedSingletonImpl", String.class, String.class ) 
+               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ), 
+               CaliSystem.matchConstructor( "TestAnotherAnnotatedSingletonImpl", String.class, Double.class ) 
       );
    }// End Method
    
@@ -115,7 +115,7 @@ public class CaliSystemTest {
                CaliSystem.matchConstructor( "TestAnnotatedSingletonImpl", 1 ) 
       );
       Assert.assertEquals( 
-               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, String.class ), 
+               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ), 
                CaliSystem.matchConstructor( "TestAnotherAnnotatedSingletonImpl", 2 ) 
       );
    }// End Method
@@ -218,6 +218,27 @@ public class CaliSystemTest {
                CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "anything", 1 ) 
       );
       Assert.assertNull( CaliSystem.matchMethodSignature( TestAnnotatedSingletonImpl.class, "nonCaliMethod", 1 ) );
+   }// End Method
+   
+   /**
+    * {@link CaliSystem#findConstructors(Class, Integer)} test.
+    */
+   @Test public void shouldMatchAllCaliConstructors() throws NoSuchMethodException, SecurityException{
+      Constructor< ? > singleString = TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class );
+      Constructor< ? > stringAndDouble = TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class );
+      
+      Assert.assertEquals(
+               Arrays.asList( singleString, stringAndDouble ), 
+               CaliSystem.findConstructors( TestAnotherAnnotatedSingletonImpl.class, null )
+      );
+      Assert.assertEquals(
+               Arrays.asList( singleString, stringAndDouble ), 
+               CaliSystem.findConstructors( TestAnotherAnnotatedSingletonImpl.class, 1 )
+      );
+      Assert.assertEquals(
+               Arrays.asList( stringAndDouble ), 
+               CaliSystem.findConstructors( TestAnotherAnnotatedSingletonImpl.class, 2 )
+      );
    }// End Method
 
 }// End Class

@@ -17,6 +17,8 @@ public class CaliParserUtilities {
    private static final String PARAMETERS_CLOSE = ")";
    private static final String PARAMETERS_DELIMITER = ",";
    private static final String STATEMENT_DELIMITER = ".";
+   private static final String PARAMETER_REFERENCE_OPEN = "<";
+   private static final String PARAMETERS_REFERENCE_CLOSE = ">";
    
    /**
     * Getter for the open tag in {@link Cali} {@link Command}s.
@@ -74,6 +76,16 @@ public class CaliParserUtilities {
     */
    public static String regexStatementDelimter(){
       return REGEX_PREFIX + statementDelimiter();
+   }// End Method
+   
+   /**
+    * Method to get  description of the given {@link Class} in the form:
+    * <{@link Class#getSimpleName()}>.
+    * @param clazz the {@link Class} to describe.
+    * @return the {@link String} description.
+    */
+   public static String getDescriptionOfParameter( Class< ? > clazz ) {
+      return PARAMETER_REFERENCE_OPEN + clazz.getSimpleName() + PARAMETERS_REFERENCE_CLOSE;
    }// End Method
    
    /**

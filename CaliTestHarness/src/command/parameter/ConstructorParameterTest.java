@@ -7,6 +7,8 @@
  */
 package command.parameter;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -154,7 +156,7 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
       final String testParameter2 = "name";
       final String testParameter3 = "20.0";
       constructorValue = new ConstructorParameterValue();
-      constructorValue.setConstructor( TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, String.class ) );
+      constructorValue.setConstructor( TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ) );
       constructorValue.addParameters( testParameter2 );
       constructorValue.addParameters( testParameter3 );
       Assert.assertEquals( 
@@ -219,4 +221,41 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
       Assert.fail();
    }
 
+   /**
+    * {@link ConstructorParameterImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.assertEquals( 
+               Arrays.asList( "TestAnnotatedSingletonImpl(", "TestAnotherAnnotatedSingletonImpl(" ), 
+               parameter.getSuggestions( "" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "TestAnnotatedSingletonImpl(", "TestAnotherAnnotatedSingletonImpl(" ), 
+               parameter.getSuggestions( "TestA" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "TestAnnotatedSingletonImpl(" ), 
+               parameter.getSuggestions( "TestAnnota" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "<String> )", "<String>, <Double> )" ), 
+               parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl(" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "<String> )", "<String>, <Double> )" ), 
+               parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( ")", "<Double> )" ), 
+               parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything," ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "<Double> )" ), 
+               parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything, 23" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList(), 
+               parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything, 23 )" ) 
+      );
+   }// End Method
 }// End Class

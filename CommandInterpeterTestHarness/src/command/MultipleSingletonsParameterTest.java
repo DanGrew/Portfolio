@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import parameter.CommandParameterParseUtilities;
 import parameter.FixedValueParameterImpl;
-import parameter.SingletonReferenceParameterImpl;
+import parameter.SingletonNameAsReferenceParameterImpl;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
 import architecture.request.RequestSystem;
@@ -51,7 +51,7 @@ public class MultipleSingletonsParameterTest {
                "", 
                null, 
                new FixedValueParameterImpl( KEY_PARAMETER ), 
-               new SingletonReferenceParameterImpl( TestSingleton.class )
+               new SingletonNameAsReferenceParameterImpl( TestSingleton.class )
       );
    }// End Method
    

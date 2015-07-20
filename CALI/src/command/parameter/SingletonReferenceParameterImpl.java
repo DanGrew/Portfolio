@@ -7,6 +7,7 @@
  */
 package command.parameter;
 
+import java.util.Arrays;
 import java.util.List;
 
 import model.singleton.Singleton;
@@ -26,6 +27,13 @@ public class SingletonReferenceParameterImpl implements CommandParameter {
     */
    @Override public String getParameterType() {
       return "<statment>";
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      return Arrays.asList( getParameterType() );
    }// End Method
    
    /**

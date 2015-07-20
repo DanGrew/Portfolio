@@ -419,7 +419,7 @@ import annotation.Cali;
     * @return a {@link GraphResult} with the error, if an error exists, null otherwise.
     */
    private GraphResult verifySearch(){
-      if ( dataSeries == null ) {
+      if ( dataSeries.isEmpty() ) {
          return new GraphResult( GraphError.MissingSearchCriteria, null );
       } else {
          return null;

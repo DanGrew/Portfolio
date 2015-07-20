@@ -7,10 +7,14 @@
  */
 package command.parameter;
 
+import java.util.Arrays;
+import java.util.List;
+
 import model.singleton.Singleton;
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import annotation.CaliParserUtilities;
+
 import command.parameter.result.MethodCallResult;
 import command.parameter.result.SingletonReferenceParserResult;
 
@@ -34,6 +38,13 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
     */
    @Override public String getParameterType() {
       return "<singleton>.<method>( <parameters> )";
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      return Arrays.asList( getParameterType() );
    }// End Method
 
    /**

@@ -7,8 +7,10 @@
  */
 package parameter.wrapper;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.function.Function;
@@ -61,6 +63,26 @@ public class LinkedMapParametersImpl implements CommandParameters{
     */
    @Override public < TypeT > TypeT getExpectedParameter( CommandParameter parameter, Class< TypeT > expected ) {
       return expected.cast( getParameter( parameter ) );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< String > getSuggestions( String expression ) {
+      if ( expression.trim().isEmpty() ) {
+         return parameters.keySet().iterator().next().getSuggestions( expression );
+      }
+      for ( CommandParameter parameter : parameters.keySet() ) {
+         if ( parameter.completeMatches( expression ) ) {
+            expression = parameter.extractInput( expression );
+            continue;
+         } else if ( parameter.partialMatches( expression ) ) {
+            return parameter.getSuggestions( expression );
+         } else {
+            break;
+         }
+      }
+      return Arrays.asList( CommandParameter.READY );
    }// End Method
    
    /**

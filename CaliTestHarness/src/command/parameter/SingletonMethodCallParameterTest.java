@@ -7,12 +7,13 @@
  */
 package command.parameter;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import system.CaliSystem;
-
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 
@@ -188,6 +189,17 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
       Assert.assertNull( parameter.autoComplete( "anything" ) );
       Assert.assertNull( parameter.autoComplete( "" ) );
       Assert.assertNull( parameter.autoComplete( " " ) );
+   }// End Method
+   
+   /**
+    * {@link SingletonMethodCallParameterImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.fail();
+      Assert.assertEquals( 
+               Arrays.asList( TEST_ANNOTATED_SINGLETON_NAME ),
+               parameter.getSuggestions( "Test" ) 
+      );
    }// End Method
    
 }// End Class

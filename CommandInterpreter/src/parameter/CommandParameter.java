@@ -7,6 +7,8 @@
  */
 package parameter;
 
+import java.util.List;
+
 import command.Command;
 
 /**
@@ -14,6 +16,8 @@ import command.Command;
  * of a {@link Command}.
  */
 public interface CommandParameter {
+   /** Constant defining the suggestion when the {@link Command} or {@link CommandParameter} is complete.**/
+   public static final String READY = "READY";   
    
    /**
     * Method to get a {@link String} description of the type of {@link CommandParameter} being
@@ -21,6 +25,13 @@ public interface CommandParameter {
     * @return a {@link String} description of the {@link CommandParameter}.
     */
    public String getParameterType();
+   
+   /**
+    * Method to get a {@link List} of suggestions for completion of the {@link CommandParameter}.
+    * @param input the current input for the {@link CommandParameter}.
+    * @return a {@link List} of {@link String} options for the {@link CommandParameter}.
+    */
+   public List< String > getSuggestions( String expression );
    
    /**
     * Method to determine whether the {@link CommandParameter} requires some information to be

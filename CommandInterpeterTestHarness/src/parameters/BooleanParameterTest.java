@@ -7,6 +7,8 @@
  */
 package parameters;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -109,5 +111,19 @@ public class BooleanParameterTest {
       Assert.assertNull( parameter.autoComplete( "anything" ) );
       Assert.assertNull( parameter.autoComplete( "" ) );
       Assert.assertNull( parameter.autoComplete( " " ) );
+   }// End Method
+   
+   /**
+    * {@link BooleanParameterImpl#getSuggestions(String)} test.
+    */
+   @Test public void shouldSuggest(){
+      Assert.assertEquals( Arrays.asList( "true", "false" ), parameter.getSuggestions( "" ) );
+      Assert.assertEquals( Arrays.asList( "true" ), parameter.getSuggestions( "TR" ) );
+      Assert.assertEquals( Arrays.asList( "true" ), parameter.getSuggestions( "tr" ) );
+      Assert.assertEquals( Arrays.asList( "true" ), parameter.getSuggestions( "TRUE" ) );
+      Assert.assertEquals( Arrays.asList(), parameter.getSuggestions( "TRUET" ) );
+      Assert.assertEquals( Arrays.asList( "false" ), parameter.getSuggestions( "FA" ) );
+      Assert.assertEquals( Arrays.asList( "false" ), parameter.getSuggestions( "fal" ) );
+      Assert.assertEquals( Arrays.asList(), parameter.getSuggestions( "anything" ) );
    }// End Method
 }// End Class

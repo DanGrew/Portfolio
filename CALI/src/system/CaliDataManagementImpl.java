@@ -145,5 +145,28 @@ public class CaliDataManagementImpl implements CaliDataManagement {
       }
       return null;
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< Constructor< ? > > findConstructors( Class< ? > clazz, Integer numberOfParametersEntered ) {
+      List< Constructor< ? > > constructors = new ArrayList<>();
+      if ( !CaliAnnotations.isAnnotationPresent( clazz ) ) {
+         return constructors;
+      }
+      
+      for ( Constructor< ? > constructor : clazz.getConstructors() ) {
+         if ( CaliAnnotations.isAnnotationPresent( constructor ) ) {
+            if ( numberOfParametersEntered == null ) {
+               constructors.add( constructor );
+            } else {
+               if ( constructor.getParameterCount() >= numberOfParametersEntered ) {
+                  constructors.add( constructor );
+               }
+            }
+         }
+      }
+      return constructors;
+   }// End Method
 
 }// End Class

@@ -12,10 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.singleton.Singleton;
 import objecttype.Definition;
 import objecttype.DefinitionImpl;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -25,7 +27,6 @@ import propertytype.PropertyTypeImpl;
 import serialization.XmlBuilderObjectWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
-
 import commands.parameters.ObjectBuilderClassParameterTypes;
 
 /**
@@ -35,6 +36,13 @@ public class SerializableBuilderObjectTest {
    
    @Rule public TemporaryFolder folder = new TemporaryFolder();
 
+   /**
+    * Method to setup the {@link Singleton}s for the test.
+    */
+   @BeforeClass public static void setup(){
+      RequestSystem.reset();
+   }// End Method
+   
    /**
     * Method to test the serialization of {@link BuilderObject}s using {@link XmlBuilderObjectImpl}.
     */

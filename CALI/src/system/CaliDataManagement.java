@@ -77,4 +77,13 @@ public interface CaliDataManagement {
     */
    public Method matchMethodSignature( Class< ? > clazz, String methodPartialName, int parameterCountExpected );
 
+   /**
+    * Method to find all {@link Constructor}s for the given {@link Class} that have the given number of
+    * parameters.
+    * @param clazz the {@link Class} of the object.
+    * @param numberOfParametersEntered the number of parameters entered, null indicates any number.
+    * @return a {@link List} of {@link Constructor}s that have at least the given number of parameters.
+    */
+   public List< Constructor< ? > > findConstructors( Class< ? > clazz, Integer numberOfParametersEntered );
+
 }// End Interface
