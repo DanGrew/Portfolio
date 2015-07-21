@@ -31,7 +31,6 @@ import common.TestObjects.TestDoubleParameterAnnotatedSingletonImpl;
  */
 public class ParameterSuggestionsTest {
    
-   private static final ParameterSuggestions suggestions = new ParameterSuggestions();
    private static final String SINGLETON = "singleton";
    private static Singleton SINGLETON_OBJECT;
    
@@ -72,11 +71,11 @@ public class ParameterSuggestionsTest {
    @Test public void shouldIdentifyRedirectionsForString(){
       Assert.assertEquals( 
                Arrays.asList( "anything" ), 
-               suggestions.identifyRedirectionsFor( String.class, "anything" ) 
+               ParameterSuggestions.identifyRedirectionsFor( String.class, "anything" ) 
       );
       Assert.assertEquals( 
                Arrays.asList( "23" ), 
-               suggestions.identifyRedirectionsFor( String.class, "23" ) 
+               ParameterSuggestions.identifyRedirectionsFor( String.class, "23" ) 
       );
    }// End Method
    
@@ -84,7 +83,7 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#identifyRedirectionsFor(Class, Object)} for {@link String}s.
     */
    @Test public void shouldNotIdentifyRedirectionsForString(){
-      Assert.assertEquals( new ArrayList<>(), suggestions.identifyRedirectionsFor( String.class, null ) );
+      Assert.assertEquals( new ArrayList<>(), ParameterSuggestions.identifyRedirectionsFor( String.class, null ) );
    }// End Method
    
    /**
@@ -92,12 +91,12 @@ public class ParameterSuggestionsTest {
     */
    @Test public void shouldIdentifyRedirectionsForNumber(){
       Assert.assertEquals( 
-               Arrays.asList( 234.0 ), 
-               suggestions.identifyRedirectionsFor( Number.class, 234 ) 
+               Arrays.asList( "234.0" ), 
+               ParameterSuggestions.identifyRedirectionsFor( Number.class, 234 ) 
       );
       Assert.assertEquals( 
-               Arrays.asList( 0.0034 ), 
-               suggestions.identifyRedirectionsFor( Number.class, 0.0034 ) 
+               Arrays.asList( "0.0034" ), 
+               ParameterSuggestions.identifyRedirectionsFor( Number.class, 0.0034 ) 
       );
    }// End Method
    
@@ -105,7 +104,7 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#identifyRedirectionsFor(Class, Object)} for {@link Number}s.
     */
    @Test public void shouldNotIdentifyRedirectionsForNumber(){
-      Assert.assertEquals( new ArrayList<>(), suggestions.identifyRedirectionsFor( Number.class, "anything" ) );
+      Assert.assertEquals( new ArrayList<>(), ParameterSuggestions.identifyRedirectionsFor( Number.class, "anything" ) );
    }// End Method
    
    /**
@@ -113,12 +112,12 @@ public class ParameterSuggestionsTest {
     */
    @Test public void shouldIdentifyRedirectionsForTestSingleton(){
       Assert.assertEquals( 
-               Arrays.asList( TEST_SINGLETON_OBJECT, TEST_SINGLETON_OBJECT_2 ), 
-               suggestions.identifyRedirectionsFor( TestSingleton.class, TEST_SINGLETON ) 
+               Arrays.asList( TEST_SINGLETON, TEST_SINGLETON_2 ), 
+               ParameterSuggestions.identifyRedirectionsFor( TestSingleton.class, TEST_SINGLETON ) 
       );
       Assert.assertEquals( 
-               Arrays.asList( TEST_SINGLETON_OBJECT, TEST_SINGLETON_OBJECT_2 ), 
-               suggestions.identifyRedirectionsFor( TestSingleton.class, "tes" ) 
+               Arrays.asList( TEST_SINGLETON, TEST_SINGLETON_2 ), 
+               ParameterSuggestions.identifyRedirectionsFor( TestSingleton.class, "tes" ) 
        );
    }// End Method
    
@@ -126,7 +125,7 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#identifyRedirectionsFor(Class, Object)} for {@link TestSingleton}s.
     */
    @Test public void shouldNotRedirectIdentifyRedirectionsForTestSingleton(){
-      Assert.assertEquals( new ArrayList<>(), suggestions.identifyRedirectionsFor( TestSingleton.class, "anything" ) );
+      Assert.assertEquals( new ArrayList<>(), ParameterSuggestions.identifyRedirectionsFor( TestSingleton.class, "anything" ) );
    }// End Method
    
    /**
@@ -134,16 +133,16 @@ public class ParameterSuggestionsTest {
     */
    @Test public void shouldIdentifyRedirectionsForSingleton(){
       Assert.assertEquals( 
-               Arrays.asList( TEST_SINGLETON_OBJECT, TEST_SINGLETON_OBJECT_2 ), 
-               suggestions.identifyRedirectionsFor( Singleton.class, TEST_SINGLETON ) 
+               Arrays.asList( TEST_SINGLETON, TEST_SINGLETON_2 ), 
+               ParameterSuggestions.identifyRedirectionsFor( Singleton.class, TEST_SINGLETON ) 
       );
       Assert.assertEquals( 
-               Arrays.asList( TEST_SINGLETON_OBJECT, TEST_SINGLETON_OBJECT_2 ), 
-               suggestions.identifyRedirectionsFor( Singleton.class, "tes" ) 
+               Arrays.asList( TEST_SINGLETON, TEST_SINGLETON_2 ), 
+               ParameterSuggestions.identifyRedirectionsFor( Singleton.class, "tes" ) 
       );
       Assert.assertEquals( 
-               Arrays.asList( TEST_SINGLETON_OBJECT_2 ), 
-               suggestions.identifyRedirectionsFor( Singleton.class, TEST_SINGLETON_2 ) 
+               Arrays.asList( TEST_SINGLETON_2 ), 
+               ParameterSuggestions.identifyRedirectionsFor( Singleton.class, TEST_SINGLETON_2 ) 
       );
    }// End Method
    
@@ -151,31 +150,31 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#matchesSignature(java.lang.reflect.Executable, Object...)}.
     */
    @Test public void shouldMatchSignature() throws NoSuchMethodException, SecurityException {
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestSingletonImpl.class.getConstructor( String.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestAnnotatedSingletonImpl.class.getConstructor( String.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything", 234.4
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                234.4
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, TestAnotherAnnotatedSingletonImpl.class ),
                "anything", TEST_SINGLETON_OBJECT_2
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestDoubleParameterAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything"
       ) );
@@ -185,19 +184,19 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#matchesSignature(java.lang.reflect.Executable, Object...)}.
     */
    @Test public void shouldNotMatchSignature() throws NoSuchMethodException, SecurityException {
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                234.4
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestDoubleParameterAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, TestAnotherAnnotatedSingletonImpl.class ),
                "anything", "test"
       ) );
@@ -209,11 +208,11 @@ public class ParameterSuggestionsTest {
    @Test public void shouldIdentifyExactMatchForString(){
       Assert.assertEquals( 
                "anything", 
-               suggestions.identifyExactMatchFor( String.class, "anything" ) 
+               ParameterSuggestions.identifyExactMatchFor( String.class, "anything" ) 
       );
       Assert.assertEquals( 
                "23", 
-               suggestions.identifyExactMatchFor( String.class, "23" ) 
+               ParameterSuggestions.identifyExactMatchFor( String.class, "23" ) 
       );
    }// End Method
    
@@ -221,7 +220,7 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#identifyRedirectionsFor(Class, Object)} for {@link String}s.
     */
    @Test public void shouldNotIdentifyExactMatchForString(){
-      Assert.assertNull( suggestions.identifyExactMatchFor( String.class, null ) );
+      Assert.assertNull( ParameterSuggestions.identifyExactMatchFor( String.class, null ) );
    }// End Method
    
    /**
@@ -230,11 +229,11 @@ public class ParameterSuggestionsTest {
    @Test public void shouldIdentifyExactMatchForNumber(){
       Assert.assertEquals( 
                234.0, 
-               suggestions.identifyExactMatchFor( Number.class, 234 ) 
+               ParameterSuggestions.identifyExactMatchFor( Number.class, 234 ) 
       );
       Assert.assertEquals( 
                0.0034, 
-               suggestions.identifyExactMatchFor( Number.class, 0.0034 ) 
+               ParameterSuggestions.identifyExactMatchFor( Number.class, 0.0034 ) 
       );
    }// End Method
    
@@ -242,7 +241,7 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#identifyRedirectionsFor(Class, Object)} for {@link Number}s.
     */
    @Test public void shouldNotIdentifyExactMatchForNumber(){
-      Assert.assertNull( suggestions.identifyExactMatchFor( Number.class, "anything" ) );
+      Assert.assertNull( ParameterSuggestions.identifyExactMatchFor( Number.class, "anything" ) );
    }// End Method
    
    /**
@@ -251,7 +250,7 @@ public class ParameterSuggestionsTest {
    @Test public void shouldIdentifyExactMatchForTestSingleton(){
       Assert.assertEquals( 
                TEST_SINGLETON_OBJECT, 
-               suggestions.identifyExactMatchFor( TestSingleton.class, TEST_SINGLETON ) 
+               ParameterSuggestions.identifyExactMatchFor( TestSingleton.class, TEST_SINGLETON ) 
       );
    }// End Method
    
@@ -259,8 +258,8 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#identifyRedirectionsFor(Class, Object)} for {@link TestSingleton}s.
     */
    @Test public void shouldNotIdentifyExactMatchForTestSingleton(){
-      Assert.assertNull( suggestions.identifyExactMatchFor( TestSingleton.class, "anything" ) );
-      Assert.assertNull( suggestions.identifyExactMatchFor( TestSingleton.class, "tes" ) );
+      Assert.assertNull( ParameterSuggestions.identifyExactMatchFor( TestSingleton.class, "anything" ) );
+      Assert.assertNull( ParameterSuggestions.identifyExactMatchFor( TestSingleton.class, "tes" ) );
    }// End Method
    
    /**
@@ -269,7 +268,7 @@ public class ParameterSuggestionsTest {
    @Test public void shouldIdentifyExactMatchForSingleton(){
       Assert.assertEquals( 
                TEST_SINGLETON_OBJECT, 
-               suggestions.identifyExactMatchFor( Singleton.class, TEST_SINGLETON ) 
+               ParameterSuggestions.identifyExactMatchFor( Singleton.class, TEST_SINGLETON ) 
       );
    }// End Method
    
@@ -277,19 +276,19 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#matchesSignature(java.lang.reflect.Executable, Object...)}.
     */
    @Test public void shouldExactMatchSignature() throws NoSuchMethodException, SecurityException {
-      Assert.assertTrue( suggestions.matchesExactSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesExactSignature(
                TestSingletonImpl.class.getConstructor( String.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesExactSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesExactSignature(
                TestAnnotatedSingletonImpl.class.getConstructor( String.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesExactSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything", 234.4
       ) );
-      Assert.assertTrue( suggestions.matchesExactSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, TestAnotherAnnotatedSingletonImpl.class ),
                "anything", TEST_SINGLETON_OBJECT_2
       ) );
@@ -299,27 +298,27 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#matchesSignature(java.lang.reflect.Executable, Object...)}.
     */
    @Test public void shouldNotExactMatchMatchSignature() throws NoSuchMethodException, SecurityException {
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything"
       ) );
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                234.4
       ) );
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestDoubleParameterAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything"
       ) );
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything", "something"
       ) );
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, TestAnotherAnnotatedSingletonImpl.class ),
                "anything", "anything"
       ) );
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestDoubleParameterAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything", TEST_SINGLETON_3
       ) );
@@ -329,19 +328,19 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#matchesExactSignature(java.lang.reflect.Executable, Object...)}.
     */
    @Test public void shouldMatchExactSignature() throws NoSuchMethodException, SecurityException {
-      Assert.assertTrue( suggestions.matchesExactSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesExactSignature(
                TestSingletonImpl.class.getConstructor( String.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesExactSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesExactSignature(
                TestAnnotatedSingletonImpl.class.getConstructor( String.class ),
                "anything"
       ) );
-      Assert.assertTrue( suggestions.matchesExactSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything", 234.4
       ) );
-      Assert.assertTrue( suggestions.matchesExactSignature(
+      Assert.assertTrue( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, TestAnotherAnnotatedSingletonImpl.class ),
                "anything", TEST_SINGLETON_OBJECT_2
       ) );
@@ -351,19 +350,19 @@ public class ParameterSuggestionsTest {
     * {@link ParameterSuggestions#matchesExactSignature(java.lang.reflect.Executable, Object...)}.
     */
    @Test public void shouldNotMatchExactSignature() throws NoSuchMethodException, SecurityException {
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything"
       ) );
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                234.4
       ) );
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestDoubleParameterAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
                "anything"
       ) );
-      Assert.assertFalse( suggestions.matchesExactSignature(
+      Assert.assertFalse( ParameterSuggestions.matchesExactSignature(
                TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, TestAnotherAnnotatedSingletonImpl.class ),
                "anything", "test"
       ) );

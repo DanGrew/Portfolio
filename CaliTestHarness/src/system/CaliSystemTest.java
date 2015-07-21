@@ -227,17 +227,18 @@ public class CaliSystemTest {
    @Test public void shouldMatchAllCaliConstructors() throws NoSuchMethodException, SecurityException{
       Constructor< ? > singleString = TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class );
       Constructor< ? > stringAndDouble = TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class );
+      Constructor< ? > stringAndReference = TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, TestAnotherAnnotatedSingletonImpl.class );
       
       Assert.assertEquals(
-               Arrays.asList( singleString, stringAndDouble ), 
+               Arrays.asList( singleString, stringAndDouble, stringAndReference ), 
                CaliSystem.findConstructors( TestAnotherAnnotatedSingletonImpl.class, null )
       );
       Assert.assertEquals(
-               Arrays.asList( singleString, stringAndDouble ), 
+               Arrays.asList( singleString, stringAndDouble, stringAndReference ), 
                CaliSystem.findConstructors( TestAnotherAnnotatedSingletonImpl.class, 1 )
       );
       Assert.assertEquals(
-               Arrays.asList( stringAndDouble ), 
+               Arrays.asList( stringAndDouble, stringAndReference ), 
                CaliSystem.findConstructors( TestAnotherAnnotatedSingletonImpl.class, 2 )
       );
    }// End Method
