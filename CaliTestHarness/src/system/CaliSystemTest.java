@@ -18,6 +18,7 @@ import org.junit.Test;
 
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
+import utility.TestCommon;
 import architecture.request.RequestSystem;
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
@@ -240,5 +241,60 @@ public class CaliSystemTest {
                CaliSystem.findConstructors( TestAnotherAnnotatedSingletonImpl.class, 2 )
       );
    }// End Method
+   
+   /**
+    * {@link CaliSystem#findMethods(Class, String, Integer)} test.
+    */
+   @Test public void shouldMatchAllCaliMethods() throws NoSuchMethodException, SecurityException{
+      Method testMethod = TestAnotherAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class );
+      Method overloadedMethod1 = TestAnotherAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class );
+      Method overloadedMethod2 = TestAnotherAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class, String.class );
+      
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( testMethod, overloadedMethod1, overloadedMethod2 ), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, null, null )
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( testMethod, overloadedMethod1, overloadedMethod2 ), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, null, 0 )
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( testMethod, overloadedMethod1, overloadedMethod2 ), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, null, 1 )
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( overloadedMethod2 ), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, null, 2 )
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList(), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, null, 3 )
+      );
+   }// End Method
 
+   /**
+    * {@link CaliSystem#findMethods(Class, String, Integer)} test.
+    */
+   @Test public void shouldMatchAllCaliMethodsWithPartialName() throws NoSuchMethodException, SecurityException{
+      Method testMethod = TestAnotherAnnotatedSingletonImpl.class.getMethod( "testCaliMethod", String.class );
+      Method overloadedMethod1 = TestAnotherAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class );
+      Method overloadedMethod2 = TestAnotherAnnotatedSingletonImpl.class.getMethod( "overloaded", String.class, String.class );
+      
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( testMethod, overloadedMethod1, overloadedMethod2 ), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, "", null )
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( testMethod ), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, "test", 0 )
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( testMethod ), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, "test", 1 )
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( overloadedMethod1, overloadedMethod2 ), 
+               CaliSystem.findMethods( TestAnotherAnnotatedSingletonImpl.class, "over", 1 )
+      );
+   }// End Method
 }// End Class

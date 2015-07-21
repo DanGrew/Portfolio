@@ -13,7 +13,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import parameter.CommandParameter;
 import system.CaliSystem;
+import utility.TestCommon;
+
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 
@@ -84,6 +87,8 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
     * {@inheritDoc}
     */
    @Test @Override public void shouldExtract() {
+      Assert.assertEquals( "", parameter.extractInput( "Test" ) );
+      Assert.assertEquals( "", parameter.extractInput( "Test." ) );
       Assert.assertEquals( "", parameter.extractInput( "TestAnno." ) );
       Assert.assertEquals( "", parameter.extractInput( TEST_ANNOTATED_SINGLETON_NAME ) );
       Assert.assertEquals( "anything", parameter.extractInput( "anything" ) );
@@ -195,11 +200,75 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
     * {@link SingletonMethodCallParameterImpl#getSuggestions(String)} test.
     */
    @Test public void shouldSuggest(){
-      Assert.fail();
-      Assert.assertEquals( 
-               Arrays.asList( TEST_ANNOTATED_SINGLETON_NAME ),
+      final String parametersA = "<String> )";
+      final String methodA = "testCaliMethod(";
+      final String parametersB = "<String> )";
+      final String methodB = "overloaded(";
+      final String parametersC1 = "<String>";
+      final String parametersC2 = "<String> )";
+      final String methodC = "overloaded(";
+      
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
+               Arrays.asList( TEST_ANNOTATED_SINGLETON_NAME + ".", TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + "." ),
+               parameter.getSuggestions( "" ) 
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(  
+               Arrays.asList( TEST_ANNOTATED_SINGLETON_NAME + ".", TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + "." ),
+               parameter.getSuggestions( "T" ) 
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
+               Arrays.asList( TEST_ANNOTATED_SINGLETON_NAME + ".", TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + "." ),
                parameter.getSuggestions( "Test" ) 
       );
+      Assert.assertEquals( 
+               Arrays.asList( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + "." ),
+               parameter.getSuggestions( "TestAnoth" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + "." ),
+               parameter.getSuggestions( "TestAnother" ) 
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
+               Arrays.asList( methodA, methodB ),
+               parameter.getSuggestions( "TestAnother." ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList(),
+               parameter.getSuggestions( "TestAnother.anything" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( methodA ),
+               parameter.getSuggestions( "TestAnother.testCaliMethod" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( methodB ),
+               parameter.getSuggestions( "TestAnother.over" ) 
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
+               Arrays.asList( parametersB, parametersC1 + ", " + parametersC2 ),
+               parameter.getSuggestions( "TestAnother.overloaded(" ) 
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
+               Arrays.asList( parametersB, parametersC1 + ", " + parametersC2 ),
+               parameter.getSuggestions( "TestAnother.overloaded( anything" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( parametersC2 ),
+               parameter.getSuggestions( "TestAnother.overloaded( anything," ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "<String> )" ),
+               parameter.getSuggestions( "TestAnother.overloaded( anything, anything" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( CommandParameter.READY ),
+               parameter.getSuggestions( "TestAnother.overloaded( anything, anything )" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList(),
+               parameter.getSuggestions( "TestAnother.anything( something, something )" ) 
+      );
+      Assert.fail( "should use variables with warnings" );
    }// End Method
    
 }// End Class

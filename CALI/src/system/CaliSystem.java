@@ -118,5 +118,16 @@ public class CaliSystem {
          return new ArrayList<>();
       }
    }// End Method
+   
+   /**
+    * @return {@link CaliDataManagement#findMethods(Class, String, Integer)}.
+    */
+   public static List< Method > findMethods( Class< ? > clazz, String partialName, Integer numberOfParameterEntered ) {
+      if ( database.contains( clazz ) ) {
+         return caliDataManagement.findMethods( clazz, partialName, numberOfParameterEntered );
+      } else {
+         return new ArrayList<>();
+      }
+   }// End Method
 
 }// End Class

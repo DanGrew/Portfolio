@@ -8,6 +8,7 @@
 package command.parameter.result;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.result.ComplexReturnResult;
@@ -16,7 +17,6 @@ import parameter.CommandParameterParseUtilities;
 import system.CaliSystem;
 import annotation.CaliParserUtilities;
 import annotation.CodeParametersResult;
-
 import command.parameter.result.MethodCallResult.Result;
 
 /**
@@ -39,9 +39,11 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
       CANNOT_FIND_METHOD_NAME
    }// End Enum
    
-   private Method method;
+   private Method uniqueMethod;
+   private List< Method > methodMatches;
    private Object[] parameters;
    private String expression;
+   private String methodNamePart;
    
    /**
     * Getter for the resulting expression when each part is parsed from it.
@@ -60,19 +62,52 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
    }// End Method
    
    /**
+    * Setter for the partial {@link Method} name entered.
+    * @param methodNamePart the part of the method name entered.
+    */
+   public void setMethodNamePart( String methodNamePart ) {
+      this.methodNamePart = methodNamePart;
+   }// End Method
+   
+   /**
+    * Getter for the partial {@link Method} name entered.
+    * @return the {@link String}.
+    */
+   public String getMethodNamePart() {
+      return methodNamePart;
+   }// End Method
+   
+   /**
     * Getter for the {@link Method} parsed.
     * @return the {@link Method}.
     */
-   public Method getMethod() {
-      return method;
+   public Method getUniqueMethod() {
+      return uniqueMethod;
    }// End Method
    
    /**
     * Setter for the {@link Method} parsed.
     * @param method the {@link Method} parsed.
     */
-   private void setMethod( Method method ) {
-      this.method = method;
+   private void setUniqueMethod( Method method ) {
+      this.uniqueMethod = method;
+   }// End Method
+   
+   /**
+    * Method to add all matching {@link Method}s.
+    * @param methods the {@link Method}s.
+    */
+   public void addAllMethods( List< Method > methods ) {
+      methodMatches = new ArrayList< Method >();
+      methodMatches.addAll( methods );
+   }// End Method
+   
+   /**
+    * Getter for the matching {@link Method}s.
+    * @return the {@link Method} matching the input.
+    */
+   public List< Method > getMethodMatches(){
+      return methodMatches;
    }// End Method
    
    /**
@@ -129,23 +164,26 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
          if ( methodNamePart == null ) {
             setResult( Result.CANNOT_FIND_METHOD_NAME );
             return;
-         }
+         } 
+         setMethodNamePart( methodNamePart );
+         
          expression = CommandParameterParseUtilities.reduce( expression, methodNamePart );
          setResultingExpression( expression );
          List< Method > matches = CaliSystem.partialMatchMethodName( singleton.getClass(), methodNamePart );
+         addAllMethods( matches );
          if ( expression.isEmpty() ) {
             if ( matches.isEmpty() ) {
                setResult( Result.NO_PARAMETERS_METHOD_DOES_NOT_MATCH );
             } else if ( matches.size() == 1 ){
                setResult( Result.NO_PARAMETERS_EXACT_MATCH );
-               setMethod( matches.get( 0 ) );
+               setUniqueMethod( matches.get( 0 ) );
             } else {
                setResult( Result.NO_PARAMETERS_MULTIPLE_MATCHES );
             }
             return;
          } else {
             if ( matches.size() == 1 ) {
-               setMethod( matches.get( 0 ) );
+               setUniqueMethod( matches.get( 0 ) );
             }
          }
          
@@ -162,7 +200,7 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
                setResult( Result.OPEN_NO_PARAMETERS );
                return;
             case PARAMETERS_NO_CLOSE:
-                setResult( Result.PARAMETERS_NO_CLOSE );
+               setResult( Result.PARAMETERS_NO_CLOSE );
                setParameters( result.getParameters() );
                //Assume remainder are all parameters.
                setResultingExpression( "" );
@@ -171,7 +209,7 @@ public class MethodCallResult extends ComplexReturnResult< Result >{
                Method method = CaliSystem.matchMethodSignature( singleton.getClass(), methodNamePart, result.getNumberOfParameters() );
                if ( method != null ) {
                   setResult( Result.METHOD_MATCHES );
-                  setMethod( method );
+                  setUniqueMethod( method );
                   setParameters( result.getParameters() );
                } else {
                   setResult( Result.METHOD_SIGNATURE_DOES_NOT_MATCH );

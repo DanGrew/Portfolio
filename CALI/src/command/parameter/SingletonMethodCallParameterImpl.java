@@ -7,13 +7,20 @@
  */
 package command.parameter;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import model.singleton.Singleton;
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
+import system.CaliSystem;
 import annotation.CaliParserUtilities;
+import annotation.CaliSuggestionUtilities;
 
 import command.parameter.result.MethodCallResult;
 import command.parameter.result.SingletonReferenceParserResult;
@@ -44,7 +51,129 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public List< String > getSuggestions( String expression ) {
-      return Arrays.asList( getParameterType() );
+      List< String > suggestions = new ArrayList< String >();
+      
+      String reference = parseSingletonReference( expression );
+      if ( reference == null ) {
+         //No input to match.
+         return suggestions;
+      }
+      
+      Singleton singleton = null;
+      SingletonReferenceParserResult singletonResult = new SingletonReferenceParserResult();
+      singletonResult.parse( reference, referenceParameter );
+      switch ( singletonResult.getResult() ) {
+         case COMPLETE_MATCHES_NO_SUGGESTION:
+         case PARTIAL_MATCHES_NO_SUGGESTION:
+            return suggestAllSingletons( reference );
+         case COMPLETE_MATCHES_MULTIPLE_SUGGESTION:
+         case PARTIAL_MATCHES_MULTIPLE_SUGGESTION:
+            return suggestAllSingletons( singletonResult.getMatches() );
+         case SINGLETON_DOES_NOT_MATCH:
+            return suggestions;
+         case SINGLETON_PARSED:
+            singleton = singletonResult.getSingleton();
+            if ( !singleton.getIdentification().equals( reference.replace( CaliParserUtilities.statementDelimiter(), "" ) ) ) {
+               suggestions.add( singleton.getIdentification() + CaliParserUtilities.statementDelimiter() );
+               return suggestions;
+            }
+         default:
+            break;
+      }
+
+      MethodCallResult methodResult = new MethodCallResult();
+      methodResult.parse( singleton, expression, reference );
+      switch ( methodResult.getResult() ) {
+         case DOES_NOT_OPEN:
+         case EMPTY_NO_OPEN:
+            suggestions.add( singleton.getIdentification() + CaliParserUtilities.statementDelimiter() );
+            return suggestions;
+         case NO_METHOD_NAME:
+            if ( reference.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
+               return suggestAllMethods( singleton.getClass(), null, null );
+            } else {
+               suggestions.add( singleton.getIdentification() + CaliParserUtilities.statementDelimiter() );
+               return suggestions;   
+            }
+         case METHOD_MATCHES:
+            return Arrays.asList( CommandParameter.READY );
+         case METHOD_SIGNATURE_DOES_NOT_MATCH:
+         case NO_PARAMETERS_METHOD_DOES_NOT_MATCH:
+            return suggestions;
+         case NO_PARAMETERS_EXACT_MATCH:
+         case NO_PARAMETERS_MULTIPLE_MATCHES:
+            return suggestAllMethods( singleton.getClass(), methodResult.getMethodNamePart(), null );
+         case OPEN_NO_PARAMETERS:
+            return suggestAllMethodParameters( methodResult.getMethodMatches(), null, true );
+         case PARAMETERS_NO_CLOSE:
+            if ( expression.endsWith( CaliParserUtilities.parameterDelimiter() ) ) {
+               return suggestAllMethodParameters( methodResult.getMethodMatches(), methodResult.getParameters().length, true );
+            } else {
+               return suggestAllMethodParameters( methodResult.getMethodMatches(), methodResult.getParameters().length, false );   
+            }
+         case SINGELTON_NULL:
+         case CANNOT_FIND_METHOD_NAME:
+         default:
+            return suggestions;
+      }
+   }// End Method
+   
+   /**
+    * Method to construct suggestions for all {@link Class}es that match the given partial name.
+    * @param partialName the partial name of the {@link Singleton}.
+    * @return a {@link List} of {@link String} suggestions.
+    */
+   private List< String > suggestAllSingletons( String partialName ) {
+      List< Singleton > singletons = CaliSystem.partialMatchSingletons( partialName );
+      return suggestAllSingletons( singletons );
+   }// End Method
+   
+   /**
+    * Method to suggest all {@link Singleton} names for the given {@link List} of {@link Singleton}s.
+    * @param singletons the {@link List} of {@link Singleton}s to suggest.
+    * @return a {@link List} of {@link String} suggestions.
+    */
+   private List< String > suggestAllSingletons( List< Singleton > singletons ) {
+      List< String > suggestions = new ArrayList<>();
+      singletons.forEach( singleton -> suggestions.add( singleton.getIdentification() + CaliParserUtilities.statementDelimiter() ) );
+      return suggestions;
+   }// End Method
+   
+   /**
+    * Method to suggest all {@link Method}s for the given {@link Class} and partial name of {@link Method}.
+    * @param clazz the {@link Class} of the {@link Singleton}.
+    * @param partialName the partial name of the {@link Method}.
+    * @param numberOfParameters the number of parameters parsed.
+    * @return a {@link List} of {@link String} suggestions.
+    */
+   private List< String > suggestAllMethods( Class< ? > clazz, String partialName, Integer numberOfParameters ) {
+      Set< String > suggestions = new LinkedHashSet<>();
+      List< Method > methods = CaliSystem.findMethods( clazz, partialName, numberOfParameters );
+      methods.forEach( method -> suggestions.add( method.getName() + CaliParserUtilities.open() ) );
+      return new ArrayList<>( suggestions );
+   }// End Method
+   
+   /**
+    * Method to suggest the {@link Method} parameters given the criteria.
+    * @param methods the {@link List} of {@link Method}s matching.
+    * @param numberOfParametersEntered the number of parameters entered for the {@link Method}.
+    * @param completeParameter whether the last parameter entered has been completed.
+    * @return a {@link List} of {@link String} suggestions of the parameter combinations.
+    */
+   private List< String > suggestAllMethodParameters( List< Method > methods, Integer numberOfParametersEntered, boolean completeParameter ){
+      if ( numberOfParametersEntered == null ) {
+         numberOfParametersEntered = 0;
+      } else if ( !completeParameter ) {
+         numberOfParametersEntered--;
+      }
+      
+      final int comparative = numberOfParametersEntered;
+      methods.removeIf( object -> { return object.getParameterCount() <= comparative; } );
+      
+      if ( methods.isEmpty() ) {
+         return Arrays.asList( CaliParserUtilities.close() );
+      }
+      return CaliSuggestionUtilities.suggestAllParameters( methods, numberOfParametersEntered );
    }// End Method
 
    /**
@@ -62,8 +191,9 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
       singletonResult.parse( reference, referenceParameter );
       switch ( singletonResult.getResult() ) {
          case COMPLETE_MATCHES_NO_SUGGESTION:
-            return true;
+         case COMPLETE_MATCHES_MULTIPLE_SUGGESTION:
          case PARTIAL_MATCHES_NO_SUGGESTION:
+         case PARTIAL_MATCHES_MULTIPLE_SUGGESTION:
             return true;
          case SINGLETON_DOES_NOT_MATCH:
             return false;   
@@ -141,8 +271,9 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
       singletonResult.parse( reference, referenceParameter );
       switch ( singletonResult.getResult() ) {
          case COMPLETE_MATCHES_NO_SUGGESTION:
-            return false;
+         case COMPLETE_MATCHES_MULTIPLE_SUGGESTION:
          case PARTIAL_MATCHES_NO_SUGGESTION:
+         case PARTIAL_MATCHES_MULTIPLE_SUGGESTION:
             return false;
          case SINGLETON_PARSED:
             singleton = singletonResult.getSingleton();
@@ -197,9 +328,9 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
       singletonResult.parse( reference, referenceParameter );
       switch ( singletonResult.getResult() ) {
          case COMPLETE_MATCHES_NO_SUGGESTION:
-            return null;
+         case COMPLETE_MATCHES_MULTIPLE_SUGGESTION:
          case PARTIAL_MATCHES_NO_SUGGESTION:
-            return null;
+         case PARTIAL_MATCHES_MULTIPLE_SUGGESTION:
          case SINGLETON_DOES_NOT_MATCH:
             return null;   
          case SINGLETON_PARSED:
@@ -218,7 +349,7 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
          case METHOD_MATCHES:
             SingletonMethodCallValue value = new SingletonMethodCallValue();
             value.setSingleton( singleton );
-            value.setMethod( methodResult.getMethod() );
+            value.setMethod( methodResult.getUniqueMethod() );
             value.addParameters( methodResult.getParameters() );
             return value;
          case METHOD_SIGNATURE_DOES_NOT_MATCH:
@@ -260,7 +391,11 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
       switch ( singletonResult.getResult() ) {
          case COMPLETE_MATCHES_NO_SUGGESTION:
             return null;
+         case COMPLETE_MATCHES_MULTIPLE_SUGGESTION:
+            return null;
          case PARTIAL_MATCHES_NO_SUGGESTION:
+            return null;
+         case PARTIAL_MATCHES_MULTIPLE_SUGGESTION:
             return null;
          case SINGLETON_DOES_NOT_MATCH:
             return null;   
@@ -285,15 +420,15 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
             return null;
          case NO_PARAMETERS_EXACT_MATCH:
             return singleton.getIdentification() + CaliParserUtilities.statementDelimiter() +
-                     methodResult.getMethod().getName() + CaliParserUtilities.open();
+                     methodResult.getUniqueMethod().getName() + CaliParserUtilities.open();
          case NO_PARAMETERS_MULTIPLE_MATCHES:
             return null;
          case OPEN_NO_PARAMETERS:
             return singleton.getIdentification() + CaliParserUtilities.statementDelimiter() +
-                     methodResult.getMethod().getName() + CaliParserUtilities.open();
+                     methodResult.getUniqueMethod().getName() + CaliParserUtilities.open();
          case PARAMETERS_NO_CLOSE:
             return singleton.getIdentification() + CaliParserUtilities.statementDelimiter() +
-                     methodResult.getMethod().getName() + CaliParserUtilities.open() + 
+                     methodResult.getUniqueMethod().getName() + CaliParserUtilities.open() + 
                      CommandParameterParseUtilities.delimiter() + methodResult.constructParametersInput();
          case SINGELTON_NULL:
             return null;
@@ -320,9 +455,11 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
       singletonResult.parse( reference, referenceParameter );
       switch ( singletonResult.getResult() ) {
          case COMPLETE_MATCHES_NO_SUGGESTION:
-            return expression;
          case PARTIAL_MATCHES_NO_SUGGESTION:
             return expression;
+         case COMPLETE_MATCHES_MULTIPLE_SUGGESTION:
+         case PARTIAL_MATCHES_MULTIPLE_SUGGESTION:
+            return expression.replace( reference, "" );
          case SINGLETON_DOES_NOT_MATCH:
             return expression;   
          case SINGLETON_PARSED:
@@ -354,7 +491,11 @@ public class SingletonMethodCallParameterImpl implements CommandParameter {
       switch ( singletonResult.getResult() ) {
          case COMPLETE_MATCHES_NO_SUGGESTION:
             return reference;
+         case COMPLETE_MATCHES_MULTIPLE_SUGGESTION:
+            return reference;
          case PARTIAL_MATCHES_NO_SUGGESTION:
+            return reference;
+         case PARTIAL_MATCHES_MULTIPLE_SUGGESTION:
             return reference;
          case SINGLETON_DOES_NOT_MATCH:
             return expression;   

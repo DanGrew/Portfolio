@@ -168,5 +168,33 @@ public class CaliDataManagementImpl implements CaliDataManagement {
       }
       return constructors;
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< Method > findMethods( Class< ? > clazz, String partialName, Integer numberOfParametersEntered ) {
+      List< Method > methods = new ArrayList<>();
+      if ( !CaliAnnotations.isAnnotationPresent( clazz ) ) {
+         return methods;
+      }
+      
+      for ( Method method : clazz.getMethods() ) {
+         if ( CaliAnnotations.isAnnotationPresent( method ) ) {
+            boolean matchesName = partialName == null || method.getName().startsWith( partialName );
+            if ( numberOfParametersEntered == null ) {
+               if ( matchesName ) {
+                  methods.add( method );
+               }
+            } else {
+               if ( method.getParameterCount() >= numberOfParametersEntered ) {
+                  if ( matchesName ) {
+                     methods.add( method );
+                  }
+               }
+            }
+         }
+      }
+      return methods;
+   }// End Method
 
 }// End Class

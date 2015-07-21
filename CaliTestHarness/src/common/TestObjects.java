@@ -97,7 +97,7 @@ public class TestObjects {
    }// End Class
    
    /** Another class of testable {@link Singleton}. */
-   public static class TestAnotherAnnotatedSingletonImpl extends TestAnnotatedSingletonImpl {
+   @Cali public static class TestAnotherAnnotatedSingletonImpl extends TestAnnotatedSingletonImpl {
 
       /**
        * Constructs a new {@link TestAnotherAnnotatedSingletonImpl}.

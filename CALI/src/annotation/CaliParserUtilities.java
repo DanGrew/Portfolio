@@ -117,6 +117,25 @@ public class CaliParserUtilities {
       }
       return null;
    }// End Method
+   
+   /**
+    * Method to parse the given expression based on the {@link CaliParserUtilities#statementDelimiter()}.
+    * @param expression the expression to parse.
+    * @return the reference having remove any parts following the delimiter.
+    */
+   public static String parseForStatement( String expression ) {
+      if ( expression.endsWith( CaliParserUtilities.statementDelimiter() ) ) {
+         expression = expression.substring( 0, expression.length() - 1 );
+      } else if ( expression.contains( CaliParserUtilities.statementDelimiter() ) ){
+         String[] result = CommandParameterParseUtilities.parseParameters( CaliParserUtilities.regexStatementDelimter(), 1, expression );
+         if ( result.length == 0 ) {
+            return null;
+         } else {
+            expression = result[ 0 ];
+         }
+      }
+      return expression;
+   }// End Method
 
    /**
     * Method to extract the code parameters from the given expression following a strict formatting.

@@ -86,4 +86,14 @@ public interface CaliDataManagement {
     */
    public List< Constructor< ? > > findConstructors( Class< ? > clazz, Integer numberOfParametersEntered );
 
+      /**
+    * Method to find all {@link Method}s for the given {@link Class} that have the given number of
+    * parameters.
+    * @param clazz the {@link Class} of the object.
+    * @param partialName the partial name of the {@link Method} to match.
+    * @param numberOfParametersEntered the number of parameters entered, null indicates any number.
+    * @return a {@link List} of {@link Constructor}s that have at least the given number of parameters.
+    */
+   public List< Method > findMethods( Class< ? > clazz, String partialName, Integer numberOfParametersEntered );
+
 }// End Interface

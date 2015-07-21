@@ -13,10 +13,12 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import parameter.CommandParameter;
+import system.CaliSystem;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
 import annotation.CaliParserUtilities;
 import architecture.request.RequestSystem;
+
 import command.Command;
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingleton;
@@ -40,12 +42,17 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
     * Method to set up the test, initialising some test objects.
     */
    @BeforeClass public static void setup(){
+      RequestSystem.reset();
+      
       TEST_SINGLETON_OBJECT = new TestSingletonImpl( TEST_SINGLETON_NAME );
       RequestSystem.store( TEST_SINGLETON_OBJECT, TestSingleton.class );
       TEST_ANNOTATED_SINGLETON_OBJECT = new TestAnnotatedSingletonImpl( TEST_ANNOTATED_SINGLETON_NAME );
       RequestSystem.store( TEST_ANNOTATED_SINGLETON_OBJECT, TestAnnotatedSingleton.class );
       TEST_ANOTHER_ANNOTATED_SINGLETON_OBJECT = new TestAnotherAnnotatedSingletonImpl( TEST_ANOTHER_ANNOTATED_SINGLETON_NAME, 23.0 );
       RequestSystem.store( TEST_ANOTHER_ANNOTATED_SINGLETON_OBJECT, TestAnotherAnnotatedSingletonImpl.class );
+      
+      CaliSystem.register( TestAnnotatedSingletonImpl.class );
+      CaliSystem.register( TestAnotherAnnotatedSingletonImpl.class );
    }// End Method   
    
    @Before public void initialise(){

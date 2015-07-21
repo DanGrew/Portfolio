@@ -17,6 +17,7 @@ import parameter.CommandParameterParseUtilities;
 import system.CaliSystem;
 import annotation.Cali;
 import annotation.CaliParserUtilities;
+import annotation.CaliSuggestionUtilities;
 import annotation.CodeParametersResult;
 
 /**
@@ -118,7 +119,6 @@ public class ConstructorParameterImpl implements CommandParameter {
     * @return a {@link List} of {@link String} suggestions of the parameter combinations.
     */
    private List< String > suggestAllConstructorsParameters( Class< ? > clazz, Integer numberOfParametersEntered, boolean completeParameter ){
-      List< String > suggestions = new ArrayList<>();
       List< Constructor< ? > > constructors = CaliSystem.findConstructors( clazz, numberOfParametersEntered );
       
       if ( numberOfParametersEntered == null ) {
@@ -126,22 +126,7 @@ public class ConstructorParameterImpl implements CommandParameter {
       } else if ( !completeParameter ) {
          numberOfParametersEntered--;
       }
-      for ( Constructor< ? > constructor : constructors ) {
-         StringBuffer buffer = new StringBuffer();
-         for ( int i = numberOfParametersEntered; i < constructor.getParameterCount(); i++ ) {
-            Class< ? > parameter = constructor.getParameterTypes()[ i ];
-            buffer.append( CaliParserUtilities.getDescriptionOfParameter( parameter ) );
-            buffer.append( CaliParserUtilities.parameterDelimiter() );
-            buffer.append( CommandParameterParseUtilities.delimiter() );
-         }
-         if ( buffer.length() > 0 ) {
-            buffer.setLength( buffer.length() - 2 );
-            buffer.append( CommandParameterParseUtilities.delimiter() );
-         }
-         buffer.append( CaliParserUtilities.close() );
-         suggestions.add( buffer.toString() );
-      }
-      return suggestions;
+      return CaliSuggestionUtilities.suggestAllParameters( constructors, numberOfParametersEntered );
    }// End Method
 
    /**
