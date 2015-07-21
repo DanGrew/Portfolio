@@ -40,7 +40,7 @@ public class ParameterSuggestions {
     * Method to determine whether the given parameters are acceptable for the given {@link Executable}.
     * @param executable the {@link Executable} that accepts parameters.
     * @param parameters the parameters.
-    * @return trur if they match, false otherwise.
+    * @return true if they match, false otherwise.
     */
    public boolean matchesSignature( Executable executable, Object... parameters ) {
       Class< ? >[] parameterClasses = executable.getParameterTypes();
@@ -58,6 +58,22 @@ public class ParameterSuggestions {
          }
       }
       return true;
+   }// End Method
+
+   /**
+    * Method to determine whether the given parameters are acceptable for the given {@link Executable}, where
+    * the parameters match exactly.
+    * @param executable the {@link Executable} that accepts parameters.
+    * @param parameters the parameters.
+    * @return true if they match, false otherwise.
+    */
+   public boolean matchesExactSignature( Executable executable, Object... parameters ) {
+      Class< ? >[] parameterClasses = executable.getParameterTypes();
+      if ( parameterClasses.length != parameters.length ) {
+         return false;
+      }
+      
+      return matchesSignature( executable, parameters );
    }// End Method
 
 }// End Class

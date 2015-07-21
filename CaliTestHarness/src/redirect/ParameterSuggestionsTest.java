@@ -198,5 +198,45 @@ public class ParameterSuggestionsTest {
                "anything", TEST_SINGLETON_3
       ) );
    }// End Method
+   
+   /**
+    * {@link ParameterSuggestions#matchesExactSignature(java.lang.reflect.Executable, Object...)}.
+    */
+   @Test public void shouldMatchExactSignature() throws NoSuchMethodException, SecurityException {
+      Assert.assertTrue( suggestions.matchesExactSignature(
+               TestSingletonImpl.class.getConstructor( String.class ),
+               "anything"
+      ) );
+      Assert.assertTrue( suggestions.matchesExactSignature(
+               TestAnnotatedSingletonImpl.class.getConstructor( String.class ),
+               "anything"
+      ) );
+      Assert.assertTrue( suggestions.matchesExactSignature(
+               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
+               "anything", 234.4
+      ) );
+      Assert.assertTrue( suggestions.matchesExactSignature(
+               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, TestAnotherAnnotatedSingletonImpl.class ),
+               "anything", TEST_SINGLETON_OBJECT_2
+      ) );
+   }// End Method
+   
+   /**
+    * {@link ParameterSuggestions#matchesExactSignature(java.lang.reflect.Executable, Object...)}.
+    */
+   @Test public void shouldNotMatchExactSignature() throws NoSuchMethodException, SecurityException {
+      Assert.assertFalse( suggestions.matchesExactSignature(
+               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
+               "anything"
+      ) );
+      Assert.assertFalse( suggestions.matchesExactSignature(
+               TestAnotherAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
+               234.4
+      ) );
+      Assert.assertFalse( suggestions.matchesExactSignature(
+               TestDoubleParameterAnnotatedSingletonImpl.class.getConstructor( String.class, Double.class ),
+               "anything"
+      ) );
+   }// End Method
 
 }// End Class

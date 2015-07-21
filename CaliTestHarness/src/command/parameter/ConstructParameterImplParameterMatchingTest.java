@@ -93,8 +93,8 @@ public class ConstructParameterImplParameterMatchingTest implements CommandParam
     * {@inheritDoc}
     */
    @Test @Override public void shouldNotCompleteMatch() {
-      Assert.assertTrue( parameter.partialMatches( "TestAnotherAnnotatedSingletonImpl( anything, TestSecondSingleton" ) );
-      Assert.assertTrue( parameter.partialMatches( "TestAnotherAnnotatedSingletonImpl( anything, Te )" ) );
+      Assert.assertFalse( parameter.completeMatches( "TestAnotherAnnotatedSingletonImpl( anything, TestSecondSingleton" ) );
+      Assert.assertFalse( parameter.completeMatches( "TestAnotherAnnotatedSingletonImpl( anything, Te )" ) );
    }// End Method
 
    /**
