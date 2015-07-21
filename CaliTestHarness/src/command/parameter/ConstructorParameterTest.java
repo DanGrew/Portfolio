@@ -58,12 +58,6 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
                TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() + "anything" + CaliParserUtilities.close() ) 
       );
       Assert.assertTrue( parameter.partialMatches( "TestAn(" ) );
-      Assert.assertTrue( parameter.partialMatches( 
-               "Test" + CaliParserUtilities.open() + 
-               " name, anything " + CaliParserUtilities.close() 
-      ) );
-      Assert.assertTrue( parameter.partialMatches( "TestAnotherAnnotatedSingletonImpl( testName, 567.06 )" ) );
-      Assert.assertTrue( parameter.partialMatches( "TestDoubleParameterAnnotatedSingletonImpl( testName )" ) );
    }// End Method
    
    /**

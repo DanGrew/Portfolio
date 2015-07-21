@@ -35,6 +35,24 @@ public class ParameterSuggestions {
          return null;
       }
    }// End Method
+   
+   /**
+    * Method to identify the exact match of the value if it exists for the given input value.
+    * @param type the {@link Class} of the parameter expected.
+    * @param value the {@link Object} value.
+    * @return the exact match found, or null.
+    */
+   public Object identifyExactMatchFor( Class< ? > type, Object value ) {
+      if ( value == null ) {
+         return null;
+      }
+      ClassParameterType parameterType = ClassParameterTypes.flexibleValueOf( type );
+      if ( parameterType != null ) {
+         return parameterType.deserialize( value.toString() );
+      } else {
+         return null;
+      }
+   }// End Method
 
    /**
     * Method to determine whether the given parameters are acceptable for the given {@link Executable}.
@@ -73,7 +91,13 @@ public class ParameterSuggestions {
          return false;
       }
       
-      return matchesSignature( executable, parameters );
+      for ( int i = 0; i < parameters.length; i++ ) {
+         Object match = identifyExactMatchFor( parameterClasses[ i ], parameters[ i ] );
+         if ( match == null ) {
+            return false;
+         }
+      }
+      return true;
    }// End Method
 
 }// End Class

@@ -220,7 +220,12 @@ public class ConstructorParameterImpl implements CommandParameter {
                return false;
             case SUCCESS:
                Object[] parameters = result.getParameters();
-               return retrieveConstructors( objectNamePart, parameters ) != null;
+               List< Constructor< ? > > constructors = retrieveConstructors( objectNamePart, parameters );
+               for ( Constructor< ? > constructor : constructors ) {
+                  if ( SUGGESTIONS.matchesExactSignature( constructor, parameters ) ) {
+                     return true;
+                  }
+               }
             default:
                return false;
          }
