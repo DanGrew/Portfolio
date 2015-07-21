@@ -32,7 +32,10 @@ public class GraphResult implements ConsoleMessage {
     * {@inheritDoc}
     */
    @Override public String getDisplayableMessage() {
-      return "Graph state invalid: " + enumeration.message() + ", Source: " + ( sourceOfError == null ? "unknown" : sourceOfError.toString() );
+      if ( enumeration.equals( GraphError.None ) ) {
+         return "Accepted";
+      }
+      return "Rejected: " + enumeration.message() + ", Source: " + ( sourceOfError == null ? "unknown" : sourceOfError.toString() );
    }// End Method
 
    /**
