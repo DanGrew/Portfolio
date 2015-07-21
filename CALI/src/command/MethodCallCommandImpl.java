@@ -39,7 +39,7 @@ public class MethodCallCommandImpl extends ParameterizedCommandImpl< Object >{
             if ( returnedValue == null ) {
                return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Executed." ) );
             } else {
-               return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Result: " + returnedValue.toString() ), returnedValue );
+               return new CommandResultImpl< Object >( new ConsoleMessageImpl( returnedValue.toString() ), returnedValue );
             }
          } catch ( IllegalAccessException | IllegalArgumentException | InvocationTargetException e ) {
             return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Error occured during execution." ) );
