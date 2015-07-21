@@ -11,8 +11,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import architecture.request.RequestSystem;
 import model.singleton.Singleton;
+import architecture.request.RequestSystem;
 
 /**
  * The {@link ParameterRedirect} is responsible for redirecting {@link Method} calls from
@@ -53,7 +53,7 @@ public class ParameterRedirect {
       Object[] redirectedParameters = redirectParameters( expectedParameterTypes, parameters );
       return constructor.newInstance( redirectedParameters );
    }// End Method
-   
+    
    /**
     * Method to redirect the parameters for the given expected types.
     * @param parameterTypes the expected {@link Class}es of parameter.
@@ -77,7 +77,7 @@ public class ParameterRedirect {
    private Object redirectParameter( Object object, Class< ? > expectedType ) {
       if ( expectedType.equals( String.class ) ) {
          return redirectString( object );
-      } else if ( expectedType.equals( Double.class ) ) {
+      } else if ( Number.class.isAssignableFrom( expectedType ) ) {
          return redirectDouble( object );
       } else if ( Singleton.class.isAssignableFrom( expectedType ) ) {
          @SuppressWarnings("unchecked") //Safe because isAssignableFrom checks. 

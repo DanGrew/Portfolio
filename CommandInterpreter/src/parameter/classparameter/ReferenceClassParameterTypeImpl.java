@@ -8,6 +8,8 @@
 package parameter.classparameter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import architecture.request.RequestSystem;
 import model.singleton.Singleton;
@@ -54,6 +56,17 @@ public class ReferenceClassParameterTypeImpl< SingletonS extends Singleton > ext
       } else {
          return null;
       }
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< Object > suggest( Object object ) {
+      List< SingletonS > matches = RequestSystem.retrieveAll( singletonType, singleton -> { 
+         return singleton.getIdentification().startsWith( object.toString() );  
+      } );
+      List< Object > returnObjects = new ArrayList< Object >( matches );
+      return returnObjects;
    }// End Method
 
 }// End Class

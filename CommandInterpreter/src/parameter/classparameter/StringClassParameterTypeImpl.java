@@ -8,6 +8,9 @@
 package parameter.classparameter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Extension of {@link ClassParameterType} for {@link String}s.
@@ -37,6 +40,16 @@ public class StringClassParameterTypeImpl extends ClassParameterTypeImpl {
     */
    @Override public Object deserialize( Serializable object ) {
       return object;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< Object > suggest( Object object ) {
+      if ( object == null ) {
+         return new ArrayList< Object >();
+      }
+      return Arrays.asList( object.toString() );
    }// End Method
 
 }// End Class

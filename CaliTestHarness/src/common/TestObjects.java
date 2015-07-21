@@ -115,5 +115,28 @@ public class TestObjects {
       @Cali public TestAnotherAnnotatedSingletonImpl( String identification, Double anotherValue ) {
          super( identification );
       }// End Constructor
+      
+      /**
+       * Constructs a new {@link TestAnotherAnnotatedSingletonImpl}.
+       * @param identification the name.
+       * @param anotherValue another value.
+       */
+      @Cali public TestAnotherAnnotatedSingletonImpl( String identification, TestAnotherAnnotatedSingletonImpl anotherValue ) {
+         super( identification );
+      }// End Constructor
+   }// End Class
+   
+   /** Another class of testable {@link Singleton}. */
+   @Cali public static class TestDoubleParameterAnnotatedSingletonImpl extends TestAnnotatedSingletonImpl {
+
+      /**
+       * Constructs a new {@link TestDoubleParameterAnnotatedSingletonImpl}.
+       * @param identification the name.
+       * @param anotherValue another value.
+       */
+      @Cali public TestDoubleParameterAnnotatedSingletonImpl( String identification, Double anotherValue ) {
+         super( identification );
+      }// End Constructor
+      
    }// End Class
 }

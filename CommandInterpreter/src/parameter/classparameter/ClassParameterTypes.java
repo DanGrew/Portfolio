@@ -73,6 +73,20 @@ public class ClassParameterTypes {
    }// End Method
    
    /**
+    * Method to get the {@link ClassParameterType} for the given {@link Class}.
+    * @param clazz the {@link Class} in question.
+    * @return the appropriate {@link ClassParameterType} flexibly chosen based on {@link Class#isAssignableFrom(Class)}.
+    */
+   public static ClassParameterType flexibleValueOf( Class< ? > clazz ) {
+      for ( ClassParameterType type : types() ) {
+         if ( type.getTypeClass().isAssignableFrom( clazz ) ) {
+            return type;
+         }
+      }
+      return null;
+   }// End Method
+   
+   /**
     * Method to get a {@link List} of all {@link ClassParameterType}s.
     * @return the {@link ClassParameterType}s available.
     */

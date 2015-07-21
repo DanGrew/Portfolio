@@ -9,17 +9,22 @@ package command.parameter;
 
 import java.util.Arrays;
 
+import model.singleton.Singleton;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import parameter.CommandParameter;
+import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.ReferenceClassParameterTypeImpl;
 import system.CaliSystem;
 import test.model.TestObjects.TestSingletonImpl;
 import annotation.CaliParserUtilities;
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
+import common.TestObjects.TestDoubleParameterAnnotatedSingletonImpl;
 
 /**
  * Test for the {@link ConstructorParameterImpl}.
@@ -34,6 +39,10 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
    @BeforeClass public static void setup(){
       CaliSystem.register( TestAnnotatedSingletonImpl.class );
       CaliSystem.register( TestAnotherAnnotatedSingletonImpl.class );
+      CaliSystem.register( TestDoubleParameterAnnotatedSingletonImpl.class );
+      ClassParameterTypes.addParameterTypes( Arrays.asList( 
+               new ReferenceClassParameterTypeImpl<>( Singleton.class ) 
+      ) );
       parameter = new ConstructorParameterImpl();
    }// End Method
    
@@ -54,6 +63,7 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
                " name, anything " + CaliParserUtilities.close() 
       ) );
       Assert.assertTrue( parameter.partialMatches( "TestAnotherAnnotatedSingletonImpl( testName, 567.06 )" ) );
+      Assert.assertTrue( parameter.partialMatches( "TestDoubleParameterAnnotatedSingletonImpl( testName )" ) );
    }// End Method
    
    /**
@@ -126,6 +136,7 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
       ) );
       Assert.assertEquals( "", parameter.extractInput( "TestAnotherAnnotatedSingletonImpl( testName, 567.06 )" ) );
       Assert.assertEquals( "", parameter.extractInput( "TestAnotherAnnotatedSingletonImpl( testName, " ) );
+      Assert.assertEquals( "", parameter.extractInput( "TestDoubleParameterAnnotatedSingletonImpl( testName )" ) );
    }// End Method
    
    /**
@@ -191,20 +202,20 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
     */
    @Test @Override public void shouldAutoComplete() {
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
-               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() ) 
+               "TestAnnotatedSingletonImpl(",
+               parameter.autoComplete( "TestAnnotatedSingletonImpl" ) 
       );
       Assert.assertEquals(
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
+               "TestAnnotatedSingletonImpl(",
                parameter.autoComplete( "TestAnn" ) 
       );
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open(),
-               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() ) 
+               "TestAnnotatedSingletonImpl(",
+               parameter.autoComplete( "TestAnnotatedSingletonImpl(" ) 
       );
       Assert.assertEquals( 
-               TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() + " anything",
-               parameter.autoComplete( TestAnnotatedSingletonImpl.class.getSimpleName() + CaliParserUtilities.open() + "anything" ) 
+               "TestAnnotatedSingletonImpl( anything",
+               parameter.autoComplete( "TestAnnotatedSingletonImpl( anything" ) 
       );
    }// End Method
    
@@ -226,7 +237,7 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
     */
    @Test public void shouldSuggest(){
       Assert.assertEquals( 
-               Arrays.asList( "TestAnnotatedSingletonImpl(", "TestAnotherAnnotatedSingletonImpl(" ), 
+               Arrays.asList( "TestAnnotatedSingletonImpl(", "TestAnotherAnnotatedSingletonImpl(", "TestDoubleParameterAnnotatedSingletonImpl(" ), 
                parameter.getSuggestions( "" ) 
       );
       Assert.assertEquals( 
@@ -238,24 +249,28 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
                parameter.getSuggestions( "TestAnnota" ) 
       );
       Assert.assertEquals( 
-               Arrays.asList( "<String> )", "<String>, <Double> )" ), 
+               Arrays.asList( "<String> )", "<String>, <Double> )", "<String>, <TestAnotherAnnotatedSingletonImpl> )" ), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl(" ) 
       );
       Assert.assertEquals( 
-               Arrays.asList( "<String> )", "<String>, <Double> )" ), 
+               Arrays.asList( "<String> )", "<String>, <Double> )", "<String>, <TestAnotherAnnotatedSingletonImpl> )" ), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything" ) 
       );
       Assert.assertEquals( 
-               Arrays.asList( ")", "<Double> )" ), 
+               Arrays.asList( ")", "<Double> )", "<TestAnotherAnnotatedSingletonImpl> )" ), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything," ) 
       );
       Assert.assertEquals( 
-               Arrays.asList( "<Double> )" ), 
+               Arrays.asList( "<Double> )", "<TestAnotherAnnotatedSingletonImpl> )" ), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything, 23" ) 
       );
       Assert.assertEquals( 
                Arrays.asList(), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything, 23 )" ) 
+      );
+      Assert.assertEquals( 
+               Arrays.asList( "<String>, <Double> )" ), 
+               parameter.getSuggestions( "TestDoubleParameterAnnotatedSingletonImpl( anything" ) 
       );
    }// End Method
 }// End Class

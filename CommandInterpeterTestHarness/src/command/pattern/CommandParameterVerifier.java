@@ -69,6 +69,11 @@ public interface CommandParameterVerifier {
     * {@link CommandParameter#autoComplete(String)} reject test.
     */
    @Test public void shouldNotAutoComplete();
+   
+   /**
+    * {@link CommandParameter#getSuggestions(String)} acceptanceTest
+    */
+   @Test public void shouldSuggest();
 
 
 }// End Interface

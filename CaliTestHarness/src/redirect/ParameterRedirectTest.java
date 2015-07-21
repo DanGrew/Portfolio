@@ -32,6 +32,8 @@ public class ParameterRedirectTest {
    private static final String TEST_SINGLETON = "testSingleton";
    private static TestSingleton TEST_SINGLETON_OBJECT;
    
+   private static final ParameterRedirect redirect = new ParameterRedirect();
+   
    /** Test class defining some methods to invoke.**/
    public static class TestClass {
       public TestClass( Double value, String string, Singleton singleton ){}
@@ -64,8 +66,6 @@ public class ParameterRedirectTest {
                                                     IllegalArgumentException, 
                                                     InvocationTargetException 
    {
-      ParameterRedirect redirect = new ParameterRedirect();
-        
       final Double testValue = 22.45;
       final String testRepresentation = testValue.toString();
       TestClass testClass = Mockito.mock( TestClass.class );
@@ -88,8 +88,6 @@ public class ParameterRedirectTest {
                                                     NoSuchMethodException, 
                                                     SecurityException  
    {
-      ParameterRedirect redirect = new ParameterRedirect();
-      
       final String testValue = "anything";
       TestClass testClass = Mockito.mock( TestClass.class );
       redirect.invoke( 
@@ -111,8 +109,6 @@ public class ParameterRedirectTest {
                                                        NoSuchMethodException, 
                                                        SecurityException 
    {
-      ParameterRedirect redirect = new ParameterRedirect();
-      
       final Singleton testValue = SINGLETON_OBJECT;
       final String testRepresentation = testValue.getIdentification();
       TestClass testClass = Mockito.mock( TestClass.class );
@@ -136,8 +132,6 @@ public class ParameterRedirectTest {
                                                        NoSuchMethodException, 
                                                        SecurityException 
    {
-      ParameterRedirect redirect = new ParameterRedirect();
-      
       final TestSingleton testValue = TEST_SINGLETON_OBJECT;
       final String testRepresentation = testValue.getIdentification();
       TestClass testClass = Mockito.mock( TestClass.class );
@@ -160,8 +154,6 @@ public class ParameterRedirectTest {
                                                      NoSuchMethodException, 
                                                      SecurityException 
    {
-      ParameterRedirect redirect = new ParameterRedirect();
-      
       final Double testNumber = 22.45;
       final String testNumberRepresentation = testNumber.toString();
       final String testString = "anything";
@@ -180,7 +172,7 @@ public class ParameterRedirectTest {
    }// End Method
    
    /**
-    * Test to prove the redicrecting of {@link Constructor} parameters.
+    * Test to prove the redirecting of {@link Constructor} parameters.
     */
    @Test public void shouldRedirectConstructor() throws NoSuchMethodException, 
                                                         SecurityException, 
@@ -189,8 +181,6 @@ public class ParameterRedirectTest {
                                                         IllegalArgumentException, 
                                                         InvocationTargetException 
    {
-      ParameterRedirect redirect = new ParameterRedirect();
-      
       final Double testNumber = 22.45;
       final String testNumberRepresentation = testNumber.toString();
       final String testString = "anything";
@@ -205,5 +195,5 @@ public class ParameterRedirectTest {
       Assert.assertNotNull( constructed );
       Assert.assertEquals( TestClass.class, constructed.getClass() );
    }// End Method
-
+   
 }// End Class

@@ -13,6 +13,7 @@ import java.util.List;
 
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
+import redirect.ParameterSuggestions;
 import system.CaliSystem;
 import annotation.Cali;
 import annotation.CaliParserUtilities;
@@ -24,6 +25,8 @@ import annotation.CodeParametersResult;
  * {@link Constructor}s of {@link Cali} objects.
  */
 public class ConstructorParameterImpl implements CommandParameter {
+   
+   private static final ParameterSuggestions SUGGESTIONS = new ParameterSuggestions();
    
    /**
     * {@inheritDoc}
@@ -64,7 +67,7 @@ public class ConstructorParameterImpl implements CommandParameter {
                break;
             case SUCCESS:
                Object[] parameters = result.getParameters();
-               retrieveConstructor( objectNamePart, parameters );
+               retrieveConstructors( objectNamePart, parameters );
                break;
             default:
                break;
@@ -147,10 +150,9 @@ public class ConstructorParameterImpl implements CommandParameter {
             case OPEN_NO_PARAMETERS:
                return true;
             case PARAMETERS_NO_CLOSE:
-               return true;
             case SUCCESS:
                Object[] parameters = result.getParameters();
-               return retrieveConstructor( objectNamePart, parameters ) != null;
+               return !retrieveConstructors( objectNamePart, parameters ).isEmpty();
             default:
                return false;
          }
@@ -176,13 +178,24 @@ public class ConstructorParameterImpl implements CommandParameter {
    }// End Method
 
    /**
-    * Method to retrieve the {@link Constructor} for the given object type and parameters.
+    * Method to retrieve the {@link Constructors} for the given object type and parameters.
     * @param objectNamePart the name of the {@link Object}.
     * @param parameters the {@link Object} parameters.
+    * @return a {@link List} of {@link Constructor}s that match the given name and parameters, verifying the types
+    * of parameter.
     */
-   private Constructor< ? > retrieveConstructor( String objectNamePart, Object[] parameters ){
-      Constructor< ? > constructor = CaliSystem.matchConstructor( objectNamePart, parameters.length );
-      return constructor;
+   private List< Constructor< ? > > retrieveConstructors( String objectNamePart, Object[] parameters ){
+      List< Constructor< ? > > constructorMatches = new ArrayList<>();
+      List< Class< ? > > classes = CaliSystem.partialMatchClass( objectNamePart );
+      for ( Class< ? > clazz : classes ) {
+         List< Constructor< ? > > constructors = CaliSystem.findConstructors( clazz, parameters.length );
+         for ( Constructor< ? > constructor : constructors ) {
+            if ( SUGGESTIONS.matchesSignature( constructor, parameters ) ) {
+               constructorMatches.add( constructor );
+            }
+         }
+      }
+      return constructorMatches;
    }// End Method
    
    /**
@@ -207,7 +220,7 @@ public class ConstructorParameterImpl implements CommandParameter {
                return false;
             case SUCCESS:
                Object[] parameters = result.getParameters();
-               return retrieveConstructor( objectNamePart, parameters ) != null;
+               return retrieveConstructors( objectNamePart, parameters ) != null;
             default:
                return false;
          }
@@ -239,9 +252,11 @@ public class ConstructorParameterImpl implements CommandParameter {
                return null;
             case SUCCESS:
                Object[] parameters = result.getParameters();
-               Constructor< ? > constructor = retrieveConstructor( objectNamePart, parameters );
-               if ( constructor != null ) {
-                  value.setConstructor( constructor );
+               List< Constructor< ? > > constructors = retrieveConstructors( objectNamePart, parameters );
+               if ( constructors.isEmpty() ) {
+                  return null;
+               } else if ( constructors.size() == 1 ) {
+                  value.setConstructor( constructors.get( 0 ) );
                   value.addParameters( parameters );
                   return value;
                } else {
@@ -288,10 +303,12 @@ public class ConstructorParameterImpl implements CommandParameter {
                return autoCorrectUpToOpen( expression, onlyChoice );
             case SUCCESS:
                Object[] parameters = result.getParameters();
-               Constructor< ? > constructor = retrieveConstructor( objectNamePart, parameters );
-               if ( constructor != null ) {
+               List< Constructor< ? > > constructors = retrieveConstructors( objectNamePart, parameters );
+               if ( constructors.isEmpty() ) {
+                  return null;
+               } else if ( constructors.size() == 1 ) {
                   StringBuffer autoCorrect = new StringBuffer();
-                  autoCorrect.append( constructor.getDeclaringClass().getSimpleName() );
+                  autoCorrect.append( constructors.get( 0 ).getDeclaringClass().getSimpleName() );
                   autoCorrect.append( CaliParserUtilities.open() );
                   autoCorrect.append( CommandParameterParseUtilities.delimiter() );
                   for ( Object parameter : parameters ) {
@@ -304,8 +321,9 @@ public class ConstructorParameterImpl implements CommandParameter {
                   autoCorrect.append( CommandParameterParseUtilities.delimiter() );
                   autoCorrect.append( expression );
                   return autoCorrect.toString();
+               } else {
+                  return null;
                }
-
             default:
                return null;
          }

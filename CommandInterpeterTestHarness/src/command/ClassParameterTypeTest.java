@@ -13,14 +13,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import architecture.request.RequestSystem;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
 import parameter.classparameter.NumberClassParameterTypeImpl;
-import parameter.classparameter.ReferenceClassParameterTypeImpl;
 import parameter.classparameter.StringClassParameterTypeImpl;
-import test.model.TestObjects.TestSingleton;
-import test.model.TestObjects.TestSingletonImpl;
 
 /**
  * Test for the {@link ClassParameterType}s.
@@ -44,42 +40,4 @@ public class ClassParameterTypeTest {
       Assert.assertEquals( new NumberClassParameterTypeImpl(), ClassParameterTypes.valueOf( "Number" ) );
    }// End Method
    
-   /**
-    * Method to test the {@link StringClassParameterTypeImpl}.
-    */
-   @Test public void stringClassTypeTest() {
-      ClassParameterType type = new StringClassParameterTypeImpl();
-      String testValue = "TestingThisValue";
-      
-      Assert.assertEquals( String.class, type.getTypeClass() );
-      Assert.assertEquals( testValue, type.deserialize( testValue ) );
-      Assert.assertEquals( testValue, type.serialize( testValue ) );
-   }// End Method
-   
-   /**
-    * Method to test the {@link NumberClassParameterTypeImpl}.
-    */
-   @Test public void numberClassTypeTest() {
-      ClassParameterType type = new NumberClassParameterTypeImpl();
-      Number testValue = 12.67583;
-      
-      Assert.assertEquals( Number.class, type.getTypeClass() );
-      Assert.assertEquals( testValue, type.deserialize( testValue ) );
-      Assert.assertEquals( testValue, type.serialize( testValue ) );
-   }// End Method
-   
-   /**
-    * Method to test the {@link ReferenceClassParameterTypeImpl}.
-    */
-   @Test public void referenceClassTypeTest() {
-      ClassParameterType type = new ReferenceClassParameterTypeImpl< TestSingleton >( TestSingleton.class );
-      final String testValueName = "TestValue";
-      TestSingleton testValue = new TestSingletonImpl( testValueName );
-      RequestSystem.store( testValue, TestSingleton.class );
-      
-      Assert.assertEquals( TestSingleton.class, type.getTypeClass() );
-      Assert.assertEquals( testValue, type.deserialize( testValueName ) );
-      Assert.assertEquals( testValue.getIdentification(), type.serialize( testValue ) );
-   }// End Method
-
 }// End Class

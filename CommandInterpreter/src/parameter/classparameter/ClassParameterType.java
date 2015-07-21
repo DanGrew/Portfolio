@@ -8,6 +8,7 @@
 package parameter.classparameter;
 
 import java.io.Serializable;
+import java.util.List;
 
 import command.Command;
 
@@ -42,5 +43,13 @@ public interface ClassParameterType {
     * @return the {@link Object} used in the system.
     */
    public Object deserialize( Serializable object );
+   
+   /**
+    * Method to suggest the {@link Object}s that could be refered to by the given for
+    * this {@link ClassParameterType}.
+    * @param object the object input.
+    * @return the {@link List} of possible matches.
+    */
+   public List< Object > suggest( Object object );
 
 }// End Interface
