@@ -27,7 +27,7 @@ public class ParameterSuggestions {
     * @param value the {@link Object} value.
     * @return a {@link List} of {@link Object}s that match the input.
     */
-   public List< Object > identifyRedirectionsFor( Class< ? > type, Object value ) {
+   public static List< String > identifyRedirectionsFor( Class< ? > type, Object value ) {
       ClassParameterType parameterType = ClassParameterTypes.flexibleValueOf( type );
       if ( parameterType != null ) {
          return parameterType.suggest( value );
@@ -42,7 +42,7 @@ public class ParameterSuggestions {
     * @param value the {@link Object} value.
     * @return the exact match found, or null.
     */
-   public Object identifyExactMatchFor( Class< ? > type, Object value ) {
+   public static Object identifyExactMatchFor( Class< ? > type, Object value ) {
       if ( value == null ) {
          return null;
       }
@@ -60,14 +60,14 @@ public class ParameterSuggestions {
     * @param parameters the parameters.
     * @return true if they match, false otherwise.
     */
-   public boolean matchesSignature( Executable executable, Object... parameters ) {
+   public static boolean matchesSignature( Executable executable, Object... parameters ) {
       Class< ? >[] parameterClasses = executable.getParameterTypes();
       if ( parameterClasses.length < parameters.length ) {
          return false;
       }
       
       for ( int i = 0; i < parameters.length; i++ ) {
-         List< Object > suggestions = identifyRedirectionsFor( parameterClasses[ i ], parameters[ i ] );
+         List< String > suggestions = identifyRedirectionsFor( parameterClasses[ i ], parameters[ i ] );
          if ( suggestions == null ) {
             return false;
          }
@@ -85,7 +85,7 @@ public class ParameterSuggestions {
     * @param parameters the parameters.
     * @return true if they match, false otherwise.
     */
-   public boolean matchesExactSignature( Executable executable, Object... parameters ) {
+   public static boolean matchesExactSignature( Executable executable, Object... parameters ) {
       Class< ? >[] parameterClasses = executable.getParameterTypes();
       if ( parameterClasses.length != parameters.length ) {
          return false;

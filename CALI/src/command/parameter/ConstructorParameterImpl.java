@@ -211,18 +211,15 @@ public class ConstructorParameterImpl implements CommandParameter {
          
          switch ( result.getResult() ) {
             case DOES_NOT_OPEN:
-               return false;
             case EMPTY_NO_OPEN:
-               return false;
             case OPEN_NO_PARAMETERS:
-               return false;
             case PARAMETERS_NO_CLOSE:
                return false;
             case SUCCESS:
                Object[] parameters = result.getParameters();
                List< Constructor< ? > > constructors = retrieveConstructors( objectNamePart, parameters );
                for ( Constructor< ? > constructor : constructors ) {
-                  if ( SUGGESTIONS.matchesExactSignature( constructor, parameters ) ) {
+                  if ( ParameterSuggestions.matchesExactSignature( constructor, parameters ) ) {
                      return true;
                   }
                }
@@ -285,50 +282,18 @@ public class ConstructorParameterImpl implements CommandParameter {
       String objectNamePart = CaliParserUtilities.extractObjectType( expression );
       List< Class< ? > > objectClasses = parseObjectClass( objectNamePart );
       if ( !objectClasses.isEmpty() ) {
-         
-         Class< ? > onlyChoice = null;
-         if ( objectClasses.size() == 1 ) {
-            onlyChoice = objectClasses.get( 0 );
-         }
-         
+        
          expression = CommandParameterParseUtilities.reduce( expression, objectNamePart );
-         
          CodeParametersResult result = CaliParserUtilities.extractParameters( expression );
          
          switch ( result.getResult() ) {
             case DOES_NOT_OPEN:
-               return autoCorrectUpToOpen( expression, onlyChoice );
             case EMPTY_NO_OPEN:
-               return autoCorrectUpToOpen( expression, onlyChoice );
             case OPEN_NO_PARAMETERS:
-               expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.regexOpen() );
-               return autoCorrectUpToOpen( expression, onlyChoice );
+               return autoCorrectConstructorName( objectClasses );
             case PARAMETERS_NO_CLOSE:
-               expression = CommandParameterParseUtilities.reduce( expression, CaliParserUtilities.regexOpen() );
-               return autoCorrectUpToOpen( expression, onlyChoice );
             case SUCCESS:
-               Object[] parameters = result.getParameters();
-               List< Constructor< ? > > constructors = retrieveConstructors( objectNamePart, parameters );
-               if ( constructors.isEmpty() ) {
-                  return null;
-               } else if ( constructors.size() == 1 ) {
-                  StringBuffer autoCorrect = new StringBuffer();
-                  autoCorrect.append( constructors.get( 0 ).getDeclaringClass().getSimpleName() );
-                  autoCorrect.append( CaliParserUtilities.open() );
-                  autoCorrect.append( CommandParameterParseUtilities.delimiter() );
-                  for ( Object parameter : parameters ) {
-                     autoCorrect.append( parameter ).append( CaliParserUtilities.parameterDelimiter() );
-                     autoCorrect.append( CommandParameterParseUtilities.delimiter() );
-                  }
-                  autoCorrect.deleteCharAt( autoCorrect.lastIndexOf( CaliParserUtilities.parameterDelimiter() ) );
-                  autoCorrect.append( CaliParserUtilities.close() );
-                  
-                  autoCorrect.append( CommandParameterParseUtilities.delimiter() );
-                  autoCorrect.append( expression );
-                  return autoCorrect.toString();
-               } else {
-                  return null;
-               }
+               return autoCorrectParameters( objectClasses, result.getParameters() );
             default:
                return null;
          }
@@ -337,19 +302,51 @@ public class ConstructorParameterImpl implements CommandParameter {
    }// End Method
    
    /**
-    * Method to auto correct the expression up to the {@link CaliParserUtilities#open()} tag.
-    * @param expression the expression to auto correct.
-    * @param onlyChoice the {@link Class} single choice available.
-    * @return the auto corrected expression.
+    * Method to create an auto correct for the {@link Constructor} name given the matching classes.
+    * @param matchingClasses the {@link Class}es that match the input.
+    * @return the {@link Constructor} name for one match, or common prefix for multiple matches.
     */
-   private String autoCorrectUpToOpen( String expression, Class< ? > onlyChoice ){
-      if ( onlyChoice != null ) {
-         String autoCorrect = onlyChoice.getSimpleName() + CaliParserUtilities.open() + CommandParameterParseUtilities.delimiter() + expression;
-         return autoCorrect.trim();
-      } else if ( expression.isEmpty() ){
+   private String autoCorrectConstructorName( List< Class< ? > > matchingClasses ) {
+      if ( matchingClasses.size() == 1 ) {
+         Class< ? > match = matchingClasses.get( 0 );
+         return match.getSimpleName() + CaliParserUtilities.open();
+      }
+      List< String > names = new ArrayList<>();
+      matchingClasses.forEach( clazz -> names.add( clazz.getSimpleName() ) );
+      String commonPrefix = CaliParserUtilities.lowestCommonSubstring( names );
+      return commonPrefix;
+   }// End Method
+   
+   /**
+    * Method to auto correct the parameters for the given matching {@link Class}es and parameters provided.
+    * @param matchingClasses the {@link Class}es that match this input.
+    * @param parameters the parameters input.
+    * @return no auto correct if no matching classes, auto correct construct name if only a single match,
+    * or auto correct for the constructor that matches the exact parameters entered. 
+    */
+   private String autoCorrectParameters( List< Class< ? > > matchingClasses, Object[] parameters ) {
+      if ( matchingClasses.size() == 0 ) {
          return null;
+      } else if ( matchingClasses.size() > 1 ) {
+         return autoCorrectConstructorName( matchingClasses );
       } else {
-         return expression;
+         Class< ? > match = matchingClasses.get( 0 );
+         List< Constructor< ? > > constructors = CaliSystem.findConstructors( match, parameters.length );
+         Constructor< ? > matchingConstructor = null;
+         if ( constructors.size() == 0 ) {
+            return null;
+         } else if ( constructors.size() > 1 ) {
+            for ( Constructor< ? > constructor : constructors ) {
+               if ( ParameterSuggestions.matchesSignature( constructor, parameters ) ) {
+                  matchingConstructor = constructor;
+                  break;
+               }
+            }
+         } else {
+            matchingConstructor = constructors.get( 0 );
+         }
+         String parameterSuggestion = CaliSuggestionUtilities.autoCorrectAllParameters( matchingConstructor, parameters );
+         return matchingConstructor.getDeclaringClass().getSimpleName() + parameterSuggestion;
       }
    }// End Method
    

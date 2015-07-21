@@ -196,6 +196,14 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
     */
    @Test @Override public void shouldAutoComplete() {
       Assert.assertEquals( 
+               "Test",
+               parameter.autoComplete( "Tes" ) 
+      );
+      Assert.assertEquals( 
+               "TestAn",
+               parameter.autoComplete( "TestA" ) 
+      );
+      Assert.assertEquals( 
                "TestAnnotatedSingletonImpl(",
                parameter.autoComplete( "TestAnnotatedSingletonImpl" ) 
       );
@@ -208,7 +216,7 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
                parameter.autoComplete( "TestAnnotatedSingletonImpl(" ) 
       );
       Assert.assertEquals( 
-               "TestAnnotatedSingletonImpl( anything",
+               "TestAnnotatedSingletonImpl( anything )",
                parameter.autoComplete( "TestAnnotatedSingletonImpl( anything" ) 
       );
    }// End Method

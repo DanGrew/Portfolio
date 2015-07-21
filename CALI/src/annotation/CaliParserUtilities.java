@@ -7,7 +7,10 @@
  */
 package annotation;
 
+import java.util.List;
+
 import parameter.CommandParameterParseUtilities;
+
 import command.Command;
 
 public class CaliParserUtilities {
@@ -135,6 +138,47 @@ public class CaliParserUtilities {
          }
       }
       return expression;
+   }// End Method
+   
+   /**
+    * Method to identify the lowest common substring of the given {@link String}s.
+    * @param items the {@link List} of {@link String}s to find the common substring for.
+    * @return the common substring.
+    */
+   public static String lowestCommonSubstring( List< String > items ){
+      switch ( items.size() ) {
+         case 0:
+            return "";
+         case 1:
+            return items.get( 0 );
+         default:
+            String currentCommon = items.get( 0 );
+            for ( int i = 1; i < items.size(); i++ ) {
+               currentCommon = findCommonPrefix( currentCommon, items.get( i ) );
+               if ( currentCommon.isEmpty() ) {
+                  return "";
+               }
+            }
+            return currentCommon;
+      }
+   }// End Method
+   
+   /**
+    * Method to find the common prefix in the two given {@link String}s.
+    * @param first the first {@link String}.
+    * @param second the second {@link String}.
+    * @return the common prefix.
+    */
+   private static String findCommonPrefix( String first, String second ) {
+      StringBuffer buffer = new StringBuffer();
+      for ( int i = 0; i < Math.min( first.length(), second.length() ); i++ ) {
+         if ( first.charAt( i ) == second.charAt( i ) ) {
+            buffer.append( first.charAt( i ) );
+         } else {
+            break;
+         }
+      }
+      return buffer.toString();
    }// End Method
 
    /**

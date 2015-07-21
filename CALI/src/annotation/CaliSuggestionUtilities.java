@@ -13,6 +13,7 @@ import java.util.List;
 
 import parameter.CommandParameterParseUtilities;
 import parameter.wrapper.CommandParameters;
+import redirect.ParameterSuggestions;
 
 /**
  * The {@link CaliSuggestionUtilities} provides common methods for identifying suggestions
@@ -45,5 +46,36 @@ public class CaliSuggestionUtilities {
          suggestions.add( buffer.toString() );
       }
       return suggestions;
+   }// End Method
+   
+   /**
+    * Method to auto correct for all parameters of the associated {@link Executable}
+    * given the parameters parsed.
+    * @param item the item to construct the auto correct for.
+    * @param parameters the parameters parsed.
+    * @return a {@link String} auto correct result.
+    */
+   public static String autoCorrectAllParameters( Executable item, Object[] parameters ) {
+      boolean complete = true;
+      StringBuffer buffer = new StringBuffer( CaliParserUtilities.open() + CommandParameterParseUtilities.delimiter() );
+      for ( int i = 0; i < parameters.length; i++ ) {
+         Class< ? > parameter = item.getParameterTypes()[ i ];
+         List< String > suggestions = ParameterSuggestions.identifyRedirectionsFor( parameter, parameters[ i ] );
+         if ( suggestions.size() != 1 ) {
+            complete = false;
+         }
+         String commonPrefix = CaliParserUtilities.lowestCommonSubstring( suggestions );
+         buffer.append( commonPrefix );
+         buffer.append( CaliParserUtilities.parameterDelimiter() );
+         buffer.append( CommandParameterParseUtilities.delimiter() );
+      }
+      if ( buffer.length() > 0 ) {
+         buffer.setLength( buffer.length() - 2 );
+      }
+      if ( complete ) {
+         buffer.append( CommandParameterParseUtilities.delimiter() );
+         buffer.append( CaliParserUtilities.close() );
+      }
+      return buffer.toString();
    }// End Method
 }// End Class

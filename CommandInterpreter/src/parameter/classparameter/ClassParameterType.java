@@ -50,6 +50,6 @@ public interface ClassParameterType {
     * @param object the object input.
     * @return the {@link List} of possible matches.
     */
-   public List< Object > suggest( Object object );
+   public List< String > suggest( Object object );
 
 }// End Interface

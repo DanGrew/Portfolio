@@ -45,9 +45,9 @@ public class StringClassParameterTypeImpl extends ClassParameterTypeImpl {
    /**
     * {@inheritDoc}
     */
-   @Override public List< Object > suggest( Object object ) {
+   @Override public List< String > suggest( Object object ) {
       if ( object == null ) {
-         return new ArrayList< Object >();
+         return new ArrayList< String >();
       }
       return Arrays.asList( object.toString() );
    }// End Method

@@ -37,7 +37,7 @@ public class NumberParameterTypeTest {
     */
    @Test public void shouldSuggest(){
       Assert.assertEquals( 
-               Arrays.asList( testValue ),
+               Arrays.asList( testValue.toString() ),
                type.suggest( testValue ) 
       );
    }// End Method

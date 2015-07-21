@@ -58,11 +58,11 @@ public class ReferenceClassParameterTypeTest {
     */
    @Test public void shouldSuggest(){
       Assert.assertEquals(
-               Arrays.asList( TEST_SINGLETON_1_OBJECT, TEST_SINGLETON_2_OBJECT ),
+               Arrays.asList( TEST_SINGLETON_1, TEST_SINGLETON_2 ),
                type.suggest( "Test" )
       );
       Assert.assertEquals(
-               Arrays.asList( TEST_SINGLETON_2_OBJECT ),
+               Arrays.asList( TEST_SINGLETON_2 ),
                type.suggest( "TestAnother" )
       );
    }// End Method

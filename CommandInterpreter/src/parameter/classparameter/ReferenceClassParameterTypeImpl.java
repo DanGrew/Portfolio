@@ -61,11 +61,12 @@ public class ReferenceClassParameterTypeImpl< SingletonS extends Singleton > ext
    /**
     * {@inheritDoc}
     */
-   @Override public List< Object > suggest( Object object ) {
+   @Override public List< String > suggest( Object object ) {
       List< SingletonS > matches = RequestSystem.retrieveAll( singletonType, singleton -> { 
          return singleton.getIdentification().startsWith( object.toString() );  
       } );
-      List< Object > returnObjects = new ArrayList< Object >( matches );
+      List< String > returnObjects = new ArrayList< String >();
+      matches.forEach( singleton -> returnObjects.add( singleton.getIdentification() ) );
       return returnObjects;
    }// End Method
 

@@ -23,6 +23,7 @@ import test.model.TestObjects.TestSingletonImpl;
 import architecture.request.RequestSystem;
 
 import command.pattern.CommandParameterVerifier;
+import common.TestObjects.TestAnnotatedSingletonImpl;
 import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
 
 /**
@@ -35,6 +36,8 @@ public class ConstructParameterImplParameterMatchingTest implements CommandParam
    private static TestAnotherAnnotatedSingletonImpl TEST_FIRST_SINGLETON;
    private static String TEST_SECOND_SINGLETON_NAME;
    private static TestAnotherAnnotatedSingletonImpl TEST_SECOND_SINGLETON;
+   private static String TEST_THIRD_SINGLETON_NAME;
+   private static TestAnnotatedSingletonImpl TEST_THIRD_SINGLETON;
    private static String NON_CALI_SINGLETON_NAME;
    private static TestSingletonImpl NON_CALI_SINGLETON;
    
@@ -50,12 +53,16 @@ public class ConstructParameterImplParameterMatchingTest implements CommandParam
       TEST_SECOND_SINGLETON_NAME = "TestSecondSingleton";
       TEST_SECOND_SINGLETON = new TestAnotherAnnotatedSingletonImpl( TEST_SECOND_SINGLETON_NAME );
       RequestSystem.store( TEST_SECOND_SINGLETON, Singleton.class );
+      TEST_THIRD_SINGLETON_NAME = "TestThirdSingleton";
+      TEST_THIRD_SINGLETON = new TestAnnotatedSingletonImpl( TEST_THIRD_SINGLETON_NAME );
+      RequestSystem.store( TEST_SECOND_SINGLETON, Singleton.class );
       
       NON_CALI_SINGLETON_NAME = "TestNonCaliSingleton";
       NON_CALI_SINGLETON = new TestSingletonImpl( NON_CALI_SINGLETON_NAME );
       RequestSystem.store( NON_CALI_SINGLETON );
       
       CaliSystem.register( TestAnotherAnnotatedSingletonImpl.class );
+      CaliSystem.register( TestAnnotatedSingletonImpl.class );
       ClassParameterTypes.addParameterTypes( Arrays.asList( 
                new ReferenceClassParameterTypeImpl<>( Singleton.class ) 
       ) );
@@ -130,11 +137,11 @@ public class ConstructParameterImplParameterMatchingTest implements CommandParam
     */
    @Test @Override public void shouldAutoComplete() {
       Assert.assertEquals( 
-               "TestAnotherAnnotatedSingletonImpl( 23",
-               parameter.autoComplete( "TestAnotherAnnotatedSingletonImpl( 23" ) 
+               "TestAnnotatedSingletonImpl( 23 )",
+               parameter.autoComplete( "TestAnnotatedSingletonImpl( 23" ) 
       );
       Assert.assertEquals( 
-               "TestAnotherAnnotatedSingletonImpl( anything, 23",
+               "TestAnotherAnnotatedSingletonImpl( anything, 23.0 )",
                parameter.autoComplete( "TestAnotherAnnotatedSingletonImpl( anything, 23" ) 
       );
       Assert.assertEquals( 
@@ -146,8 +153,20 @@ public class ConstructParameterImplParameterMatchingTest implements CommandParam
                parameter.autoComplete( "TestAnotherAnnotatedSingletonImpl( anything, TestSeco" ) 
       );
       Assert.assertEquals( 
-               "TestAnotherAnnotatedSingletonImpl( anything, TestSecondSingleton )",
+               "TestAnotherAnnotatedSingletonImpl( anything, Test",
                parameter.autoComplete( "TestAnotherAnnotatedSingletonImpl( anything, Te" )
+      );
+      Assert.assertEquals( 
+               "TestAnotherAnnotatedSingletonImpl( anything, TestSecondSingleton )",
+               parameter.autoComplete( "TestAnotherAnnotatedSingletonImpl( anything, TestS" )
+      );
+      Assert.assertEquals( 
+               "TestAnotherAnnotatedSingletonImpl( anything, TestSecondSingleton )",
+               parameter.autoComplete( "TestAnotherAnnotatedSingletonImpl( anything, TestS )" )
+      );
+      Assert.assertEquals( 
+               "TestAnotherAnnotatedSingletonImpl( anything, TestSecondSingleton )",
+               parameter.autoComplete( "TestAnotherAnnotatedSingletonImpl( anything, TestSecondSingleton )" )
       );
    }// End Method
 
