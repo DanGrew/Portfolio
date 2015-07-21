@@ -161,6 +161,22 @@ public class GraphTest {
    }// End Method
    
    /**
+    * Test that missing {@link Search} is identified.
+    */
+   @Test public void shouldNotShowAndReportNullSearch(){
+      Graph barChart = new Graph( "sample" );
+      
+      barChart.addDataSeries( null );
+      barChart.setHorizontalProperty( HORIZ_PROPERTY );
+      barChart.addVerticalProperty( VERT_PROPERTY_A );
+      barChart.addVerticalProperty( VERT_PROPERTY_B );
+      
+      GraphResult result = barChart.barChart();
+      Assert.assertNotNull( result );
+      Assert.assertEquals( result.getEnumeration(), GraphError.MissingSearchCriteria );
+   }// End Method
+   
+   /**
     * Test that non number {@link PropertyType} cant be added.
     */
    @Test public void shouldNotAddNonNumberVerticalProperty(){

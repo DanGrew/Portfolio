@@ -106,6 +106,9 @@ import annotation.Cali;
     * @param search the {@link Search} used to collect information for the {@link Graph}.
     */
    @Cali public void addDataSeries( Search search ) {
+      if ( search == null ) {
+         return;
+      }
       this.dataSeries.add( search );
    }// End Method
 
