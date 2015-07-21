@@ -12,6 +12,7 @@ import java.awt.Dimension;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 /**
@@ -30,7 +31,7 @@ public class Console extends JPanel {
       JList< ConsoleMessage > list = new JList< ConsoleMessage >();
       list.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
       list.setModel( new ConsoleModel() );
-      add( list, BorderLayout.CENTER );
+      add( new JScrollPane( list ), BorderLayout.CENTER );
    }// End Constructor
 
 }// End Class

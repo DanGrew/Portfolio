@@ -15,11 +15,13 @@ import java.awt.Dimension;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 import architecture.event.EventSystem;
+
 import command.Command;
 
 /**
@@ -61,7 +63,7 @@ public class Suggestions extends JPanel {
             refreshSelection( list );
          }
       } );
-      add( list, BorderLayout.CENTER );
+      add( new JScrollPane( list ), BorderLayout.CENTER );
       
       EventSystem.registerForEvent( 
                ScrollUpAction.Events.ScrollUp, 
