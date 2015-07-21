@@ -120,7 +120,7 @@ public class FixedValueParameterTest implements CommandParameterVerifier{
    @Test public void shouldSuggest(){
       Assert.assertEquals( Arrays.asList( VALUE ), parameter.getSuggestions( "any" ) );
       Assert.assertEquals( Arrays.asList( VALUE ), parameter.getSuggestions( "" ) );
-      Assert.assertEquals( Arrays.asList( VALUE ), parameter.getSuggestions( "anything" ) );
+      Assert.assertEquals( Arrays.asList( CommandParameter.READY ), parameter.getSuggestions( "anything" ) );
       Assert.assertEquals( Arrays.asList( VALUE ), parameter.getSuggestions( "ANY" ) );
       Assert.assertEquals( Arrays.asList(), parameter.getSuggestions( "somethingElse" ) );
    }// End Method

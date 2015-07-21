@@ -44,7 +44,9 @@ public class FixedValueParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public List< String > getSuggestions( String expression ) {
-      if ( value.toLowerCase().startsWith( expression.toLowerCase() ) ) {
+      if ( expression.trim().toLowerCase().equals( value.toLowerCase() ) ) {
+         return Arrays.asList( CommandParameter.READY );
+      } else if ( value.toLowerCase().startsWith( expression.toLowerCase() ) ) {
          return Arrays.asList( value );
       } else {
          return new ArrayList<>();
