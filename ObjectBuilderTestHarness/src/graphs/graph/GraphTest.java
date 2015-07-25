@@ -7,10 +7,7 @@
  */
 package graphs.graph;
 
-import graphs.graph.Graph;
-import graphs.graph.GraphError;
-import graphs.graph.GraphResult;
-import gui.ObjectBuilder;
+import graphics.JavaFx;
 import model.singleton.Singleton;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
@@ -46,7 +43,7 @@ public class GraphTest {
     * Method to setup the {@link Singleton}s for the test.
     */
    @BeforeClass public static void setup(){
-      ObjectBuilder.launchJavaFxForSwingEnvironment();
+      JavaFx.launchJavaFxForSwingEnvironment();
       
       VERT_PROPERTY_A = new PropertyTypeImpl( "SOM", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
       RequestSystem.store( VERT_PROPERTY_A );

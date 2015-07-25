@@ -7,8 +7,8 @@
  */
 package outline;
 
+import graphics.JavaFx;
 import graphs.graph.Graph;
-import gui.ObjectBuilder;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -35,7 +35,6 @@ import outline.describer.OutlineDescriberFactory.OutlineDescribables;
 import outline.describer.OutlineDescriberImpl;
 import propertytype.PropertyType;
 import search.SearchOnly;
-import sun.net.www.content.text.plain;
 import architecture.request.RequestSystem;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
@@ -182,7 +181,7 @@ public class SystemOutline {
     * Method to display the {@link SystemOutline}.
     */
    public void view() {
-      ObjectBuilder.launchJavaFxForSwingEnvironment();
+      JavaFx.launchJavaFxForSwingEnvironment();
       Platform.runLater( new Runnable() {
 
          @Override public void run() {

@@ -45,6 +45,8 @@ public class CommandInterpreter extends JFrame {
       setVisible( true );
    }// End Constructor
    
+   
+   
    public static void main( String[] args ) {
       RequestSystem.store( CommonCommands.TRUE_COMMAND, Command.class );
       RequestSystem.store( CommonCommands.INVERT_BOOLEAN_COMMAND, Command.class );

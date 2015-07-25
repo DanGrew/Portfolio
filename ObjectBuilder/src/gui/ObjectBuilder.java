@@ -34,15 +34,6 @@ import commands.parameters.ObjectBuilderClassParameterTypes;
 public class ObjectBuilder {
 
    /**
-    * Method to perform the initialisation needed to launch JavaFX components.
-    * Note that this is not ideal and needs to be investigated.
-    */
-   public static void launchJavaFxForSwingEnvironment(){
-      new JFXPanel();
-      Platform.setImplicitExit( false );
-   }// End Method
-   
-   /**
     * Protected method to launch the {@link CommandInterpreter} with the relevant configuration for 
     * the {@link ObjectBuilder}.
     */

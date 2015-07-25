@@ -7,7 +7,7 @@
  */
 package graphs.graph;
 
-import gui.ObjectBuilder;
+import graphics.JavaFx;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -297,7 +297,7 @@ import annotation.Cali;
       result = verifyVerticalAxes();
       if ( result != null ) return result;
       
-      ObjectBuilder.launchJavaFxForSwingEnvironment();
+      JavaFx.launchJavaFxForSwingEnvironment();
       Platform.runLater( new Runnable() {
          
          @Override public void run() {
