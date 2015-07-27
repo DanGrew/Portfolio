@@ -7,10 +7,10 @@
  */
 package gui;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.AbstractListModel;
+import javafx.scene.control.ListView;
+
 import javax.swing.JList;
 
 import architecture.event.EventSystem;
@@ -22,18 +22,17 @@ import command.Command;
  * The {@link SuggestionsModel} supports the {@link JList} providing suggestions to the user
  * based on their input.
  */
-public class SuggestionsModel extends AbstractListModel< CommandSuggestion >{
+public class SuggestionsModel {
 
-   private static final long serialVersionUID = 1L;
-   private JList< CommandSuggestion > parent;
+   private ListView< CommandSuggestion > parent;
    private List< CommandSuggestion > data;
    
    /**
     * Constructs a new {@link SuggestionsModel}.
-    * @param parent the {@link JList} being modelled.
+    * @param parent the {@link ListView} being modelled.
     */
-   public SuggestionsModel( JList< CommandSuggestion > parent ) {
-      data = new ArrayList< CommandSuggestion >();
+   public SuggestionsModel( ListView< CommandSuggestion > parent ) {
+      data = parent.getItems();
       this.parent = parent;
       
       EventSystem.registerForEvent( CommandInput.Events.TextInput, ( object, source ) -> {
@@ -46,7 +45,7 @@ public class SuggestionsModel extends AbstractListModel< CommandSuggestion >{
     * @param input the new input {@link String}.
     */
    private void inputChanged( String input ) {
-      CommandSuggestion selected = parent.getSelectedValue();
+      CommandSuggestion selected = parent.getSelectionModel().getSelectedItem();
       
       data.clear();
       @SuppressWarnings("rawtypes") List< Command > commands = RequestSystem.retrieveAll( 
@@ -59,31 +58,12 @@ public class SuggestionsModel extends AbstractListModel< CommandSuggestion >{
             data.add( new CommandSuggestion( command, suggestion ) );
          } );
       } );
-      fireContentsChanged( this, 0, data.size() );
       
-      parent.setSelectedIndex( -1 );
+      parent.getSelectionModel().clearSelection();
       if ( data.contains( selected ) ) {
-         parent.setSelectedValue( selected, true );
+         parent.getSelectionModel().select( selected );
       } else {
-         parent.setSelectedIndex( 0 );
-      }
-   }// End Method
-   
-   /**
-    * {@inheritDoc} 
-    */
-   @Override public int getSize() {
-      return data.size();
-   }// End Method
-
-   /**
-    * {@inheritDoc}
-    */
-   @Override public CommandSuggestion getElementAt( int index ) {
-      if ( index < 0 || index >= data.size() ) {
-         return null;
-      } else {
-         return data.get( index );
+         parent.getSelectionModel().select( 0 );
       }
    }// End Method
 

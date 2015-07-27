@@ -7,9 +7,9 @@
  */
 package gui;
 
-import gui.action.ExecuteAction;
 import gui.console.ConsoleMessage;
 import gui.console.ConsoleModel;
+import gui.function.GuiFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import architecture.event.EventSystem;
+
 import command.Command;
+
 import defaults.CommonCommands;
 
 /**
@@ -55,7 +57,7 @@ public class CommandExecutorTest {
       Command< Boolean > command = CommonCommands.BINARY_OR_COMMAND;
       EventSystem.raiseEvent( Suggestions.Events.CommandSelected, command );
       EventSystem.raiseEvent( CommandInput.Events.TextInput, "binaryor true true" );
-      EventSystem.raiseEvent( ExecuteAction.Events.ExecuteAction, null );
+      EventSystem.raiseEvent( GuiFunctions.Events.ExecuteAction, null );
       
       Assert.assertEquals( 1, results.size() );
       ConsoleMessage result = ( ConsoleMessage )results.get( 0 );
@@ -69,7 +71,7 @@ public class CommandExecutorTest {
    @Test public void invalidInputTest() {
       Command< Boolean > command = CommonCommands.BINARY_OR_COMMAND;
       EventSystem.raiseEvent( Suggestions.Events.CommandSelected, command );
-      EventSystem.raiseEvent( ExecuteAction.Events.ExecuteAction, null );
+      EventSystem.raiseEvent( GuiFunctions.Events.ExecuteAction, null );
       
       Assert.assertEquals( 1, results.size() );
       ConsoleMessage result = ( ConsoleMessage )results.get( 0 );
@@ -81,7 +83,7 @@ public class CommandExecutorTest {
     */
    @Test public void invalidCommandTest() {
       EventSystem.raiseEvent( CommandInput.Events.TextInput, "binaryor true true" );
-      EventSystem.raiseEvent( ExecuteAction.Events.ExecuteAction, null );
+      EventSystem.raiseEvent( GuiFunctions.Events.ExecuteAction, null );
       
       Assert.assertEquals( 1, results.size() );
       ConsoleMessage result = ( ConsoleMessage )results.get( 0 );

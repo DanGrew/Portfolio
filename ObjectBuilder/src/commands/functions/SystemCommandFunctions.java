@@ -11,11 +11,11 @@ import graphs.graph.Graph;
 import graphs.graph.XmlGraphImpl;
 import gui.console.ConsoleMessageImpl;
 
+import java.io.File;
 import java.util.List;
 import java.util.function.Function;
 
-import javax.swing.JFileChooser;
-
+import javafx.stage.FileChooser;
 import object.BuilderObject;
 import object.XmlBuilderObjectImpl;
 import objecttype.Definition;
@@ -29,6 +29,7 @@ import serialization.XmlAnalysisWrapper;
 import serialization.XmlObjectBuilderSystemWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
+
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.SystemCommands;
@@ -45,9 +46,10 @@ public class SystemCommandFunctions {
        * {@inheritDoc}
        */
       @Override public CommandResult< Void > apply( CommandParameters parameters ) {
-         JFileChooser chooser = new JFileChooser();
-         int result = chooser.showSaveDialog( null );
-         if ( result == JFileChooser.APPROVE_OPTION ) {
+         FileChooser chooser = new FileChooser();
+         chooser.setTitle( "Choose Model File to save to" );
+         File file = chooser.showSaveDialog( null );
+         if ( file != null ) {
             XmlObjectBuilderSystemWrapper serializedCollection = new XmlObjectBuilderSystemWrapper();
             List< PropertyType > propertyTypes = RequestSystem.retrieveAll( PropertyType.class );
             serializedCollection.addAllPropertyTypes( propertyTypes );
@@ -58,7 +60,7 @@ public class SystemCommandFunctions {
             
             SerializationSystem.saveToFile( 
                      serializedCollection, 
-                     chooser.getSelectedFile(), 
+                     file, 
                      XmlObjectBuilderSystemWrapper.class, 
                      XmlPropertyTypeImpl.class, 
                      XmlDefinitionImpl.class,
@@ -81,12 +83,14 @@ public class SystemCommandFunctions {
        * {@inheritDoc}
        */
       @Override public CommandResult< Void > apply( CommandParameters parameters ) {
-         JFileChooser chooser = new JFileChooser();
-         int result = chooser.showOpenDialog( null );
-         if ( result == JFileChooser.APPROVE_OPTION ) {
+         FileChooser chooser = new FileChooser();
+         chooser.setTitle( "Select model file to load." );
+         File file = chooser.showOpenDialog( null );
+
+         if ( file != null ) {
             SerializationSystem.loadWrapperFromFile( 
                      XmlObjectBuilderSystemWrapper.class, 
-                     chooser.getSelectedFile(), 
+                     file, 
                      XmlObjectBuilderSystemWrapper.class, 
                      XmlPropertyTypeImpl.class, 
                      XmlDefinitionImpl.class,
@@ -109,9 +113,11 @@ public class SystemCommandFunctions {
        * {@inheritDoc}
        */
       @Override public CommandResult< Void > apply( CommandParameters parameters ) {
-         JFileChooser chooser = new JFileChooser();
-         int result = chooser.showSaveDialog( null );
-         if ( result == JFileChooser.APPROVE_OPTION ) {
+         FileChooser chooser = new FileChooser();
+         chooser.setTitle( "Choose analysis file to save to" );
+         File file = chooser.showSaveDialog( null );
+         
+         if ( file != null ) {
             XmlAnalysisWrapper serializedCollection = new XmlAnalysisWrapper();
             List< SearchOnly > searchOnlys = RequestSystem.retrieveAll( SearchOnly.class );
             serializedCollection.addAllSearchOnlys( searchOnlys );
@@ -120,7 +126,7 @@ public class SystemCommandFunctions {
             
             SerializationSystem.saveToFile( 
                      serializedCollection, 
-                     chooser.getSelectedFile(), 
+                     file, 
                      XmlAnalysisWrapper.class, 
                      XmlSearchOnlyImpl.class, 
                      XmlGraphImpl.class
@@ -142,12 +148,14 @@ public class SystemCommandFunctions {
        * {@inheritDoc}
        */
       @Override public CommandResult< Void > apply( CommandParameters parameters ) {
-         JFileChooser chooser = new JFileChooser();
-         int result = chooser.showOpenDialog( null );
-         if ( result == JFileChooser.APPROVE_OPTION ) {
+         FileChooser chooser = new FileChooser();
+         chooser.setTitle( "Choose analysis file to load" );
+         File file = chooser.showOpenDialog( null );
+         
+         if ( file != null ) {
             SerializationSystem.loadWrapperFromFile( 
                      XmlAnalysisWrapper.class, 
-                     chooser.getSelectedFile(), 
+                     file, 
                      XmlAnalysisWrapper.class, 
                      XmlSearchOnlyImpl.class, 
                      XmlGraphImpl.class

@@ -8,35 +8,30 @@
 package gui;
 
 import gui.console.Console;
-
-import java.awt.BorderLayout;
-
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
+import javafx.geometry.Orientation;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.BorderPane;
 
 import command.Command;
 
 /**
  * The {@link CommandPrompt} represents the overall panel for using {@link Command}s.
  */
-public class CommandPrompt extends JPanel {
-
-   private static final long serialVersionUID = 1L;
+public class CommandPrompt extends BorderPane {
 
    /**
     * Constructs a new {@link CommandPrompt}.
     */
    public CommandPrompt(){
-      setLayout( new BorderLayout() );
-      add( new CommandInput(), BorderLayout.NORTH );
+      setTop( new CommandInput() );
       
-      JSplitPane split = new JSplitPane( 
-               JSplitPane.HORIZONTAL_SPLIT, 
+      SplitPane split = new SplitPane(
                new Console(), 
                new Suggestions() 
       );
-      split.setDividerLocation( 0.5 );
-      add( split, BorderLayout.CENTER );
+      split.orientationProperty().setValue( Orientation.HORIZONTAL );
+      split.setDividerPositions( 0.5 );
+      setCenter( split );
       
       new CommandExecutor();
       new CommandAutoComplete();

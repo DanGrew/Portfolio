@@ -7,7 +7,7 @@
  */
 package gui;
 
-import gui.action.AutoCompleteAction;
+import gui.function.GuiFunctions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,9 @@ import org.junit.Test;
 
 import parameter.CommandParameter;
 import architecture.event.EventSystem;
+
 import command.Command;
+
 import defaults.CommonCommands;
 
 /**
@@ -54,7 +56,7 @@ public class CommandAutoCompleteTest {
       Command< Boolean > command = CommonCommands.BINARY_OR_COMMAND;
       EventSystem.raiseEvent( Suggestions.Events.CommandSelected, command );
       EventSystem.raiseEvent( CommandInput.Events.TextInput, "bin" );
-      EventSystem.raiseEvent( AutoCompleteAction.Events.AutoComplete, null );
+      EventSystem.raiseEvent( GuiFunctions.Events.AutoComplete, null );
       
       Assert.assertEquals( 1, results.size() );
       Assert.assertEquals( "BinaryOr", results.get( 0 ) );
@@ -67,7 +69,7 @@ public class CommandAutoCompleteTest {
       Command< Boolean > command = CommonCommands.BINARY_OR_COMMAND;
       EventSystem.raiseEvent( Suggestions.Events.CommandSelected, command );
       EventSystem.raiseEvent( CommandInput.Events.TextInput, "binaryor t" );
-      EventSystem.raiseEvent( AutoCompleteAction.Events.AutoComplete, null );
+      EventSystem.raiseEvent( GuiFunctions.Events.AutoComplete, null );
       
       Assert.assertEquals( 1, results.size() );
       Assert.assertEquals( "BinaryOr true", results.get( 0 ) );
@@ -80,7 +82,7 @@ public class CommandAutoCompleteTest {
       Command< Boolean > command = CommonCommands.BINARY_OR_COMMAND;
       EventSystem.raiseEvent( Suggestions.Events.CommandSelected, command );
       EventSystem.raiseEvent( CommandInput.Events.TextInput, "binaryor true fa" );
-      EventSystem.raiseEvent( AutoCompleteAction.Events.AutoComplete, null );
+      EventSystem.raiseEvent( GuiFunctions.Events.AutoComplete, null );
       
       Assert.assertEquals( 1, results.size() );
       Assert.assertEquals( "BinaryOr true false", results.get( 0 ) );
@@ -93,7 +95,7 @@ public class CommandAutoCompleteTest {
       Command< String > command = CommonCommands.INVERT_STRING_CASE_COMMAND;
       EventSystem.raiseEvent( Suggestions.Events.CommandSelected, command );
       EventSystem.raiseEvent( CommandInput.Events.TextInput, "invertString test" );
-      EventSystem.raiseEvent( AutoCompleteAction.Events.AutoComplete, null );
+      EventSystem.raiseEvent( GuiFunctions.Events.AutoComplete, null );
       
       Assert.assertEquals( 1, results.size() );
       Assert.assertEquals( "InvertString test", results.get( 0 ) );

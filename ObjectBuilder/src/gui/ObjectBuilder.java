@@ -37,7 +37,7 @@ public class ObjectBuilder {
     * Protected method to launch the {@link CommandInterpreter} with the relevant configuration for 
     * the {@link ObjectBuilder}.
     */
-   protected static void launch(){
+   public static void launch(){
       RequestSystem.store( PropertyTypeCommands.VIEW_PROPERTY_TYPES_COMMAND, Command.class );
       RequestSystem.store( DefinitionCommands.VIEW_BUILDER_TYPES_COMMAND, Command.class );
       RequestSystem.store( BuilderObjectCommands.VIEW_OBJECTS_COMMAND, Command.class );
@@ -56,11 +56,11 @@ public class ObjectBuilder {
       CaliSystem.register( Graph.class );
       
       ObjectBuilderClassParameterTypes.initialiseTypes();
-      new CommandInterpreter();
    }// End Method
    
    public static void main( String[] args ) {
       launch();
+      new CommandInterpreter();
    }// End Method
    
 }// End Class

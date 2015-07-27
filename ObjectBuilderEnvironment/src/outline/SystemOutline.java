@@ -43,7 +43,7 @@ import com.sun.javafx.scene.control.skin.VirtualFlow;
  * The {@link SystemOutline} provides an interactive {@link TreeTableView} displaying
  * all data in the system.
  */
-public class SystemOutline {
+public class SystemOutline extends BorderPane {
 
    private static final String ELEMENTS = "Elements";
    private static final String ROOT = "ROOT";
@@ -65,6 +65,7 @@ public class SystemOutline {
     */
    public SystemOutline() {
       initialiseOutlineData();
+      constructLayout();
    }// End Constructor
    
    /**
@@ -180,48 +181,35 @@ public class SystemOutline {
    /**
     * Method to display the {@link SystemOutline}.
     */
-   public void view() {
-      JavaFx.launchJavaFxForSwingEnvironment();
-      Platform.runLater( new Runnable() {
-
-         @Override public void run() {
-            TreeItem< OutlineDescriber > root = new TreeItem<>( new OutlineDescriberImpl( ROOT ) );
-            root.setExpanded( true );
-            TreeItem< OutlineDescriber > modelBranch = createBranch( root, MODEL, null, null );
-            createBranch( modelBranch, PROPERTY_TYPES, propertyTypes, OutlineDescribables.PropertyType );
-            createBranch( modelBranch, DEFINITIONS, definitions, OutlineDescribables.Definition );
-            
-            TreeItem< OutlineDescriber > dataBranch = createBranch( root, DATA, null, null );
-            builderObjects.forEach( ( definition, objects ) -> {
-               createBranch( dataBranch, definition.getIdentification(), objects, OutlineDescribables.BuilderObject );
-            } );
-            
-            TreeItem< OutlineDescriber > analysisBranch = createBranch( root, ANALYSIS, null, null );
-            createBranch( analysisBranch, SEARCHES, searchOnlys, null );
-            createBranch( analysisBranch, GRAPHS, graphs, null );
-
-            TreeTableView< OutlineDescriber > treeTableView = new TreeTableView<>( root );
-            treeTableView.setEditable( true );
-            
-            createElementsColumn( treeTableView );
-            for ( int i = 1; i < 10; i++ ) {
-               createSpreadsheetColumn( treeTableView, i );
-            }
-
-            treeTableView.setShowRoot( false );
-            treeTableView.setTableMenuButtonVisible( true );
-            treeTableView.setOnScrollFinished( event -> updateColumnHeadersForView( treeTableView ) );
-            
-            BorderPane pane = new BorderPane();
-            pane.setCenter( treeTableView );
-            
-            Stage stage = new Stage();
-            Scene scene = new Scene( pane, 800, 400 );
-            stage.setScene( scene );
-            stage.setFullScreen( true );
-            stage.show();
-         }
+   public void constructLayout() {
+      TreeItem< OutlineDescriber > root = new TreeItem<>( new OutlineDescriberImpl( ROOT ) );
+      root.setExpanded( true );
+      TreeItem< OutlineDescriber > modelBranch = createBranch( root, MODEL, null, null );
+      createBranch( modelBranch, PROPERTY_TYPES, propertyTypes, OutlineDescribables.PropertyType );
+      createBranch( modelBranch, DEFINITIONS, definitions, OutlineDescribables.Definition );
+      
+      TreeItem< OutlineDescriber > dataBranch = createBranch( root, DATA, null, null );
+      builderObjects.forEach( ( definition, objects ) -> {
+         createBranch( dataBranch, definition.getIdentification(), objects, OutlineDescribables.BuilderObject );
       } );
+      
+      TreeItem< OutlineDescriber > analysisBranch = createBranch( root, ANALYSIS, null, null );
+      createBranch( analysisBranch, SEARCHES, searchOnlys, null );
+      createBranch( analysisBranch, GRAPHS, graphs, null );
+
+      TreeTableView< OutlineDescriber > treeTableView = new TreeTableView<>( root );
+      treeTableView.setEditable( true );
+      
+      createElementsColumn( treeTableView );
+      for ( int i = 1; i < 10; i++ ) {
+         createSpreadsheetColumn( treeTableView, i );
+      }
+
+      treeTableView.setShowRoot( false );
+      treeTableView.setTableMenuButtonVisible( true );
+      treeTableView.setOnScrollFinished( event -> updateColumnHeadersForView( treeTableView ) );
+      
+      setCenter( treeTableView );
    }// End Method
 
 }// End Class

@@ -7,18 +7,13 @@
  */
 package gui;
 
-import gui.action.ScrollDownAction;
-import gui.action.ScrollUpAction;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import gui.function.GuiFunctions;
+import javafx.collections.ListChangeListener.Change;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.layout.BorderPane;
 
 import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListDataListener;
 
 import architecture.event.EventSystem;
 
@@ -28,10 +23,8 @@ import command.Command;
  * The {@link Suggestions} represents a {@link JList} of possible {@link Command}s based on the 
  * input the user has provided.
  */
-public class Suggestions extends JPanel {
+public class Suggestions extends BorderPane {
 
-   private static final long serialVersionUID = 1L;
-   
    public enum Events {
       /** Event raised when a {@link Command} has been selected.**/
       CommandSelected;
@@ -41,56 +34,41 @@ public class Suggestions extends JPanel {
     * Constructs a new {@link Suggestions} panel.
     */
    public Suggestions() {
-      setLayout( new BorderLayout() );
-      setPreferredSize( new Dimension( 450, 400 ) );
-      JList< CommandSuggestion > list = new JList< CommandSuggestion >();
-      list.setSelectionMode( ListSelectionModel.SINGLE_SELECTION );
-      list.setModel( new SuggestionsModel( list ) );
-      list.getSelectionModel().addListSelectionListener( event -> {
+      ListView< CommandSuggestion > list = new ListView< CommandSuggestion >();
+      list.getSelectionModel().setSelectionMode( SelectionMode.SINGLE );
+      new SuggestionsModel( list );
+      
+      list.getSelectionModel().getSelectedItems().addListener( ( Change< ? extends CommandSuggestion > change ) -> {
          refreshSelection( list );
       } );
-      list.getModel().addListDataListener( new ListDataListener() {
-         
-         @Override public void intervalRemoved( ListDataEvent e ) {
-            refreshSelection( list );
-         }
-         
-         @Override public void intervalAdded( ListDataEvent e ) {
-            refreshSelection( list );
-         }
-         
-         @Override public void contentsChanged( ListDataEvent e ) {
-            refreshSelection( list );
-         }
-      } );
-      add( new JScrollPane( list ), BorderLayout.CENTER );
+      setCenter( list );
       
       EventSystem.registerForEvent( 
-               ScrollUpAction.Events.ScrollUp, 
-               ( event, source ) -> {
-                  int currentSelection = list.getSelectedIndex();
-                  if ( currentSelection > 0 ) {
-                     list.setSelectedIndex( currentSelection - 1 );
-                  }
-               }
+         GuiFunctions.Events.ScrollUp, 
+         ( event, source ) -> {
+            int currentSelection = list.getSelectionModel().getSelectedIndex();
+            if ( currentSelection > 0 ) {
+               list.getSelectionModel().clearAndSelect( currentSelection - 1 );
+            }
+         }
       );
       EventSystem.registerForEvent( 
-               ScrollDownAction.Events.ScrollDown, 
-               ( event, source ) -> {
-                  int currentSelection = list.getSelectedIndex();
-                  if ( currentSelection < list.getModel().getSize() - 1 ) {
-                     list.setSelectedIndex( currentSelection + 1 );
-                  }
-               }
+         GuiFunctions.Events.ScrollDown, 
+         ( event, source ) -> {
+            int currentSelection = list.getSelectionModel().getSelectedIndex();
+            if ( currentSelection < list.getItems().size() - 1 ) {
+               list.getSelectionModel().clearAndSelect( currentSelection + 1 );
+            }
+         }
       );
    }// End Constructor
    
    /**
     * Method to refresh the current selection in the {@link JList}.
-    * @param list the {@link JList} holding the {@link CommandSuggestion}s.
+    * @param list the {@link ListView} holding the {@link CommandSuggestion}s.
     */
-   private void refreshSelection( JList< CommandSuggestion > list ){
-      CommandSuggestion selected = list.getSelectedValue();
+   private void refreshSelection( ListView< CommandSuggestion > list ){
+      CommandSuggestion selected = list.getSelectionModel().getSelectedItem();
       if ( selected != null ) {
          EventSystem.raiseEvent( Events.CommandSelected, selected.getCommand() );
       } else {

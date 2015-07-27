@@ -7,8 +7,9 @@
  */
 package gui;
 
-import gui.action.AutoCompleteAction;
+import gui.function.GuiFunctions;
 import architecture.event.EventSystem;
+
 import command.Command;
 
 /**
@@ -28,7 +29,7 @@ public class CommandAutoComplete extends CommandMonitor{
    public CommandAutoComplete() {
       super();
       EventSystem.registerForEvent( 
-               AutoCompleteAction.Events.AutoComplete, 
+               GuiFunctions.Events.AutoComplete, 
                ( event, object ) -> autoComplete()
       );
    }// End Constructor

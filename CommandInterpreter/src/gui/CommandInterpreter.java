@@ -7,44 +7,44 @@
  */
 package gui;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 
 import architecture.request.RequestSystem;
 
 import command.Command;
 
-import defaults.CommandActions;
 import defaults.CommonCommands;
 
 /**
  * The {@link CommandInterpreter} provides a {@link JFrame} and {@link JMenuBar} for the 
  * {@link CommandPrompt}.
  */
-public class CommandInterpreter extends JFrame {
+public class CommandInterpreter extends Application {
    
-   private static final long serialVersionUID = 1L;
-
    /**
     * Constructs a new {@link CommandInterpreter}.
     */
-   public CommandInterpreter() {
-      JMenuBar menuBar = new JMenuBar();
-      JMenu menu = new JMenu( "Menu" );
-      menu.add( new JMenuItem( CommandActions.EXECUTE_ACTION ) );
-      menu.add( new JMenuItem( CommandActions.AUTO_COMPLETE_ACTION ) );
-      menu.add( new JMenuItem( CommandActions.SCROLL_UP_ACTION ) );
-      menu.add( new JMenuItem( CommandActions.SCROLL_DOWN_ACTION ) );
-      menuBar.add( menu );
-      
-      setJMenuBar( menuBar );
-      add( new CommandPrompt() );
-      pack();
-      setVisible( true );
-   }// End Constructor
+   public CommandInterpreter() {}// End Constructor
    
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void start( Stage primaryStage ) throws Exception {
+      BorderPane pane = new BorderPane();
+      pane.setTop( new CommandInterpreterMenuBar() );
+      
+      pane.setCenter( new CommandPrompt() );
+
+      Scene scene = new Scene( pane, 1000, 400 );
+      primaryStage.setScene( scene );
+      primaryStage.show();
+   }// End Method
    
    
    public static void main( String[] args ) {
@@ -54,8 +54,8 @@ public class CommandInterpreter extends JFrame {
       RequestSystem.store( CommonCommands.BINARY_OR_COMMAND, Command.class );
       RequestSystem.store( CommonCommands.BINARY_XOR_COMMAND, Command.class );
       RequestSystem.store( CommonCommands.ADDITION_COMMAND, Command.class );
-      
-      new CommandInterpreter();
+
+      launch( args );
    }// End Method
 
 }// End Class

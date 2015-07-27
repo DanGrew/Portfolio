@@ -7,11 +7,12 @@
  */
 package gui;
 
-import gui.action.ExecuteAction;
 import gui.console.ConsoleMessage;
 import gui.console.ConsoleMessageImpl;
 import gui.console.ConsoleModel;
+import gui.function.GuiFunctions;
 import architecture.event.EventSystem;
+
 import command.Command;
 import command.CommandResult;
 
@@ -32,7 +33,7 @@ public class CommandExecutor extends CommandMonitor{
    public CommandExecutor() {
       super();
       EventSystem.registerForEvent( 
-               ExecuteAction.Events.ExecuteAction, 
+               GuiFunctions.Events.ExecuteAction, 
                ( event, object ) -> execute()
       );
    }// End Constructor

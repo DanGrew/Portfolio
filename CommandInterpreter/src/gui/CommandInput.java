@@ -7,24 +7,17 @@
  */
 package gui;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
+import gui.function.GuiFunctions;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import architecture.event.EventSystem;
-import defaults.CommandActions;
 
 /**
  * The {@link CommandInput} represents the element of the gui that accepts input from the user.
  */
-public class CommandInput extends JPanel {
+public class CommandInput extends BorderPane {
 
-   private static final long serialVersionUID = 1L;
-   
    public enum Events {
       /** Text has been entered.**/
       TextInput;
@@ -34,37 +27,23 @@ public class CommandInput extends JPanel {
     * Constructs a new {@link CommandInput}.
     */
    public CommandInput(){
-      setLayout( new BorderLayout() );
-      
-      JTextField textArea = new JTextField( "Type stuff here." );
-      textArea.getDocument().addDocumentListener( new DocumentListener() {
-         
-         @Override public void removeUpdate( DocumentEvent e ) {
-            notifyEventSystem();
-         }
-         
-         @Override public void insertUpdate( DocumentEvent e ) {
-            notifyEventSystem();
-         }
-         
-         @Override public void changedUpdate( DocumentEvent e ) {
-            notifyEventSystem();
-         }
-         
-         private void notifyEventSystem(){
-            EventSystem.raiseEvent( Events.TextInput, textArea.getText() );
-         }
+      TextField textArea = new TextField();
+      textArea.setText( "Type stuff here." );
+      textArea.textProperty().addListener( ( event, old, newValue ) -> {
+         EventSystem.raiseEvent( Events.TextInput, textArea.getText() );
       } );
-      add( textArea, BorderLayout.CENTER );
+      setCenter( textArea );
       
       EventSystem.registerForEvent( 
                CommandAutoComplete.Events.AutoCompletSuggestion, 
                ( object, source ) -> {
                   textArea.setText( source.toString() );
+                  textArea.end();
                } 
       );
       
-      JButton executeButton = new JButton( CommandActions.EXECUTE_ACTION );
-      add( executeButton, BorderLayout.EAST );
+      Button executeButton = new Button();
+      GuiFunctions.respondWithExecute( executeButton );
+      setRight( executeButton );
    }// End Constructor
 }// End Class

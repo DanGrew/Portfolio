@@ -47,6 +47,7 @@ public class ParameterSuggestionsTest {
     * Method to setup data for the test.
     */
    @BeforeClass public static void setup(){
+      RequestSystem.reset();
       SINGLETON_OBJECT = new TestSingletonImpl( SINGLETON );
       RequestSystem.store( SINGLETON_OBJECT, Singleton.class );
       
