@@ -50,9 +50,6 @@ public class SystemOutline extends BorderPane {
    private static final String ANALYSIS = "Analysis";
    private static final String SEARCHES = "Searches";
    private static final String GRAPHS = "Graphs";
-   private List< PropertyType > propertyTypes;
-   private List< Definition > definitions;
-   private Map< Definition, List< BuilderObject > > builderObjects;
    private List< SearchOnly > searchOnlys;
    private List< Graph > graphs;
 
@@ -68,29 +65,10 @@ public class SystemOutline extends BorderPane {
     * Method to initialise the data required for the outline.
     */
    private void initialiseOutlineData(){
-      propertyTypes = RequestSystem.retrieveAll( PropertyType.class );
-      definitions = RequestSystem.retrieveAll( Definition.class );
-      builderObjects = new LinkedHashMap<>();
-      List< BuilderObject > objectsList = RequestSystem.retrieveAll( BuilderObject.class );
-      objectsList.forEach( object -> addBuilderObject( object ) );
       searchOnlys = RequestSystem.retrieveAll( SearchOnly.class );
       graphs = RequestSystem.retrieveAll( Graph.class );
    }// End Method
    
-   /**
-    * Method to a add a {@link BuilderObject} to the internal outline structure.
-    * @param object the {@link BuilderObject} to add.
-    */
-   private void addBuilderObject( BuilderObject object ){
-      Definition definition = object.getDefinition();
-      List< BuilderObject > objects = builderObjects.get( definition );
-      if ( objects == null ) {
-         objects = new ArrayList< BuilderObject >();
-         builderObjects.put( definition, objects );
-      }
-      objects.add( object );
-   }// End Method
-
    /**
     * Method to create a branch in the tree for the given data.
     * @param parent the parent {@link TreeItem} in the tree.
@@ -98,7 +76,7 @@ public class SystemOutline extends BorderPane {
     * @param data the {@link Singleton}s to populate the branch with.
     * @param describable the {@link OutlineDescribables} for the items.
     * @param <SingletonT> the type of {@link Singleton} being added to the outline.
-    * @return the contructed {@link TreeItem} representing the branch.
+    * @return the constructed {@link TreeItem} representing the branch.
     */
    private < SingletonT extends Singleton > TreeItem< OutlineDescriber > createBranch( 
             TreeItem< OutlineDescriber > parent, 
@@ -181,13 +159,13 @@ public class SystemOutline extends BorderPane {
       TreeItem< OutlineDescriber > root = new TreeItem<>( new OutlineDescriberImpl( ROOT ) );
       root.setExpanded( true );
       TreeItem< OutlineDescriber > modelBranch = createBranch( root, MODEL, null, null );
-      createBranch( modelBranch, PROPERTY_TYPES, propertyTypes, OutlineDescribables.PropertyType );
-      createBranch( modelBranch, DEFINITIONS, definitions, OutlineDescribables.Definition );
+      TreeItem< OutlineDescriber > propertyTypeBranch = createBranch( modelBranch, PROPERTY_TYPES, null, null );
+      new TreeItemListModel( OutlineDescribables.PropertyType, propertyTypeBranch );
+      TreeItem< OutlineDescriber > definitionBranch = createBranch( modelBranch, DEFINITIONS, null, null );
+      new TreeItemListModel( OutlineDescribables.Definition, definitionBranch );
       
       TreeItem< OutlineDescriber > dataBranch = createBranch( root, DATA, null, null );
-      builderObjects.forEach( ( definition, objects ) -> {
-         createBranch( dataBranch, definition.getIdentification(), objects, OutlineDescribables.BuilderObject );
-      } );
+      new BuilderObjectTreeItemModel( dataBranch );
       
       TreeItem< OutlineDescriber > analysisBranch = createBranch( root, ANALYSIS, null, null );
       createBranch( analysisBranch, SEARCHES, searchOnlys, null );

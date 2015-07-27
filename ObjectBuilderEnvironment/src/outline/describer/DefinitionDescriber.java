@@ -32,9 +32,12 @@ public class DefinitionDescriber extends SingletonDescriberImpl< Definition > {
     * {@inheritDoc}
     */
    @Override public String getColumnEntry( int columnReference ) {
+      if ( columnReference == 0 || !hasSingleton() ) {
+         return super.getColumnEntry( columnReference );
+      }
       List< PropertyType > types = getSingleton().getPropertyTypes();
-      if ( columnReference == 0 || !hasSingleton() || columnReference > types.size() ) {
-         return super.getColumnDescription( columnReference );
+      if ( columnReference > types.size() ) {
+         return super.getColumnEntry( columnReference );
       } else {
          return types.get( columnReference - 1 ).getIdentification();
       }
