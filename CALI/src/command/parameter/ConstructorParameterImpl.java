@@ -26,8 +26,6 @@ import annotation.CodeParametersResult;
  */
 public class ConstructorParameterImpl implements CommandParameter {
    
-   private static final ParameterSuggestions SUGGESTIONS = new ParameterSuggestions();
-   
    /**
     * {@inheritDoc}
     */
@@ -190,7 +188,7 @@ public class ConstructorParameterImpl implements CommandParameter {
       for ( Class< ? > clazz : classes ) {
          List< Constructor< ? > > constructors = CaliSystem.findConstructors( clazz, parameters.length );
          for ( Constructor< ? > constructor : constructors ) {
-            if ( SUGGESTIONS.matchesSignature( constructor, parameters ) ) {
+            if ( ParameterSuggestions.matchesSignature( constructor, parameters ) ) {
                constructorMatches.add( constructor );
             }
          }

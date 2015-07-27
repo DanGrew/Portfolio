@@ -53,7 +53,9 @@ public class SuggestionsModel {
                command -> { return command.partialMatches( input ); } 
       );
       commands.forEach( command -> {
-         List< String > suggestions = command.getSuggestions( input );
+         //Remove unsafe use by re-attaching the generic.
+         Command< ? > commandA = ( Command< ? > )command;
+         List< String > suggestions = commandA.getSuggestions( input );
          suggestions.forEach( suggestion -> {
             data.add( new CommandSuggestion( command, suggestion ) );
          } );

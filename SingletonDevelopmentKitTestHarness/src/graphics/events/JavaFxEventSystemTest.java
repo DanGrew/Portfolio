@@ -7,7 +7,6 @@
  */
 package graphics.events;
 
-import graphics.event.JavaFxEventManagementSystemImpl;
 import graphics.event.JavaFxEventSystem;
 
 import java.util.ArrayList;

@@ -37,7 +37,6 @@ public class ConstructParameterImplParameterMatchingTest implements CommandParam
    private static String TEST_SECOND_SINGLETON_NAME;
    private static TestAnotherAnnotatedSingletonImpl TEST_SECOND_SINGLETON;
    private static String TEST_THIRD_SINGLETON_NAME;
-   private static TestAnnotatedSingletonImpl TEST_THIRD_SINGLETON;
    private static String NON_CALI_SINGLETON_NAME;
    private static TestSingletonImpl NON_CALI_SINGLETON;
    
@@ -54,8 +53,8 @@ public class ConstructParameterImplParameterMatchingTest implements CommandParam
       TEST_SECOND_SINGLETON = new TestAnotherAnnotatedSingletonImpl( TEST_SECOND_SINGLETON_NAME );
       RequestSystem.store( TEST_SECOND_SINGLETON, Singleton.class );
       TEST_THIRD_SINGLETON_NAME = "TestThirdSingleton";
-      TEST_THIRD_SINGLETON = new TestAnnotatedSingletonImpl( TEST_THIRD_SINGLETON_NAME );
-      RequestSystem.store( TEST_SECOND_SINGLETON, Singleton.class );
+      TestAnnotatedSingletonImpl TEST_THIRD_SINGLETON = new TestAnnotatedSingletonImpl( TEST_THIRD_SINGLETON_NAME );
+      RequestSystem.store( TEST_THIRD_SINGLETON, Singleton.class );
       
       NON_CALI_SINGLETON_NAME = "TestNonCaliSingleton";
       NON_CALI_SINGLETON = new TestSingletonImpl( NON_CALI_SINGLETON_NAME );

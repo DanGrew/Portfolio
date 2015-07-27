@@ -7,7 +7,6 @@
  */
 package outline;
 
-import graphics.JavaFx;
 import graphs.graph.Graph;
 
 import java.util.ArrayList;
@@ -16,16 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.Workarounds;
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.scene.Scene;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableRow;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import model.singleton.Singleton;
 import object.BuilderObject;
 import objecttype.Definition;
