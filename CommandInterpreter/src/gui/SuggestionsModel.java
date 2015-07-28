@@ -7,6 +7,8 @@
  */
 package gui;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.scene.control.ListView;
@@ -15,7 +17,6 @@ import javax.swing.JList;
 
 import architecture.event.EventSystem;
 import architecture.request.RequestSystem;
-
 import command.Command;
 
 /**
@@ -61,6 +62,12 @@ public class SuggestionsModel {
          } );
       } );
       
+      //Sort all suggestions alphabetically.
+      Collections.sort( data, new Comparator< CommandSuggestion >() {
+         @Override public int compare( CommandSuggestion o1, CommandSuggestion o2 ) {
+            return o1.getSuggestion().toLowerCase().compareTo( o2.getSuggestion().toLowerCase() );
+         }// End Method
+      } );
       parent.getSelectionModel().clearSelection();
       if ( data.contains( selected ) ) {
          parent.getSelectionModel().select( selected );
