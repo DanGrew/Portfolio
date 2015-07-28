@@ -16,6 +16,7 @@ import property.Property;
 import property.PropertyImpl;
 import propertytype.PropertyType;
 import annotation.Cali;
+import architecture.event.EventSystem;
 
 /**
  * Implementation of the {@link BuilderObject}.
@@ -61,6 +62,7 @@ import annotation.Cali;
       if ( type.hasProperty( propertyType ) ) {
          Property property = retrieveProperty( propertyType );
          property.setValue( value );
+         EventSystem.raiseEvent( BuilderObject.Events.PropertySet, this );
       }
    }// End Method
    

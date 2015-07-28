@@ -32,6 +32,7 @@ public class TreeItemListModel {
    
    private OutlineDescribables describableType;
    private TreeItem< OutlineDescriber > parent;
+   private EventReceiver updater;
    private ObservableList< TreeItem< OutlineDescriber > > view;
    private Map< Object, TreeItem< OutlineDescriber > > modelToView;
    
@@ -44,29 +45,46 @@ public class TreeItemListModel {
        * {@inheritDoc}
        */
       @Override public void receive( Enum< ? > event, Object object ) {
-         SingletonStoredSource storedSource = ( SingletonStoredSource )object;
-         Object storedObject = storedSource.storedObject;
+         Object storedObject = null;
+         if ( object instanceof SingletonStoredSource ) {
+            SingletonStoredSource storedSource = ( SingletonStoredSource )object;
+            storedObject = storedSource.storedObject;
+         } else {
+            storedObject = object;
+         }
+         
          if ( !describableType.isDescribable( storedObject ) ) {
             return;
          }
          
          if ( modelToView.containsKey( storedObject ) ) {
-            return;
+            updateView( storedObject );
+         } else {
+            addToView( storedObject );
          }
-
-         updateView( storedObject );
       }// End Method
       
       /**
-       * Method to update the view with the given {@link Object}.
-       * @param singleton the singleton changed.
+       * Method to update the view with the given {@link Object} that has been added.
+       * @param singleton the singleton added.
        */
-      private void updateView( Object singleton ){
+      private void addToView( Object singleton ){
          OutlineDescriber describer = OutlineDescriberFactory.newDescriber( describableType, singleton );
          TreeItem< OutlineDescriber > treeItem = new TreeItem<>( describer );
          modelToView.put( singleton, treeItem );
          view.add( treeItem );
-         JavaFx.expandAll( parent );
+         JavaFx.expandAll( treeItem );
+      }// End Method
+      
+      /**
+       * Method to update the view.
+       * @param singleton the {@link Singleton} that has changed state.
+       */
+      private void updateView( Object singleton ){
+         TreeItem< OutlineDescriber > item = modelToView.get( singleton );
+         JavaFx.expandAll( item );
+         
+         SystemOutlineUtilities.refreshTreeItem( item );
       }// End Method
       
    }// End Class
@@ -81,7 +99,17 @@ public class TreeItemListModel {
       this.parent = viewParent;
       this.view = parent.getChildren();
       modelToView = new HashMap<>();
-      JavaFxEventSystem.registerForEvent( DataManagementSystem.Events.ObjectStored, new SingletonUpdater() );
+      
+      updater = new SingletonUpdater();
+      JavaFxEventSystem.registerForEvent( DataManagementSystem.Events.ObjectStored, updater );
    }// End Constructor
+   
+   /**
+    * Method to add a trigger for the updating of the tree.
+    * @param event the event to register for.
+    */
+   public void addUpdateEvent( Enum< ? > event ) {
+      JavaFxEventSystem.registerForEvent( event, updater );
+   }// End Method
 
 }// End Class

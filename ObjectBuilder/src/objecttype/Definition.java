@@ -18,6 +18,11 @@ import propertytype.PropertyType;
  */
 public interface Definition extends SingletonSerialization< SerializableDefinition > {
 
+   /** Public events raised by the {@link Definition}.**/
+   public enum Events {
+      PropertyAdded
+   }// End Enum
+   
    /**
     * Method to add a {@link PropertyType} to the {@link Definition}.
     * @param property the {@link PropertyType} to add.

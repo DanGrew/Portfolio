@@ -15,6 +15,7 @@ import java.util.List;
 import model.singleton.SingletonImpl;
 import propertytype.PropertyType;
 import annotation.Cali;
+import architecture.event.EventSystem;
 
 /**
  * Implementation of the {@link Definition}.
@@ -39,6 +40,7 @@ import annotation.Cali;
    @Cali @Override public void addPropertyType( PropertyType property ) {
       if ( !properties.contains( property ) ) {
          properties.add( property );
+         EventSystem.raiseEvent( Definition.Events.PropertyAdded, this );
       }
    }// End Method
 

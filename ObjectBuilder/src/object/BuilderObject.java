@@ -19,6 +19,11 @@ import propertytype.PropertyType;
  */
 public interface BuilderObject extends SingletonSerialization< SerializableBuilderObject > {
 
+   /** Public events raised by the {@link BuilderObject}.**/
+   public enum Events {
+      PropertySet
+   }// End Enum
+   
    /**
     * Getter for the {@link PropertyType} given.
     * @param property the {@link PropertyType} to retrieve the value for.

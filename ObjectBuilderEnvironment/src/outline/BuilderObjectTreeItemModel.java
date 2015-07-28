@@ -46,8 +46,13 @@ public class BuilderObjectTreeItemModel {
        * {@inheritDoc}
        */
       @Override public void receive( Enum< ? > event, Object object ) {
-         SingletonStoredSource storedSource = ( SingletonStoredSource )object;
-         Object storedObject = storedSource.storedObject;
+         Object storedObject = null;
+         if ( object instanceof SingletonStoredSource ) {
+            SingletonStoredSource storedSource = ( SingletonStoredSource )object;
+            storedObject = storedSource.storedObject;
+         } else {
+            storedObject = object;
+         }
          if ( OutlineDescribables.Definition.isDescribable( storedObject ) ) {
             Definition definition = ( Definition )storedObject;
             updateBranchView( definition );
@@ -80,15 +85,15 @@ public class BuilderObjectTreeItemModel {
        */
       private void updateBranch( BuilderObject builderObject ) {
          if ( modelToView.containsKey( builderObject ) ) {
-            return;
+            SystemOutlineUtilities.refreshTreeItem( parent );
+         } else {
+            ObservableList< TreeItem< OutlineDescriber > > treeItems = branchChildren.get( builderObject.getDefinition() );
+            OutlineDescriber describer = OutlineDescriberFactory.newDescriber( OutlineDescribables.BuilderObject, builderObject );
+            TreeItem< OutlineDescriber > treeItem = new TreeItem<>( describer );
+            modelToView.put( builderObject, treeItem );
+            treeItems.add( treeItem );
+            JavaFx.expandAll( treeItem );
          }
-         
-         ObservableList< TreeItem< OutlineDescriber > > treeItems = branchChildren.get( builderObject.getDefinition() );
-         OutlineDescriber describer = OutlineDescriberFactory.newDescriber( OutlineDescribables.BuilderObject, builderObject );
-         TreeItem< OutlineDescriber > treeItem = new TreeItem<>( describer );
-         modelToView.put( builderObject, treeItem );
-         treeItems.add( treeItem );
-         JavaFx.expandAll( treeItem );
       }// End Method
       
    }// End Class
@@ -102,7 +107,9 @@ public class BuilderObjectTreeItemModel {
       this.branchView = parent.getChildren();
       this.branchChildren = new HashMap<>();
       this.modelToView = new HashMap<>();
-      JavaFxEventSystem.registerForEvent( DataManagementSystem.Events.ObjectStored, new SingletonUpdater() );
+      SingletonUpdater updater = new SingletonUpdater();
+      JavaFxEventSystem.registerForEvent( DataManagementSystem.Events.ObjectStored, updater );
+      JavaFxEventSystem.registerForEvent( BuilderObject.Events.PropertySet, updater );
    }// End Constructor
 
 }// End Class

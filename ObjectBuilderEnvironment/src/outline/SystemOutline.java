@@ -162,7 +162,8 @@ public class SystemOutline extends BorderPane {
       TreeItem< OutlineDescriber > propertyTypeBranch = createBranch( modelBranch, PROPERTY_TYPES, null, null );
       new TreeItemListModel( OutlineDescribables.PropertyType, propertyTypeBranch );
       TreeItem< OutlineDescriber > definitionBranch = createBranch( modelBranch, DEFINITIONS, null, null );
-      new TreeItemListModel( OutlineDescribables.Definition, definitionBranch );
+      TreeItemListModel definitionModel = new TreeItemListModel( OutlineDescribables.Definition, definitionBranch );
+      definitionModel.addUpdateEvent( Definition.Events.PropertyAdded );
       
       TreeItem< OutlineDescriber > dataBranch = createBranch( root, DATA, null, null );
       new BuilderObjectTreeItemModel( dataBranch );
