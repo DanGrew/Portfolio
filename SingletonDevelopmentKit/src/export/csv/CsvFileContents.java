@@ -147,6 +147,18 @@ public class CsvFileContents {
    public Integer getUniqueIdentifierColumn() {
       return uniqueIdentifierColumn;
    }// End Method
+   
+   /**
+    * Method to get the identification for the given row.
+    * @param row the row index.
+    * @return the {@link String} identification, null if no column set.
+    */
+   public String getIdentification( int row ) {
+      if ( getUniqueIdentifierColumn() == null ) {
+         return null;
+      }
+      return getItem( row, getUniqueIdentifierColumn() );
+   }// End Method
 
    /**
     * Method to exclude the given row index from the data. Note that this is destructive to the parsed data.
@@ -172,5 +184,5 @@ public class CsvFileContents {
          }
       }
    }// End Method
-
+   
 }// End Class

@@ -1,0 +1,33 @@
+/*
+ * ----------------------------------------
+ *            Object Builder
+ * ----------------------------------------
+ *          Produced by Dan Grew
+ * ----------------------------------------
+ */
+package export.csv;
+
+import model.singleton.Singleton;
+
+/**
+ * Abstract class providing a base for {@link Singleton} related contents imported
+ * from a csv file.
+ */
+public abstract class SingletonCsvContents extends CsvFileContents {
+
+   /**
+    * Method to import the objects from the imported data.
+    */
+   public abstract void importObjects();
+   
+   /**
+    * Method to check whether the settings of the import are valid.
+    * @return true if valid, false otherwise.
+    */
+   public abstract boolean isImportValid();
+   
+   /**
+    * Method to clear the clutter of the import.
+    */
+   public abstract void clearImport();
+}// End Interface
