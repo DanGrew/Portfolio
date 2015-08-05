@@ -37,7 +37,8 @@ public class ParameterRedirectTest {
    /** Test class defining some methods to invoke.**/
    public static class TestClass {
       public TestClass( Double value, String string, Singleton singleton ){}
-      public void number( Double value ){}
+      public void doubleValue( Double value ){}
+      public void integerValue( Integer value ){}
       public void string( String value ){}
       public void singleton( Singleton value ){}
       public void specificSingleton( TestSingleton singleton ){}
@@ -71,11 +72,33 @@ public class ParameterRedirectTest {
       TestClass testClass = Mockito.mock( TestClass.class );
       redirect.invoke( 
                testClass, 
-               TestClass.class.getMethod( "number", Double.class ),
+               TestClass.class.getMethod( "doubleValue", Double.class ),
                testRepresentation
       );
       
-      Mockito.verify( testClass ).number( testValue );
+      Mockito.verify( testClass ).doubleValue( testValue );
+      Mockito.verifyNoMoreInteractions( testClass );
+   }// End Method
+   
+   /**
+    * Test to prove the redirecting of {@link Integer} parameters.
+    */
+   @Test public void shouldRedirectIntegers() throws NoSuchMethodException, 
+                                                    SecurityException, 
+                                                    IllegalAccessException, 
+                                                    IllegalArgumentException, 
+                                                    InvocationTargetException 
+   {
+      final Integer testValue = 22;
+      final String testRepresentation = testValue.toString();
+      TestClass testClass = Mockito.mock( TestClass.class );
+      redirect.invoke( 
+               testClass, 
+               TestClass.class.getMethod( "integerValue", Integer.class ),
+               testRepresentation
+      );
+      
+      Mockito.verify( testClass ).integerValue( testValue );
       Mockito.verifyNoMoreInteractions( testClass );
    }// End Method
    

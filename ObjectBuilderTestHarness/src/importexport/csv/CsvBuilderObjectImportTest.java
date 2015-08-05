@@ -25,6 +25,8 @@ import architecture.request.RequestSystem;
  * Test for the {@link CsvBuilderObjectContents}.
  */
 public class CsvBuilderObjectImportTest {
+   
+   private static final String CONTENTS_NAME = "anything";
 
    /**
     * Method to reset the {@link RequestSystem} between imports.
@@ -43,7 +45,7 @@ public class CsvBuilderObjectImportTest {
              + "AnotherObject,anything,else"
       );
       
-      CsvBuilderObjectContents contents = new CsvBuilderObjectContents();
+      CsvBuilderObjectContents contents = new CsvBuilderObjectContents( CONTENTS_NAME );
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 0 );
       contents.assignColumnNames( 0 );
@@ -74,7 +76,7 @@ public class CsvBuilderObjectImportTest {
              + "anything,AnotherObject,else"
       );
       
-      CsvBuilderObjectContents contents = new CsvBuilderObjectContents();
+      CsvBuilderObjectContents contents = new CsvBuilderObjectContents( CONTENTS_NAME );
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 1 );
       contents.assignColumnNames( 0 );
@@ -105,7 +107,7 @@ public class CsvBuilderObjectImportTest {
              + "AnotherObject,anything"
       );
       
-      CsvBuilderObjectContents contents = new CsvBuilderObjectContents();
+      CsvBuilderObjectContents contents = new CsvBuilderObjectContents( CONTENTS_NAME );
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 0 );
       contents.assignColumnNames( 0 );
@@ -146,7 +148,7 @@ public class CsvBuilderObjectImportTest {
              + "AnotherObject,anything,else"
       );
       
-      CsvBuilderObjectContents contents = new CsvBuilderObjectContents();
+      CsvBuilderObjectContents contents = new CsvBuilderObjectContents( CONTENTS_NAME );
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 0 );
       
@@ -163,7 +165,7 @@ public class CsvBuilderObjectImportTest {
              + "AnotherObject,anything,else"
       );
       
-      CsvBuilderObjectContents contents = new CsvBuilderObjectContents();
+      CsvBuilderObjectContents contents = new CsvBuilderObjectContents( CONTENTS_NAME );
       contents.read( reader );
       
       Assert.assertFalse( contents.isImportValid() );
@@ -179,7 +181,7 @@ public class CsvBuilderObjectImportTest {
              + ",anything,else"
       );
       
-      CsvBuilderObjectContents contents = new CsvBuilderObjectContents();
+      CsvBuilderObjectContents contents = new CsvBuilderObjectContents( CONTENTS_NAME );
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 0 );
       
@@ -196,7 +198,7 @@ public class CsvBuilderObjectImportTest {
              + "FirstObject,anything,else"
       );
       
-      CsvBuilderObjectContents contents = new CsvBuilderObjectContents();
+      CsvBuilderObjectContents contents = new CsvBuilderObjectContents( CONTENTS_NAME );
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 0 );
       

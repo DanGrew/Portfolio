@@ -7,11 +7,16 @@
  */
 package importexport.csv;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import model.singleton.Singleton;
+import javafx.stage.FileChooser;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.Definition;
@@ -19,6 +24,7 @@ import objecttype.DefinitionImpl;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
+import annotation.Cali;
 import architecture.request.RequestSystem;
 import export.csv.CsvFileContents;
 import export.csv.SingletonCsvContents;
@@ -27,23 +33,48 @@ import export.csv.SingletonCsvContents;
  * The {@link CsvBuilderObjectContents} is responsible for importing data using
  * {@link CsvFileContents} and converting the data into {@link BuilderObject}s.
  */
-public class CsvBuilderObjectContents extends SingletonCsvContents {
+@Cali public class CsvBuilderObjectContents extends SingletonCsvContents {
    
    private Map< Integer, PropertyType > columnTypes;
    private Definition definition;
    
    /**
     * Constructs a new {@link CsvBuilderObjectContents}.
+    * @param identification the identification of the {@link Singleton}.
     */
-   public CsvBuilderObjectContents() {
-      super();
+   @Cali public CsvBuilderObjectContents( String identification ) {
+      super( identification );
       columnTypes = new HashMap< Integer, PropertyType >();
    }// End Constructor
    
    /**
+    * Method to read a csv {@link File} by asking the user to select the {@link File}.
+    * @return true if successfully parsed, false otherwise.
+    */
+   @Cali public boolean read() {
+      if ( isImportValid() ) {
+         return false;
+      }
+      
+      FileChooser chooser = new FileChooser();
+      chooser.setTitle( "Choose Csv file to import." );
+      File file = chooser.showOpenDialog( null );
+      if ( file == null ) {
+         return false;
+      }
+      
+      try {
+         FileReader reader = new FileReader( file );
+         return read( reader );
+      } catch ( FileNotFoundException e ) {
+         return false;
+      }
+   }// End Method
+   
+   /**
     * {@inheritDoc}
     */
-   @Override public void clearImport() {
+   @Cali @Override public void clearImport() {
       columnTypes.clear();
       definition = null;
    }// End Method
@@ -51,7 +82,7 @@ public class CsvBuilderObjectContents extends SingletonCsvContents {
    /**
     * {@inheritDoc}
     */
-   @Override public boolean isImportValid() {
+   @Cali @Override public boolean isImportValid() {
       if ( getUniqueIdentifierColumn() == null ) {
          return false;
       }
@@ -59,6 +90,7 @@ public class CsvBuilderObjectContents extends SingletonCsvContents {
       Set< String > uniqueEntries = new HashSet<>();
       for ( int i = 0; i < getNumberOfRows(); i++ ) {
          String item = getItem( i, getUniqueIdentifierColumn() );
+         System.out.println( item );
          if ( item == null || item.isEmpty() ) {
             return false;
          }
@@ -74,7 +106,7 @@ public class CsvBuilderObjectContents extends SingletonCsvContents {
    /**
     * {@inheritDoc}
     */
-   @Override public void importObjects() {
+   @Cali @Override public void importObjects() {
       clearImport();
       if ( !isImportValid() ) {
          return;
@@ -136,6 +168,83 @@ public class CsvBuilderObjectContents extends SingletonCsvContents {
          definition.addPropertyType( propertyType );
       }
       return propertyType;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public String getItem( Integer row, Integer column ) {
+      return super.getItem( row, column );
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public int getNumberOfRows() {
+      return super.getNumberOfRows();
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public int getColumnCount( Integer row ) {
+      return super.getColumnCount( row );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public String getColumnName( Integer column ) {
+      return super.getColumnName( column );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public void assignColumnNames( Integer row ) {
+      super.assignColumnNames( row );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public void useDefaultColumnNames() {
+      super.useDefaultColumnNames();
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public void setUniqueIdentifierColumn( Integer uniqueIdentifierColumn ) {
+      super.setUniqueIdentifierColumn( uniqueIdentifierColumn );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public Integer getUniqueIdentifierColumn() {
+      return super.getUniqueIdentifierColumn();
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public String getIdentification( Integer row ) {
+      return super.getIdentification( row );
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public void excludeRow( Integer row ) {
+      super.excludeRow( row );
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Cali @Override public void excludeColumn( Integer column ) {
+      super.excludeColumn( column );
    }// End Method
    
 }// End Class

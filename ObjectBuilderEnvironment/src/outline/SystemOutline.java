@@ -176,7 +176,7 @@ public class SystemOutline extends BorderPane {
       treeTableView.setEditable( true );
       
       createElementsColumn( treeTableView );
-      for ( int i = 1; i < 10; i++ ) {
+      for ( int i = 1; i < 20; i++ ) {
          createSpreadsheetColumn( treeTableView, i );
       }
 

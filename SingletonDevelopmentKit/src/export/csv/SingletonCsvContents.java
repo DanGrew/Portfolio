@@ -16,6 +16,14 @@ import model.singleton.Singleton;
 public abstract class SingletonCsvContents extends CsvFileContents {
 
    /**
+    * Protected constructor for creating {@link SingletonCsvContents}.
+    * @param identification the identification of the {@link CsvFileContents}.
+    */
+   protected SingletonCsvContents( String identification ) {
+      super( identification );
+   }// End Constructor
+   
+   /**
     * Method to import the objects from the imported data.
     */
    public abstract void importObjects();

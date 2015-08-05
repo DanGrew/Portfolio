@@ -77,8 +77,10 @@ public class ParameterRedirect {
    private Object redirectParameter( Object object, Class< ? > expectedType ) {
       if ( expectedType.equals( String.class ) ) {
          return redirectString( object );
-      } else if ( Number.class.isAssignableFrom( expectedType ) ) {
+      } else if ( Double.class.isAssignableFrom( expectedType ) ) {
          return redirectDouble( object );
+      } else if ( Integer.class.isAssignableFrom( expectedType ) ) {
+         return redirectInteger( object );
       } else if ( Singleton.class.isAssignableFrom( expectedType ) ) {
          @SuppressWarnings("unchecked") //Safe because isAssignableFrom checks. 
          Class< ? extends Singleton > singletonClass = ( Class< ? extends Singleton > )expectedType;
@@ -105,6 +107,20 @@ public class ParameterRedirect {
    private Double redirectDouble( Object string ) {
       try {
          Double value = Double.valueOf( string.toString() );
+         return value;
+      } catch ( NumberFormatException exception ) {
+         return null;
+      }
+   }// End Method
+   
+   /**
+    * Method to redirect to a {@link Integer} parameter.
+    * @param string the object to redirect.
+    * @return the object in the correct format.
+    */
+   private Integer redirectInteger( Object string ) {
+      try {
+         Integer value = Integer.valueOf( string.toString() );
          return value;
       } catch ( NumberFormatException exception ) {
          return null;

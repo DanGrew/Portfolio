@@ -18,6 +18,8 @@ import org.junit.Test;
  */
 public class CsvFileContentsTest {
 
+   private static final String CONTENTS_NAME = "anything";
+   
    /**
     * {@link CsvFileContents#read(Reader)} test.
     */
@@ -27,7 +29,7 @@ public class CsvFileContentsTest {
              + "with,even,more,on,the,next,line\n"
              + "but,not,the,last" 
       );
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       contents.read( reader );
       
       Assert.assertEquals( 3, contents.getNumberOfRows() );
@@ -47,7 +49,7 @@ public class CsvFileContentsTest {
     * {@link CsvFileContents#getColumnName(int)} test.
     */
    @Test public void shouldAssumeNewColumnNames() {
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       for ( int i = 0; i < 5; i++ ) {
          Assert.assertEquals( CsvColumnNames.getDefaultColumnName( i ), contents.getColumnName( i ) );
       }
@@ -60,7 +62,7 @@ public class CsvFileContentsTest {
       Reader reader = new StringReader( 
                "these,should,be,column,names" 
       );
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       contents.read( reader );
       contents.assignColumnNames( 0 );
       
@@ -79,7 +81,7 @@ public class CsvFileContentsTest {
       Reader reader = new StringReader( 
                "these,should,be,column,names" 
       );
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       contents.read( reader );
       contents.assignColumnNames( 56 );
       
@@ -96,7 +98,7 @@ public class CsvFileContentsTest {
                "these,should,be,column,names\n"
              + "but,these,should,be,replaced,afterwards" 
       );
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       contents.read( reader );
       contents.assignColumnNames( 0 );
       
@@ -129,7 +131,7 @@ public class CsvFileContentsTest {
       Reader reader = new StringReader( 
                "these,should,be,column,names" 
       );
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       contents.read( reader );
       contents.assignColumnNames( 0 );
       
@@ -141,7 +143,7 @@ public class CsvFileContentsTest {
     * {@link CsvFileContents#getUniqueIdentifierColumn()} test.
     */
    @Test public void shouldNotAssumeUniqueIdentifier() {
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       Assert.assertNull( contents.getUniqueIdentifierColumn() );
    }// End Method
    
@@ -149,7 +151,7 @@ public class CsvFileContentsTest {
     * {@link CsvFileContents#setUniqueIdentifierColumn(Integer)} test.
     */
    @Test public void shouldAssignUniqueIdentifier() {
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       contents.setUniqueIdentifierColumn( 3 );
       Assert.assertEquals( Integer.valueOf( 3 ), contents.getUniqueIdentifierColumn() );
    }// End Method
@@ -161,7 +163,7 @@ public class CsvFileContentsTest {
       Reader reader = new StringReader( 
                "these,should,be,column,names" 
       );
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       contents.read( reader );
       contents.excludeColumn( 1 );
       
@@ -181,7 +183,7 @@ public class CsvFileContentsTest {
              + "with,even,more,on,the,next,line\n"
              + "but,not,the,last" 
       );
-      CsvFileContents contents = new CsvFileContents();
+      CsvFileContents contents = new CsvFileContents( CONTENTS_NAME );
       contents.read( reader );
       contents.excludeRow( 1 );
       

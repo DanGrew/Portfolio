@@ -12,13 +12,15 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.singleton.SingletonImpl;
+
 import com.opencsv.CSVReader;
 
 /**
  * {@link CsvFileContents} provides the contents of a csv file in the form of
  * rows of {@link String} arrays.
  */
-public class CsvFileContents {
+public class CsvFileContents extends SingletonImpl< SerializableCsvFileContents >{
    
    private CsvColumnNames columnNames;
    private List< String[] > rows;
@@ -26,8 +28,10 @@ public class CsvFileContents {
 
    /**
     * Constructs a new {@link CsvFileContents}.
+    * @param identification the identification of the {@link Singleton}.
     */
-   public CsvFileContents() {
+   public CsvFileContents( String identification ) {
+      super( identification );
       rows = new ArrayList<>();
       columnNames = new CsvColumnNames();
    }// End Constructor
@@ -65,7 +69,7 @@ public class CsvFileContents {
     * @param column the column.
     * @return the {@link String} at the position, or null if none.
     */
-   public String getItem( int row, int column ) {
+   public String getItem( Integer row, Integer column ) {
       if ( row < rows.size() && row >= 0 ) {
          String[] values = rows.get( row );
          if ( column < values.length && column > -1 ) {
@@ -88,7 +92,7 @@ public class CsvFileContents {
     * @param row the row index.
     * @return the number of columns in the row.
     */
-   public int getColumnCount( int row ) {
+   public int getColumnCount( Integer row ) {
       if ( row < 0 ) {
          return 0;
       } else if ( row < rows.size() ) {
@@ -108,7 +112,7 @@ public class CsvFileContents {
     * @param column the column index.
     * @return {@link CsvColumnNames#getColumnName(int)}.
     */
-   public String getColumnName( int column ) {
+   public String getColumnName( Integer column ) {
       return columnNames.getColumnName( column );
    }// End Method
    
@@ -117,7 +121,7 @@ public class CsvFileContents {
     * given row from the data.
     * @param row the index of the row to use as column names.
     */
-   public void assignColumnNames( int row ) {
+   public void assignColumnNames( Integer row ) {
       if ( row < rows.size() && row >= 0 ) {
          String[] rowValues = rows.get( row );
          rows.remove( row );
@@ -153,7 +157,7 @@ public class CsvFileContents {
     * @param row the row index.
     * @return the {@link String} identification, null if no column set.
     */
-   public String getIdentification( int row ) {
+   public String getIdentification( Integer row ) {
       if ( getUniqueIdentifierColumn() == null ) {
          return null;
       }
@@ -164,7 +168,7 @@ public class CsvFileContents {
     * Method to exclude the given row index from the data. Note that this is destructive to the parsed data.
     * @param row the row to exclude.
     */
-   public void excludeRow( int row ) {
+   public void excludeRow( Integer row ) {
       if ( row < rows.size() && row >= 0 ) {
          rows.remove( row );
       }
@@ -174,7 +178,7 @@ public class CsvFileContents {
     * Method to exclude the column of the given index. Note that this is destructive to the parsed data.
     * @param column the column index to exclude.
     */
-   public void excludeColumn( int column ) {
+   public void excludeColumn( Integer column ) {
       for ( String[] row : rows ) {
          if ( column < row.length ) {
             for ( int i = column; i < row.length - 1; i++ ) {
@@ -184,5 +188,8 @@ public class CsvFileContents {
          }
       }
    }// End Method
+
+   @Override protected void writeSingleton( SerializableCsvFileContents serializable ) {}
+   @Override protected void readSingleton( SerializableCsvFileContents serialized ) {}
    
 }// End Class

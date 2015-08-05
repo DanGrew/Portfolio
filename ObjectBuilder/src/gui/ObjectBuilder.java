@@ -7,6 +7,7 @@
  */
 package gui;
 
+import importexport.csv.CsvBuilderObjectContents;
 import graphs.graph.Graph;
 import object.BuilderObjectImpl;
 import objecttype.DefinitionImpl;
@@ -15,7 +16,6 @@ import search.SearchAll;
 import search.SearchOnly;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
-
 import command.Command;
 import command.MethodCallCommandImpl;
 import command.NewCommandImpl;
@@ -52,6 +52,7 @@ public class ObjectBuilder {
       CaliSystem.register( SearchAll.class );
       CaliSystem.register( SearchOnly.class );
       CaliSystem.register( Graph.class );
+      CaliSystem.register( CsvBuilderObjectContents.class );
       
       ObjectBuilderClassParameterTypes.initialiseTypes();
    }// End Method
