@@ -124,7 +124,7 @@ public class CsvFileContents extends SingletonImpl< SerializableCsvFileContents 
    public void assignColumnNames( Integer row ) {
       if ( row < rows.size() && row >= 0 ) {
          String[] rowValues = rows.get( row );
-         rows.remove( row );
+         rows.remove( rowValues );
          columnNames.setNames( rowValues );
       }
    }// End Method
@@ -162,6 +162,14 @@ public class CsvFileContents extends SingletonImpl< SerializableCsvFileContents 
          return null;
       }
       return getItem( row, getUniqueIdentifierColumn() );
+   }// End Method
+   
+   /**
+    * Method to get the name of the table indicated by the identifier column in the column headers.
+    * @return {@link #getColumnName(Integer)} for {@link #getUniqueIdentifierColumn()}.
+    */
+   public String getObjectTableName() {
+      return columnNames.getColumnName( getUniqueIdentifierColumn() );
    }// End Method
 
    /**

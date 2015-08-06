@@ -34,8 +34,4 @@ public abstract class SingletonCsvContents extends CsvFileContents {
     */
    public abstract boolean isImportValid();
    
-   /**
-    * Method to clear the clutter of the import.
-    */
-   public abstract void clearImport();
 }// End Interface

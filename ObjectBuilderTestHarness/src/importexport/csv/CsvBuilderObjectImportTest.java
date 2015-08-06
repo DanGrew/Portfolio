@@ -9,6 +9,7 @@ package importexport.csv;
 
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.concurrent.ExecutionException;
 
 import object.BuilderObject;
 import objecttype.Definition;
@@ -38,7 +39,7 @@ public class CsvBuilderObjectImportTest {
    /**
     * {@link CsvBuilderObjectContents#importObjects()} test.
     */
-   @Test public void shouldImportUniformGridObjectsAndStore() {
+   @Test public void shouldImportUniformGridObjectsAndStore() throws InterruptedException, ExecutionException {
       Reader reader = new StringReader(
                "TestObject,Key,Value\n"
              + "FirstObject,SomeKey,SomeValue\n"
@@ -49,7 +50,9 @@ public class CsvBuilderObjectImportTest {
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 0 );
       contents.assignColumnNames( 0 );
-      contents.importObjects();
+      
+      CsvBuilderObjectImportProcess importTask = new CsvBuilderObjectImportProcess( contents );
+      importTask.run();
       
       assertPropertyTypeExists( "Key" );
       assertPropertyTypeExists( "Value" );
@@ -64,6 +67,7 @@ public class CsvBuilderObjectImportTest {
       assertBuilderObjectExists( "AnotherObject", "TestObject" );
       assertBuilderObjectProperty( "AnotherObject", "Key", "anything" );
       assertBuilderObjectProperty( "AnotherObject", "Value", "else" );
+      
    }// End Method
    
    /**
@@ -80,7 +84,9 @@ public class CsvBuilderObjectImportTest {
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 1 );
       contents.assignColumnNames( 0 );
-      contents.importObjects();
+      
+      CsvBuilderObjectImportProcess importTask = new CsvBuilderObjectImportProcess( contents );
+      importTask.run();
       
       assertPropertyTypeExists( "Key" );
       assertPropertyTypeExists( "Value" );
@@ -111,7 +117,9 @@ public class CsvBuilderObjectImportTest {
       contents.read( reader );
       contents.setUniqueIdentifierColumn( 0 );
       contents.assignColumnNames( 0 );
-      contents.importObjects();
+      
+      CsvBuilderObjectImportProcess importTask = new CsvBuilderObjectImportProcess( contents );
+      importTask.run();
       
       assertPropertyTypeExists( "Key" );
       assertPropertyTypeExists( "Value" );

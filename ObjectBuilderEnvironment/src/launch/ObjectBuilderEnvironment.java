@@ -35,9 +35,8 @@ public class ObjectBuilderEnvironment extends Application {
       view.setCenter( new SystemOutline() );
       view.setBottom( new CommandPrompt() );
       
-      Scene scene = new Scene( view, 800, 400 );
+      Scene scene = new Scene( view, 1200, 800 );
       stage.setScene( scene );
-      stage.setFullScreen( true );
       stage.show();
    }// End Method
    
