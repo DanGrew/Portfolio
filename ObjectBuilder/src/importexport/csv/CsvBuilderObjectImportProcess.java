@@ -12,14 +12,13 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import export.csv.CsvFileContents;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.Definition;
 import objecttype.DefinitionImpl;
-import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.ClassParameterType;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import runnables.ProgressControlledTask;
@@ -27,6 +26,7 @@ import runnables.ProgressControlledTaskBindable;
 import runnables.TaskUpdateProcess.TaskProgress;
 import runnables.TaskUpdateProcess.TaskState;
 import architecture.request.RequestSystem;
+import export.csv.CsvFileContents;
 
 /**
  * The {@link CsvBuilderObjectImportProcess} provides the processing for the import of {@link BuilderObject}s
@@ -147,7 +147,8 @@ public class CsvBuilderObjectImportProcess implements ProgressControlledTaskBind
       PropertyType propertyType = columnTypes.get( column );
       if ( propertyType == null ) {
          String columnName = contents.getColumnName( column );
-         propertyType = new PropertyTypeImpl( columnName, ClassParameterTypes.STRING_PARAMETER_TYPE );
+         ClassParameterType type = contents.getColumnType( column );
+         propertyType = new PropertyTypeImpl( columnName, type );
          columnTypes.put( column, propertyType );
          RequestSystem.store( propertyType, PropertyType.class );
          definition.addPropertyType( propertyType );

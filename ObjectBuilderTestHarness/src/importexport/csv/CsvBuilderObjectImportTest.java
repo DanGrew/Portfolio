@@ -18,6 +18,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import architecture.request.RequestSystem;
@@ -54,8 +55,8 @@ public class CsvBuilderObjectImportTest {
       CsvBuilderObjectImportProcess importTask = new CsvBuilderObjectImportProcess( contents );
       importTask.run();
       
-      assertPropertyTypeExists( "Key" );
-      assertPropertyTypeExists( "Value" );
+      assertDefaultPropertyTypeExists( "Key" );
+      assertDefaultPropertyTypeExists( "Value" );
       assertDefinitionExists( "TestObject" );
 
       assertBuilderObjectDoesNotExist( "TestObject" );
@@ -88,8 +89,8 @@ public class CsvBuilderObjectImportTest {
       CsvBuilderObjectImportProcess importTask = new CsvBuilderObjectImportProcess( contents );
       importTask.run();
       
-      assertPropertyTypeExists( "Key" );
-      assertPropertyTypeExists( "Value" );
+      assertDefaultPropertyTypeExists( "Key" );
+      assertDefaultPropertyTypeExists( "Value" );
       assertDefinitionExists( "TestObject" );
 
       assertBuilderObjectDoesNotExist( "TestObject" );
@@ -121,9 +122,9 @@ public class CsvBuilderObjectImportTest {
       CsvBuilderObjectImportProcess importTask = new CsvBuilderObjectImportProcess( contents );
       importTask.run();
       
-      assertPropertyTypeExists( "Key" );
-      assertPropertyTypeExists( "Value" );
-      assertPropertyTypeExists( "Column3" );
+      assertDefaultPropertyTypeExists( "Key" );
+      assertDefaultPropertyTypeExists( "Value" );
+      assertDefaultPropertyTypeExists( "Column3" );
       
       assertDefinitionExists( "TestObject" );
       assertBuilderObjectDoesNotExist( "TestObject" );
@@ -214,14 +215,54 @@ public class CsvBuilderObjectImportTest {
    }// End Method
    
    /**
+    * {@link CsvBuilderObjectContents#setColumnType(Integer, String)} test.
+    */
+   @Test public void shouldChangeColumnTypes(){
+      Reader reader = new StringReader(
+               "TestObject,Key,Value\n"
+             + "FirstObject,SomeKey,251"
+      );
+      
+      CsvBuilderObjectContents contents = new CsvBuilderObjectContents( CONTENTS_NAME );
+      contents.read( reader );
+      contents.setUniqueIdentifierColumn( 0 );
+      contents.assignColumnNames( 0 );
+      contents.setColumnType( 2, ClassParameterTypes.NUMBER_PARAMETER_TYPE.getName() );
+      
+      CsvBuilderObjectImportProcess importTask = new CsvBuilderObjectImportProcess( contents );
+      importTask.run();
+      
+      assertDefaultPropertyTypeExists( "Key" );
+      assertPropertyTypeExists( "Value", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
+      
+      assertDefinitionExists( "TestObject" );
+      assertBuilderObjectDoesNotExist( "TestObject" );
+      
+      assertBuilderObjectExists( "FirstObject", "TestObject" );
+      assertBuilderObjectProperty( "FirstObject", "Key", "SomeKey" );
+      assertBuilderObjectProperty( "FirstObject", "Value", 251.0 );
+   }// End Method
+   
+   /**
     * Method to assert that a {@link PropertyType} exists based on the given identification.
     * @param identification the id of the {@link PropertyType}.
     */
-   private void assertPropertyTypeExists( String identification ) {
+   private void assertDefaultPropertyTypeExists( String identification ) {
       PropertyType key = RequestSystem.retrieve( PropertyType.class, identification );
       Assert.assertNotNull( key );
       Assert.assertEquals( identification, key.getIdentification() );
       Assert.assertEquals( ClassParameterTypes.STRING_PARAMETER_TYPE, key.getParameterType() );
+   }// End Method
+   
+   /**
+    * Method to assert that a {@link PropertyType} exists based on the given identification.
+    * @param identification the id of the {@link PropertyType}.
+    */
+   private void assertPropertyTypeExists( String identification, ClassParameterType type ) {
+      PropertyType key = RequestSystem.retrieve( PropertyType.class, identification );
+      Assert.assertNotNull( key );
+      Assert.assertEquals( identification, key.getIdentification() );
+      Assert.assertEquals( type, key.getParameterType() );
    }// End Method
    
    /**
@@ -268,6 +309,9 @@ public class CsvBuilderObjectImportTest {
       BuilderObject object = RequestSystem.retrieve( BuilderObject.class, builderObject );
       PropertyType propertyType = RequestSystem.retrieve( PropertyType.class, property );
       Assert.assertEquals( value, object.get( propertyType ) );
+      if ( value != null ) {
+         Assert.assertTrue( propertyType.isCorrectType( value ) );
+      }
    }// End Method
 
 }// End Class

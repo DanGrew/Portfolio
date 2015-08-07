@@ -30,7 +30,7 @@ import architecture.request.RequestSystem;
 public class SearchOnlyTest {
 
    
-   private static final String TEST_PROPERTY_VALUE = "anySpecificValue";
+   private static final String TEST_PROPERTY_VALUE = "anySpecific Value";
    private static PropertyType ANY_NUMBER_TYPE;
    private static PropertyType ANY_PROPERTY;
    private static Definition ANY_DEFINITION_ONE;
