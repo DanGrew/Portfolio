@@ -7,6 +7,7 @@
  */
 package commands.functions;
 
+import graphics.tasks.TaskProgressor;
 import graphs.graph.Graph;
 import graphs.graph.XmlGraphImpl;
 import gui.console.ConsoleMessageImpl;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.util.List;
 import java.util.function.Function;
 
+import javafx.concurrent.Task;
 import javafx.stage.FileChooser;
 import object.BuilderObject;
 import object.XmlBuilderObjectImpl;
@@ -29,7 +31,6 @@ import serialization.XmlAnalysisWrapper;
 import serialization.XmlObjectBuilderSystemWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
-
 import command.CommandResult;
 import command.CommandResultImpl;
 import commands.SystemCommands;
@@ -88,17 +89,26 @@ public class SystemCommandFunctions {
          File file = chooser.showOpenDialog( null );
 
          if ( file != null ) {
-            SerializationSystem.loadWrapperFromFile( 
-                     XmlObjectBuilderSystemWrapper.class, 
-                     file, 
-                     XmlObjectBuilderSystemWrapper.class, 
-                     XmlPropertyTypeImpl.class, 
-                     XmlDefinitionImpl.class,
-                     XmlBuilderObjectImpl.class
-            );
+            Task< Void > task = new Task< Void >() {
+               @Override protected Void call() throws Exception {
+                  SerializationSystem.loadWrapperFromFile( 
+                           XmlObjectBuilderSystemWrapper.class, 
+                           file, 
+                           XmlObjectBuilderSystemWrapper.class, 
+                           XmlPropertyTypeImpl.class, 
+                           XmlDefinitionImpl.class,
+                           XmlBuilderObjectImpl.class
+                  );
+                  return null;
+               }
+            };
+            new TaskProgressor( "Loading", task ).launch();
             return new CommandResultImpl< Void >( 
-                     new ConsoleMessageImpl( "Successfully loaded data!" ) 
+                     new ConsoleMessageImpl( "Load started but state unknown." ) 
             );
+//            return new CommandResultImpl< Void >( 
+//                     new ConsoleMessageImpl( "Successfully loaded data!" ) 
+//            );
          }
          return new CommandResultImpl< Void >( 
                   new ConsoleMessageImpl( "Failed to load data." )

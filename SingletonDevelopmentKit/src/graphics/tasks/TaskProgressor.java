@@ -11,6 +11,7 @@ import java.util.UUID;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.concurrent.Worker.State;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -27,6 +28,8 @@ public class TaskProgressor {
    private Alert alert;
    private ProgressBar progressBar;
    private Task< ? > task;
+   private Thread runningThread;
+   private State state;
 
    /**
     * Constructs a new {@link TaskProgressor}.
@@ -57,6 +60,11 @@ public class TaskProgressor {
       progressBar = new ProgressBar( 0.75 );
       progressBar.progressProperty().bind( task.progressProperty() );
       task.setOnSucceeded( event -> {
+         state = State.SUCCEEDED;
+         dispose();
+      } );
+      task.setOnFailed( event -> {
+         state = State.FAILED;
          dispose();
       } );
       
@@ -76,7 +84,19 @@ public class TaskProgressor {
     */
    public void launch(){
       alert.show();
-      new Thread( task ).start();
+      runningThread = new Thread( task );
+      runningThread.start();
+   }// End Method
+   
+   /**
+    * Method to block the calling {@link Thread} until the {@link Task} is complete.
+    */
+   public void block(){
+      try {
+         runningThread.join();
+      } catch ( InterruptedException e ) {
+         e.printStackTrace();
+      }
    }// End Method
    
    /**
