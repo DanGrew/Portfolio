@@ -25,6 +25,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import propertytype.PropertyType;
+import search.SearchSpace.SearchCriteria;
 import testmodels.PersonModel;
 
 /**
@@ -93,6 +94,22 @@ public class SearchSpaceTest {
       search.clearIncluded();
       matches = search.getMatches();
       Assert.assertTrue( matches.isEmpty() );
+   }// End Method
+   
+   /**
+    * Exclusions should be cleared for {@link PropertyType} and values.
+    */
+   @Test public void shouldClearExcludedPropertyValues() {
+      SearchSpace search = new SearchSpace( "search" );
+      search.exclude( SearchPolicy.ExactString, COMPANY, "CHSCHS" );
+      
+      search.identifyMatches();
+      Collection< SearchCriteria > exclusions = search.getExclusions();
+      Assert.assertFalse( exclusions.isEmpty() );
+      
+      search.clearExcluded();
+      exclusions = search.getExclusions();
+      Assert.assertTrue( exclusions.isEmpty() );
    }// End Method
    
    /**

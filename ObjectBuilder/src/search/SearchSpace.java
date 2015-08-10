@@ -218,6 +218,13 @@ import architecture.request.RequestSystem;
    @Cali public void clearIncluded() {
       inclusions.clear();
    }// End Method
+   
+   /**
+    * Method to clear the excluded {@link PropertyType} values.
+    */
+   @Cali public void clearExcluded() {
+      exclusions.clear();
+   }// End Method
 
    /**
     * Getter for the {@link SearchCriteria} defining the inclusions.
