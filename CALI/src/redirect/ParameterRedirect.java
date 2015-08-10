@@ -34,6 +34,9 @@ public class ParameterRedirect {
    {
       Class< ? >[] expectedParameterTypes = method.getParameterTypes();
       Object[] redirectedParameters = redirectParameters( expectedParameterTypes, parameters );
+      if ( redirectedParameters == null ) {
+         return null;
+      }
       return method.invoke( object, redirectedParameters );
    }// End Method
    
@@ -51,6 +54,9 @@ public class ParameterRedirect {
    {
       Class< ? >[] expectedParameterTypes = constructor.getParameterTypes();
       Object[] redirectedParameters = redirectParameters( expectedParameterTypes, parameters );
+      if ( redirectedParameters == null ) {
+         return null;
+      }
       return constructor.newInstance( redirectedParameters );
    }// End Method
     
@@ -63,7 +69,11 @@ public class ParameterRedirect {
    private Object[] redirectParameters( Class< ? >[] parameterTypes, Object[] parameters ) {
       Object[] redirectedParameters = new Object[ parameters.length ];
       for ( int i = 0; i < parameterTypes.length; i++ ) {
-         redirectedParameters[ i ] = redirectParameter( parameters[ i ], parameterTypes[ i ] );
+         Object value = redirectParameter( parameters[ i ], parameterTypes[ i ] );
+         if ( value == null ) {
+            return null;
+         }
+         redirectedParameters[ i ] = value;
       }
       return redirectedParameters;
    }// End Method
@@ -85,6 +95,8 @@ public class ParameterRedirect {
          @SuppressWarnings("unchecked") //Safe because isAssignableFrom checks. 
          Class< ? extends Singleton > singletonClass = ( Class< ? extends Singleton > )expectedType;
          return redirectSingleton( object, singletonClass );
+      } else if ( Enum.class.isAssignableFrom( expectedType ) ) {
+         return redirectEnum( object, expectedType );
       } else {
          return object;
       }
@@ -139,6 +151,24 @@ public class ParameterRedirect {
          throw new NullPointerException( "No object defined for " + object.toString() + "." );
       }
       return singleton;
+   }// End Method
+   
+   /**
+    * Method to redirect an {@link Enum} to its actual value.
+    * @param object the object to turn into the {@link Enum}.
+    * @param expectedClass the expected {@link Class} that is an {@link Enum}.
+    * @param <EnumT> generic helper for supporting casting and conversion.
+    * @return the {@link Object} in its {@link Enum} form, or null if not an {@link Enum}.
+    */
+   private < EnumT extends Enum< EnumT > > Object redirectEnum( Object object, Class< ? > expectedClass ) {
+      try {
+         @SuppressWarnings("unchecked") //Verified cast prior to calling, wrapped in try catch. 
+         Class< EnumT > enumClass = ( Class< EnumT > )expectedClass;
+         EnumT enumValue = Enum.valueOf( enumClass, object.toString() );
+         return enumValue;
+      } catch ( IllegalArgumentException exception ) {
+         return null;
+      }
    }// End Method
 
 }// End Class

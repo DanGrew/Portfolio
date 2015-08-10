@@ -17,6 +17,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import redirect.ParameterRedirectTest.TestClass.TestEnum;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
 import architecture.request.RequestSystem;
@@ -36,6 +37,8 @@ public class ParameterRedirectTest {
    
    /** Test class defining some methods to invoke.**/
    public static class TestClass {
+      public enum TestEnum { Value }
+      
       public TestClass( Double value, String string, Singleton singleton ){}
       public void doubleValue( Double value ){}
       public void integerValue( Integer value ){}
@@ -43,6 +46,7 @@ public class ParameterRedirectTest {
       public void singleton( Singleton value ){}
       public void specificSingleton( TestSingleton singleton ){}
       public void multiple( Double valueA, String valueB, Singleton valueC ){}
+      public void enumMethod( TestEnum value ){}
    }// End Class
    
    /**
@@ -217,6 +221,33 @@ public class ParameterRedirectTest {
       
       Assert.assertNotNull( constructed );
       Assert.assertEquals( TestClass.class, constructed.getClass() );
+   }// End Method
+   
+   /**
+    * Test to prove the redirecting of {@link Enum} parameters.
+    */
+   @Test public void shouldRedirectEnums() throws IllegalAccessException, 
+                                                  IllegalArgumentException, 
+                                                  InvocationTargetException, 
+                                                  NoSuchMethodException, 
+                                                  SecurityException  
+   {
+      TestClass testClass = Mockito.mock( TestClass.class );
+      redirect.invoke( 
+               testClass, 
+               TestClass.class.getMethod( "enumMethod", TestEnum.class ),
+               "Value"
+      );
+      
+      Mockito.verify( testClass ).enumMethod( TestEnum.Value );
+      Mockito.verifyNoMoreInteractions( testClass );
+      
+      redirect.invoke( 
+               testClass, 
+               TestClass.class.getMethod( "enumMethod", TestEnum.class ),
+               "something"
+      );
+      Mockito.verifyNoMoreInteractions( testClass );
    }// End Method
    
 }// End Class
