@@ -12,12 +12,13 @@ import java.util.Collection;
 
 import model.singleton.Singleton;
 import object.BuilderObject;
+import object.BuilderObjectImpl;
 import objecttype.Definition;
+import objecttype.DefinitionImpl;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
@@ -29,49 +30,57 @@ import architecture.request.RequestSystem;
  */
 public class SearchSpaceTest {
    
-   private static final String TEST_PROPERTY_VALUE = "anySpecific Value";
-   private static final Double TEST_NUMBER_VALUE = 54.3498;
-   private static PropertyType ANY_NUMBER_TYPE;
-   private static PropertyType ANY_STRING_PROPERTY;
-   private static Definition ANY_DEFINITION_ONE;
-   private static Definition ANY_DEFINITION_TWO;
-   private static BuilderObject ANY_OBJECT_ONE;
-   private static BuilderObject ANY_OBJECT_TWO;
-   private static BuilderObject ANY_OBJECT_THREE;
-   private static BuilderObject ANY_OBJECT_FOUR;
+   private static PropertyType AGE;
+   private static PropertyType COMPANY;
+   private static PropertyType HAIR_COLOUR;
+   
+   private static Definition PERSON;
+   
+   private static BuilderObject DAN;
+   private static BuilderObject LIZ;
+   private static BuilderObject MOM;
+   private static BuilderObject DAD;
    
    /**
     * Method to setup the {@link Singleton}s for the test.
     */
    @BeforeClass public static void setup(){
-      ANY_STRING_PROPERTY = new PropertyTypeImpl( "something", ClassParameterTypes.STRING_PARAMETER_TYPE );
-      RequestSystem.store( ANY_STRING_PROPERTY );
-      ANY_NUMBER_TYPE = new PropertyTypeImpl( "number", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
-      RequestSystem.store( ANY_NUMBER_TYPE, PropertyType.class );
+      AGE = new PropertyTypeImpl( "Age", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
+      RequestSystem.store( AGE, PropertyType.class );
+      COMPANY = new PropertyTypeImpl( "Company", ClassParameterTypes.STRING_PARAMETER_TYPE );
+      RequestSystem.store( COMPANY, PropertyType.class );
+      HAIR_COLOUR = new PropertyTypeImpl( "HairColour", ClassParameterTypes.STRING_PARAMETER_TYPE );
+      RequestSystem.store( HAIR_COLOUR, PropertyType.class );
       
-      ANY_DEFINITION_ONE = Mockito.mock( Definition.class );
-      Mockito.when( ANY_DEFINITION_ONE.hasProperty( ANY_STRING_PROPERTY ) ).thenReturn( false );
-      RequestSystem.store( ANY_DEFINITION_ONE );
-      ANY_DEFINITION_TWO = Mockito.mock( Definition.class );
-      Mockito.when( ANY_DEFINITION_TWO.hasProperty( ANY_STRING_PROPERTY ) ).thenReturn( true );
-      RequestSystem.store( ANY_DEFINITION_TWO );
+      PERSON = new DefinitionImpl( "Person" );
+      PERSON.addPropertyType( AGE );
+      PERSON.addPropertyType( COMPANY );
+      PERSON.addPropertyType( HAIR_COLOUR );
+      RequestSystem.store( PERSON, Definition.class );
       
-      ANY_OBJECT_ONE = Mockito.mock( BuilderObject.class );
-      Mockito.when( ANY_OBJECT_ONE.getDefinition() ).thenReturn( ANY_DEFINITION_ONE );
-      //Deliberately configure incorrect return to prove this is checked.
-      Mockito.when( ANY_OBJECT_ONE.get( ANY_STRING_PROPERTY ) ).thenReturn( TEST_PROPERTY_VALUE );
-      RequestSystem.store( ANY_OBJECT_ONE );
-      ANY_OBJECT_TWO = Mockito.mock( BuilderObject.class );
-      Mockito.when( ANY_OBJECT_TWO.getDefinition() ).thenReturn( ANY_DEFINITION_TWO );
-      Mockito.when( ANY_OBJECT_TWO.get( ANY_STRING_PROPERTY ) ).thenReturn( TEST_PROPERTY_VALUE );
-      RequestSystem.store( ANY_OBJECT_TWO );
-      ANY_OBJECT_THREE = Mockito.mock( BuilderObject.class );
-      Mockito.when( ANY_OBJECT_THREE.getDefinition() ).thenReturn( ANY_DEFINITION_TWO );
-      RequestSystem.store( ANY_OBJECT_THREE );
-      ANY_OBJECT_FOUR = Mockito.mock( BuilderObject.class );
-      Mockito.when( ANY_OBJECT_FOUR.getDefinition() ).thenReturn( ANY_DEFINITION_ONE );
-      Mockito.when( ANY_OBJECT_FOUR.get( ANY_NUMBER_TYPE ) ).thenReturn( TEST_NUMBER_VALUE );
-      RequestSystem.store( ANY_OBJECT_FOUR );
+      DAN = new BuilderObjectImpl( "Dan", PERSON );
+      DAN.set( AGE, 26 );
+      DAN.set( COMPANY, "Graffica" );
+      DAN.set( HAIR_COLOUR, "Brown" );
+      RequestSystem.store( DAN, BuilderObject.class );
+      
+      LIZ = new BuilderObjectImpl( "Liz", PERSON );
+      LIZ.set( AGE, 26 );
+      LIZ.set( COMPANY, "Mvp" );
+      LIZ.set( HAIR_COLOUR, "Brown" );
+      RequestSystem.store( LIZ, BuilderObject.class );
+      
+      MOM = new BuilderObjectImpl( "Mom", PERSON );
+      MOM.set( AGE, 53 );
+      MOM.set( COMPANY, "CHSCHS" );
+      MOM.set( HAIR_COLOUR, "Brown" );
+      RequestSystem.store( MOM, BuilderObject.class );
+      
+      DAD = new BuilderObjectImpl( "Dad", PERSON );
+      DAD.set( AGE, 53 );
+      DAD.set( COMPANY, "CHSCHS" );
+      DAD.set( HAIR_COLOUR, "Brown" );
+      RequestSystem.store( DAD, BuilderObject.class );
    }// End Method
    
    /**
@@ -89,12 +98,12 @@ public class SearchSpaceTest {
     */
    @Test public void shouldIncludePropertyValue() {
       SearchSpace search = new SearchSpace( "search" );
-      search.include( SearchPolicy.ExactString, ANY_STRING_PROPERTY, TEST_PROPERTY_VALUE );
+      search.include( SearchPolicy.ExactString, COMPANY, "CHSCHS" );
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
-               Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_TWO ), 
+               Arrays.asList( MOM, DAD ), 
                matches 
       );
    }// End Method
@@ -104,7 +113,7 @@ public class SearchSpaceTest {
     */
    @Test public void shouldNotIncludePropertyValue() {
       SearchSpace search = new SearchSpace( "search" );
-      search.include( SearchPolicy.ExactString, ANY_NUMBER_TYPE, TEST_PROPERTY_VALUE );
+      search.include( SearchPolicy.ExactString, COMPANY, "anything" );
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
@@ -119,7 +128,7 @@ public class SearchSpaceTest {
     */
    @Test public void shouldClearIncludedPropertyValues() {
       SearchSpace search = new SearchSpace( "search" );
-      search.include( SearchPolicy.ExactString, ANY_STRING_PROPERTY, TEST_PROPERTY_VALUE );
+      search.include( SearchPolicy.ExactString, COMPANY, "CHSCHS" );
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
@@ -135,13 +144,64 @@ public class SearchSpaceTest {
     */
    @Test public void shouldIncludeMultiple() {
       SearchSpace search = new SearchSpace( "search" );
-      search.include( SearchPolicy.ExactString, ANY_STRING_PROPERTY, TEST_PROPERTY_VALUE );
-      search.include( SearchPolicy.ExactNumber, ANY_NUMBER_TYPE, TEST_NUMBER_VALUE );
+      search.include( SearchPolicy.ExactString, COMPANY, "CHSCHS" );
+      search.include( SearchPolicy.ExactNumber, AGE, 26 );
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
-               Arrays.asList( ANY_OBJECT_ONE, ANY_OBJECT_TWO, ANY_OBJECT_FOUR ), 
+               Arrays.asList( DAN, LIZ, MOM, DAD ), 
+               matches 
+      );
+   }// End Method
+   
+   /**
+    * Results should only include matching {@link PropertyType} and value.
+    */
+   @Test public void shouldExcludeSingle() {
+      SearchSpace search = new SearchSpace( "search" );
+      search.include( SearchPolicy.ExactString, COMPANY, "CHSCHS" );
+      search.include( SearchPolicy.ExactNumber, AGE, 26 );
+      
+      search.identifyMatches();
+      Collection< BuilderObject > matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( DAN, LIZ, MOM, DAD ), 
+               matches 
+      );
+      
+      search.exclude( SearchPolicy.ExactString, COMPANY, "Graffica" );
+      
+      search.identifyMatches();
+      matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( LIZ, MOM, DAD ), 
+               matches 
+      );
+   }// End Method
+   
+   /**
+    * Results should only include matching {@link PropertyType} and value.
+    */
+   @Test public void shouldExcludeMultiple() {
+      SearchSpace search = new SearchSpace( "search" );
+      search.include( SearchPolicy.ExactString, COMPANY, "CHSCHS" );
+      search.include( SearchPolicy.ExactNumber, AGE, 26 );
+      
+      search.identifyMatches();
+      Collection< BuilderObject > matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( DAN, LIZ, MOM, DAD ), 
+               matches 
+      );
+      
+      search.exclude( SearchPolicy.ExactString, COMPANY, "Graffica" );
+      search.exclude( SearchPolicy.ExactNumber, AGE, 53 );
+      
+      search.identifyMatches();
+      matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( LIZ ), 
                matches 
       );
    }// End Method
