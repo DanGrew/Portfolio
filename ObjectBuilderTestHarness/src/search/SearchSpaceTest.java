@@ -183,4 +183,36 @@ public class SearchSpaceTest {
       
       Assert.assertEquals( new ArrayList<>(), search.getExclusions() );
    }// End Method
+   
+   /**
+    * {@link SearchSpace#include(SearchPolicy, PropertyType, String)} between.
+    */
+   @Test public void shouldIncludeBetween() {
+      SearchSpace search = new SearchSpace( "search" );
+      search.include( SearchPolicy.GreaterThanNumber, AGE, "20" );
+      search.exclude( SearchPolicy.GreaterThanNumber, AGE, "27" );
+      
+      search.identifyMatches();
+      Collection< BuilderObject > matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( DAN, LIZ ), 
+               matches 
+      );
+   }
+   
+   /**
+    * {@link SearchSpace#include(SearchPolicy, PropertyType, String)} between.
+    */
+   @Test public void shouldIncludeBetweenAlternate() {
+      SearchSpace search = new SearchSpace( "search" );
+      search.include( SearchPolicy.LessThanNumber, AGE, "60" );
+      search.exclude( SearchPolicy.LessThanNumber, AGE, "27" );
+      
+      search.identifyMatches();
+      Collection< BuilderObject > matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( MOM, DAD ), 
+               matches 
+      );
+   }
 }// End Class
