@@ -214,13 +214,13 @@ public class ParameterRedirectTest {
       final Singleton testSingleton = SINGLETON_OBJECT;
       final String testSingletonRepresentation = testSingleton.getIdentification();
       
-      Object constructed = redirect.construct( 
+      ParameterRedirectResult result = redirect.construct( 
                TestClass.class.getConstructor( Double.class, String.class, Singleton.class ),
                testNumberRepresentation, testString, testSingletonRepresentation
       );
       
-      Assert.assertNotNull( constructed );
-      Assert.assertEquals( TestClass.class, constructed.getClass() );
+      Assert.assertNotNull( result );
+      Assert.assertEquals( TestClass.class, result.getReturnValue().getClass() );
    }// End Method
    
    /**

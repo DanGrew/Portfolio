@@ -16,6 +16,8 @@ import parameter.CommandParameter;
 import parameter.FixedValueParameterImpl;
 import parameter.wrapper.CommandParameters;
 import redirect.ParameterRedirect;
+import redirect.ParameterRedirectResult;
+import redirect.ParameterRedirectResult.Result;
 import annotation.Cali;
 import architecture.request.RequestSystem;
 import command.parameter.ConstructorParameterImpl;
@@ -40,17 +42,11 @@ public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
       @Override public CommandResultImpl< Object > apply( CommandParameters parameters ) {
          ConstructorParameterValue value = parameters.getExpectedParameter( CONSTRUCTOR_PARAMETER, ConstructorParameterValue.class );
          Constructor< ? > constructor = value.getConstructor();
-         try {
-            Object object = CONSTRUCTOR_REDIRECT.construct( constructor, value.getParameters() );
-            RequestSystem.store( object, Singleton.class );
-            return new CommandResultImpl< Object >( 
-                     "Successfully created " + constructor.getDeclaringClass().getSimpleName() + ".",
-                     object 
-            );
-         } catch ( InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException exception ) {
-            exception.printStackTrace();
-            return new CommandResultImpl< Object >( "Failed to create object, Constructor does not match.", null );
+         ParameterRedirectResult result = CONSTRUCTOR_REDIRECT.construct( constructor, value.getParameters() );
+         if ( result.getResult().equals( Result.Invoked ) ) {
+            RequestSystem.store( result.getReturnValue(), Singleton.class );
          }
+         return new CommandResultImpl< Object >( result );
       }// End Method
    }; // End Class
    

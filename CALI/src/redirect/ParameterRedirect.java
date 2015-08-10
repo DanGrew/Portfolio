@@ -8,10 +8,10 @@
 package redirect;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import model.singleton.Singleton;
+import redirect.ParameterRedirectResult.Result;
 import architecture.request.RequestSystem;
 
 /**
@@ -26,18 +26,20 @@ public class ParameterRedirect {
     * @param object the object to invoke the {@link Method} on.
     * @param method the {@link Method} to invoke.
     * @param parameters the parameters to convert to actual types.
-    * @return the result of the invocation.
+    * @return the {@link ParameterRedirectResult} of the invocation.
     */
-   public Object invoke( Object object, Method method, Object... parameters ) throws IllegalAccessException, 
-                                                                                     IllegalArgumentException, 
-                                                                                     InvocationTargetException 
-   {
+   public ParameterRedirectResult invoke( Object object, Method method, Object... parameters ) {
       Class< ? >[] expectedParameterTypes = method.getParameterTypes();
       Object[] redirectedParameters = redirectParameters( expectedParameterTypes, parameters );
       if ( redirectedParameters == null ) {
-         return null;
+         return new ParameterRedirectResult( Result.ParameterMismatch, null );
       }
-      return method.invoke( object, redirectedParameters );
+      try {
+         Object returnValue = method.invoke( object, redirectedParameters );
+         return new ParameterRedirectResult( Result.Invoked, returnValue );
+      } catch ( Exception exception ) {
+         return new ParameterRedirectResult( Result.InvokeFailed, null );
+      }
    }// End Method
    
    /**
@@ -45,19 +47,20 @@ public class ParameterRedirect {
     * correct types.
     * @param constructor the {@link Constructor} to invoke.
     * @param parameters the parameters to convert to actual types.
-    * @return the {@link Object} constructed using the {@link Constructor}.
+    * @return the {@link ParameterRedirectResult} describing the result of the invocation.
     */
-   public Object construct( Constructor< ? > constructor, Object... parameters ) throws InstantiationException, 
-                                                                                        IllegalAccessException, 
-                                                                                        IllegalArgumentException, 
-                                                                                        InvocationTargetException 
-   {
+   public ParameterRedirectResult construct( Constructor< ? > constructor, Object... parameters ) {
       Class< ? >[] expectedParameterTypes = constructor.getParameterTypes();
       Object[] redirectedParameters = redirectParameters( expectedParameterTypes, parameters );
       if ( redirectedParameters == null ) {
-         return null;
+         return new ParameterRedirectResult( Result.ParameterMismatch, null );
       }
-      return constructor.newInstance( redirectedParameters );
+      try {
+         Object newObject = constructor.newInstance( redirectedParameters );;
+         return new ParameterRedirectResult( Result.Invoked, newObject );
+      } catch ( Exception exception ) {
+         return new ParameterRedirectResult( Result.InvokeFailed, null );
+      }
    }// End Method
     
    /**

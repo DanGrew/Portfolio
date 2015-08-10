@@ -7,14 +7,13 @@
  */
 package command;
 
-import gui.console.ConsoleMessageImpl;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
 
 import parameter.CommandParameter;
 import parameter.wrapper.CommandParameters;
 import redirect.ParameterRedirect;
+import redirect.ParameterRedirectResult;
+
 import command.parameter.SingletonMethodCallParameterImpl;
 import command.parameter.SingletonMethodCallValue;
 
@@ -34,16 +33,8 @@ public class MethodCallCommandImpl extends ParameterizedCommandImpl< Object >{
        */
       @Override public CommandResultImpl< Object > apply( CommandParameters parameters ) {
          SingletonMethodCallValue value = parameters.getExpectedParameter( METHOD_PARAMETER, SingletonMethodCallValue.class );
-         try {
-            Object returnedValue = METHOD_REDIRECT_PROXY.invoke( value.getSingleton(), value.getMethod(), value.getParameters() );
-            if ( returnedValue == null ) {
-               return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Executed." ) );
-            } else {
-               return new CommandResultImpl< Object >( new ConsoleMessageImpl( returnedValue.toString() ), returnedValue );
-            }
-         } catch ( IllegalAccessException | IllegalArgumentException | InvocationTargetException e ) {
-            return new CommandResultImpl< Object >( new ConsoleMessageImpl( "Error occured during execution." ) );
-         }
+         ParameterRedirectResult result = METHOD_REDIRECT_PROXY.invoke( value.getSingleton(), value.getMethod(), value.getParameters() );
+         return new CommandResultImpl< Object >( result );
       }// End Method
    }; // End Class
    
