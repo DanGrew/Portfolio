@@ -29,5 +29,17 @@ public interface SerializableSearchSpace extends SerializedSingleton< SearchSpac
     * @return a {@link List} of resolved {@link SearchCriteria}s.
     */
    public List< SearchCriteria > resolveInclusions();
+   
+   /**
+    * Method to serialize a {@link SearchCriteria} exclusion.
+    * @param criteria the {@link SearchCriteria} to be serialized.
+    */
+   public void addExclusion( SearchCriteria criteria );
+
+   /**
+    * Method to resolve the {@link SearchCriteria} exclusion.
+    * @return a {@link List} of resolved {@link SearchCriteria}s.
+    */
+   public List< SearchCriteria > resolveExclusions();
 
 }// End Interface

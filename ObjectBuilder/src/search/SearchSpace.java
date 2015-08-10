@@ -165,6 +165,7 @@ import architecture.request.RequestSystem;
     */
    @Override protected void writeSingleton( SerializableSearchSpace serializable ) {
       inclusions.forEach( inclusion -> serializable.addInclusion( inclusion ) );
+      exclusions.forEach( exclusion -> serializable.addExclusion( exclusion ) );
    }// End Method
 
    /**
@@ -173,6 +174,8 @@ import architecture.request.RequestSystem;
    @Override protected void readSingleton( SerializableSearchSpace serialized ) {
       inclusions.clear();
       serialized.resolveInclusions().forEach( inclusion -> include( inclusion.policy, inclusion.type, inclusion.value ) );
+      exclusions.clear();
+      serialized.resolveExclusions().forEach( exclusion -> exclude( exclusion.policy, exclusion.type, exclusion.value ) );
    }// End Method
 
    /**

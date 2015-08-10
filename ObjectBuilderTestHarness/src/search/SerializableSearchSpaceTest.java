@@ -63,6 +63,8 @@ public class SerializableSearchSpaceTest {
       SearchSpace search2 = new SearchSpace( "search2" );
       search2.include( SearchPolicy.ExactString, ANY_PROPERTY_TYPE_1, "anything" );
       search2.include( SearchPolicy.ExactNumber, ANY_PROPERTY_TYPE_2, 25.0 );
+      search2.exclude( SearchPolicy.ExactString, ANY_PROPERTY_TYPE_1, "anything" );
+      search2.exclude( SearchPolicy.ExactNumber, ANY_PROPERTY_TYPE_2, 25.0 );
       actualSearches.add( search2 );
       
       SearchSpace search3 = new SearchSpace( "search3" );
@@ -89,10 +91,12 @@ public class SerializableSearchSpaceTest {
       SearchSpace writableSearch = new SearchSpace( name );
       final String writtenValue = "newValue";
       writableSearch.include( SearchPolicy.ExactString, ANY_PROPERTY_TYPE_1, writtenValue );
+      writableSearch.exclude( SearchPolicy.ExactString, ANY_PROPERTY_TYPE_1, writtenValue );
       
       SearchSpace existingSearch = new SearchSpace( name );
       final String originalValue = "originalValue";
       existingSearch.include( SearchPolicy.ContainsString, ANY_PROPERTY_TYPE_1, originalValue );
+      writableSearch.exclude( SearchPolicy.ContainsString, ANY_PROPERTY_TYPE_1, originalValue );
       RequestSystem.store( existingSearch, Search.class );
       
       Assert.assertEquals( existingSearch, RequestSystem.retrieve( SearchSpace.class, name ) );
@@ -127,6 +131,10 @@ public class SerializableSearchSpaceTest {
          Collection< SearchCriteria > expectedIncludedTypes = expected.getInclusions();
          Collection< SearchCriteria > parsedIncludedTypes = parsed.getInclusions();
          Assert.assertEquals( expectedIncludedTypes, parsedIncludedTypes );
+         
+         Collection< SearchCriteria > expectedExclusion = expected.getExclusions();
+         Collection< SearchCriteria > parsedExclusion = parsed.getExclusions();
+         Assert.assertEquals( expectedExclusion, parsedExclusion );
       }
    }// End Method
 

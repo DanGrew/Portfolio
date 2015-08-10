@@ -23,7 +23,8 @@ import architecture.request.RequestSystem;
  */
 public class XmlSearchSpaceImpl extends XmlSingletonWrapper< SearchSpace > implements SerializableSearchSpace {
 
-   @XmlElement private List< XmlSearchCriteria > values;
+   @XmlElement private List< XmlSearchCriteria > inclusions;
+   @XmlElement private List< XmlSearchCriteria > exclusions;
    
    /**
     * The {@link XmlSearchCriteria} defines a xml serializable form of {@link SearchCriteria}.
@@ -67,7 +68,8 @@ public class XmlSearchSpaceImpl extends XmlSingletonWrapper< SearchSpace > imple
     */
    public XmlSearchSpaceImpl() {
       super();
-      values = new ArrayList<>();
+      inclusions = new ArrayList<>();
+      exclusions = new ArrayList<>();
    }// End Constructor
    
    /**
@@ -75,7 +77,7 @@ public class XmlSearchSpaceImpl extends XmlSingletonWrapper< SearchSpace > imple
     */
    @Override public void addInclusion( SearchCriteria criteria ) {
       XmlSearchCriteria value = new XmlSearchCriteria( criteria );
-      values.add( value );
+      inclusions.add( value );
    }// End Method
    
    /**
@@ -83,7 +85,26 @@ public class XmlSearchSpaceImpl extends XmlSingletonWrapper< SearchSpace > imple
     */
    @Override public List< SearchCriteria > resolveInclusions() {
       List< SearchCriteria > criteria = new ArrayList<>();
-      for ( XmlSearchCriteria value : values ) {
+      for ( XmlSearchCriteria value : inclusions ) {
+         criteria.add( value.deserialize() );
+      }
+      return criteria;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void addExclusion( SearchCriteria criteria ) {
+      XmlSearchCriteria value = new XmlSearchCriteria( criteria );
+      exclusions.add( value );
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public List< SearchCriteria > resolveExclusions() {
+      List< SearchCriteria > criteria = new ArrayList<>();
+      for ( XmlSearchCriteria value : exclusions ) {
          criteria.add( value.deserialize() );
       }
       return criteria;
