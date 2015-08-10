@@ -51,25 +51,25 @@ public class PersonModel {
       RequestSystem.store( PERSON, Definition.class );
       
       DAN = new BuilderObjectImpl( "Dan", PERSON );
-      DAN.set( AGE, 26 );
+      DAN.set( AGE, 26.0 );
       DAN.set( COMPANY, "Graffica" );
       DAN.set( HAIR_COLOUR, "Brown" );
       RequestSystem.store( DAN, BuilderObject.class );
       
       LIZ = new BuilderObjectImpl( "Liz", PERSON );
-      LIZ.set( AGE, 26 );
+      LIZ.set( AGE, 26.0 );
       LIZ.set( COMPANY, "Mvp" );
       LIZ.set( HAIR_COLOUR, "Brown" );
       RequestSystem.store( LIZ, BuilderObject.class );
       
       MOM = new BuilderObjectImpl( "Mom", PERSON );
-      MOM.set( AGE, 53 );
+      MOM.set( AGE, 53.0 );
       MOM.set( COMPANY, "CHSCHS" );
       MOM.set( HAIR_COLOUR, "Brown" );
       RequestSystem.store( MOM, BuilderObject.class );
       
       DAD = new BuilderObjectImpl( "Dad", PERSON );
-      DAD.set( AGE, 53 );
+      DAD.set( AGE, 53.0 );
       DAD.set( COMPANY, "CHSCHS" );
       DAD.set( HAIR_COLOUR, "Brown" );
       RequestSystem.store( DAD, BuilderObject.class );

@@ -21,7 +21,7 @@ public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl {
     * Constructs a new {@link NumberClassParameterTypeImpl}.
     */
    public NumberClassParameterTypeImpl() {
-      super( Double.class );
+      super( Number.class );
    }// End Constructor
    
    /**
