@@ -26,7 +26,7 @@ import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
 import propertytype.XmlPropertyTypeImpl;
 import search.SearchSpace;
-import search.XmlSearchOnlyImpl;
+import search.XmlSearchSpaceImpl;
 import serialization.XmlAnalysisWrapper;
 import serialization.XmlObjectBuilderSystemWrapper;
 import architecture.request.RequestSystem;
@@ -138,7 +138,7 @@ public class SystemCommandFunctions {
                      serializedCollection, 
                      file, 
                      XmlAnalysisWrapper.class, 
-                     XmlSearchOnlyImpl.class, 
+                     XmlSearchSpaceImpl.class, 
                      XmlGraphImpl.class
             );
             return new CommandResultImpl< Void >( 
@@ -167,7 +167,7 @@ public class SystemCommandFunctions {
                      XmlAnalysisWrapper.class, 
                      file, 
                      XmlAnalysisWrapper.class, 
-                     XmlSearchOnlyImpl.class, 
+                     XmlSearchSpaceImpl.class, 
                      XmlGraphImpl.class
             );
             return new CommandResultImpl< Void >( 

@@ -22,7 +22,8 @@ import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import search.Search;
-import search.SearchAll;
+import search.SearchPolicy;
+import search.SearchSpace;
 import architecture.request.RequestSystem;
 
 /**
@@ -90,7 +91,8 @@ public class GraphTest {
       
       Graph barChart = new Graph( "sample" );
       
-      Search search = new SearchAll( "defaultSearch" );
+      SearchSpace search = new SearchSpace( "defaultSearch" );
+      search.include( SearchPolicy.ContainsString, VERT_PROPERTY_A, "" );
       search.identifyMatches();
       barChart.addDataSeries( search );
       
@@ -115,7 +117,7 @@ public class GraphTest {
    @Test public void shouldNotShowAndReportMissingHorizontalProperty(){
       Graph barChart = new Graph( "sample" );
       
-      Search search = new SearchAll( "defaultSearch" );
+      Search search = new SearchSpace( "defaultSearch" );
       barChart.addDataSeries( search );
       
       barChart.addVerticalProperty( VERT_PROPERTY_A );
@@ -132,7 +134,7 @@ public class GraphTest {
    @Test public void shouldNotShowAndReportMissingAnyVerticalProperties(){
       Graph barChart = new Graph( "sample" );
       
-      Search search = new SearchAll( "defaultSearch" );
+      Search search = new SearchSpace( "defaultSearch" );
       barChart.addDataSeries( search );
       
       barChart.setHorizontalProperty( HORIZ_PROPERTY );
@@ -191,7 +193,7 @@ public class GraphTest {
    @Test public void shouldDefendNullNumbers() {
       Graph barChart = new Graph( "sample" );
       
-      Search search = new SearchAll( "defaultSearch" );
+      Search search = new SearchSpace( "defaultSearch" );
       search.identifyMatches();
       barChart.addDataSeries( search );
       

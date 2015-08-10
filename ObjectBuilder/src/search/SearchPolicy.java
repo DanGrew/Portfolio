@@ -87,4 +87,12 @@ public enum SearchPolicy {
       return type.getParameterType().equals( parameterType );
    }// End Method
    
+   /**
+    * Getter for the {@link ClassParameterType} associated with the {@link SearchPolicy}.
+    * @return the {@link ClassParameterType}.
+    */
+   public ClassParameterType getParameterType() {
+      return parameterType;
+   }// End Method
+   
 }// End Enum

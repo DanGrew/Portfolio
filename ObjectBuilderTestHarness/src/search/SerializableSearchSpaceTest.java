@@ -23,16 +23,16 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import parameter.classparameter.ClassParameterTypes;
-import property.Property;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
+import search.SearchSpace.SearchCriteria;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
 
 /**
  * Test for the {@link SerializableSearchOnly}.
  */
-public class SerializableSearchOnlyTest {
+public class SerializableSearchSpaceTest {
    
    @Rule public TemporaryFolder folder = new TemporaryFolder();
    private static PropertyType ANY_PROPERTY_TYPE_1;
@@ -52,80 +52,80 @@ public class SerializableSearchOnlyTest {
    }// End Method
 
    /**
-    * Method to test the serialization of {@link SearchOnly}s using {@link XmlSearchOnlyWrapper}.
+    * Method to test the serialization of {@link SearchSpace}s using {@link XmlSearchSpaceWrapper}.
     */
    @Test public void collectionSerializationTest() throws IOException {
-      List< SearchOnly > actualSearches = new ArrayList< SearchOnly >();
+      List< SearchSpace > actualSearches = new ArrayList< SearchSpace >();
       
-      SearchOnly search1 = new SearchOnly( "search1" );
+      SearchSpace search1 = new SearchSpace( "search1" );
       actualSearches.add( search1 );
       
-      SearchOnly search2 = new SearchOnly( "search2" );
-      search2.includePropertyValue( ANY_PROPERTY_TYPE_1, "anything" );
-      search2.includePropertyValue( ANY_PROPERTY_TYPE_2, "somethingElse" );
+      SearchSpace search2 = new SearchSpace( "search2" );
+      search2.include( SearchPolicy.ExactString, ANY_PROPERTY_TYPE_1, "anything" );
+      search2.include( SearchPolicy.ExactNumber, ANY_PROPERTY_TYPE_2, 25.0 );
       actualSearches.add( search2 );
       
-      SearchOnly search3 = new SearchOnly( "search3" );
+      SearchSpace search3 = new SearchSpace( "search3" );
       actualSearches.add( search3 );
       
-      XmlSearchOnlyWrapper serializedCollection = new XmlSearchOnlyWrapper();
+      XmlSearchSpaceWrapper serializedCollection = new XmlSearchSpaceWrapper();
       serializedCollection.addAllUnwrapped( actualSearches.iterator() );
       
       File testFile = folder.newFile();
-      SerializationSystem.saveToFile( serializedCollection, testFile, XmlSearchOnlyWrapper.class, XmlSearchOnlyImpl.class );
+      SerializationSystem.saveToFile( serializedCollection, testFile, XmlSearchSpaceWrapper.class, XmlSearchSpaceImpl.class );
       
-      XmlSearchOnlyWrapper parsedSearchWrapper = SerializationSystem.loadSingletonsFromFile( 
-               XmlSearchOnlyWrapper.class, testFile, XmlSearchOnlyWrapper.class, XmlSearchOnlyImpl.class );
+      XmlSearchSpaceWrapper parsedSearchWrapper = SerializationSystem.loadSingletonsFromFile( 
+               XmlSearchSpaceWrapper.class, testFile, XmlSearchSpaceWrapper.class, XmlSearchSpaceImpl.class );
       Assert.assertNotNull( parsedSearchWrapper );
-      List< SearchOnly > parsedSearches = parsedSearchWrapper.retrieveSingletons();
+      List< SearchSpace > parsedSearches = parsedSearchWrapper.retrieveSingletons();
       assertSearchOnlyLists( actualSearches, parsedSearches );
    }// End Method
    
    /**
-    * Method to test that when reading a {@link SearchOnly} that already exists, it is overwritten. 
+    * Method to test that when reading a {@link SearchSpace} that already exists, it is overwritten. 
     */
    @Test public void overwriteTest() throws IOException{
       final String name = "graph";
-      SearchOnly writableSearch = new SearchOnly( name );
+      SearchSpace writableSearch = new SearchSpace( name );
       final String writtenValue = "newValue";
-      writableSearch.includePropertyValue( ANY_PROPERTY_TYPE_1, writtenValue );
+      writableSearch.include( SearchPolicy.ExactString, ANY_PROPERTY_TYPE_1, writtenValue );
       
-      SearchOnly existingSearch = new SearchOnly( name );
+      SearchSpace existingSearch = new SearchSpace( name );
       final String originalValue = "originalValue";
-      existingSearch.includePropertyValue( ANY_PROPERTY_TYPE_1, originalValue );
+      existingSearch.include( SearchPolicy.ContainsString, ANY_PROPERTY_TYPE_1, originalValue );
       RequestSystem.store( existingSearch, Search.class );
       
-      Assert.assertEquals( existingSearch, RequestSystem.retrieve( SearchOnly.class, name ) );
-      Assert.assertNotEquals( writableSearch, RequestSystem.retrieve( SearchOnly.class, name ) );
+      Assert.assertEquals( existingSearch, RequestSystem.retrieve( SearchSpace.class, name ) );
+      Assert.assertNotEquals( writableSearch, RequestSystem.retrieve( SearchSpace.class, name ) );
       
-      XmlSearchOnlyWrapper serializedCollection = new XmlSearchOnlyWrapper();
+      XmlSearchSpaceWrapper serializedCollection = new XmlSearchSpaceWrapper();
       serializedCollection.addUnwrapped( writableSearch );
       
       File testFile = folder.newFile();
-      SerializationSystem.saveToFile( serializedCollection, testFile, XmlSearchOnlyWrapper.class, XmlSearchOnlyImpl.class );
+      SerializationSystem.saveToFile( serializedCollection, testFile, XmlSearchSpaceWrapper.class, XmlSearchSpaceImpl.class );
       
-      XmlSearchOnlyWrapper parsedPropertyType = SerializationSystem.loadSingletonsFromFile( 
-               XmlSearchOnlyWrapper.class, testFile, XmlSearchOnlyWrapper.class, XmlSearchOnlyImpl.class );
+      XmlSearchSpaceWrapper parsedPropertyType = SerializationSystem.loadSingletonsFromFile( 
+               XmlSearchSpaceWrapper.class, testFile, XmlSearchSpaceWrapper.class, XmlSearchSpaceImpl.class );
       Assert.assertNotNull( parsedPropertyType );
       
-      SearchOnly resultingVersion = RequestSystem.retrieve( SearchOnly.class, name );
+      SearchSpace resultingVersion = RequestSystem.retrieve( SearchSpace.class, name );
       Assert.assertNotNull( resultingVersion );
       assertSearchOnlyLists( Arrays.asList( writableSearch ), Arrays.asList( resultingVersion ) );
    }// End Method
    
    /**
-    * Method to assert that two {@link List} of {@link SearchOnly}s are identical.
-    * @param actualSearches the original {@link SearchOnly}s.
-    * @param parsedSearches the parsed {@link SearchOnly}s.
+    * Method to assert that two {@link List} of {@link SearchSpace}s are identical.
+    * @param actualSearches the original {@link SearchSpace}s.
+    * @param parsedSearches the parsed {@link SearchSpace}s.
     */
-   public static void assertSearchOnlyLists( List< SearchOnly > actualSearches, List< SearchOnly > parsedSearches ){
+   public static void assertSearchOnlyLists( List< SearchSpace > actualSearches, List< SearchSpace > parsedSearches ){
       Assert.assertEquals( actualSearches.size(), parsedSearches.size() );
       for ( int i = 0; i < actualSearches.size(); i++ ) {
-         SearchOnly expected = actualSearches.get( i );
-         SearchOnly parsed = parsedSearches.get( i );
-         
-         Collection< Property > expectedIncludedTypes = expected.getIncludedPropertyTypes();
-         Collection< Property > parsedIncludedTypes = parsed.getIncludedPropertyTypes();
+         SearchSpace expected = actualSearches.get( i );
+         SearchSpace parsed = parsedSearches.get( i );
+
+         Collection< SearchCriteria > expectedIncludedTypes = expected.getInclusions();
+         Collection< SearchCriteria > parsedIncludedTypes = parsed.getInclusions();
          Assert.assertEquals( expectedIncludedTypes, parsedIncludedTypes );
       }
    }// End Method

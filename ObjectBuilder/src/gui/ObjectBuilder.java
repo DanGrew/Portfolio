@@ -7,15 +7,15 @@
  */
 package gui;
 
-import importexport.csv.CsvBuilderObjectContents;
 import graphs.graph.Graph;
+import importexport.csv.CsvBuilderObjectContents;
 import object.BuilderObjectImpl;
 import objecttype.DefinitionImpl;
 import propertytype.PropertyTypeImpl;
-import search.SearchAll;
 import search.SearchSpace;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
+
 import command.Command;
 import command.MethodCallCommandImpl;
 import command.NewCommandImpl;

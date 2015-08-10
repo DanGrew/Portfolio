@@ -28,10 +28,95 @@ import architecture.request.RequestSystem;
    private List< SearchCriteria > exclusions;
    
    /** Private class for holding inclusion criteria.**/
-   private class SearchCriteria {
+   public static class SearchCriteria {
       private SearchPolicy policy;
       private PropertyType type;
       private Object value;
+      
+      /** Default constructor for private use.**/
+      private SearchCriteria() {}
+      
+      /**
+       * Constructs a new {@link SearchCriteria}.
+       * @param policy the {@link SearchPolicy}.
+       * @param type the {@link PropertyType}.
+       * @param value the value to match.
+       */
+      public SearchCriteria( SearchPolicy policy, PropertyType type, Object value ) {
+         this.policy = policy;
+         this.type = type;
+         this.value = value;
+      }// End Constructor
+      
+      /**
+       * Getter for the {@link SearchPolicy}.
+       * @return the {@link SearchPolicy}.
+       */
+      public SearchPolicy getPolicy() {
+         return policy;
+      }// End Method
+      
+      /**
+       * Getter for the {@link PropertyType} matching.
+       * @return the {@link PropertyType}.
+       */
+      public PropertyType getType() {
+         return type;
+      }// End Method
+      
+      /**
+       * Getter for the value to match.
+       * @return the value.
+       */
+      public Object getValue() {
+         return value;
+      }// End Method
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override public int hashCode() {
+         final int prime = 31;
+         int result = 1;
+         result = prime * result + ( ( policy == null ) ? 0 : policy.hashCode() );
+         result = prime * result + ( ( type == null ) ? 0 : type.hashCode() );
+         result = prime * result + ( ( value == null ) ? 0 : value.hashCode() );
+         return result;
+      }// End Method
+
+      /**
+       * {@inheritDoc}
+       */
+      @Override public boolean equals( Object obj ) {
+         if ( obj == null ) {
+            return false;
+         }
+         if ( !( obj instanceof SearchCriteria ) ){
+            return false;
+         }
+         
+         SearchCriteria other = ( SearchCriteria )obj;
+         if ( ( other.getPolicy() == null ) != ( policy == null ) ) {
+            return false;
+         }
+         if ( !other.getPolicy().equals( policy ) ) {
+            return false;
+         }
+         if ( ( other.getType() == null ) != ( type == null ) ) {
+            return false;
+         }
+         if ( !other.getType().equals( type ) ) {
+            return false;
+         }
+         if ( ( other.getValue() == null ) != ( value == null ) ) {
+            return false;
+         }
+         if ( !other.getValue().equals( value ) ) {
+            return false;
+         }
+         return true;
+      }// End Method
+     
    }// End Class
    
    /**
@@ -79,16 +164,16 @@ import architecture.request.RequestSystem;
     * {@inheritDoc}
     */
    @Override protected void writeSingleton( SerializableSearchSpace serializable ) {
-//      includePropertyValues.forEach( object -> serializable.addValue( object ) );
-   }
+      inclusions.forEach( inclusion -> serializable.addInclusion( inclusion ) );
+   }// End Method
 
    /**
     * {@inheritDoc}
     */
    @Override protected void readSingleton( SerializableSearchSpace serialized ) {
-//      includePropertyValues.clear();
-//      includePropertyValues.addAll( serialized.resolveValues() );
-   }
+      inclusions.clear();
+      serialized.resolveInclusions().forEach( inclusion -> include( inclusion.policy, inclusion.type, inclusion.value ) );
+   }// End Method
 
    /**
     * Method to include a {@link PropertyType} and value that should be matched.
@@ -124,12 +209,19 @@ import architecture.request.RequestSystem;
    }// End Method
 
    /**
-    * Method to get the included {@link Property}s.
-    * @return a {@link Collection} of the included {@link Property} rules.
+    * Getter for the {@link SearchCriteria} defining the inclusions.
+    * @return the inclusions.
     */
-   public Collection< Property > getIncluded() {
-      return new ArrayList<>(  );
+   public List< SearchCriteria > getInclusions() {
+      return inclusions;
    }// End Method
-
+   
+   /**
+    * Getter for the {@link SearchCriteria} defining the exclusions.
+    * @return the exclusions.
+    */
+   public List< SearchCriteria > getExclusions() {
+      return exclusions;
+   }// End Method
 
 }// End Class

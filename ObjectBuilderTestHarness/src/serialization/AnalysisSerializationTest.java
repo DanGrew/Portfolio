@@ -25,8 +25,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import search.SearchSpace;
-import search.SerializableSearchOnlyTest;
-import search.XmlSearchOnlyImpl;
+import search.SerializableSearchSpaceTest;
+import search.XmlSearchSpaceImpl;
 import architecture.serialization.SerializationSystem;
 
 /**
@@ -61,7 +61,7 @@ public class AnalysisSerializationTest {
                serializedCollection, 
                testFile, 
                XmlAnalysisWrapper.class, 
-               XmlSearchOnlyImpl.class, 
+               XmlSearchSpaceImpl.class, 
                XmlGraphImpl.class 
       );
       
@@ -69,13 +69,13 @@ public class AnalysisSerializationTest {
                XmlAnalysisWrapper.class, 
                testFile, 
                XmlAnalysisWrapper.class, 
-               XmlSearchOnlyImpl.class, 
+               XmlSearchSpaceImpl.class, 
                XmlGraphImpl.class 
       );
       Assert.assertNotNull( parsedSystem );
       
       List< SearchSpace > parsedSearchOnlys = parsedSystem.retrieveSearchOnlys();
-      SerializableSearchOnlyTest.assertSearchOnlyLists( actualSearchOnlys, parsedSearchOnlys );
+      SerializableSearchSpaceTest.assertSearchOnlyLists( actualSearchOnlys, parsedSearchOnlys );
 
       List< Graph > parsedGraphs = parsedSystem.retrieveGraphs();
       SerializableGraphTest.assertGraphLists( actualGraphs, parsedGraphs );

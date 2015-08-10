@@ -10,8 +10,8 @@ package search;
 import java.io.Serializable;
 import java.util.List;
 
-import property.Property;
 import model.data.SerializedSingleton;
+import search.SearchSpace.SearchCriteria;
 
 /**
  * {@link Serializable} form of {@link SearchSpace}.
@@ -19,15 +19,15 @@ import model.data.SerializedSingleton;
 public interface SerializableSearchSpace extends SerializedSingleton< SearchSpace >{
 
    /**
-    * Method to serialize a {@link Property}.
-    * @param property the {@link Property} to be serialized.
+    * Method to serialize a {@link SearchCriteria} inclusion.
+    * @param criteria the {@link SearchCriteria} to be serialized.
     */
-   public void addValue( Property property );
+   public void addInclusion( SearchCriteria criteria );
 
    /**
-    * Method to resolve the {@link Property}s.
-    * @return a {@link List} of resolved {@link Property}s.
+    * Method to resolve the {@link SearchCriteria} inclusion.
+    * @return a {@link List} of resolved {@link SearchCriteria}s.
     */
-   public List< Property > resolveValues();
+   public List< SearchCriteria > resolveInclusions();
 
 }// End Interface

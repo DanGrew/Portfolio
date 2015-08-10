@@ -18,7 +18,6 @@ import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import search.Search;
-import search.SearchAll;
 import search.SearchSpace;
 import architecture.request.RequestSystem;
 

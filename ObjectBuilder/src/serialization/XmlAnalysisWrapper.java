@@ -18,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import model.singleton.Singleton;
 import search.SearchSpace;
-import search.XmlSearchOnlyWrapper;
+import search.XmlSearchSpaceWrapper;
 import architecture.representation.SingletonContainer;
 import architecture.representation.StructuralRepresentation;
 import architecture.request.RequestSystem;
@@ -30,14 +30,14 @@ import architecture.request.RequestSystem;
 @XmlRootElement
 public class XmlAnalysisWrapper implements SingletonContainer, StructuralRepresentation< Object >{
 
-   @XmlElement private XmlSearchOnlyWrapper searchOnlys;
+   @XmlElement private XmlSearchSpaceWrapper searchSpaces;
    @XmlElement private XmlGraphWrapper graphs;
    
    /**
     * Constructs a new {@link XmlAnalysisWrapper}.
     */
    public XmlAnalysisWrapper() {
-      searchOnlys = new XmlSearchOnlyWrapper();
+      searchSpaces = new XmlSearchSpaceWrapper();
       graphs = new XmlGraphWrapper();
    }// End Constructor
    
@@ -46,7 +46,7 @@ public class XmlAnalysisWrapper implements SingletonContainer, StructuralReprese
     * @param searchOnlys the {@link SearchSpace}s to add.
     */
    public void addAllSearchOnlys( List< SearchSpace > searchOnlys ) {
-      searchOnlys.forEach( object -> this.searchOnlys.addUnwrapped( object ) );
+      searchOnlys.forEach( object -> this.searchSpaces.addUnwrapped( object ) );
    }// End Method
    
    /**
@@ -68,7 +68,7 @@ public class XmlAnalysisWrapper implements SingletonContainer, StructuralReprese
     * {@inheritDoc}
     */
    @Override public void constructSingletons() {
-      searchOnlys.constructSingletons();
+      searchSpaces.constructSingletons();
       graphs.constructSingletons();
    }// End Method
 
@@ -76,7 +76,7 @@ public class XmlAnalysisWrapper implements SingletonContainer, StructuralReprese
     * {@inheritDoc}
     */
    @Override public void resolveSingletons() {
-      searchOnlys.resolveSingletons();
+      searchSpaces.resolveSingletons();
       graphs.resolveSingletons();
    }// End Method
    
@@ -86,7 +86,7 @@ public class XmlAnalysisWrapper implements SingletonContainer, StructuralReprese
     * @return a {@link List} of {@link SearchSpace}s resolved with the {@link RequestSystem}.
     */
    public List< SearchSpace > retrieveSearchOnlys(){
-      return searchOnlys.retrieveSingletons();
+      return searchSpaces.retrieveSingletons();
    }// End Method
    
    /**
