@@ -31,7 +31,7 @@ import architecture.request.RequestSystem;
    public static class SearchCriteria {
       private SearchPolicy policy;
       private PropertyType type;
-      private Object value;
+      private String value;
       
       /** Default constructor for private use.**/
       private SearchCriteria() {}
@@ -42,7 +42,7 @@ import architecture.request.RequestSystem;
        * @param type the {@link PropertyType}.
        * @param value the value to match.
        */
-      public SearchCriteria( SearchPolicy policy, PropertyType type, Object value ) {
+      public SearchCriteria( SearchPolicy policy, PropertyType type, String value ) {
          this.policy = policy;
          this.type = type;
          this.value = value;
@@ -68,7 +68,7 @@ import architecture.request.RequestSystem;
        * Getter for the value to match.
        * @return the value.
        */
-      public Object getValue() {
+      public String getValue() {
          return value;
       }// End Method
 
@@ -183,7 +183,11 @@ import architecture.request.RequestSystem;
     * @param propertyType the {@link PropertyType} an object should have.
     * @param value the value the object should have for the {@link PropertyType}.
     */
-   @Cali public void include( SearchPolicy policy, PropertyType propertyType, Object value ) {
+   @Cali public void include( SearchPolicy policy, PropertyType propertyType, String value ) {
+      if ( !policy.policyApplicableFor( propertyType ) ) {
+         return;
+      }
+      
       SearchCriteria inclusion = new SearchCriteria();
       inclusion.policy = policy;
       inclusion.type = propertyType;
@@ -196,7 +200,11 @@ import architecture.request.RequestSystem;
     * @param propertyType the {@link PropertyType} an object should have.
     * @param value the value the object should have for the {@link PropertyType}.
     */
-   @Cali public void exclude( SearchPolicy policy, PropertyType propertyType, Object value ) {
+   @Cali public void exclude( SearchPolicy policy, PropertyType propertyType, String value ) {
+      if ( !policy.policyApplicableFor( propertyType ) ) {
+         return;
+      }
+      
       SearchCriteria exclusion = new SearchCriteria();
       exclusion.policy = policy;
       exclusion.type = propertyType;

@@ -33,7 +33,7 @@ public class XmlSearchSpaceImpl extends XmlSingletonWrapper< SearchSpace > imple
       private static final long serialVersionUID = 1L;
       @XmlElement private SearchPolicy policy;
       @XmlElement private String propertyType;
-      @XmlElement private Object value;
+      @XmlElement private String value;
       
       /** Default constructor.*/
       @SuppressWarnings("unused") //Used for Xml. 
@@ -46,7 +46,7 @@ public class XmlSearchSpaceImpl extends XmlSingletonWrapper< SearchSpace > imple
       private XmlSearchCriteria( SearchCriteria criteria ) {
          this.policy = criteria.getPolicy();
          this.propertyType = criteria.getType().getIdentification();
-         this.value = criteria.getPolicy().getParameterType().serialize( criteria.getValue() );
+         this.value = criteria.getValue();
       }// End Constructor
       
       /**
@@ -58,8 +58,7 @@ public class XmlSearchSpaceImpl extends XmlSingletonWrapper< SearchSpace > imple
          if ( resolved == null ) {
             return null;
          }
-         Object deserializedValue = resolved.getParameterType().deserialize( value.toString() );
-         return new SearchCriteria( policy, resolved, deserializedValue );
+         return new SearchCriteria( policy, resolved, value );
       }// End Method
    }// End Class
    

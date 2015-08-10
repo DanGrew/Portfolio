@@ -23,5 +23,5 @@ public interface SearchPolicyFunction {
     * @param value the value to match.
     * @return true if matches.
     */
-   public boolean matchesPolicy( BuilderObject object, PropertyType type, Object value );
+   public boolean matchesPolicy( BuilderObject object, PropertyType type, String value );
 }// End Interface

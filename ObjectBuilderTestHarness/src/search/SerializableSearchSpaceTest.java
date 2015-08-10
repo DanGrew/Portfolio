@@ -62,9 +62,9 @@ public class SerializableSearchSpaceTest {
       
       SearchSpace search2 = new SearchSpace( "search2" );
       search2.include( SearchPolicy.ExactString, ANY_PROPERTY_TYPE_1, "anything" );
-      search2.include( SearchPolicy.ExactNumber, ANY_PROPERTY_TYPE_2, 25.0 );
+      search2.include( SearchPolicy.ExactNumber, ANY_PROPERTY_TYPE_2, "25.0" );
       search2.exclude( SearchPolicy.ExactString, ANY_PROPERTY_TYPE_1, "anything" );
-      search2.exclude( SearchPolicy.ExactNumber, ANY_PROPERTY_TYPE_2, 25.0 );
+      search2.exclude( SearchPolicy.ExactNumber, ANY_PROPERTY_TYPE_2, "25.0" );
       actualSearches.add( search2 );
       
       SearchSpace search3 = new SearchSpace( "search3" );

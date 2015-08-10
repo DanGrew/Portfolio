@@ -10,6 +10,7 @@ package search;
 import object.BuilderObject;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.NumberClassParameterTypeImpl;
 import propertytype.PropertyType;
 
 /**
@@ -18,38 +19,57 @@ import propertytype.PropertyType;
  */
 public enum SearchPolicy {
 
-   ExactString( 
-            ClassParameterTypes.STRING_PARAMETER_TYPE, 
-            ( object, type, value ) -> {
-                  Object objectValue = object.get( type );
-                  if ( objectValue == null ) {
-                     return false;
-                  }
-                  objectValue = objectValue.toString();
-                  return value.equals( objectValue );
-            } 
-    ),
-    ContainsString( 
-             ClassParameterTypes.STRING_PARAMETER_TYPE, 
-             ( object, type, value ) -> {
-                Object objectValue = object.get( type );
-                if ( objectValue == null ) {
-                   return false;
-                }
-                return objectValue.toString().contains( value.toString() );
-             } 
-     ),
-     ExactNumber( 
-              ClassParameterTypes.NUMBER_PARAMETER_TYPE, 
-              ( object, type, value ) -> {
-                 Object objectValue = object.get( type );
-                 if ( objectValue == null ) {
-                    return false;
-                 }
-                 return objectValue.equals( value );
-           } 
-     );
-   
+   ExactString( ClassParameterTypes.STRING_PARAMETER_TYPE, ( object, type, value ) -> {
+      Object objectValue = object.get( type );
+      if ( objectValue == null ) {
+         return false;
+      }
+      objectValue = objectValue.toString();
+      return value.equals( objectValue );
+   } ), 
+   ContainsString( ClassParameterTypes.STRING_PARAMETER_TYPE, ( object, type, value ) -> {
+      Object objectValue = object.get( type );
+      if ( objectValue == null ) {
+         return false;
+      }
+      return objectValue.toString().contains( value.toString() );
+   } ), 
+   ExactNumber( ClassParameterTypes.NUMBER_PARAMETER_TYPE, ( object, type, value ) -> {
+      Object objectValue = object.get( type );
+      if ( objectValue == null ) {
+         return false;
+      }
+      Double doubleValue = NumberClassParameterTypeImpl.objectToNumber( value );
+      if ( doubleValue == null ) {
+         return false;
+      }
+      return objectValue.equals( doubleValue );
+   } ),
+   GreaterThanNumber( ClassParameterTypes.NUMBER_PARAMETER_TYPE, ( object, type, value ) -> {
+      Object objectValue = object.get( type );
+      if ( objectValue == null ) {
+         return false;
+      }
+      Double doubleValue = NumberClassParameterTypeImpl.objectToNumber( value );
+      if ( doubleValue == null ) {
+         return false;
+      }
+      Double actualDouble = NumberClassParameterTypeImpl.objectToNumber( objectValue );
+      return actualDouble >= doubleValue;
+   } ),
+   LessThanNumber( ClassParameterTypes.NUMBER_PARAMETER_TYPE, ( object, type, value ) -> {
+      Object objectValue = object.get( type );
+      if ( objectValue == null ) {
+         return false;
+      }
+      Double doubleValue = NumberClassParameterTypeImpl.objectToNumber( value );
+      if ( doubleValue == null ) {
+         return false;
+      }
+      Double actualDouble = NumberClassParameterTypeImpl.objectToNumber( objectValue );
+      return actualDouble <= doubleValue;
+   } );
+
    private ClassParameterType parameterType;
    private SearchPolicyFunction function;
    
@@ -70,7 +90,7 @@ public enum SearchPolicy {
     * @param value the value to match.
     * @return true if matches, false otherwise.
     */
-   public boolean matchesPolicy( BuilderObject object, PropertyType type, Object value ) {
+   public boolean matchesPolicy( BuilderObject object, PropertyType type, String value ) {
       if ( !policyApplicableFor( type ) ) {
          return false;
       }

@@ -21,7 +21,7 @@ public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl {
     * Constructs a new {@link NumberClassParameterTypeImpl}.
     */
    public NumberClassParameterTypeImpl() {
-      super( Number.class );
+      super( Double.class );
    }// End Constructor
    
    /**
@@ -29,11 +29,7 @@ public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl {
     */
    @Override public Double serialize( Object object ) {
       if ( object != null ) {
-         try { 
-            return Double.valueOf( object.toString() );
-         } catch ( NumberFormatException exception ) {
-            return null;
-         }
+         return objectToNumber( object );
       } else {
          return null;
       }
@@ -56,5 +52,18 @@ public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl {
       }
       return Arrays.asList( value.toString() );
    }// End Method
-
+   
+   /**
+    * Method to convert the given {@link Object} into a {@link Double}, if possible.
+    * @param object the {@link Object} to convert.
+    * @return the {@link Double} if converted successfully, null otherwise.
+    */
+   public static Double objectToNumber( Object object ) {
+      try { 
+         return Double.valueOf( object.toString() );
+      } catch ( NumberFormatException exception ) {
+         return null;
+      }
+   }// End Method
+   
 }// End Class
