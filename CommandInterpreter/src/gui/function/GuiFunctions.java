@@ -26,7 +26,7 @@ public class GuiFunctions {
    public enum Events {
       /** Event raised when a {@link Command} should be executed.**/
       ExecuteAction,
-      /** Events raised when auto complete is requeste.**/
+      /** Events raised when auto complete is request.**/
       AutoComplete,
       /** Event raised when the list should scroll up.**/
       ScrollUp,

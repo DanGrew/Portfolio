@@ -130,7 +130,7 @@ public class CsvBuilderObjectImportProcess implements ProgressControlledTaskBind
          RequestSystem.store( builderObject, BuilderObject.class );
          state.progressMade();
          try {
-            Thread.sleep( 10 );
+            Thread.sleep( 5 );
          } catch ( InterruptedException e ) {
             e.printStackTrace();
          }

@@ -1,9 +1,17 @@
 package graphics;
 
+import java.util.Optional;
+
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 
 /**
  * {@link JavaFx} defines common java fx functions.
@@ -27,6 +35,53 @@ public class JavaFx {
       while ( iterativeParent.getParent() != null ) {
          iterativeParent = iterativeParent.getParent();
          iterativeParent.setExpanded( true );
+      }
+   }// End Method
+   
+   /**
+    * Method to construct a {@link Label} with wrapped text.
+    * @param text the text to put in the {@link Label}.
+    * @return the {@link Label}.
+    */
+   public static Label wrappedLabel( String text ) {
+      Label label = new Label( text );
+      label.setWrapText( true );
+      return label;
+   }// End Method
+   
+   /**
+    * Method to popup and {@link Alert} for an error.
+    * @param title the title of the {@link Alert}.
+    * @param header the header of the {@link Alert}.
+    * @param issue the content of the {@link Alert}.
+    */
+   public static void error( String title, String header, String issue ) {
+      Alert alert = new Alert( AlertType.ERROR );
+      alert.setTitle( title );
+      alert.setHeaderText( header );
+      alert.setContentText( issue );
+      alert.showAndWait();
+   }// End Method
+   
+   /**
+    * Method to popup an {@link Alert} to check whether the user is happy with a particular
+    * operation.
+    * @param title the title of the {@link Alert}.
+    * @param header the header of the {@link Alert}.
+    * @param question the question to ask the user.
+    * @return true if the user acknowledges, false if they cancel.
+    */
+   public static boolean happyWithThis( String title, String header, String question ) {
+      Alert alert = new Alert( AlertType.CONFIRMATION );
+      alert.setTitle( title );
+      alert.setHeaderText( header );
+      alert.setContentText( question );
+
+      Optional< ButtonType > result = alert.showAndWait();
+      if ( result.get() == ButtonType.OK ) {
+         return true;
+      } else {
+         return false;
       }
    }// End Method
    

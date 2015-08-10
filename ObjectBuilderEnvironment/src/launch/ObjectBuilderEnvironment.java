@@ -7,13 +7,13 @@
  */
 package launch;
 
-import gui.CommandInterpreterMenuBar;
 import gui.CommandPrompt;
 import gui.ObjectBuilder;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import menu.ObeMenuBar;
 import outline.SystemOutline;
 
 /**
@@ -31,7 +31,7 @@ public class ObjectBuilderEnvironment extends Application {
     */
    @Override public void start( Stage stage ) throws Exception {
       BorderPane view = new BorderPane();
-      view.setTop( new CommandInterpreterMenuBar() );
+      view.setTop( new ObeMenuBar() );
       view.setCenter( new SystemOutline() );
       view.setBottom( new CommandPrompt() );
       

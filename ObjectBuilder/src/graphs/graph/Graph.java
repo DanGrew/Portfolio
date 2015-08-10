@@ -111,6 +111,13 @@ import annotation.Cali;
       }
       this.dataSeries.add( search );
    }// End Method
+   
+   /**
+    * Method to clear the {@link Search}s specified for the {@link Graph}.
+    */
+   @Cali public void clearDataSeries() {
+      dataSeries.clear();
+   }// End Method
 
    /**
     * Getter for the horizontal axis' label.
@@ -169,6 +176,13 @@ import annotation.Cali;
    }// End Method
    
    /**
+    * Method to clear the vertical {@link PropertyType}s set on the {@link Graph}.
+    */
+   @Cali public void clearVerticalProperties() {
+      verticalProperties.clear();
+   }// End Method
+   
+   /**
     * Getter for the label used for the vertical axis.
     * @return the {@link String} label.
     */
@@ -198,6 +212,9 @@ import annotation.Cali;
     * @param undefinedNumber the {@link Number} to use by default.
     */
    @Cali public void setDefaultValueForUndefinedNumber( Number undefinedNumber ) {
+      if ( undefinedNumber == null ) {
+         return;
+      }
       this.undefinedNumber = undefinedNumber;
    }// End Method
    
@@ -428,5 +445,5 @@ import annotation.Cali;
          return null;
       }
    }// End Method
-   
+
 }// End Class

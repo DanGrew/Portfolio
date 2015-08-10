@@ -7,6 +7,8 @@
  */
 package graphics.wizard;
 
+import graphics.JavaFx;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +18,6 @@ import javafx.collections.FXCollections;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogEvent;
@@ -28,14 +29,17 @@ import javafx.scene.control.TextField;
  * and allowing the user to navigate through them configuring some sort of object associated
  * with the {@link Wizard}.
  */
-public class Wizard extends Alert {
+public class Wizard< ConfigurableT > extends Alert {
    
-   private List< WizardPage > pages;
+   private static final String ERROR_TITLE = "Configuration Issue";
+   private List< WizardPage< ConfigurableT > > pages;
    private int currentPage;
+   private ConfigurableT configurable;
    
    private ButtonType buttonPrevious;
    private ButtonType buttonNext;
    private ButtonType buttonCancel;
+   private ButtonType buttonFinish;
    
    /**
     * Constructs a new {@link Wizard}.
@@ -43,16 +47,17 @@ public class Wizard extends Alert {
     */
    public Wizard( String title ) {
       super( Alert.AlertType.INFORMATION );
-      pages = new ArrayList< WizardPage >();
+      pages = new ArrayList< WizardPage< ConfigurableT > >();
       
       setTitle( title );
       setHeaderText( "Initialising Wizard." );
 
       buttonPrevious = new ButtonType( "Previous" );
       buttonNext = new ButtonType( "Next" );
-      buttonCancel = new ButtonType( "Cancel", ButtonData.CANCEL_CLOSE );
-
-      getButtonTypes().setAll( buttonPrevious, buttonNext, buttonCancel);
+      buttonCancel = new ButtonType( "Cancel" );
+      buttonFinish = new ButtonType( "Finish" );
+      
+      getButtonTypes().setAll( buttonNext, buttonCancel);
       setOnCloseRequest( event -> { 
          navigate( event );
       } ); 
@@ -64,7 +69,7 @@ public class Wizard extends Alert {
     * @param pages the {@link List} of {@link WizardPage} to use as content. This will
     * initialise the {@link Wizard} to the first page.
     */
-   public void setContentPages( List< WizardPage > pages ){
+   public void setContentPages( List< WizardPage< ConfigurableT > > pages ){
       this.pages.addAll( pages );
       currentPage = 0;
       displayCurrentPage();
@@ -74,9 +79,18 @@ public class Wizard extends Alert {
     * Method to navigate to the next page in the {@link Wizard}.
     */
    private void nextPage(){
-      if ( currentPage < pages.size() - 1 ) {
-         currentPage++;
+      if ( currentPage >= pages.size() - 1 ) {
+         return;
       }
+      
+      WizardPage< ConfigurableT > page = getCurrentPage();
+      if ( !page.isContentAcceptable() ) {
+         return;
+      }
+      configurable = page.configure( configurable );
+      
+      currentPage++;
+      
       displayCurrentPage();
    }// End Method
    
@@ -84,9 +98,12 @@ public class Wizard extends Alert {
     * Method to navigate to the previous page in the {@link Wizard}.
     */
    private void previousPage() {
-      if ( currentPage > 0 ) {
-         currentPage--;
+      if ( currentPage <= 0 ) {
+         return;
       }
+      
+      currentPage--;
+      
       displayCurrentPage();
    }// End Method
    
@@ -94,16 +111,27 @@ public class Wizard extends Alert {
     * Method to display the current {@link WizardPage}.
     */
    private void displayCurrentPage() {
-      WizardPage currentPage = getCurrentPage();
+      if ( currentPage == 0 ) {
+         getButtonTypes().clear();
+         getButtonTypes().addAll( buttonNext, buttonCancel );
+      } else if ( currentPage == pages.size() - 1 ) {
+         getButtonTypes().clear();
+         getButtonTypes().addAll( buttonPrevious, buttonFinish );
+      } else {
+         getButtonTypes().clear();
+         getButtonTypes().addAll( buttonPrevious, buttonNext, buttonCancel );
+      }
+      
+      WizardPage< ConfigurableT > currentPage = getCurrentPage();
       setHeaderText( currentPage.getPageDescription() );
-      getDialogPane().setContent( currentPage.getContent() );
+      getDialogPane().setContent( currentPage.getContent( configurable ) );
    }// End Method
    
    /**
     * Convenience method for finding the current {@link WizardPage}.
     * @return the current {@link WizardPage}.
     */
-   private WizardPage getCurrentPage(){
+   private WizardPage< ConfigurableT > getCurrentPage(){
       return pages.get( currentPage );
    }// End Method
    
@@ -132,44 +160,53 @@ public class Wizard extends Alert {
    public void launch() {
       showAndWait();
    }// End Method
+   
+   /**
+    * Method to {@link Alert} an error in a common way for all {@link Wizard}s.
+    * @param header the header of the error.
+    * @param issue the content of the error.
+    */
+   public static void error( String header, String issue ) {
+      JavaFx.error( ERROR_TITLE, header, issue );
+   }// End Method
 
    public static void main( String[] args ) {
       new JFXPanel();
       Platform.runLater( new Runnable() {
          @Override public void run() {
-            Wizard wizard = new Wizard( "Test" );
+            Wizard< Void > wizard = new Wizard< Void >( "Test" );
             
             wizard.setContentPages( 
                Arrays.asList( 
-                  new WizardPage() {
+                  new WizardPageImpl() {
                      @Override public String getPageDescription() {
                         return "FirstPage";
                      }
-                     public Node getContent() {
+                     public Node getContent( Void v ) {
                         return new Label( "Some information" );
                      }
                   },
-                  new WizardPage() {
+                  new WizardPageImpl() {
                      @Override public String getPageDescription() {
                         return "SecondPage";
                      }
-                     public Node getContent() {
+                     public Node getContent( Void v ) {
                         return new TextField( "Text field" );
                      }
                   },
-                  new WizardPage() {
+                  new WizardPageImpl() {
                      @Override public String getPageDescription() {
                         return "Nearly Done";
                      }
-                     public Node getContent() {
+                     public Node getContent( Void v ) {
                         return new ComboBox<>( FXCollections.observableArrayList() );
                      }
                   },
-                  new WizardPage() {
+                  new WizardPageImpl() {
                      @Override public String getPageDescription() {
                         return "Finished!";
                      }
-                     public Node getContent() {
+                     public Node getContent( Void v ) {
                         return null;
                      }
                   } 

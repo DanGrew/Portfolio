@@ -9,10 +9,7 @@ package outline;
 
 import graphs.graph.Graph;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javafx.Workarounds;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -23,13 +20,11 @@ import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.BorderPane;
 import model.singleton.Singleton;
-import object.BuilderObject;
 import objecttype.Definition;
 import outline.describer.OutlineDescriber;
 import outline.describer.OutlineDescriberFactory;
 import outline.describer.OutlineDescriberFactory.OutlineDescribables;
 import outline.describer.OutlineDescriberImpl;
-import propertytype.PropertyType;
 import search.SearchOnly;
 import architecture.request.RequestSystem;
 
