@@ -19,7 +19,7 @@ import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import search.Search;
 import search.SearchAll;
-import search.SearchOnly;
+import search.SearchSpace;
 import architecture.request.RequestSystem;
 
 /**
@@ -49,8 +49,7 @@ public class GraphWizard {
       RequestSystem.store( new PropertyTypeImpl( "NumberA", ClassParameterTypes.NUMBER_PARAMETER_TYPE ), PropertyType.class );
       RequestSystem.store( new PropertyTypeImpl( "NumberB", ClassParameterTypes.NUMBER_PARAMETER_TYPE ), PropertyType.class );
       RequestSystem.store( new PropertyTypeImpl( "String", ClassParameterTypes.STRING_PARAMETER_TYPE ), PropertyType.class );
-      RequestSystem.store( new SearchAll( "SearchAll" ), Search.class );
-      RequestSystem.store( new SearchOnly( "SearchOnly" ), Search.class );
+      RequestSystem.store( new SearchSpace( "SearchSpace" ), Search.class );
       
       new JFXPanel();
       Platform.runLater( () -> {

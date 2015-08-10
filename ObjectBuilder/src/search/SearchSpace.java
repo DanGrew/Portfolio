@@ -19,20 +19,27 @@ import annotation.Cali;
 import architecture.request.RequestSystem;
 
 /**
- * {@link SearchOnly} provides a {@link Search} that the criteria adds matches to, an
+ * {@link SearchSpace} provides a {@link Search} that the criteria adds matches to, an
  * inclusive search.
  */
-@Cali public class SearchOnly extends SearchImpl< SerializableSearchOnly > implements Search{
+@Cali public class SearchSpace extends SearchImpl< SerializableSearchSpace > implements Search{
 
-   private List< Property > includePropertyValues;
+   private List< Inclusion > inclusions;
+   
+   /** Private class for holding inclusion criteria.**/
+   private class Inclusion {
+      private SearchPolicy policy;
+      private PropertyType type;
+      private Object value;
+   }// End Class
    
    /**
-    * Constructs a new {@link SearchOnly}.
+    * Constructs a new {@link SearchSpace}.
     * @param identification the unique id fo rthe {@link Search}.
     */
-   @Cali public SearchOnly( String identification ) {
+   @Cali public SearchSpace( String identification ) {
       super( identification );
-      includePropertyValues = new ArrayList< Property >();
+      inclusions = new ArrayList<>();
    }// End Constructor
 
    /**
@@ -44,19 +51,10 @@ import architecture.request.RequestSystem;
       Collection< BuilderObject > allObjects = RequestSystem.retrieveAll( BuilderObject.class );
       Collection< BuilderObject > matches = new ArrayList< BuilderObject >();
       allObjects.forEach( object -> {
-         for ( Property entry : includePropertyValues ) {
-            if ( !object.getDefinition().hasProperty( entry.getType() ) ) {
+         for ( Inclusion inclusion : inclusions ) {
+            if ( inclusion.policy.matchesPolicy( object, inclusion.type, inclusion.value ) ) {
+               matches.add( object );
                return;
-            } else {
-               Object value = object.get( entry.getType() );
-               if ( value == null ) {
-                  return;
-               } else if ( !value.equals( entry.getValue() ) ){
-                  return;
-               } else {
-                  matches.add( object );
-                  return;
-               }
             }
          }
       } );
@@ -67,16 +65,16 @@ import architecture.request.RequestSystem;
    /**
     * {@inheritDoc}
     */
-   @Override protected void writeSingleton( SerializableSearchOnly serializable ) {
-      includePropertyValues.forEach( object -> serializable.addValue( object ) );
+   @Override protected void writeSingleton( SerializableSearchSpace serializable ) {
+//      includePropertyValues.forEach( object -> serializable.addValue( object ) );
    }
 
    /**
     * {@inheritDoc}
     */
-   @Override protected void readSingleton( SerializableSearchOnly serialized ) {
-      includePropertyValues.clear();
-      includePropertyValues.addAll( serialized.resolveValues() );
+   @Override protected void readSingleton( SerializableSearchSpace serialized ) {
+//      includePropertyValues.clear();
+//      includePropertyValues.addAll( serialized.resolveValues() );
    }
 
    /**
@@ -84,25 +82,27 @@ import architecture.request.RequestSystem;
     * @param propertyType the {@link PropertyType} an object should have.
     * @param value the value the object should have for the {@link PropertyType}.
     */
-   @Cali public void includePropertyValue( PropertyType propertyType, Object value ) {
-      Property property = new PropertyImpl( propertyType );
-      property.setValue( value );
-      includePropertyValues.add( property );
+   @Cali public void include( SearchPolicy policy, PropertyType propertyType, Object value ) {
+      Inclusion inclusion = new Inclusion();
+      inclusion.policy = policy;
+      inclusion.type = propertyType;
+      inclusion.value = value;
+      inclusions.add( inclusion );
    }// End Method
 
    /**
     * Method to clear the included {@link PropertyType} values.
     */
-   @Cali public void clearIncludedPropertyValues() {
-      includePropertyValues.clear();
+   @Cali public void clearIncluded() {
+      inclusions.clear();
    }// End Method
 
    /**
     * Method to get the included {@link Property}s.
     * @return a {@link Collection} of the included {@link Property} rules.
     */
-   public Collection< Property > getIncludedPropertyTypes() {
-      return new ArrayList<>( includePropertyValues );
+   public Collection< Property > getIncluded() {
+      return new ArrayList<>(  );
    }// End Method
 
 }// End Class

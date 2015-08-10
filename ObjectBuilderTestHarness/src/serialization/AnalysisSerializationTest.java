@@ -24,7 +24,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import search.SearchOnly;
+import search.SearchSpace;
 import search.SerializableSearchOnlyTest;
 import search.XmlSearchOnlyImpl;
 import architecture.serialization.SerializationSystem;
@@ -42,10 +42,10 @@ public class AnalysisSerializationTest {
     * {@link XmlAnalysisWrapper}.
     */
    @Test public void collectionSerializationTest() throws IOException {
-      List< SearchOnly > actualSearchOnlys = new ArrayList< SearchOnly >();
-      actualSearchOnlys.add( new SearchOnly( "searchA" ) );
-      actualSearchOnlys.add( new SearchOnly( "searchB" ) );
-      actualSearchOnlys.add( new SearchOnly( "searchC" ) );
+      List< SearchSpace > actualSearchOnlys = new ArrayList< SearchSpace >();
+      actualSearchOnlys.add( new SearchSpace( "searchA" ) );
+      actualSearchOnlys.add( new SearchSpace( "searchB" ) );
+      actualSearchOnlys.add( new SearchSpace( "searchC" ) );
       
       List< Graph > actualGraphs = new ArrayList< Graph >();
       actualGraphs.add( new Graph( "graphA" ) );
@@ -74,7 +74,7 @@ public class AnalysisSerializationTest {
       );
       Assert.assertNotNull( parsedSystem );
       
-      List< SearchOnly > parsedSearchOnlys = parsedSystem.retrieveSearchOnlys();
+      List< SearchSpace > parsedSearchOnlys = parsedSystem.retrieveSearchOnlys();
       SerializableSearchOnlyTest.assertSearchOnlyLists( actualSearchOnlys, parsedSearchOnlys );
 
       List< Graph > parsedGraphs = parsedSystem.retrieveGraphs();

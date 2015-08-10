@@ -14,9 +14,9 @@ import property.Property;
 import model.data.SerializedSingleton;
 
 /**
- * {@link Serializable} form of {@link SearchOnly}.
+ * {@link Serializable} form of {@link SearchSpace}.
  */
-public interface SerializableSearchOnly extends SerializedSingleton< SearchOnly >{
+public interface SerializableSearchSpace extends SerializedSingleton< SearchSpace >{
 
    /**
     * Method to serialize a {@link Property}.

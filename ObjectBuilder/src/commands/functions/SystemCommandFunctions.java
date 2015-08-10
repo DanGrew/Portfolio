@@ -25,7 +25,7 @@ import objecttype.XmlDefinitionImpl;
 import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
 import propertytype.XmlPropertyTypeImpl;
-import search.SearchOnly;
+import search.SearchSpace;
 import search.XmlSearchOnlyImpl;
 import serialization.XmlAnalysisWrapper;
 import serialization.XmlObjectBuilderSystemWrapper;
@@ -129,7 +129,7 @@ public class SystemCommandFunctions {
          
          if ( file != null ) {
             XmlAnalysisWrapper serializedCollection = new XmlAnalysisWrapper();
-            List< SearchOnly > searchOnlys = RequestSystem.retrieveAll( SearchOnly.class );
+            List< SearchSpace > searchOnlys = RequestSystem.retrieveAll( SearchSpace.class );
             serializedCollection.addAllSearchOnlys( searchOnlys );
             List< Graph > graphs = RequestSystem.retrieveAll( Graph.class );
             serializedCollection.addAllGraphs( graphs );

@@ -13,7 +13,7 @@ import object.BuilderObjectImpl;
 import objecttype.DefinitionImpl;
 import propertytype.PropertyTypeImpl;
 import search.SearchAll;
-import search.SearchOnly;
+import search.SearchSpace;
 import system.CaliSystem;
 import architecture.request.RequestSystem;
 import command.Command;
@@ -49,8 +49,7 @@ public class ObjectBuilder {
       CaliSystem.register( BuilderObjectImpl.class );
       CaliSystem.register( PropertyTypeImpl.class );
       CaliSystem.register( DefinitionImpl.class );
-      CaliSystem.register( SearchAll.class );
-      CaliSystem.register( SearchOnly.class );
+      CaliSystem.register( SearchSpace.class );
       CaliSystem.register( Graph.class );
       CaliSystem.register( CsvBuilderObjectContents.class );
       

@@ -14,25 +14,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 import representation.xml.wrapper.XmlCollectionWrapper;
 
 /**
- * The {@link XmlSearchOnlyWrapper} provides an Xml wrapper for the {@link SearchOnly}s in the 
+ * The {@link XmlSearchOnlyWrapper} provides an Xml wrapper for the {@link SearchSpace}s in the 
  * system.
  */
 @XmlRootElement
-public class XmlSearchOnlyWrapper extends XmlCollectionWrapper< SearchOnly, SerializableSearchOnly >{
+public class XmlSearchOnlyWrapper extends XmlCollectionWrapper< SearchSpace, SerializableSearchSpace >{
 
    /**
     * {@inheritDoc}
     */
-   @Override public void addUnwrapped( SearchOnly object ) {
-      SerializableSearchOnly serialized = object.write( XmlSearchOnlyImpl.class );
+   @Override public void addUnwrapped( SearchSpace object ) {
+      SerializableSearchSpace serialized = object.write( XmlSearchOnlyImpl.class );
       super.addObject( serialized );
    }// End Method
 
    /**
     * {@inheritDoc}
     */
-   @Override public List< SearchOnly > retrieveSingletons() {
-      return super.retrieveSingletons( SearchOnly.class );
+   @Override public List< SearchSpace > retrieveSingletons() {
+      return super.retrieveSingletons( SearchSpace.class );
    }// End Method
 
 }// End Class

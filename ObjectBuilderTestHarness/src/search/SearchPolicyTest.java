@@ -7,9 +7,6 @@
  */
 package search;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 import model.singleton.Singleton;
 import object.BuilderObject;
 import objecttype.Definition;
@@ -25,12 +22,13 @@ import propertytype.PropertyTypeImpl;
 import architecture.request.RequestSystem;
 
 /**
- * Test for the {@link SearchOnly}.
+ * Test for the {@link SearchSpace}.
  */
-public class SearchOnlyTest {
+public class SearchPolicyTest {
 
    
    private static final String TEST_PROPERTY_VALUE = "anySpecific Value";
+   private static final Double TEST_NUMBER_VALUE = 54.3498;
    private static PropertyType ANY_NUMBER_TYPE;
    private static PropertyType ANY_PROPERTY;
    private static Definition ANY_DEFINITION_ONE;
@@ -46,18 +44,22 @@ public class SearchOnlyTest {
    @BeforeClass public static void setup(){
       ANY_PROPERTY = new PropertyTypeImpl( "something", ClassParameterTypes.STRING_PARAMETER_TYPE );
       RequestSystem.store( ANY_PROPERTY );
+      ANY_NUMBER_TYPE = new PropertyTypeImpl( "number", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
+      RequestSystem.store( ANY_NUMBER_TYPE, PropertyType.class );
       
       ANY_DEFINITION_ONE = Mockito.mock( Definition.class );
       Mockito.when( ANY_DEFINITION_ONE.hasProperty( ANY_PROPERTY ) ).thenReturn( false );
       RequestSystem.store( ANY_DEFINITION_ONE );
       ANY_DEFINITION_TWO = Mockito.mock( Definition.class );
       Mockito.when( ANY_DEFINITION_TWO.hasProperty( ANY_PROPERTY ) ).thenReturn( true );
+      Mockito.when( ANY_DEFINITION_TWO.hasProperty( ANY_NUMBER_TYPE ) ).thenReturn( true );
       RequestSystem.store( ANY_DEFINITION_TWO );
       
       ANY_OBJECT_ONE = Mockito.mock( BuilderObject.class );
       Mockito.when( ANY_OBJECT_ONE.getDefinition() ).thenReturn( ANY_DEFINITION_ONE );
       //Deliberately configure incorrect return to prove this is checked.
       Mockito.when( ANY_OBJECT_ONE.get( ANY_PROPERTY ) ).thenReturn( TEST_PROPERTY_VALUE );
+      Mockito.when( ANY_OBJECT_ONE.get( ANY_NUMBER_TYPE ) ).thenReturn( TEST_NUMBER_VALUE );
       RequestSystem.store( ANY_OBJECT_ONE );
       ANY_OBJECT_TWO = Mockito.mock( BuilderObject.class );
       Mockito.when( ANY_OBJECT_TWO.getDefinition() ).thenReturn( ANY_DEFINITION_TWO );
@@ -69,65 +71,56 @@ public class SearchOnlyTest {
       ANY_OBJECT_FOUR = Mockito.mock( BuilderObject.class );
       Mockito.when( ANY_OBJECT_FOUR.getDefinition() ).thenReturn( ANY_DEFINITION_ONE );
       RequestSystem.store( ANY_OBJECT_FOUR );
-      
-      ANY_NUMBER_TYPE = new PropertyTypeImpl( "number", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
-      RequestSystem.store( ANY_NUMBER_TYPE, PropertyType.class );
    }// End Method
    
    /**
-    * {@link SearchOnly} should construct.
+    * {@link SearchPolicy#ExactString} test.
     */
-   @Test public void shouldConstruct() {
-      Search search = new SearchOnly( "search" );
-      Assert.assertTrue( search.getMatches().isEmpty() );
-      search.identifyMatches();
-      Assert.assertTrue( search.getMatches().isEmpty() );
+   @Test public void shouldExactStringMatch() {
+      Assert.assertTrue( SearchPolicy.ExactString.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, TEST_PROPERTY_VALUE ) );
    }// End Method
    
    /**
-    * Results should only include matching {@link PropertyType} and value.
+    * {@link SearchPolicy#ExactString} test.
     */
-   @Test public void shouldIncludeOnlyPropertyValue() {
-      SearchOnly search = new SearchOnly( "search" );
-      search.includePropertyValue( ANY_PROPERTY, TEST_PROPERTY_VALUE );
-      
-      search.identifyMatches();
-      Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
-               Arrays.asList( ANY_OBJECT_TWO ), 
-               matches 
-      );
+   @Test public void shouldNotExactStringMatch() {
+      Assert.assertFalse( SearchPolicy.ExactString.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, "anythingElse" ) );
+      Assert.assertFalse( SearchPolicy.ExactString.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, 25.0 ) );
+      Assert.assertFalse( SearchPolicy.ExactString.matchesPolicy( ANY_OBJECT_ONE, ANY_NUMBER_TYPE, 25.0 ) );
    }// End Method
    
    /**
-    * Results should not include {@link PropertyType} and value when value is not correct type.
+    * {@link SearchPolicy#ContainsString} test.
     */
-   @Test public void shouldNotIncludeOnlyPropertyValue() {
-      SearchOnly search = new SearchOnly( "search" );
-      search.includePropertyValue( ANY_NUMBER_TYPE, TEST_PROPERTY_VALUE );
-      
-      search.identifyMatches();
-      Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
-               Arrays.asList(), 
-               matches 
-      );
+   @Test public void shouldContainString() {
+      Assert.assertTrue( SearchPolicy.ContainsString.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, "any" ) );
+      Assert.assertTrue( SearchPolicy.ContainsString.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, "fic" ) );
    }// End Method
    
    /**
-    * Inclusions should be cleared for {@link PropertyType} and values.
+    * {@link SearchPolicy#ContainsString} test.
     */
-   @Test public void shouldClearIncludedPropertyValues() {
-      SearchOnly search = new SearchOnly( "search" );
-      search.includePropertyValue( ANY_PROPERTY, TEST_PROPERTY_VALUE );
-      
-      search.identifyMatches();
-      Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertFalse( matches.isEmpty() );
-      
-      search.clearIncludedPropertyValues();
-      matches = search.getMatches();
-      Assert.assertTrue( matches.isEmpty() );
+   @Test public void shouldNotContainString() {
+      Assert.assertFalse( SearchPolicy.ContainsString.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, "nothing" ) );
+      Assert.assertFalse( SearchPolicy.ContainsString.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, "25" ) );
+      Assert.assertFalse( SearchPolicy.ContainsString.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, 25.0 ) );
+      Assert.assertFalse( SearchPolicy.ContainsString.matchesPolicy( ANY_OBJECT_ONE, ANY_NUMBER_TYPE, 25.0 ) );
    }// End Method
-
+   
+   /**
+    * {@link SearchPolicy#ExactNumber} test.
+    */
+   @Test public void shouldExactNumberMatch() {
+      Assert.assertTrue( SearchPolicy.ExactNumber.matchesPolicy( ANY_OBJECT_ONE, ANY_NUMBER_TYPE, TEST_NUMBER_VALUE ) );
+   }// End Method
+   
+   /**
+    * {@link SearchPolicy#ExactNumber} test.
+    */
+   @Test public void shouldNotExactNumberMatch() {
+      Assert.assertFalse( SearchPolicy.ExactNumber.matchesPolicy( ANY_OBJECT_ONE, ANY_NUMBER_TYPE, "me" ) );
+      Assert.assertFalse( SearchPolicy.ExactNumber.matchesPolicy( ANY_OBJECT_ONE, ANY_NUMBER_TYPE, "25" ) );
+      Assert.assertFalse( SearchPolicy.ExactNumber.matchesPolicy( ANY_OBJECT_ONE, ANY_PROPERTY, TEST_PROPERTY_VALUE ) );
+   }// End Method
+   
 }// End Class

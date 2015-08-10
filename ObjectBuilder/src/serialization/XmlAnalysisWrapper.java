@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import model.singleton.Singleton;
-import search.SearchOnly;
+import search.SearchSpace;
 import search.XmlSearchOnlyWrapper;
 import architecture.representation.SingletonContainer;
 import architecture.representation.StructuralRepresentation;
@@ -42,10 +42,10 @@ public class XmlAnalysisWrapper implements SingletonContainer, StructuralReprese
    }// End Constructor
    
    /**
-    * Method to add all {@link SearchOnly}s given.
-    * @param searchOnlys the {@link SearchOnly}s to add.
+    * Method to add all {@link SearchSpace}s given.
+    * @param searchOnlys the {@link SearchSpace}s to add.
     */
-   public void addAllSearchOnlys( List< SearchOnly > searchOnlys ) {
+   public void addAllSearchOnlys( List< SearchSpace > searchOnlys ) {
       searchOnlys.forEach( object -> this.searchOnlys.addUnwrapped( object ) );
    }// End Method
    
@@ -81,11 +81,11 @@ public class XmlAnalysisWrapper implements SingletonContainer, StructuralReprese
    }// End Method
    
    /**
-    * Method to retrieve the {@link SearchOnly}s stored in the {@link RequestSystem} from the parsing
+    * Method to retrieve the {@link SearchSpace}s stored in the {@link RequestSystem} from the parsing
     * of this object.
-    * @return a {@link List} of {@link SearchOnly}s resolved with the {@link RequestSystem}.
+    * @return a {@link List} of {@link SearchSpace}s resolved with the {@link RequestSystem}.
     */
-   public List< SearchOnly > retrieveSearchOnlys(){
+   public List< SearchSpace > retrieveSearchOnlys(){
       return searchOnlys.retrieveSingletons();
    }// End Method
    

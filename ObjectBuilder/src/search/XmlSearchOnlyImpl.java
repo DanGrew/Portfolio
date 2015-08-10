@@ -18,9 +18,9 @@ import representation.xml.wrapper.XmlSingletonWrapper;
 import architecture.request.RequestSystem;
 
 /**
- * The {@link XmlSearchOnlyImpl} provides an Xml form of a serialized {@link SearchOnly}.
+ * The {@link XmlSearchOnlyImpl} provides an Xml form of a serialized {@link SearchSpace}.
  */
-public class XmlSearchOnlyImpl extends XmlSingletonWrapper< SearchOnly > implements SerializableSearchOnly {
+public class XmlSearchOnlyImpl extends XmlSingletonWrapper< SearchSpace > implements SerializableSearchSpace {
 
    @XmlElement private List< XmlPropertyValue > values;
    
@@ -54,10 +54,10 @@ public class XmlSearchOnlyImpl extends XmlSingletonWrapper< SearchOnly > impleme
    /**
     * {@inheritDoc}
     */
-   @Override public SearchOnly unwrap() {
-      SearchOnly type = RequestSystem.retrieve( SearchOnly.class, getIdentification() ); 
+   @Override public SearchSpace unwrap() {
+      SearchSpace type = RequestSystem.retrieve( SearchSpace.class, getIdentification() ); 
       if ( type == null ) {
-         type = new SearchOnly( getIdentification() );
+         type = new SearchSpace( getIdentification() );
          RequestSystem.store( type );
       }
       return type;
@@ -67,7 +67,7 @@ public class XmlSearchOnlyImpl extends XmlSingletonWrapper< SearchOnly > impleme
     * {@inheritDoc}
     */
    @Override public void resolve() {
-      SearchOnly type = RequestSystem.retrieve( SearchOnly.class, getIdentification() ); 
+      SearchSpace type = RequestSystem.retrieve( SearchSpace.class, getIdentification() ); 
       if ( type == null ) {
          throw new IllegalStateException( "Search Only must exist at this point." );
       } else {

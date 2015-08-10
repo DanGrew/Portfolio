@@ -25,7 +25,7 @@ import outline.describer.OutlineDescriber;
 import outline.describer.OutlineDescriberFactory;
 import outline.describer.OutlineDescriberFactory.OutlineDescribables;
 import outline.describer.OutlineDescriberImpl;
-import search.SearchOnly;
+import search.SearchSpace;
 import architecture.request.RequestSystem;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
@@ -45,7 +45,7 @@ public class SystemOutline extends BorderPane {
    private static final String ANALYSIS = "Analysis";
    private static final String SEARCHES = "Searches";
    private static final String GRAPHS = "Graphs";
-   private List< SearchOnly > searchOnlys;
+   private List< SearchSpace > searchOnlys;
    private List< Graph > graphs;
 
    /**
@@ -60,7 +60,7 @@ public class SystemOutline extends BorderPane {
     * Method to initialise the data required for the outline.
     */
    private void initialiseOutlineData(){
-      searchOnlys = RequestSystem.retrieveAll( SearchOnly.class );
+      searchOnlys = RequestSystem.retrieveAll( SearchSpace.class );
       graphs = RequestSystem.retrieveAll( Graph.class );
    }// End Method
    
