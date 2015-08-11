@@ -8,6 +8,7 @@
 package search;
 
 import static testmodels.PersonModel.AGE;
+import static testmodels.PersonModel.BIRTH_DATE;
 import static testmodels.PersonModel.COMPANY;
 import static testmodels.PersonModel.DAD;
 import static testmodels.PersonModel.DAN;
@@ -106,9 +107,40 @@ public class SearchPolicyTest {
    /**
     * {@link SearchPolicy#ExactNumber} test.
     */
-   @Test public void shouldLessGreaterThanNumberMatch() {
+   @Test public void shouldNotLessThanNumberMatch() {
       Assert.assertFalse( SearchPolicy.LessThanNumber.matchesPolicy( DAD, AGE, "45" ) );
       Assert.assertFalse( SearchPolicy.LessThanNumber.matchesPolicy( DAN, AGE, "15" ) );
    }// End Method
    
+   /**
+    * {@link SearchPolicy#GreaterThanDate} test.
+    */
+   @Test public void shouldGreaterThanDateMatch() {
+      Assert.assertTrue( SearchPolicy.GreaterThanDate.matchesPolicy( DAN, BIRTH_DATE, "02/12/1962" ) );
+      Assert.assertTrue( SearchPolicy.GreaterThanDate.matchesPolicy( DAD, BIRTH_DATE, "02/02/1962" ) );
+   }// End Method
+   
+   /**
+    * {@link SearchPolicy#GreaterThanDate} test.
+    */
+   @Test public void shouldNotGreaterThanDateMatch() {
+      Assert.assertFalse( SearchPolicy.GreaterThanDate.matchesPolicy( DAD, BIRTH_DATE, "02/12/2002" ) );
+      Assert.assertFalse( SearchPolicy.GreaterThanDate.matchesPolicy( DAN, BIRTH_DATE, "02/12/2002" ) );
+   }// End Method
+   
+   /**
+    * {@link SearchPolicy#LessThanDate} test.
+    */
+   @Test public void shouldLessThanDateMatch() {
+      Assert.assertTrue( SearchPolicy.LessThanDate.matchesPolicy( DAN, BIRTH_DATE, "02/12/2002" ) );
+      Assert.assertTrue( SearchPolicy.LessThanDate.matchesPolicy( DAD, BIRTH_DATE, "02/12/2002" ) );
+   }// End Method
+   
+   /**
+    * {@link SearchPolicy#LessThanDate} test.
+    */
+   @Test public void shouldNotLessThanDateMatch() {
+      Assert.assertFalse( SearchPolicy.LessThanDate.matchesPolicy( DAD, BIRTH_DATE, "02/12/1934" ) );
+      Assert.assertFalse( SearchPolicy.LessThanDate.matchesPolicy( DAN, BIRTH_DATE, "02/12/1934" ) );
+   }// End Method
 }// End Class

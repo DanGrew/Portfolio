@@ -37,14 +37,16 @@ public class DateParameterTypeTest {
       Assert.assertEquals( LocalDate.of( 2015, 3, 25 ), DateClassParameterTypeImpl.parse( "25/03/15" ) );
       Assert.assertEquals( LocalDate.of( 2015, 3, 25 ), DateClassParameterTypeImpl.parse( "250315" ) );
       Assert.assertEquals( LocalDate.of( 2015, 3, 25 ), DateClassParameterTypeImpl.parse( "2015-03-25" ) );
+      Assert.assertEquals( LocalDate.of( 2015, 3, 25 ), DateClassParameterTypeImpl.parse( "25/03/2015" ) );
+      Assert.assertEquals( LocalDate.of( 2015, 3, 25 ), DateClassParameterTypeImpl.parse( "25032015" ) );
    }// End Method
 
    /**
     * {@link DateClassParameterTypeImpl#serialize(Object)} test.
     */
    @Test public void shouldSerialize() {
-      Assert.assertEquals( LocalDate.of( 2015, 3, 25 ), ClassParameterTypes.DATE_PARAMETER_TYPE.serialize( "25/03/15" ) );
-      Assert.assertEquals( LocalDate.of( 2015, 3, 25 ), ClassParameterTypes.DATE_PARAMETER_TYPE.serialize( "250315" ) );
+      Assert.assertEquals( LocalDate.of( 2015, 3, 25 ).toString(), ClassParameterTypes.DATE_PARAMETER_TYPE.serialize( "25/03/15" ) );
+      Assert.assertEquals( LocalDate.of( 2015, 3, 25 ).toString(), ClassParameterTypes.DATE_PARAMETER_TYPE.serialize( "250315" ) );
    }// End Method
    
    /**

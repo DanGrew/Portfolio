@@ -22,6 +22,8 @@ public class DateClassParameterTypeImpl extends ClassParameterTypeImpl implement
 
    private static final DateTimeFormatter FULL_SLASH = DateTimeFormatter.ofPattern( "dd/MM/yy" );
    private static final DateTimeFormatter NO_SLASH = DateTimeFormatter.ofPattern( "ddMMyy" );
+   private static final DateTimeFormatter FULL_SLASH_FULL_YEAR = DateTimeFormatter.ofPattern( "dd/MM/yyyy" );
+   private static final DateTimeFormatter NO_SLASH_FULL_YEAR = DateTimeFormatter.ofPattern( "ddMMyyyy" );
    private static final DateTimeFormatter TO_STRING = DateTimeFormatter.ofPattern( "yyyy-MM-dd" );
    
    /**
@@ -94,6 +96,14 @@ public class DateClassParameterTypeImpl extends ClassParameterTypeImpl implement
       
       try {
          return LocalDate.parse( date, NO_SLASH );
+      } catch ( DateTimeParseException exception ) {}
+      
+      try {
+         return LocalDate.parse( date, FULL_SLASH_FULL_YEAR );
+      } catch ( DateTimeParseException exception ) {}
+      
+      try {
+         return LocalDate.parse( date, NO_SLASH_FULL_YEAR );
       } catch ( DateTimeParseException exception ) {}
       
       try {

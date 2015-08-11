@@ -7,9 +7,12 @@
  */
 package search;
 
+import java.time.LocalDate;
+
 import object.BuilderObject;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.DateClassParameterTypeImpl;
 import parameter.classparameter.NumberClassParameterTypeImpl;
 import propertytype.PropertyType;
 
@@ -68,7 +71,32 @@ public enum SearchPolicy {
       }
       Double actualDouble = NumberClassParameterTypeImpl.objectToNumber( objectValue );
       return actualDouble <= doubleValue;
+   } ),
+   GreaterThanDate( ClassParameterTypes.DATE_PARAMETER_TYPE, ( object, type, value ) -> {
+      Object objectValue = object.get( type );
+      if ( objectValue == null ) {
+         return false;
+      }
+      LocalDate compareValue = DateClassParameterTypeImpl.objectToDate( value );
+      if ( compareValue == null ) {
+         return false;
+      }
+      LocalDate actualDate = DateClassParameterTypeImpl.objectToDate( objectValue );
+      return actualDate.isAfter( compareValue );
+   } ),
+   LessThanDate( ClassParameterTypes.DATE_PARAMETER_TYPE, ( object, type, value ) -> {
+      Object objectValue = object.get( type );
+      if ( objectValue == null ) {
+         return false;
+      }
+      LocalDate compareValue = DateClassParameterTypeImpl.objectToDate( value );
+      if ( compareValue == null ) {
+         return false;
+      }
+      LocalDate actualDate = DateClassParameterTypeImpl.objectToDate( objectValue );
+      return actualDate.isBefore( compareValue );
    } );
+   
 
    private ClassParameterType parameterType;
    private SearchPolicyFunction function;
