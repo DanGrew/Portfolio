@@ -18,6 +18,7 @@ public class ClassParameterTypes {
 
    public static final ClassParameterType STRING_PARAMETER_TYPE = new StringClassParameterTypeImpl();
    public static final ClassParameterType NUMBER_PARAMETER_TYPE = new NumberClassParameterTypeImpl();
+   public static final ClassParameterType DATE_PARAMETER_TYPE = new DateClassParameterTypeImpl();
    
    /** Static {@link List} of all {@link ClassParameterType}s. */
    private static List< ClassParameterType > types = new ArrayList< ClassParameterType >();
@@ -33,6 +34,7 @@ public class ClassParameterTypes {
       if ( types.isEmpty() ) {
          types.add( STRING_PARAMETER_TYPE );
          types.add( NUMBER_PARAMETER_TYPE );
+         types.add( DATE_PARAMETER_TYPE );
       }
    }// End Method
    
@@ -51,7 +53,7 @@ public class ClassParameterTypes {
     */
    public static ClassParameterType valueOf( String expression ) {
       for ( ClassParameterType type : types() ) {
-         if ( type.getName().equals( expression ) ) {
+         if ( type.getName().equals( expression ) || type.getTypeClass().getSimpleName().equals( expression ) ) {
             return type;
          }
       }

@@ -29,6 +29,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import propertytype.SerializablePropertyTypeTest;
@@ -53,6 +54,8 @@ public class ObjectBuilderSystemSerializationTest {
       actualPropertyTypes.add( testType1 );
       PropertyType testType2 = new PropertyTypeImpl( "type2", Number.class );
       actualPropertyTypes.add( testType2 );
+      PropertyType testType3 = new PropertyTypeImpl( "type3", ClassParameterTypes.DATE_PARAMETER_TYPE );
+      actualPropertyTypes.add( testType3 );
       
       List< Definition > actualDefinitions = new ArrayList< Definition >();
       Definition builder1 = new DefinitionImpl( "FirstBuilder" );
@@ -60,6 +63,7 @@ public class ObjectBuilderSystemSerializationTest {
       actualDefinitions.add( builder1 );
       
       Definition builder2 = new DefinitionImpl( "SecondBuilder" );
+      builder2.addPropertyType( testType3 );
       builder2.addPropertyType( testType2 );
       builder2.addPropertyType( testType1 );
       actualDefinitions.add( builder2 );
@@ -70,6 +74,7 @@ public class ObjectBuilderSystemSerializationTest {
       actualObjects.add( object1 );
       BuilderObject object2 = new BuilderObjectImpl( "object2", builder2 );
       object2.set( testType2, 67988.1298 );
+      object2.set( testType3, "25/03/15" );
       actualObjects.add( object2 );
       
       XmlObjectBuilderSystemWrapper serializedCollection = new XmlObjectBuilderSystemWrapper();
@@ -84,7 +89,7 @@ public class ObjectBuilderSystemSerializationTest {
                XmlObjectBuilderSystemWrapper.class, 
                XmlPropertyTypeImpl.class, 
                XmlDefinitionImpl.class, 
-               XmlBuilderObjectImpl.class 
+               XmlBuilderObjectImpl.class
       );
       
       XmlObjectBuilderSystemWrapper parsedSystem = SerializationSystem.loadWrapperFromFile( 
