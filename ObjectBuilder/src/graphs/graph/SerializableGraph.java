@@ -7,6 +7,8 @@
  */
 package graphs.graph;
 
+import graphs.graph.sorting.GraphSort;
+
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -65,6 +67,16 @@ public interface SerializableGraph extends SerializedSingleton< Graph >{
     * @param type the {@link PropertyType} to serialize.
     */
    public void setHorizontalProperty( PropertyType type );
+   
+   /**
+    * {@link Graph#getHorizontalSort()}.
+    */
+   public GraphSort getHorizontalSort();
+   
+   /**
+    * {@link Graph#setHorizontalSort(GraphSort)}.
+    */
+   public void setHorizontalSort( GraphSort sort );
    
    /**
     * {@link Graph#getHorizontalAxisLabel()}.

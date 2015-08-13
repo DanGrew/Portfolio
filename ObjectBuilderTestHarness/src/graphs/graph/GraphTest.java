@@ -8,6 +8,7 @@
 package graphs.graph;
 
 import graphics.JavaFx;
+import graphs.graph.sorting.GraphSort;
 import model.singleton.Singleton;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
@@ -73,7 +74,7 @@ public class GraphTest {
     * Method that can be enabled but requires sleep to view result. Creates a graph
     * with realistic data as a demo.
     */
-   public void shouldRunAndNotThrow() throws InterruptedException {
+   @Test public void shouldRunAndNotThrow() throws InterruptedException {
       ANY_OBJECT_ONE.set( HORIZ_PROPERTY, "Monday" );
       ANY_OBJECT_TWO.set( HORIZ_PROPERTY, "Tuesday" );
       ANY_OBJECT_THREE.set( HORIZ_PROPERTY, "Wednesday" );
@@ -92,11 +93,13 @@ public class GraphTest {
       Graph barChart = new Graph( "sample" );
       
       SearchSpace search = new SearchSpace( "defaultSearch" );
-      search.include( SearchPolicy.ContainsString, VERT_PROPERTY_A, "" );
+      search.include( SearchPolicy.ContainsString, HORIZ_PROPERTY, "day" );
       search.identifyMatches();
       barChart.addDataSeries( search );
       
       barChart.setHorizontalProperty( HORIZ_PROPERTY );
+      barChart.setHorizontalSort( GraphSort.StringAlphabetical );
+      
       barChart.addVerticalProperty( VERT_PROPERTY_A );
       barChart.addVerticalProperty( VERT_PROPERTY_B );
       

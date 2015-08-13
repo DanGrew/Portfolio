@@ -7,6 +7,8 @@
  */
 package graphs.graph;
 
+import graphs.graph.sorting.GraphSort;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,6 +62,7 @@ public class SerializableGraphTest {
       Graph testGraph2 = new Graph( "graph2" );
       testGraph2.setHorizontalProperty( ANY_PROPERTY_TYPE_1 );
       testGraph2.setHorizontalAxisLabel( "SomeHorizontalAxisLabel" );
+      testGraph2.setHorizontalSort( GraphSort.StringReverseAlphabetical );
       testGraph2.addVerticalProperty( ANY_PROPERTY_TYPE_2 );
       testGraph2.addVerticalProperty( ANY_PROPERTY_TYPE_3 );
       testGraph2.setDefaultValueForUndefinedNumber( 4.0 );
@@ -130,6 +133,7 @@ public class SerializableGraphTest {
          Assert.assertEquals( expected.getVerticalProperties(), parsed.getVerticalProperties() );
          Assert.assertEquals( expected.getVerticalAxisLabel(), parsed.getVerticalAxisLabel() );
          Assert.assertEquals( expected.getHorizontalProperty(), parsed.getHorizontalProperty() );
+         Assert.assertEquals( expected.getHorizontalSort(), parsed.getHorizontalSort() );
          Assert.assertEquals( expected.getHorizontalAxisLabel(), parsed.getHorizontalAxisLabel() );
          Assert.assertEquals( expected.getDefaultValueForUndefinedNumber(), parsed.getDefaultValueForUndefinedNumber() );
          Assert.assertEquals( expected.getDefaultValueForUndefinedString(), parsed.getDefaultValueForUndefinedString() );

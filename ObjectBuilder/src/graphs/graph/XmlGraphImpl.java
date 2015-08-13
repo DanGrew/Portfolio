@@ -7,6 +7,8 @@
  */
 package graphs.graph;
 
+import graphs.graph.sorting.GraphSort;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -34,6 +36,7 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
    
    @XmlElement private String verticalAxisLabel;
    @XmlElement private String horizontalProperty;
+   @XmlElement private GraphSort horizontalSort;
    @XmlElement private String horizontalAxisLabel;
    @XmlElement private Double undefinedNumber;
    @XmlElement private String undefinedString;
@@ -115,6 +118,20 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
       if ( type != null ) {
          this.horizontalProperty = type.getIdentification();
       }
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public GraphSort getHorizontalSort() {
+      return horizontalSort;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void setHorizontalSort( GraphSort sort ) {
+      this.horizontalSort = sort;
    }// End Method
 
    /**

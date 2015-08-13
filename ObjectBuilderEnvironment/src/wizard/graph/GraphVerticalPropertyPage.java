@@ -60,7 +60,7 @@ public class GraphVerticalPropertyPage extends VBox implements WizardPage< Graph
       getChildren().add( verticalProperties );
       
       setPrefWidth( GraphWizardConfiguration.wizardWidth() );
-      setPrefHeight( GraphWizardConfiguration.wizardHeight() + 150 );
+      setPrefHeight( GraphWizardConfiguration.wizardHeight() + 100 );
    }// End Method
    
    /**

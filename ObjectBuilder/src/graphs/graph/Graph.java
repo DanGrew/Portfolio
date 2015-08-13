@@ -8,6 +8,7 @@
 package graphs.graph;
 
 import graphics.JavaFx;
+import graphs.graph.sorting.GraphSort;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,6 +51,7 @@ import annotation.Cali;
    private List< PropertyType > verticalProperties;
    private String verticalAxisLabel;
    private PropertyType horizontalProperty;
+   private GraphSort sorting;
    private String horizontalAxisLabel;
    private Number undefinedNumber = DEFAULT_UNDEFINED_NUMBER;
    private String undefinedString = DEFAULT_UNDEFINED_STRING;
@@ -73,6 +75,7 @@ import annotation.Cali;
       verticalProperties.forEach( property -> serializable.addVerticalProperty( property ) );
       serializable.setVerticalAxisLabel( verticalAxisLabel );
       serializable.setHorizontalProperty( horizontalProperty );
+      serializable.setHorizontalSort( sorting );
       serializable.setHorizontalAxisLabel( horizontalAxisLabel );
       serializable.setUndefinedNumber( undefinedNumber );
       serializable.setUndefinedString( undefinedString );
@@ -87,6 +90,7 @@ import annotation.Cali;
       serialized.resolveVerticalProperties().forEach( property -> addVerticalProperty( property ) );
       verticalAxisLabel = serialized.getVerticalAxisLabel();
       horizontalProperty = serialized.getHorizontalProperty();
+      sorting = serialized.getHorizontalSort();
       horizontalAxisLabel = serialized.getHorizontalAxisLabel();
       undefinedNumber = serialized.getUndefinedNumber();
       undefinedString = serialized.getUndefinedString();
@@ -150,6 +154,22 @@ import annotation.Cali;
     */
    @Cali public void setHorizontalProperty( PropertyType property ) {
       horizontalProperty = property;
+   }// End Method
+
+   /**
+    * Method to set the {@link GraphSort} to use for the horizontal axis.
+    * @param sort the {@link GraphSort} to use.
+    */
+   @Cali public void setHorizontalSort( GraphSort sort ) {
+      this.sorting = sort;
+   }// End Method
+   
+   /**
+    * Getter for the {@link GraphSort} to use for the horizontal axis.
+    * @return the {@link GraphSort} to use, can be null.
+    */
+   @Cali public GraphSort getHorizontalSort(){
+      return sorting;
    }// End Method
    
    /**
@@ -338,6 +358,10 @@ import annotation.Cali;
                      String horizontalValue = defendString( object.get( horizontalProperty ) );
                      Data< String, Number > data = new Data<>( horizontalValue, verticalValue );
                      series.getData().add( data );
+                  }
+                  
+                  if ( sorting != null ) {
+                     sorting.sort( series.getData() );
                   }
                   graph.getData().add( series );
                }
