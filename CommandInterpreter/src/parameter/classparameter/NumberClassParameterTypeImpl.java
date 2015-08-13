@@ -59,6 +59,9 @@ public class NumberClassParameterTypeImpl extends ClassParameterTypeImpl {
     * @return the {@link Double} if converted successfully, null otherwise.
     */
    public static Double objectToNumber( Object object ) {
+      if ( object == null ) {
+         return null;
+      }
       try { 
          return Double.valueOf( object.toString() );
       } catch ( NumberFormatException exception ) {

@@ -17,6 +17,8 @@ import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.NumberClassParameterTypeImpl;
+import architecture.utility.Comparators;
 
 /**
  * The {@link GraphSort} provides methods of sorting the {@link Graph}'s horizontal axis
@@ -25,36 +27,36 @@ import parameter.classparameter.ClassParameterTypes;
 public enum GraphSort {
    
    StringAlphabetical( ClassParameterTypes.STRING_PARAMETER_TYPE, ( itemA, itemB ) -> {
-      Integer inputNullCheck = checkValues( itemA, itemB, true );
+      Integer inputNullCheck = Comparators.compareForNullValues( itemA, itemB, true );
       if ( inputNullCheck != null ) {
          return inputNullCheck;
       }
       
       String itemAString = itemA.getXValue();
       String itemBString = itemB.getXValue();
-      inputNullCheck = checkValues( itemAString, itemBString, true );
-      if ( inputNullCheck != null ) {
-         return inputNullCheck;
-      }
-      
-      return itemAString.compareTo( itemBString ); 
+      return Comparators.compare( itemAString, itemBString );
    } ),
    
-   StringReverseAlphabetical( ClassParameterTypes.STRING_PARAMETER_TYPE, ( itemA, itemB ) -> {
-      Integer inputNullCheck = checkValues( itemA, itemB, false );
+   StringReverseAlphabetical( 
+            ClassParameterTypes.STRING_PARAMETER_TYPE,
+            Comparators.reverseComparator( StringAlphabetical.comparatorFunction )
+   ),
+   
+   NumberAscending( ClassParameterTypes.NUMBER_PARAMETER_TYPE, ( itemA, itemB ) -> {
+      Integer inputNullCheck = Comparators.compareForNullValues( itemA, itemB, true );
       if ( inputNullCheck != null ) {
          return inputNullCheck;
       }
       
-      String itemAString = itemA.getXValue();
-      String itemBString = itemB.getXValue();
-      inputNullCheck = checkValues( itemAString, itemBString, false );
-      if ( inputNullCheck != null ) {
-         return inputNullCheck;
-      }
-      
-      return itemBString.compareTo( itemAString ); 
-   } );
+      Double itemAString = NumberClassParameterTypeImpl.objectToNumber( itemA.getXValue() );
+      Double itemBString = NumberClassParameterTypeImpl.objectToNumber( itemB.getXValue() );
+      return Comparators.compare( itemAString, itemBString );
+   } ),
+   
+   NumberDescending( 
+            ClassParameterTypes.NUMBER_PARAMETER_TYPE,
+            Comparators.reverseComparator( NumberAscending.comparatorFunction )
+   );
    
    private Comparator< Data< String, Number > > comparatorFunction;
    private ClassParameterType parameterType;
@@ -86,28 +88,4 @@ public enum GraphSort {
       return parameterType.equals( type );
    }// End Method
 
-   /**
-    * Method to check the given objects based on a particular order.
-    * @param objectA the first.
-    * @param objectB the second.
-    * @param inOrder whether a to b or b to a.
-    * @return the comparison is one or both are null preserving the order, or null if
-    * they both are not null.
-    */
-   private static Integer checkValues( Object objectA, Object objectB, boolean inOrder ) {
-      if ( !inOrder ) {
-         Object tmp = objectA;
-         objectA = objectB;
-         objectB = tmp;
-      }
-      if ( objectA == null && objectB == null ) {
-         return 0;
-      } else if ( objectA == null ) {
-         return -1;
-      } else if ( objectB == null ) {
-         return 1;
-      } else {
-         return null;
-      }
-   }// End Method
 }// End Class
