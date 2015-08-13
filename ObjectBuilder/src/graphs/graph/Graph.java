@@ -9,9 +9,9 @@ package graphs.graph;
 
 import graphics.JavaFx;
 import graphs.graph.sorting.GraphSort;
+import graphs.series.PropertyPlot;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javafx.application.Platform;
@@ -27,11 +27,9 @@ import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.StackedAreaChart;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import javafx.stage.Stage;
 import model.singleton.SingletonImpl;
-import object.BuilderObject;
 import parameter.classparameter.ClassParameterTypes;
 import property.Property;
 import propertytype.PropertyType;
@@ -348,17 +346,10 @@ import annotation.Cali;
             verticalAxis.setLabel( verticalAxisLabel );
 
             for ( Search search : dataSeries ) {
-               Collection< BuilderObject > matches = search.getMatches();
-               
                for ( PropertyType type : verticalProperties ) {
-                  Series< String, Number > series = new Series<>();
-                  series.setName( search.getIdentification() + "|" + type.getDisplayName() );
-                  for ( BuilderObject object : matches ) {
-                     Number verticalValue = defendNumber( object.get( type ) );
-                     String horizontalValue = defendString( object.get( horizontalProperty ) );
-                     Data< String, Number > data = new Data<>( horizontalValue, verticalValue );
-                     series.getData().add( data );
-                  }
+                  Series< String, Number > series = new PropertyPlot( type ).constructSeries( 
+                           search, horizontalProperty, undefinedString, undefinedNumber 
+                  ); 
                   
                   if ( sorting != null ) {
                      sorting.sort( series.getData() );
@@ -399,34 +390,6 @@ import annotation.Cali;
             return new StackedBarChart<>( horizontalAxis, verticalAxis );
          default:
             return null;
-      }
-   }// End Method
-   
-   /**
-    * Method to defend {@link Number} values.
-    * @param object the {@link Object} being added to the graph.
-    * @return a sensible {@link Number}, not null.
-    */
-   private Number defendNumber( Object object ) {
-      if ( object == null ) {
-         return undefinedNumber;
-      } else if ( object instanceof Number ) {
-         return ( Number )object;
-      } else {
-         return undefinedNumber;
-      }
-   }// End Method
-   
-   /**
-    * Method to defend {@link String} values.
-    * @param object the {@link Object} being added to the graph.
-    * @return a sensible {@link String}, not null.
-    */
-   private String defendString( Object object ) {
-      if ( object == null ) {
-         return undefinedString;
-      } else {
-         return object.toString();
       }
    }// End Method
    

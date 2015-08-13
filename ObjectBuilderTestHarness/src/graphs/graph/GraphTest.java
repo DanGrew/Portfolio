@@ -74,7 +74,7 @@ public class GraphTest {
     * Method that can be enabled but requires sleep to view result. Creates a graph
     * with realistic data as a demo.
     */
-   @Test public void shouldRunAndNotThrow() throws InterruptedException {
+   public void shouldRunAndNotThrow() throws InterruptedException {
       ANY_OBJECT_ONE.set( HORIZ_PROPERTY, "Monday" );
       ANY_OBJECT_TWO.set( HORIZ_PROPERTY, "Tuesday" );
       ANY_OBJECT_THREE.set( HORIZ_PROPERTY, "Wednesday" );
