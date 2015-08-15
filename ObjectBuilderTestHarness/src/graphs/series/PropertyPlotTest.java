@@ -34,11 +34,11 @@ public class PropertyPlotTest {
       PropertyType sampleHorizontal = new PropertyTypeImpl( "horizontal", ClassParameterTypes.STRING_PARAMETER_TYPE );
       SeriesExtractor plot = new PropertyPlot( sampleVertical );
       
-      BuilderObject objectA = createBuilderObject( sampleHorizontal, sampleVertical, "anything", 25.0 );
-      BuilderObject objectB = createBuilderObject( sampleHorizontal, sampleVertical, "another", 2.0 );
-      BuilderObject objectC = createBuilderObject( sampleHorizontal, sampleVertical, "else", 234.4355 );
-      BuilderObject objectD = createBuilderObject( sampleHorizontal, sampleVertical, "blank", -9.0 );
-      BuilderObject objectE = createBuilderObject( sampleHorizontal, sampleVertical, "something", 16.0 );
+      BuilderObject objectA = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "anything", 25.0 );
+      BuilderObject objectB = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "another", 2.0 );
+      BuilderObject objectC = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "else", 234.4355 );
+      BuilderObject objectD = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "blank", -9.0 );
+      BuilderObject objectE = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "something", 16.0 );
       
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE ) );
@@ -64,11 +64,11 @@ public class PropertyPlotTest {
       PropertyType sampleHorizontal = new PropertyTypeImpl( "horizontal", ClassParameterTypes.STRING_PARAMETER_TYPE );
       SeriesExtractor plot = new PropertyPlot( sampleVertical );
       
-      BuilderObject objectA = createBuilderObject( sampleHorizontal, sampleVertical, null, 25.0 );
-      BuilderObject objectB = createBuilderObject( sampleHorizontal, sampleVertical, "another", null );
-      BuilderObject objectC = createBuilderObject( sampleHorizontal, sampleVertical, "else", 234.4355 );
-      BuilderObject objectD = createBuilderObject( sampleHorizontal, sampleVertical, "blank", null );
-      BuilderObject objectE = createBuilderObject( sampleHorizontal, sampleVertical, null, 16.0 );
+      BuilderObject objectA = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, null, 25.0 );
+      BuilderObject objectB = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "another", null );
+      BuilderObject objectC = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "else", 234.4355 );
+      BuilderObject objectD = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "blank", null );
+      BuilderObject objectE = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, null, 16.0 );
       
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE ) );
@@ -94,11 +94,11 @@ public class PropertyPlotTest {
       PropertyType sampleHorizontal = new PropertyTypeImpl( "horizontal", ClassParameterTypes.STRING_PARAMETER_TYPE );
       SeriesExtractor plot = new PropertyPlot( sampleVertical );
       
-      BuilderObject objectA = createBuilderObject( sampleHorizontal, sampleVertical, "another", 25.0 );
-      BuilderObject objectB = createBuilderObject( sampleHorizontal, sampleVertical, "another", -2 );
-      BuilderObject objectC = createBuilderObject( sampleHorizontal, sampleVertical, "else", 234.4355 );
-      BuilderObject objectD = createBuilderObject( sampleHorizontal, sampleVertical, "blank", -2 );
-      BuilderObject objectE = createBuilderObject( sampleHorizontal, sampleVertical, "another", 16.0 );
+      BuilderObject objectA = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "another", 25.0 );
+      BuilderObject objectB = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "another", -2 );
+      BuilderObject objectC = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "else", 234.4355 );
+      BuilderObject objectD = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "blank", -2 );
+      BuilderObject objectE = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "another", 16.0 );
       
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE ) );
@@ -116,19 +116,4 @@ public class PropertyPlotTest {
       Assert.assertEquals( 16.0, series.getData().get( 4 ).getYValue() );
    }// End Method
    
-   /**
-    * Method to create a {@link BuilderObject} for testing.
-    * @param horizontalProperty the {@link PropertyType} to use as horizontal axis.
-    * @param verticalProperty the {@link PropertyType} to use as vertical axis.
-    * @param horizontal the horizontal value.
-    * @param vertical the vertical value.
-    * @return the constructed {@link BuilderObject}.
-    */
-   private BuilderObject createBuilderObject( PropertyType horizontalProperty, PropertyType verticalProperty, String horizontal, Number vertical ) {
-      BuilderObject object = Mockito.mock( BuilderObject.class );
-      Mockito.when( object.get( horizontalProperty ) ).thenReturn( horizontal );
-      Mockito.when( object.get( verticalProperty ) ).thenReturn( vertical );
-      return object;
-   }// End Method
-
 }// End Class
