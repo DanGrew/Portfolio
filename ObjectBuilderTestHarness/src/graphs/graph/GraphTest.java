@@ -9,6 +9,8 @@ package graphs.graph;
 
 import graphics.JavaFx;
 import graphs.graph.sorting.GraphSort;
+import graphs.series.GroupEvaluation;
+import graphs.series.SeriesExtractor;
 import model.singleton.Singleton;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
@@ -134,7 +136,7 @@ public class GraphTest {
    /**
     * Test that missing vertical data is missing.
     */
-   @Test public void shouldNotShowAndReportMissingAnyVerticalProperties(){
+   @Test public void shouldNotShowAndReportMissingAnyExtractions(){
       Graph barChart = new Graph( "sample" );
       
       Search search = new SearchSpace( "defaultSearch" );
@@ -145,6 +147,33 @@ public class GraphTest {
       GraphResult result = barChart.barChart();
       Assert.assertNotNull( result );
       Assert.assertEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
+   }// End Method
+   
+   /**
+    * Test that any {@link SeriesExtractor}s are accepted.
+    */
+   @Test public void shouldAcceptAnyExtractions(){
+      Graph barChart = new Graph( "sample" );
+      
+      Search search = new SearchSpace( "defaultSearch" );
+      barChart.addDataSeries( search );
+      
+      barChart.setHorizontalProperty( HORIZ_PROPERTY );
+      
+      GraphResult result = barChart.barChart();
+      Assert.assertNotNull( result );
+      Assert.assertEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
+      
+      barChart.addVerticalProperty( VERT_PROPERTY_A );
+      result = barChart.barChart();
+      Assert.assertNotNull( result );
+      Assert.assertNotEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
+      
+      barChart.clearVerticalProperties();
+      barChart.addGroupEvaluation( VERT_PROPERTY_A, GroupEvaluation.Count );
+      result = barChart.barChart();
+      Assert.assertNotNull( result );
+      Assert.assertNotEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
    }// End Method
    
    /**

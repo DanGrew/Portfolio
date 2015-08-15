@@ -7,13 +7,16 @@
  */
 package graphs.graph;
 
-import graphics.JavaFx;
-import graphs.graph.sorting.GraphSort;
-import graphs.series.PropertyPlot;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map.Entry;
 
+import annotation.Cali;
+import graphics.JavaFx;
+import graphs.graph.sorting.GraphSort;
+import graphs.series.GroupEvaluation;
+import graphs.series.SeriesExtractions;
+import graphs.series.SeriesExtractor;
 import javafx.application.Platform;
 import javafx.geometry.Dimension2D;
 import javafx.scene.Scene;
@@ -34,7 +37,6 @@ import parameter.classparameter.ClassParameterTypes;
 import property.Property;
 import propertytype.PropertyType;
 import search.Search;
-import annotation.Cali;
 
 /**
  * The {@link Graph} represents a configuration for an {@link XYChart}
@@ -46,7 +48,7 @@ import annotation.Cali;
    private static final String DEFAULT_UNDEFINED_STRING = "Unknown";
    private static final Dimension2D DEFAULT_DIMENSION = new Dimension2D( 800, 800 );
    private List< Search > dataSeries;
-   private List< PropertyType > verticalProperties;
+   private SeriesExtractions extractions;
    private String verticalAxisLabel;
    private PropertyType horizontalProperty;
    private GraphSort sorting;
@@ -61,7 +63,7 @@ import annotation.Cali;
     */
    @Cali public Graph( String identification ) {
       super( identification );
-      verticalProperties = new ArrayList< PropertyType >();
+      extractions = new SeriesExtractions();
       dataSeries = new ArrayList<>();
    }// End Constructor
    
@@ -70,7 +72,8 @@ import annotation.Cali;
     */
    @Override protected void writeSingleton( SerializableGraph serializable ) {
       dataSeries.forEach( search -> serializable.addSearch( search ) );
-      verticalProperties.forEach( property -> serializable.addVerticalProperty( property ) );
+      extractions.getPropertyPlots().forEach( property -> serializable.addVerticalProperty( property ) );
+      extractions.getGroupEvaluations().forEach( entry -> serializable.addGroupEvaluation( entry ) );
       serializable.setVerticalAxisLabel( verticalAxisLabel );
       serializable.setHorizontalProperty( horizontalProperty );
       serializable.setHorizontalSort( sorting );
@@ -86,6 +89,7 @@ import annotation.Cali;
    @Override protected void readSingleton( SerializableGraph serialized ) {
       serialized.resolveSearches().forEach( search -> addDataSeries( search ) );
       serialized.resolveVerticalProperties().forEach( property -> addVerticalProperty( property ) );
+      serialized.resolveGroupEvaluations().forEach( entry -> addGroupEvaluation( entry.getKey(), entry.getValue() ) );
       verticalAxisLabel = serialized.getVerticalAxisLabel();
       horizontalProperty = serialized.getHorizontalProperty();
       sorting = serialized.getHorizontalSort();
@@ -175,7 +179,7 @@ import annotation.Cali;
     * @return a {@link List} of {@link PropertyType}s on the vertical axis.
     */
    public List< PropertyType > getVerticalProperties() {
-      return verticalProperties;
+      return new ArrayList<>( extractions.getPropertyPlots() );
    }// End Method
    
    /**
@@ -186,7 +190,7 @@ import annotation.Cali;
     */
    @Cali public GraphResult addVerticalProperty( PropertyType property ) {
       if ( property.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ) ) {
-         verticalProperties.add( property );
+         extractions.addPropertyPlot( property );
          return GraphResult.SUCCESS;
       } else {
          return new GraphResult( GraphError.NonNumericalVerticalAxis, property );
@@ -197,7 +201,37 @@ import annotation.Cali;
     * Method to clear the vertical {@link PropertyType}s set on the {@link Graph}.
     */
    @Cali public void clearVerticalProperties() {
-      verticalProperties.clear();
+      extractions.removeAllPropertyPlots();
+   }// End Method
+   
+   /**
+    * Getter for the {@link GroupEvaluation}s used for the vertical axis.
+    * @return a {@link List} of {@link GroupEvaluation}s on the vertical axis.
+    */
+   public List< Entry< PropertyType, GroupEvaluation > > getGroupEvaluations() {
+      return new ArrayList<>( extractions.getGroupEvaluations() );
+   }// End Method
+   
+   /**
+    * Method to add a {@link GroupEvaluation} series to the graph.
+    * @param property the {@link PropertyType}, required to be {@link ClassParameterTypes#NUMBER_PARAMETER_TYPE}.
+    * @return a {@link GraphResult} indicating the result of the add since this can fail if
+    * a non number type is supplied.
+    */
+   @Cali public GraphResult addGroupEvaluation( PropertyType property, GroupEvaluation evaluation ) {
+      if ( property.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ) ) {
+         extractions.addGroupEvaluation( property, evaluation );
+         return GraphResult.SUCCESS;
+      } else {
+         return new GraphResult( GraphError.NonNumericalVerticalAxis, property );
+      }
+   }// End Method
+   
+   /**
+    * Method to clear the vertical {@link PropertyType}s set on the {@link Graph}.
+    */
+   @Cali public void clearGroupEvaluations() {
+      extractions.removeAllGroupEvaluations();
    }// End Method
    
    /**
@@ -346,8 +380,8 @@ import annotation.Cali;
             verticalAxis.setLabel( verticalAxisLabel );
 
             for ( Search search : dataSeries ) {
-               for ( PropertyType type : verticalProperties ) {
-                  Series< String, Number > series = new PropertyPlot( type ).constructSeries( 
+               for ( SeriesExtractor extractor : extractions.getExtractors() ) {
+                  Series< String, Number > series = extractor.constructSeries( 
                            search, horizontalProperty, undefinedString, undefinedNumber 
                   ); 
                   
@@ -410,12 +444,18 @@ import annotation.Cali;
     * @return a {@link GraphResult} with the error, if an error exists, null otherwise.
     */
    private GraphResult verifyVerticalAxes(){
-      if ( verticalProperties.isEmpty() ) {
+      if ( !extractions.hasPropertyPlots() && !extractions.hasGroupEvaluations() ) {
          return new GraphResult( GraphError.MissingVerticalSeries, null );
       }
-      for ( PropertyType type : verticalProperties ) {
+      for ( PropertyType type : extractions.getPropertyPlots() ) {
          if ( !type.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ) ) {
             return new GraphResult( GraphError.NonNumericalVerticalAxis, type );
+         }
+      }
+      
+      for ( Entry< PropertyType, GroupEvaluation > entry : extractions.getGroupEvaluations() ) {
+         if ( !entry.getKey().getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ) ) {
+            return new GraphResult( GraphError.NonNumericalVerticalAxis, entry );
          }
       }
       return null;

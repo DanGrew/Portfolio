@@ -7,14 +7,10 @@
  */
 package graphs.graph;
 
-import graphs.graph.sorting.GraphSort;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.singleton.Singleton;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -22,11 +18,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import architecture.request.RequestSystem;
+import architecture.serialization.SerializationSystem;
+import graphs.graph.sorting.GraphSort;
+import graphs.series.GroupEvaluation;
+import model.singleton.Singleton;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
-import architecture.request.RequestSystem;
-import architecture.serialization.SerializationSystem;
 
 /**
  * Test for the {@link SerializableGraph}.
@@ -65,6 +64,8 @@ public class SerializableGraphTest {
       testGraph2.setHorizontalSort( GraphSort.StringReverseAlphabetical );
       testGraph2.addVerticalProperty( ANY_PROPERTY_TYPE_2 );
       testGraph2.addVerticalProperty( ANY_PROPERTY_TYPE_3 );
+      testGraph2.addGroupEvaluation( ANY_PROPERTY_TYPE_2, GroupEvaluation.Count );
+      testGraph2.addGroupEvaluation( ANY_PROPERTY_TYPE_3, GroupEvaluation.Maximum );
       testGraph2.setDefaultValueForUndefinedNumber( 4.0 );
       testGraph2.setDefaultValueForUndefinedString( "Default" );
       testGraph2.setDimension( 456, 987.654 );
@@ -131,6 +132,7 @@ public class SerializableGraphTest {
          Graph parsed = parsedGraphs.get( i );
          Assert.assertEquals( expected.getDataSeries(), parsed.getDataSeries() );
          Assert.assertEquals( expected.getVerticalProperties(), parsed.getVerticalProperties() );
+         Assert.assertEquals( expected.getGroupEvaluations(), parsed.getGroupEvaluations() );
          Assert.assertEquals( expected.getVerticalAxisLabel(), parsed.getVerticalAxisLabel() );
          Assert.assertEquals( expected.getHorizontalProperty(), parsed.getHorizontalProperty() );
          Assert.assertEquals( expected.getHorizontalSort(), parsed.getHorizontalSort() );

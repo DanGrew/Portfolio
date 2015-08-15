@@ -7,17 +7,14 @@
  */
 package graphs.series;
 
-import graphs.series.GroupEvaluationPlot.GroupEvaluation;
-
 import java.util.Arrays;
-
-import javafx.scene.chart.XYChart.Series;
-import object.BuilderObject;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import javafx.scene.chart.XYChart.Series;
+import object.BuilderObject;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;

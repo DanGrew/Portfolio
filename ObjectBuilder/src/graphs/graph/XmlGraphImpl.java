@@ -7,25 +7,29 @@
  */
 package graphs.graph;
 
-import graphs.graph.sorting.GraphSort;
-
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import javafx.geometry.Dimension2D;
+import java.util.Map.Entry;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlSeeAlso;
 
+import architecture.request.RequestSystem;
+import architecture.serialization.utility.XmlSimpleEntry;
+import graphs.graph.sorting.GraphSort;
+import graphs.series.GroupEvaluation;
+import javafx.geometry.Dimension2D;
 import propertytype.PropertyType;
 import representation.xml.wrapper.XmlSingletonWrapper;
 import search.Search;
-import architecture.request.RequestSystem;
 
 /**
  * The {@link XmlGraphImpl} provides an Xml form of a serialized {@link Graph}.
  */
+@XmlSeeAlso( GroupEvaluation.class )
 public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements SerializableGraph {
 
    @XmlElementWrapper( name = "searches" ) @XmlElement( name = "search" ) 
@@ -33,6 +37,9 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
    
    @XmlElementWrapper( name = "vertical_properties" ) @XmlElement( name = "vertical_property" ) 
    private List< String > verticalProperties;
+
+   @XmlElementWrapper( name = "group_evaluations" ) @XmlElement( name = "group_evaluation" ) 
+   private List< XmlSimpleEntry< String, GroupEvaluation > > groupEvaluations;
    
    @XmlElement private String verticalAxisLabel;
    @XmlElement private String horizontalProperty;
@@ -50,6 +57,7 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
       super();
       searches = new ArrayList<>();
       verticalProperties = new ArrayList<>();
+      groupEvaluations = new ArrayList<>();
    }// End Constructor
 
    /**
@@ -87,6 +95,29 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
    @Override public void addVerticalProperty( PropertyType type ) {
       if ( type != null ) {
          verticalProperties.add( type.getIdentification() );
+      }
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Collection< Entry< PropertyType, GroupEvaluation > > resolveGroupEvaluations() {
+      Collection< Entry< PropertyType, GroupEvaluation > > resolvedTypes = new ArrayList<>();
+      groupEvaluations.forEach( entry -> {
+         resolvedTypes.add( new SimpleEntry<>( 
+                  RequestSystem.retrieve( PropertyType.class, entry.getKey() ),
+                  entry.getValue()
+         ) );
+      } );
+      return resolvedTypes;
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void addGroupEvaluation( Entry< PropertyType, GroupEvaluation > entry ) {
+      if ( entry != null ) {
+         groupEvaluations.add( new XmlSimpleEntry< String, GroupEvaluation >( entry.getKey().getIdentification(), entry.getValue() ) );
       }
    }// End Method
 

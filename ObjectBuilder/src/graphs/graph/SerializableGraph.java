@@ -7,11 +7,12 @@
  */
 package graphs.graph;
 
-import graphs.graph.sorting.GraphSort;
-
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Map.Entry;
 
+import graphs.graph.sorting.GraphSort;
+import graphs.series.GroupEvaluation;
 import javafx.geometry.Dimension2D;
 import model.data.SerializedSingleton;
 import propertytype.PropertyType;
@@ -45,6 +46,18 @@ public interface SerializableGraph extends SerializedSingleton< Graph >{
     * @param type the {@link PropertyType} to serialize.
     */
    public void addVerticalProperty( PropertyType type );
+   
+   /**
+    * Resolve the vertical {@link Graph#getGroupEvaluations()}.
+    * @return the resolved {@link GroupEvaluation}s.
+    */
+   public Collection< Entry< PropertyType, GroupEvaluation > > resolveGroupEvaluations();
+   
+   /**
+    * Method to serialize a {@link GroupEvaluation}s used for the vertical axis.
+    * @param type the {@link GroupEvaluation}s to serialize.
+    */
+   public void addGroupEvaluation( Entry< PropertyType, GroupEvaluation > entry );
    
    /**
     * {@link Graph#getVerticalAxisLabel()}.

@@ -26,48 +26,6 @@ import architecture.utility.Defense;
  */
 public class GroupEvaluationPlot implements SeriesExtractor {
 
-   /** {@link Enum} describing the {@link NumberFunction}s that can be applied to {@link BuilderObject}s.*/
-   public enum GroupEvaluation implements NumberFunction {
-      
-      Count( GroupEvaluationFunctions.newCountFunction() ), 
-      Maximum( GroupEvaluationFunctions.newMaximumFunction() ), 
-      Minimum( GroupEvaluationFunctions.newMinimumFunction() ), 
-      Sum( GroupEvaluationFunctions.newSumFunction() ), 
-      Average( GroupEvaluationFunctions.newAverageFunction() );
-      
-      private NumberFunction function;
-      
-      /**
-       * Constructs a new {@link GroupEvaluation}.
-       * @param function the {@link NumberFunction} associated.
-       */
-      private GroupEvaluation( NumberFunction function ) {
-         this.function = function;
-      }// End Constructor
-
-      /**
-       * {@inheritDoc}
-       */
-      @Override public void consider( double value ) {
-         function.consider( value );
-      }// End Method
-      
-      /**
-       * {@inheritDoc}
-       */
-      @Override public Double getResult() {
-         return function.getResult();
-      }// End Method
-      
-      /**
-       * {@inheritDoc}
-       */
-      @Override public void reset() {
-         function.reset();
-      }// End Method
-      
-   }// End Class
-   
    private GroupEvaluation evaluation;
    private PropertyType vertical;
    
@@ -83,6 +41,44 @@ public class GroupEvaluationPlot implements SeriesExtractor {
       this.vertical = vertical;
    }// End Constructor
    
+   /**
+    * {@inheritDoc}
+    */
+   @Override public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ( ( evaluation == null ) ? 0 : evaluation.hashCode() );
+      result = prime * result + ( ( vertical == null ) ? 0 : vertical.hashCode() );
+      return result;
+   }//End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean equals( Object obj ) {
+      if ( this == obj ) {
+         return true;
+      }
+      if ( obj == null ) {
+         return false;
+      }
+      if ( !( obj instanceof GroupEvaluationPlot ) ) {
+         return false;
+      }
+      GroupEvaluationPlot other = ( GroupEvaluationPlot ) obj;
+      if ( evaluation != other.evaluation ) {
+         return false;
+      }
+      if ( vertical == null ) {
+         if ( other.vertical != null ) {
+            return false;
+         }
+      } else if ( !vertical.equals( other.vertical ) ) {
+         return false;
+      }
+      return true;
+   }//End Method
+
    /**
     * Method to categorise the {@link BuilderObject}s identified by the {@link Search}.
     * @param search the {@link Search} providing the {@link BuilderObject}s to categorise.
@@ -112,18 +108,30 @@ public class GroupEvaluationPlot implements SeriesExtractor {
             Number defaultNumber 
    ) {
       categorise( search, horizontal, defaultString );;
-      return performFunction( defaultNumber, evaluation );
+      return performFunction( constructName( search, horizontal ), defaultNumber, evaluation );
    }// End Method
+   
+   /**
+    * Method to construct the name of the {@link Series}.
+    * @param search the {@link Search} used.
+    * @param horizontalProperty the {@link PropertyType} used on the horizontal axis.
+    * @return the {@link String} name.
+    */
+   private String constructName( Search search, PropertyType horizontalProperty ) {
+      return search.getIdentification() + "|" + horizontalProperty.getDisplayName() + "|" + evaluation.getDisplayName();
+   }//End Method
    
    /**
     * Method to perform the {@link NumberFunction} associated with the {@link GroupEvaluation} on the
     * categorised {@link BuilderObject}s.
+    * @param name the name of the {@link Series}.
     * @param defaultNumber the default number to use if the property isnt set.
     * @param function the {@link NumberFunction} to use.
     * @return a {@link Series} of category key to the result of the {@link NumberFunction}.
     */
-   private Series< String, Number > performFunction( Number defaultNumber, NumberFunction function ) {
+   private Series< String, Number > performFunction( String name, Number defaultNumber, NumberFunction function ) {
       Series< String, Number > series = new Series<>();
+      series.setName( name );
       for ( Entry< String, List< BuilderObject > > entry : categorisedObjects.entrySet() ) {
          function.reset();
          List< BuilderObject > objects = entry.getValue();

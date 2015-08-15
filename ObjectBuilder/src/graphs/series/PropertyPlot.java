@@ -29,6 +29,40 @@ public class PropertyPlot implements SeriesExtractor {
    public PropertyPlot( PropertyType vertical ) {
       this.vertical = vertical;
    }// End Constructor
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + ( ( vertical == null ) ? 0 : vertical.hashCode() );
+      return result;
+   }//End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public boolean equals( Object obj ) {
+      if ( this == obj ) {
+         return true;
+      }
+      if ( obj == null ) {
+         return false;
+      }
+      if ( !( obj instanceof PropertyPlot ) ) {
+         return false;
+      }
+      PropertyPlot other = ( PropertyPlot ) obj;
+      if ( vertical == null ) {
+         if ( other.vertical != null ) {
+            return false;
+         }
+      } else if ( !vertical.equals( other.vertical ) ) {
+         return false;
+      }
+      return true;
+   }//End Method
 
    /**
     * {@inheritDoc}
