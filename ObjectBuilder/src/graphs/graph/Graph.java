@@ -454,7 +454,7 @@ import search.Search;
       }
       
       for ( Entry< PropertyType, GroupEvaluation > entry : extractions.getGroupEvaluations() ) {
-         if ( !entry.getKey().getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ) ) {
+         if ( !entry.getValue().isCompatible( entry.getKey().getParameterType() ) ) {
             return new GraphResult( GraphError.NonNumericalVerticalAxis, entry );
          }
       }
