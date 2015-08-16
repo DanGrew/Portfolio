@@ -54,6 +54,34 @@ public class GroupEvaluationPlotTest {
    }// End Method
    
    /**
+    * {@link GroupEvaluation#Count} test.
+    */
+   @Test public void shouldCountNonNumber() {
+      PropertyType sampleVertical = new PropertyTypeImpl( "anything", ClassParameterTypes.STRING_PARAMETER_TYPE );
+      PropertyType sampleHorizontal = new PropertyTypeImpl( "horizontal", ClassParameterTypes.STRING_PARAMETER_TYPE );
+      SeriesExtractor plot = new GroupEvaluationPlot( GroupEvaluation.Count, sampleVertical );
+      
+      BuilderObject objectA = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "first", "value" );
+      BuilderObject objectB = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "first", "doesn't" );
+      BuilderObject objectC = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "second", "matter" );
+      BuilderObject objectD = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "second", "at" );
+      BuilderObject objectE = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "first", "all" );
+      BuilderObject objectF = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, "first", null );
+      BuilderObject objectG = SeriesExtractorFunctions.createBuilderObject( sampleHorizontal, sampleVertical, null, "anything" );
+      
+      Search search = Mockito.mock( Search.class );
+      Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE, objectF, objectG ) );
+      
+      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, "x", 0.0 );
+      Assert.assertEquals( "first", series.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( 4.0, series.getData().get( 0 ).getYValue() );
+      Assert.assertEquals( "second", series.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( 2.0, series.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( "x", series.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( 1.0, series.getData().get( 2 ).getYValue() );
+   }// End Method
+   
+   /**
     * {@link GroupEvaluation#Maximum} test.
     */
    @Test public void shouldFindMaximum() {

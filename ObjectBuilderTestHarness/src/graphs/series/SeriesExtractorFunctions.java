@@ -31,7 +31,7 @@ public class SeriesExtractorFunctions {
             PropertyType horizontalProperty, 
             PropertyType verticalProperty, 
             String horizontal, 
-            Number vertical 
+            Object vertical 
    ) {
       BuilderObject object = Mockito.mock( BuilderObject.class );
       Mockito.when( object.get( horizontalProperty ) ).thenReturn( horizontal );

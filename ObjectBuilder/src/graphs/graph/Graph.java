@@ -219,7 +219,7 @@ import search.Search;
     * a non number type is supplied.
     */
    @Cali public GraphResult addGroupEvaluation( PropertyType property, GroupEvaluation evaluation ) {
-      if ( property.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ) ) {
+      if ( evaluation.isCompatible( property.getParameterType() ) ) {
          extractions.addGroupEvaluation( property, evaluation );
          return GraphResult.SUCCESS;
       } else {
