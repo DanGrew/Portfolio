@@ -35,6 +35,9 @@ public enum SearchPolicy {
       if ( objectValue == null ) {
          return false;
       }
+      if ( value.isEmpty() ) {
+         return true;
+      }
       return objectValue.toString().contains( value.toString() );
    } ), 
    ExactNumber( ClassParameterTypes.NUMBER_PARAMETER_TYPE, ( object, type, value ) -> {

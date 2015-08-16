@@ -24,6 +24,7 @@ import propertytype.PropertyType;
 
    private List< SearchCriteria > inclusions;
    private List< SearchCriteria > exclusions;
+   private boolean includeAll = false;
    
    /** Private class for holding inclusion criteria.**/
    public static class SearchCriteria {
@@ -133,7 +134,12 @@ import propertytype.PropertyType;
    @Cali @Override public void identifyMatches() {
       clearMatches();
       
+      
       Collection< BuilderObject > allObjects = RequestSystem.retrieveAll( BuilderObject.class );
+      if ( includeAll ) {
+         addAllMatches( allObjects );
+         return;
+      }
       Collection< BuilderObject > matches = new ArrayList< BuilderObject >();
       allObjects.forEach( object -> {
          for ( SearchCriteria inclusion : inclusions ) {
@@ -215,6 +221,7 @@ import propertytype.PropertyType;
     */
    @Cali public void clearIncluded() {
       inclusions.clear();
+      includeAll = false;
    }// End Method
    
    /**
@@ -239,5 +246,12 @@ import propertytype.PropertyType;
    public List< SearchCriteria > getExclusions() {
       return exclusions;
    }// End Method
+
+   /**
+    * Method to include all {@link BuilderObject}s in the system.
+    */
+   @Cali public void includeAll() {
+      includeAll = true;
+   }//End Method
 
 }// End Class

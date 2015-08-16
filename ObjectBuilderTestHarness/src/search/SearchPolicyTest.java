@@ -36,7 +36,7 @@ public class SearchPolicyTest {
     * {@link SearchPolicy#ExactString} test.
     */
    @Test public void shouldExactStringMatch() {
-      Assert.assertTrue( SearchPolicy.ExactString.matchesPolicy( DAN, COMPANY, "Graffica" ) );
+      Assert.assertTrue( SearchPolicy.ExactString.matchesPolicy( DAN, COMPANY, "Graffica Ltd" ) );
    }// End Method
    
    /**
@@ -53,6 +53,8 @@ public class SearchPolicyTest {
    @Test public void shouldContainString() {
       Assert.assertTrue( SearchPolicy.ContainsString.matchesPolicy( DAN, COMPANY, "Graf" ) );
       Assert.assertTrue( SearchPolicy.ContainsString.matchesPolicy( DAN, COMPANY, "fic" ) );
+      Assert.assertTrue( SearchPolicy.ContainsString.matchesPolicy( DAN, COMPANY, "" ) );
+      Assert.assertTrue( SearchPolicy.ContainsString.matchesPolicy( DAN, COMPANY, " " ) );
    }// End Method
    
    /**

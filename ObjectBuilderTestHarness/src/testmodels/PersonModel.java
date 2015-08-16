@@ -56,7 +56,7 @@ public class PersonModel {
       
       DAN = new BuilderObjectImpl( "Dan", PERSON );
       DAN.set( AGE, 26.0 );
-      DAN.set( COMPANY, "Graffica" );
+      DAN.set( COMPANY, "Graffica Ltd" );
       DAN.set( HAIR_COLOUR, "Brown" );
       DAN.set( BIRTH_DATE, "09/10/1988" );
       RequestSystem.store( DAN, BuilderObject.class );

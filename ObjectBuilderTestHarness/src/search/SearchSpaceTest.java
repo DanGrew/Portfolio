@@ -143,7 +143,7 @@ public class SearchSpaceTest {
                matches 
       );
       
-      search.exclude( SearchPolicy.ExactString, COMPANY, "Graffica" );
+      search.exclude( SearchPolicy.ExactString, COMPANY, "Graffica Ltd" );
       
       search.identifyMatches();
       matches = search.getMatches();
@@ -168,7 +168,7 @@ public class SearchSpaceTest {
                matches 
       );
       
-      search.exclude( SearchPolicy.ExactString, COMPANY, "Graffica" );
+      search.exclude( SearchPolicy.ExactString, COMPANY, "Graffica Ltd" );
       search.exclude( SearchPolicy.ExactNumber, AGE, "53" );
       
       search.identifyMatches();
@@ -232,4 +232,26 @@ public class SearchSpaceTest {
                matches 
       );
    }
+   
+   /**
+    * {@link SearchSpace#includeAll() test.
+    */
+   @Test public void shouldIncludeAll() {
+      SearchSpace search = new SearchSpace( "search" );
+      search.includeAll();
+      
+      search.identifyMatches();
+      Collection< BuilderObject > matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( DAN, LIZ,MOM, DAD ), 
+               matches 
+      );
+      
+      search.clearIncluded();
+      matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList(), 
+               matches 
+      );
+   }//End Method
 }// End Class
