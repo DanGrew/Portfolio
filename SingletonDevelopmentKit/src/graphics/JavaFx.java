@@ -10,8 +10,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 
 /**
  * {@link JavaFx} defines common java fx functions.

@@ -7,20 +7,18 @@
  */
 package wizard.graph;
 
-import graphics.JavaFx;
-import graphics.node.DualListView;
-import graphics.wizard.Wizard;
-import graphics.wizard.WizardPage;
-import graphs.graph.Graph;
-
 import java.util.Arrays;
 import java.util.List;
 
+import architecture.request.RequestSystem;
+import graphics.JavaFx;
+import graphics.node.DualListView;
+import graphics.wizard.WizardPage;
+import graphs.graph.Graph;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
-import architecture.request.RequestSystem;
 
 /**
  * The {@link GraphVerticalPropertyPage} is responsible for showing the user how to configure
@@ -28,7 +26,6 @@ import architecture.request.RequestSystem;
  */
 public class GraphVerticalPropertyPage extends VBox implements WizardPage< Graph >{
 
-   private static final String ERROR_HEADER = "Vertical properties are not ready.";
    private DualListView< PropertyType > verticalProperties;
    
    /**
@@ -85,12 +82,6 @@ public class GraphVerticalPropertyPage extends VBox implements WizardPage< Graph
     * {@inheritDoc}
     */
    @Override public boolean isContentAcceptable() {
-      List< PropertyType > chosen = verticalProperties.getChosenItems();
-      if ( chosen.isEmpty() ) {
-         Wizard.error( ERROR_HEADER, "There are no vertical properties set." );
-         return false;
-      }
-      
       return true;
    }// End Method
 

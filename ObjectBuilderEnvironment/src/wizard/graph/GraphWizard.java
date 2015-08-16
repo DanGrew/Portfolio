@@ -36,6 +36,7 @@ public class GraphWizard {
                new GraphIntroductionPage(),
                new GraphHorizontalAxisPage(),
                new GraphVerticalPropertyPage(),
+               new GraphGroupEvaluationsPage(),
                new GraphDataSeriesPage(),
                new GraphPresentationPage(),
                new GraphDisplayPage()

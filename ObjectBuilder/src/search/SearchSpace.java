@@ -11,12 +11,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import object.BuilderObject;
-import property.Property;
-import property.PropertyImpl;
-import propertytype.PropertyType;
 import annotation.Cali;
 import architecture.request.RequestSystem;
+import object.BuilderObject;
+import propertytype.PropertyType;
 
 /**
  * {@link SearchSpace} provides a {@link Search} that the criteria adds matches to, an

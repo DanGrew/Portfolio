@@ -7,6 +7,7 @@
  */
 package javafx;
 
+import javafx.scene.control.TableColumnBase;
 import javafx.scene.control.TreeTableColumn;
 
 /**
@@ -16,9 +17,9 @@ public class Workarounds {
    
    /**
     * Method to disable reordering of columns in the given {@link TreeTableColumn}.
-    * @param column the {@link TreeTableColumn} to disable reordering on.
+    * @param column the {@link TableColumnBase} to disable reordering on.
     */
-   @SuppressWarnings("deprecation") public static void disableColumnDragging( TreeTableColumn< ?, ? > column ) {
+   @SuppressWarnings("deprecation") public static void disableColumnDragging( TableColumnBase< ?, ? > column ) {
       column.impl_setReorderable( false );
    }// End Method
 
