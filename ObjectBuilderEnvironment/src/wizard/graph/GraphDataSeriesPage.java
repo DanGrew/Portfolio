@@ -19,6 +19,7 @@ import java.util.List;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import search.Search;
+import wizard.common.WizardConfiguration;
 import architecture.request.RequestSystem;
 
 /**
@@ -48,16 +49,16 @@ public class GraphDataSeriesPage extends VBox implements WizardPage< Graph >{
       ) );
       
       searches = new DualListView<>( false );
-      searches.setListWidth( GraphWizardConfiguration.dualListWidth() );
-      searches.setPrefHeight( GraphWizardConfiguration.dualListHeight() );
+      searches.setListWidth( WizardConfiguration.dualListWidth() );
+      searches.setPrefHeight( WizardConfiguration.tableHeight() );
       List< Search > searchObjects = RequestSystem.retrieveAll( 
                Search.class 
       );
       searches.setChoices( searchObjects );
       getChildren().add( searches );
       
-      setPrefWidth( GraphWizardConfiguration.wizardWidth() );
-      setPrefHeight( GraphWizardConfiguration.wizardHeight() + 100 );
+      setPrefWidth( WizardConfiguration.wizardWidth() );
+      setPrefHeight( WizardConfiguration.wizardHeight() + 100 );
    }// End Constructor
    
    /**

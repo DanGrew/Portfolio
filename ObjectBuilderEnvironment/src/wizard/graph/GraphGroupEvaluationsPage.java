@@ -19,6 +19,7 @@ import graphs.series.GroupEvaluation;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import propertytype.PropertyType;
+import wizard.common.WizardConfiguration;
 import wizard.graph.components.GroupEvaluationsTableView;
 
 /**
@@ -49,8 +50,8 @@ public class GraphGroupEvaluationsPage extends VBox implements WizardPage< Graph
       plots = new GroupEvaluationsTableView(); 
       getChildren().add( plots );
       
-      setPrefWidth( GraphWizardConfiguration.wizardWidth() );
-      setPrefHeight( GraphWizardConfiguration.wizardHeight() + 100 );
+      setPrefWidth( WizardConfiguration.wizardWidth() );
+      setPrefHeight( WizardConfiguration.wizardHeight() + 100 );
    }// End Method
    
    /**

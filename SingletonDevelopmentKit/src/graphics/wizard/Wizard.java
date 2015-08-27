@@ -7,12 +7,11 @@
  */
 package graphics.wizard;
 
-import graphics.JavaFx;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import graphics.JavaFx;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.embed.swing.JFXPanel;
@@ -23,6 +22,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * The {@link Wizard} provides a method of supplying pages of a configuration process
@@ -51,6 +52,9 @@ public class Wizard< ConfigurableT > extends Alert {
       
       setTitle( title );
       setHeaderText( "Initialising Wizard." );
+      initModality( Modality.NONE );
+      Stage stage = ( Stage )getDialogPane().getScene().getWindow();
+      stage.setAlwaysOnTop( true );
 
       buttonPrevious = new ButtonType( "Previous" );
       buttonNext = new ButtonType( "Next" );

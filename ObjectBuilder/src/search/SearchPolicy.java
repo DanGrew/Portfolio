@@ -122,8 +122,11 @@ public enum SearchPolicy {
     * @return true if matches, false otherwise.
     */
    public boolean matchesPolicy( BuilderObject object, PropertyType type, String value ) {
-      if ( !policyApplicableFor( type ) ) {
+      if ( !isCompatible( type ) ) {
          return false;
+      }
+      if ( value == null ) {
+         value = "";
       }
       return function.matchesPolicy( object, type, value );
    }// End Method
@@ -134,7 +137,7 @@ public enum SearchPolicy {
     * @param type the {@link PropertyType} in question.
     * @return true if applicable.
     */
-   public boolean policyApplicableFor( PropertyType type ) {
+   public boolean isCompatible( PropertyType type ) {
       return type.getParameterType().equals( parameterType );
    }// End Method
    

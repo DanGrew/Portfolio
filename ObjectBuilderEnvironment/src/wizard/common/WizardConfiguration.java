@@ -5,19 +5,21 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package wizard.graph;
+package wizard.common;
 
-import graphics.node.DualListView;
+import graphics.wizard.Wizard;
 import graphics.wizard.WizardPage;
+import javafx.scene.control.TableView;
+import wizard.graph.GraphWizard;
 
 /**
- * The {@link GraphWizardConfiguration} if responsible for defining the defaults for the 
+ * The {@link WizardConfiguration} if responsible for defining the defaults for the 
  * {@link GraphWizard} and {@link WizardPage}s within it.
  */
-public class GraphWizardConfiguration {
+public class WizardConfiguration {
 
    /**
-    * Getter for the default width of the {@link GraphWizard}.
+    * Getter for the default width of the {@link Wizard}.
     * @return the default width.
     */
    public static double wizardWidth(){
@@ -25,7 +27,7 @@ public class GraphWizardConfiguration {
    }// End Method
    
    /**
-    * Getter for the default height of the {@link GraphWizard}.
+    * Getter for the default height of the {@link Wizard}.
     * @return the default height.
     */
    public static double wizardHeight(){
@@ -33,7 +35,7 @@ public class GraphWizardConfiguration {
    }// End Method
    
    /**
-    * Getter for the default width of the {@link DualListView}s in the {@link GraphWizard}.
+    * Getter for the default width of the {@link TableView}s in the {@link Wizard}.
     * @return the default width.
     */
    public static double dualListWidth(){
@@ -41,10 +43,10 @@ public class GraphWizardConfiguration {
    }// End Method
    
    /**
-    * Getter for the default height of the {@link DualListView}s in the {@link GraphWizard}.
+    * Getter for the default height of the {@link TableView}s in the {@link Wizard}.
     * @return the default height.
     */
-   public static double dualListHeight(){
+   public static double tableHeight(){
       return 200;
    }// End Method
    

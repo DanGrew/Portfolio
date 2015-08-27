@@ -21,6 +21,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import propertytype.PropertyType;
+import wizard.common.WizardConfiguration;
 import architecture.request.RequestSystem;
 
 /**
@@ -53,7 +54,7 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
       List< PropertyType > propertyTypes = RequestSystem.retrieveAll( PropertyType.class );
       horizontalProperties = new ComboBox<>();
       horizontalProperties.getItems().addAll( propertyTypes );
-      horizontalProperties.setPrefWidth( GraphWizardConfiguration.wizardWidth() );
+      horizontalProperties.setPrefWidth( WizardConfiguration.wizardWidth() );
       getChildren().add( horizontalProperties );
       horizontalProperties.getSelectionModel().selectedItemProperty().addListener( change -> refreshSortOptions() );
       
@@ -67,11 +68,11 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
 
       sortOptionsBox = new ComboBox<>();
       refreshSortOptions();
-      sortOptionsBox.setPrefWidth( GraphWizardConfiguration.wizardWidth() );
+      sortOptionsBox.setPrefWidth( WizardConfiguration.wizardWidth() );
       getChildren().add( sortOptionsBox );
       
-      setPrefWidth( GraphWizardConfiguration.wizardWidth() );
-      setPrefHeight( GraphWizardConfiguration.wizardHeight() );
+      setPrefWidth( WizardConfiguration.wizardWidth() );
+      setPrefHeight( WizardConfiguration.wizardHeight() );
    }// End Constructor
    
    /**

@@ -19,6 +19,7 @@ import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
+import wizard.common.WizardConfiguration;
 
 /**
  * The {@link GraphVerticalPropertyPage} is responsible for showing the user how to configure
@@ -47,8 +48,8 @@ public class GraphVerticalPropertyPage extends VBox implements WizardPage< Graph
       ) );
       
       verticalProperties = new DualListView<>( false );
-      verticalProperties.setListWidth( GraphWizardConfiguration.dualListWidth() );
-      verticalProperties.setPrefHeight( GraphWizardConfiguration.dualListHeight() );
+      verticalProperties.setListWidth( WizardConfiguration.dualListWidth() );
+      verticalProperties.setPrefHeight( WizardConfiguration.tableHeight() );
       List< PropertyType > numberTypes = RequestSystem.retrieveAll( 
                PropertyType.class, 
                object -> { return object.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ); }
@@ -56,8 +57,8 @@ public class GraphVerticalPropertyPage extends VBox implements WizardPage< Graph
       verticalProperties.setChoices( numberTypes );
       getChildren().add( verticalProperties );
       
-      setPrefWidth( GraphWizardConfiguration.wizardWidth() );
-      setPrefHeight( GraphWizardConfiguration.wizardHeight() + 100 );
+      setPrefWidth( WizardConfiguration.wizardWidth() );
+      setPrefHeight( WizardConfiguration.wizardHeight() + 100 );
    }// End Method
    
    /**

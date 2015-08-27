@@ -16,6 +16,7 @@ import java.util.Arrays;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import wizard.common.WizardConfiguration;
 
 /**
  * The {@link GraphDisplayPage} is responsible for showing the user which types of
@@ -61,8 +62,8 @@ public class GraphDisplayPage extends VBox implements WizardPage< Graph >{
       stackedAreaChart.setOnAction( event -> graph.stackedAreaChart() );
       getChildren().add( stackedAreaChart );
       
-      setPrefWidth( GraphWizardConfiguration.wizardWidth() );
-      setPrefHeight( GraphWizardConfiguration.wizardHeight() );
+      setPrefWidth( WizardConfiguration.wizardWidth() );
+      setPrefHeight( WizardConfiguration.wizardHeight() );
    }// End Constructor
    
    /**

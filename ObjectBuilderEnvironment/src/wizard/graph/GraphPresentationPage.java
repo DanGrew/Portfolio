@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import wizard.common.WizardConfiguration;
 
 /**
  * The {@link GraphPresentationPage} is responsible for showing the user how to configure 
@@ -94,8 +95,8 @@ public class GraphPresentationPage extends VBox implements WizardPage< Graph >{
             heightBox
       ) );  
       
-      setPrefWidth( GraphWizardConfiguration.wizardWidth() );
-      setPrefHeight( GraphWizardConfiguration.wizardHeight() + 200 );
+      setPrefWidth( WizardConfiguration.wizardWidth() );
+      setPrefHeight( WizardConfiguration.wizardHeight() + 200 );
    }// End Constructor
    
    /**

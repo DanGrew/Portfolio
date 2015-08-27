@@ -136,19 +136,19 @@ import propertytype.PropertyType;
       
       
       Collection< BuilderObject > allObjects = RequestSystem.retrieveAll( BuilderObject.class );
-      if ( includeAll ) {
-         addAllMatches( allObjects );
-         return;
-      }
       Collection< BuilderObject > matches = new ArrayList< BuilderObject >();
-      allObjects.forEach( object -> {
-         for ( SearchCriteria inclusion : inclusions ) {
-            if ( inclusion.policy.matchesPolicy( object, inclusion.type, inclusion.value ) ) {
-               matches.add( object );
-               return;
+      if ( includeAll ) {
+         matches.addAll( allObjects );
+      } else {
+         allObjects.forEach( object -> {
+            for ( SearchCriteria inclusion : inclusions ) {
+               if ( inclusion.policy.matchesPolicy( object, inclusion.type, inclusion.value ) ) {
+                  matches.add( object );
+                  return;
+               }
             }
-         }
-      } );
+         } );
+      }
       
       Collection< BuilderObject > mismatches = new ArrayList< BuilderObject >();
       matches.forEach( object -> {
@@ -188,7 +188,7 @@ import propertytype.PropertyType;
     * @param value the value the object should have for the {@link PropertyType}.
     */
    @Cali public void include( SearchPolicy policy, PropertyType propertyType, String value ) {
-      if ( !policy.policyApplicableFor( propertyType ) ) {
+      if ( !policy.isCompatible( propertyType ) ) {
          return;
       }
       
@@ -205,7 +205,7 @@ import propertytype.PropertyType;
     * @param value the value the object should have for the {@link PropertyType}.
     */
    @Cali public void exclude( SearchPolicy policy, PropertyType propertyType, String value ) {
-      if ( !policy.policyApplicableFor( propertyType ) ) {
+      if ( !policy.isCompatible( propertyType ) ) {
          return;
       }
       

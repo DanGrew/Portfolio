@@ -234,6 +234,21 @@ public class SearchSpaceTest {
    }
    
    /**
+    * {@link SearchSpace#include(SearchPolicy, PropertyType, String)} null string value.
+    */
+   @Test public void shouldIncludeWithNoStringValue() {
+      SearchSpace search = new SearchSpace( "search" );
+      search.include( SearchPolicy.ContainsString, COMPANY, null );
+      
+      search.identifyMatches();
+      Collection< BuilderObject > matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( DAN, LIZ, MOM, DAD ), 
+               matches 
+      );
+   }
+   
+   /**
     * {@link SearchSpace#includeAll() test.
     */
    @Test public void shouldIncludeAll() {
@@ -243,7 +258,7 @@ public class SearchSpaceTest {
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
       Assert.assertEquals( 
-               Arrays.asList( DAN, LIZ,MOM, DAD ), 
+               Arrays.asList( DAN, LIZ, MOM, DAD ), 
                matches 
       );
       
@@ -251,6 +266,28 @@ public class SearchSpaceTest {
       matches = search.getMatches();
       Assert.assertEquals( 
                Arrays.asList(), 
+               matches 
+      );
+   }//End Method
+   
+   /**
+    * {@link SearchSpace#includeAll() test.
+    */
+   @Test public void excludeShouldOverrideIncludeAll() {
+      SearchSpace search = new SearchSpace( "search" );
+      search.includeAll();
+      
+      search.identifyMatches();
+      Collection< BuilderObject > matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( DAN, LIZ, MOM, DAD ), 
+               matches 
+      );
+      
+      search.exclude( SearchPolicy.ContainsString, COMPANY, "Graff" );
+      matches = search.getMatches();
+      Assert.assertEquals( 
+               Arrays.asList( LIZ, MOM, DAD ), 
                matches 
       );
    }//End Method
