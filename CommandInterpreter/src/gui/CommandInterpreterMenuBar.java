@@ -27,18 +27,18 @@ public class CommandInterpreterMenuBar extends MenuBar {
       
       MenuItem executeItem = new MenuItem();
       menu.getItems().add( executeItem );
-      GuiFunctions.respondWithExecute( executeItem );
+      GuiFunctions.getExecuteFunction().configure( executeItem );
       
       MenuItem autoCompleteItem = new MenuItem();
       menu.getItems().add( autoCompleteItem );
-      GuiFunctions.respondWithAutoComplete( autoCompleteItem );
+      GuiFunctions.getAutoCompleteFunction().configure( autoCompleteItem );
       
       MenuItem scrollUpItem = new MenuItem();
       menu.getItems().add( scrollUpItem );
-      GuiFunctions.respondWithScrollUp( scrollUpItem );
+      GuiFunctions.getScrollUpFunction().configure( scrollUpItem );
       
       MenuItem scrollDownItem = new MenuItem();
       menu.getItems().add( scrollDownItem );
-      GuiFunctions.respondWithScrollDown( scrollDownItem );
+      GuiFunctions.getScrollDownFunction().configure( scrollDownItem );
    }// End Constructor
 }// End Class

@@ -57,36 +57,36 @@ public class GuiFunctions {
             ( ActionEvent event ) -> EventSystem.raiseEvent( Events.ScrollDown, null )
    );
    
-   public static void respondWithExecute( MenuItem item ) {
-      EXECUTE_FUNCTION.configure( item );
-   }
+   /**
+    * Method to get the {@link GuiFunction} for the execute command.
+    * @return the {@link GuiFunction}.
+    */
+   public static GuiFunction getExecuteFunction(){
+      return EXECUTE_FUNCTION;
+   }//End Method
    
-   public static void respondWithAutoComplete( MenuItem item ) {
-      AUTO_COMPLETE_FUNCTION.configure( item );
-   }
-
-   public static void respondWithScrollUp( MenuItem scrollUpItem ) {
-      SCROLL_UP_FUNCTION.configure( scrollUpItem );
-   }
+   /**
+    * Method to get the {@link GuiFunction} for the auto complete command.
+    * @return the {@link GuiFunction}.
+    */
+   public static GuiFunction getAutoCompleteFunction(){
+      return AUTO_COMPLETE_FUNCTION;
+   }//End Method
    
-   public static void respondWithScrollDown( MenuItem scrollDownItem ) {
-      SCROLL_DOWN_FUNCTION.configure( scrollDownItem );
-   }
+   /**
+    * Method to get the {@link GuiFunction} for the scroll up command.
+    * @return the {@link GuiFunction}.
+    */
+   public static GuiFunction getScrollUpFunction(){
+      return SCROLL_UP_FUNCTION;
+   }//End Method
    
-   public static void respondWithExecute( Button item ) {
-      EXECUTE_FUNCTION.configure( item );
-   }
+   /**
+    * Method to get the {@link GuiFunction} for the scroll down command.
+    * @return the {@link GuiFunction}.
+    */
+   public static GuiFunction getScrollDownFunction(){
+      return SCROLL_DOWN_FUNCTION;
+   }//End Method
    
-   public static void respondWithAutoComplete( Button item ) {
-      AUTO_COMPLETE_FUNCTION.configure( item );
-   }
-
-   public static void respondWithScrollUp( Button scrollUpItem ) {
-      SCROLL_UP_FUNCTION.configure( scrollUpItem );
-   }
-   
-   public static void respondWithScrollDown( Button scrollDownItem ) {
-      SCROLL_DOWN_FUNCTION.configure( scrollDownItem );
-   }
-
 }// End Class

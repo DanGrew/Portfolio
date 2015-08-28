@@ -43,7 +43,7 @@ public class CommandInput extends BorderPane {
       );
       
       Button executeButton = new Button();
-      GuiFunctions.respondWithExecute( executeButton );
+      GuiFunctions.getExecuteFunction().configure( executeButton );
       setRight( executeButton );
    }// End Constructor
 }// End Class
