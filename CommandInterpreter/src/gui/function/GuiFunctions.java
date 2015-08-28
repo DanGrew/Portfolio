@@ -7,15 +7,12 @@
  */
 package gui.function;
 
+import architecture.event.EventSystem;
+import command.Command;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import architecture.event.EventSystem;
-
-import command.Command;
 
 /**
  * {@link GuiFunctions}s provides the definition of the different functions the gui can perform.
