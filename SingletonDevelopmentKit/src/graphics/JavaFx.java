@@ -10,6 +10,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * {@link JavaFx} defines common java fx functions.
@@ -55,6 +57,8 @@ public class JavaFx {
     */
    public static void error( String title, String header, String issue ) {
       Alert alert = new Alert( AlertType.ERROR );
+      alertAlwaysOnTop( alert );
+      alert.initModality( Modality.WINDOW_MODAL );
       alert.setTitle( title );
       alert.setHeaderText( header );
       alert.setContentText( issue );
@@ -71,6 +75,8 @@ public class JavaFx {
     */
    public static boolean happyWithThis( String title, String header, String question ) {
       Alert alert = new Alert( AlertType.CONFIRMATION );
+      alertAlwaysOnTop( alert );
+      alert.initModality( Modality.WINDOW_MODAL );
       alert.setTitle( title );
       alert.setHeaderText( header );
       alert.setContentText( question );
@@ -82,5 +88,14 @@ public class JavaFx {
          return false;
       }
    }// End Method
+   
+   /**
+    * Method to force an {@link Alert} to always be on top.
+    * @param alert the {@link Alert} to configure.
+    */
+   public static void alertAlwaysOnTop( Alert alert ){
+      Stage stage = ( Stage )alert.getDialogPane().getScene().getWindow();
+      stage.setAlwaysOnTop( true );
+   }//End Method
    
 }// End Class

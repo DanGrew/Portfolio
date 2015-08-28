@@ -53,8 +53,6 @@ public class Wizard< ConfigurableT > extends Alert {
       setTitle( title );
       setHeaderText( "Initialising Wizard." );
       initModality( Modality.NONE );
-      Stage stage = ( Stage )getDialogPane().getScene().getWindow();
-      stage.setAlwaysOnTop( true );
 
       buttonPrevious = new ButtonType( "Previous" );
       buttonNext = new ButtonType( "Next" );
