@@ -305,58 +305,65 @@ import search.Search;
    
    /**
     * Method to display the {@link Graph} as a {@link BarChart}.
+    * @param orienation the {@link GraphOrientation}.
     * @return the {@link GraphResult} of the graphical construction.
     */
-   @Cali public GraphResult barChart(){
-      return show( ChartType.BarChart );
+   @Cali public GraphResult barChart( GraphOrientation orienation ){
+      return show( ChartType.BarChart, orienation );
    }// End Method
    
    /**
     * Method to display the {@link Graph} as a {@link StackedBarChart}.
+    * @param orienation the {@link GraphOrientation}.
     * @return the {@link GraphResult} of the graphical construction.
     */
-   @Cali public GraphResult stackedBarChart(){
-      return show( ChartType.StackedBarChart );
+   @Cali public GraphResult stackedBarChart( GraphOrientation orienation ){
+      return show( ChartType.StackedBarChart, orienation );
    }// End Method
    
    /**
     * Method to display the {@link Graph} as a {@link LineChart}.
+    * @param orienation the {@link GraphOrientation}.
     * @return the {@link GraphResult} of the graphical construction.
     */
-   @Cali public GraphResult lineChart(){
-      return show( ChartType.LineChart );
+   @Cali public GraphResult lineChart( GraphOrientation orienation ){
+      return show( ChartType.LineChart, orienation );
    }// End Method
    
    /**
     * Method to display the {@link Graph} as a {@link ScatterChart}.
+    * @param orienation the {@link GraphOrientation}.
     * @return the {@link GraphResult} of the graphical construction.
     */
-   @Cali public GraphResult scatterChart(){
-      return show( ChartType.ScatterChart );
+   @Cali public GraphResult scatterChart( GraphOrientation orienation ){
+      return show( ChartType.ScatterChart, orienation );
    }// End Method
    
    /**
     * Method to display the {@link Graph} as a {@link AreaChart}.
+    * @param orienation the {@link GraphOrientation}.
     * @return the {@link GraphResult} of the graphical construction.
     */
-   @Cali public GraphResult areaChart(){
-      return show( ChartType.AreaChart );
+   @Cali public GraphResult areaChart( GraphOrientation orienation ){
+      return show( ChartType.AreaChart, orienation );
    }// End Method
    
    /**
     * Method to display the {@link Graph} as a {@link StackedAreaChart}.
+    * @param orienation the {@link GraphOrientation}.
     * @return the {@link GraphResult} of the graphical construction.
     */
-   @Cali public GraphResult stackedAreaChart(){
-      return show( ChartType.StackedAreaChart );
+   @Cali public GraphResult stackedAreaChart( GraphOrientation orienation ){
+      return show( ChartType.StackedAreaChart, orienation );
    }// End Method
    
    /**
     * Method to show the graph. This launches a new window with the {@link Graph} inside.
+    * @param orienation the {@link GraphOrientation}.
     * @return the {@link GraphResult} of the launch, {@link GraphError}s provided if not
     * configured correctly.
     */
-   private GraphResult show( ChartType type ) {
+   private GraphResult show( ChartType type, GraphOrientation orienation ) {
       GraphResult result = verifySearch();
       if ( result != null ) return result;
       
@@ -375,7 +382,18 @@ import search.Search;
             final CategoryAxis horizontalAxis = new CategoryAxis();
             final NumberAxis verticalAxis = new NumberAxis();
             
-            final XYChart< String, Number > graph = createChart( type, horizontalAxis, verticalAxis );
+            XYChart< String, Number > verticalGraph = null;
+            XYChart< Number, String > horizontalGraph = null;
+            switch ( orienation ) {
+               case Horizontal:
+                  horizontalGraph = createChart( type, verticalAxis, horizontalAxis );
+                  break;
+               case Vertical:
+                  verticalGraph = createChart( type, horizontalAxis, verticalAxis );
+                  break;
+               default:
+                  return;
+            }
             horizontalAxis.setLabel( horizontalAxisLabel );
             verticalAxis.setLabel( verticalAxisLabel );
 
@@ -388,11 +406,40 @@ import search.Search;
                   if ( sorting != null ) {
                      sorting.sort( series.getData() );
                   }
-                  graph.getData().add( series );
+                  
+                  switch ( orienation ) {
+                     case Horizontal:
+                        Series< Number, String > reversed = SeriesExtractor.reverseParameters( series );
+                        horizontalGraph.getData().add( reversed );
+                        break;
+                     case Vertical:
+                        verticalGraph.getData().add( series );
+                        break;
+                     default:
+                        return;
+                  }
                }
             }
 
-            Scene scene = new Scene( graph, dimension.getWidth(), dimension.getHeight() );
+            Scene scene = null;
+            switch ( orienation ) {
+               case Horizontal:
+                  scene = new Scene( 
+                     horizontalGraph,
+                     dimension.getWidth(), 
+                     dimension.getHeight() 
+                  );
+                  break;
+               case Vertical:
+                  scene = new Scene( 
+                     verticalGraph,
+                     dimension.getWidth(), 
+                     dimension.getHeight() 
+                  );
+                  break;
+               default:
+                  return;
+            }
             stage.setScene( scene );
             stage.show();
          }
@@ -408,7 +455,7 @@ import search.Search;
     * @param verticalAxis the {@link Axis} to use for the vertical.
     * @return the constructed {@link XYChart}.
     */
-   private XYChart< String, Number > createChart( ChartType type, Axis< String > horizontalAxis, Axis< Number > verticalAxis ) {
+   private < X, Y > XYChart< X, Y > createChart( ChartType type, Axis< X > horizontalAxis, Axis< Y > verticalAxis ) {
       switch ( type ) {
          case AreaChart:
             return new AreaChart<>( horizontalAxis, verticalAxis );

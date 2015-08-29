@@ -10,11 +10,15 @@ package wizard.graph;
 import graphics.JavaFx;
 import graphics.wizard.WizardPage;
 import graphs.graph.Graph;
+import graphs.graph.GraphOrientation;
 
 import java.util.Arrays;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import wizard.common.WizardConfiguration;
 
@@ -38,29 +42,63 @@ public class GraphDisplayPage extends VBox implements WizardPage< Graph >{
             )
       ) );
       
+      GridPane grid = new GridPane();
+      ColumnConstraints constraints = new ColumnConstraints();
+      constraints.setPercentWidth( 50 );
+      grid.getColumnConstraints().add( constraints );
+      getChildren().add( grid );
+      
+      grid.add( new Label( "Vertical Charts" ), 0, 0 );
+      grid.add( new Label( "Horizontal Charts" ), 1, 0 );
+      
       Button barChart = new Button( "Bar Chart" );
-      barChart.setOnAction( event -> graph.barChart() );
-      getChildren().add( barChart );
+      barChart.setOnAction( event -> graph.barChart( GraphOrientation.Vertical ) );
+      grid.add( barChart, 0, 1 );
       
       Button stackedBarChart = new Button( "Stacked Bar Chart" );
-      stackedBarChart.setOnAction( event -> graph.stackedBarChart() );
-      getChildren().add( stackedBarChart );
+      stackedBarChart.setOnAction( event -> graph.stackedBarChart( GraphOrientation.Vertical ) );
+      grid.add( stackedBarChart, 0, 2 );
       
       Button lineChart = new Button( "Line Chart" );
-      lineChart.setOnAction( event -> graph.lineChart() );
-      getChildren().add( lineChart );
+      lineChart.setOnAction( event -> graph.lineChart( GraphOrientation.Vertical ) );
+      grid.add( lineChart, 0, 3 );
       
       Button scatterChart = new Button( "Scatter Chart" );
-      scatterChart.setOnAction( event -> graph.scatterChart() );
-      getChildren().add( scatterChart );
+      scatterChart.setOnAction( event -> graph.scatterChart( GraphOrientation.Vertical ) );
+      grid.add( scatterChart, 0, 4 );
       
       Button areaChart = new Button( "Area Chart" );
-      areaChart.setOnAction( event -> graph.areaChart() );
-      getChildren().add( areaChart );
+      areaChart.setOnAction( event -> graph.areaChart( GraphOrientation.Vertical ) );
+      grid.add( areaChart, 0, 5 );
       
       Button stackedAreaChart = new Button( "Stacked Area Chart" );
-      stackedAreaChart.setOnAction( event -> graph.stackedAreaChart() );
-      getChildren().add( stackedAreaChart );
+      stackedAreaChart.setOnAction( event -> graph.stackedAreaChart( GraphOrientation.Horizontal ) );
+      grid.add( stackedAreaChart, 0, 6 );
+      
+      Button barChartHorizontal = new Button( "Bar Chart" );
+      barChartHorizontal.setOnAction( event -> graph.barChart( GraphOrientation.Horizontal ) );
+      grid.add( barChartHorizontal, 1, 1 );
+      
+      Button stackedBarChartHorizontal = new Button( "Stacked Bar Chart" );
+      stackedBarChartHorizontal.setOnAction( event -> graph.stackedBarChart( GraphOrientation.Horizontal ) );
+      grid.add( stackedBarChartHorizontal, 1, 2 );
+      
+      Button lineChartHorizontal = new Button( "Line Chart" );
+      lineChartHorizontal.setOnAction( event -> graph.lineChart( GraphOrientation.Horizontal ) );
+      grid.add( lineChartHorizontal, 1, 3 );
+      
+      Button scatterChartHorizontal = new Button( "Scatter Chart" );
+      scatterChartHorizontal.setOnAction( event -> graph.scatterChart( GraphOrientation.Horizontal ) );
+      grid.add( scatterChartHorizontal, 1, 4 );
+      
+      Button areaChartHorizontal = new Button( "Area Chart" );
+      areaChartHorizontal.setOnAction( event -> graph.areaChart( GraphOrientation.Horizontal ) );
+      grid.add( areaChartHorizontal, 1, 5 );
+      
+//      ISSUE#44
+//      Button stackedAreaChartHorizontal = new Button( "Stacked Area Chart" );
+//      stackedAreaChartHorizontal.setOnAction( event -> graph.stackedAreaChart( GraphOrientation.Horizontal ) );
+//      grid.add( stackedAreaChartHorizontal, 1, 6 );
       
       setPrefWidth( WizardConfiguration.wizardWidth() );
       setPrefHeight( WizardConfiguration.wizardHeight() );
