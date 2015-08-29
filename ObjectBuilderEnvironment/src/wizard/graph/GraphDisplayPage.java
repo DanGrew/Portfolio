@@ -72,7 +72,7 @@ public class GraphDisplayPage extends VBox implements WizardPage< Graph >{
       grid.add( areaChart, 0, 5 );
       
       Button stackedAreaChart = new Button( "Stacked Area Chart" );
-      stackedAreaChart.setOnAction( event -> graph.stackedAreaChart( GraphOrientation.Horizontal ) );
+      stackedAreaChart.setOnAction( event -> graph.stackedAreaChart( GraphOrientation.Vertical ) );
       grid.add( stackedAreaChart, 0, 6 );
       
       Button barChartHorizontal = new Button( "Bar Chart" );
