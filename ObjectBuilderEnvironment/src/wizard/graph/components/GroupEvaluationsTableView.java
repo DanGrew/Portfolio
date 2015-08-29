@@ -150,7 +150,9 @@ public class GroupEvaluationsTableView extends VBox {
          }
          for ( GroupEvaluation evaluation : GroupEvaluation.values() ) {
             if ( evaluation.isCompatible( type.getParameterType() ) ) {
-               availableGroupEvaluations.add( evaluation );
+               if ( !availableGroupEvaluations.contains( evaluation ) ) {
+                  availableGroupEvaluations.add( evaluation );
+               }
             } else {
                availableGroupEvaluations.remove( evaluation );
             }
