@@ -41,6 +41,7 @@ public class SerializableGraphTest {
     * Method to setup some dependent {@link Singleton}s.
     */
    @BeforeClass public static void setup(){
+      RequestSystem.reset();
       ANY_PROPERTY_TYPE_1 = new PropertyTypeImpl( "type1", ClassParameterTypes.STRING_PARAMETER_TYPE );
       RequestSystem.store( ANY_PROPERTY_TYPE_1, PropertyType.class );
       ANY_PROPERTY_TYPE_2 = new PropertyTypeImpl( "type2", ClassParameterTypes.NUMBER_PARAMETER_TYPE );

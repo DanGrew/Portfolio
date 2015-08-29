@@ -35,6 +35,13 @@ import architecture.event.EventSystem;
       super( name );
       this.type = type;
       propertyValues = new HashMap< PropertyType, Property >();
+      
+      PropertyType nameProperty = type.getNamePropertyType();
+      if ( nameProperty != null ) {
+         Property property = retrieveProperty( nameProperty );
+         property.setValue( getIdentification() );
+         propertyValues.put( type.getNamePropertyType(), property );
+      }
    }// End Constructor
    
    /**
@@ -59,6 +66,10 @@ import architecture.event.EventSystem;
     * {@inheritDoc}
     */
    @Cali @Override public void set( PropertyType propertyType, Object value ) {
+      if ( propertyType.equals( type.getNamePropertyType() ) ) {
+         //Cannot change name at this point.
+         return;
+      }
       if ( type.hasProperty( propertyType ) ) {
          Property property = retrieveProperty( propertyType );
          property.setValue( value );

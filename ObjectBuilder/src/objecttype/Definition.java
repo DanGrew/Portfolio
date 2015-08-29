@@ -10,6 +10,7 @@ package objecttype;
 import java.util.List;
 
 import model.data.SingletonSerialization;
+import object.BuilderObject;
 import propertytype.PropertyType;
 
 /**
@@ -22,6 +23,12 @@ public interface Definition extends SingletonSerialization< SerializableDefiniti
    public enum Events {
       PropertyAdded
    }// End Enum
+   
+   /**
+    * Method to get the unique and common {@link PropertyType} for the name of the {@link BuilderObject}.
+    * @return the name {@link PropertyType}.
+    */
+   public PropertyType getNamePropertyType();
    
    /**
     * Method to add a {@link PropertyType} to the {@link Definition}.

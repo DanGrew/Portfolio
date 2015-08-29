@@ -28,4 +28,14 @@ public class DefinitionTest {
       Assert.assertTrue( object.hasProperty( propertyType ) );
    }// End Method
    
+   /**
+    * {@link Definition#getNamePropertyType()} test.
+    */
+   @Test public void shouldHaveBuiltInName(){
+      Definition object = new DefinitionImpl( "Test" );
+      Assert.assertTrue( object.hasProperty( DefinitionStructure.getNamePropertyType() ) );
+      
+      Assert.assertEquals( DefinitionStructure.getNamePropertyType(), object.getNamePropertyType() );
+   }//End Method
+   
 }// End Class

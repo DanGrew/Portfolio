@@ -118,7 +118,7 @@ public class GroupEvaluationPlot implements SeriesExtractor {
     * @return the {@link String} name.
     */
    private String constructName( Search search, PropertyType horizontalProperty ) {
-      return search.getIdentification() + "|" + horizontalProperty.getDisplayName() + "|" + evaluation.getDisplayName();
+      return search.getIdentification() + "|" + horizontalProperty.getDisplayName() + "|" + evaluation.getDisplayName() + "|" + vertical.getDisplayName();
    }//End Method
    
    /**

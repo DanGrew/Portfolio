@@ -7,15 +7,7 @@
  */
 package gui;
 
-import graphs.graph.Graph;
-import importexport.csv.CsvBuilderObjectContents;
-import object.BuilderObjectImpl;
-import objecttype.DefinitionImpl;
-import propertytype.PropertyTypeImpl;
-import search.SearchSpace;
-import system.CaliSystem;
 import architecture.request.RequestSystem;
-
 import command.Command;
 import command.MethodCallCommandImpl;
 import command.NewCommandImpl;
@@ -24,6 +16,14 @@ import commands.DefinitionCommands;
 import commands.PropertyTypeCommands;
 import commands.SystemCommands;
 import commands.parameters.ObjectBuilderClassParameterTypes;
+import graphs.graph.Graph;
+import importexport.csv.CsvBuilderObjectContents;
+import object.BuilderObjectImpl;
+import objecttype.DefinitionImpl;
+import objecttype.DefinitionStructure;
+import propertytype.PropertyTypeImpl;
+import search.SearchSpace;
+import system.CaliSystem;
 
 /**
  * The {@link ObjectBuilder} provides a launcher for the {@link CommandInterpreter} with
@@ -48,6 +48,7 @@ public class ObjectBuilder {
       RequestSystem.store( new MethodCallCommandImpl(), Command.class );
       CaliSystem.register( BuilderObjectImpl.class );
       CaliSystem.register( PropertyTypeImpl.class );
+      DefinitionStructure.initialise();
       CaliSystem.register( DefinitionImpl.class );
       CaliSystem.register( SearchSpace.class );
       CaliSystem.register( Graph.class );

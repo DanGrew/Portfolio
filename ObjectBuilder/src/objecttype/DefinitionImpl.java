@@ -12,10 +12,10 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-import model.singleton.SingletonImpl;
-import propertytype.PropertyType;
 import annotation.Cali;
 import architecture.event.EventSystem;
+import model.singleton.SingletonImpl;
+import propertytype.PropertyType;
 
 /**
  * Implementation of the {@link Definition}.
@@ -31,8 +31,16 @@ import architecture.event.EventSystem;
    @Cali public DefinitionImpl( String identification ) {
       super( identification );
       properties = new LinkedHashSet< PropertyType >();
+      properties.add( getNamePropertyType() );
       this.identification = identification;
    }// End Constructor
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public PropertyType getNamePropertyType() {
+      return DefinitionStructure.getNamePropertyType();
+   }//End Method
    
    /**
     * {@inheritDoc}

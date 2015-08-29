@@ -70,5 +70,27 @@ public class BuilderObjectTest {
       Object value = testObject.get( testPropertyTypeA );
       Assert.assertEquals( testValue, value );
    }// End Method
+   
+   /**
+    * {@link BuilderObject#get(PropertyType)} for name test.
+    */
+   @Test public void shouldHaveNamePropertySet(){
+      Definition definition = new DefinitionImpl( "Test" );
+      BuilderObject object = new BuilderObjectImpl( "object", definition );
+      Assert.assertEquals( object.getIdentification(), object.get( definition.getNamePropertyType() ) );
+      Assert.assertEquals( "object", object.get( definition.getNamePropertyType() ) );
+   }//End Method
+   
+   /**
+    * {@link BuilderObject#set(PropertyType, Object)} for name test.
+    */
+   @Test public void shouldNotModifyNameProperty(){
+      Definition definition = new DefinitionImpl( "Test" );
+      BuilderObject object = new BuilderObjectImpl( "object", definition );
+      Assert.assertEquals( "object", object.get( definition.getNamePropertyType() ) );
+      
+      object.set( definition.getNamePropertyType(), "somethingElse" );
+      Assert.assertEquals( "object", object.get( definition.getNamePropertyType() ) );
+   }//End Method
 
 }// End Class

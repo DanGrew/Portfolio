@@ -37,6 +37,7 @@ public class SerializableDefinitionTest {
    @Test public void collectionSerializationTest() throws IOException {
       List< Definition > actualTypes = new ArrayList< Definition >();
       
+      DefinitionStructure.initialise();
       PropertyType testType1 = new PropertyTypeImpl( "type1", String.class );
       RequestSystem.store( testType1, PropertyType.class );
       PropertyType testType2 = new PropertyTypeImpl( "type2", Number.class );

@@ -21,6 +21,7 @@ import object.SerializableBuilderObjectTest;
 import object.XmlBuilderObjectImpl;
 import objecttype.Definition;
 import objecttype.DefinitionImpl;
+import objecttype.DefinitionStructure;
 import objecttype.SerializableDefinitionTest;
 import objecttype.XmlDefinitionImpl;
 
@@ -49,6 +50,7 @@ public class ObjectBuilderSystemSerializationTest {
     * {@link XmlObjectBuilderSystemWrapper}.
     */
    @Test public void collectionSerializationTest() throws IOException {
+      DefinitionStructure.initialise();
       List< PropertyType > actualPropertyTypes = new ArrayList< PropertyType >();
       PropertyType testType1 = new PropertyTypeImpl( "type1", String.class );
       actualPropertyTypes.add( testType1 );
