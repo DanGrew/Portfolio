@@ -105,13 +105,13 @@ public class GraphTest {
       barChart.addVerticalProperty( VERT_PROPERTY_A );
       barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      barChart.barChart();
+      barChart.barChart( GraphOrientation.Horizontal );
       
       Thread.sleep( 5000 );
       
       //Make a subtle change and prove window is re-launched (note must manually close first).
       barChart.setHorizontalAxisLabel( "ANYTHING" );
-      barChart.barChart();
+      barChart.barChart( GraphOrientation.Horizontal );
       
       Thread.sleep( 500000 );
    }// End Method
@@ -128,7 +128,7 @@ public class GraphTest {
       barChart.addVerticalProperty( VERT_PROPERTY_A );
       barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      GraphResult result = barChart.barChart();
+      GraphResult result = barChart.barChart( GraphOrientation.Horizontal );
       Assert.assertNotNull( result );
       Assert.assertEquals( result.getEnumeration(), GraphError.MissingHorizontalAxis );
    }// End Method
@@ -144,7 +144,7 @@ public class GraphTest {
       
       barChart.setHorizontalProperty( HORIZ_PROPERTY );
       
-      GraphResult result = barChart.barChart();
+      GraphResult result = barChart.barChart( GraphOrientation.Horizontal );
       Assert.assertNotNull( result );
       Assert.assertEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
    }// End Method
@@ -160,18 +160,18 @@ public class GraphTest {
       
       barChart.setHorizontalProperty( HORIZ_PROPERTY );
       
-      GraphResult result = barChart.barChart();
+      GraphResult result = barChart.barChart( GraphOrientation.Horizontal );
       Assert.assertNotNull( result );
       Assert.assertEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
       
       barChart.addVerticalProperty( VERT_PROPERTY_A );
-      result = barChart.barChart();
+      result = barChart.barChart( GraphOrientation.Horizontal );
       Assert.assertNotNull( result );
       Assert.assertNotEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
       
       barChart.clearVerticalProperties();
       barChart.addGroupEvaluation( VERT_PROPERTY_A, GroupEvaluation.Count );
-      result = barChart.barChart();
+      result = barChart.barChart( GraphOrientation.Horizontal );
       Assert.assertNotNull( result );
       Assert.assertNotEquals( result.getEnumeration(), GraphError.MissingVerticalSeries );
    }// End Method
@@ -186,7 +186,7 @@ public class GraphTest {
       barChart.addVerticalProperty( VERT_PROPERTY_A );
       barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      GraphResult result = barChart.barChart();
+      GraphResult result = barChart.barChart( GraphOrientation.Horizontal );
       Assert.assertNotNull( result );
       Assert.assertEquals( result.getEnumeration(), GraphError.MissingSearchCriteria );
    }// End Method
@@ -202,7 +202,7 @@ public class GraphTest {
       barChart.addVerticalProperty( VERT_PROPERTY_A );
       barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      GraphResult result = barChart.barChart();
+      GraphResult result = barChart.barChart( GraphOrientation.Horizontal );
       Assert.assertNotNull( result );
       Assert.assertEquals( result.getEnumeration(), GraphError.MissingSearchCriteria );
    }// End Method
@@ -233,7 +233,7 @@ public class GraphTest {
       barChart.addVerticalProperty( VERT_PROPERTY_A );
       barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      barChart.barChart();
+      barChart.barChart( GraphOrientation.Horizontal );
    }// End Method
    
 }// End Class
