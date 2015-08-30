@@ -23,7 +23,6 @@ import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 /**
  * The {@link Wizard} provides a method of supplying pages of a configuration process

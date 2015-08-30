@@ -8,7 +8,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
- 
+
 public class HorizontalGraphExample extends Application {
     final static String austria = "Austriaalsidufhasdnclakjnsdlkjvbalsjkfvlakjns";
     final static String brazil = "Brazil";
@@ -16,7 +16,7 @@ public class HorizontalGraphExample extends Application {
     final static String italy = "Italy";
     final static String usa = "USA";
  
-    @Override public void start(Stage stage) {
+    @SuppressWarnings({ "rawtypes", "unchecked" }) @Override public void start(Stage stage) {
         stage.setTitle("Bar Chart Sample");
         final NumberAxis xAxis = new NumberAxis();
         final CategoryAxis yAxis = new CategoryAxis();
