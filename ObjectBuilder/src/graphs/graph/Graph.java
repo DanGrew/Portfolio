@@ -29,6 +29,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.StackedAreaChart;
 import javafx.scene.chart.StackedBarChart;
+import javafx.scene.chart.ValueAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.stage.Stage;
@@ -466,7 +467,12 @@ import search.Search;
          case ScatterChart:
             return new ScatterChart<>( horizontalAxis, verticalAxis );
          case StackedAreaChart:
-            return new StackedAreaChart<>( horizontalAxis, verticalAxis );
+            //JavaFx8 does not support swapping the axes.
+            if ( verticalAxis instanceof ValueAxis ) {
+               return new StackedAreaChart<>( horizontalAxis, verticalAxis );
+            } else {
+               return null;
+            }
          case StackedBarChart:
             return new StackedBarChart<>( horizontalAxis, verticalAxis );
          default:

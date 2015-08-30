@@ -95,10 +95,7 @@ public class GraphDisplayPage extends VBox implements WizardPage< Graph >{
       areaChartHorizontal.setOnAction( event -> graph.areaChart( GraphOrientation.Horizontal ) );
       grid.add( areaChartHorizontal, 1, 5 );
       
-//      ISSUE#44
-//      Button stackedAreaChartHorizontal = new Button( "Stacked Area Chart" );
-//      stackedAreaChartHorizontal.setOnAction( event -> graph.stackedAreaChart( GraphOrientation.Horizontal ) );
-//      grid.add( stackedAreaChartHorizontal, 1, 6 );
+      grid.add( new Label( "(Not Supported by Java)" ), 1, 6 );
       
       setPrefWidth( WizardConfiguration.wizardWidth() );
       setPrefHeight( WizardConfiguration.wizardHeight() );
