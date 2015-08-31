@@ -7,6 +7,7 @@
  */
 package graphs.series;
 
+import graphs.graph.sorting.GraphSort;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import object.BuilderObject;
@@ -23,6 +24,7 @@ public interface SeriesExtractor {
     * Method to construct a {@link Series} from the given data.
     * @param search the {@link Search} providing the {@link BuilderObject} data.
     * @param horizontal the {@link PropertyType} used for the horizontal axis.
+    * @param sorting the {@link GraphSort} to use, can be null.
     * @param defaultString the default value for {@link String}s when not present.
     * @param defaultNumber the default value for {@link Number}s when not present.
     * @return a {@link Series} of the data.
@@ -30,6 +32,7 @@ public interface SeriesExtractor {
    public Series< String, Number > constructSeries( 
             Search search, 
             PropertyType horizontal, 
+            GraphSort sorting,
             String defaultString, 
             Number defaultNumber 
    );

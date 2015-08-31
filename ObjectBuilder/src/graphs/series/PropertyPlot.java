@@ -8,9 +8,10 @@
 package graphs.series;
 
 import architecture.utility.Defense;
-import object.BuilderObject;
+import graphs.graph.sorting.GraphSort;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
+import object.BuilderObject;
 import propertytype.PropertyType;
 import search.Search;
 
@@ -70,6 +71,7 @@ public class PropertyPlot implements SeriesExtractor {
    @Override public Series< String, Number > constructSeries( 
             Search search, 
             PropertyType horizontal, 
+            GraphSort sorting, 
             String defaultString, 
             Number defaultNumber 
    ) {
@@ -80,6 +82,10 @@ public class PropertyPlot implements SeriesExtractor {
          String horizontalValue = Defense.defendString( object.get( horizontal ), defaultString );
          Data< String, Number > data = new Data<>( horizontalValue, verticalValue );
          series.getData().add( data );
+      }
+      
+      if ( sorting != null ) {
+         sorting.sortSeries( series.getData() );
       }
       return series;
    }// End Method

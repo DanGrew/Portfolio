@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
+import architecture.utility.Defense;
+import graphs.graph.sorting.GraphSort;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import object.BuilderObject;
 import propertytype.PropertyType;
 import search.Search;
-import architecture.utility.Defense;
 
 /**
  * The {@link GroupEvaluationPlot} provides a method of constructing {@link Series}
@@ -104,11 +104,12 @@ public class GroupEvaluationPlot implements SeriesExtractor {
    @Override public Series< String, Number > constructSeries( 
             Search search, 
             PropertyType horizontal, 
+            GraphSort sorting,
             String defaultString,
             Number defaultNumber 
    ) {
       categorise( search, horizontal, defaultString );;
-      return performFunction( constructName( search, horizontal ), defaultNumber, evaluation );
+      return performFunction( constructName( search, horizontal ), sorting, defaultNumber, evaluation );
    }// End Method
    
    /**
@@ -125,16 +126,23 @@ public class GroupEvaluationPlot implements SeriesExtractor {
     * Method to perform the {@link NumberFunction} associated with the {@link GroupEvaluation} on the
     * categorised {@link BuilderObject}s.
     * @param name the name of the {@link Series}.
+    * @param sorting the {@link GraphSort} to use, can be null.
     * @param defaultNumber the default number to use if the property isnt set.
     * @param function the {@link NumberFunction} to use.
     * @return a {@link Series} of category key to the result of the {@link NumberFunction}.
     */
-   private Series< String, Number > performFunction( String name, Number defaultNumber, NumberFunction function ) {
+   private Series< String, Number > performFunction( String name, GraphSort sorting, Number defaultNumber, NumberFunction function ) {
       Series< String, Number > series = new Series<>();
       series.setName( name );
       function.reset();
-      for ( Entry< String, List< BuilderObject > > entry : categorisedObjects.entrySet() ) {
-         List< BuilderObject > objects = entry.getValue();
+      
+      List< String > categories = new ArrayList<>( categorisedObjects.keySet() );
+      if ( sorting != null ) {
+         sorting.sortList( categories );
+      }
+      
+      for ( String category : categories ) {
+         List< BuilderObject > objects = categorisedObjects.get( category );
          
          if ( objects.size() == 0 ) {
             function.consider( defaultNumber.doubleValue() );
@@ -147,7 +155,7 @@ public class GroupEvaluationPlot implements SeriesExtractor {
          }
          
          Data< String, Number > data = new Data<>();
-         data.setXValue( entry.getKey() );
+         data.setXValue( category );
          data.setYValue( function.getResult() );
          series.getData().add( data );
          function.nextCategory();

@@ -401,13 +401,9 @@ import search.Search;
             for ( Search search : dataSeries ) {
                for ( SeriesExtractor extractor : extractions.getExtractors() ) {
                   Series< String, Number > series = extractor.constructSeries( 
-                           search, horizontalProperty, undefinedString, undefinedNumber 
+                           search, horizontalProperty, sorting, undefinedString, undefinedNumber 
                   ); 
-                  
-                  if ( sorting != null ) {
-                     sorting.sort( series.getData() );
-                  }
-                  
+
                   switch ( orienation ) {
                      case Horizontal:
                         Series< Number, String > reversed = SeriesExtractor.reverseParameters( series );

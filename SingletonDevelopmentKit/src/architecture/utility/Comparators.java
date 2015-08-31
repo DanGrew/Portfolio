@@ -10,6 +10,8 @@ package architecture.utility;
 import java.time.LocalDate;
 import java.util.Comparator;
 
+import javafx.scene.chart.XYChart.Data;
+
 /**
  * {@link Comparators} provides common {@link Comparator} functions and methods for sorting objects.
  */
@@ -93,6 +95,24 @@ public class Comparators {
          }
       };
    }// End Method
+   
+   /**
+    * {@link Comparator} for comparing {@link Data} for which the x value should be compared.
+    * @param valueComparator the {@link Comparator} for the {@link String} x value to sort by.
+    * @return a {@link Comparator} for the {@link Data} wrapping the given {@link Comparator}.
+    */
+   public static Comparator< Data< String, ? > > seriesComparator( Comparator< String > valueComparator ) {
+      return new Comparator< Data< String, ? > >() {
+         @Override public int compare( Data< String, ? > itemA, Data< String, ? > itemB ) {
+            Integer inputNullCheck = Comparators.compareForNullValues( itemA, itemB, true );
+            if ( inputNullCheck != null ) {
+               return inputNullCheck;
+            }
+            
+            return valueComparator.compare( itemA.getXValue(), itemB.getXValue() );
+         }
+      };
+   }//End Method
    
    /**
     * Method to check the given objects based on a particular order.

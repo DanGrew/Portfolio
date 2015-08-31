@@ -30,7 +30,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "any", 5 ) );
       series.getData().add( new Data< String, Number >( "sort", 6 ) );
       
-      GraphSort.StringAlphabetical.sort( series.getData() );
+      GraphSort.StringAlphabetical.sortSeries( series.getData() );
       
       Assert.assertEquals( "any", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 5, series.getData().get( 0 ).getYValue() );
@@ -58,7 +58,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( null, 5 ) );
       series.getData().add( new Data< String, Number >( "sort", 6 ) );
       
-      GraphSort.StringAlphabetical.sort( series.getData() );
+      GraphSort.StringAlphabetical.sortSeries( series.getData() );
       
       Assert.assertEquals( null, series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 1, series.getData().get( 0 ).getYValue() );
@@ -86,7 +86,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "same", 5 ) );
       series.getData().add( new Data< String, Number >( "sort", 6 ) );
       
-      GraphSort.StringAlphabetical.sort( series.getData() );
+      GraphSort.StringAlphabetical.sortSeries( series.getData() );
       
       Assert.assertEquals( "in", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 4, series.getData().get( 0 ).getYValue() );
@@ -114,7 +114,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "any", 5 ) );
       series.getData().add( new Data< String, Number >( "sort", 6 ) );
       
-      GraphSort.StringReverseAlphabetical.sort( series.getData() );
+      GraphSort.StringReverseAlphabetical.sortSeries( series.getData() );
       
       Assert.assertEquals( "sort", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
@@ -142,7 +142,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( null, 5 ) );
       series.getData().add( new Data< String, Number >( "sort", 6 ) );
       
-      GraphSort.StringReverseAlphabetical.sort( series.getData() );
+      GraphSort.StringReverseAlphabetical.sortSeries( series.getData() );
       
       Assert.assertEquals( "sort", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
@@ -170,7 +170,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "same", 5 ) );
       series.getData().add( new Data< String, Number >( "sort", 6 ) );
       
-      GraphSort.StringReverseAlphabetical.sort( series.getData() );
+      GraphSort.StringReverseAlphabetical.sortSeries( series.getData() );
       
       Assert.assertEquals( "sort", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
@@ -198,7 +198,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "1", 5 ) );
       series.getData().add( new Data< String, Number >( "1765432", 6 ) );
       
-      GraphSort.NumberAscending.sort( series.getData() );
+      GraphSort.NumberAscending.sortSeries( series.getData() );
       
       Assert.assertEquals( "1", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 5, series.getData().get( 0 ).getYValue() );
@@ -226,7 +226,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( null, 5 ) );
       series.getData().add( new Data< String, Number >( "1765432", 6 ) );
       
-      GraphSort.NumberAscending.sort( series.getData() );
+      GraphSort.NumberAscending.sortSeries( series.getData() );
       
       Assert.assertEquals( null, series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 1, series.getData().get( 0 ).getYValue() );
@@ -254,7 +254,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "8", 5 ) );
       series.getData().add( new Data< String, Number >( "1765432", 6 ) );
       
-      GraphSort.NumberAscending.sort( series.getData() );
+      GraphSort.NumberAscending.sortSeries( series.getData() );
       
       Assert.assertEquals( "1", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 4, series.getData().get( 0 ).getYValue() );
@@ -282,7 +282,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "1", 5 ) );
       series.getData().add( new Data< String, Number >( "1765432", 6 ) );
       
-      GraphSort.NumberDescending.sort( series.getData() );
+      GraphSort.NumberDescending.sortSeries( series.getData() );
       
       Assert.assertEquals( "1765432", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
@@ -310,7 +310,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( null, 5 ) );
       series.getData().add( new Data< String, Number >( "1765432", 6 ) );
       
-      GraphSort.NumberDescending.sort( series.getData() );
+      GraphSort.NumberDescending.sortSeries( series.getData() );
       
       Assert.assertEquals( "1765432", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
@@ -338,7 +338,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "8", 5 ) );
       series.getData().add( new Data< String, Number >( "1765432", 6 ) );
       
-      GraphSort.NumberDescending.sort( series.getData() );
+      GraphSort.NumberDescending.sortSeries( series.getData() );
       
       Assert.assertEquals( "1765432", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
@@ -366,7 +366,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "15/07/2015", 5 ) );
       series.getData().add( new Data< String, Number >( "27/01/4016", 6 ) );
       
-      GraphSort.DateAscending.sort( series.getData() );
+      GraphSort.DateAscending.sortSeries( series.getData() );
       
       Assert.assertEquals( "15/07/2015", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 5, series.getData().get( 0 ).getYValue() );
@@ -394,7 +394,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( null, 5 ) );
       series.getData().add( new Data< String, Number >( "15/07/4015", 6 ) );
       
-      GraphSort.DateAscending.sort( series.getData() );
+      GraphSort.DateAscending.sortSeries( series.getData() );
       
       Assert.assertEquals( null, series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 1, series.getData().get( 0 ).getYValue() );
@@ -422,7 +422,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "18/08/2015", 5 ) );
       series.getData().add( new Data< String, Number >( "20/08/4015", 6 ) );
       
-      GraphSort.DateAscending.sort( series.getData() );
+      GraphSort.DateAscending.sortSeries( series.getData() );
       
       Assert.assertEquals( "15/07/2015", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 2, series.getData().get( 0 ).getYValue() );
@@ -450,7 +450,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "15/07/2015", 5 ) );
       series.getData().add( new Data< String, Number >( "27/01/4016", 6 ) );
       
-      GraphSort.DateDescending.sort( series.getData() );
+      GraphSort.DateDescending.sortSeries( series.getData() );
       
       Assert.assertEquals( "15/07/2015", series.getData().get( 5 ).getXValue() );
       Assert.assertEquals( 5, series.getData().get( 5 ).getYValue() );
@@ -478,7 +478,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( null, 5 ) );
       series.getData().add( new Data< String, Number >( "15/07/4015", 6 ) );
       
-      GraphSort.DateDescending.sort( series.getData() );
+      GraphSort.DateDescending.sortSeries( series.getData() );
       
       Assert.assertEquals( null, series.getData().get( 3 ).getXValue() );
       Assert.assertEquals( 1, series.getData().get( 3 ).getYValue() );
@@ -506,7 +506,7 @@ public class GraphSortTest {
       series.getData().add( new Data< String, Number >( "18/08/2015", 5 ) );
       series.getData().add( new Data< String, Number >( "20/08/4015", 6 ) );
       
-      GraphSort.DateDescending.sort( series.getData() );
+      GraphSort.DateDescending.sortSeries( series.getData() );
       
       Assert.assertEquals( "15/07/2015", series.getData().get( 5 ).getXValue() );
       Assert.assertEquals( 2, series.getData().get( 5 ).getYValue() );

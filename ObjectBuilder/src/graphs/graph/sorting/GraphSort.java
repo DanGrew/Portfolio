@@ -28,14 +28,7 @@ import parameter.classparameter.NumberClassParameterTypeImpl;
 public enum GraphSort {
    
    StringAlphabetical( ClassParameterTypes.STRING_PARAMETER_TYPE, ( itemA, itemB ) -> {
-      Integer inputNullCheck = Comparators.compareForNullValues( itemA, itemB, true );
-      if ( inputNullCheck != null ) {
-         return inputNullCheck;
-      }
-      
-      String itemAString = itemA.getXValue();
-      String itemBString = itemB.getXValue();
-      return Comparators.compare( itemAString, itemBString );
+      return Comparators.compare( itemA, itemB );
    } ),
    
    StringReverseAlphabetical( 
@@ -44,13 +37,8 @@ public enum GraphSort {
    ),
    
    NumberAscending( ClassParameterTypes.NUMBER_PARAMETER_TYPE, ( itemA, itemB ) -> {
-      Integer inputNullCheck = Comparators.compareForNullValues( itemA, itemB, true );
-      if ( inputNullCheck != null ) {
-         return inputNullCheck;
-      }
-      
-      Double itemAString = NumberClassParameterTypeImpl.objectToNumber( itemA.getXValue() );
-      Double itemBString = NumberClassParameterTypeImpl.objectToNumber( itemB.getXValue() );
+      Double itemAString = NumberClassParameterTypeImpl.objectToNumber( itemA );
+      Double itemBString = NumberClassParameterTypeImpl.objectToNumber( itemB );
       return Comparators.compare( itemAString, itemBString );
    } ),
    
@@ -60,13 +48,8 @@ public enum GraphSort {
    ),
    
    DateAscending( ClassParameterTypes.DATE_PARAMETER_TYPE, ( itemA, itemB ) -> {
-      Integer inputNullCheck = Comparators.compareForNullValues( itemA, itemB, true );
-      if ( inputNullCheck != null ) {
-         return inputNullCheck;
-      }
-      
-      LocalDate itemAString = DateClassParameterTypeImpl.objectToDate( itemA.getXValue() );
-      LocalDate itemBString = DateClassParameterTypeImpl.objectToDate( itemB.getXValue() );
+      LocalDate itemAString = DateClassParameterTypeImpl.objectToDate( itemA );
+      LocalDate itemBString = DateClassParameterTypeImpl.objectToDate( itemB );
       return Comparators.compare( itemAString, itemBString );
    } ),
    
@@ -75,7 +58,7 @@ public enum GraphSort {
             Comparators.reverseComparator( DateAscending.comparatorFunction )
    );
    
-   private Comparator< Data< String, Number > > comparatorFunction;
+   private Comparator< String > comparatorFunction;
    private ClassParameterType parameterType;
    
    /**
@@ -83,7 +66,7 @@ public enum GraphSort {
     * @param type the {@link ClassParameterType} the sort compatible with.
     * @param comparatorFunction the {@link Comparator} for ordering the {@link Data}.
     */
-   private GraphSort( ClassParameterType type, Comparator< Data< String, Number > > comparatorFunction ) {
+   private GraphSort( ClassParameterType type, Comparator< String > comparatorFunction ) {
       this.parameterType = type;
       this.comparatorFunction = comparatorFunction;
    }// End Constructor
@@ -92,7 +75,15 @@ public enum GraphSort {
     * Method to sort the given {@link Data} from the {@link Series}.
     * @param data the data to order.
     */
-   public void sort( List< Data< String, Number > > data ) {
+   public void sortSeries( List< Data< String, Number > > data ) {
+      Collections.sort( data, Comparators.seriesComparator( comparatorFunction ) );
+   }// End Method
+   
+   /**
+    * Method to sort the given {@link String}s according the associated {@link Comparator}.
+    * @param data the {@link List} to sort.
+    */
+   public void sortList( List< String > data ) {
       Collections.sort( data, comparatorFunction );
    }// End Method
    

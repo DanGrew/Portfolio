@@ -44,7 +44,7 @@ public class GroupEvaluationPlotTest {
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE, objectF, objectG ) );
       
-      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, "x", 0.0 );
+      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, null, "x", 0.0 );
       Assert.assertEquals( "first", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 4.0, series.getData().get( 0 ).getYValue() );
       Assert.assertEquals( "second", series.getData().get( 1 ).getXValue() );
@@ -72,7 +72,7 @@ public class GroupEvaluationPlotTest {
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE, objectF, objectG ) );
       
-      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, "x", 0.0 );
+      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, null, "x", 0.0 );
       Assert.assertEquals( "first", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 4.0, series.getData().get( 0 ).getYValue() );
       Assert.assertEquals( "second", series.getData().get( 1 ).getXValue() );
@@ -101,7 +101,7 @@ public class GroupEvaluationPlotTest {
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE, objectF, objectG, objectH ) );
       
-      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, "x", 0.0 );
+      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, null, "x", 0.0 );
       Assert.assertEquals( "first", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 25.0, series.getData().get( 0 ).getYValue() );
       Assert.assertEquals( "second", series.getData().get( 1 ).getXValue() );
@@ -133,7 +133,7 @@ public class GroupEvaluationPlotTest {
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE, objectF, objectG ) );
       
-      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, "x", 0.0 );
+      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, null, "x", 0.0 );
       Assert.assertEquals( "first", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 0.0, series.getData().get( 0 ).getYValue() );
       Assert.assertEquals( "second", series.getData().get( 1 ).getXValue() );
@@ -162,7 +162,7 @@ public class GroupEvaluationPlotTest {
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE, objectF, objectG, objectH ) );
       
-      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, "x", 0.0 );
+      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, null, "x", 0.0 );
       Assert.assertEquals( "first", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 43.0, series.getData().get( 0 ).getYValue() );
       Assert.assertEquals( "second", series.getData().get( 1 ).getXValue() );
@@ -191,7 +191,7 @@ public class GroupEvaluationPlotTest {
       Search search = Mockito.mock( Search.class );
       Mockito.when( search.getMatches() ).thenReturn( Arrays.asList( objectA, objectB, objectC, objectD, objectE, objectF, objectG, objectH ) );
       
-      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, "x", 0.0 );
+      Series< String, Number > series = plot.constructSeries( search, sampleHorizontal, null, "x", 0.0 );
       Assert.assertEquals( "first", series.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 43.0/4, series.getData().get( 0 ).getYValue() );
       Assert.assertEquals( "second", series.getData().get( 1 ).getXValue() );
