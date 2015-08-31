@@ -353,4 +353,173 @@ public class GraphSortTest {
       Assert.assertEquals( "1", series.getData().get( 5 ).getXValue() );
       Assert.assertEquals( 4, series.getData().get( 5 ).getYValue() );
    }// End Method
+   
+   /**
+    * {@link GraphSort#DateAscending} test.
+    */
+   @Test public void shouldDateAscendingSortWithSafeData() {
+      Series< String, Number > series = new Series<>();
+      series.getData().add( new Data< String, Number >( "27/01/2016", 1 ) );
+      series.getData().add( new Data< String, Number >( "15/10/2015", 2 ) );
+      series.getData().add( new Data< String, Number >( "27/02/2016", 3 ) );
+      series.getData().add( new Data< String, Number >( "28/01/2016", 4 ) );
+      series.getData().add( new Data< String, Number >( "15/07/2015", 5 ) );
+      series.getData().add( new Data< String, Number >( "27/01/4016", 6 ) );
+      
+      GraphSort.DateAscending.sort( series.getData() );
+      
+      Assert.assertEquals( "15/07/2015", series.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( 5, series.getData().get( 0 ).getYValue() );
+      Assert.assertEquals( "15/10/2015", series.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( 2, series.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( "27/01/2016", series.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( 1, series.getData().get( 2 ).getYValue() );
+      Assert.assertEquals( "28/01/2016", series.getData().get( 3 ).getXValue() );
+      Assert.assertEquals( 4, series.getData().get( 3 ).getYValue() );
+      Assert.assertEquals( "27/02/2016", series.getData().get( 4 ).getXValue() );
+      Assert.assertEquals( 3, series.getData().get( 4 ).getYValue() );
+      Assert.assertEquals( "27/01/4016", series.getData().get( 5 ).getXValue() );
+      Assert.assertEquals( 6, series.getData().get( 5 ).getYValue() );
+   }// End Method
+   
+   /**
+    * {@link GraphSort#DateAscending} test.
+    */
+   @Test public void shouldDateAscendingSortWithMissingData() {
+      Series< String, Number > series = new Series<>();
+      series.getData().add( new Data< String, Number >( null, 1 ) );
+      series.getData().add( new Data< String, Number >( "15/07/2015", 2 ) );
+      series.getData().add( new Data< String, Number >( null, 3 ) );
+      series.getData().add( new Data< String, Number >( "18/07/2015", 4 ) );
+      series.getData().add( new Data< String, Number >( null, 5 ) );
+      series.getData().add( new Data< String, Number >( "15/07/4015", 6 ) );
+      
+      GraphSort.DateAscending.sort( series.getData() );
+      
+      Assert.assertEquals( null, series.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( 1, series.getData().get( 0 ).getYValue() );
+      Assert.assertEquals( null, series.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( 3, series.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( null, series.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( 5, series.getData().get( 2 ).getYValue() );
+      Assert.assertEquals( "15/07/2015", series.getData().get( 3 ).getXValue() );
+      Assert.assertEquals( 2, series.getData().get( 3 ).getYValue() );
+      Assert.assertEquals( "18/07/2015", series.getData().get( 4 ).getXValue() );
+      Assert.assertEquals( 4, series.getData().get( 4 ).getYValue() );
+      Assert.assertEquals( "15/07/4015", series.getData().get( 5 ).getXValue() );
+      Assert.assertEquals( 6, series.getData().get( 5 ).getYValue() );
+   }// End Method
+   
+   /**
+    * {@link GraphSort#DateAscending} test.
+    */
+   @Test public void shouldDateAscendingSortWithEqualData() {
+      Series< String, Number > series = new Series<>();
+      series.getData().add( new Data< String, Number >( "18/08/2015", 1 ) );
+      series.getData().add( new Data< String, Number >( "15/07/2015", 2 ) );
+      series.getData().add( new Data< String, Number >( "18/08/2015", 3 ) );
+      series.getData().add( new Data< String, Number >( "15/08/2015", 4 ) );
+      series.getData().add( new Data< String, Number >( "18/08/2015", 5 ) );
+      series.getData().add( new Data< String, Number >( "20/08/4015", 6 ) );
+      
+      GraphSort.DateAscending.sort( series.getData() );
+      
+      Assert.assertEquals( "15/07/2015", series.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( 2, series.getData().get( 0 ).getYValue() );
+      Assert.assertEquals( "15/08/2015", series.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( 4, series.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( "18/08/2015", series.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( 1, series.getData().get( 2 ).getYValue() );
+      Assert.assertEquals( "18/08/2015", series.getData().get( 3 ).getXValue() );
+      Assert.assertEquals( 3, series.getData().get( 3 ).getYValue() );
+      Assert.assertEquals( "18/08/2015", series.getData().get( 4 ).getXValue() );
+      Assert.assertEquals( 5, series.getData().get( 4 ).getYValue() );
+      Assert.assertEquals( "20/08/4015", series.getData().get( 5 ).getXValue() );
+      Assert.assertEquals( 6, series.getData().get( 5 ).getYValue() );
+   }// End Method
+   
+   /**
+    * {@link GraphSort#DateDescending} test.
+    */
+   @Test public void shouldDateDescendingSortWithSafeData() {
+      Series< String, Number > series = new Series<>();
+      series.getData().add( new Data< String, Number >( "27/01/2016", 1 ) );
+      series.getData().add( new Data< String, Number >( "15/10/2015", 2 ) );
+      series.getData().add( new Data< String, Number >( "27/02/2016", 3 ) );
+      series.getData().add( new Data< String, Number >( "28/01/2016", 4 ) );
+      series.getData().add( new Data< String, Number >( "15/07/2015", 5 ) );
+      series.getData().add( new Data< String, Number >( "27/01/4016", 6 ) );
+      
+      GraphSort.DateDescending.sort( series.getData() );
+      
+      Assert.assertEquals( "15/07/2015", series.getData().get( 5 ).getXValue() );
+      Assert.assertEquals( 5, series.getData().get( 5 ).getYValue() );
+      Assert.assertEquals( "15/10/2015", series.getData().get( 4 ).getXValue() );
+      Assert.assertEquals( 2, series.getData().get( 4 ).getYValue() );
+      Assert.assertEquals( "27/01/2016", series.getData().get( 3 ).getXValue() );
+      Assert.assertEquals( 1, series.getData().get( 3 ).getYValue() );
+      Assert.assertEquals( "28/01/2016", series.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( 4, series.getData().get( 2 ).getYValue() );
+      Assert.assertEquals( "27/02/2016", series.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( 3, series.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( "27/01/4016", series.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
+   }// End Method
+   
+   /**
+    * {@link GraphSort#DateDescending} test.
+    */
+   @Test public void shouldDateDescendingSortWithMissingData() {
+      Series< String, Number > series = new Series<>();
+      series.getData().add( new Data< String, Number >( null, 1 ) );
+      series.getData().add( new Data< String, Number >( "15/07/2015", 2 ) );
+      series.getData().add( new Data< String, Number >( null, 3 ) );
+      series.getData().add( new Data< String, Number >( "18/07/2015", 4 ) );
+      series.getData().add( new Data< String, Number >( null, 5 ) );
+      series.getData().add( new Data< String, Number >( "15/07/4015", 6 ) );
+      
+      GraphSort.DateDescending.sort( series.getData() );
+      
+      Assert.assertEquals( null, series.getData().get( 3 ).getXValue() );
+      Assert.assertEquals( 1, series.getData().get( 3 ).getYValue() );
+      Assert.assertEquals( null, series.getData().get( 4 ).getXValue() );
+      Assert.assertEquals( 3, series.getData().get( 4 ).getYValue() );
+      Assert.assertEquals( null, series.getData().get( 5 ).getXValue() );
+      Assert.assertEquals( 5, series.getData().get( 5 ).getYValue() );
+      Assert.assertEquals( "15/07/2015", series.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( 2, series.getData().get( 2 ).getYValue() );
+      Assert.assertEquals( "18/07/2015", series.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( 4, series.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( "15/07/4015", series.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
+   }// End Method
+   
+   /**
+    * {@link GraphSort#DateDescending} test.
+    */
+   @Test public void shouldDateDescendingSortWithEqualData() {
+      Series< String, Number > series = new Series<>();
+      series.getData().add( new Data< String, Number >( "18/08/2015", 1 ) );
+      series.getData().add( new Data< String, Number >( "15/07/2015", 2 ) );
+      series.getData().add( new Data< String, Number >( "18/08/2015", 3 ) );
+      series.getData().add( new Data< String, Number >( "15/08/2015", 4 ) );
+      series.getData().add( new Data< String, Number >( "18/08/2015", 5 ) );
+      series.getData().add( new Data< String, Number >( "20/08/4015", 6 ) );
+      
+      GraphSort.DateDescending.sort( series.getData() );
+      
+      Assert.assertEquals( "15/07/2015", series.getData().get( 5 ).getXValue() );
+      Assert.assertEquals( 2, series.getData().get( 5 ).getYValue() );
+      Assert.assertEquals( "15/08/2015", series.getData().get( 4 ).getXValue() );
+      Assert.assertEquals( 4, series.getData().get( 4 ).getYValue() );
+      Assert.assertEquals( "18/08/2015", series.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( 1, series.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( "18/08/2015", series.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( 3, series.getData().get( 2 ).getYValue() );
+      Assert.assertEquals( "18/08/2015", series.getData().get( 3 ).getXValue() );
+      Assert.assertEquals( 5, series.getData().get( 3 ).getYValue() );
+      Assert.assertEquals( "20/08/4015", series.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( 6, series.getData().get( 0 ).getYValue() );
+   }// End Method
+
 }// End Class

@@ -7,6 +7,7 @@
  */
 package architecture.utility;
 
+import java.time.LocalDate;
 import java.util.Comparator;
 
 /**
@@ -56,6 +57,28 @@ public class Comparators {
     */
    public static int compare( Double o1, Double o2 ) {
       return NUMBER_ASCENDING.compare( o1, o2 );
+   }// End Method
+   
+   /** Basic implementation of a {@link LocalDate} {@link Comparator}.**/
+   private static final Comparator< LocalDate > DATE_ASCENDING = new Comparator< LocalDate >() {
+      @Override public int compare( LocalDate o1, LocalDate o2 ) {
+         Integer nullResult = compareForNullValues( o1, o2, true );
+         if ( nullResult == null ) {
+            return o1.compareTo( o2 );
+         } else {
+            return nullResult;
+         }
+      }
+   };
+   
+   /**
+    * Method to compare two {@link LocalDate}s. Note accepts nulls.
+    * @param o1 the first.
+    * @param o2 the second.
+    * @return {@link Double#compareTo(LocalDate)} with null checking.
+    */
+   public static int compare( LocalDate o1, LocalDate o2 ) {
+      return DATE_ASCENDING.compare( o1, o2 );
    }// End Method
    
    /**

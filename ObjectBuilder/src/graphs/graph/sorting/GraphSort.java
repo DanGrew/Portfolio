@@ -7,18 +7,19 @@
  */
 package graphs.graph.sorting;
 
-import graphs.graph.Graph;
-
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import architecture.utility.Comparators;
+import graphs.graph.Graph;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.DateClassParameterTypeImpl;
 import parameter.classparameter.NumberClassParameterTypeImpl;
-import architecture.utility.Comparators;
 
 /**
  * The {@link GraphSort} provides methods of sorting the {@link Graph}'s horizontal axis
@@ -56,6 +57,22 @@ public enum GraphSort {
    NumberDescending( 
             ClassParameterTypes.NUMBER_PARAMETER_TYPE,
             Comparators.reverseComparator( NumberAscending.comparatorFunction )
+   ),
+   
+   DateAscending( ClassParameterTypes.DATE_PARAMETER_TYPE, ( itemA, itemB ) -> {
+      Integer inputNullCheck = Comparators.compareForNullValues( itemA, itemB, true );
+      if ( inputNullCheck != null ) {
+         return inputNullCheck;
+      }
+      
+      LocalDate itemAString = DateClassParameterTypeImpl.objectToDate( itemA.getXValue() );
+      LocalDate itemBString = DateClassParameterTypeImpl.objectToDate( itemB.getXValue() );
+      return Comparators.compare( itemAString, itemBString );
+   } ),
+   
+   DateDescending( 
+            ClassParameterTypes.DATE_PARAMETER_TYPE,
+            Comparators.reverseComparator( DateAscending.comparatorFunction )
    );
    
    private Comparator< Data< String, Number > > comparatorFunction;
