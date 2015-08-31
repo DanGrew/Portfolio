@@ -18,7 +18,12 @@ public enum GroupEvaluation implements NumberFunction {
    Maximum( GroupEvaluationFunctions.newMaximumFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE ), 
    Minimum( GroupEvaluationFunctions.newMinimumFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE ), 
    Sum( GroupEvaluationFunctions.newSumFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE ), 
-   Average( GroupEvaluationFunctions.newAverageFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE );
+   Average( GroupEvaluationFunctions.newAverageFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE ), 
+   CumulativeCount( GroupEvaluationFunctions.newCumulativeCountFunction(), null ), 
+   CumulativeMaximum( GroupEvaluationFunctions.newCumulativeMaximumFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE ), 
+   CumulativeMinimum( GroupEvaluationFunctions.newCumulativeMinimumFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE ), 
+   CumulativeSum( GroupEvaluationFunctions.newCumulativeSumFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE ), 
+   CumulativeAverage( GroupEvaluationFunctions.newCumulativeAverageFunction(), ClassParameterTypes.NUMBER_PARAMETER_TYPE );
    
    private NumberFunction function;
    private ClassParameterType compatibleType;
@@ -49,9 +54,16 @@ public enum GroupEvaluation implements NumberFunction {
    /**
     * {@inheritDoc}
     */
+   @Override public void nextCategory() {
+      function.nextCategory();
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public void reset() {
       function.reset();
-   }// End Method
+   }//End Method
 
    /**
     * Method to get a display friendly name.

@@ -132,8 +132,8 @@ public class GroupEvaluationPlot implements SeriesExtractor {
    private Series< String, Number > performFunction( String name, Number defaultNumber, NumberFunction function ) {
       Series< String, Number > series = new Series<>();
       series.setName( name );
+      function.reset();
       for ( Entry< String, List< BuilderObject > > entry : categorisedObjects.entrySet() ) {
-         function.reset();
          List< BuilderObject > objects = entry.getValue();
          
          if ( objects.size() == 0 ) {
@@ -150,6 +150,7 @@ public class GroupEvaluationPlot implements SeriesExtractor {
          data.setXValue( entry.getKey() );
          data.setYValue( function.getResult() );
          series.getData().add( data );
+         function.nextCategory();
       }
       return series;
    }// End Method
