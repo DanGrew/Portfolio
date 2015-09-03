@@ -102,13 +102,31 @@ public enum GraphDataPolicy {
     * @param defaultNumberNotConverted the default value to use, unconverted for ease.
     * @return the converted {@link Series}.
     */
-   public Series< Number, Number > convertStringSeries( Series< String, Number > series, String defaultNumberNotConverted ) {
+   public Series< Number, Number > convertHorizontalSeries( Series< String, Number > series, String defaultNumberNotConverted ) {
       Series< Number, Number > converted = new Series<>();
       converted.setName( series.getName() );
       
       for ( Data< String, Number > datum : series.getData() ) {
          Number convertedXValue = convertStringToNumber( datum.getXValue(), defaultNumberNotConverted );
          converted.getData().add( new Data< Number, Number >( convertedXValue, datum.getYValue() ) );
+      }
+      return converted;
+   }//End Method
+   
+   /**
+    * Method to convert a {@link Series} of {@link Number} to {@link String} into a {@link Number} to {@link Number} using the
+    * associated conversion {@link Function}s.
+    * @param series the {@link Series} to convert.
+    * @param defaultNumberNotConverted the default value to use, unconverted for ease.
+    * @return the converted {@link Series}.
+    */
+   public Series< Number, Number > convertVerticalSeries( Series< Number, String > series, String defaultNumberNotConverted ) {
+      Series< Number, Number > converted = new Series<>();
+      converted.setName( series.getName() );
+      
+      for ( Data< Number, String > datum : series.getData() ) {
+         Number convertedYValue = convertStringToNumber( datum.getYValue(), defaultNumberNotConverted );
+         converted.getData().add( new Data< Number, Number >( datum.getXValue(), convertedYValue ) );
       }
       return converted;
    }//End Method

@@ -149,7 +149,7 @@ public class GraphTest {
       
       barChart.addVerticalProperty( VERT_PROPERTY_B );
       
-      barChart.barChart( GraphOrientation.Horizontal );
+      barChart.lineChart( GraphOrientation.Vertical );
       
       Thread.sleep( 50000 );
    }// End Method

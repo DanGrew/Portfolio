@@ -81,9 +81,9 @@ public class GraphDataPolicyTest {
    }//End Method
    
    /**
-    * {@link GraphDataPolicy#ContinuousNumbers#convertStringSeries(Series, String)} test.
+    * {@link GraphDataPolicy#ContinuousNumbers#convertHorizontalSeries(Series, String)} test.
     */
-   @Test public void shouldSupportContinuousNumberData() {
+   @Test public void shouldSupportHorizontalContinuousNumberData() {
       Series< String, Number > series = new Series<>();
       series.getData().add( new Data< String, Number >( "34", 1 ) );
       series.getData().add( new Data< String, Number >( "14.5", 2 ) );
@@ -92,7 +92,7 @@ public class GraphDataPolicyTest {
       series.getData().add( new Data< String, Number >( null, 5 ) );
       series.getData().add( new Data< String, Number >( "34", 6 ) );
       
-      Series< Number, Number > converted = GraphDataPolicy.ContinuousNumbers.convertStringSeries( series, "100" );
+      Series< Number, Number > converted = GraphDataPolicy.ContinuousNumbers.convertHorizontalSeries( series, "100" );
       
       Assert.assertEquals( 34.0, converted.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 1, converted.getData().get( 0 ).getYValue() );
@@ -109,9 +109,9 @@ public class GraphDataPolicyTest {
    }//End Method
    
    /**
-    * {@link GraphDataPolicy#ContinuousDates#convertStringSeries(Series, String)} test.
+    * {@link GraphDataPolicy#ContinuousDates#convertHorizontalSeries(Series, String)} test.
     */
-   @Test public void shouldSupportContinuousDateData() {
+   @Test public void shouldSupportHorizontalContinuousDateData() {
       Series< String, Number > series = new Series<>();
       series.getData().add( new Data< String, Number >( "01/01/2015", 1 ) );
       series.getData().add( new Data< String, Number >( "34876", 2 ) );
@@ -120,7 +120,7 @@ public class GraphDataPolicyTest {
       series.getData().add( new Data< String, Number >( null, 5 ) );
       series.getData().add( new Data< String, Number >( "01/01/2015", 6 ) );
       
-      Series< Number, Number > converted = GraphDataPolicy.ContinuousDates.convertStringSeries( series, "09/10/1988" );
+      Series< Number, Number > converted = GraphDataPolicy.ContinuousDates.convertHorizontalSeries( series, "09/10/1988" );
       
       Assert.assertEquals( DateClassParameterTypeImpl.parse( "01/01/2015" ).toEpochDay(), converted.getData().get( 0 ).getXValue() );
       Assert.assertEquals( 1, converted.getData().get( 0 ).getYValue() );
@@ -134,6 +134,62 @@ public class GraphDataPolicyTest {
       Assert.assertEquals( 5, converted.getData().get( 4 ).getYValue() );
       Assert.assertEquals( DateClassParameterTypeImpl.parse( "01/01/2015" ).toEpochDay(), converted.getData().get( 5 ).getXValue() );
       Assert.assertEquals( 6, converted.getData().get( 5 ).getYValue() );
+   }//End Method
+   
+   /**
+    * {@link GraphDataPolicy#ContinuousNumbers#convertVerticalSeries(Series, String)} test.
+    */
+   @Test public void shouldSupportVerticalContinuousNumberData() {
+      Series< Number, String > series = new Series<>();
+      series.getData().add( new Data< Number, String >( 1, "34" ) );
+      series.getData().add( new Data< Number, String >( 2, "14.5" ) );
+      series.getData().add( new Data< Number, String >( 3, "87" ) );
+      series.getData().add( new Data< Number, String >( 4, "0.00023476" ) );
+      series.getData().add( new Data< Number, String >( 5, null ) );
+      series.getData().add( new Data< Number, String >( 6, "34" ) );
+      
+      Series< Number, Number > converted = GraphDataPolicy.ContinuousNumbers.convertVerticalSeries( series, "100" );
+      
+      Assert.assertEquals( 34.0, converted.getData().get( 0 ).getYValue() );
+      Assert.assertEquals( 1, converted.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( 14.5, converted.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( 2, converted.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( 87.0, converted.getData().get( 2 ).getYValue() );
+      Assert.assertEquals( 3, converted.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( 0.00023476, converted.getData().get( 3 ).getYValue() );
+      Assert.assertEquals( 4, converted.getData().get( 3 ).getXValue() );
+      Assert.assertEquals( 100.0, converted.getData().get( 4 ).getYValue() );
+      Assert.assertEquals( 5, converted.getData().get( 4 ).getXValue() );
+      Assert.assertEquals( 34.0, converted.getData().get( 5 ).getYValue() );
+      Assert.assertEquals( 6, converted.getData().get( 5 ).getXValue() );
+   }//End Method
+   
+   /**
+    * {@link GraphDataPolicy#ContinuousDates#convertVerticalSeries(Series, String)} test.
+    */
+   @Test public void shouldSupportVerticalContinuousDateData() {
+      Series< Number, String > series = new Series<>();
+      series.getData().add( new Data< Number, String >( 1, "01/01/2015" ) );
+      series.getData().add( new Data< Number, String >( 2, "34876" ) );
+      series.getData().add( new Data< Number, String >( 3, "21/09/1915" ) );
+      series.getData().add( new Data< Number, String >( 4, "01/01/4015" ) );
+      series.getData().add( new Data< Number, String >( 5, null ) );
+      series.getData().add( new Data< Number, String >( 6, "01/01/2015" ) );
+      
+      Series< Number, Number > converted = GraphDataPolicy.ContinuousDates.convertVerticalSeries( series, "09/10/1988" );
+      
+      Assert.assertEquals( DateClassParameterTypeImpl.parse( "01/01/2015" ).toEpochDay(), converted.getData().get( 0 ).getYValue() );
+      Assert.assertEquals( 1, converted.getData().get( 0 ).getXValue() );
+      Assert.assertEquals( DateClassParameterTypeImpl.parse( "09/10/1988" ).toEpochDay(), converted.getData().get( 1 ).getYValue() );
+      Assert.assertEquals( 2, converted.getData().get( 1 ).getXValue() );
+      Assert.assertEquals( DateClassParameterTypeImpl.parse( "21/09/1915" ).toEpochDay(), converted.getData().get( 2 ).getYValue() );
+      Assert.assertEquals( 3, converted.getData().get( 2 ).getXValue() );
+      Assert.assertEquals( DateClassParameterTypeImpl.parse( "01/01/4015" ).toEpochDay(), converted.getData().get( 3 ).getYValue() );
+      Assert.assertEquals( 4, converted.getData().get( 3 ).getXValue() );
+      Assert.assertEquals( DateClassParameterTypeImpl.parse( "09/10/1988" ).toEpochDay(), converted.getData().get( 4 ).getYValue() );
+      Assert.assertEquals( 5, converted.getData().get( 4 ).getXValue() );
+      Assert.assertEquals( DateClassParameterTypeImpl.parse( "01/01/2015" ).toEpochDay(), converted.getData().get( 5 ).getYValue() );
+      Assert.assertEquals( 6, converted.getData().get( 5 ).getXValue() );
    }//End Method
 
 }//End Class

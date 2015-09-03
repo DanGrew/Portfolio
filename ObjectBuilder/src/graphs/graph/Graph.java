@@ -406,7 +406,7 @@ import search.Search;
             switch ( dataPolicy ) {
                case ContinuousDates:
                case ContinuousNumbers:
-                  stage.setScene( createContinuousGraph( type ) );
+                  stage.setScene( createContinuousGraph( type, orienation ) );
                   break;
                case Discrete:
                   switch ( orienation ) {
@@ -502,16 +502,27 @@ import search.Search;
    /**
     * Method dedicated to creating a continuous axis {@link Chart}, {@link Number} to {@link Number}.
     * @param type the {@link ChartType}.
+    * @param orientation the {@link GraphOrientation}.
     * @return a {@link Scene} constructed with the {@link Chart}.
     */
-   private Scene createContinuousGraph( ChartType type ){
+   private Scene createContinuousGraph( ChartType type, GraphOrientation orientation ){
       final NumberAxis horizontalAxis = new NumberAxis();
       horizontalAxis.setAutoRanging( true );
       horizontalAxis.setForceZeroInRange( false );
       horizontalAxis.setTickLabelFormatter( dataPolicy.getConverter() );
       final NumberAxis verticalAxis = new NumberAxis();
       
-      XYChart< Number, Number > graph = createChart( type, horizontalAxis, verticalAxis );
+      XYChart< Number, Number > graph = null;
+      switch ( orientation ) {
+         case Horizontal:
+            graph = createChart( type, horizontalAxis, verticalAxis );
+            break;
+         case Vertical:
+            graph = createChart( type, verticalAxis, horizontalAxis );
+            break;
+         default:
+            return null;
+      }
       if ( graph == null ) {
          return null;
       }
@@ -524,7 +535,18 @@ import search.Search;
                      search, horizontalProperty, sorting, undefinedString, undefinedNumber 
             ); 
             
-            Series< Number, Number > converted = dataPolicy.convertStringSeries( series, undefinedString );
+            Series< Number, Number > converted = null;
+            switch ( orientation ) {
+               case Horizontal:
+                  converted = dataPolicy.convertHorizontalSeries( series, undefinedString );
+                  break;
+               case Vertical:
+                  Series< Number, String > reversed = SeriesExtractor.reverseParameters( series );
+                  converted = dataPolicy.convertVerticalSeries( reversed, undefinedString );
+                  break;
+               default:
+                  return null;
+            }
             graph.getData().add( converted );
          }
       }
