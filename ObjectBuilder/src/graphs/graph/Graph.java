@@ -404,19 +404,20 @@ import search.Search;
          
          @Override public void run() {
             Stage stage = new Stage();
+            Scene scene = null;
             
             switch ( dataPolicy ) {
                case ContinuousDates:
                case ContinuousNumbers:
-                  stage.setScene( createContinuousGraph( type, orienation ) );
+                  scene = createContinuousGraph( type, orienation );
                   break;
                case Discrete:
                   switch ( orienation ) {
                      case Horizontal:
-                        stage.setScene( createHorizontalGraph( type ) );
+                        scene = createHorizontalGraph( type );
                         break;
                      case Vertical:
-                        stage.setScene( createVerticalGraph( type ) );
+                        scene = createVerticalGraph( type );
                         break;
                      default:
                         return;
@@ -426,6 +427,10 @@ import search.Search;
                   break;
                
             }
+            if ( scene == null ) {
+               return;
+            }
+            stage.setScene( scene );
             stage.show();
          }
       } );
@@ -516,10 +521,10 @@ import search.Search;
       
       XYChart< Number, Number > graph = null;
       switch ( orientation ) {
-         case Horizontal:
+         case Vertical:
             graph = createChart( type, horizontalAxis, verticalAxis );
             break;
-         case Vertical:
+         case Horizontal:
             graph = createChart( type, verticalAxis, horizontalAxis );
             break;
          default:
@@ -539,10 +544,10 @@ import search.Search;
             
             Series< Number, Number > converted = null;
             switch ( orientation ) {
-               case Horizontal:
+               case Vertical:
                   converted = dataPolicy.convertHorizontalSeries( series, undefinedString );
                   break;
-               case Vertical:
+               case Horizontal:
                   Series< Number, String > reversed = SeriesExtractor.reverseParameters( series );
                   converted = dataPolicy.convertVerticalSeries( reversed, undefinedString );
                   break;
@@ -590,7 +595,6 @@ import search.Search;
       } catch ( IllegalArgumentException exception ) {
          /* Java has hardcoded exceptions that aren't very friendly for dynamically creating
           * charts. This catch safely returns if these are unexpectedly hit.*/
-         exception.printStackTrace();
          return null;
       }
    }// End Method
