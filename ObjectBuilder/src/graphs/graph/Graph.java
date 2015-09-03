@@ -187,6 +187,8 @@ import search.Search;
    @Cali public void setDataPolicy( GraphDataPolicy policy ) {
       if ( policy != null ) {
          dataPolicy = policy;
+      } else {
+         dataPolicy = GraphDataPolicy.Discrete;
       }
    }//End Method
    
@@ -601,7 +603,8 @@ import search.Search;
       if ( horizontalProperty == null ) {
          return new GraphResult( GraphError.MissingHorizontalAxis, null );
       } else if ( dataPolicy == null ) {
-         return new GraphResult( GraphError.MissingDataPolicy, null );
+         dataPolicy = GraphDataPolicy.Discrete;
+         return null;
       } else {
          return null;
       }

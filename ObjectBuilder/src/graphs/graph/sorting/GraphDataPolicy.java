@@ -89,7 +89,7 @@ public enum GraphDataPolicy {
     * @return true if it can be sorted, false otherwise.
     */
    public boolean appropriateForPolicy( ClassParameterType type ) {
-      if ( type == null ) {
+      if ( parameterType == null ) {
          return true;
       }
       return parameterType.equals( type );

@@ -11,6 +11,7 @@ import graphics.JavaFx;
 import graphics.wizard.Wizard;
 import graphics.wizard.WizardPage;
 import graphs.graph.Graph;
+import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
    private static final String ERROR_HEADER = "Horizontal axis is not ready.";
    private ComboBox< PropertyType > horizontalProperties;
    private ComboBox< GraphSort > sortOptionsBox;
+   private ComboBox< GraphDataPolicy > dataPolicyOptionsBox;
    
    /**
     * Constructs a new {@link GraphHorizontalAxisPage}.
@@ -56,7 +58,10 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
       horizontalProperties.getItems().addAll( propertyTypes );
       horizontalProperties.setPrefWidth( WizardConfiguration.wizardWidth() );
       getChildren().add( horizontalProperties );
-      horizontalProperties.getSelectionModel().selectedItemProperty().addListener( change -> refreshSortOptions() );
+      horizontalProperties.getSelectionModel().selectedItemProperty().addListener( change -> {
+         refreshSortOptions();
+         refreshDataPolicyOptions();
+      } );
       
       getChildren().addAll( Arrays.asList( 
             JavaFx.wrappedLabel( 
@@ -71,8 +76,21 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
       sortOptionsBox.setPrefWidth( WizardConfiguration.wizardWidth() );
       getChildren().add( sortOptionsBox );
       
+      getChildren().addAll( Arrays.asList( 
+            JavaFx.wrappedLabel( 
+               "For some data types you can use a continuous range for proprtional representation. The data policy "
+             + "choices are different for each type of property so the choices change depending "
+             + "on the property you choose for the axis above."
+            )
+      ) );
+
+      dataPolicyOptionsBox = new ComboBox<>();
+      refreshDataPolicyOptions();
+      dataPolicyOptionsBox.setPrefWidth( WizardConfiguration.wizardWidth() );
+      getChildren().add( dataPolicyOptionsBox );
+      
       setPrefWidth( WizardConfiguration.wizardWidth() );
-      setPrefHeight( WizardConfiguration.wizardHeight() );
+      setPrefHeight( WizardConfiguration.wizardHeight() + 100 );
    }// End Constructor
    
    /**
@@ -96,6 +114,26 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
    }// End Method
    
    /**
+    * Method to refresh the policies options based on the horizontal axis selection.
+    */
+   private void refreshDataPolicyOptions(){
+      PropertyType horizontalSelection = horizontalProperties.getSelectionModel().getSelectedItem();
+      if ( horizontalSelection == null ) {
+         dataPolicyOptionsBox.getItems().clear();
+         return;
+      }
+      List< GraphDataPolicy > policyOptions = new ArrayList< GraphDataPolicy >();
+      for ( GraphDataPolicy policy : GraphDataPolicy.values() ) {
+         if ( policy.appropriateForPolicy( horizontalSelection.getParameterType() ) ) {
+            policyOptions.add( policy );
+         }
+      }
+      dataPolicyOptionsBox.getItems().clear();
+      dataPolicyOptionsBox.getItems().add( null );
+      dataPolicyOptionsBox.getItems().addAll( policyOptions );
+   }// End Method
+   
+   /**
     * {@inheritDoc}
     */
    @Override public String getPageDescription() {
@@ -111,6 +149,7 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
          horizontalProperties.getSelectionModel().select( horizontal );
       }
       sortOptionsBox.getSelectionModel().select( input.getHorizontalSort() );
+      dataPolicyOptionsBox.getSelectionModel().select( input.getDataPolicy() );
       return this;
    }// End Method
 
@@ -135,6 +174,7 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
          configurable.setHorizontalProperty( horizontal );
       }
       configurable.setHorizontalSort( sortOptionsBox.getSelectionModel().getSelectedItem() );
+      configurable.setDataPolicy( dataPolicyOptionsBox.getSelectionModel().getSelectedItem() );
       return configurable;
    }// End Method
 

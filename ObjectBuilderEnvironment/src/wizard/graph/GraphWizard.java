@@ -49,6 +49,7 @@ public class GraphWizard {
       RequestSystem.store( new PropertyTypeImpl( "NumberA", ClassParameterTypes.NUMBER_PARAMETER_TYPE ), PropertyType.class );
       RequestSystem.store( new PropertyTypeImpl( "NumberB", ClassParameterTypes.NUMBER_PARAMETER_TYPE ), PropertyType.class );
       RequestSystem.store( new PropertyTypeImpl( "String", ClassParameterTypes.STRING_PARAMETER_TYPE ), PropertyType.class );
+      RequestSystem.store( new PropertyTypeImpl( "Date", ClassParameterTypes.DATE_PARAMETER_TYPE ), PropertyType.class );
       RequestSystem.store( new SearchSpace( "SearchSpace" ), Search.class );
       
       new JFXPanel();
