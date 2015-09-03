@@ -73,7 +73,7 @@ public class GroupEvaluationsTableView extends VBox {
       createTable();
       createPropertyColumn();
       createEvaluationColumn();
-      createRows();
+      createRows( 10 );
       getChildren().add( table );
    }//End Constructor
    
@@ -165,9 +165,10 @@ public class GroupEvaluationsTableView extends VBox {
    
    /**
     * Method to create some blank rows in the table for populating by the user.
+    * @param count the number of rows to create.
     */
-   private void createRows() {
-      for ( int i = 0; i < 10; i ++ ) {
+   private void createRows( int count ) {
+      for ( int i = 0; i < count; i ++ ) {
          table.getItems().add( new GroupEvaluationRow() );
       }
    }//End Method
@@ -178,9 +179,14 @@ public class GroupEvaluationsTableView extends VBox {
     */
    public void populateTable( Collection< Entry< PropertyType, GroupEvaluation > > evaluations ) {
       table.getItems().clear();
-      evaluations.forEach( entry -> {
+      
+      int count = 0;
+      for ( Entry< PropertyType, GroupEvaluation > entry : evaluations ) {
          table.getItems().add( new GroupEvaluationRow( entry.getKey(), entry.getValue() ) );
-      } );
+         count++;
+      }
+      
+      createRows( 10 - count );
    }//End Method
    
    /**

@@ -8,6 +8,7 @@
 package graphs.graph;
 
 import graphics.JavaFx;
+import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 import graphs.series.GroupEvaluation;
 import graphs.series.SeriesExtractor;
@@ -22,6 +23,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.DateClassParameterTypeImpl;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import search.Search;
@@ -36,6 +38,7 @@ public class GraphTest {
    
    private static PropertyType VERT_PROPERTY_A;
    private static PropertyType VERT_PROPERTY_B;
+   private static PropertyType VERT_PROPERTY_C;
    private static PropertyType HORIZ_PROPERTY;
    private static Definition ANY_DEFINITION_ONE;
    private static BuilderObject ANY_OBJECT_ONE;
@@ -53,12 +56,15 @@ public class GraphTest {
       RequestSystem.store( VERT_PROPERTY_A );
       VERT_PROPERTY_B = new PropertyTypeImpl( "Dying Light", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
       RequestSystem.store( VERT_PROPERTY_B );
-      HORIZ_PROPERTY = new PropertyTypeImpl( "Date", ClassParameterTypes.STRING_PARAMETER_TYPE );
+      VERT_PROPERTY_C = new PropertyTypeImpl( "Date", ClassParameterTypes.DATE_PARAMETER_TYPE );
+      RequestSystem.store( VERT_PROPERTY_C );
+      HORIZ_PROPERTY = new PropertyTypeImpl( "Day", ClassParameterTypes.STRING_PARAMETER_TYPE );
       RequestSystem.store( HORIZ_PROPERTY );
       
       ANY_DEFINITION_ONE = new DefinitionImpl( "Definition" );
       ANY_DEFINITION_ONE.addPropertyType( VERT_PROPERTY_A );
       ANY_DEFINITION_ONE.addPropertyType( VERT_PROPERTY_B );
+      ANY_DEFINITION_ONE.addPropertyType( VERT_PROPERTY_C );
       ANY_DEFINITION_ONE.addPropertyType( HORIZ_PROPERTY );
       RequestSystem.store( ANY_DEFINITION_ONE );
       
@@ -114,6 +120,38 @@ public class GraphTest {
       barChart.barChart( GraphOrientation.Horizontal );
       
       Thread.sleep( 500000 );
+   }// End Method
+   
+   /**
+    * Method that can be enabled but requires sleep to view result. Creates a graph
+    * with realistic data as a demo, specifically showing {@link GraphDataPolicy#ContinuousDates}.
+    */
+   public void shouldRunContinuousHorizontalAndNotThrow() throws InterruptedException {
+      ANY_OBJECT_ONE.set( VERT_PROPERTY_C, DateClassParameterTypeImpl.objectToDate( "01/05/2015" ) );
+      ANY_OBJECT_TWO.set( VERT_PROPERTY_C, DateClassParameterTypeImpl.objectToDate( "07/05/2015" ) );
+      ANY_OBJECT_THREE.set( VERT_PROPERTY_C, DateClassParameterTypeImpl.objectToDate( "21/08/2015" ) );
+      ANY_OBJECT_FOUR.set( VERT_PROPERTY_C, DateClassParameterTypeImpl.objectToDate( "22/08/2015" ) );
+      
+      ANY_OBJECT_ONE.set( VERT_PROPERTY_B, 3.7 );
+      ANY_OBJECT_TWO.set( VERT_PROPERTY_B, 0.0 );
+      ANY_OBJECT_THREE.set( VERT_PROPERTY_B, 6.5 );
+      ANY_OBJECT_FOUR.set( VERT_PROPERTY_B, 4.0 );
+      
+      Graph barChart = new Graph( "sample" );
+      
+      SearchSpace search = new SearchSpace( "defaultSearch" );
+      search.includeAll();
+      search.identifyMatches();
+      barChart.addDataSeries( search );
+      
+      barChart.setHorizontalProperty( VERT_PROPERTY_C );
+      barChart.setDataPolicy( GraphDataPolicy.ContinuousDates );
+      
+      barChart.addVerticalProperty( VERT_PROPERTY_B );
+      
+      barChart.barChart( GraphOrientation.Horizontal );
+      
+      Thread.sleep( 50000 );
    }// End Method
    
    /**

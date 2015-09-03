@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 
 import annotation.Cali;
 import graphics.JavaFx;
+import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 import graphs.series.GroupEvaluation;
 import graphs.series.SeriesExtractions;
@@ -24,12 +25,12 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.Chart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.StackedAreaChart;
 import javafx.scene.chart.StackedBarChart;
-import javafx.scene.chart.ValueAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
 import javafx.stage.Stage;
@@ -53,6 +54,7 @@ import search.Search;
    private String verticalAxisLabel;
    private PropertyType horizontalProperty;
    private GraphSort sorting;
+   private GraphDataPolicy dataPolicy;
    private String horizontalAxisLabel;
    private Number undefinedNumber = DEFAULT_UNDEFINED_NUMBER;
    private String undefinedString = DEFAULT_UNDEFINED_STRING;
@@ -66,6 +68,7 @@ import search.Search;
       super( identification );
       extractions = new SeriesExtractions();
       dataSeries = new ArrayList<>();
+      dataPolicy = GraphDataPolicy.Discrete;
    }// End Constructor
    
    /**
@@ -78,6 +81,7 @@ import search.Search;
       serializable.setVerticalAxisLabel( verticalAxisLabel );
       serializable.setHorizontalProperty( horizontalProperty );
       serializable.setHorizontalSort( sorting );
+      serializable.setDataPolicy( dataPolicy );
       serializable.setHorizontalAxisLabel( horizontalAxisLabel );
       serializable.setUndefinedNumber( undefinedNumber );
       serializable.setUndefinedString( undefinedString );
@@ -94,6 +98,7 @@ import search.Search;
       verticalAxisLabel = serialized.getVerticalAxisLabel();
       horizontalProperty = serialized.getHorizontalProperty();
       sorting = serialized.getHorizontalSort();
+      dataPolicy = serialized.getDataPolicy();
       horizontalAxisLabel = serialized.getHorizontalAxisLabel();
       undefinedNumber = serialized.getUndefinedNumber();
       undefinedString = serialized.getUndefinedString();
@@ -174,6 +179,24 @@ import search.Search;
    @Cali public GraphSort getHorizontalSort(){
       return sorting;
    }// End Method
+   
+   /**
+    * Method to set the {@link GraphDataPolicy} to use for the horizontal axis.
+    * @param policy the {@link GraphDataPolicy}, must not be null.
+    */
+   @Cali public void setDataPolicy( GraphDataPolicy policy ) {
+      if ( policy != null ) {
+         dataPolicy = policy;
+      }
+   }//End Method
+   
+   /**
+    * Getter for the current {@link GraphDataPolicy}.
+    * @return the {@link GraphDataPolicy}.
+    */
+   @Cali public GraphDataPolicy getDataPolicy(){
+      return dataPolicy;
+   }//End Method
    
    /**
     * Getter for the {@link PropertyType}s used for the vertical axis.
@@ -380,69 +403,139 @@ import search.Search;
          @Override public void run() {
             Stage stage = new Stage();
             
-            final CategoryAxis horizontalAxis = new CategoryAxis();
-            final NumberAxis verticalAxis = new NumberAxis();
-            
-            XYChart< String, Number > verticalGraph = null;
-            XYChart< Number, String > horizontalGraph = null;
-            switch ( orienation ) {
-               case Horizontal:
-                  horizontalGraph = createChart( type, verticalAxis, horizontalAxis );
+            switch ( dataPolicy ) {
+               case ContinuousDates:
+               case ContinuousNumbers:
+                  stage.setScene( createContinuousGraph( type ) );
                   break;
-               case Vertical:
-                  verticalGraph = createChart( type, horizontalAxis, verticalAxis );
-                  break;
-               default:
-                  return;
-            }
-            horizontalAxis.setLabel( horizontalAxisLabel );
-            verticalAxis.setLabel( verticalAxisLabel );
-
-            for ( Search search : dataSeries ) {
-               for ( SeriesExtractor extractor : extractions.getExtractors() ) {
-                  Series< String, Number > series = extractor.constructSeries( 
-                           search, horizontalProperty, sorting, undefinedString, undefinedNumber 
-                  ); 
-
+               case Discrete:
                   switch ( orienation ) {
                      case Horizontal:
-                        Series< Number, String > reversed = SeriesExtractor.reverseParameters( series );
-                        horizontalGraph.getData().add( reversed );
+                        stage.setScene( createHorizontalGraph( type ) );
                         break;
                      case Vertical:
-                        verticalGraph.getData().add( series );
+                        stage.setScene( createVerticalGraph( type ) );
                         break;
                      default:
                         return;
                   }
-               }
-            }
-
-            Scene scene = null;
-            switch ( orienation ) {
-               case Horizontal:
-                  scene = new Scene( 
-                     horizontalGraph,
-                     dimension.getWidth(), 
-                     dimension.getHeight() 
-                  );
-                  break;
-               case Vertical:
-                  scene = new Scene( 
-                     verticalGraph,
-                     dimension.getWidth(), 
-                     dimension.getHeight() 
-                  );
                   break;
                default:
-                  return;
+                  break;
+               
             }
-            stage.setScene( scene );
             stage.show();
          }
       } );
       return GraphResult.SUCCESS;
    }// End Method
+   
+   /**
+    * Method dedicated to creating a vertical {@link Chart}, {@link String} to {@link Number}.
+    * @param type the {@link ChartType}.
+    * @return a {@link Scene} constructed with the {@link Chart}.
+    */
+   private Scene createVerticalGraph( ChartType type ){
+      final CategoryAxis horizontalAxis = new CategoryAxis();
+      final NumberAxis verticalAxis = new NumberAxis();
+      
+      XYChart< String, Number > verticalGraph = createChart( type, horizontalAxis, verticalAxis );
+      if ( verticalGraph == null ) {
+         return null;
+      }
+      horizontalAxis.setLabel( horizontalAxisLabel );
+      verticalAxis.setLabel( verticalAxisLabel );
+
+      for ( Search search : dataSeries ) {
+         for ( SeriesExtractor extractor : extractions.getExtractors() ) {
+            Series< String, Number > series = extractor.constructSeries( 
+                     search, horizontalProperty, sorting, undefinedString, undefinedNumber 
+            ); 
+
+            verticalGraph.getData().add( series );
+         }
+      }
+
+      Scene scene = new Scene( 
+         verticalGraph,
+         dimension.getWidth(), 
+         dimension.getHeight() 
+      );
+      return scene;
+   }//End Method
+   
+   /**
+    * Method dedicated to creating a horizontal {@link Chart}, {@link Number} to {@link String}.
+    * @param type the {@link ChartType}.
+    * @return a {@link Scene} constructed with the {@link Chart}.
+    */
+   private Scene createHorizontalGraph( ChartType type ){
+      final CategoryAxis horizontalAxis = new CategoryAxis();
+      final NumberAxis verticalAxis = new NumberAxis();
+      
+      XYChart< Number, String > horizontalGraph = createChart( type, verticalAxis, horizontalAxis );
+      if ( horizontalGraph == null ) {
+         return null;
+      }
+      horizontalAxis.setLabel( horizontalAxisLabel );
+      verticalAxis.setLabel( verticalAxisLabel );
+
+      for ( Search search : dataSeries ) {
+         for ( SeriesExtractor extractor : extractions.getExtractors() ) {
+            Series< String, Number > series = extractor.constructSeries( 
+                     search, horizontalProperty, sorting, undefinedString, undefinedNumber 
+            ); 
+
+            Series< Number, String > reversed = SeriesExtractor.reverseParameters( series );
+            horizontalGraph.getData().add( reversed );
+         }
+      }
+
+      Scene scene = new Scene( 
+         horizontalGraph,
+         dimension.getWidth(), 
+         dimension.getHeight() 
+      );
+      return scene;
+   }//End Method
+   
+   /**
+    * Method dedicated to creating a continuous axis {@link Chart}, {@link Number} to {@link Number}.
+    * @param type the {@link ChartType}.
+    * @return a {@link Scene} constructed with the {@link Chart}.
+    */
+   private Scene createContinuousGraph( ChartType type ){
+      final NumberAxis horizontalAxis = new NumberAxis();
+      horizontalAxis.setAutoRanging( true );
+      horizontalAxis.setForceZeroInRange( false );
+      horizontalAxis.setTickLabelFormatter( dataPolicy.getConverter() );
+      final NumberAxis verticalAxis = new NumberAxis();
+      
+      XYChart< Number, Number > graph = createChart( type, horizontalAxis, verticalAxis );
+      if ( graph == null ) {
+         return null;
+      }
+      horizontalAxis.setLabel( horizontalAxisLabel );
+      verticalAxis.setLabel( verticalAxisLabel );
+
+      for ( Search search : dataSeries ) {
+         for ( SeriesExtractor extractor : extractions.getExtractors() ) {
+            Series< String, Number > series = extractor.constructSeries( 
+                     search, horizontalProperty, sorting, undefinedString, undefinedNumber 
+            ); 
+            
+            Series< Number, Number > converted = dataPolicy.convertStringSeries( series, undefinedString );
+            graph.getData().add( converted );
+         }
+      }
+
+      Scene scene = new Scene( 
+         graph,
+         dimension.getWidth(), 
+         dimension.getHeight() 
+      );
+      return scene;
+   }//End Method
    
    /**
     * Method to create and instance of the appropriate {@link XYChart} given the {@link ChartType}.
@@ -453,26 +546,28 @@ import search.Search;
     * @return the constructed {@link XYChart}.
     */
    private < X, Y > XYChart< X, Y > createChart( ChartType type, Axis< X > horizontalAxis, Axis< Y > verticalAxis ) {
-      switch ( type ) {
-         case AreaChart:
-            return new AreaChart<>( horizontalAxis, verticalAxis );
-         case BarChart:
-            return new BarChart<>( horizontalAxis, verticalAxis );
-         case LineChart:
-            return new LineChart<>( horizontalAxis, verticalAxis );
-         case ScatterChart:
-            return new ScatterChart<>( horizontalAxis, verticalAxis );
-         case StackedAreaChart:
-            //JavaFx8 does not support swapping the axes.
-            if ( verticalAxis instanceof ValueAxis ) {
+      try {
+         switch ( type ) {
+            case AreaChart:
+               return new AreaChart<>( horizontalAxis, verticalAxis );
+            case BarChart:
+               return new BarChart<>( horizontalAxis, verticalAxis );
+            case LineChart:
+               return new LineChart<>( horizontalAxis, verticalAxis );
+            case ScatterChart:
+               return new ScatterChart<>( horizontalAxis, verticalAxis );
+            case StackedAreaChart:
                return new StackedAreaChart<>( horizontalAxis, verticalAxis );
-            } else {
+            case StackedBarChart:
+               return new StackedBarChart<>( horizontalAxis, verticalAxis );
+            default:
                return null;
-            }
-         case StackedBarChart:
-            return new StackedBarChart<>( horizontalAxis, verticalAxis );
-         default:
-            return null;
+         }
+      } catch ( IllegalArgumentException exception ) {
+         /* Java has hardcoded exceptions that aren't very friendly for dynamically creating
+          * charts. This catch safely returns if these are unexpectedly hit.*/
+         exception.printStackTrace();
+         return null;
       }
    }// End Method
    
@@ -483,6 +578,8 @@ import search.Search;
    private GraphResult verifyHorizontalAxis(){
       if ( horizontalProperty == null ) {
          return new GraphResult( GraphError.MissingHorizontalAxis, null );
+      } else if ( dataPolicy == null ) {
+         return new GraphResult( GraphError.MissingDataPolicy, null );
       } else {
          return null;
       }

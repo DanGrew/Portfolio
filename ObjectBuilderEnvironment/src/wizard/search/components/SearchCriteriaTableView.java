@@ -77,7 +77,7 @@ public class SearchCriteriaTableView extends VBox {
       createPolicyColumn();
       createPropertyColumn();
       createValueColumn();
-      createRows();
+      createRows( 10 );
       getChildren().add( table );
    }//End Constructor
    
@@ -181,9 +181,10 @@ public class SearchCriteriaTableView extends VBox {
    
    /**
     * Method to create some blank rows in the table for populating by the user.
+    * @param count the number of rows to create.
     */
-   private void createRows() {
-      for ( int i = 0; i < 10; i ++ ) {
+   private void createRows( int count ) {
+      for ( int i = 0; i < count; i ++ ) {
          table.getItems().add( new SearchCriteriaRow() );
       }
    }//End Method
@@ -194,9 +195,13 @@ public class SearchCriteriaTableView extends VBox {
     */
    public void populateTable( Collection< SearchCriteria > evaluations ) {
       table.getItems().clear();
-      evaluations.forEach( entry -> {
+      
+      int count = 0;
+      for ( SearchCriteria entry : evaluations )  {
          table.getItems().add( new SearchCriteriaRow( entry.getPolicy(), entry.getType(), entry.getValue() ) );
-      } );
+         count++;
+      };
+      createRows( 10 -  count );
    }//End Method
    
    /**

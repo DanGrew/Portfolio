@@ -20,6 +20,7 @@ import org.junit.rules.TemporaryFolder;
 
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
+import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 import graphs.series.GroupEvaluation;
 import model.singleton.Singleton;
@@ -63,6 +64,7 @@ public class SerializableGraphTest {
       testGraph2.setHorizontalProperty( ANY_PROPERTY_TYPE_1 );
       testGraph2.setHorizontalAxisLabel( "SomeHorizontalAxisLabel" );
       testGraph2.setHorizontalSort( GraphSort.StringReverseAlphabetical );
+      testGraph2.setDataPolicy( GraphDataPolicy.ContinuousDates );
       testGraph2.addVerticalProperty( ANY_PROPERTY_TYPE_2 );
       testGraph2.addVerticalProperty( ANY_PROPERTY_TYPE_3 );
       testGraph2.addGroupEvaluation( ANY_PROPERTY_TYPE_2, GroupEvaluation.Count );
@@ -137,6 +139,7 @@ public class SerializableGraphTest {
          Assert.assertEquals( expected.getVerticalAxisLabel(), parsed.getVerticalAxisLabel() );
          Assert.assertEquals( expected.getHorizontalProperty(), parsed.getHorizontalProperty() );
          Assert.assertEquals( expected.getHorizontalSort(), parsed.getHorizontalSort() );
+         Assert.assertEquals( expected.getDataPolicy(), parsed.getDataPolicy() );
          Assert.assertEquals( expected.getHorizontalAxisLabel(), parsed.getHorizontalAxisLabel() );
          Assert.assertEquals( expected.getDefaultValueForUndefinedNumber(), parsed.getDefaultValueForUndefinedNumber() );
          Assert.assertEquals( expected.getDefaultValueForUndefinedString(), parsed.getDefaultValueForUndefinedString() );

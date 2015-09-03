@@ -15,8 +15,10 @@ public enum GraphError {
    MissingHorizontalAxis( "Horizontal Axis not Defined" ), 
    MissingVerticalSeries( "No Properties defined for the Vertical Axis" ),
    MissingSearchCriteria( "Search Criteria is not Defined" ), 
+   MissingGraphOrientation( "Graph orientation not specified." ),
+   MissingDataPolicy( "Graph data policy not specified." ),
    NonNumericalVerticalAxis( "Non Numerical Property Type specified for Veritcal Axis" ), 
-   None( "Success: No error reported." );
+   None( "Success: No error reported." ); 
    
    private String message;
    

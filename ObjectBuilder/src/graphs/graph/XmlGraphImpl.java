@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlSeeAlso;
 
 import architecture.request.RequestSystem;
 import architecture.serialization.utility.XmlSimpleEntry;
+import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 import graphs.series.GroupEvaluation;
 import javafx.geometry.Dimension2D;
@@ -44,6 +45,7 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
    @XmlElement private String verticalAxisLabel;
    @XmlElement private String horizontalProperty;
    @XmlElement private GraphSort horizontalSort;
+   @XmlElement private GraphDataPolicy dataPolicy;
    @XmlElement private String horizontalAxisLabel;
    @XmlElement private Double undefinedNumber;
    @XmlElement private String undefinedString;
@@ -163,6 +165,20 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
     */
    @Override public void setHorizontalSort( GraphSort sort ) {
       this.horizontalSort = sort;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public GraphDataPolicy getDataPolicy() {
+      return dataPolicy;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void setDataPolicy( GraphDataPolicy policy ) {
+      this.dataPolicy = policy;
    }// End Method
 
    /**

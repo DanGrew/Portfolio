@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map.Entry;
 
+import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 import graphs.series.GroupEvaluation;
 import javafx.geometry.Dimension2D;
@@ -90,6 +91,16 @@ public interface SerializableGraph extends SerializedSingleton< Graph >{
     * {@link Graph#setHorizontalSort(GraphSort)}.
     */
    public void setHorizontalSort( GraphSort sort );
+   
+   /**
+    * {@link Graph#getDataPolicy()}.
+    */
+   public GraphDataPolicy getDataPolicy();
+   
+   /**
+    * {@link Graph#setDataPolicy(GraphDataPolicy)}.
+    */
+   public void setDataPolicy( GraphDataPolicy sort );
    
    /**
     * {@link Graph#getHorizontalAxisLabel()}.
