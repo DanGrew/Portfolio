@@ -111,14 +111,15 @@ public class GroupEvaluationsTableView extends VBox {
       column.setOnEditCommit( event -> {
          ReadOnlyObjectWrapper< PropertyType > propertyWrapper = event.getRowValue().type;
          propertyWrapper.set( event.getNewValue() );
-         GroupEvaluation evaluation = event.getRowValue().evaluation.get();
-         if ( evaluation == null ) {
+         ReadOnlyObjectWrapper< GroupEvaluation > evaluationWrapper = event.getRowValue().evaluation;
+         if ( evaluationWrapper.get() == null ) {
             return;
          }
          if ( propertyWrapper.get() == null ) {
+            event.getRowValue().evaluation.set( null ); 
             return;
          }
-         if ( evaluation.isCompatible( propertyWrapper.get().getParameterType() ) ){
+         if ( evaluationWrapper.get().isCompatible( propertyWrapper.get().getParameterType() ) ){
             return;
          }
          event.getRowValue().evaluation.set( null );
