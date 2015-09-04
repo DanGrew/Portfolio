@@ -47,6 +47,7 @@ public class Wizard< ConfigurableT > extends Alert {
     */
    public Wizard( String title ) {
       super( Alert.AlertType.INFORMATION );
+      JavaFx.alertAlwaysOnTop( this );
       pages = new ArrayList< WizardPage< ConfigurableT > >();
       
       setTitle( title );
