@@ -75,6 +75,14 @@ public class DualListView< ItemT > extends BorderPane {
    }// End Constructor
    
    /**
+    * Method to clear the items in the view, emptying both tables.
+    */
+   public void clear(){
+      selectionList.getItems().clear();
+      populatingList.getItems().clear();
+   }//End Method
+   
+   /**
     * Method to set the preferred width of the {@link ListView}s.
     * @param width the preferred width.
     */

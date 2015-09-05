@@ -69,21 +69,30 @@ public class GroupEvaluationsTableView extends VBox {
       super();
       availablePropertyTypes = FXCollections.observableArrayList();
       availableGroupEvaluations = FXCollections.observableArrayList();
-      refresh();
       createTable();
       createPropertyColumn();
       createEvaluationColumn();
-      createRows( 10 );
+      refresh();
       getChildren().add( table );
    }//End Constructor
+   
+   /**
+    * Method to clear the table, refreshing all elements to defaults.
+    */
+   public void clear(){
+      refresh();
+   }//End Method
    
    /**
     * Method to refresh the {@link PropertyType}s they may have been changed outside
     * the {@link TableView}.
     */
    private void refresh(){
+      availableGroupEvaluations.clear();
       availablePropertyTypes.clear();
       availablePropertyTypes.addAll( RequestSystem.retrieveAll( PropertyType.class ) );
+      table.getItems().clear();
+      createRows( 10 );
    }//End Method
    
    /**

@@ -65,6 +65,8 @@ public class GraphGroupEvaluationsPage extends VBox implements WizardPage< Graph
     * {@inheritDoc}
     */
    @Override public Node getContent( Graph input ) {
+      plots.clear();
+      
       List< Entry< PropertyType, GroupEvaluation > > evaluations = input.getGroupEvaluations();
       if ( !evaluations.isEmpty() ) {
          plots.populateTable( evaluations );

@@ -144,6 +144,10 @@ public class GraphHorizontalAxisPage extends VBox implements WizardPage< Graph >
     * {@inheritDoc}
     */
    @Override public Node getContent( Graph input ) {
+      horizontalProperties.getSelectionModel().clearSelection();
+      sortOptionsBox.getSelectionModel().clearSelection();
+      dataPolicyOptionsBox.getSelectionModel().clearSelection();
+      
       PropertyType horizontal = input.getHorizontalProperty();
       if ( horizontal != null ) {
          horizontalProperties.getSelectionModel().select( horizontal );

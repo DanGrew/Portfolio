@@ -50,16 +50,24 @@ public class GraphVerticalPropertyPage extends VBox implements WizardPage< Graph
       verticalProperties = new DualListView<>( false );
       verticalProperties.setListWidth( WizardConfiguration.dualListWidth() );
       verticalProperties.setPrefHeight( WizardConfiguration.tableHeight() );
-      List< PropertyType > numberTypes = RequestSystem.retrieveAll( 
-               PropertyType.class, 
-               object -> { return object.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ); }
-      );
-      verticalProperties.setChoices( numberTypes );
+      refresh();
       getChildren().add( verticalProperties );
       
       setPrefWidth( WizardConfiguration.wizardWidth() );
       setPrefHeight( WizardConfiguration.wizardHeight() + 100 );
    }// End Method
+   
+   /**
+    * Method to refresh the page elements to defaults.
+    */
+   private void refresh(){
+      verticalProperties.clear();
+      List< PropertyType > numberTypes = RequestSystem.retrieveAll( 
+               PropertyType.class, 
+               object -> { return object.getParameterType().equals( ClassParameterTypes.NUMBER_PARAMETER_TYPE ); }
+      );
+      verticalProperties.setChoices( numberTypes );
+   }//End Method
    
    /**
     * {@inheritDoc}
@@ -72,6 +80,7 @@ public class GraphVerticalPropertyPage extends VBox implements WizardPage< Graph
     * {@inheritDoc}
     */
    @Override public Node getContent( Graph input ) {
+      refresh();
       List< PropertyType > vertical = input.getVerticalProperties();
       if ( !vertical.isEmpty() ) {
          verticalProperties.setChosenItems( vertical );

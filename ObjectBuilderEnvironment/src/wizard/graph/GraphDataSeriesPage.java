@@ -89,6 +89,7 @@ public class GraphDataSeriesPage extends VBox implements WizardPage< Graph >{
     * made by a launched {@link SearchSpaceWizard}.
     */
    private void refresh(){
+      searches.clear();
       List< Search > searchObjects = RequestSystem.retrieveAll( 
                Search.class 
       );
