@@ -33,6 +33,7 @@ import javafx.scene.chart.StackedAreaChart;
 import javafx.scene.chart.StackedBarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.chart.XYChart.Series;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.singleton.SingletonImpl;
 import parameter.classparameter.ClassParameterTypes;
@@ -56,6 +57,7 @@ import search.Search;
    private GraphSort sorting;
    private GraphDataPolicy dataPolicy;
    private String horizontalAxisLabel;
+   private Double horizontalFontSize;
    private Number undefinedNumber = DEFAULT_UNDEFINED_NUMBER;
    private String undefinedString = DEFAULT_UNDEFINED_STRING;
    private Dimension2D dimension = DEFAULT_DIMENSION;
@@ -83,6 +85,7 @@ import search.Search;
       serializable.setHorizontalSort( sorting );
       serializable.setDataPolicy( dataPolicy );
       serializable.setHorizontalAxisLabel( horizontalAxisLabel );
+      serializable.setHorizontalFontSize( horizontalFontSize );
       serializable.setUndefinedNumber( undefinedNumber );
       serializable.setUndefinedString( undefinedString );
       serializable.setDimension( dimension );
@@ -100,6 +103,7 @@ import search.Search;
       sorting = serialized.getHorizontalSort();
       dataPolicy = serialized.getDataPolicy();
       horizontalAxisLabel = serialized.getHorizontalAxisLabel();
+      horizontalFontSize = serialized.getHorizontalFontSize();
       undefinedNumber = serialized.getUndefinedNumber();
       undefinedString = serialized.getUndefinedString();
       dimension = serialized.getDimension();
@@ -146,6 +150,23 @@ import search.Search;
    @Cali public void setHorizontalAxisLabel( String horizontalAxisLabel ) {
       this.horizontalAxisLabel = horizontalAxisLabel;
    }// End Method
+   
+   /**
+    * Getter for the {@link Font} size to use on the horizontal axis.
+    * @return the size, can be null.
+    */
+   @Cali public Double getHorizontalFontSize() {
+      return horizontalFontSize;
+   }//End Method
+   
+   /**
+    * Setter for the {@link Font} size to use on the horizontal axis. This can avoid positioning issues
+    * when there a large number of entries on a rotated {@link Graph}.
+    * @param fontSize the size.
+    */
+   @Cali public void setHorizontalFontSize( Double fontSize ) {
+      this.horizontalFontSize = fontSize;
+   }//End Method
    
    /**
     * Getter for the horizontal {@link PropertyType}.
@@ -444,6 +465,9 @@ import search.Search;
     */
    private Scene createVerticalGraph( ChartType type ){
       final CategoryAxis horizontalAxis = new CategoryAxis();
+      if ( horizontalFontSize != null ) {
+         horizontalAxis.setTickLabelFont( Font.font( horizontalFontSize ) );
+      }
       final NumberAxis verticalAxis = new NumberAxis();
       
       XYChart< String, Number > verticalGraph = createChart( type, horizontalAxis, verticalAxis );
@@ -478,6 +502,9 @@ import search.Search;
     */
    private Scene createHorizontalGraph( ChartType type ){
       final CategoryAxis horizontalAxis = new CategoryAxis();
+      if ( horizontalFontSize != null ) {
+         horizontalAxis.setTickLabelFont( Font.font( horizontalFontSize ) );
+      }
       final NumberAxis verticalAxis = new NumberAxis();
       
       XYChart< Number, String > horizontalGraph = createChart( type, verticalAxis, horizontalAxis );
@@ -517,6 +544,9 @@ import search.Search;
       horizontalAxis.setAutoRanging( true );
       horizontalAxis.setForceZeroInRange( false );
       horizontalAxis.setTickLabelFormatter( dataPolicy.getConverter() );
+      if ( horizontalFontSize != null ) {
+         horizontalAxis.setTickLabelFont( Font.font( horizontalFontSize ) );
+      }
       final NumberAxis verticalAxis = new NumberAxis();
       
       XYChart< Number, Number > graph = null;

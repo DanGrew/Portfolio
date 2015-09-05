@@ -47,6 +47,7 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
    @XmlElement private GraphSort horizontalSort;
    @XmlElement private GraphDataPolicy dataPolicy;
    @XmlElement private String horizontalAxisLabel;
+   @XmlElement private Double horizontalFontSize;
    @XmlElement private Double undefinedNumber;
    @XmlElement private String undefinedString;
    @XmlElement private double dimensionWidth;
@@ -193,6 +194,20 @@ public class XmlGraphImpl extends XmlSingletonWrapper< Graph > implements Serial
     */
    @Override public void setHorizontalAxisLabel( String label ) {
       this.horizontalAxisLabel = label;
+   }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Double getHorizontalFontSize() {
+      return horizontalFontSize;
+   }// End Method
+
+   /**
+    * {@inheritDoc}
+    */
+   @Override public void setHorizontalFontSize( Double size ) {
+      this.horizontalFontSize = size;
    }// End Method
 
    /**

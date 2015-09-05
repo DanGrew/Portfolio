@@ -31,6 +31,7 @@ public class GraphPresentationPage extends VBox implements WizardPage< Graph >{
    private TextField undefinedString;
    private TextField undefinedNumber;
    private TextField horizontalAxis;
+   private TextField horizontalFont;
    private TextField verticalAxis;
    private TextField dimensionWidth;
    private TextField dimensionHeight;
@@ -75,6 +76,14 @@ public class GraphPresentationPage extends VBox implements WizardPage< Graph >{
             horizontalAxis
       ) ); 
       
+      horizontalFont = new TextField();
+      getChildren().addAll( Arrays.asList( 
+            JavaFx.wrappedLabel( 
+               "What font size would you like for the horizontal axis labels?"
+            ),
+            horizontalFont
+      ) ); 
+      
       verticalAxis = new TextField();
       getChildren().addAll( Arrays.asList( 
             JavaFx.wrappedLabel( 
@@ -96,7 +105,7 @@ public class GraphPresentationPage extends VBox implements WizardPage< Graph >{
       ) );  
       
       setPrefWidth( WizardConfiguration.wizardWidth() );
-      setPrefHeight( WizardConfiguration.wizardHeight() + 200 );
+      setPrefHeight( WizardConfiguration.wizardHeight() + 220 );
    }// End Constructor
    
    /**
@@ -113,6 +122,11 @@ public class GraphPresentationPage extends VBox implements WizardPage< Graph >{
       undefinedString.setText( input.getDefaultValueForUndefinedString() );
       undefinedNumber.setText( "" + input.getDefaultValueForUndefinedNumber() );
       horizontalAxis.setText( input.getHorizontalAxisLabel() );
+      if ( input.getHorizontalFontSize() != null ) {
+         horizontalFont.setText( "" + input.getHorizontalFontSize() );
+      } else {
+         horizontalFont.setText( "" );
+      }
       verticalAxis.setText( input.getVerticalAxisLabel() );
       dimensionWidth.setText( "" + input.getDimension().getWidth() );
       dimensionHeight.setText( "" + input.getDimension().getHeight() );
@@ -158,6 +172,7 @@ public class GraphPresentationPage extends VBox implements WizardPage< Graph >{
       configurable.setDefaultValueForUndefinedString( undefinedString.getText() );
       configurable.setDefaultValueForUndefinedNumber( retrieveNumber( undefinedNumber ) );
       configurable.setHorizontalAxisLabel( horizontalAxis.getText() );
+      configurable.setHorizontalFontSize( retrieveNumber( horizontalFont ) );
       configurable.setVerticalAxisLabel( verticalAxis.getText() );
       Double width = retrieveNumber( dimensionWidth );
       Double height = retrieveNumber( dimensionHeight );

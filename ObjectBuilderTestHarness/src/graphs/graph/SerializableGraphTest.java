@@ -63,6 +63,7 @@ public class SerializableGraphTest {
       Graph testGraph2 = new Graph( "graph2" );
       testGraph2.setHorizontalProperty( ANY_PROPERTY_TYPE_1 );
       testGraph2.setHorizontalAxisLabel( "SomeHorizontalAxisLabel" );
+      testGraph2.setHorizontalFontSize( 25.0 );
       testGraph2.setHorizontalSort( GraphSort.StringReverseAlphabetical );
       testGraph2.setDataPolicy( GraphDataPolicy.ContinuousDates );
       testGraph2.addVerticalProperty( ANY_PROPERTY_TYPE_2 );
@@ -141,6 +142,7 @@ public class SerializableGraphTest {
          Assert.assertEquals( expected.getHorizontalSort(), parsed.getHorizontalSort() );
          Assert.assertEquals( expected.getDataPolicy(), parsed.getDataPolicy() );
          Assert.assertEquals( expected.getHorizontalAxisLabel(), parsed.getHorizontalAxisLabel() );
+         Assert.assertEquals( expected.getHorizontalFontSize(), parsed.getHorizontalFontSize() );
          Assert.assertEquals( expected.getDefaultValueForUndefinedNumber(), parsed.getDefaultValueForUndefinedNumber() );
          Assert.assertEquals( expected.getDefaultValueForUndefinedString(), parsed.getDefaultValueForUndefinedString() );
          Assert.assertEquals( expected.getDimension(), parsed.getDimension() );

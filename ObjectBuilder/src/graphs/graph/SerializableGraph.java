@@ -111,6 +111,16 @@ public interface SerializableGraph extends SerializedSingleton< Graph >{
     * {@link Graph#setHorizontalAxisLabel(String)}.
     */
    public void setHorizontalAxisLabel( String label );   
+   
+   /**
+    * {@link Graph#getHorizontalFontSize()}.
+    */
+   public Double getHorizontalFontSize();
+   
+   /**
+    * {@link Graph#setHorizontalFontSize(Double)}.
+    */
+   public void setHorizontalFontSize( Double size );  
 
    /**
     * {@link Graph#getDefaultValueForUndefinedNumber()}.
