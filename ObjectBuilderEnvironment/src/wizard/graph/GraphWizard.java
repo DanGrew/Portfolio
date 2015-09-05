@@ -51,6 +51,8 @@ public class GraphWizard {
       RequestSystem.store( new PropertyTypeImpl( "String", ClassParameterTypes.STRING_PARAMETER_TYPE ), PropertyType.class );
       RequestSystem.store( new PropertyTypeImpl( "Date", ClassParameterTypes.DATE_PARAMETER_TYPE ), PropertyType.class );
       RequestSystem.store( new SearchSpace( "SearchSpace" ), Search.class );
+      RequestSystem.store( new SearchSpace( "SearchSpace2" ), Search.class );
+      RequestSystem.store( new SearchSpace( "SearchSpace3" ), Search.class );
       
       new JFXPanel();
       Platform.runLater( () -> {

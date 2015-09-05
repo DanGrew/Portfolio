@@ -8,9 +8,8 @@
 package graphics.node;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -89,8 +88,7 @@ public class DualListView< ItemT > extends BorderPane {
     * @param choices the {@link List} of choices.
     */
    public void setChoices( List< ItemT > choices ){
-      selectionList.getItems().addAll( choices );
-      removeDuplicates( selectionList );
+      addItems( choices, selectionList.getItems() );
    }// End Method
    
    /**
@@ -113,14 +111,18 @@ public class DualListView< ItemT > extends BorderPane {
    /**
     * Method to remove duplicates from the given {@link ListView}. Note here that
     * {@link #duplicatesAllowed} is consulted following the configuration in the constructor.
-    * @param list the {@link ListView} to remove from.
+    * @param choices the {@link Collection} to add to the subject.
+    * @param subject the {@link Collection} to ad to.
     */
-   private void removeDuplicates( ListView< ItemT > list ) {
-      ObservableList< ItemT > items = list.getItems();
-      if ( !duplicatesAllowed ) {
-         Set< ItemT > setItems = new HashSet<>( items );
-         items.clear();
-         items.addAll( setItems );
+   private void addItems( Collection< ItemT > choices, ObservableList< ItemT > subject ) {
+      if ( duplicatesAllowed ) {
+         subject.addAll( choices );
+      } else {
+         choices.forEach( item -> {
+            if ( !subject.contains( item ) ) {
+               subject.add( item );
+            }
+         } );
       }
    }// End Method
    
@@ -133,8 +135,7 @@ public class DualListView< ItemT > extends BorderPane {
          return;
       }
       
-      populatingList.getItems().addAll( selected );
-      removeDuplicates( populatingList );
+      addItems( selected, populatingList.getItems() );
    }// End Method
    
    /**
