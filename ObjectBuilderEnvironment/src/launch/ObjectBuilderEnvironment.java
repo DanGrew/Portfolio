@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import menu.ObeMenuBar;
 import outline.SystemOutline;
+import outline.configuration.SystemOutlineDetail;
 
 /**
  * The {@link ObjectBuilderEnvironment} launches {@link ObjectBuilder} with the full IDE.
@@ -32,7 +33,7 @@ public class ObjectBuilderEnvironment extends Application {
    @Override public void start( Stage stage ) throws Exception {
       BorderPane view = new BorderPane();
       view.setTop( new ObeMenuBar() );
-      view.setCenter( new SystemOutline() );
+      view.setCenter( new SystemOutline( SystemOutlineDetail.completeSystemOutline() ) );
       view.setBottom( new CommandPrompt() );
       
       Scene scene = new Scene( view, 1200, 800 );

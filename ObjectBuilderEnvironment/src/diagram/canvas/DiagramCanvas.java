@@ -8,7 +8,6 @@
 package diagram.canvas;
 
 import architecture.event.EventSystem;
-import architecture.request.RequestSystem;
 import diagram.layer.ContentLayer;
 import diagram.layer.InformationLayer;
 import diagram.toolbox.ContentEvents;
@@ -21,10 +20,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import object.BuilderObject;
-import object.BuilderObjectImpl;
-import objecttype.Definition;
-import objecttype.DefinitionImpl;
+import outline.SystemOutline;
+import outline.configuration.SystemOutlineDetail;
 
 /**
  * The {@link DiagramCanvas} is a graphical interface for creating abstract diagrams.
@@ -32,14 +29,6 @@ import objecttype.DefinitionImpl;
 public class DiagramCanvas extends Application {
 
    public static void main( String[] args ) {
-      Definition definition = new DefinitionImpl( "Definition" );
-      RequestSystem.store( definition, Definition.class );
-      BuilderObject object1 = new BuilderObjectImpl( "Object1", definition );
-      RequestSystem.store( object1, BuilderObject.class );
-      BuilderObject object2 = new BuilderObjectImpl( "Object2", definition );
-      RequestSystem.store( object2, BuilderObject.class );
-      BuilderObject object3 = new BuilderObjectImpl( "Object3", definition );
-      RequestSystem.store( object3, BuilderObject.class );
       DiagramCanvas.launch();
    }// End Method
    
@@ -66,6 +55,9 @@ public class DiagramCanvas extends Application {
       
       ContentToolBox contentToolBox = new ContentToolBox();
       window.setRight( contentToolBox );
+      
+      SystemOutline outline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );
+      window.setLeft( outline );
       
       Scene scene = new Scene( window, 1200, 800 );
       stage.setScene( scene );

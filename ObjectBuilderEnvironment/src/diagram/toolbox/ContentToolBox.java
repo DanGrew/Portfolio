@@ -14,6 +14,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import object.BuilderObject;
+import object.BuilderObjectImpl;
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
 
 /**
  * The {@link ContentToolBox} provides controls for the {@link ContentLayer}.
@@ -34,11 +37,19 @@ public class ContentToolBox extends VBox {
       
       Button newObjectButton = new Button( "Add Object" );
       newObjectButton.setOnAction( event -> {
-         BuilderObject selected = objects.getSelectionModel().getSelectedItem();
-         if ( selected == null ) {
-            return;
-         }
-         EventSystem.raiseEvent( ContentEvents.AddObject, selected );
+//         BuilderObject selected = objects.getSelectionModel().getSelectedItem();
+//         if ( selected == null ) {
+//            return;
+//         }
+//         EventSystem.raiseEvent( ContentEvents.AddObject, selected );
+         Definition definition = new DefinitionImpl( "Definition" );
+         RequestSystem.store( definition, Definition.class );
+         BuilderObject object1 = new BuilderObjectImpl( "Object1", definition );
+         RequestSystem.store( object1, BuilderObject.class );
+         BuilderObject object2 = new BuilderObjectImpl( "Object2", definition );
+         RequestSystem.store( object2, BuilderObject.class );
+         BuilderObject object3 = new BuilderObjectImpl( "Object3", definition );
+         RequestSystem.store( object3, BuilderObject.class );
       } );
       getChildren().add( newObjectButton );
       

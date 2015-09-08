@@ -21,6 +21,7 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.BorderPane;
 import model.singleton.Singleton;
 import objecttype.Definition;
+import outline.configuration.SystemOutlineDetail;
 import outline.describer.OutlineDescriber;
 import outline.describer.OutlineDescriberFactory;
 import outline.describer.OutlineDescriberFactory.OutlineDescribables;
@@ -40,11 +41,13 @@ public class SystemOutline extends BorderPane {
    private static final String DATA = "Data";
 
    /**
-    * Constructs a new {@link SystemOutline}
+    * Constructs a new {@link SystemOutline}.
+    * @param detail the {@link SystemOutlineDetail} configuration object for displaying different
+    * levels of detail.
     */
-   public SystemOutline() {
+   public SystemOutline( SystemOutlineDetail detail ) {
       initialiseOutlineData();
-      constructLayout();
+      constructLayout( detail );
    }// End Constructor
    
    /**
@@ -138,25 +141,39 @@ public class SystemOutline extends BorderPane {
    /**
     * Method to display the {@link SystemOutline}.
     */
-   public void constructLayout() {
+   public void constructLayout( SystemOutlineDetail detail ) {
       TreeItem< OutlineDescriber > root = new TreeItem<>( new OutlineDescriberImpl( ROOT ) );
       root.setExpanded( true );
-      TreeItem< OutlineDescriber > modelBranch = createBranch( root, MODEL, null, null );
-      TreeItem< OutlineDescriber > propertyTypeBranch = createBranch( modelBranch, PROPERTY_TYPES, null, null );
-      new TreeItemListModel( OutlineDescribables.PropertyType, propertyTypeBranch );
-      TreeItem< OutlineDescriber > definitionBranch = createBranch( modelBranch, DEFINITIONS, null, null );
-      TreeItemListModel definitionModel = new TreeItemListModel( OutlineDescribables.Definition, definitionBranch );
-      definitionModel.addUpdateEvent( Definition.Events.PropertyAdded );
       
-      TreeItem< OutlineDescriber > dataBranch = createBranch( root, DATA, null, null );
-      new BuilderObjectTreeItemModel( dataBranch );
+      if ( detail.isPropertyTypesShown() || detail.isDefinitionsShown() ) {
+         TreeItem< OutlineDescriber > modelBranch = createBranch( root, MODEL, null, null );
+         
+         if ( detail.isPropertyTypesShown() ) {
+            TreeItem< OutlineDescriber > propertyTypeBranch = createBranch( modelBranch, PROPERTY_TYPES, null, null );
+            new TreeItemListModel( OutlineDescribables.PropertyType, propertyTypeBranch );
+         }
+         
+         if ( detail.isDefinitionsShown() ) {
+            TreeItem< OutlineDescriber > definitionBranch = createBranch( modelBranch, DEFINITIONS, null, null );
+            TreeItemListModel definitionModel = new TreeItemListModel( OutlineDescribables.Definition, definitionBranch );
+            definitionModel.addUpdateEvent( Definition.Events.PropertyAdded );
+         }
+      }
+      
+      if ( detail.isBuilderObjectsShown() ) {
+         TreeItem< OutlineDescriber > dataBranch = createBranch( root, DATA, null, null );
+         new BuilderObjectTreeItemModel( dataBranch );
+      }
 
       TreeTableView< OutlineDescriber > treeTableView = new TreeTableView<>( root );
       treeTableView.setEditable( true );
       
       createElementsColumn( treeTableView );
-      for ( int i = 1; i < 20; i++ ) {
-         createSpreadsheetColumn( treeTableView, i );
+      
+      if ( detail.isValueColumnsShown() ) {
+         for ( int i = 1; i < 20; i++ ) {
+            createSpreadsheetColumn( treeTableView, i );
+         }
       }
 
       treeTableView.setShowRoot( false );
