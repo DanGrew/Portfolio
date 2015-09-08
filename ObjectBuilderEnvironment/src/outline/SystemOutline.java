@@ -7,9 +7,9 @@
  */
 package outline;
 
-import graphs.graph.Graph;
-
 import java.util.List;
+
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 import javafx.Workarounds;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -25,10 +25,6 @@ import outline.describer.OutlineDescriber;
 import outline.describer.OutlineDescriberFactory;
 import outline.describer.OutlineDescriberFactory.OutlineDescribables;
 import outline.describer.OutlineDescriberImpl;
-import search.SearchSpace;
-import architecture.request.RequestSystem;
-
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 
 /**
  * The {@link SystemOutline} provides an interactive {@link TreeTableView} displaying
@@ -42,11 +38,6 @@ public class SystemOutline extends BorderPane {
    private static final String PROPERTY_TYPES = "Property Types";
    private static final String DEFINITIONS = "Definitions";
    private static final String DATA = "Data";
-   private static final String ANALYSIS = "Analysis";
-   private static final String SEARCHES = "Searches";
-   private static final String GRAPHS = "Graphs";
-   private List< SearchSpace > searchOnlys;
-   private List< Graph > graphs;
 
    /**
     * Constructs a new {@link SystemOutline}
@@ -59,10 +50,7 @@ public class SystemOutline extends BorderPane {
    /**
     * Method to initialise the data required for the outline.
     */
-   private void initialiseOutlineData(){
-      searchOnlys = RequestSystem.retrieveAll( SearchSpace.class );
-      graphs = RequestSystem.retrieveAll( Graph.class );
-   }// End Method
+   private void initialiseOutlineData(){}// End Method
    
    /**
     * Method to create a branch in the tree for the given data.
@@ -162,10 +150,6 @@ public class SystemOutline extends BorderPane {
       
       TreeItem< OutlineDescriber > dataBranch = createBranch( root, DATA, null, null );
       new BuilderObjectTreeItemModel( dataBranch );
-      
-      TreeItem< OutlineDescriber > analysisBranch = createBranch( root, ANALYSIS, null, null );
-      createBranch( analysisBranch, SEARCHES, searchOnlys, null );
-      createBranch( analysisBranch, GRAPHS, graphs, null );
 
       TreeTableView< OutlineDescriber > treeTableView = new TreeTableView<>( root );
       treeTableView.setEditable( true );

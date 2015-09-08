@@ -24,7 +24,7 @@ public class ContentLayerPanBehaviour {
    /**
     * Constructs a new {@link ContentLayerPanBehaviour}.
     */
-   public ContentLayerPanBehaviour() {
+   ContentLayerPanBehaviour() {
       panningX = new SimpleDoubleProperty( 0.0 );
       panningY = new SimpleDoubleProperty( 0.0 );
    }//End Constructor

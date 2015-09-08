@@ -8,7 +8,6 @@
 package graphs.graph.sorting;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.function.Function;
 
 import javafx.scene.chart.XYChart.Data;

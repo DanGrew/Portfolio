@@ -8,6 +8,7 @@
 package diagram.toolbox;
 
 import diagram.layer.ContentLayer;
+import javafx.scene.Node;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
 import object.BuilderObject;
@@ -35,6 +36,8 @@ public enum ContentEvents {
    /** Pan left, moving all items up, by a fixed amount.**/
    PanLeft,
    /** Pan around the content, moving all items, using gestures, {@link ScrollEvent} given.**/
-   PanEvent
+   PanEvent, 
+   /** Select the {@link Node} associated with the event. **/
+   SelectNode 
 
 }//End Enum

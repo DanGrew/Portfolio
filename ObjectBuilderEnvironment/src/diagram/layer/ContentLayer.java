@@ -20,6 +20,7 @@ public class ContentLayer extends Pane {
 
    private ContentLayerDragBehaviour dragBehaviour;
    private ContentLayerPanBehaviour panBehaviour;
+   private ContentLayerSelectionBehaviour selectionBehaviour;
    
    /**
     * Constructs a new {@link ContentLayer}. 
@@ -29,6 +30,7 @@ public class ContentLayer extends Pane {
       new ContentLayerController( this );
       panBehaviour = new ContentLayerPanBehaviour();
       dragBehaviour = new ContentLayerDragBehaviour();
+      selectionBehaviour = new ContentLayerSelectionBehaviour();
       addShape();
    }//End Constructor
    
@@ -50,6 +52,8 @@ public class ContentLayer extends Pane {
       
       dragBehaviour.registerForDragOperations( rectangle );
       panBehaviour.registerForPanBehaviour( rectangle );
+      selectionBehaviour.registerForSelectionBehaviour( rectangle );
+      
       getChildren().add( rectangle );
    }//End Method
    

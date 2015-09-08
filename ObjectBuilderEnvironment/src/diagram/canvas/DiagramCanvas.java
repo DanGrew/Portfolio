@@ -10,10 +10,10 @@ package diagram.canvas;
 import architecture.event.EventSystem;
 import architecture.request.RequestSystem;
 import diagram.layer.ContentLayer;
+import diagram.layer.InformationLayer;
 import diagram.toolbox.ContentEvents;
 import diagram.toolbox.ContentToolBox;
 import javafx.application.Application;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -47,9 +47,6 @@ public class DiagramCanvas extends Application {
     * {@inheritDoc}
     */
    @Override public void start( Stage stage ) throws Exception {
-      Group informationLayer = new Group();
-      ContentLayer contentLayer = new ContentLayer();
-      
       BorderPane window = new BorderPane();
       window.setOnScroll( event -> {
          EventSystem.raiseEvent( ContentEvents.PanEvent, event );  
@@ -59,7 +56,12 @@ public class DiagramCanvas extends Application {
       } );
       window.setBackground( new Background( new BackgroundFill( Color.WHITE, null, null ) ) );
       
-      StackPane stack = new StackPane( contentLayer );
+      InformationLayer informationLayer = new InformationLayer();
+      ContentLayer contentLayer = new ContentLayer();
+      informationLayer.scaleXProperty().bind( contentLayer.scaleXProperty() );
+      informationLayer.scaleYProperty().bind( contentLayer.scaleYProperty() );
+      
+      StackPane stack = new StackPane( informationLayer, contentLayer );
       window.setCenter( stack );
       
       ContentToolBox contentToolBox = new ContentToolBox();
