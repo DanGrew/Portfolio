@@ -29,9 +29,6 @@ public class ContentLayerController {
     */
    ContentLayerController( ContentLayer layer ) {
       this.contentLayer = layer;
-      JavaFxEventSystem.registerForEvent( ContentEvents.AddObject, ( event, source ) -> {
-         handleAddObject( ( BuilderObject )source );
-      } );
       JavaFxEventSystem.registerForEvent( ContentEvents.ZoomIn, ( event, source ) -> {
          handleZoomIn();
       } );
@@ -58,14 +55,6 @@ public class ContentLayerController {
          handlePan( -PAN_SPEED, 0 );
       } );
    }//End Constructor
-   
-   /**
-    * Method to handle the adding of a {@link BuilderObject} to the {@link ContentLayer}.
-    * @param object the {@link BuilderObject} to add.
-    */
-   private void handleAddObject( BuilderObject object ){
-      contentLayer.addShape();
-   }//End Method
    
    /**
     * Method to handle a fixed zoom in.

@@ -12,6 +12,7 @@ import diagram.layer.ContentLayer;
 import diagram.layer.InformationLayer;
 import diagram.toolbox.ContentEvents;
 import diagram.toolbox.ContentToolBox;
+import diagram.toolbox.ShapeToolBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
@@ -36,6 +37,8 @@ public class DiagramCanvas extends Application {
     * {@inheritDoc}
     */
    @Override public void start( Stage stage ) throws Exception {
+      DiagramSettings canvasSettings = new DiagramSettings();
+      
       BorderPane window = new BorderPane();
       window.setOnScroll( event -> {
          EventSystem.raiseEvent( ContentEvents.PanEvent, event );  
@@ -46,7 +49,7 @@ public class DiagramCanvas extends Application {
       window.setBackground( new Background( new BackgroundFill( Color.WHITE, null, null ) ) );
       
       InformationLayer informationLayer = new InformationLayer();
-      ContentLayer contentLayer = new ContentLayer();
+      ContentLayer contentLayer = new ContentLayer( canvasSettings );
       informationLayer.scaleXProperty().bind( contentLayer.scaleXProperty() );
       informationLayer.scaleYProperty().bind( contentLayer.scaleYProperty() );
       
@@ -55,6 +58,8 @@ public class DiagramCanvas extends Application {
       
       ContentToolBox contentToolBox = new ContentToolBox();
       window.setRight( contentToolBox );
+      
+      window.setTop( new ShapeToolBox( canvasSettings ) );
       
       SystemOutline outline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );
       window.setLeft( outline );

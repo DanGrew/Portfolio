@@ -14,10 +14,14 @@ import com.sun.javafx.scene.control.skin.VirtualFlow;
 import javafx.Workarounds;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableRow;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import model.singleton.Singleton;
 import objecttype.Definition;
@@ -106,6 +110,35 @@ public class SystemOutline extends BorderPane {
    private void createElementsColumn( TreeTableView< OutlineDescriber > parent ) {
       TreeTableColumn< OutlineDescriber, String > elementsColumn = new TreeTableColumn<>( ELEMENTS );
       elementsColumn.setPrefWidth( 200 );
+      elementsColumn.setCellFactory( list -> {
+         TreeTableCell< OutlineDescriber, String > cell = new TreeTableCell< OutlineDescriber, String >() {
+            @Override protected void updateItem(String item, boolean empty) {
+                if (item == getItem()) return;
+
+                super.updateItem(item, empty);
+
+                if (item == null) {
+                    super.setText(null);
+                    super.setGraphic(null);
+                } else {
+                    super.setText(item.toString());
+                    super.setGraphic(null);
+                }
+            }
+        };
+        cell.setOnDragDetected( event -> {
+           /* drag was detected, start a drag-and-drop gesture*/
+           /* allow any transfer mode */
+           Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
+           
+           /* Put a string on a dragboard */
+           ClipboardContent content = new ClipboardContent();
+           String singleton = cell.getTreeTableRow().getItem().getColumnEntry( 0 );
+           content.putString(singleton);
+           db.setContent(content);
+        } );
+        return cell;
+      } );
       elementsColumn.setCellValueFactory( param -> 
          new ReadOnlyObjectWrapper<>( param.getValue().getValue().getColumnEntry( 0 ) )
       );
