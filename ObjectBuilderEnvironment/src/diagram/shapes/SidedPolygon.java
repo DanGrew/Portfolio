@@ -13,11 +13,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
 
 /**
- * The {@link ResizeablePolygon} provides a {@link Polygon} that is centred with horizontal
+ * The {@link SidedPolygon} provides a {@link Polygon} that is centred with horizontal
  * and vertical radius' where any number of points can be used to determine the shape which are
  * defined by the ellipse created by the radius'.
  */
-public class ResizeablePolygon extends Polygon{
+public class SidedPolygon extends Polygon{
    
    private static final double DEFAULT_RADIUS = 100;
    private DoubleProperty numberOfSidesProperty;
@@ -57,24 +57,24 @@ public class ResizeablePolygon extends Polygon{
    }//End Method
 
    /**
-    * Constructs a new {@link ResizeablePolygon}.
+    * Constructs a new {@link SidedPolygon}.
     * @param numberOfSides the number of sides in the {@link Polygon}.
     * @param centrePositionX the centre x of the {@link Polygon}.
     * @param centrePositionY the centre y of the {@link Polygon}.
     */
-   public ResizeablePolygon( int numberOfSides, double centrePositionX, double centrePositionY ) {
+   public SidedPolygon( int numberOfSides, double centrePositionX, double centrePositionY ) {
       this( numberOfSides, centrePositionX, centrePositionY, DEFAULT_RADIUS, DEFAULT_RADIUS );
    }//End Constructor
    
    /**
-    * Constructs a new {@link ResizeablePolygon}.
+    * Constructs a new {@link SidedPolygon}.
     * @param numberOfSides the number of sides in the {@link Polygon}.
     * @param centrePositionX the centre x of the {@link Polygon}.
     * @param centrePositionY the centre y of the {@link Polygon}.
     * @param horizontalRadius the horizontal radius.
     * @param verticalRadius the vertical radius.
     */
-   public ResizeablePolygon( 
+   public SidedPolygon( 
             int numberOfSides, 
             double centrePositionX, 
             double centrePositionY, 

@@ -11,7 +11,7 @@ package diagram.layer;
 
 import diagram.canvas.DiagramCanvas;
 import diagram.canvas.DiagramSettings;
-import diagram.shapes.ResizeablePolygon;
+import diagram.shapes.SidedPolygon;
 import diagram.shapes.SelectionShape;
 import javafx.scene.Node;
 import javafx.scene.input.TransferMode;
@@ -68,8 +68,8 @@ public class Content extends Pane {
             Ellipse circle = new Ellipse();
             circle.setCenterX( x );
             circle.setCenterY( y );
-            circle.setRadiusX( ResizeablePolygon.getDefaultRadius() );
-            circle.setRadiusY( ResizeablePolygon.getDefaultRadius() );
+            circle.setRadiusX( SidedPolygon.getDefaultRadius() );
+            circle.setRadiusY( SidedPolygon.getDefaultRadius() );
       
             circle.setFill( Color.TRANSPARENT );
             circle.setStroke( Color.BLACK );
@@ -84,7 +84,7 @@ public class Content extends Pane {
             break;
          case 3: case 4: case 5: case 6:
          case 7: case 8: case 9: case 10:
-            ResizeablePolygon polygon = new ResizeablePolygon( canvasSettings.getNumberOfSides(), x, y );
+            SidedPolygon polygon = new SidedPolygon( canvasSettings.getNumberOfSides(), x, y );
 
             polygon.setFill( Color.TRANSPARENT );
             polygon.setStroke( Color.BLACK );
@@ -99,10 +99,10 @@ public class Content extends Pane {
    }//End Method
    
    /**
-    * Method to select the given {@link ResizeablePolygon}. This will create a duplicate that is bound to the given.
-    * @param node the {@link ResizeablePolygon} to select.
+    * Method to select the given {@link SidedPolygon}. This will create a duplicate that is bound to the given.
+    * @param node the {@link SidedPolygon} to select.
     */
-   void selectNode( ResizeablePolygon node ) {
+   void selectNode( SidedPolygon node ) {
       if ( currentSelection != null ) {
          getChildren().remove( currentSelection );
          getChildren().removeAll( currentSelection.getComponents() );

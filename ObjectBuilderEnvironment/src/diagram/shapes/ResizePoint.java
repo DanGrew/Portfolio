@@ -18,7 +18,7 @@ import javafx.scene.shape.Circle;
 
 /**
  * The {@link ResizePoint} provides a small {@link Circle} that can be used to 
- * resize {@link ResizeablePolygon}s.
+ * resize {@link SidedPolygon}s.
  */
 public class ResizePoint extends Circle {
    
@@ -48,18 +48,18 @@ public class ResizePoint extends Circle {
    }//End Class
    
    /**
-    * The {@link HorizontalRadiusUpdater} is responsible for recalculating the {@link ResizeablePolygon#horizontalRadiusProperty()}
+    * The {@link HorizontalRadiusUpdater} is responsible for recalculating the {@link SidedPolygon#horizontalRadiusProperty()}
     * when the associated event triggers.
     */
    private class HorizontalRadiusUpdater implements ChangeListener< Number > {
       
-      private ResizeablePolygon polygon;
+      private SidedPolygon polygon;
       
       /**
        * Constructs a new {@link HorizontalRadiusUpdater}.
-       * @param polygon the {@link ResizeablePolygon} to update.
+       * @param polygon the {@link SidedPolygon} to update.
        */
-      private HorizontalRadiusUpdater( ResizeablePolygon polygon ) {
+      private HorizontalRadiusUpdater( SidedPolygon polygon ) {
          this.polygon = polygon;
       }//End Constructor
 
@@ -78,18 +78,18 @@ public class ResizePoint extends Circle {
    }//End Class
    
    /**
-    * The {@link VerticalRadiusUpdater} is responsible for recalculating the {@link ResizeablePolygon#verticalRadiusProperty()}
+    * The {@link VerticalRadiusUpdater} is responsible for recalculating the {@link SidedPolygon#verticalRadiusProperty()}
     * when the associated event triggers.
     */
    private class VerticalRadiusUpdater implements ChangeListener< Number > {
       
-      private ResizeablePolygon polygon;
+      private SidedPolygon polygon;
       
       /**
        * Constructs a new {@link VerticalRadiusUpdater}.
-       * @param polygon the {@link ResizeablePolygon} to update.
+       * @param polygon the {@link SidedPolygon} to update.
        */
-      private VerticalRadiusUpdater( ResizeablePolygon polygon ) {
+      private VerticalRadiusUpdater( SidedPolygon polygon ) {
          this.polygon = polygon;
       }//End Constructor
 
@@ -108,11 +108,11 @@ public class ResizePoint extends Circle {
    }//End Class
    
    /**
-    * Constructs a new {@link ResizePoint} for the given {@link ResizeablePolygon}, located and the bottom right of the
+    * Constructs a new {@link ResizePoint} for the given {@link SidedPolygon}, located and the bottom right of the
     * {@link Bounds}.
-    * @param node the {@link ResizeablePolygon} associated.
+    * @param node the {@link SidedPolygon} associated.
     */
-   public ResizePoint( ResizeablePolygon node ) {
+   public ResizePoint( SidedPolygon node ) {
       super( 4 );
       setCenterX( node.getBoundsInLocal().getMaxX() );
       setCenterY( node.getBoundsInLocal().getMaxY() );

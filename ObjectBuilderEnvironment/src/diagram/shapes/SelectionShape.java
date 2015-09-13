@@ -19,7 +19,7 @@ import javafx.scene.shape.Rectangle;
 
 /**
  * The {@link SelectionShape} is the shape responsible for showing the selection of the 
- * associated {@link ResizeablePolygon} by highlighting its {@link Bounds}.
+ * associated {@link SidedPolygon} by highlighting its {@link Bounds}.
  */
 public class SelectionShape extends Rectangle {
    
@@ -27,9 +27,9 @@ public class SelectionShape extends Rectangle {
 
    /**
     * Constructs a new {@link SelectionShape}.
-    * @param selected the {@link ResizeablePolygon} being selected.
+    * @param selected the {@link SidedPolygon} being selected.
     */
-   public SelectionShape( ResizeablePolygon selected ) {
+   public SelectionShape( SidedPolygon selected ) {
       update( selected );
       
       selected.boundsInLocalProperty().addListener( ( change, old, updated ) -> {

@@ -16,58 +16,58 @@ import javafx.geometry.Point2D;
 import utility.TestCommon;
 
 /**
- * Test for the {@link ResizeablePolygon}.
+ * Test for the {@link SidedPolygon}.
  */
 public class ResizeablePolygonTest {
    
    /**
-    * Method to test that {@link ResizeablePolygon#calculatePointOnCircle(double, double, double, double, double)}
+    * Method to test that {@link SidedPolygon#calculatePointOnCircle(double, double, double, double, double)}
     * functions correctly.
     */
    @Test public void shouldCalculatePointOnCircle(){
       Assert.assertEquals( 
                new Point2D( 200, 100 ), 
-               ResizeablePolygon.calculatePointOnCircle( 100, 100, 100, 100, 0 ) 
+               SidedPolygon.calculatePointOnCircle( 100, 100, 100, 100, 0 ) 
       );
       Assert.assertEquals( 
                100.0, 
-               ResizeablePolygon.calculatePointOnCircle( 100, 100, 100, 100, 90 ).getX(),
+               SidedPolygon.calculatePointOnCircle( 100, 100, 100, 100, 90 ).getX(),
                TestCommon.precision()
       );
       Assert.assertEquals( 
                200.0, 
-               ResizeablePolygon.calculatePointOnCircle( 100, 100, 100, 100, 90 ).getY(),
+               SidedPolygon.calculatePointOnCircle( 100, 100, 100, 100, 90 ).getY(),
                TestCommon.precision()
       );
       Assert.assertEquals( 
                0.0, 
-               ResizeablePolygon.calculatePointOnCircle( 100, 100, 100, 100, 180 ).getX(),
+               SidedPolygon.calculatePointOnCircle( 100, 100, 100, 100, 180 ).getX(),
                TestCommon.precision()
       );
       Assert.assertEquals( 
                100.0, 
-               ResizeablePolygon.calculatePointOnCircle( 100, 100, 100, 100, 180 ).getY(),
+               SidedPolygon.calculatePointOnCircle( 100, 100, 100, 100, 180 ).getY(),
                TestCommon.precision()
       );
       Assert.assertEquals( 
                100.0, 
-               ResizeablePolygon.calculatePointOnCircle( 100, 100, 100, 100, 270 ).getX(),
+               SidedPolygon.calculatePointOnCircle( 100, 100, 100, 100, 270 ).getX(),
                TestCommon.precision()
       );
       Assert.assertEquals( 
                0.0, 
-               ResizeablePolygon.calculatePointOnCircle( 100, 100, 100, 100, 270 ).getY(),
+               SidedPolygon.calculatePointOnCircle( 100, 100, 100, 100, 270 ).getY(),
                TestCommon.precision()
       );
    }//End Method
    
    /**
-    * {@link ResizeablePolygon} with 3 sides test.
+    * {@link SidedPolygon} with 3 sides test.
     */
    @Test public void shouldCreateWithThreeSides(){
-      ResizeablePolygon triangle = new ResizeablePolygon( 3, 100, 100 );
+      SidedPolygon triangle = new SidedPolygon( 3, 100, 100 );
       
-      Assert.assertEquals( 100, ResizeablePolygon.getDefaultRadius(), TestCommon.precision() );
+      Assert.assertEquals( 100, SidedPolygon.getDefaultRadius(), TestCommon.precision() );
       
       List< Double > points = triangle.getPoints();
       Assert.assertEquals( 6, points.size() );
@@ -77,9 +77,9 @@ public class ResizeablePolygonTest {
     * Test for calculating the points following the change of the horizontal radius.
     */
    @Test public void shouldHorizontalStretchPoints(){
-      ResizeablePolygon rectangle = new ResizeablePolygon( 4, 100, 100 );
+      SidedPolygon rectangle = new SidedPolygon( 4, 100, 100 );
       
-      Assert.assertEquals( 100, ResizeablePolygon.getDefaultRadius(), TestCommon.precision() );
+      Assert.assertEquals( 100, SidedPolygon.getDefaultRadius(), TestCommon.precision() );
       
       List< Double > points = rectangle.getPoints();
       Assert.assertEquals( 8, points.size() );
@@ -98,9 +98,9 @@ public class ResizeablePolygonTest {
     * Test for calculating the points following the change of the vertical radius.
     */
    @Test public void shouldVerticalStretchPoints(){
-      ResizeablePolygon rectangle = new ResizeablePolygon( 4, 100, 100 );
+      SidedPolygon rectangle = new SidedPolygon( 4, 100, 100 );
       
-      Assert.assertEquals( 100, ResizeablePolygon.getDefaultRadius(), TestCommon.precision() );
+      Assert.assertEquals( 100, SidedPolygon.getDefaultRadius(), TestCommon.precision() );
       
       List< Double > points = rectangle.getPoints();
       Assert.assertEquals( 8, points.size() );
