@@ -7,9 +7,12 @@
  */
 package diagram.layer;
 
+import java.util.function.Consumer;
+
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
 /**
@@ -45,6 +48,20 @@ public class ContentPanBehaviour {
          @Override public void changed( ObservableValue< ? extends Number > observable, Number oldValue, Number newValue ) {
             node.setTranslateY( node.getTranslateY() + ( newValue.doubleValue() - oldValue.doubleValue() ) );
          }
+      } );
+   }//End Method
+   
+   /**
+    * Method to register for panning information.
+    * @param function the {@link Consumer} that is called with the {@link Point2D} representing the centre
+    * of the canvas after panning.
+    */
+   void registerForPanInformation( Consumer< Point2D > function ) {
+      panningX.addListener( ( change, old, updated ) -> {
+         function.accept( new Point2D( panningX.doubleValue(), panningY.doubleValue() ) );
+      } );
+      panningY.addListener( ( change, old, updated ) -> {
+         function.accept( new Point2D( panningX.doubleValue(), panningY.doubleValue() ) );
       } );
    }//End Method
 

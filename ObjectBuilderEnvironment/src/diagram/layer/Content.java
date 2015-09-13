@@ -7,13 +7,16 @@
  */
 package diagram.layer;
 
-
+import java.text.DecimalFormat;
 
 import diagram.canvas.DiagramCanvas;
 import diagram.canvas.DiagramSettings;
-import diagram.shapes.SidedPolygon;
+import diagram.shapes.MultiLayeredPolygon;
 import diagram.shapes.SelectionShape;
+import diagram.shapes.SidedPolygon;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -24,7 +27,8 @@ import javafx.scene.shape.Shape;
  * The {@link Content} is responsible for holding all content for the {@link DiagramCanvas}.
  */
 public class Content extends Pane {
-
+   
+   private static final DecimalFormat COORDINATE_FORMAT = new DecimalFormat( "#.##" );
    private Layer contentLayer;
    private Layer selectionLayer;
    
@@ -56,8 +60,36 @@ public class Content extends Pane {
       setOnDragOver(event -> {
          event.acceptTransferModes(TransferMode.MOVE);
          event.consume();
-     });
+      });
+      
+//      addPanInformation();
    }//End Constructor
+   
+   private void addPanInformation(){
+      Label panInfo = new Label();
+      panInfo.setLayoutX( 0 );
+      panInfo.layoutYProperty().bind( heightProperty().subtract( 40 ) );
+      panBehaviour.registerForPanInformation( ( panLocation ) -> {
+         panInfo.setText( String.format( 
+                  "Canvas( x: %s, y: %s )", 
+                  COORDINATE_FORMAT.format( panLocation.getX() ), 
+                  COORDINATE_FORMAT.format( panLocation.getY() ) 
+         ) );
+      } );
+      getChildren().add( panInfo );
+      
+      Label mouseInfo = new Label();
+      mouseInfo.setLayoutX( 0 );
+      mouseInfo.layoutYProperty().bind( heightProperty().subtract( 20 ) );
+      addEventFilter( MouseEvent.MOUSE_MOVED, event -> {
+         mouseInfo.setText( String.format( 
+                  "Mouse( x: %s, y: %s )", 
+                  COORDINATE_FORMAT.format( event.getX() ), 
+                  COORDINATE_FORMAT.format( event.getY() ) 
+         ) );
+      } );
+      getChildren().add( mouseInfo );
+   }
    
    /**
     * Method to add a {@link Shape} to the {@link Content}.
@@ -87,6 +119,25 @@ public class Content extends Pane {
          case 3: case 4: case 5: case 6:
          case 7: case 8: case 9: case 10:
             SidedPolygon polygon = new SidedPolygon( canvasSettings.getNumberOfSides(), x, y );
+
+            polygon.setFill( Color.TRANSPARENT );
+            polygon.setStroke( Color.BLACK );
+            
+            dragBehaviour.registerForDragOperations( polygon );
+            panBehaviour.registerForPanBehaviour( polygon );
+            selectionBehaviour.registerForSelectionBehaviour( polygon );
+            
+            contentLayer.layerNode( polygon );
+            break;
+         case 11:
+            SidedPolygon pentagon = new SidedPolygon( 6, x - 10, y - 10 );
+
+            pentagon.setFill( Color.TRANSPARENT );
+            pentagon.setStroke( Color.BLACK );
+            pentagon.horizontalRadiusProperty().set( 50 );
+            pentagon.verticalRadiusProperty().set( 50 );
+            
+            polygon = new MultiLayeredPolygon( pentagon, x, y );
 
             polygon.setFill( Color.TRANSPARENT );
             polygon.setStroke( Color.BLACK );

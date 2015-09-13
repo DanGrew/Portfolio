@@ -7,6 +7,9 @@
  */
 package diagram.shapes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
@@ -81,6 +84,26 @@ public class SidedPolygon extends Polygon{
             double horizontalRadius, 
             double verticalRadius 
    ) {
+      this( numberOfSides, centrePositionX, centrePositionY, horizontalRadius, verticalRadius, true );
+   }//End Constructor
+   
+   /**
+    * Constructs a new {@link SidedPolygon}.
+    * @param numberOfSides the number of sides in the {@link Polygon}.
+    * @param centrePositionX the centre x of the {@link Polygon}.
+    * @param centrePositionY the centre y of the {@link Polygon}.
+    * @param horizontalRadius the horizontal radius.
+    * @param verticalRadius the vertical radius.
+    * @param initialisePoints whether to initialise the points or not.
+    */
+   protected SidedPolygon( 
+            int numberOfSides, 
+            double centrePositionX, 
+            double centrePositionY, 
+            double horizontalRadius, 
+            double verticalRadius,
+            boolean initialisePoints
+   ) {
       numberOfSidesProperty = new SimpleDoubleProperty( numberOfSides );
       centreXProperty = new SimpleDoubleProperty( centrePositionX );
       centreYProperty = new SimpleDoubleProperty( centrePositionY );
@@ -88,25 +111,38 @@ public class SidedPolygon extends Polygon{
       horizontalRadiusProperty.addListener( ( change, oldValue, newValue ) -> calculatePoints() );
       verticalRadiusProperty = new SimpleDoubleProperty( verticalRadius );
       verticalRadiusProperty.addListener( ( change, oldValue, newValue ) -> calculatePoints() );
-      calculatePoints();
+      if ( initialisePoints ) calculatePoints();
    }//End Constructor
    
    /**
     * Method to provide the calculation for the points in the {@link Polygon}.
     */
-   private void calculatePoints(){
+   protected void calculatePoints(){
       getPoints().clear();
-      for ( int i = 0; i < numberOfSidesProperty.doubleValue(); i++ ) {
-         double angle = ( 360.0 / numberOfSidesProperty.doubleValue() ) * i;
+      getPoints().addAll( calculateSidePoints( this, 0 ) );
+   }//End Method
+   
+   /**
+    * Method to calculate the points of the {@link SidedPolygon} given with the angle offset.
+    * @param polygon the {@link SidedPolygon} to calculate for.
+    * @param angleOffset the offset to apply to the angle.
+    * @return the calculated points.
+    */
+   protected final List< Double > calculateSidePoints( SidedPolygon polygon, double angleOffset ){
+      List< Double > calculatedPoints = new ArrayList<>();
+      for ( int i = 0; i < polygon.numberOfSidesProperty.doubleValue(); i++ ) {
+         double angle = ( 360.0 / polygon.numberOfSidesProperty.doubleValue() ) * i;
          Point2D point = calculatePointOnCircle( 
-                  centreXProperty.doubleValue(), 
-                  centreYProperty.doubleValue(), 
-                  horizontalRadiusProperty.doubleValue(), 
-                  verticalRadiusProperty.doubleValue(), 
-                  angle 
+                  polygon.centreXProperty.doubleValue(), 
+                  polygon.centreYProperty.doubleValue(), 
+                  polygon.horizontalRadiusProperty.doubleValue(), 
+                  polygon.verticalRadiusProperty.doubleValue(), 
+                  angle + angleOffset
          );
-         getPoints().addAll( point.getX(), point.getY() );
+         calculatedPoints.add( point.getX() );
+         calculatedPoints.add( point.getY() );
       }
+      return calculatedPoints;
    }//End Method
    
    /**
@@ -139,5 +175,13 @@ public class SidedPolygon extends Polygon{
     */
    public DoubleProperty verticalRadiusProperty() {
       return verticalRadiusProperty;
+   }//End Method
+
+   /**
+    * Getter for the number of sides in the {@link SidedPolygon}.
+    * @return the number of sides in the shape.
+    */
+   public int getNumberOfSides() {
+      return numberOfSidesProperty.intValue();
    }//End Method
 }//End Class

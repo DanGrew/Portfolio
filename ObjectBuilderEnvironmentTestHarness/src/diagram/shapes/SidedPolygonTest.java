@@ -18,7 +18,7 @@ import utility.TestCommon;
 /**
  * Test for the {@link SidedPolygon}.
  */
-public class ResizeablePolygonTest {
+public class SidedPolygonTest {
    
    /**
     * Method to test that {@link SidedPolygon#calculatePointOnCircle(double, double, double, double, double)}
