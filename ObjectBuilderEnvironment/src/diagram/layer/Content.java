@@ -32,6 +32,8 @@ public class Content extends Pane {
    private ContentDragBehaviour dragBehaviour;
    private ContentPanBehaviour panBehaviour;
    private ContentSelectionBehaviour selectionBehaviour;
+   
+   private SidedPolygon currentSelectedPolygon;
    private SelectionShape currentSelection;
    
    /**
@@ -103,11 +105,15 @@ public class Content extends Pane {
     * @param node the {@link SidedPolygon} to select.
     */
    void selectNode( SidedPolygon node ) {
+      if ( node == currentSelectedPolygon ) {
+         return;
+      }
       if ( currentSelection != null ) {
          getChildren().remove( currentSelection );
          getChildren().removeAll( currentSelection.getComponents() );
       }
       currentSelection = new SelectionShape( node );
+      currentSelectedPolygon = node;
 
       selectionLayer.layerNode( currentSelection );
       selectionLayer.layerAllNodes( currentSelection.getComponents() );

@@ -114,23 +114,29 @@ public class ResizePoint extends Circle {
     */
    public ResizePoint( SidedPolygon node ) {
       super( 4 );
-      setCenterX( node.getBoundsInLocal().getMaxX() );
-      setCenterY( node.getBoundsInLocal().getMaxY() );
+      setCenterX( node.getBoundsInLocal().getMaxX() + node.getTranslateX() );
+      setCenterY( node.getBoundsInLocal().getMaxY() + node.getTranslateY() );
       setFill( Color.ORANGE );
       setStroke( Color.ORANGE );
       
       ContentDragBehaviour dragBehaviour = new ContentDragBehaviour();
       dragBehaviour.registerForDragOperations( this );
       
-      node.centreXProperty().addListener( new PropertyUpdater( centerXProperty() ) );
-      node.centreYProperty().addListener( new PropertyUpdater( centerYProperty() ) );
-      node.translateXProperty().addListener( new PropertyUpdater( translateXProperty() ) );
-      node.translateYProperty().addListener( new PropertyUpdater( translateYProperty() ) );
+//      node.centreXProperty().addListener( new PropertyUpdater( centerXProperty() ) );
+//      node.centreYProperty().addListener( new PropertyUpdater( centerYProperty() ) );
+      node.translateXProperty().addListener( ( change, old, updated ) -> {
+         centerXProperty().set( node.getBoundsInLocal().getMaxX() + node.getTranslateX() );
+         translateXProperty().set( 0.0 );
+      } );
+      node.translateYProperty().addListener( ( change, old, updated ) -> {
+         centerYProperty().set( node.getBoundsInLocal().getMaxY() + node.getTranslateY() );
+         translateYProperty().set( 0.0 );
+      } );
       
       translateXProperty().addListener( new HorizontalRadiusUpdater( node ) );
       translateYProperty().addListener( new VerticalRadiusUpdater( node ) );
-      centerXProperty().addListener( new HorizontalRadiusUpdater( node ) );
-      centerYProperty().addListener( new VerticalRadiusUpdater( node ) );
+//      centerXProperty().addListener( new HorizontalRadiusUpdater( node ) );
+//      centerYProperty().addListener( new VerticalRadiusUpdater( node ) );
       
       setOnMouseEntered( event -> {
          this.getParent().getScene().setCursor( Cursor.SE_RESIZE );
