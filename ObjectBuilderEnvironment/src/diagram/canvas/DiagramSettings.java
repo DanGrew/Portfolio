@@ -13,29 +13,29 @@ package diagram.canvas;
  */
 public class DiagramSettings {
    
-   private DiagramShapes shape;
+   private int numberOfSides;
    
    /**
     * Constructs a new {@link DiagramSettings}.
     */
    public DiagramSettings() {
-      shape = DiagramShapes.Rectangle;
+      numberOfSides = 4;
    }//End Constructor
 
    /**
-    * Getter for the {@link DiagramShapes} to be drawn.
-    * @return the shape the {@link DiagramShapes}.
+    * Getter for the number of sides in the shape being drawn.
+    * @return the number of sides.
     */
-   public DiagramShapes getShape() {
-      return shape;
+   public int getNumberOfSides() {
+      return numberOfSides;
    }//End Method
 
    /**
-    * Setter for the {@link DiagramShapes} to draw.
-    * @param shape the shape to set.
+    * Setter for the number of sides in the shape to be drawn.
+    * @param numberOfSides the number of sides..
     */
-   public void setShape( DiagramShapes shape ) {
-      this.shape = shape;
+   public void setNumberOfSides( int numberOfSides ) {
+      this.numberOfSides = numberOfSides;
    }//End Method
    
 }//End Class

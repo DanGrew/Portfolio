@@ -12,11 +12,13 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
 /**
- * The {@link ContentLayerDragBehaviour} is responsible for managing dragging objects
- * on the {@link ContentLayer}.
+ * The {@link ContentDragBehaviour} is responsible for managing dragging objects
+ * on the {@link Content}.
  */
-public class ContentLayerDragBehaviour {
+public class ContentDragBehaviour {
    
+   private Boolean horizontalDraggingEnabled;
+   private Boolean verticalDraggingEnabled;
    private Double dragOperationBeginPositionX;
    private Double dragOperationBeginPositionY;
    private Double dragOperationBeginTranslateX;
@@ -58,11 +60,15 @@ public class ContentLayerDragBehaviour {
          double newTranslateX = dragOperationBeginTranslateX + offsetX;
          double newTranslateY = dragOperationBeginTranslateY + offsetY;
          
-         node.setTranslateX( newTranslateX );
-         node.setTranslateY( newTranslateY );
+         if ( horizontalDraggingEnabled ) {
+            node.setTranslateX( newTranslateX );
+         }
+         if ( verticalDraggingEnabled ) {
+            node.setTranslateY( newTranslateY );
+         }
       }//End Method
    };
-   
+     
    /**
     * Method to extract the {@link Node} from the given {@link MouseEvent}.
     * @param event the {@link MouseEvent} to get from.
@@ -74,8 +80,24 @@ public class ContentLayerDragBehaviour {
    
    /**
     * Method to register a {@link Node} for drag behaviour.
+    * @param node the {@link Node} to enable dragging on.
     */
-   void registerForDragOperations( Node node ) {
+   public void registerForDragOperations( Node node ) {
+      horizontalDraggingEnabled = true;
+      verticalDraggingEnabled = true;
+      node.setOnMousePressed( lineStartListener );
+      node.setOnMouseDragged( lineDragListener );
+   }//End Method
+   
+   /**
+    * Method to register a {@link Node} for drag behaviour.
+    * @param node the {@link Node} that should be draggable.
+    * @param enableHorizontalDragging whether to enable horizontal dragging.
+    * @param enableVerticalDragging whether to enable vertical dragging.
+    */
+   public void registerForDragOperations( Node node, boolean enableHorizontalDragging, boolean enableVerticalDragging ) {
+      horizontalDraggingEnabled = enableHorizontalDragging;
+      verticalDraggingEnabled = enableVerticalDragging;
       node.setOnMousePressed( lineStartListener );
       node.setOnMouseDragged( lineDragListener );
    }//End Method

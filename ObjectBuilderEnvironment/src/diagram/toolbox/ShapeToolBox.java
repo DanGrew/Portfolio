@@ -8,14 +8,12 @@
 package diagram.toolbox;
 
 import diagram.canvas.DiagramSettings;
-import diagram.canvas.DiagramShapes;
+import diagram.shapes.ResizeablePolygon;
 import javafx.geometry.Insets;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
 /**
@@ -30,43 +28,32 @@ public class ShapeToolBox extends HBox {
    public ShapeToolBox( DiagramSettings canvasSettings ) {
       setPadding( new Insets( 5 ) );
       
-      ToggleButton rectangle = new ToggleButton();
-      rectangle.setGraphic( new Rectangle( 12, 8 ) );
-      rectangle.setOnAction( event -> canvasSettings.setShape( DiagramShapes.Rectangle ) );
-      getChildren().add( rectangle );
-      
+      ToggleGroup grouping = new ToggleGroup();
+
       ToggleButton circle = new ToggleButton();
       circle.setGraphic( new Circle( 6 ) );
-      circle.setOnAction( event -> canvasSettings.setShape( DiagramShapes.Circle ) );
+      circle.setOnAction( event -> canvasSettings.setNumberOfSides( 0 ) );
       getChildren().add( circle );
+      grouping.getToggles().add( circle );
       
-      ToggleButton triangle = new ToggleButton();
-      triangle.setGraphic( new Polygon( 
-               0, 0,
-               12, 0,
-               6, -12
-      ) );
-      triangle.setOnAction( event -> canvasSettings.setShape( DiagramShapes.Triangle ) );
-      getChildren().add( triangle );
+      for ( int i = 3; i < 11; i++ ) {
+         ToggleButton button = new ToggleButton();
+         button.setGraphic( new ResizeablePolygon( i, 0, 0, 8, 8 ) );
+         final int numberOfSides = i;
+         button.setOnAction( event -> canvasSettings.setNumberOfSides( numberOfSides ) );
+         getChildren().add( button );
+         grouping.getToggles().add( button );
+      }
       
-      ToggleGroup grouping = new ToggleGroup();
-      grouping.getToggles().addAll( rectangle, circle, triangle );
-      grouping.selectedToggleProperty().addListener( event -> {
-         if ( grouping.getSelectedToggle() == null ) {
-            rectangle.setSelected( true );
-         }
-      } );
-      
-      switch ( canvasSettings.getShape() ) {
-         case Circle:
+      switch ( canvasSettings.getNumberOfSides() ) {
+         case 0:
             circle.setSelected( true );
             break;
-         case Rectangle:
-            rectangle.setSelected( true );
+         case 1: case 2:
             break;
-         case Triangle:
-            triangle.setSelected( true );
-            break;
+         case 3: case 4: case 5: case 6:
+         case 7: case 8: case 9: case 10:
+            grouping.getToggles().get( canvasSettings.getNumberOfSides() - 1 ).setSelected( true );
          default:
             break;
       }

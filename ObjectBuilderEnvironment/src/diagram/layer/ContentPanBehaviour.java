@@ -13,18 +13,18 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 
 /**
- * The {@link ContentLayerPanBehaviour} is responsible for providing panning behaviour
- * by translating all objects on the {@link ContentLayer}.
+ * The {@link ContentPanBehaviour} is responsible for providing panning behaviour
+ * by translating all objects on the {@link Content}.
  */
-public class ContentLayerPanBehaviour {
+public class ContentPanBehaviour {
    
    private SimpleDoubleProperty panningX;
    private SimpleDoubleProperty panningY;
    
    /**
-    * Constructs a new {@link ContentLayerPanBehaviour}.
+    * Constructs a new {@link ContentPanBehaviour}.
     */
-   ContentLayerPanBehaviour() {
+   ContentPanBehaviour() {
       panningX = new SimpleDoubleProperty( 0.0 );
       panningY = new SimpleDoubleProperty( 0.0 );
    }//End Constructor
@@ -49,7 +49,7 @@ public class ContentLayerPanBehaviour {
    }//End Method
 
    /**
-    * Method to pan the {@link ContentLayer}, moving all objects on the layer.
+    * Method to pan the {@link Content}, moving all objects on the layer.
     * @param horizontal the horizontal amount to pan by.
     * @param vertical the vertical amount to pan by.
     */

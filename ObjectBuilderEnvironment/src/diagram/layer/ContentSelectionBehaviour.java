@@ -13,9 +13,9 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
 /**
- * {@link ContentLayerSelectionBehaviour} is responsible for handling selection of items in the {@link ContentLayer}.
+ * {@link ContentSelectionBehaviour} is responsible for handling selection of items in the {@link Content}.
  */
-public class ContentLayerSelectionBehaviour {
+public class ContentSelectionBehaviour {
 
    /**
     * Method to register the given {@link Node} as a selectable item.

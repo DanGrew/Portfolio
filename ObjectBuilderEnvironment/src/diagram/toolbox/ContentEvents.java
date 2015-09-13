@@ -7,14 +7,14 @@
  */
 package diagram.toolbox;
 
-import diagram.layer.ContentLayer;
+import diagram.layer.Content;
 import javafx.scene.Node;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
 import object.BuilderObject;
 
 /**
- * {@link Enum} defining the events that can be received by the {@link ContentLayer}
+ * {@link Enum} defining the events that can be received by the {@link Content}
  * for controlling the content.
  */
 public enum ContentEvents {

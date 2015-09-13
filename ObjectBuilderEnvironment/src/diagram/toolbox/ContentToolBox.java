@@ -9,7 +9,7 @@ package diagram.toolbox;
 
 import architecture.event.EventSystem;
 import architecture.request.RequestSystem;
-import diagram.layer.ContentLayer;
+import diagram.layer.Content;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
@@ -19,7 +19,7 @@ import objecttype.Definition;
 import objecttype.DefinitionImpl;
 
 /**
- * The {@link ContentToolBox} provides controls for the {@link ContentLayer}.
+ * The {@link ContentToolBox} provides controls for the {@link Content}.
  */
 public class ContentToolBox extends VBox {
    

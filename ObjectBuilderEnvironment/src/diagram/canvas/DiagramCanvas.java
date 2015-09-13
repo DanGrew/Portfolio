@@ -8,8 +8,7 @@
 package diagram.canvas;
 
 import architecture.event.EventSystem;
-import diagram.layer.ContentLayer;
-import diagram.layer.InformationLayer;
+import diagram.layer.Content;
 import diagram.toolbox.ContentEvents;
 import diagram.toolbox.ContentToolBox;
 import diagram.toolbox.ShapeToolBox;
@@ -18,7 +17,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import outline.SystemOutline;
@@ -48,13 +46,8 @@ public class DiagramCanvas extends Application {
       } );
       window.setBackground( new Background( new BackgroundFill( Color.WHITE, null, null ) ) );
       
-      InformationLayer informationLayer = new InformationLayer();
-      ContentLayer contentLayer = new ContentLayer( canvasSettings );
-      informationLayer.scaleXProperty().bind( contentLayer.scaleXProperty() );
-      informationLayer.scaleYProperty().bind( contentLayer.scaleYProperty() );
-      
-      StackPane stack = new StackPane( informationLayer, contentLayer );
-      window.setCenter( stack );
+      Content contentLayer = new Content( canvasSettings );
+      window.setCenter( contentLayer );
       
       ContentToolBox contentToolBox = new ContentToolBox();
       window.setRight( contentToolBox );

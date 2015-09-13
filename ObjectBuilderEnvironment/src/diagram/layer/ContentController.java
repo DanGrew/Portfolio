@@ -7,27 +7,28 @@
  */
 package diagram.layer;
 
+import diagram.shapes.ResizeablePolygon;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
+import javafx.scene.Node;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
-import object.BuilderObject;
 
 /**
- * The {@link ContentLayerController} is responsible for controlling the {@link ContentLayer} and
- * providing a decoupling via events. The events are received here and pushed into the {@link ContentLayer}
+ * The {@link ContentController} is responsible for controlling the {@link Content} and
+ * providing a decoupling via events. The events are received here and pushed into the {@link Content}
  * via the appropriate methods on its interface.
  */
-public class ContentLayerController {
+public class ContentController {
    
    private static final double PAN_SPEED = 50;
-   private ContentLayer contentLayer;
+   private Content contentLayer;
    
    /**
-    * Constructs a new {@link ContentLayerController}.
-    * @param layer the {@link ContentLayer} being controlled.
+    * Constructs a new {@link ContentController}.
+    * @param layer the {@link Content} being controlled.
     */
-   ContentLayerController( ContentLayer layer ) {
+   ContentController( Content layer ) {
       this.contentLayer = layer;
       JavaFxEventSystem.registerForEvent( ContentEvents.ZoomIn, ( event, source ) -> {
          handleZoomIn();
@@ -54,7 +55,16 @@ public class ContentLayerController {
       JavaFxEventSystem.registerForEvent( ContentEvents.PanLeft, ( event, source ) -> {
          handlePan( -PAN_SPEED, 0 );
       } );
+      JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> handleSelection( ( ResizeablePolygon )source ) );
    }//End Constructor
+   
+   /**
+    * Method to handle the selection of the given {@link ResizeablePolygon}.
+    * @param node the {@link ResizeablePolygon} to select.
+    */
+   private void handleSelection( ResizeablePolygon node ) {
+      contentLayer.selectNode( node );
+   }//End Method
    
    /**
     * Method to handle a fixed zoom in.
