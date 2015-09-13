@@ -23,31 +23,6 @@ import javafx.scene.shape.Circle;
 public class ResizePoint extends Circle {
    
    /**
-    * Listener that will automatically update the given {@link DoubleProperty} with the new
-    * value set.
-    */
-   private class PropertyUpdater implements ChangeListener< Number > {
-
-      private DoubleProperty property;
-      
-      /**
-       * Constructs a new {@link PropertyUpdater}.
-       * @param property the {@link DoubleProperty} to auto update.
-       */
-      private PropertyUpdater( DoubleProperty property ) {
-         this.property = property;
-      }//End Constructor
-      
-      /**
-       * {@inheritDoc}
-       */
-      @Override public void changed( ObservableValue< ? extends Number > observable, Number oldValue, Number newValue ) {
-         property.set( newValue.doubleValue() );
-      }//End Method
-      
-   }//End Class
-   
-   /**
     * The {@link HorizontalRadiusUpdater} is responsible for recalculating the {@link SidedPolygon#horizontalRadiusProperty()}
     * when the associated event triggers.
     */
@@ -114,29 +89,25 @@ public class ResizePoint extends Circle {
     */
    public ResizePoint( SidedPolygon node ) {
       super( 4 );
-      setCenterX( node.getBoundsInLocal().getMaxX() + node.getTranslateX() );
-      setCenterY( node.getBoundsInLocal().getMaxY() + node.getTranslateY() );
+      setCenterX( node.centreXProperty().doubleValue() + node.getTranslateX() + node.horizontalRadiusProperty().doubleValue() );
+      setCenterY( node.centreYProperty().doubleValue() + node.getTranslateY() + node.verticalRadiusProperty().doubleValue() );
       setFill( Color.ORANGE );
       setStroke( Color.ORANGE );
       
       ContentDragBehaviour dragBehaviour = new ContentDragBehaviour();
       dragBehaviour.registerForDragOperations( this );
       
-//      node.centreXProperty().addListener( new PropertyUpdater( centerXProperty() ) );
-//      node.centreYProperty().addListener( new PropertyUpdater( centerYProperty() ) );
       node.translateXProperty().addListener( ( change, old, updated ) -> {
-         centerXProperty().set( node.getBoundsInLocal().getMaxX() + node.getTranslateX() );
+         setCenterX( node.centreXProperty().doubleValue() + node.getTranslateX() + node.horizontalRadiusProperty().doubleValue() );
          translateXProperty().set( 0.0 );
       } );
       node.translateYProperty().addListener( ( change, old, updated ) -> {
-         centerYProperty().set( node.getBoundsInLocal().getMaxY() + node.getTranslateY() );
+         setCenterY( node.centreYProperty().doubleValue() + node.getTranslateY() + node.verticalRadiusProperty().doubleValue() );
          translateYProperty().set( 0.0 );
       } );
       
       translateXProperty().addListener( new HorizontalRadiusUpdater( node ) );
       translateYProperty().addListener( new VerticalRadiusUpdater( node ) );
-//      centerXProperty().addListener( new HorizontalRadiusUpdater( node ) );
-//      centerYProperty().addListener( new VerticalRadiusUpdater( node ) );
       
       setOnMouseEntered( event -> {
          this.getParent().getScene().setCursor( Cursor.SE_RESIZE );
