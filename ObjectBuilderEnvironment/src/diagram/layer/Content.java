@@ -11,7 +11,7 @@ import java.text.DecimalFormat;
 
 import diagram.canvas.DiagramCanvas;
 import diagram.canvas.DiagramSettings;
-import diagram.shapes.MultiLayeredPolygon;
+import diagram.shapes.StarredPolygon;
 import diagram.shapes.SelectionShape;
 import diagram.shapes.EllipticPolygon;
 import javafx.scene.Node;
@@ -137,7 +137,7 @@ public class Content extends Pane {
             pentagon.horizontalRadiusProperty().set( 50 );
             pentagon.verticalRadiusProperty().set( 50 );
             
-            polygon = new MultiLayeredPolygon( pentagon, x, y );
+            polygon = new StarredPolygon( pentagon, x, y );
 
             polygon.setFill( Color.TRANSPARENT );
             polygon.setStroke( Color.BLACK );

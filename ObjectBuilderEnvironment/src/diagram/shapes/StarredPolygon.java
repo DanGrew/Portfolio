@@ -13,32 +13,32 @@ import java.util.List;
 import javafx.scene.shape.Polygon;
 
 /**
- * The {@link MultiLayeredPolygon} is an extension of {@link EllipticPolygon} with a sub {@link EllipticPolygon}
+ * The {@link StarredPolygon} is an extension of {@link EllipticPolygon} with a sub {@link EllipticPolygon}
  * that provides intermediate points along the sides of the {@link EllipticPolygon}.
  */
-public class MultiLayeredPolygon extends EllipticPolygon{
+public class StarredPolygon extends EllipticPolygon{
    
    private EllipticPolygon innerPolygon;
 
    /**
-    * Constructs a new {@link MultiLayeredPolygon}.
+    * Constructs a new {@link StarredPolygon}.
     * @param numberOfSides the number of sides in the {@link Polygon}.
     * @param centrePositionX the centre x of the {@link Polygon}.
     * @param centrePositionY the centre y of the {@link Polygon}.
     */
-   public MultiLayeredPolygon( EllipticPolygon polygon, double centrePositionX, double centrePositionY ) {
+   public StarredPolygon( EllipticPolygon polygon, double centrePositionX, double centrePositionY ) {
       this( polygon, centrePositionX, centrePositionY, EllipticPolygon.getDefaultRadius(), EllipticPolygon.getDefaultRadius() );
    }//End Constructor
    
    /**
-    * Constructs a new {@link MultiLayeredPolygon}.
+    * Constructs a new {@link StarredPolygon}.
     * @param numberOfSides the number of sides in the {@link Polygon}.
     * @param centrePositionX the centre x of the {@link Polygon}.
     * @param centrePositionY the centre y of the {@link Polygon}.
     * @param horizontalRadius the horizontal radius.
     * @param verticalRadius the vertical radius.
     */
-   public MultiLayeredPolygon( 
+   public StarredPolygon( 
             EllipticPolygon polygon, 
             double centrePositionX, 
             double centrePositionY, 
@@ -59,7 +59,7 @@ public class MultiLayeredPolygon extends EllipticPolygon{
    }//End Method
    
    /**
-    * Method to calculate the points in the {@link MultiLayeredPolygon} accounting for the inner {@link EllipticPolygon}.
+    * Method to calculate the points in the {@link StarredPolygon} accounting for the inner {@link EllipticPolygon}.
     * @return a {@link List} of combined {@link Double} points that make up the {@link Polygon}.
     */
    protected final List< Double > calculateWithInnerPolygon(){

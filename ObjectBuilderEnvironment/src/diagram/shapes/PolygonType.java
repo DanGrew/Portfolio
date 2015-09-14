@@ -20,7 +20,7 @@ public enum PolygonType implements PolygonCreator {
    Starred( 
             ( sides, x, y ) -> {
                EllipticPolygon innerPolygon = new EllipticPolygon( sides, x, y );
-               MultiLayeredPolygon polygon = new MultiLayeredPolygon( innerPolygon, x, y );
+               StarredPolygon polygon = new StarredPolygon( innerPolygon, x, y );
                return polygon;
             }
    );
