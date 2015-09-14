@@ -15,6 +15,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
 
 /**
  * The {@link ResizePoint} provides a small {@link Circle} that can be used to 
@@ -85,29 +86,27 @@ public class ResizePoint extends Circle {
    /**
     * Constructs a new {@link ResizePoint} for the given {@link SidedPolygon}, located and the bottom right of the
     * {@link Bounds}.
-    * @param node the {@link SidedPolygon} associated.
+    * @param polygon the {@link SidedPolygon} associated.
     */
-   public ResizePoint( SidedPolygon node ) {
+   public ResizePoint( SidedPolygon polygon ) {
       super( 4 );
-      setCenterX( node.centreXProperty().doubleValue() + node.getTranslateX() + node.horizontalRadiusProperty().doubleValue() );
-      setCenterY( node.centreYProperty().doubleValue() + node.getTranslateY() + node.verticalRadiusProperty().doubleValue() );
+      resetCentreX( polygon );
+      resetCentreY( polygon );
       setFill( Color.ORANGE );
       setStroke( Color.ORANGE );
       
       ContentDragBehaviour dragBehaviour = new ContentDragBehaviour();
       dragBehaviour.registerForDragOperations( this );
       
-      node.translateXProperty().addListener( ( change, old, updated ) -> {
-         setCenterX( node.centreXProperty().doubleValue() + node.getTranslateX() + node.horizontalRadiusProperty().doubleValue() );
-         translateXProperty().set( 0.0 );
+      polygon.translateXProperty().addListener( ( change, old, updated ) -> {
+         resetCentreX( polygon );
       } );
-      node.translateYProperty().addListener( ( change, old, updated ) -> {
-         setCenterY( node.centreYProperty().doubleValue() + node.getTranslateY() + node.verticalRadiusProperty().doubleValue() );
-         translateYProperty().set( 0.0 );
+      polygon.translateYProperty().addListener( ( change, old, updated ) -> {
+         resetCentreY( polygon );
       } );
       
-      translateXProperty().addListener( new HorizontalRadiusUpdater( node ) );
-      translateYProperty().addListener( new VerticalRadiusUpdater( node ) );
+      translateXProperty().addListener( new HorizontalRadiusUpdater( polygon ) );
+      translateYProperty().addListener( new VerticalRadiusUpdater( polygon ) );
       
       setOnMouseEntered( event -> {
          this.getParent().getScene().setCursor( Cursor.SE_RESIZE );
@@ -116,5 +115,23 @@ public class ResizePoint extends Circle {
          this.getParent().getScene().setCursor( Cursor.DEFAULT );
       } );
    }//End Constructor
+   
+   /**
+    * Method to reset the centre based on the {@link SidedPolygon}.
+    * @param polygon the {@link SidedPolygon} used to calculate the centre x of this {@link Ellipse}.
+    */
+   private void resetCentreX( SidedPolygon polygon ){
+      setCenterX( polygon.centreXProperty().doubleValue() + polygon.getTranslateX() + polygon.horizontalRadiusProperty().doubleValue() );
+      translateXProperty().set( 0.0 );
+   }//End Method
+   
+   /**
+    * Method to reset the centre based on the {@link SidedPolygon}.
+    * @param polygon the {@link SidedPolygon} used to calculate the centre y of this {@link Ellipse}.
+    */
+   private void resetCentreY( SidedPolygon polygon ) {
+      setCenterY( polygon.centreYProperty().doubleValue() + polygon.getTranslateY() + polygon.verticalRadiusProperty().doubleValue() );
+      translateYProperty().set( 0.0 );
+   }//End Method
    
 }//End Class
