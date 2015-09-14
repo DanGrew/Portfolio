@@ -10,7 +10,6 @@ package diagram.layer;
 import diagram.shapes.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
-import javafx.scene.Node;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
 

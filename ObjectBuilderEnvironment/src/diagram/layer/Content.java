@@ -11,9 +11,8 @@ import java.text.DecimalFormat;
 
 import diagram.canvas.DiagramCanvas;
 import diagram.canvas.DiagramSettings;
-import diagram.shapes.StarredPolygon;
-import diagram.shapes.SelectionShape;
 import diagram.shapes.EllipticPolygon;
+import diagram.shapes.SelectionShape;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -119,8 +118,11 @@ public class Content extends Pane {
          case 3: case 4: case 5: case 6:
          case 7: case 8: case 9: case 10:
             EllipticPolygon polygon = canvasSettings.getPolygonType().createPolygon( 
-                     canvasSettings.getNumberOfSides(), x, y 
+                     canvasSettings.getNumberOfSides(), x, y, 
+                     EllipticPolygon.getDefaultRadius(), EllipticPolygon.getDefaultRadius() 
             );
+            polygon.inversionProperty().set( canvasSettings.isInvertPolygon() );
+            polygon.calculatePoints();
 
             polygon.setFill( Color.TRANSPARENT );
             polygon.setStroke( Color.BLACK );

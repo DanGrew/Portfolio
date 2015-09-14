@@ -10,7 +10,9 @@ package diagram.shapes;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
@@ -28,6 +30,7 @@ public class EllipticPolygon extends Polygon {
    private DoubleProperty centreYProperty;
    private DoubleProperty horizontalRadiusProperty;
    private DoubleProperty verticalRadiusProperty;
+   private BooleanProperty inversionProperty;
    
    /**
     * Method to provide the default radius of the {@link Polygon}.
@@ -111,13 +114,14 @@ public class EllipticPolygon extends Polygon {
       horizontalRadiusProperty.addListener( ( change, oldValue, newValue ) -> calculatePoints() );
       verticalRadiusProperty = new SimpleDoubleProperty( verticalRadius );
       verticalRadiusProperty.addListener( ( change, oldValue, newValue ) -> calculatePoints() );
+      inversionProperty = new SimpleBooleanProperty( false );
       if ( initialisePoints ) calculatePoints();
    }//End Constructor
    
    /**
     * Method to provide the calculation for the points in the {@link Polygon}.
     */
-   protected void calculatePoints(){
+   public void calculatePoints(){
       getPoints().clear();
       getPoints().addAll( calculateSidePoints( this, 0 ) );
    }//End Method
@@ -135,8 +139,8 @@ public class EllipticPolygon extends Polygon {
          Point2D point = calculatePointOnCircle( 
                   polygon.centreXProperty.doubleValue(), 
                   polygon.centreYProperty.doubleValue(), 
-                  polygon.horizontalRadiusProperty.doubleValue(), 
-                  polygon.verticalRadiusProperty.doubleValue(), 
+                  polygon.calculateAppliedHorizontalRadius(), 
+                  polygon.calculateAppliedVerticalRadius(), 
                   angle + angleOffset
          );
          calculatedPoints.add( point.getX() );
@@ -183,5 +187,40 @@ public class EllipticPolygon extends Polygon {
     */
    public int getNumberOfSides() {
       return numberOfSidesProperty.intValue();
+   }//End Method
+   
+   /**
+    * Method to take the configuration of the {@link EllipticPolygon} and calculate the 
+    * horizontal radius.
+    * @return the radius to use in points calculations.
+    */
+   private double calculateAppliedHorizontalRadius(){
+      if ( inversionProperty.get() ) {
+         return horizontalRadiusProperty.negate().doubleValue();
+      } else {
+         return horizontalRadiusProperty.doubleValue();
+      }
+   }//End Method
+   
+   /**
+    * Method to take the configuration of the {@link EllipticPolygon} and calculate the 
+    * vertical radius.
+    * @return the radius to use in points calculations.
+    */
+   private double calculateAppliedVerticalRadius(){
+      if ( inversionProperty.get() ) {
+         return verticalRadiusProperty.negate().doubleValue();
+      } else {
+         return verticalRadiusProperty.doubleValue();
+      }
+   }//End Method
+   
+   /**
+    * Getter for the inversion property. This determines whether the {@link EllipticPolygon}s
+    * radius' are inverted.
+    * @return the inversion {@link BooleanProperty}.
+    */
+   public BooleanProperty inversionProperty() {
+      return inversionProperty;
    }//End Method
 }//End Class

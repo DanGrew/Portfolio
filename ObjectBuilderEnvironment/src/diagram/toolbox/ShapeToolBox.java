@@ -10,7 +10,6 @@ package diagram.toolbox;
 import diagram.canvas.DiagramSettings;
 import diagram.shapes.EllipticPolygon;
 import diagram.shapes.PolygonType;
-import diagram.shapes.StarredPolygon;
 import javafx.geometry.Insets;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -41,27 +40,15 @@ public class ShapeToolBox extends HBox {
       grouping.getToggles().add( circle );
       
       for ( int i = 3; i < 11; i++ ) {
-         ToggleButton button = new ToggleButton();
-         button.setGraphic( new EllipticPolygon( i, 0, 0, 8, 8 ) );
-         final int numberOfSides = i;
-         button.setOnAction( event -> {
-            canvasSettings.setNumberOfSides( numberOfSides );
-            canvasSettings.setPolygonType( PolygonType.Regular );
-         } );
-         getChildren().add( button );
-         grouping.getToggles().add( button );
+         createButtonFor( canvasSettings, grouping, i, PolygonType.Regular, false );
       }
       
       for ( int i = 3; i < 11; i++ ) {
-         ToggleButton button = new ToggleButton();
-         button.setGraphic( new StarredPolygon( i, 0, 0, 8, 8 ) );
-         final int numberOfSides = i;
-         button.setOnAction( event -> {
-            canvasSettings.setNumberOfSides( numberOfSides );
-            canvasSettings.setPolygonType( PolygonType.Starred );
-         } );
-         getChildren().add( button );
-         grouping.getToggles().add( button );
+         createButtonFor( canvasSettings, grouping, i, PolygonType.Starred, false );
+      }
+      
+      for ( int i = 3; i < 11; i++ ) {
+         createButtonFor( canvasSettings, grouping, i, PolygonType.Starred, true );
       }
       
       switch ( canvasSettings.getNumberOfSides() ) {
@@ -77,5 +64,35 @@ public class ShapeToolBox extends HBox {
             break;
       }
    }//End Constructor
+   
+   /**
+    * Method to create a {@link ToggleButton} to set the configuration on the {@link DiagramSettings}.
+    * @param canvasSettings the {@link DiagramSettings} to configure.
+    * @param grouping the {@link ToggleGroup} to add the {@link ToggleButton} to.
+    * @param numberOfSides the number of sides in the shape.
+    * @param type the {@link PolygonType} to create.
+    * @param inversion whether the {@link EllipticPolygon} is inverted.
+    */
+   private void createButtonFor( 
+            DiagramSettings canvasSettings, 
+            ToggleGroup grouping, 
+            int numberOfSides, 
+            PolygonType type, 
+            boolean inversion 
+   ) {
+      ToggleButton button = new ToggleButton();
+      EllipticPolygon polygon = type.createPolygon( numberOfSides, 0, 0, 8, 8 );
+      polygon.inversionProperty().set( inversion );
+      polygon.calculatePoints();
+      button.setGraphic( polygon );
+      
+      button.setOnAction( event -> {
+         canvasSettings.setNumberOfSides( numberOfSides );
+         canvasSettings.setPolygonType( type );
+         canvasSettings.setInvertPolygon( inversion );
+      } );
+      getChildren().add( button );
+      grouping.getToggles().add( button );
+   }//End Method
 
 }//End Class

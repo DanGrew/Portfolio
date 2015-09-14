@@ -18,8 +18,16 @@ public interface PolygonCreator {
     * @param numberOfSides the number of sides to the underlying {@link EllipticPolygon}.
     * @param centreX the centre x position.
     * @param centreY the centre y position.
+    * @param horizontalRadius the horizontal radius.
+    * @param verticalRadius the vertical radius.
     * @return the constructed {@link EllipticPolygon}.
     */
-   public EllipticPolygon createPolygon( int numberOfSides, double centreX, double centreY );
+   public EllipticPolygon createPolygon( 
+            int numberOfSides, 
+            double centreX, 
+            double centreY, 
+            double horizontalRadius, 
+            double verticalRadius 
+   );
 
 }//End Interface

@@ -8,6 +8,7 @@
 package diagram.canvas;
 
 import diagram.shapes.PolygonType;
+import javafx.scene.shape.Polygon;
 
 /**
  * The {@link DiagramSettings} provides a object that is configurable by the system, where the system
@@ -17,6 +18,7 @@ public class DiagramSettings {
    
    private PolygonType polygonType;
    private int numberOfSides;
+   private boolean invertPolygon;
    
    /**
     * Constructs a new {@link DiagramSettings}.
@@ -24,6 +26,7 @@ public class DiagramSettings {
    public DiagramSettings() {
       numberOfSides = 4;
       polygonType = PolygonType.Regular;
+      invertPolygon = false;
    }//End Constructor
 
    /**
@@ -56,6 +59,22 @@ public class DiagramSettings {
     */
    public void setNumberOfSides( int numberOfSides ) {
       this.numberOfSides = numberOfSides;
+   }//End Method
+   
+   /**
+    * Getter for whether the {@link Polygon} is inverted.
+    * @return inverted or not.
+    */
+   public boolean isInvertPolygon() {
+      return invertPolygon;
+   }//End Method
+   
+   /**
+    * Setter for whether to invert the {@link Polygon} or not.
+    * @param invertPolygon the value to set.
+    */
+   public void setInvertPolygon( boolean invertPolygon ) {
+      this.invertPolygon = invertPolygon;
    }//End Method
    
 }//End Class

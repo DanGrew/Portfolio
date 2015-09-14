@@ -13,15 +13,14 @@ package diagram.shapes;
 public enum PolygonType implements PolygonCreator {
    
    Regular( 
-            ( sides, x, y ) -> {
-               return new EllipticPolygon( sides, x, y );
+            ( sides, x, y, h, v ) -> {
+               return new EllipticPolygon( sides, x, y, h, v );
             }
    ),
    Starred( 
-            ( sides, x, y ) -> {
+            ( sides, x, y, h, v ) -> {
                StarredPolygon polygon = new StarredPolygon( 
-                        sides, x, y, 
-                        EllipticPolygon.getDefaultRadius(), EllipticPolygon.getDefaultRadius() 
+                        sides, x, y, h, v 
                );
                return polygon;
             }
@@ -40,8 +39,14 @@ public enum PolygonType implements PolygonCreator {
    /**
     * {@inheritDoc}
     */
-   @Override public EllipticPolygon createPolygon( int numberOfSides, double centreX, double centreY ) {
-      return creator.createPolygon( numberOfSides, centreX, centreY );
+   @Override public EllipticPolygon createPolygon( 
+            int numberOfSides, 
+            double centreX, 
+            double centreY, 
+            double horizontalRadius, 
+            double verticalRadius 
+   ) {
+      return creator.createPolygon( numberOfSides, centreX, centreY, horizontalRadius, verticalRadius );
    }//End Method
 
 }//End Enum

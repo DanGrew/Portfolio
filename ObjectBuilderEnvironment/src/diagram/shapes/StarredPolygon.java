@@ -77,7 +77,7 @@ public class StarredPolygon extends EllipticPolygon{
    /**
     * Method to provide the calculation for the points in the {@link Polygon}.
     */
-   protected void calculatePoints(){
+   @Override public void calculatePoints(){
       getPoints().clear();
       getPoints().addAll( calculateWithInnerPolygon() );
    }//End Method
