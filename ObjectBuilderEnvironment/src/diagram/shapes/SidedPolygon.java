@@ -20,7 +20,7 @@ import javafx.scene.shape.Polygon;
  * and vertical radius' where any number of points can be used to determine the shape which are
  * defined by the ellipse created by the radius'.
  */
-public class SidedPolygon extends Polygon{
+public class SidedPolygon extends Polygon implements EllipticPolygon {
    
    private static final double DEFAULT_RADIUS = 100;
    private DoubleProperty numberOfSidesProperty;
@@ -146,42 +146,37 @@ public class SidedPolygon extends Polygon{
    }//End Method
    
    /**
-    * Getter for the {@link DoubleProperty} of the centre x position.
-    * @return the {@link DoubleProperty}.
+    * {@inheritDoc}
     */
-   public DoubleProperty centreXProperty() {
+   @Override public DoubleProperty centreXProperty() {
       return centreXProperty;
    }//End Method
    
    /**
-    * Getter for the {@link DoubleProperty} of the centre y position.
-    * @return the {@link DoubleProperty}.
+    * {@inheritDoc}
     */
-   public DoubleProperty centreYProperty() {
+   @Override public DoubleProperty centreYProperty() {
       return centreYProperty;
    }//End Method
    
    /**
-    * Getter for the {@link DoubleProperty} of the horizontal radius.
-    * @return the {@link DoubleProperty}.
+    * {@inheritDoc}
     */
-   public DoubleProperty horizontalRadiusProperty() {
+   @Override public DoubleProperty horizontalRadiusProperty() {
       return horizontalRadiusProperty;
    }//End Method
    
    /**
-    * Getter for the {@link DoubleProperty} of the vertical radius.
-    * @return the {@link DoubleProperty}.
+    * {@inheritDoc}
     */
-   public DoubleProperty verticalRadiusProperty() {
+   @Override public DoubleProperty verticalRadiusProperty() {
       return verticalRadiusProperty;
    }//End Method
 
    /**
-    * Getter for the number of sides in the {@link SidedPolygon}.
-    * @return the number of sides in the shape.
+    * {@inheritDoc}
     */
-   public int getNumberOfSides() {
+   @Override public int getNumberOfSides() {
       return numberOfSidesProperty.intValue();
    }//End Method
 }//End Class
