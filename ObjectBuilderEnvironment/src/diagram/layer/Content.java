@@ -13,7 +13,7 @@ import diagram.canvas.DiagramCanvas;
 import diagram.canvas.DiagramSettings;
 import diagram.shapes.MultiLayeredPolygon;
 import diagram.shapes.SelectionShape;
-import diagram.shapes.SidedPolygon;
+import diagram.shapes.EllipticPolygon;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -37,7 +37,7 @@ public class Content extends Pane {
    private ContentPanBehaviour panBehaviour;
    private ContentSelectionBehaviour selectionBehaviour;
    
-   private SidedPolygon currentSelectedPolygon;
+   private EllipticPolygon currentSelectedPolygon;
    private SelectionShape currentSelection;
    
    /**
@@ -102,8 +102,8 @@ public class Content extends Pane {
             Ellipse circle = new Ellipse();
             circle.setCenterX( x );
             circle.setCenterY( y );
-            circle.setRadiusX( SidedPolygon.getDefaultRadius() );
-            circle.setRadiusY( SidedPolygon.getDefaultRadius() );
+            circle.setRadiusX( EllipticPolygon.getDefaultRadius() );
+            circle.setRadiusY( EllipticPolygon.getDefaultRadius() );
       
             circle.setFill( Color.TRANSPARENT );
             circle.setStroke( Color.BLACK );
@@ -118,7 +118,7 @@ public class Content extends Pane {
             break;
          case 3: case 4: case 5: case 6:
          case 7: case 8: case 9: case 10:
-            SidedPolygon polygon = new SidedPolygon( canvasSettings.getNumberOfSides(), x, y );
+            EllipticPolygon polygon = new EllipticPolygon( canvasSettings.getNumberOfSides(), x, y );
 
             polygon.setFill( Color.TRANSPARENT );
             polygon.setStroke( Color.BLACK );
@@ -130,7 +130,7 @@ public class Content extends Pane {
             contentLayer.layerNode( polygon );
             break;
          case 11:
-            SidedPolygon pentagon = new SidedPolygon( 6, x - 10, y - 10 );
+            EllipticPolygon pentagon = new EllipticPolygon( 6, x - 10, y - 10 );
 
             pentagon.setFill( Color.TRANSPARENT );
             pentagon.setStroke( Color.BLACK );
@@ -152,10 +152,10 @@ public class Content extends Pane {
    }//End Method
    
    /**
-    * Method to select the given {@link SidedPolygon}. This will create a duplicate that is bound to the given.
-    * @param node the {@link SidedPolygon} to select.
+    * Method to select the given {@link EllipticPolygon}. This will create a duplicate that is bound to the given.
+    * @param node the {@link EllipticPolygon} to select.
     */
-   void selectNode( SidedPolygon node ) {
+   void selectNode( EllipticPolygon node ) {
       if ( node == currentSelectedPolygon ) {
          return;
       }

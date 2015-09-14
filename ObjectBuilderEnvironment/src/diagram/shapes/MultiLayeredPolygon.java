@@ -13,12 +13,12 @@ import java.util.List;
 import javafx.scene.shape.Polygon;
 
 /**
- * The {@link MultiLayeredPolygon} is an extension of {@link SidedPolygon} with a sub {@link SidedPolygon}
- * that provides intermediate points along the sides of the {@link SidedPolygon}.
+ * The {@link MultiLayeredPolygon} is an extension of {@link EllipticPolygon} with a sub {@link EllipticPolygon}
+ * that provides intermediate points along the sides of the {@link EllipticPolygon}.
  */
-public class MultiLayeredPolygon extends SidedPolygon{
+public class MultiLayeredPolygon extends EllipticPolygon{
    
-   private SidedPolygon innerPolygon;
+   private EllipticPolygon innerPolygon;
 
    /**
     * Constructs a new {@link MultiLayeredPolygon}.
@@ -26,8 +26,8 @@ public class MultiLayeredPolygon extends SidedPolygon{
     * @param centrePositionX the centre x of the {@link Polygon}.
     * @param centrePositionY the centre y of the {@link Polygon}.
     */
-   public MultiLayeredPolygon( SidedPolygon polygon, double centrePositionX, double centrePositionY ) {
-      this( polygon, centrePositionX, centrePositionY, SidedPolygon.getDefaultRadius(), SidedPolygon.getDefaultRadius() );
+   public MultiLayeredPolygon( EllipticPolygon polygon, double centrePositionX, double centrePositionY ) {
+      this( polygon, centrePositionX, centrePositionY, EllipticPolygon.getDefaultRadius(), EllipticPolygon.getDefaultRadius() );
    }//End Constructor
    
    /**
@@ -39,7 +39,7 @@ public class MultiLayeredPolygon extends SidedPolygon{
     * @param verticalRadius the vertical radius.
     */
    public MultiLayeredPolygon( 
-            SidedPolygon polygon, 
+            EllipticPolygon polygon, 
             double centrePositionX, 
             double centrePositionY, 
             double horizontalRadius, 
@@ -59,7 +59,7 @@ public class MultiLayeredPolygon extends SidedPolygon{
    }//End Method
    
    /**
-    * Method to calculate the points in the {@link MultiLayeredPolygon} accounting for the inner {@link SidedPolygon}.
+    * Method to calculate the points in the {@link MultiLayeredPolygon} accounting for the inner {@link EllipticPolygon}.
     * @return a {@link List} of combined {@link Double} points that make up the {@link Polygon}.
     */
    protected final List< Double > calculateWithInnerPolygon(){

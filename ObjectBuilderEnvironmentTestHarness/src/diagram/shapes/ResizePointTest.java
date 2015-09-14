@@ -21,7 +21,7 @@ public class ResizePointTest {
     * Test that the centre position updates the horiontal radius.
     */
    @Test public void centreShouldUpdateHorizontalRadius() {
-      SidedPolygon polygon = new SidedPolygon( 4, 100, 100 );
+      EllipticPolygon polygon = new EllipticPolygon( 4, 100, 100 );
       ResizePoint point = new ResizePoint( polygon );
       
       Assert.assertEquals( polygon.getBoundsInLocal().getMaxX(), point.getCenterX(), TestCommon.precision() );
@@ -34,7 +34,7 @@ public class ResizePointTest {
     * Test that the centre position updates the vertical radius.
     */
    @Test public void translateShouldUpdateHorizontalRadius() {
-      SidedPolygon polygon = new SidedPolygon( 4, 100, 100 );
+      EllipticPolygon polygon = new EllipticPolygon( 4, 100, 100 );
       ResizePoint point = new ResizePoint( polygon );
       
       Assert.assertEquals( polygon.getBoundsInLocal().getMaxX(), point.getCenterX(), TestCommon.precision() );

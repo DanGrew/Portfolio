@@ -7,7 +7,7 @@
  */
 package diagram.layer;
 
-import diagram.shapes.SidedPolygon;
+import diagram.shapes.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
 import javafx.scene.Node;
@@ -55,14 +55,14 @@ public class ContentController {
       JavaFxEventSystem.registerForEvent( ContentEvents.PanLeft, ( event, source ) -> {
          handlePan( -PAN_SPEED, 0 );
       } );
-      JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> handleSelection( ( SidedPolygon )source ) );
+      JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> handleSelection( ( EllipticPolygon )source ) );
    }//End Constructor
    
    /**
-    * Method to handle the selection of the given {@link SidedPolygon}.
-    * @param node the {@link SidedPolygon} to select.
+    * Method to handle the selection of the given {@link EllipticPolygon}.
+    * @param node the {@link EllipticPolygon} to select.
     */
-   private void handleSelection( SidedPolygon node ) {
+   private void handleSelection( EllipticPolygon node ) {
       contentLayer.selectNode( node );
    }//End Method
    

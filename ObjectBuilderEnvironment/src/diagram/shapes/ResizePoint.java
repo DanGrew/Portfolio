@@ -19,23 +19,23 @@ import javafx.scene.shape.Ellipse;
 
 /**
  * The {@link ResizePoint} provides a small {@link Circle} that can be used to 
- * resize {@link SidedPolygon}s.
+ * resize {@link EllipticPolygon}s.
  */
 public class ResizePoint extends Circle {
    
    /**
-    * The {@link HorizontalRadiusUpdater} is responsible for recalculating the {@link SidedPolygon#horizontalRadiusProperty()}
+    * The {@link HorizontalRadiusUpdater} is responsible for recalculating the {@link EllipticPolygon#horizontalRadiusProperty()}
     * when the associated event triggers.
     */
    private class HorizontalRadiusUpdater implements ChangeListener< Number > {
       
-      private SidedPolygon polygon;
+      private EllipticPolygon polygon;
       
       /**
        * Constructs a new {@link HorizontalRadiusUpdater}.
-       * @param polygon the {@link SidedPolygon} to update.
+       * @param polygon the {@link EllipticPolygon} to update.
        */
-      private HorizontalRadiusUpdater( SidedPolygon polygon ) {
+      private HorizontalRadiusUpdater( EllipticPolygon polygon ) {
          this.polygon = polygon;
       }//End Constructor
 
@@ -54,18 +54,18 @@ public class ResizePoint extends Circle {
    }//End Class
    
    /**
-    * The {@link VerticalRadiusUpdater} is responsible for recalculating the {@link SidedPolygon#verticalRadiusProperty()}
+    * The {@link VerticalRadiusUpdater} is responsible for recalculating the {@link EllipticPolygon#verticalRadiusProperty()}
     * when the associated event triggers.
     */
    private class VerticalRadiusUpdater implements ChangeListener< Number > {
       
-      private SidedPolygon polygon;
+      private EllipticPolygon polygon;
       
       /**
        * Constructs a new {@link VerticalRadiusUpdater}.
-       * @param polygon the {@link SidedPolygon} to update.
+       * @param polygon the {@link EllipticPolygon} to update.
        */
-      private VerticalRadiusUpdater( SidedPolygon polygon ) {
+      private VerticalRadiusUpdater( EllipticPolygon polygon ) {
          this.polygon = polygon;
       }//End Constructor
 
@@ -84,11 +84,11 @@ public class ResizePoint extends Circle {
    }//End Class
    
    /**
-    * Constructs a new {@link ResizePoint} for the given {@link SidedPolygon}, located and the bottom right of the
+    * Constructs a new {@link ResizePoint} for the given {@link EllipticPolygon}, located and the bottom right of the
     * {@link Bounds}.
-    * @param polygon the {@link SidedPolygon} associated.
+    * @param polygon the {@link EllipticPolygon} associated.
     */
-   public ResizePoint( SidedPolygon polygon ) {
+   public ResizePoint( EllipticPolygon polygon ) {
       super( 4 );
       resetCentreX( polygon );
       resetCentreY( polygon );
@@ -117,19 +117,19 @@ public class ResizePoint extends Circle {
    }//End Constructor
    
    /**
-    * Method to reset the centre based on the {@link SidedPolygon}.
-    * @param polygon the {@link SidedPolygon} used to calculate the centre x of this {@link Ellipse}.
+    * Method to reset the centre based on the {@link EllipticPolygon}.
+    * @param polygon the {@link EllipticPolygon} used to calculate the centre x of this {@link Ellipse}.
     */
-   private void resetCentreX( SidedPolygon polygon ){
+   private void resetCentreX( EllipticPolygon polygon ){
       setCenterX( polygon.centreXProperty().doubleValue() + polygon.getTranslateX() + polygon.horizontalRadiusProperty().doubleValue() );
       translateXProperty().set( 0.0 );
    }//End Method
    
    /**
-    * Method to reset the centre based on the {@link SidedPolygon}.
-    * @param polygon the {@link SidedPolygon} used to calculate the centre y of this {@link Ellipse}.
+    * Method to reset the centre based on the {@link EllipticPolygon}.
+    * @param polygon the {@link EllipticPolygon} used to calculate the centre y of this {@link Ellipse}.
     */
-   private void resetCentreY( SidedPolygon polygon ) {
+   private void resetCentreY( EllipticPolygon polygon ) {
       setCenterY( polygon.centreYProperty().doubleValue() + polygon.getTranslateY() + polygon.verticalRadiusProperty().doubleValue() );
       translateYProperty().set( 0.0 );
    }//End Method

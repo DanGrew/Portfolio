@@ -18,7 +18,7 @@ import javafx.scene.shape.Ellipse;
 
 /**
  * The {@link SelectionShape} is the shape responsible for showing the selection of the 
- * associated {@link SidedPolygon} by highlighting its {@link Bounds}.
+ * associated {@link EllipticPolygon} by highlighting its {@link Bounds}.
  */
 public class SelectionShape extends Ellipse {
    
@@ -26,9 +26,9 @@ public class SelectionShape extends Ellipse {
 
    /**
     * Constructs a new {@link SelectionShape}.
-    * @param selected the {@link SidedPolygon} being selected.
+    * @param selected the {@link EllipticPolygon} being selected.
     */
-   public SelectionShape( SidedPolygon selected ) {
+   public SelectionShape( EllipticPolygon selected ) {
       setFill( Color.TRANSPARENT );
       setStroke( Color.ORANGE );
       setStrokeWidth( 3 );

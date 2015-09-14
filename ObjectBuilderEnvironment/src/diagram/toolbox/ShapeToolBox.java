@@ -8,7 +8,7 @@
 package diagram.toolbox;
 
 import diagram.canvas.DiagramSettings;
-import diagram.shapes.SidedPolygon;
+import diagram.shapes.EllipticPolygon;
 import javafx.geometry.Insets;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -38,7 +38,7 @@ public class ShapeToolBox extends HBox {
       
       for ( int i = 3; i < 11; i++ ) {
          ToggleButton button = new ToggleButton();
-         button.setGraphic( new SidedPolygon( i, 0, 0, 8, 8 ) );
+         button.setGraphic( new EllipticPolygon( i, 0, 0, 8, 8 ) );
          final int numberOfSides = i;
          button.setOnAction( event -> canvasSettings.setNumberOfSides( numberOfSides ) );
          getChildren().add( button );
