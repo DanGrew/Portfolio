@@ -118,26 +118,9 @@ public class Content extends Pane {
             break;
          case 3: case 4: case 5: case 6:
          case 7: case 8: case 9: case 10:
-            EllipticPolygon polygon = new EllipticPolygon( canvasSettings.getNumberOfSides(), x, y );
-
-            polygon.setFill( Color.TRANSPARENT );
-            polygon.setStroke( Color.BLACK );
-            
-            dragBehaviour.registerForDragOperations( polygon );
-            panBehaviour.registerForPanBehaviour( polygon );
-            selectionBehaviour.registerForSelectionBehaviour( polygon );
-            
-            contentLayer.layerNode( polygon );
-            break;
-         case 11:
-            EllipticPolygon pentagon = new EllipticPolygon( 6, x - 10, y - 10 );
-
-            pentagon.setFill( Color.TRANSPARENT );
-            pentagon.setStroke( Color.BLACK );
-            pentagon.horizontalRadiusProperty().set( 50 );
-            pentagon.verticalRadiusProperty().set( 50 );
-            
-            polygon = new StarredPolygon( pentagon, x, y );
+            EllipticPolygon polygon = canvasSettings.getPolygonType().createPolygon( 
+                     canvasSettings.getNumberOfSides(), x, y 
+            );
 
             polygon.setFill( Color.TRANSPARENT );
             polygon.setStroke( Color.BLACK );

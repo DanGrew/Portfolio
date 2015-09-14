@@ -25,6 +25,30 @@ public class StarredPolygon extends EllipticPolygon{
     * @param numberOfSides the number of sides in the {@link Polygon}.
     * @param centrePositionX the centre x of the {@link Polygon}.
     * @param centrePositionY the centre y of the {@link Polygon}.
+    * @param horizontalRadius the horizontal radius.
+    * @param verticalRadius the vertical radius.
+    */
+   public StarredPolygon( int numberOfSides, double centrePositionX, double centrePositionY, double horizontalRadius, double verticalRadius ) {
+      this( 
+               new EllipticPolygon( 
+                        numberOfSides, 
+                        centrePositionX, 
+                        centrePositionY, 
+                        horizontalRadius / 2, 
+                        verticalRadius / 2 
+               ), 
+               centrePositionX, 
+               centrePositionY, 
+               horizontalRadius, 
+               verticalRadius
+      );
+   }//End Constructor
+   
+   /**
+    * Constructs a new {@link StarredPolygon}.
+    * @param numberOfSides the number of sides in the {@link Polygon}.
+    * @param centrePositionX the centre x of the {@link Polygon}.
+    * @param centrePositionY the centre y of the {@link Polygon}.
     */
    public StarredPolygon( EllipticPolygon polygon, double centrePositionX, double centrePositionY ) {
       this( polygon, centrePositionX, centrePositionY, EllipticPolygon.getDefaultRadius(), EllipticPolygon.getDefaultRadius() );

@@ -9,6 +9,8 @@ package diagram.toolbox;
 
 import diagram.canvas.DiagramSettings;
 import diagram.shapes.EllipticPolygon;
+import diagram.shapes.PolygonType;
+import diagram.shapes.StarredPolygon;
 import javafx.geometry.Insets;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -32,7 +34,9 @@ public class ShapeToolBox extends HBox {
 
       ToggleButton circle = new ToggleButton();
       circle.setGraphic( new Circle( 6 ) );
-      circle.setOnAction( event -> canvasSettings.setNumberOfSides( 0 ) );
+      circle.setOnAction( event -> {
+         canvasSettings.setNumberOfSides( 0 );  
+      } );
       getChildren().add( circle );
       grouping.getToggles().add( circle );
       
@@ -40,7 +44,22 @@ public class ShapeToolBox extends HBox {
          ToggleButton button = new ToggleButton();
          button.setGraphic( new EllipticPolygon( i, 0, 0, 8, 8 ) );
          final int numberOfSides = i;
-         button.setOnAction( event -> canvasSettings.setNumberOfSides( numberOfSides ) );
+         button.setOnAction( event -> {
+            canvasSettings.setNumberOfSides( numberOfSides );
+            canvasSettings.setPolygonType( PolygonType.Regular );
+         } );
+         getChildren().add( button );
+         grouping.getToggles().add( button );
+      }
+      
+      for ( int i = 3; i < 11; i++ ) {
+         ToggleButton button = new ToggleButton();
+         button.setGraphic( new StarredPolygon( i, 0, 0, 8, 8 ) );
+         final int numberOfSides = i;
+         button.setOnAction( event -> {
+            canvasSettings.setNumberOfSides( numberOfSides );
+            canvasSettings.setPolygonType( PolygonType.Starred );
+         } );
          getChildren().add( button );
          grouping.getToggles().add( button );
       }

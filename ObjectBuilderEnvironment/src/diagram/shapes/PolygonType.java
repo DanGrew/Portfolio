@@ -19,8 +19,10 @@ public enum PolygonType implements PolygonCreator {
    ),
    Starred( 
             ( sides, x, y ) -> {
-               EllipticPolygon innerPolygon = new EllipticPolygon( sides, x, y );
-               StarredPolygon polygon = new StarredPolygon( innerPolygon, x, y );
+               StarredPolygon polygon = new StarredPolygon( 
+                        sides, x, y, 
+                        EllipticPolygon.getDefaultRadius(), EllipticPolygon.getDefaultRadius() 
+               );
                return polygon;
             }
    );
