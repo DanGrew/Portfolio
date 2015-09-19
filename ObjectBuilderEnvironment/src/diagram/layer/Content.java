@@ -28,6 +28,7 @@ import javafx.scene.shape.Shape;
 public class Content extends Pane {
    
    private static final DecimalFormat COORDINATE_FORMAT = new DecimalFormat( "#.##" );
+   private Layer controlLayer;
    private Layer contentLayer;
    private Layer selectionLayer;
    
@@ -52,6 +53,7 @@ public class Content extends Pane {
       selectionBehaviour = new ContentSelectionBehaviour();
       contentLayer = new Layer( this, 0.0 );
       selectionLayer = new Layer( this, 1.0 );
+      controlLayer = new Layer( this, -1.0 );
       
       setOnDragDropped( event -> {
          addShape( event.getX(), event.getY() );
@@ -126,6 +128,7 @@ public class Content extends Pane {
 
             polygon.setFill( Color.TRANSPARENT );
             polygon.setStroke( Color.BLACK );
+            polygon.setStrokeWidth( 1.0 );
             
             dragBehaviour.registerForDragOperations( polygon );
             panBehaviour.registerForPanBehaviour( polygon );
@@ -152,7 +155,7 @@ public class Content extends Pane {
       currentSelectedPolygon = node;
 
       selectionLayer.layerNode( currentSelection );
-      selectionLayer.layerAllNodes( currentSelection.getComponents() );
+      controlLayer.layerAllNodes( currentSelection.getComponents() );
    }//End Method
    
    /**
@@ -170,6 +173,16 @@ public class Content extends Pane {
    void zoom( double factor ){
       setScaleX( getScaleX() * factor );
       setScaleY( getScaleY() * factor );
+      if ( factor < 0 ) {
+         double difference = 1.0 - factor;
+         double proportion = factor / difference;
+         factor += proportion;
+      } else {
+         double difference = factor - 1;
+         double proportion = difference / factor;
+         factor = 1 * ( 1 - proportion );
+      }
+      currentSelectedPolygon.setStrokeWidth( currentSelectedPolygon.getStrokeWidth() * factor );
    }//End Method
    
    /**

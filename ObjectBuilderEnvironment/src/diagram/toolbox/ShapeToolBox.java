@@ -51,6 +51,10 @@ public class ShapeToolBox extends HBox {
          createButtonFor( canvasSettings, grouping, i, PolygonType.Starred, true );
       }
       
+      for ( int i = 3; i < 7; i++ ) {
+         createButtonFor( canvasSettings, grouping, i, PolygonType.Fractal, false );
+      }
+      
       switch ( canvasSettings.getNumberOfSides() ) {
          case 0:
             circle.setSelected( true );

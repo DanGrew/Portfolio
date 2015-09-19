@@ -24,6 +24,14 @@ public enum PolygonType implements PolygonCreator {
                );
                return polygon;
             }
+   ),
+   Fractal( 
+            ( sides, x, y, h, v ) -> {
+               FractalPolygon polygon = new FractalPolygon( 
+                        sides, x, y, h, v, 3 
+               );
+               return polygon;
+            }
    );
    
    private PolygonCreator creator;

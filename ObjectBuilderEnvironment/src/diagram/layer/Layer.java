@@ -38,7 +38,7 @@ class Layer {
    void layerNode( Node node ){
       parent.getChildren().add( node );
       node.setTranslateZ( depth );
-      node.toBack();
+      node.toFront();
    }//End Method
    
    /**
