@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
+import math.ShapesAndVectors;
 
 /**
  * The {@link EllipticPolygon} provides a {@link Polygon} that is centred with horizontal
@@ -40,28 +41,6 @@ public class EllipticPolygon extends Polygon {
       return DEFAULT_RADIUS;
    }//End Method
    
-   /**
-    * Method to calculate the {@link Point2D} on the ellispe given by the parameters.
-    * @param originX the centre x of the ellispe.
-    * @param originY the centre y of the ellispe.
-    * @param horizontalRadius the horizontal radius.
-    * @param verticalRadius the vertical radius.
-    * @param angle the angle the point is at, in degrees.
-    * @return the calculated {@link Point2D}.
-    */
-   public static final Point2D calculatePointOnCircle( 
-            double originX, 
-            double originY, 
-            double horizontalRadius, 
-            double verticalRadius, 
-            double angle 
-   ){
-      angle = Math.toRadians( angle );
-      double x = originX + horizontalRadius * Math.cos( angle );
-      double y = originY + verticalRadius * Math.sin( angle );
-      return new Point2D( x, y );
-   }//End Method
-
    /**
     * Constructs a new {@link EllipticPolygon}.
     * @param numberOfSides the number of sides in the {@link Polygon}.
@@ -136,7 +115,7 @@ public class EllipticPolygon extends Polygon {
       List< Double > calculatedPoints = new ArrayList<>();
       for ( int i = 0; i < polygon.numberOfSidesProperty.doubleValue(); i++ ) {
          double angle = ( 360.0 / polygon.numberOfSidesProperty.doubleValue() ) * i;
-         Point2D point = calculatePointOnCircle( 
+         Point2D point = ShapesAndVectors.calculatePointOnCircle( 
                   polygon.centreXProperty.doubleValue(), 
                   polygon.centreYProperty.doubleValue(), 
                   polygon.calculateAppliedHorizontalRadius(), 

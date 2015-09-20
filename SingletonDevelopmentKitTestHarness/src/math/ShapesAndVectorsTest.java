@@ -19,6 +19,83 @@ import utility.TestCommon;
 public class ShapesAndVectorsTest {
 
    /**
+    * Method to test that {@link ShapesAndVectors#calculatePointOnCircle(double, double, double, double, double)}
+    * functions correctly.
+    */
+   @Test public void shouldCalculatePointOnCircle(){
+      Assert.assertEquals( 
+               new Point2D( 200, 100 ), 
+               ShapesAndVectors.calculatePointOnCircle( 100, 100, 100, 100, 0 ) 
+      );
+      Assert.assertEquals( 
+               100.0, 
+               ShapesAndVectors.calculatePointOnCircle( 100, 100, 100, 100, 90 ).getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               200.0, 
+               ShapesAndVectors.calculatePointOnCircle( 100, 100, 100, 100, 90 ).getY(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               0.0, 
+               ShapesAndVectors.calculatePointOnCircle( 100, 100, 100, 100, 180 ).getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               100.0, 
+               ShapesAndVectors.calculatePointOnCircle( 100, 100, 100, 100, 180 ).getY(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               100.0, 
+               ShapesAndVectors.calculatePointOnCircle( 100, 100, 100, 100, 270 ).getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               0.0, 
+               ShapesAndVectors.calculatePointOnCircle( 100, 100, 100, 100, 270 ).getY(),
+               TestCommon.precision()
+      );
+
+      Point2D point = ShapesAndVectors.calculatePointOnCircle( 0, 0, 100, 100, 0 ); 
+      Assert.assertEquals( 
+               100,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               0,
+               point.getY(),
+               TestCommon.precision()
+      );
+      
+      point = ShapesAndVectors.calculatePointOnCircle( 0, 0, 100, 100, 90 ); 
+      Assert.assertEquals( 
+               0,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               100,
+               point.getY(),
+               TestCommon.precision()
+      );
+      
+      point = ShapesAndVectors.calculatePointOnCircle( 0, 0, 100, 100, 180 ); 
+      Assert.assertEquals( 
+               -100,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               0,
+               point.getY(),
+               TestCommon.precision()
+      );
+   }
+   
+   /**
     * {@link ShapesAndVectors#getAngleOfLineBetweenTwoPoints(Point2D, Point2D)} test.
     */
    @Test public void shouldCalculateAngles() {
@@ -54,35 +131,6 @@ public class ShapesAndVectorsTest {
                ),
                TestCommon.precision()
       );
-   }//End Method
-   
-   /**
-    * {@link ShapesAndVectors#extendVectorBy(double, Point2D, Point2D)} test.
-    */
-   @Test public void shouldExtendVector(){
-      Point2D result = ShapesAndVectors.extendVectorBy( 500, new Point2D( 0, 0 ), new Point2D( 300, 400 ) );
-      Assert.assertEquals( 600, result.getX(), TestCommon.precision() );
-      Assert.assertEquals( 800, result.getY(), TestCommon.precision() );
-      
-      result = ShapesAndVectors.extendVectorBy( 500, new Point2D( 0, 0 ), new Point2D( 400, 300 ) );
-      Assert.assertEquals( 800, result.getX(), TestCommon.precision() );
-      Assert.assertEquals( 600, result.getY(), TestCommon.precision() );
-      
-      result = ShapesAndVectors.extendVectorBy( 300, new Point2D( 0, 0 ), new Point2D( 300, 0 ) );
-      Assert.assertEquals( 600, result.getX(), TestCommon.precision() );
-      Assert.assertEquals( 0,   result.getY(), TestCommon.precision() );
-      
-      result = ShapesAndVectors.extendVectorBy( 300, new Point2D( 300, 0 ), new Point2D( 0, 0 ) );
-      Assert.assertEquals( -300, result.getX(), TestCommon.precision() );
-      Assert.assertEquals( 0,    result.getY(), TestCommon.precision() );
-      
-      result = ShapesAndVectors.extendVectorBy( 300, new Point2D( 0, 0 ), new Point2D( 0, 300 ) );
-      Assert.assertEquals( 0,   result.getX(), TestCommon.precision() );
-      Assert.assertEquals( 600, result.getY(), TestCommon.precision() );
-      
-      result = ShapesAndVectors.extendVectorBy( 300, new Point2D( 0, 300 ), new Point2D( 0, 0 ) );
-      Assert.assertEquals( 0,    result.getX(), TestCommon.precision() );
-      Assert.assertEquals( -300, result.getY(), TestCommon.precision() );
    }//End Method
    
    /**

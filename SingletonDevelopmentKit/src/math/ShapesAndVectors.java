@@ -15,6 +15,28 @@ import javafx.geometry.Point2D;
 public class ShapesAndVectors {
 
    /**
+    * Method to calculate the {@link Point2D} on the ellispe given by the parameters.
+    * @param originX the centre x of the ellispe.
+    * @param originY the centre y of the ellispe.
+    * @param horizontalRadius the horizontal radius.
+    * @param verticalRadius the vertical radius.
+    * @param angle the angle the point is at, in degrees.
+    * @return the calculated {@link Point2D}.
+    */
+   public static final Point2D calculatePointOnCircle( 
+            double originX, 
+            double originY, 
+            double horizontalRadius, 
+            double verticalRadius, 
+            double angle 
+   ){
+      angle = Math.toRadians( angle );
+      double x = originX + horizontalRadius * Math.cos( angle );
+      double y = originY + verticalRadius * Math.sin( angle );
+      return new Point2D( x, y );
+   }//End Method
+   
+   /**
     * Method to calculate the radius of a regular polygon from the number of sides and length of side.
     * @param numberOfSides the number of sides in the polygon.
     * @param lengthOfSide the length of a side in the polygon.
@@ -50,23 +72,6 @@ public class ShapesAndVectors {
          angle += 360.0;
       }
       return angle;
-   }//End Method
-   
-   /**
-    * Method to extend the vector between the given {@link Point2D}s, by the given length.
-    * @param length the length to extend by.
-    * @param from the {@link Point2D} from.
-    * @param to the {@link Point2D} to.
-    * @return the {@link Point2D} beyond that it is extended to.
-    */
-   public static Point2D extendVectorBy( double length, Point2D from, Point2D to ) {
-      double vectorLength = from.distance( to );
-      length = vectorLength - length;
-      Point2D end = new Point2D( 
-         to.getX() + ( to.getX() - from.getX() ) / vectorLength * length,
-         to.getY() + ( to.getY() - from.getY() ) / vectorLength * length
-      );
-      return end;
    }//End Method
    
    /**
