@@ -28,10 +28,8 @@ import javafx.scene.shape.Shape;
 public class Content extends Pane {
    
    private static final DecimalFormat COORDINATE_FORMAT = new DecimalFormat( "#.##" );
-   private Layer controlLayer;
-   private Layer contentLayer;
-   private Layer selectionLayer;
    
+   private LayerManager layers;
    private DiagramSettings canvasSettings;
    private ContentDragBehaviour dragBehaviour;
    private ContentPanBehaviour panBehaviour;
@@ -48,12 +46,11 @@ public class Content extends Pane {
       super();
       new ContentController( this );
       this.canvasSettings = canvasSettings;
+      layers = new LayerManager( getChildren() );
       panBehaviour = new ContentPanBehaviour();
       dragBehaviour = new ContentDragBehaviour();
       selectionBehaviour = new ContentSelectionBehaviour();
-      contentLayer = new Layer( this, 0.0 );
-      selectionLayer = new Layer( this, 1.0 );
-      controlLayer = new Layer( this, -1.0 );
+      
       
       setOnDragDropped( event -> {
          addShape( event.getX(), event.getY() );
@@ -109,11 +106,10 @@ public class Content extends Pane {
             circle.setFill( Color.TRANSPARENT );
             circle.setStroke( Color.BLACK );
             
-            dragBehaviour.registerForDragOperations( circle );
             panBehaviour.registerForPanBehaviour( circle );
             selectionBehaviour.registerForSelectionBehaviour( circle );
             
-            contentLayer.layerNode( circle );
+            layers.addNodes( Layers.Content, circle );
             break;
          case 1: case 2:
             break;
@@ -130,11 +126,10 @@ public class Content extends Pane {
             polygon.setStroke( Color.BLACK );
             polygon.setStrokeWidth( 1.0 );
             
-            dragBehaviour.registerForDragOperations( polygon );
             panBehaviour.registerForPanBehaviour( polygon );
             selectionBehaviour.registerForSelectionBehaviour( polygon );
             
-            contentLayer.layerNode( polygon );
+            layers.addNodes( Layers.Content, polygon );
             break;
       }
    }//End Method
@@ -147,23 +142,23 @@ public class Content extends Pane {
       if ( node == currentSelectedPolygon ) {
          return;
       }
-      if ( currentSelection != null ) {
-         getChildren().remove( currentSelection );
-         getChildren().removeAll( currentSelection.getComponents() );
-      }
+      deselect();
       currentSelection = new SelectionShape( node );
       currentSelectedPolygon = node;
+      dragBehaviour.registerForDragOperations( currentSelection );
 
-      selectionLayer.layerNode( currentSelection );
-      controlLayer.layerAllNodes( currentSelection.getComponents() );
+      layers.addNodes( Layers.Selection, currentSelection );
+      layers.addNodes( Layers.Control, currentSelection.getComponents() );
    }//End Method
    
    /**
     * Method to deselect a {@link Node} by removing the current selection.
     */
    void deselect(){
-      getChildren().remove( currentSelection );
-      currentSelection = null;
+      if ( currentSelection != null ) {
+         getChildren().remove( currentSelection );
+         getChildren().removeAll( currentSelection.getComponents() );
+      }
    }//End Method
    
    /**

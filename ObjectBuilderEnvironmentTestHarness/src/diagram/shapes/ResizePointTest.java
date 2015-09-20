@@ -10,6 +10,7 @@ package diagram.shapes;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javafx.scene.shape.Ellipse;
 import utility.TestCommon;
 
 /**
@@ -18,30 +19,30 @@ import utility.TestCommon;
 public class ResizePointTest {
 
    /**
-    * Test that the centre position updates the horiontal radius.
+    * Test that the centre position updates the horizontal radius.
     */
    @Test public void centreShouldUpdateHorizontalRadius() {
-      EllipticPolygon polygon = new EllipticPolygon( 4, 100, 100 );
+      Ellipse polygon = new Ellipse( 100, 100, 4, 4 );
       ResizePoint point = new ResizePoint( polygon );
       
       Assert.assertEquals( polygon.getBoundsInLocal().getMaxX(), point.getCenterX(), TestCommon.precision() );
       
       point.setCenterX( 300 );
-      Assert.assertEquals( 200, polygon.horizontalRadiusProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( 200, polygon.radiusXProperty().get(), TestCommon.precision() );
    }//End Method
    
    /**
     * Test that the centre position updates the vertical radius.
     */
    @Test public void translateShouldUpdateHorizontalRadius() {
-      EllipticPolygon polygon = new EllipticPolygon( 4, 100, 100 );
+      Ellipse polygon = new Ellipse( 100, 100, 4, 4 );
       ResizePoint point = new ResizePoint( polygon );
       
       Assert.assertEquals( polygon.getBoundsInLocal().getMaxX(), point.getCenterX(), TestCommon.precision() );
       
       point.setTranslateX( 300 );
       Assert.assertEquals( polygon.getBoundsInLocal().getMaxX(), point.getCenterX() + point.getTranslateX(), TestCommon.precision() );
-      Assert.assertEquals( polygon.horizontalRadiusProperty().get(), 400, TestCommon.precision() );
+      Assert.assertEquals( 304, polygon.radiusXProperty().get(), TestCommon.precision() );
    }//End Method
 
 }//End Class

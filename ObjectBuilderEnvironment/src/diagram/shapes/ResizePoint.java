@@ -28,13 +28,13 @@ public class ResizePoint extends Circle {
     */
    private class HorizontalRadiusUpdater implements ChangeListener< Number > {
       
-      private EllipticPolygon polygon;
+      private Ellipse polygon;
       
       /**
        * Constructs a new {@link HorizontalRadiusUpdater}.
-       * @param polygon the {@link EllipticPolygon} to update.
+       * @param polygon the {@link Ellipse} to update.
        */
-      private HorizontalRadiusUpdater( EllipticPolygon polygon ) {
+      private HorizontalRadiusUpdater( Ellipse polygon ) {
          this.polygon = polygon;
       }//End Constructor
 
@@ -45,9 +45,9 @@ public class ResizePoint extends Circle {
          double radius = (
                   ( getCenterX() + getTranslateX() ) 
                      - 
-                  ( polygon.centreXProperty().doubleValue() + polygon.translateXProperty().doubleValue() ) 
+                  ( polygon.centerXProperty().doubleValue() + polygon.translateXProperty().doubleValue() ) 
          );
-         polygon.horizontalRadiusProperty().set( radius );
+         polygon.radiusXProperty().set( radius );
       }//End Method
       
    }//End Class
@@ -58,13 +58,13 @@ public class ResizePoint extends Circle {
     */
    private class VerticalRadiusUpdater implements ChangeListener< Number > {
       
-      private EllipticPolygon polygon;
+      private Ellipse polygon;
       
       /**
        * Constructs a new {@link VerticalRadiusUpdater}.
-       * @param polygon the {@link EllipticPolygon} to update.
+       * @param polygon the {@link Ellipse} to update.
        */
-      private VerticalRadiusUpdater( EllipticPolygon polygon ) {
+      private VerticalRadiusUpdater( Ellipse polygon ) {
          this.polygon = polygon;
       }//End Constructor
 
@@ -75,19 +75,19 @@ public class ResizePoint extends Circle {
          double radius = (
                   ( getCenterY() + getTranslateY() ) 
                      - 
-                  ( polygon.centreYProperty().doubleValue() + polygon.translateYProperty().doubleValue() ) 
+                  ( polygon.centerYProperty().doubleValue() + polygon.translateYProperty().doubleValue() ) 
          );
-         polygon.verticalRadiusProperty().set( radius );
+         polygon.radiusYProperty().set( radius );
       }//End Method
       
    }//End Class
    
    /**
-    * Constructs a new {@link ResizePoint} for the given {@link EllipticPolygon}, located and the bottom right of the
+    * Constructs a new {@link ResizePoint} for the given {@link Ellipse}, located and the bottom right of the
     * {@link Bounds}.
-    * @param polygon the {@link EllipticPolygon} associated.
+    * @param polygon the {@link Ellipse} associated.
     */
-   public ResizePoint( EllipticPolygon polygon ) {
+   public ResizePoint( Ellipse polygon ) {
       super( 4 );
       resetCentreX( polygon );
       resetCentreY( polygon );
@@ -104,6 +104,8 @@ public class ResizePoint extends Circle {
          resetCentreY( polygon );
       } );
       
+      centerXProperty().addListener( new HorizontalRadiusUpdater( polygon ) );
+      centerYProperty().addListener( new VerticalRadiusUpdater( polygon ) );
       translateXProperty().addListener( new HorizontalRadiusUpdater( polygon ) );
       translateYProperty().addListener( new VerticalRadiusUpdater( polygon ) );
       
@@ -116,20 +118,20 @@ public class ResizePoint extends Circle {
    }//End Constructor
    
    /**
-    * Method to reset the centre based on the {@link EllipticPolygon}.
-    * @param polygon the {@link EllipticPolygon} used to calculate the centre x of this {@link Ellipse}.
+    * Method to reset the centre based on the {@link Ellipse}.
+    * @param polygon the {@link Ellipse} used to calculate the centre x of this {@link Ellipse}.
     */
-   private void resetCentreX( EllipticPolygon polygon ){
-      setCenterX( polygon.centreXProperty().doubleValue() + polygon.getTranslateX() + polygon.horizontalRadiusProperty().doubleValue() );
+   private void resetCentreX( Ellipse polygon ){
+      setCenterX( polygon.centerXProperty().doubleValue() + polygon.getTranslateX() + polygon.radiusXProperty().doubleValue() );
       translateXProperty().set( 0.0 );
    }//End Method
    
    /**
-    * Method to reset the centre based on the {@link EllipticPolygon}.
-    * @param polygon the {@link EllipticPolygon} used to calculate the centre y of this {@link Ellipse}.
+    * Method to reset the centre based on the {@link Ellipse}.
+    * @param polygon the {@link Ellipse} used to calculate the centre y of this {@link Ellipse}.
     */
-   private void resetCentreY( EllipticPolygon polygon ) {
-      setCenterY( polygon.centreYProperty().doubleValue() + polygon.getTranslateY() + polygon.verticalRadiusProperty().doubleValue() );
+   private void resetCentreY( Ellipse polygon ) {
+      setCenterY( polygon.centerYProperty().doubleValue() + polygon.getTranslateY() + polygon.radiusYProperty().doubleValue() );
       translateYProperty().set( 0.0 );
    }//End Method
    
