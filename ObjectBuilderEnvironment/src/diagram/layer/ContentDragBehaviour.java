@@ -7,6 +7,7 @@
  */
 package diagram.layer;
 
+import diagram.layer.TranslationConstraint.DefaultTranslation;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -17,13 +18,12 @@ import javafx.scene.input.MouseEvent;
  */
 public class ContentDragBehaviour {
    
-   private Boolean horizontalDraggingEnabled;
-   private Boolean verticalDraggingEnabled;
    private Double dragOperationBeginPositionX;
    private Double dragOperationBeginPositionY;
    private Double dragOperationBeginTranslateX;
    private Double dragOperationBeginTranslateY;
-
+   private TranslationConstraint translationConstraint;
+   
    /**
     * Class responsible for recording the initial position when drag is started.
     */
@@ -60,15 +60,26 @@ public class ContentDragBehaviour {
          double newTranslateX = dragOperationBeginTranslateX + offsetX;
          double newTranslateY = dragOperationBeginTranslateY + offsetY;
          
-         if ( horizontalDraggingEnabled ) {
-            node.setTranslateX( newTranslateX );
-         }
-         if ( verticalDraggingEnabled ) {
-            node.setTranslateY( newTranslateY );
-         }
+         translationConstraint.applyTranslation( node, newTranslateX, newTranslateY );
       }//End Method
    };
+   
+   /**
+    * Constructs a new {@link ContentDragBehaviour} with the {@link DefaultTranslation} behaviour.
+    */
+   public ContentDragBehaviour() {
+      this( new TranslationConstraint.DefaultTranslation() );
+   }//End Constructor
      
+   /**
+    * Constructs a new {@link ContentDragBehaviour} with the given {@link TranslationConstraint}
+    * invoked when translated.
+    * @param translationConstraint the {@link TranslationConstraint} to use.
+    */
+   public ContentDragBehaviour( TranslationConstraint translationConstraint ) {
+      this.translationConstraint = translationConstraint;
+   }//End Constructor
+   
    /**
     * Method to extract the {@link Node} from the given {@link MouseEvent}.
     * @param event the {@link MouseEvent} to get from.
@@ -83,22 +94,8 @@ public class ContentDragBehaviour {
     * @param node the {@link Node} to enable dragging on.
     */
    public void registerForDragOperations( Node node ) {
-      horizontalDraggingEnabled = true;
-      verticalDraggingEnabled = true;
       node.setOnMousePressed( lineStartListener );
       node.setOnMouseDragged( lineDragListener );
    }//End Method
    
-   /**
-    * Method to register a {@link Node} for drag behaviour.
-    * @param node the {@link Node} that should be draggable.
-    * @param enableHorizontalDragging whether to enable horizontal dragging.
-    * @param enableVerticalDragging whether to enable vertical dragging.
-    */
-   public void registerForDragOperations( Node node, boolean enableHorizontalDragging, boolean enableVerticalDragging ) {
-      horizontalDraggingEnabled = enableHorizontalDragging;
-      verticalDraggingEnabled = enableVerticalDragging;
-      node.setOnMousePressed( lineStartListener );
-      node.setOnMouseDragged( lineDragListener );
-   }//End Method
 }//End Class

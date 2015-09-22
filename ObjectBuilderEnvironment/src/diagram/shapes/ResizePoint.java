@@ -91,8 +91,8 @@ public class ResizePoint extends Circle {
       super( 4 );
       resetCentreX( polygon );
       resetCentreY( polygon );
-      setFill( Color.ORANGE );
-      setStroke( Color.ORANGE );
+      setFill( Color.LAWNGREEN );
+      setStroke( Color.LAWNGREEN );
       
       ContentDragBehaviour dragBehaviour = new ContentDragBehaviour();
       dragBehaviour.registerForDragOperations( this );

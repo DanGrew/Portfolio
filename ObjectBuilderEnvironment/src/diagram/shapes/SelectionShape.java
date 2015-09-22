@@ -41,6 +41,7 @@ public class SelectionShape extends Ellipse {
       setTranslateY( selected.translateYProperty().doubleValue() );
       setRadiusX( selected.horizontalRadiusProperty().doubleValue() );
       setRadiusY( selected.verticalRadiusProperty().doubleValue() );
+      setRotate( selected.getRotate() );
 
       selected.centreXProperty().bind( centerXProperty() );
       selected.centreYProperty().bind( centerYProperty() );
@@ -48,10 +49,13 @@ public class SelectionShape extends Ellipse {
       selected.translateYProperty().bind( translateYProperty() );
       selected.horizontalRadiusProperty().bind( radiusXProperty() );
       selected.verticalRadiusProperty().bind( radiusYProperty() );
+      selected.rotateProperty().bind( rotateProperty() );
 
       ResizePoint resizer = new ResizePoint( this );
+      RotationPoint rotator = new RotationPoint( this );
       components = Collections.unmodifiableList( Arrays.asList( 
-               resizer 
+               resizer,
+               rotator
       ) );
    }//End Method
    
