@@ -9,7 +9,6 @@ package diagram.shapes;
 
 import diagram.layer.ContentDragBehaviour;
 import diagram.layer.TranslationConstraint;
-import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;

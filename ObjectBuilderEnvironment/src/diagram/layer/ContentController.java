@@ -11,7 +11,6 @@ import diagram.shapes.AddShapeEvent;
 import diagram.shapes.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
-import javafx.scene.input.ZoomEvent;
 
 /**
  * The {@link ContentController} is responsible for controlling the {@link Content} and

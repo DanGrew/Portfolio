@@ -11,7 +11,6 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.layout.Pane;
 
 /**
  * The {@link Layer} is responsible for ordering {@link Node}s on the z axis providing
