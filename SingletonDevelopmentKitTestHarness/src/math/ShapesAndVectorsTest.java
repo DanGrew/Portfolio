@@ -147,6 +147,19 @@ public class ShapesAndVectorsTest {
    }//End Method
    
    /**
+    * {@link ShapesAndVectors#rotateAsVectorAbout(Point2D, Point2D, double)} test.
+    */
+   @Test public void shouldRotateVectorAbout(){
+      Point2D result = ShapesAndVectors.rotateAsVectorAbout( new Point2D( 2, 2 ), new Point2D( 1, 1 ), 90 );
+      Assert.assertEquals( 0, result.getX(), TestCommon.precision() );
+      Assert.assertEquals( 2, result.getY(), TestCommon.precision() );
+      
+      result = ShapesAndVectors.rotateAsVectorAbout( new Point2D( -1, -1 ), new Point2D( 2, 2 ), 180 );
+      Assert.assertEquals( 5, result.getX(), TestCommon.precision() );
+      Assert.assertEquals( 5, result.getY(), TestCommon.precision() );
+   }//End Method
+   
+   /**
     * {@link ShapesAndVectors#calculateLengthOfSideForRightAngleTriangle(double, double)} test.
     */
    @Test public void shouldCalculateLengthOfRightAngleTriangle(){

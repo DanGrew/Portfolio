@@ -105,7 +105,10 @@ public class RotationPoint extends Circle {
                polygon.getCenterY(), 
                polygon.getRadiusX(), 
                polygon.getRadiusY(), 
-               polygon.getRotate() 
+               0 
+      );
+      point = ShapesAndVectors.rotateAsVectorAbout( 
+               point, new Point2D( polygon.getCenterX(), polygon.getCenterY() ), polygon.getRotate() 
       );
       
       setTranslateX( point.getX() + polygon.getTranslateX() );

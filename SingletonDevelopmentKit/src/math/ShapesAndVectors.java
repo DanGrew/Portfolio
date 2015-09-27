@@ -87,4 +87,17 @@ public class ShapesAndVectors {
          point.getX() * Math.sin( angle ) + point.getY() * Math.cos( angle )
       );
    }//End Method
+   
+   /**
+    * Method to rotate the given {@link Point2D} by the given angle, in degrees, about the given point as a vector to the point.
+    * @param pointToRotate the {@link Point2D} representing a vector from (0,0).
+    * @param pointAbout the {@link Point2D} to rotate about.
+    * @param angle the angle to rotate by.
+    * @return the {@link Point2D} representing the vector of the rotation.
+    */
+   public static Point2D rotateAsVectorAbout( Point2D pointToRotate, Point2D pointAbout, double angle ) {
+      Point2D relativeToZero = pointToRotate.subtract( pointAbout );
+      Point2D rotated = rotateAsVector( relativeToZero, angle );
+      return rotated.add( pointAbout );
+   }//End Method
 }//End Class
