@@ -7,17 +7,12 @@
  */
 package diagram.canvas;
 
-import architecture.event.EventSystem;
 import diagram.layer.Content;
-import diagram.toolbox.ContentEvents;
 import diagram.toolbox.ContentToolBox;
 import diagram.toolbox.ShapeToolBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import outline.SystemOutline;
 import outline.configuration.SystemOutlineDetail;
@@ -38,16 +33,10 @@ public class DiagramCanvas extends Application {
       DiagramSettings canvasSettings = new DiagramSettings();
       
       BorderPane window = new BorderPane();
-      window.setOnScroll( event -> {
-         EventSystem.raiseEvent( ContentEvents.PanEvent, event );  
-      } );
-      window.setOnZoom( event -> {
-         EventSystem.raiseEvent( ContentEvents.ZoomEvent, event );  
-      } );
-      window.setBackground( new Background( new BackgroundFill( Color.WHITE, null, null ) ) );
       
       Content contentLayer = new Content( canvasSettings );
-      window.setCenter( contentLayer );
+      CanvasViewport viewPort = new CanvasViewport( contentLayer );
+      window.setCenter( viewPort );
       
       ContentToolBox contentToolBox = new ContentToolBox();
       window.setRight( contentToolBox );

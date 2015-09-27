@@ -7,10 +7,10 @@
  */
 package diagram.layer;
 
+import diagram.shapes.AddShapeEvent;
 import diagram.shapes.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
 
 /**
@@ -20,7 +20,6 @@ import javafx.scene.input.ZoomEvent;
  */
 public class ContentController {
    
-   private static final double PAN_SPEED = 50;
    private Content contentLayer;
    
    /**
@@ -29,33 +28,18 @@ public class ContentController {
     */
    ContentController( Content layer ) {
       this.contentLayer = layer;
-      JavaFxEventSystem.registerForEvent( ContentEvents.ZoomIn, ( event, source ) -> {
-         handleZoomIn();
-      } );
-      JavaFxEventSystem.registerForEvent( ContentEvents.ZoomOut, ( event, source ) -> {
-         handleZoomOut();
-      } );
-      JavaFxEventSystem.registerForEvent( ContentEvents.ZoomEvent, ( event, source ) -> {
-         handleZoom( ( ( ZoomEvent )source ).getZoomFactor() );
-      } );
       
-      JavaFxEventSystem.registerForEvent( ContentEvents.PanEvent, ( event, source ) -> {
-         handlePan( ( ScrollEvent )source );
-      } );
-      JavaFxEventSystem.registerForEvent( ContentEvents.PanUp, ( event, source ) -> {
-         handlePan( 0, -PAN_SPEED );
-      } );
-      JavaFxEventSystem.registerForEvent( ContentEvents.PanDown, ( event, source ) -> {
-         handlePan( 0, PAN_SPEED );
-      } );
-      JavaFxEventSystem.registerForEvent( ContentEvents.PanRight, ( event, source ) -> {
-         handlePan( PAN_SPEED, 0 );
-      } );
-      JavaFxEventSystem.registerForEvent( ContentEvents.PanLeft, ( event, source ) -> {
-         handlePan( -PAN_SPEED, 0 );
-      } );
       JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> handleSelection( ( EllipticPolygon )source ) );
+      JavaFxEventSystem.registerForEvent( ContentEvents.AddShape, ( event, source ) -> handleAddShape( ( AddShapeEvent )source ) );
    }//End Constructor
+   
+   /**
+    * Method to handle adding a shape to the {@link Content}.
+    * @param event the {@link AddShapeEvent}.
+    */
+   private void handleAddShape( AddShapeEvent event ){
+      contentLayer.addShape( event.xPosition, event.yPosition );
+   }//End Method
    
    /**
     * Method to handle the selection of the given {@link EllipticPolygon}.
@@ -65,43 +49,4 @@ public class ContentController {
       contentLayer.selectNode( node );
    }//End Method
    
-   /**
-    * Method to handle a fixed zoom in.
-    */
-   private void handleZoomIn(){
-      handleZoom( 1.25 );
-   }//End Method
-   
-   /**
-    * Method to handle a fixed zoom out.
-    */
-   private void handleZoomOut(){
-      handleZoom( 0.8 );
-   }//End Method
-   
-   /**
-    * Method to handle a zoom with the given factor to zoom by.
-    * @param factor the zoom factor.
-    */
-   private void handleZoom( double factor ) {
-      contentLayer.zoom( factor );
-   }//End Method
-   
-   /**
-    * Method to handle the panning from a {@link ScrollEvent}.
-    * @param event the {@link ScrollEvent} for the pan.
-    */
-   private void handlePan( ScrollEvent event ) {
-      handlePan( event.getDeltaX(), event.getDeltaY() );
-   }//End Method
-   
-   /**
-    * Method to handle the pan of a fixed amount.
-    * @param horizontal the horizontal pan amount.
-    * @param vertical the vertical pan amount.
-    */
-   private void handlePan( double horizontal, double vertical ) {
-      contentLayer.pan( horizontal, vertical );
-   }//End Method
-
 }//End Class

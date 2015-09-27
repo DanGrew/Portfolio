@@ -8,6 +8,7 @@
 package diagram.toolbox;
 
 import diagram.layer.Content;
+import diagram.shapes.AddShapeEvent;
 import javafx.scene.Node;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
@@ -38,6 +39,8 @@ public enum ContentEvents {
    /** Pan around the content, moving all items, using gestures, {@link ScrollEvent} given.**/
    PanEvent, 
    /** Select the {@link Node} associated with the event. **/
-   SelectNode 
+   SelectNode, 
+   /** Add a shape at the given position, {@link AddShapeEvent} given. **/
+   AddShape 
 
 }//End Enum

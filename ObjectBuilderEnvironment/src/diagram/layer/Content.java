@@ -16,7 +16,6 @@ import diagram.shapes.SelectionShape;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -32,7 +31,6 @@ public class Content extends Pane {
    private LayerManager layers;
    private DiagramSettings canvasSettings;
    private ContentDragBehaviour dragBehaviour;
-   private ContentPanBehaviour panBehaviour;
    private ContentSelectionBehaviour selectionBehaviour;
    
    private EllipticPolygon currentSelectedPolygon;
@@ -47,19 +45,10 @@ public class Content extends Pane {
       new ContentController( this );
       this.canvasSettings = canvasSettings;
       layers = new LayerManager( getChildren() );
-      panBehaviour = new ContentPanBehaviour();
       dragBehaviour = new ContentDragBehaviour();
       selectionBehaviour = new ContentSelectionBehaviour();
       
-      
-      setOnDragDropped( event -> {
-         addShape( event.getX(), event.getY() );
-      } );
-      setOnDragOver(event -> {
-         event.acceptTransferModes(TransferMode.MOVE);
-         event.consume();
-      });
-      
+      addShape( 100, 100 );
 //      addPanInformation();
    }//End Constructor
    
@@ -67,13 +56,13 @@ public class Content extends Pane {
       Label panInfo = new Label();
       panInfo.setLayoutX( 0 );
       panInfo.layoutYProperty().bind( heightProperty().subtract( 40 ) );
-      panBehaviour.registerForPanInformation( ( panLocation ) -> {
-         panInfo.setText( String.format( 
-                  "Canvas( x: %s, y: %s )", 
-                  COORDINATE_FORMAT.format( panLocation.getX() ), 
-                  COORDINATE_FORMAT.format( panLocation.getY() ) 
-         ) );
-      } );
+//      panBehaviour.registerForPanInformation( ( panLocation ) -> {
+//         panInfo.setText( String.format( 
+//                  "Canvas( x: %s, y: %s )", 
+//                  COORDINATE_FORMAT.format( panLocation.getX() ), 
+//                  COORDINATE_FORMAT.format( panLocation.getY() ) 
+//         ) );
+//      } );
       getChildren().add( panInfo );
       
       Label mouseInfo = new Label();
@@ -106,7 +95,6 @@ public class Content extends Pane {
             circle.setFill( Color.TRANSPARENT );
             circle.setStroke( Color.BLACK );
             
-            panBehaviour.registerForPanBehaviour( circle );
             selectionBehaviour.registerForSelectionBehaviour( circle );
             
             layers.addNodes( Layers.Content, circle );
@@ -126,7 +114,6 @@ public class Content extends Pane {
             polygon.setStroke( Color.BLACK );
             polygon.setStrokeWidth( 1.0 );
             
-            panBehaviour.registerForPanBehaviour( polygon );
             selectionBehaviour.registerForSelectionBehaviour( polygon );
             
             layers.addNodes( Layers.Content, polygon );
@@ -159,34 +146,6 @@ public class Content extends Pane {
          getChildren().remove( currentSelection );
          getChildren().removeAll( currentSelection.getComponents() );
       }
-   }//End Method
-   
-   /**
-    * Method to zoom the {@link Content} by the given factor.
-    * @param factor the zoom factor.
-    */
-   void zoom( double factor ){
-      setScaleX( getScaleX() * factor );
-      setScaleY( getScaleY() * factor );
-      if ( factor < 0 ) {
-         double difference = 1.0 - factor;
-         double proportion = factor / difference;
-         factor += proportion;
-      } else {
-         double difference = factor - 1;
-         double proportion = difference / factor;
-         factor = 1 * ( 1 - proportion );
-      }
-      currentSelectedPolygon.setStrokeWidth( currentSelectedPolygon.getStrokeWidth() * factor );
-   }//End Method
-   
-   /**
-    * Method to pan around the {@link Content}, translating all objects.
-    * @param horizontal the horizontal pan distance.
-    * @param vertical the vertical pan distance.
-    */
-   void pan( double horizontal, double vertical ) {
-      panBehaviour.pan( horizontal, vertical );
    }//End Method
    
 }//End Class
