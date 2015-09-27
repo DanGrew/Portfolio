@@ -82,6 +82,10 @@ public class RotationPoint extends Circle {
       dragBehaviour.registerForDragOperations( this );
       
       polygon.rotateProperty().addListener( ( change, old, updated ) -> resetCentre( polygon ) );
+      polygon.translateXProperty().addListener( ( change, old, updated ) -> resetCentre( polygon ) );
+      polygon.translateYProperty().addListener( ( change, old, updated ) -> resetCentre( polygon ) );
+      polygon.radiusXProperty().addListener( ( change, old, updated ) -> resetCentre( polygon ) );
+      polygon.radiusYProperty().addListener( ( change, old, updated ) -> resetCentre( polygon ) );
       
       setOnMouseEntered( event -> {
          this.getParent().getScene().setCursor( Cursor.CROSSHAIR );
