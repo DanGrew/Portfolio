@@ -7,7 +7,9 @@
  */
 package math;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
+import javafx.scene.layout.Pane;
 
 /**
  * {@link Class} for defining common math functions for shapes and vectors.
@@ -99,5 +101,46 @@ public class ShapesAndVectors {
       Point2D relativeToZero = pointToRotate.subtract( pointAbout );
       Point2D rotated = rotateAsVector( relativeToZero, angle );
       return rotated.add( pointAbout );
+   }//End Method
+   
+   /**
+    * Method to invert the given scale about the default scale 1.
+    * @param scale the scale to invert.
+    * @return the inverted scale such that scale * result = 1;
+    */
+   public static double invertScale( double scale ) {
+      if ( Double.compare( 1, scale ) == 0 ) {
+         return 1;
+      } else if ( scale < 1 ) {
+         double reduction = 1 - scale;
+         double proportion = reduction / scale;
+         return 1 + proportion;
+      } else {
+         double increase = scale - 1;
+         double proportion = increase / scale;
+         return 1 - proportion;
+      }
+   }//End Method
+   
+   /**
+    * Method to scale the given click position for the given {@link Pane} which controls the scaling.
+    * @param x the x position on the parent.
+    * @param y the y position on the parent.
+    * @param canvas the {@link Pane} controlling the scale.
+    * @return the calculated {@link Point2D} relative to the scaled {@link Pane}.
+    */
+   public static Point2D scaleClick( double x, double y, Pane canvas ) {
+      Bounds localBounds = canvas.getBoundsInLocal();
+      Bounds parentBounds = canvas.getBoundsInParent();
+      double actualWidth = canvas.getPrefWidth() / 2;
+      double actualHeight = canvas.getPrefHeight() / 2;
+      double horizontalScreenScale = localBounds.getWidth() / parentBounds.getWidth();
+      double verticalScreenScale = localBounds.getHeight() / parentBounds.getHeight();
+      
+      Point2D scaledPoint = new Point2D(  
+               ( x - canvas.getLayoutX() - canvas.getTranslateX() - actualWidth ) * horizontalScreenScale + actualWidth, 
+               ( y - canvas.getLayoutY() - canvas.getTranslateY() - actualHeight ) * verticalScreenScale + actualHeight
+      );
+      return scaledPoint;
    }//End Method
 }//End Class

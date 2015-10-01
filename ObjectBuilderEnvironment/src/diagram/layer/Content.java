@@ -16,6 +16,9 @@ import diagram.shapes.SelectionShape;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -42,13 +45,16 @@ public class Content extends Pane {
     */
    public Content( DiagramSettings canvasSettings ) {
       super();
+      setBorder( new Border( new BorderStroke( Color.BLACK, BorderStrokeStyle.SOLID, null, null, null ) ) );
       new ContentController( this );
       this.canvasSettings = canvasSettings;
       layers = new LayerManager( getChildren() );
       dragBehaviour = new ContentDragBehaviour();
       selectionBehaviour = new ContentSelectionBehaviour();
       
-      addShape( 100, 100 );
+      setPrefWidth( 1000 );
+      setPrefHeight( 1000 );
+      
 //      addPanInformation();
    }//End Constructor
    

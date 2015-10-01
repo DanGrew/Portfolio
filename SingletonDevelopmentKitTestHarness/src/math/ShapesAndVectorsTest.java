@@ -11,6 +11,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import javafx.geometry.Point2D;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import utility.TestCommon;
 
 /**
@@ -172,6 +174,117 @@ public class ShapesAndVectorsTest {
    @Test public void shouldCalculateRadiusOfPolygon(){
       Assert.assertEquals( 70.71067811, ShapesAndVectors.calculateRadiusOfRegularPolygon( 4, 100 ), TestCommon.precision() );
       Assert.assertEquals( 57.73502691, ShapesAndVectors.calculateRadiusOfRegularPolygon( 3, 100 ), TestCommon.precision() );
+   }//End Method
+   
+   /**
+    * {@link ShapesAndVectors#calculateRadiusOfRegularPolygon(int, double)} test.
+    */
+   @Test public void shouldInvertScale(){
+      Assert.assertEquals( 1.25, ShapesAndVectors.invertScale( 0.8 ), TestCommon.precision() );
+      Assert.assertEquals( 0.8, ShapesAndVectors.invertScale( 1.25 ), TestCommon.precision() );
+   }//End Method
+   
+   /**
+    * {@link ShapesAndVectors#scaleClick(double, double, Pane)} test.
+    */
+   @Test public void shouldScalePoint() {
+      Rectangle rectangle = new Rectangle( 0, 0, 1000, 1000 );
+      Pane group = new Pane( rectangle );
+      Point2D point = ShapesAndVectors.scaleClick( 0, 0, group  ); 
+      Assert.assertEquals( 
+               0,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               0,
+               point.getY(),
+               TestCommon.precision()
+      );
+      
+      point = ShapesAndVectors.scaleClick( 678, 243, group  ); 
+      Assert.assertEquals( 
+               678,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               243,
+               point.getY(),
+               TestCommon.precision()
+      );
+      
+      group.setPrefWidth( 1000 );
+      group.setPrefHeight( 1000 );
+      point = ShapesAndVectors.scaleClick( 456, 111, group  ); 
+      Assert.assertEquals( 
+               456,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               111,
+               point.getY(),
+               TestCommon.precision()
+      );
+      
+      group.setScaleX( 0.5 );
+      group.setScaleY( 0.5 );
+      point = ShapesAndVectors.scaleClick( 0, 0, group  ); 
+      Assert.assertEquals( 
+               -500,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               -500,
+               point.getY(),
+               TestCommon.precision()
+      );
+      
+      group.setScaleX( 0.5 );
+      group.setScaleY( 1 );
+      point = ShapesAndVectors.scaleClick( 0, 0, group  ); 
+      Assert.assertEquals( 
+               -500,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               0,
+               point.getY(),
+               TestCommon.precision()
+      );
+      
+      group.setScaleX( 1 );
+      group.setScaleY( 0.5 );
+      point = ShapesAndVectors.scaleClick( 0, 0, group  ); 
+      Assert.assertEquals( 
+               0,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               -500,
+               point.getY(),
+               TestCommon.precision()
+      );
+      
+      group.setPrefWidth( 500 );
+      group.setPrefHeight( 500 );
+      group.setScaleX( 0.5 );
+      group.setScaleY( 0.5 );
+      point = ShapesAndVectors.scaleClick( 10, 10, group  ); 
+      Assert.assertEquals( 
+               -230,
+               point.getX(),
+               TestCommon.precision()
+      );
+      Assert.assertEquals( 
+               -230,
+               point.getY(),
+               TestCommon.precision()
+      );
    }//End Method
 
 }//End Class
