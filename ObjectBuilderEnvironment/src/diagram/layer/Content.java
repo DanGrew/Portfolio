@@ -7,15 +7,11 @@
  */
 package diagram.layer;
 
-import java.text.DecimalFormat;
-
 import diagram.canvas.DiagramCanvas;
 import diagram.canvas.DiagramSettings;
 import diagram.shapes.EllipticPolygon;
 import diagram.shapes.SelectionShape;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -28,8 +24,6 @@ import javafx.scene.shape.Shape;
  * The {@link Content} is responsible for holding all content for the {@link DiagramCanvas}.
  */
 public class Content extends Pane {
-   
-   private static final DecimalFormat COORDINATE_FORMAT = new DecimalFormat( "#.##" );
    
    private LayerManager layers;
    private DiagramSettings canvasSettings;
@@ -54,35 +48,7 @@ public class Content extends Pane {
       
       setPrefWidth( 1000 );
       setPrefHeight( 1000 );
-      
-//      addPanInformation();
    }//End Constructor
-   
-   private void addPanInformation(){
-      Label panInfo = new Label();
-      panInfo.setLayoutX( 0 );
-      panInfo.layoutYProperty().bind( heightProperty().subtract( 40 ) );
-//      panBehaviour.registerForPanInformation( ( panLocation ) -> {
-//         panInfo.setText( String.format( 
-//                  "Canvas( x: %s, y: %s )", 
-//                  COORDINATE_FORMAT.format( panLocation.getX() ), 
-//                  COORDINATE_FORMAT.format( panLocation.getY() ) 
-//         ) );
-//      } );
-      getChildren().add( panInfo );
-      
-      Label mouseInfo = new Label();
-      mouseInfo.setLayoutX( 0 );
-      mouseInfo.layoutYProperty().bind( heightProperty().subtract( 20 ) );
-      addEventFilter( MouseEvent.MOUSE_MOVED, event -> {
-         mouseInfo.setText( String.format( 
-                  "Mouse( x: %s, y: %s )", 
-                  COORDINATE_FORMAT.format( event.getX() ), 
-                  COORDINATE_FORMAT.format( event.getY() ) 
-         ) );
-      } );
-      getChildren().add( mouseInfo );
-   }
    
    /**
     * Method to add a {@link Shape} to the {@link Content}.

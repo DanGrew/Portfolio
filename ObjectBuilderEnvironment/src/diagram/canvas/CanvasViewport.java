@@ -29,7 +29,7 @@ import math.ShapesAndVectors;
 public class CanvasViewport extends Pane {
    
    private Pane contentHolder;
-
+   
    /**
     * Constructs a new {@link CanvasViewport}.
     * @param content the {@link Node} content of the {@link Pane}.
@@ -59,6 +59,9 @@ public class CanvasViewport extends Pane {
          event.acceptTransferModes( TransferMode.MOVE );
          event.consume();
       });
+      
+      ViewportInformation information = new ViewportInformation( contentHolder, this );
+      getChildren().add( information );
    }//End Constructor
    
 //   void addShapeAtViewportCoordinates( double x, double y ) {
