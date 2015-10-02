@@ -71,17 +71,17 @@ public class ViewportInformation extends Pane {
     * @param viewport the viewport to the canvas.
     */
    ViewportInformation( Pane scalablePane, Pane viewport ) {
-      Label panInfoX = new Label();
-      panInfoX.setLayoutX( 0 );
-      panInfoX.layoutYProperty().bind( viewport.heightProperty().subtract( 60 ) );
+      Label panInfo = new Label();
+      panInfo.setLayoutX( 0 );
+      panInfo.layoutYProperty().bind( viewport.heightProperty().subtract( 60 ) );
       
       LabelUpdater translater = new LabelUpdater( 
-               panInfoX, "Canvas Location( %s, %s )", scalablePane.translateXProperty(), scalablePane.translateYProperty() 
+               panInfo, "Canvas Location( %s, %s )", scalablePane.translateXProperty(), scalablePane.translateYProperty() 
       );
       translater.changed( null, null, null );
       scalablePane.translateXProperty().addListener( translater );
-      scalablePane.translateXProperty().addListener( translater );
-      getChildren().add( panInfoX );
+      scalablePane.translateYProperty().addListener( translater );
+      getChildren().add( panInfo );
       
       Label mouseInfo = new Label( "Mouse( , )" );
       mouseInfo.setLayoutX( 0 );
