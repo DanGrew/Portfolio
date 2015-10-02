@@ -47,7 +47,7 @@ public class ResizePoint extends Circle {
                      - 
                   ( polygon.centerXProperty().doubleValue() + polygon.translateXProperty().doubleValue() ) 
          );
-         polygon.radiusXProperty().set( radius );
+         polygon.radiusXProperty().set( Math.abs( radius ) );
       }//End Method
       
    }//End Class
@@ -77,7 +77,7 @@ public class ResizePoint extends Circle {
                      - 
                   ( polygon.centerYProperty().doubleValue() + polygon.translateYProperty().doubleValue() ) 
          );
-         polygon.radiusYProperty().set( radius );
+         polygon.radiusYProperty().set( Math.abs( radius ) );
       }//End Method
       
    }//End Class
