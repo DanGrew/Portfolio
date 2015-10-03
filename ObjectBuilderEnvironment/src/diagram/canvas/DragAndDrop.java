@@ -54,6 +54,9 @@ public class DragAndDrop {
     * @return the {@link Singleton} dropped.
     */
    public static Singleton drop( Dragboard board ) {
+      if ( board == null ) {
+         return null;
+      }
       Object name = board.getContent( SINGLETON_NAME_DATA_KEY );
       Object clazz = board.getContent( SINGLETON_NAME_CLASS_KEY );
       return getSingleton( name, clazz );

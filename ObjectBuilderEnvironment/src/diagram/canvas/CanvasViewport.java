@@ -15,7 +15,6 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.input.ZoomEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -47,7 +46,7 @@ public class CanvasViewport extends Pane {
          panViewport( scroll.getDeltaX(), scroll.getDeltaY() );
       } );
       setOnZoom( event -> {
-         zoomViewport( ( ( ZoomEvent )event ).getZoomFactor() );  
+         zoomViewport( event.getZoomFactor(), event.getZoomFactor() );  
       } );
       
       setOnDragDropped( event -> {
@@ -57,10 +56,10 @@ public class CanvasViewport extends Pane {
                   scaledPoint.getX(), scaledPoint.getY()
          ) );
       } );
-      setOnDragOver(event -> {
+      setOnDragOver( event -> {
          event.acceptTransferModes( TransferMode.MOVE );
          event.consume();
-      });
+      } );
       
       ViewportInformation information = new ViewportInformation( contentHolder, this );
       getChildren().add( information );
@@ -78,6 +77,54 @@ public class CanvasViewport extends Pane {
 //   }
    
    /**
+    * Getter for the current translation x value for the view to the content.
+    * @return the translate x value.
+    */
+   double getViewTranslationX(){
+      return contentHolder.getTranslateX();
+   }//End Method
+   
+   /**
+    * Getter for the current translation y value for the view to the content.
+    * @return the translate y value.
+    */
+   double getViewTranslationY(){
+      return contentHolder.getTranslateY();
+   }//End Method
+   
+   /**
+    * Getter for the current scale x value for the view to the content.
+    * @return the scale x value.
+    */
+   double getViewScaleX(){
+      return contentHolder.getScaleX();
+   }//End Method
+   
+   /**
+    * Getter for the current scale y value for the view to the content.
+    * @return the scale y value.
+    */
+   double getViewScaleY(){
+      return contentHolder.getScaleY();
+   }//End Method
+   
+   /**
+    * Getter for the current preferred width value for the view to the content.
+    * @return the preferred width value.
+    */
+   double getViewPrefWidth(){
+      return contentHolder.getPrefWidth();
+   }//End Method
+   
+   /**
+    * Getter for the current preferred height value for the view to the content.
+    * @return the preferred height value.
+    */
+   double getViewPrefHeight(){
+      return contentHolder.getPrefHeight();
+   }//End Method
+   
+   /**
     * Method to pan the viewport by the given values, as changes to current position.
     * @param changeInX the change to apply to the x.
     * @param changeInY the change to apply to the y.
@@ -89,10 +136,11 @@ public class CanvasViewport extends Pane {
    
    /**
     * Method to zoom the viewport by the given factor.
-    * @param factor the factor to zoom by.
+    * @param factorX the factor to zoom by.
+    * @param factorY the factor to zoom by.
     */
-   void zoomViewport( double factor ) {
-      contentHolder.setScaleX( contentHolder.getScaleX() * factor );
-      contentHolder.setScaleY( contentHolder.getScaleY() * factor );
+   void zoomViewport( double factorX, double factorY ) {
+      contentHolder.setScaleX( contentHolder.getScaleX() * factorX );
+      contentHolder.setScaleY( contentHolder.getScaleY() * factorY );
    }//End Method
 }//End Class
