@@ -5,8 +5,10 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.layer;
+package diagram.behaviour;
 
+import diagram.layer.Content;
+import diagram.layer.TranslationConstraint;
 import diagram.layer.TranslationConstraint.DefaultTranslation;
 import javafx.event.EventHandler;
 import javafx.scene.Node;

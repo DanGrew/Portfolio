@@ -5,10 +5,11 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.layer;
+package diagram.behaviour;
 
 import java.util.function.Consumer;
 
+import diagram.layer.Content;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -27,7 +28,7 @@ public class ContentPanBehaviour {
    /**
     * Constructs a new {@link ContentPanBehaviour}.
     */
-   ContentPanBehaviour() {
+   public ContentPanBehaviour() {
       panningX = new SimpleDoubleProperty( 0.0 );
       panningY = new SimpleDoubleProperty( 0.0 );
    }//End Constructor

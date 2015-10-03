@@ -7,7 +7,7 @@
  */
 package diagram.shapes;
 
-import diagram.layer.ContentDragBehaviour;
+import diagram.behaviour.ContentDragBehaviour;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;

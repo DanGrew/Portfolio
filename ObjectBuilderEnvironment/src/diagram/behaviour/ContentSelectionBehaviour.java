@@ -5,9 +5,10 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.layer;
+package diagram.behaviour;
 
 import architecture.event.EventSystem;
+import diagram.layer.Content;
 import diagram.toolbox.ContentEvents;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -21,7 +22,7 @@ public class ContentSelectionBehaviour {
     * Method to register the given {@link Node} as a selectable item.
     * @param node the {@link Node} that can be selected.
     */
-   void registerForSelectionBehaviour( Node node ) {
+   public void registerForSelectionBehaviour( Node node ) {
       node.addEventFilter( MouseEvent.MOUSE_PRESSED, event -> {
         EventSystem.raiseEvent( ContentEvents.SelectNode, node );
       } );

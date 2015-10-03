@@ -7,6 +7,8 @@
  */
 package diagram.layer;
 
+import diagram.behaviour.ContentDragBehaviour;
+import diagram.behaviour.ContentSelectionBehaviour;
 import diagram.canvas.DiagramCanvas;
 import diagram.canvas.DiagramSettings;
 import diagram.shapes.EllipticPolygon;
