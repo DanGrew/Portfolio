@@ -49,5 +49,12 @@ public class OutlineDescriberImplTest {
       Assert.assertEquals( type1.getParameterType().getName(), describer.getColumnEntry( 1 ) );
       Assert.assertEquals( null, describer.getColumnEntry( 2 ) );
    }// End Method
+   
+   /**
+    * {@link OutlineDescriberImpl#getSubject()} test.
+    */
+   @Test public void shouldGetSubject(){
+      Assert.assertNull( describer.getSubject() );
+   }//End Method
 
 }// End Class

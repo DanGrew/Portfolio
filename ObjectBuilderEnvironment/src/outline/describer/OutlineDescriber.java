@@ -29,5 +29,11 @@ public interface OutlineDescriber {
     * @return the {@link String} value, can be null.
     */
    public String getColumnEntry( int columnReference );
+   
+   /**
+    * Method to get the subject associated with the {@link OutlineDescriber}.
+    * @return the object.
+    */
+   public Object getSubject();
 
 }// End Interface

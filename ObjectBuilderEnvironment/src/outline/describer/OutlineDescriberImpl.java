@@ -42,4 +42,11 @@ public class OutlineDescriberImpl implements OutlineDescriber {
       }
       return null;
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Object getSubject() {
+      return null;
+   }//End Method
 }// End Class

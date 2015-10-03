@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 
+import diagram.canvas.DragAndDrop;
 import javafx.Workarounds;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.scene.control.TreeItem;
@@ -43,7 +44,7 @@ public class SystemOutline extends BorderPane {
    private static final String PROPERTY_TYPES = "Property Types";
    private static final String DEFINITIONS = "Definitions";
    private static final String DATA = "Data";
-
+   
    /**
     * Constructs a new {@link SystemOutline}.
     * @param detail the {@link SystemOutlineDetail} configuration object for displaying different
@@ -127,15 +128,13 @@ public class SystemOutline extends BorderPane {
             }
         };
         cell.setOnDragDetected( event -> {
-           /* drag was detected, start a drag-and-drop gesture*/
-           /* allow any transfer mode */
-           Dragboard db = cell.startDragAndDrop(TransferMode.ANY);
-           
-           /* Put a string on a dragboard */
-           ClipboardContent content = new ClipboardContent();
-           String singleton = cell.getTreeTableRow().getItem().getColumnEntry( 0 );
-           content.putString(singleton);
-           db.setContent(content);
+           Dragboard dragBoard = cell.startDragAndDrop(TransferMode.ANY);
+           Singleton singleton = ( Singleton )cell.getTreeTableRow().getItem().getSubject();
+           if ( singleton == null ) {
+              return;
+           }
+           ClipboardContent content = DragAndDrop.drag( singleton );
+           dragBoard.setContent( content );
         } );
         return cell;
       } );

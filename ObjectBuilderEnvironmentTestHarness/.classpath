@@ -8,5 +8,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKit"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKitTestHarness"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CommandInterpreter"/>
+	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/mockito-1.9.5/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

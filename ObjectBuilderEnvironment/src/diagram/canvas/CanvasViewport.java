@@ -21,6 +21,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import math.ShapesAndVectors;
+import model.singleton.Singleton;
 
 /**
  * The {@link CanvasViewport} provides the viewport to the {@link Content}, essentially
@@ -50,6 +51,7 @@ public class CanvasViewport extends Pane {
       } );
       
       setOnDragDropped( event -> {
+         Singleton singleton = DragAndDrop.drop( event.getDragboard() );
          Point2D scaledPoint = ShapesAndVectors.scaleClick( event.getX(), event.getY(), contentHolder );
          EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( 
                   scaledPoint.getX(), scaledPoint.getY()

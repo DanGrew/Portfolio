@@ -67,4 +67,11 @@ public class SingletonDescriberImpl< SingletonT extends Singleton > extends Outl
          return null;
       }
    }// End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public SingletonT getSubject() {
+      return getSingleton();
+   }//End Method
 }// End Class
