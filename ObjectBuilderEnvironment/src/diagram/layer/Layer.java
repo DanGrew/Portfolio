@@ -7,8 +7,6 @@
  */
 package diagram.layer;
 
-import java.util.List;
-
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 
@@ -38,13 +36,4 @@ class Layer {
       node.setTranslateZ( depth );
    }//End Method
    
-   /**
-    * Method to layer all {@link Node}s in the given {@link List}.
-    * @param layeredNodes the {@link ObservableList} to add the {@link Node} to.
-    * @param nodes the {@link List} of {@link Node}s.
-    */
-   void layerAllNodes( ObservableList< Node > layeredNodes, List< Node > nodes ) {
-      nodes.forEach( node -> layerNode( layeredNodes, node ) );
-   }//End Method
-
 }//End Class
