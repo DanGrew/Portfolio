@@ -60,10 +60,11 @@ public class DefinitionDescriberTest {
     */
    @Test public void shouldFillEntries(){
       Assert.assertEquals( definition.getIdentification(), describer.getColumnEntry( 0 ) );
-      Assert.assertEquals( type1.getIdentification(), describer.getColumnEntry( 1 ) );
-      Assert.assertEquals( type2.getIdentification(), describer.getColumnEntry( 2 ) );
-      Assert.assertEquals( type3.getIdentification(), describer.getColumnEntry( 3 ) );
-      Assert.assertEquals( null, describer.getColumnEntry( 4 ) );
+      Assert.assertEquals( BuilderObjectDescriber.NAME, describer.getColumnEntry( 1 ) );
+      Assert.assertEquals( type1.getIdentification(), describer.getColumnEntry( 2 ) );
+      Assert.assertEquals( type2.getIdentification(), describer.getColumnEntry( 3 ) );
+      Assert.assertEquals( type3.getIdentification(), describer.getColumnEntry( 4 ) );
+      Assert.assertEquals( null, describer.getColumnEntry( 5 ) );
    }// End Method
 
 }// End Class

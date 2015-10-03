@@ -54,7 +54,7 @@ public class OutlineDescriberImplTest {
     * {@link OutlineDescriberImpl#getSubject()} test.
     */
    @Test public void shouldGetSubject(){
-      Assert.assertNull( describer.getSubject() );
+      Assert.assertEquals( type1, describer.getSubject() );
    }//End Method
 
 }// End Class

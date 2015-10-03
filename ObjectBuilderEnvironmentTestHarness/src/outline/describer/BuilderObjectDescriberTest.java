@@ -61,10 +61,11 @@ public class BuilderObjectDescriberTest {
     */
    @Test public void shouldDescribeColumns() {
       Assert.assertEquals( BuilderObjectDescriber.NAME, describer.getColumnDescription( 0 ) );
-      Assert.assertEquals( type1.getIdentification(), describer.getColumnDescription( 1 ) );
-      Assert.assertEquals( type2.getIdentification(), describer.getColumnDescription( 2 ) );
-      Assert.assertEquals( type3.getIdentification(), describer.getColumnDescription( 3 ) );
-      Assert.assertEquals( null, describer.getColumnDescription( 4 ) );
+      Assert.assertEquals( BuilderObjectDescriber.NAME, describer.getColumnDescription( 1 ) );
+      Assert.assertEquals( type1.getIdentification(), describer.getColumnDescription( 2 ) );
+      Assert.assertEquals( type2.getIdentification(), describer.getColumnDescription( 3 ) );
+      Assert.assertEquals( type3.getIdentification(), describer.getColumnDescription( 4 ) );
+      Assert.assertEquals( null, describer.getColumnDescription( 5 ) );
    }// End Method
    
    /**
@@ -72,10 +73,11 @@ public class BuilderObjectDescriberTest {
     */
    @Test public void shouldFillEntries(){
       Assert.assertEquals( object.getIdentification(), describer.getColumnEntry( 0 ) );
-      Assert.assertEquals( object.get( type1 ), describer.getColumnEntry( 1 ) );
-      Assert.assertEquals( object.get( type2 ), describer.getColumnEntry( 2 ) );
-      Assert.assertEquals( object.get( type3 ), describer.getColumnEntry( 3 ) );
-      Assert.assertEquals( null, describer.getColumnEntry( 4 ) );
+      Assert.assertEquals( object.getIdentification(), describer.getColumnEntry( 1 ) );
+      Assert.assertEquals( object.get( type1 ), describer.getColumnEntry( 2 ) );
+      Assert.assertEquals( object.get( type2 ), describer.getColumnEntry( 3 ) );
+      Assert.assertEquals( object.get( type3 ), describer.getColumnEntry( 4 ) );
+      Assert.assertEquals( null, describer.getColumnEntry( 5 ) );
    }// End Method
 
 }// End Class
