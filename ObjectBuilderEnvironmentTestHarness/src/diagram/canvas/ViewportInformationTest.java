@@ -135,5 +135,18 @@ public class ViewportInformationTest {
                information.getMouseLocation() 
       );
    }//End Method
+   
+   /**
+    * Test that the {@link ViewportInformation} has at least 3 {@link Label}s to prove it has content tested
+    * above.
+    */
+   @Test public void shouldHaveThreeLabelsForData(){
+      Pane scalablePane = new Pane();
+      Pane viewport = new Pane();
+      ViewportInformation information = new ViewportInformation( scalablePane, viewport );
+      Assert.assertTrue( information.getChildren().get( 0 ) instanceof Label );
+      Assert.assertTrue( information.getChildren().get( 1 ) instanceof Label );
+      Assert.assertTrue( information.getChildren().get( 2 ) instanceof Label );
+   }//End Method
 
 }//End Class

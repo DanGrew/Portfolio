@@ -46,6 +46,11 @@ public class CanvasViewportTest {
       
       Assert.assertEquals( pane.getPrefWidth(), viewport.getViewPrefWidth(), TestCommon.precision() );
       Assert.assertEquals( pane.getPrefHeight(), viewport.getViewPrefHeight(), TestCommon.precision() );
+      
+      pane.setPrefWidth( 567 );
+      pane.setPrefHeight( -4567 );
+      Assert.assertEquals( pane.getPrefWidth(), viewport.getViewPrefWidth(), TestCommon.precision() );
+      Assert.assertEquals( pane.getPrefHeight(), viewport.getViewPrefHeight(), TestCommon.precision() );
    }//End Method
    
    /**
@@ -149,6 +154,18 @@ public class CanvasViewportTest {
       }
       
       Assert.assertTrue( found );
+   }//End Method
+   
+   /**
+    * Test that the content provided is held in the {@link CanvasViewport}.
+    */
+   @Test public void shouldContainContentInChild(){
+      Pane pane = new Pane();
+      CanvasViewport viewport = new CanvasViewport( pane );
+      Node node = viewport.getChildren().get( 0 );
+      Assert.assertNotNull( node );
+      Assert.assertTrue( node instanceof Pane );
+      Assert.assertEquals( ( ( Pane )node ).getChildren().get( 0 ), pane );
    }//End Method
 
 }//End Class
