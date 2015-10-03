@@ -21,14 +21,25 @@ import javafx.scene.layout.Pane;
  * This provides information such as translation, scale and mouse position.
  */
 public class ViewportInformation extends Pane {
-
-   private static final DecimalFormat COORDINATE_FORMAT = new DecimalFormat( "#.##" );
+   
+   /** String format for displaying the canvas location.**/
+   static final String CANVAS_LOCATION_FORMAT = "Canvas Location( %s, %s )";
+   /** String format for displaying the mouse location.**/
+   static final String MOUSE_LOCATION_FORMAT = "Mouse( x: %s, y: %s )";
+   /** String format for displaying the canvas scale.**/
+   static final String CANVAS_SCALE_FORMAT = "Scale( %s, %s )";
+   
+   private Label canvasLocation;
+   private Label mouseLocation;
+   private Label canvasScale;
    
    /**
     * {@link ChangeListener} for updating a particular {@link Label} with given properties.
     */
-   private class LabelUpdater implements ChangeListener< Number > {
+   static class LabelUpdater implements ChangeListener< Number > {
 
+      /** {@link DecimalFormat} for displaying digit values.**/
+      static final DecimalFormat COORDINATE_FORMAT = new DecimalFormat( "#.##" );
       private Label label;
       private String format;
       private DoubleProperty xProperty;
@@ -41,7 +52,7 @@ public class ViewportInformation extends Pane {
        * @param xProperty the {@link DoubleProperty} for the first parameter.
        * @param yProperty the {@link DoubleProperty} for the second parameter.
        */
-      private LabelUpdater( Label label, String format, DoubleProperty xProperty, DoubleProperty yProperty ) {
+      LabelUpdater( Label label, String format, DoubleProperty xProperty, DoubleProperty yProperty ) {
          this.label = label;
          this.format = format;
          this.xProperty = xProperty;
@@ -71,41 +82,65 @@ public class ViewportInformation extends Pane {
     * @param viewport the viewport to the canvas.
     */
    ViewportInformation( Pane scalablePane, Pane viewport ) {
-      Label panInfo = new Label();
-      panInfo.setLayoutX( 0 );
-      panInfo.layoutYProperty().bind( viewport.heightProperty().subtract( 60 ) );
+      canvasLocation = new Label();
+      canvasLocation.setLayoutX( 0 );
+      canvasLocation.layoutYProperty().bind( viewport.heightProperty().subtract( 60 ) );
       
       LabelUpdater translater = new LabelUpdater( 
-               panInfo, "Canvas Location( %s, %s )", scalablePane.translateXProperty(), scalablePane.translateYProperty() 
+               canvasLocation, CANVAS_LOCATION_FORMAT, scalablePane.translateXProperty(), scalablePane.translateYProperty() 
       );
       translater.changed( null, null, null );
       scalablePane.translateXProperty().addListener( translater );
       scalablePane.translateYProperty().addListener( translater );
-      getChildren().add( panInfo );
+      getChildren().add( canvasLocation );
       
-      Label mouseInfo = new Label( "Mouse( , )" );
-      mouseInfo.setLayoutX( 0 );
-      mouseInfo.layoutYProperty().bind( viewport.heightProperty().subtract( 40 ) );
+      mouseLocation = new Label( "Mouse( , )" );
+      mouseLocation.setLayoutX( 0 );
+      mouseLocation.layoutYProperty().bind( viewport.heightProperty().subtract( 40 ) );
       viewport.addEventFilter( MouseEvent.MOUSE_MOVED, event -> {
-         mouseInfo.setText( String.format( 
-                  "Mouse( x: %s, y: %s )", 
-                  COORDINATE_FORMAT.format( event.getX() ), 
-                  COORDINATE_FORMAT.format( event.getY() ) 
+         mouseLocation.setText( String.format( 
+                  MOUSE_LOCATION_FORMAT, 
+                  LabelUpdater.COORDINATE_FORMAT.format( event.getX() ), 
+                  LabelUpdater.COORDINATE_FORMAT.format( event.getY() ) 
          ) );
       } );
-      getChildren().add( mouseInfo );
+      getChildren().add( mouseLocation );
       
-      Label scaleInfo = new Label();
-      scaleInfo.setLayoutX( 0 );
-      scaleInfo.layoutYProperty().bind( viewport.heightProperty().subtract( 20 ) );
+      canvasScale = new Label();
+      canvasScale.setLayoutX( 0 );
+      canvasScale.layoutYProperty().bind( viewport.heightProperty().subtract( 20 ) );
       
       LabelUpdater scaler = new LabelUpdater( 
-               scaleInfo, "Scale( %s, %s )", scalablePane.scaleXProperty(), scalablePane.scaleYProperty() 
+               canvasScale, CANVAS_SCALE_FORMAT, scalablePane.scaleXProperty(), scalablePane.scaleYProperty() 
       );
       scaler.changed( null, null, null );
       scalablePane.scaleXProperty().addListener( scaler );
       scalablePane.scaleYProperty().addListener( scaler );
-      getChildren().add( scaleInfo );
+      getChildren().add( canvasScale );
+   }//End Method
+   
+   /**
+    * Getter for the current description of the canvas location.
+    * @return the {@link String} description, as formatted by {@link #CANVAS_LOCATION_FORMAT}.
+    */
+   String getCanvasLocation(){
+      return canvasLocation.getText();
+   }//End Method
+   
+   /**
+    * Getter for the current description of the mouse location.
+    * @return the {@link String} description, as formatted by {@link #MOUSE_LOCATION_FORMAT}.
+    */
+   String getMouseLocation(){
+      return mouseLocation.getText();
+   }//End Method
+   
+   /**
+    * Getter for the current description of the canvas scale.
+    * @return the {@link String} description, as formatted by {@link #CANVAS_SCALE_FORMAT}.
+    */
+   String getCanvasScale(){
+      return canvasScale.getText();
    }//End Method
    
 }//End Class
