@@ -31,12 +31,14 @@ public class ContentControllerTest {
    
    /**
     * Test for adding a shape from event.
+    * @throws InterruptedException 
     */
-   @Test public void shouldTriggerAddShape() {
+   @Test public void shouldTriggerAddShape() throws InterruptedException {
       Content content = Mockito.mock( Content.class );
       new ContentController( content );
       
       EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( 100, -50 ) );
+      Thread.sleep( 1000 );
       Mockito.verify( content ).addShape( 100, -50 );
       Mockito.verifyNoMoreInteractions( content );
    }//End Method
