@@ -7,7 +7,7 @@
  */
 package diagram.shapes;
 
-import diagram.behaviour.ContentDragBehaviour;
+import diagram.behaviour.DragBehaviour;
 import diagram.layer.TranslationConstraint;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
@@ -78,7 +78,7 @@ public class RotationPoint extends Circle {
       setFill( Color.SKYBLUE );
       setStroke( Color.SKYBLUE );
       
-      ContentDragBehaviour dragBehaviour = new ContentDragBehaviour( new CircleTranslationConstraint( polygon ) );
+      DragBehaviour dragBehaviour = new DragBehaviour( new CircleTranslationConstraint( polygon ) );
       dragBehaviour.registerForDragOperations( this );
       
       polygon.rotateProperty().addListener( ( change, old, updated ) -> resetCentre( polygon ) );

@@ -15,10 +15,10 @@ import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 
 /**
- * The {@link ContentDragBehaviour} is responsible for managing dragging objects
+ * The {@link DragBehaviour} is responsible for managing dragging objects
  * on the {@link Content}.
  */
-public class ContentDragBehaviour {
+public class DragBehaviour {
    
    private Double dragOperationBeginPositionX;
    private Double dragOperationBeginPositionY;
@@ -67,18 +67,18 @@ public class ContentDragBehaviour {
    };
    
    /**
-    * Constructs a new {@link ContentDragBehaviour} with the {@link DefaultTranslation} behaviour.
+    * Constructs a new {@link DragBehaviour} with the {@link DefaultTranslation} behaviour.
     */
-   public ContentDragBehaviour() {
+   public DragBehaviour() {
       this( new TranslationConstraint.DefaultTranslation() );
    }//End Constructor
      
    /**
-    * Constructs a new {@link ContentDragBehaviour} with the given {@link TranslationConstraint}
+    * Constructs a new {@link DragBehaviour} with the given {@link TranslationConstraint}
     * invoked when translated.
     * @param translationConstraint the {@link TranslationConstraint} to use.
     */
-   public ContentDragBehaviour( TranslationConstraint translationConstraint ) {
+   public DragBehaviour( TranslationConstraint translationConstraint ) {
       this.translationConstraint = translationConstraint;
    }//End Constructor
    

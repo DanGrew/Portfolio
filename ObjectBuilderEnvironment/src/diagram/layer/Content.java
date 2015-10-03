@@ -7,8 +7,8 @@
  */
 package diagram.layer;
 
-import diagram.behaviour.ContentDragBehaviour;
-import diagram.behaviour.ContentSelectionBehaviour;
+import diagram.behaviour.DragBehaviour;
+import diagram.behaviour.SelectionBehaviour;
 import diagram.canvas.DiagramCanvas;
 import diagram.canvas.DiagramSettings;
 import diagram.shapes.EllipticPolygon;
@@ -29,8 +29,8 @@ public class Content extends Pane {
    
    private LayerManager layers;
    private DiagramSettings canvasSettings;
-   private ContentDragBehaviour dragBehaviour;
-   private ContentSelectionBehaviour selectionBehaviour;
+   private DragBehaviour dragBehaviour;
+   private SelectionBehaviour selectionBehaviour;
    
    private EllipticPolygon currentSelectedPolygon;
    private SelectionShape currentSelection;
@@ -45,8 +45,8 @@ public class Content extends Pane {
       new ContentController( this );
       this.canvasSettings = canvasSettings;
       layers = new LayerManager( getChildren() );
-      dragBehaviour = new ContentDragBehaviour();
-      selectionBehaviour = new ContentSelectionBehaviour();
+      dragBehaviour = new DragBehaviour();
+      selectionBehaviour = new SelectionBehaviour();
       
       setPrefWidth( 1000 );
       setPrefHeight( 1000 );

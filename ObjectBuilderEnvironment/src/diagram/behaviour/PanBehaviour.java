@@ -17,18 +17,18 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 
 /**
- * The {@link ContentPanBehaviour} is responsible for providing panning behaviour
+ * The {@link PanBehaviour} is responsible for providing panning behaviour
  * by translating all objects on the {@link Content}.
  */
-public class ContentPanBehaviour {
+public class PanBehaviour {
    
    private SimpleDoubleProperty panningX;
    private SimpleDoubleProperty panningY;
    
    /**
-    * Constructs a new {@link ContentPanBehaviour}.
+    * Constructs a new {@link PanBehaviour}.
     */
-   public ContentPanBehaviour() {
+   public PanBehaviour() {
       panningX = new SimpleDoubleProperty( 0.0 );
       panningY = new SimpleDoubleProperty( 0.0 );
    }//End Constructor

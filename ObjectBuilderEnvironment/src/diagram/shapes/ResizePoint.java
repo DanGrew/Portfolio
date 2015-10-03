@@ -7,7 +7,7 @@
  */
 package diagram.shapes;
 
-import diagram.behaviour.ContentDragBehaviour;
+import diagram.behaviour.DragBehaviour;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;
@@ -94,7 +94,7 @@ public class ResizePoint extends Circle {
       setFill( Color.LAWNGREEN );
       setStroke( Color.LAWNGREEN );
       
-      ContentDragBehaviour dragBehaviour = new ContentDragBehaviour();
+      DragBehaviour dragBehaviour = new DragBehaviour();
       dragBehaviour.registerForDragOperations( this );
       
       polygon.translateXProperty().addListener( ( change, old, updated ) -> {
