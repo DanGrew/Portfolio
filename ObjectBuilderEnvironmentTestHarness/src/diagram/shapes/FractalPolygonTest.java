@@ -255,5 +255,26 @@ public class FractalPolygonTest {
       Assert.assertEquals( 0, points.remove( 0 ), TestCommon.precision() );
       Assert.assertTrue( points.isEmpty() );
    }//End Method
+   
+   /**
+    * {@link FractalPolygon#calculateFractals()} test.
+    */
+   @Test public void shouldApplyFractal(){
+      FractalPolygon polygon = new FractalPolygon( 4, 0, 0, 100, 100, 1 );
+      List< Double > calculatedPoints = polygon.calculateFractals();
+      Assert.assertEquals( 48, calculatedPoints.size() );
+      
+      polygon = new FractalPolygon( 4, 0, 0, 100, 100, 2 );
+      calculatedPoints = polygon.calculateFractals();
+      Assert.assertEquals( 276, calculatedPoints.size() );
+      
+      polygon = new FractalPolygon( 4, 0, 0, 100, 100, 3 );
+      calculatedPoints = polygon.calculateFractals();
+      Assert.assertEquals( 1644, calculatedPoints.size() );
+      
+      polygon = new FractalPolygon( 4, 0, 0, 100, 100, 4 );
+      calculatedPoints = polygon.calculateFractals();
+      Assert.assertEquals( 9852, calculatedPoints.size() );
+   }//End Method
 
 }//End Class

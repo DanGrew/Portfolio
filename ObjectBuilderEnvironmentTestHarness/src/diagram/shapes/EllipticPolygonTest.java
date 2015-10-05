@@ -72,5 +72,23 @@ public class EllipticPolygonTest {
       Assert.assertEquals( 100, points.get( 2 ), TestCommon.precision() );
       Assert.assertEquals( 400, points.get( 3 ), TestCommon.precision() );
    }//End Method
+   
+   /**
+    * {@link EllipticPolygon#calculateSidePoints(EllipticPolygon, double)} test.
+    */
+   @Test public void shouldCalculatePolygonPoints(){
+      EllipticPolygon polygon = new EllipticPolygon( 4, 0, 0, 100, 100 );
+      List< Double > points = polygon.calculateSidePoints( polygon, 90 );
+      
+      Assert.assertEquals( 8, points.size() );
+      Assert.assertEquals( 0, points.get( 0 ), TestCommon.precision() );
+      Assert.assertEquals( 100, points.get( 1 ), TestCommon.precision() );
+      Assert.assertEquals( -100, points.get( 2 ), TestCommon.precision() );
+      Assert.assertEquals( 0, points.get( 3 ), TestCommon.precision() );
+      Assert.assertEquals( 0, points.get( 4 ), TestCommon.precision() );
+      Assert.assertEquals( -100, points.get( 5 ), TestCommon.precision() );
+      Assert.assertEquals( 100, points.get( 6 ), TestCommon.precision() );
+      Assert.assertEquals( 0, points.get( 7 ), TestCommon.precision() );
+   }//End Method
 
 }//End Class
