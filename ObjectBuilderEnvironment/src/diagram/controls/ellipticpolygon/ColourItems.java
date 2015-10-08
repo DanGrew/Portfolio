@@ -25,8 +25,9 @@ public class ColourItems extends GridItemSelection {
     */
    public ColourItems( EllipticPolygon polygon ) {
       super( 
-               1, 1, 
-               new ColourPickerItemImpl( "Shape Fill", colour -> polygon.setFill( colour ) ) 
+               2, 1, 
+               new ColourPickerItemImpl( "Shape Fill", colour -> polygon.setFill( colour ) ),
+               new ColourPickerItemImpl( "Outline Stroke", colour -> polygon.setStroke( colour ) )
       );
    }//End Constructor
 
