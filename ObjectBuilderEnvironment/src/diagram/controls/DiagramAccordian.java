@@ -7,8 +7,11 @@
  */
 package diagram.controls;
 
+import diagram.controls.ellipticpolygon.ColourItems;
 import diagram.controls.ellipticpolygon.InversionItems;
 import diagram.controls.ellipticpolygon.NumberOfSidesItems;
+import diagram.controls.ellipticpolygon.RadiusItems;
+import diagram.controls.ellipticpolygon.RotationItems;
 import diagram.shapes.EllipticPolygon;
 import diagram.shapes.EllipticPolygonGraphics;
 import javafx.application.Application;
@@ -16,8 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 /**
@@ -41,13 +42,12 @@ public class DiagramAccordian extends Application {
       Accordion window = new Accordion();
       window.getPanes().addAll( 
                new TitledPane( "Sides", new NumberOfSidesItems( polygon ) ),
-               new TitledPane( "Inversion", new InversionItems( polygon ) )
+               new TitledPane( "Inversion", new InversionItems( polygon ) ),
+               new TitledPane( "Rotation", new RotationItems( polygon ) ),
+               new TitledPane( "Size", new RadiusItems( polygon ) ),
+               new TitledPane( "Colour", new ColourItems( polygon ) )
       );
       pane.setCenter( window );
-      
-      GridPane grid = new GridPane();
-      grid.add( new Circle( 2 ), 1, 1 );
-      window.getPanes().add( new TitledPane( "Test2", grid ) );
       
       Scene scene = new Scene( pane, 220, 800 );
       stage.setScene( scene );
