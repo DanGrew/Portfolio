@@ -90,5 +90,23 @@ public class EllipticPolygonTest {
       Assert.assertEquals( 100, points.get( 6 ), TestCommon.precision() );
       Assert.assertEquals( 0, points.get( 7 ), TestCommon.precision() );
    }//End Method
+   
+   /**
+    * {@link EllipticPolygon#numberOfSidesProperty()} modifying test.
+    */
+   @Test public void shouldRecalculatePointsOnSideNumberChange(){
+      EllipticPolygon triangle = new EllipticPolygon( 3, 100, 100 );
+      
+      List< Double > points = triangle.getPoints();
+      Assert.assertEquals( 6, points.size() );
+      
+      triangle.numberOfSidesProperty().set( 4 );
+      points = triangle.getPoints();
+      Assert.assertEquals( 8, points.size() );
+      
+      triangle.numberOfSidesProperty().set( 9 );
+      points = triangle.getPoints();
+      Assert.assertEquals( 18, points.size() );
+   }//End Method
 
 }//End Class

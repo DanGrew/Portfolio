@@ -19,40 +19,6 @@ import javafx.scene.shape.Polygon;
 public class StarredPolygon extends EllipticPolygon{
    
    private EllipticPolygon innerPolygon;
-
-   /**
-    * Constructs a new {@link StarredPolygon}.
-    * @param numberOfSides the number of sides in the {@link Polygon}.
-    * @param centrePositionX the centre x of the {@link Polygon}.
-    * @param centrePositionY the centre y of the {@link Polygon}.
-    * @param horizontalRadius the horizontal radius.
-    * @param verticalRadius the vertical radius.
-    */
-   public StarredPolygon( int numberOfSides, double centrePositionX, double centrePositionY, double horizontalRadius, double verticalRadius ) {
-      this( 
-               new EllipticPolygon( 
-                        numberOfSides, 
-                        centrePositionX, 
-                        centrePositionY, 
-                        horizontalRadius / 2, 
-                        verticalRadius / 2 
-               ), 
-               centrePositionX, 
-               centrePositionY, 
-               horizontalRadius, 
-               verticalRadius
-      );
-   }//End Constructor
-   
-   /**
-    * Constructs a new {@link StarredPolygon}.
-    * @param numberOfSides the number of sides in the {@link Polygon}.
-    * @param centrePositionX the centre x of the {@link Polygon}.
-    * @param centrePositionY the centre y of the {@link Polygon}.
-    */
-   public StarredPolygon( EllipticPolygon polygon, double centrePositionX, double centrePositionY ) {
-      this( polygon, centrePositionX, centrePositionY, EllipticPolygon.getDefaultRadius(), EllipticPolygon.getDefaultRadius() );
-   }//End Constructor
    
    /**
     * Constructs a new {@link StarredPolygon}.
@@ -63,21 +29,34 @@ public class StarredPolygon extends EllipticPolygon{
     * @param verticalRadius the vertical radius.
     */
    public StarredPolygon( 
-            EllipticPolygon polygon, 
+            int numberOfSides, 
             double centrePositionX, 
             double centrePositionY, 
             double horizontalRadius, 
             double verticalRadius 
    ) {
-      super( polygon.getNumberOfSides(), centrePositionX, centrePositionY, horizontalRadius, verticalRadius, false );
-      this.innerPolygon = polygon;
+      super( numberOfSides, centrePositionX, centrePositionY, horizontalRadius, verticalRadius, false );
       calculatePoints();
    }//End Constructor
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public PolygonType getPolygonType(){
+      return PolygonType.Starred;
+   }//End Method
    
    /**
     * Method to provide the calculation for the points in the {@link Polygon}.
     */
    @Override public void calculatePoints(){
+      innerPolygon = new EllipticPolygon( 
+               getNumberOfSides(), 
+               centreXProperty().doubleValue(), 
+               centreYProperty().doubleValue(), 
+               horizontalRadiusProperty().doubleValue() / 2, 
+               horizontalRadiusProperty().doubleValue() / 2 
+      );
       getPoints().clear();
       getPoints().addAll( calculateWithInnerPolygon() );
    }//End Method

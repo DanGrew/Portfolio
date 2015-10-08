@@ -114,6 +114,13 @@ public class FractalPolygon extends EllipticPolygon{
    }//End Constructor
    
    /**
+    * {@inheritDoc}
+    */
+   @Override public PolygonType getPolygonType(){
+      return PolygonType.Fractal;
+   }//End Method
+   
+   /**
     * Method to provide the calculation for the points in the {@link Polygon}.
     */
    @Override public void calculatePoints(){

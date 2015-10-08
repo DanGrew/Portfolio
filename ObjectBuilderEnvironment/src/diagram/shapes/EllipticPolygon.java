@@ -12,8 +12,10 @@ import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
 import math.ShapesAndVectors;
@@ -26,7 +28,7 @@ import math.ShapesAndVectors;
 public class EllipticPolygon extends Polygon {
    
    private static final double DEFAULT_RADIUS = 100;
-   private DoubleProperty numberOfSidesProperty;
+   private IntegerProperty numberOfSidesProperty;
    private DoubleProperty centreXProperty;
    private DoubleProperty centreYProperty;
    private DoubleProperty horizontalRadiusProperty;
@@ -86,7 +88,8 @@ public class EllipticPolygon extends Polygon {
             double verticalRadius,
             boolean initialisePoints
    ) {
-      numberOfSidesProperty = new SimpleDoubleProperty( numberOfSides );
+      numberOfSidesProperty = new SimpleIntegerProperty( numberOfSides );
+      numberOfSidesProperty.addListener( ( change, old, updated ) -> calculatePoints() );
       centreXProperty = new SimpleDoubleProperty( centrePositionX );
       centreYProperty = new SimpleDoubleProperty( centrePositionY );
       horizontalRadiusProperty = new SimpleDoubleProperty( horizontalRadius );
@@ -94,8 +97,17 @@ public class EllipticPolygon extends Polygon {
       verticalRadiusProperty = new SimpleDoubleProperty( verticalRadius );
       verticalRadiusProperty.addListener( ( change, oldValue, newValue ) -> calculatePoints() );
       inversionProperty = new SimpleBooleanProperty( false );
+      inversionProperty.addListener( ( change, old, updated ) -> calculatePoints() );
       if ( initialisePoints ) calculatePoints();
    }//End Constructor
+   
+   /**
+    * Method to get the {@link PolygonType} associated with this type of {@link EllipticPolygon}.
+    * @return the {@link PolygonType}.
+    */
+   public PolygonType getPolygonType(){
+      return PolygonType.Regular;
+   }//End Method
    
    /**
     * Method to provide the calculation for the points in the {@link Polygon}.
@@ -166,6 +178,14 @@ public class EllipticPolygon extends Polygon {
     */
    public int getNumberOfSides() {
       return numberOfSidesProperty.intValue();
+   }//End Method
+   
+   /**
+    * Getter for the {@link IntegerProperty} for the number of sides in the {@link EllipticPolygon}.
+    * @return the {@link IntegerProperty}.
+    */
+   public IntegerProperty numberOfSidesProperty(){
+      return numberOfSidesProperty;
    }//End Method
    
    /**
