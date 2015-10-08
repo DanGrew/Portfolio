@@ -7,51 +7,41 @@
  */
 package diagram.controls;
 
+import diagram.canvas.DiagramCanvas;
 import diagram.controls.ellipticpolygon.ColourItems;
 import diagram.controls.ellipticpolygon.InversionItems;
+import diagram.controls.ellipticpolygon.LocationItems;
 import diagram.controls.ellipticpolygon.NumberOfSidesItems;
-import diagram.controls.ellipticpolygon.RadiusItems;
+import diagram.controls.ellipticpolygon.SizeItems;
 import diagram.controls.ellipticpolygon.RotationItems;
 import diagram.shapes.EllipticPolygon;
-import diagram.shapes.EllipticPolygonGraphics;
-import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 /**
- * The {@link DiagramAccordian} is an {@link Accordion} that is used for configuring
- * {@link EllipticPolygon}s.
+ * The {@link DiagramAccordion} provides an {@link Accordion} for {@link EllipticPolygon}s specifically
+ * manipulated in the {@link DiagramCanvas}.
  */
-public class DiagramAccordian extends Application {
+public class DiagramAccordion extends BorderPane {
 
-   public static void main( String[] args ) {
-      DiagramAccordian.launch();
-   }// End Method
-   
    /**
-    * {@inheritDoc}
+    * Constructs a new {@link DiagramAccordion}.
+    * @param polygon the {@link EllipticPolygon} to configure.
     */
-   @Override public void start( Stage stage ) throws Exception {
-      BorderPane pane = new BorderPane();
-      EllipticPolygon polygon = EllipticPolygonGraphics.getStarredTriangle();
-      pane.setTop( polygon );
-      
+   public DiagramAccordion( EllipticPolygon polygon ) {
       Accordion window = new Accordion();
       window.getPanes().addAll( 
                new TitledPane( "Sides", new NumberOfSidesItems( polygon ) ),
                new TitledPane( "Inversion", new InversionItems( polygon ) ),
                new TitledPane( "Rotation", new RotationItems( polygon ) ),
-               new TitledPane( "Size", new RadiusItems( polygon ) ),
+               new TitledPane( "Size", new SizeItems( polygon ) ),
+               new TitledPane( "Location", new LocationItems( polygon ) ),
                new TitledPane( "Colour", new ColourItems( polygon ) )
       );
-      pane.setCenter( window );
+      setCenter( window );
       
-      Scene scene = new Scene( pane, 220, 800 );
-      stage.setScene( scene );
-      stage.show();
-   }// End Method
+      setPrefWidth( 220 );
+   }//End Constructor
    
 }//End Class

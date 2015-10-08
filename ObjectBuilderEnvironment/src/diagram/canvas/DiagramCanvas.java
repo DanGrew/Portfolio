@@ -7,9 +7,13 @@
  */
 package diagram.canvas;
 
+import diagram.controls.DiagramAccordion;
 import diagram.layer.Content;
+import diagram.shapes.EllipticPolygon;
+import diagram.toolbox.ContentEvents;
 import diagram.toolbox.ContentToolBox;
 import diagram.toolbox.ShapeToolBox;
+import graphics.event.JavaFxEventSystem;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -40,6 +44,11 @@ public class DiagramCanvas extends Application {
       
       ContentToolBox contentToolBox = new ContentToolBox();
       window.setRight( contentToolBox );
+      
+      JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> {
+         EllipticPolygon polygon = ( EllipticPolygon )source;
+         window.setRight( new DiagramAccordion( polygon ) );
+      } );
       
       window.setTop( new ShapeToolBox( canvasSettings ) );
       

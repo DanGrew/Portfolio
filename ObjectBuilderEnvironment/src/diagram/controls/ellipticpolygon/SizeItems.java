@@ -12,21 +12,23 @@ import diagram.controls.NumberSpinnerItemImpl;
 import diagram.shapes.EllipticPolygon;
 
 /**
- * {@link RadiusItems} provides the {@link GridItemSelection} for the radius properties
+ * {@link SizeItems} provides the {@link GridItemSelection} for the size properties
  * of an {@link EllipticPolygon}.
  */
-public class RadiusItems extends GridItemSelection {
+public class SizeItems extends GridItemSelection {
 
    /**
-    * Constructs a new {@link RadiusItems}.
+    * Constructs a new {@link SizeItems}.
     * @param polygon the {@link EllipticPolygon} to control.
     */
-   public RadiusItems( EllipticPolygon polygon ) {
+   public SizeItems( EllipticPolygon polygon ) {
       super( 
-               2, 1, 
+               3, 1, 
                new NumberSpinnerItemImpl( "Horizontal Radius", value -> polygon.horizontalRadiusProperty().set( value ) )
                   .setRange( 1, Integer.MAX_VALUE ),
                new NumberSpinnerItemImpl( "Vertical Radius", value -> polygon.verticalRadiusProperty().set( value ) )
+                  .setRange( 1, Integer.MAX_VALUE ),
+               new NumberSpinnerItemImpl( "Stroke Thickness", value -> polygon.setStrokeWidth( value ) )
                   .setRange( 1, Integer.MAX_VALUE )
       );
    }//End Constructor

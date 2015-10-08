@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javafx.beans.binding.Bindings;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
@@ -45,12 +46,13 @@ public class SelectionShape extends Ellipse {
 
       selected.centreXProperty().bind( centerXProperty() );
       selected.centreYProperty().bind( centerYProperty() );
-      selected.translateXProperty().bind( translateXProperty() );
-      selected.translateYProperty().bind( translateYProperty() );
-      selected.horizontalRadiusProperty().bind( radiusXProperty() );
-      selected.verticalRadiusProperty().bind( radiusYProperty() );
-      selected.rotateProperty().bind( rotateProperty() );
-
+      
+      Bindings.bindBidirectional( selected.translateXProperty(), translateXProperty() );
+      Bindings.bindBidirectional( selected.translateYProperty(), translateYProperty() );
+      Bindings.bindBidirectional( selected.horizontalRadiusProperty(), radiusXProperty() );
+      Bindings.bindBidirectional( selected.verticalRadiusProperty(), radiusYProperty() );
+      Bindings.bindBidirectional( selected.rotateProperty(), rotateProperty() );
+      
       ResizePoint resizer = new ResizePoint( this );
       RotationPoint rotator = new RotationPoint( this );
       components = Collections.unmodifiableList( Arrays.asList( 
