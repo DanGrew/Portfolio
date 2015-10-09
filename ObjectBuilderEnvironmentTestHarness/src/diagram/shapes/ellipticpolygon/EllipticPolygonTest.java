@@ -135,5 +135,28 @@ public class EllipticPolygonTest {
       points = triangle.getPoints();
       Assert.assertEquals( 18, points.size() );
    }//End Method
+   
+   /**
+    * {@link EllipticPolygon#polygonTypeProperty()} test.
+    */
+   @Test public void shouldRecalculatePointsOnTypeChange(){
+      EllipticPolygon triangle = new EllipticPolygon(
+            new EllipticPolygonBuilder( PolygonType.Regular, 3 )
+               .horizontalRadiusProperty( 100 )
+               .verticalRadiusProperty( 100 )
+      );
+      
+      List< Double > points = triangle.getPoints();
+      Assert.assertEquals( 6, points.size() );
+      
+      triangle.polygonTypeProperty().set( PolygonType.Starred );
+      points = triangle.getPoints();
+      Assert.assertEquals( 12, points.size() );
+      
+      triangle.numberOfFractalsProperty().set( 1 );
+      triangle.polygonTypeProperty().set( PolygonType.Fractal );
+      points = triangle.getPoints();
+      Assert.assertEquals( 30, points.size() );
+   }//End Method
 
 }//End Class
