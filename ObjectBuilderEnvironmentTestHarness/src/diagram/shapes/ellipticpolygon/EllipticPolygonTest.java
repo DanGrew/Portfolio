@@ -101,7 +101,7 @@ public class EllipticPolygonTest {
                .horizontalRadiusProperty( 100 )
                .verticalRadiusProperty( 100 )
       );
-      List< Double > points = polygon.calculateSidePoints( polygon, 90 );
+      List< Double > points = EllipticPolygonCalculations.calculateSidePoints( polygon, 90 );
       
       Assert.assertEquals( 8, points.size() );
       Assert.assertEquals( 0, points.get( 0 ), TestCommon.precision() );
