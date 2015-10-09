@@ -27,14 +27,12 @@ public enum PolygonType implements PolygonCreator {
             double verticalRadius 
    ) {
       return new EllipticPolygon( 
-               this, 
-               numberOfSides, 
-               centreX, 
-               centreY, 
-               horizontalRadius, 
-               verticalRadius, 
-               3, 
-               true 
+            new EllipticPolygonBuilder( this, numberOfSides )
+               .centreXProperty( centreX )
+               .centreYProperty( centreY )
+               .horizontalRadiusProperty( horizontalRadius )
+               .verticalRadiusProperty( verticalRadius )
+               .numberOfFractals( 3 ) 
       );
    }//End Method
 

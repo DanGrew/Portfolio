@@ -260,19 +260,24 @@ public class FractalPolygonTest {
     * {@link EllipticPolygon#calculateFractals()} test.
     */
    @Test public void shouldApplyFractal(){
-      EllipticPolygon polygon = new EllipticPolygon( 4, 0, 0, 100, 100, 1 );
+      EllipticPolygon polygon = new EllipticPolygon( 
+            new EllipticPolygonBuilder( PolygonType.Fractal, 4 )
+               .horizontalRadiusProperty( 100 )
+               .verticalRadiusProperty( 100 )
+               .numberOfFractals( 1 )
+      );               
       List< Double > calculatedPoints = polygon.calculateFractals();
       Assert.assertEquals( 48, calculatedPoints.size() );
       
-      polygon = new EllipticPolygon( 4, 0, 0, 100, 100, 2 );
+      polygon.numberOfFractalsProperty().set( 2 );
       calculatedPoints = polygon.calculateFractals();
       Assert.assertEquals( 276, calculatedPoints.size() );
       
-      polygon = new EllipticPolygon( 4, 0, 0, 100, 100, 3 );
+      polygon.numberOfFractalsProperty().set( 3 );
       calculatedPoints = polygon.calculateFractals();
       Assert.assertEquals( 1644, calculatedPoints.size() );
       
-      polygon = new EllipticPolygon( 4, 0, 0, 100, 100, 4 );
+      polygon.numberOfFractalsProperty().set( 4 );
       calculatedPoints = polygon.calculateFractals();
       Assert.assertEquals( 9852, calculatedPoints.size() );
    }//End Method

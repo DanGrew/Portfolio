@@ -41,7 +41,7 @@ public class EllipticPolygon extends Polygon {
    private ObjectProperty< PolygonType > polygonTypeProperty;
    private EllipticPolygon innerPolygon;
    
-   private IntegerProperty numberOfFractals;
+   private IntegerProperty numberOfFractalsProperty;
    
    /**
     * Method to provide the default radius of the {@link Polygon}.
@@ -73,7 +73,13 @@ public class EllipticPolygon extends Polygon {
       double secondPointY = from.getY() + yThird;
       
       double radius = ShapesAndVectors.calculateRadiusOfRegularPolygon( sides, sideLength );
-      EllipticPolygon polygon = new EllipticPolygon( sides, 0, 0, radius, radius );
+      EllipticPolygon polygon = new EllipticPolygon( 
+               new EllipticPolygonBuilder( PolygonType.Regular, sides )
+                  .centreXProperty( 0 )
+                  .centreYProperty( 0 )
+                  .horizontalRadiusProperty( radius )
+                  .verticalRadiusProperty( radius )
+      );
       
       double rotationForAlignment = 360.0 / ( sides * 2 );
       double angleOfLine = ShapesAndVectors.getAngleOfLineBetweenTwoPoints( from, to );
@@ -102,77 +108,24 @@ public class EllipticPolygon extends Polygon {
    
    /**
     * Constructs a new {@link EllipticPolygon}.
-    * @param numberOfSides the number of sides in the {@link Polygon}.
-    * @param centrePositionX the centre x of the {@link Polygon}.
-    * @param centrePositionY the centre y of the {@link Polygon}.
+    * @param builder the {@link EllipticPolygonBuilder} configuring the polygon.
     */
-   public EllipticPolygon( int numberOfSides, double centrePositionX, double centrePositionY ) {
-      this( numberOfSides, centrePositionX, centrePositionY, DEFAULT_RADIUS, DEFAULT_RADIUS );
-   }//End Constructor
-   
-   /**
-    * Constructs a new {@link EllipticPolygon}.
-    * @param numberOfSides the number of sides in the {@link Polygon}.
-    * @param centrePositionX the centre x of the {@link Polygon}.
-    * @param centrePositionY the centre y of the {@link Polygon}.
-    * @param horizontalRadius the horizontal radius.
-    * @param verticalRadius the vertical radius.
-    */
-   public EllipticPolygon( 
-            int numberOfSides, 
-            double centrePositionX, 
-            double centrePositionY, 
-            double horizontalRadius, 
-            double verticalRadius 
-   ) {
-      this( PolygonType.Regular, numberOfSides, centrePositionX, centrePositionY, horizontalRadius, verticalRadius, 0, true );
-   }//End Constructor
-   
-   public EllipticPolygon( 
-            int numberOfSides, 
-            double centrePositionX, 
-            double centrePositionY, 
-            double horizontalRadius, 
-            double verticalRadius,
-            int fractals
-   ) {
-      this( PolygonType.Regular, numberOfSides, centrePositionX, centrePositionY, horizontalRadius, verticalRadius, fractals, true );
-   }//End Constructor
-   
-   /**
-    * Constructs a new {@link EllipticPolygon}.
-    * @param numberOfSides the number of sides in the {@link Polygon}.
-    * @param centrePositionX the centre x of the {@link Polygon}.
-    * @param centrePositionY the centre y of the {@link Polygon}.
-    * @param horizontalRadius the horizontal radius.
-    * @param verticalRadius the vertical radius.
-    * @param initialisePoints whether to initialise the points or not.
-    */
-   public EllipticPolygon( 
-            PolygonType type,
-            int numberOfSides, 
-            double centrePositionX, 
-            double centrePositionY, 
-            double horizontalRadius, 
-            double verticalRadius,
-            int fractals,
-            boolean initialisePoints
-   ) {
-      polygonTypeProperty = new SimpleObjectProperty< PolygonType >( type );
+   public EllipticPolygon( EllipticPolygonBuilder builder ) {
+      polygonTypeProperty = new SimpleObjectProperty< PolygonType >( builder.getPolygonTypeProperty() );
       polygonTypeProperty.addListener( ( change, old, updated ) ->  calculatePoints() );
-      numberOfSidesProperty = new SimpleIntegerProperty( numberOfSides );
+      numberOfSidesProperty = new SimpleIntegerProperty( builder.getNumberOfSidesProperty() );
       numberOfSidesProperty.addListener( ( change, old, updated ) -> calculatePoints() );
-      centreXProperty = new SimpleDoubleProperty( centrePositionX );
-      centreYProperty = new SimpleDoubleProperty( centrePositionY );
-      horizontalRadiusProperty = new SimpleDoubleProperty( horizontalRadius );
+      centreXProperty = new SimpleDoubleProperty( builder.getCentreXProperty() );
+      centreYProperty = new SimpleDoubleProperty( builder.getCentreYProperty() );
+      horizontalRadiusProperty = new SimpleDoubleProperty( builder.getHorizontalRadiusProperty() );
       horizontalRadiusProperty.addListener( ( change, oldValue, newValue ) -> calculatePoints() );
-      verticalRadiusProperty = new SimpleDoubleProperty( verticalRadius );
+      verticalRadiusProperty = new SimpleDoubleProperty( builder.getVerticalRadiusProperty() );
       verticalRadiusProperty.addListener( ( change, oldValue, newValue ) -> calculatePoints() );
-      inversionProperty = new SimpleBooleanProperty( false );
+      inversionProperty = new SimpleBooleanProperty( builder.isInversionProperty() );
       inversionProperty.addListener( ( change, old, updated ) -> calculatePoints() );
-      numberOfFractals = new SimpleIntegerProperty( fractals );
-      numberOfFractals.addListener( ( change, old, updated ) -> calculatePoints() );
-      if ( initialisePoints ) calculatePoints();
+      numberOfFractalsProperty = new SimpleIntegerProperty( builder.getNumberOfFractals() );
+      numberOfFractalsProperty.addListener( ( change, old, updated ) -> calculatePoints() );
+      calculatePoints();
    }//End Constructor
    
    /**
@@ -196,12 +149,12 @@ public class EllipticPolygon extends Polygon {
             getPoints().addAll( calculateSidePoints( this, 0 ) );
             break;
          case Starred:
-            innerPolygon = new EllipticPolygon( 
-                     getNumberOfSides(), 
-                     centreXProperty().doubleValue(), 
-                     centreYProperty().doubleValue(), 
-                     horizontalRadiusProperty().doubleValue() / 2, 
-                     horizontalRadiusProperty().doubleValue() / 2 
+            innerPolygon = new EllipticPolygon(
+                  new EllipticPolygonBuilder( PolygonType.Regular, getNumberOfSides() )
+                     .centreXProperty( centreXProperty().doubleValue() )
+                     .centreYProperty( centreYProperty().doubleValue() )
+                     .horizontalRadiusProperty( horizontalRadiusProperty().doubleValue() / 2 )
+                     .verticalRadiusProperty( horizontalRadiusProperty().doubleValue() / 2 )
             );
             getPoints().addAll( calculateWithInnerPolygon() );
             break;
@@ -258,9 +211,9 @@ public class EllipticPolygon extends Polygon {
    protected final List< Double > calculateFractals(){
       List< Double > combinedPoints = calculateSidePoints( this, 0 );
       
-      for ( int i = 0; i < numberOfFractals.intValue(); i++ ) {
+      for ( int i = 0; i < numberOfFractalsProperty.intValue(); i++ ) {
          List< Double > fractal = applyFractal( combinedPoints );
-         if ( i < numberOfFractals.intValue() - 1 ) {
+         if ( i < numberOfFractalsProperty.intValue() - 1 ) {
             fractal.remove( 0 );
             fractal.remove( 0 );
          }
@@ -381,5 +334,14 @@ public class EllipticPolygon extends Polygon {
     */
    public BooleanProperty inversionProperty() {
       return inversionProperty;
+   }//End Method
+   
+   /**
+    * Getter for the number of fractals property on the {@link EllipticPolygon}. Note that this is only used
+    * when the {@link EllipticPolygon} is of the {@link PolygonType#Fractal} type.
+    * @return the {@link IntegerProperty}.
+    */
+   public IntegerProperty numberOfFractalsProperty() {
+      return numberOfFractalsProperty;
    }//End Method
 }//End Class

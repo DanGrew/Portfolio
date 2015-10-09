@@ -23,7 +23,11 @@ public class EllipticPolygonTest {
     * {@link EllipticPolygon} with 3 sides test.
     */
    @Test public void shouldCreateWithThreeSides(){
-      EllipticPolygon triangle = new EllipticPolygon( 3, 100, 100 );
+      EllipticPolygon triangle = new EllipticPolygon( 
+            new EllipticPolygonBuilder( PolygonType.Regular, 3 )
+               .horizontalRadiusProperty( 100 )
+               .verticalRadiusProperty( 100 )
+      );
       
       Assert.assertEquals( 100, EllipticPolygon.getDefaultRadius(), TestCommon.precision() );
       
@@ -35,7 +39,13 @@ public class EllipticPolygonTest {
     * Test for calculating the points following the change of the horizontal radius.
     */
    @Test public void shouldHorizontalStretchPoints(){
-      EllipticPolygon rectangle = new EllipticPolygon( 4, 100, 100 );
+      EllipticPolygon rectangle = new EllipticPolygon(
+            new EllipticPolygonBuilder( PolygonType.Regular, 4 )
+               .centreXProperty( 100 )
+               .centreYProperty( 100 )
+               .horizontalRadiusProperty( 100 )
+               .verticalRadiusProperty( 100 )
+      );
       
       Assert.assertEquals( 100, EllipticPolygon.getDefaultRadius(), TestCommon.precision() );
       
@@ -56,7 +66,13 @@ public class EllipticPolygonTest {
     * Test for calculating the points following the change of the vertical radius.
     */
    @Test public void shouldVerticalStretchPoints(){
-      EllipticPolygon rectangle = new EllipticPolygon( 4, 100, 100 );
+      EllipticPolygon rectangle = new EllipticPolygon(
+            new EllipticPolygonBuilder( PolygonType.Regular, 4 )
+               .centreXProperty( 100 )
+               .centreYProperty( 100 )
+               .horizontalRadiusProperty( 100 )
+               .verticalRadiusProperty( 100 )
+      );
       
       Assert.assertEquals( 100, EllipticPolygon.getDefaultRadius(), TestCommon.precision() );
       
@@ -77,7 +93,11 @@ public class EllipticPolygonTest {
     * {@link EllipticPolygon#calculateSidePoints(EllipticPolygon, double)} test.
     */
    @Test public void shouldCalculatePolygonPoints(){
-      EllipticPolygon polygon = new EllipticPolygon( 4, 0, 0, 100, 100 );
+      EllipticPolygon polygon = new EllipticPolygon( 
+            new EllipticPolygonBuilder( PolygonType.Regular, 4 )
+               .horizontalRadiusProperty( 100 )
+               .verticalRadiusProperty( 100 )
+      );
       List< Double > points = polygon.calculateSidePoints( polygon, 90 );
       
       Assert.assertEquals( 8, points.size() );
@@ -95,7 +115,11 @@ public class EllipticPolygonTest {
     * {@link EllipticPolygon#numberOfSidesProperty()} modifying test.
     */
    @Test public void shouldRecalculatePointsOnSideNumberChange(){
-      EllipticPolygon triangle = new EllipticPolygon( 3, 100, 100 );
+      EllipticPolygon triangle = new EllipticPolygon(
+            new EllipticPolygonBuilder( PolygonType.Regular, 3 )
+               .horizontalRadiusProperty( 100 )
+               .verticalRadiusProperty( 100 )
+      );
       
       List< Double > points = triangle.getPoints();
       Assert.assertEquals( 6, points.size() );
