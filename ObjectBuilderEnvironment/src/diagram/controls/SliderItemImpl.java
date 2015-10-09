@@ -10,7 +10,6 @@ package diagram.controls;
 import java.util.function.Consumer;
 
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;

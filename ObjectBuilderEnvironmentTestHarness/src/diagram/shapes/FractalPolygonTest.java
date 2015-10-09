@@ -24,7 +24,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to an increasing horizontal line.
     */
    @Test public void shouldCalculateSquareFractalPositiveHorizontal() {
-      List< Double > points = FractalPolygon.calculateFractal( 4, new Point2D( 200, 200 ), new Point2D( 500, 200 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 4, new Point2D( 200, 200 ), new Point2D( 500, 200 ) );
       
       Assert.assertEquals( 12, points.size() );
       Assert.assertEquals( 200, points.remove( 0 ), TestCommon.precision() );
@@ -51,7 +51,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to a decreasing horizontal line.
     */
    @Test public void shouldCalculateSquareFractalNegativeHorizontal() {
-      List< Double > points = FractalPolygon.calculateFractal( 4, new Point2D( 500, 200 ), new Point2D( 200, 200 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 4, new Point2D( 500, 200 ), new Point2D( 200, 200 ) );
       
       Assert.assertEquals( 12, points.size() );
       Assert.assertEquals( 500, points.remove( 0 ), TestCommon.precision() );
@@ -78,7 +78,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to an increasing vertical line.
     */
    @Test public void shouldCalculateSquareFractalPositiveVertical() {
-      List< Double > points = FractalPolygon.calculateFractal( 4, new Point2D( 200, 200 ), new Point2D( 200, 500 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 4, new Point2D( 200, 200 ), new Point2D( 200, 500 ) );
       
       Assert.assertEquals( 12, points.size() );
       Assert.assertEquals( 200, points.remove( 0 ), TestCommon.precision() );
@@ -105,7 +105,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to a decreasing vertical line.
     */
    @Test public void shouldCalculateSquareFractalNegativeVertical() {
-      List< Double > points = FractalPolygon.calculateFractal( 4, new Point2D( 200, 500 ), new Point2D( 200, 200 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 4, new Point2D( 200, 500 ), new Point2D( 200, 200 ) );
       
       Assert.assertEquals( 12, points.size() );
       Assert.assertEquals( 200, points.remove( 0 ), TestCommon.precision() );
@@ -132,7 +132,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to a line moving in the south east direction.
     */
    @Test public void shouldCalculateSquareSouthEastFractal() {
-      List< Double > points = FractalPolygon.calculateFractal( 4, new Point2D( 0, 0 ), new Point2D( 1200, 900 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 4, new Point2D( 0, 0 ), new Point2D( 1200, 900 ) );
       
       Assert.assertEquals( 12, points.size() );
       Assert.assertEquals( 0, points.remove( 0 ), TestCommon.precision() );
@@ -158,7 +158,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to a line moving in the south west direction.
     */
    @Test public void shouldCalculateSquareSouthWestFractal() {
-      List< Double > points = FractalPolygon.calculateFractal( 4, new Point2D( 0, 0 ), new Point2D( -1200, 900 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 4, new Point2D( 0, 0 ), new Point2D( -1200, 900 ) );
       
       Assert.assertEquals( 12, points.size() );
       Assert.assertEquals( 0, points.remove( 0 ), TestCommon.precision() );
@@ -184,7 +184,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to a line moving in the north east direction.
     */
    @Test public void shouldCalculateSquareNorthEastFractal() {
-      List< Double > points = FractalPolygon.calculateFractal( 4, new Point2D( 0, 0 ), new Point2D( 1200, -900 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 4, new Point2D( 0, 0 ), new Point2D( 1200, -900 ) );
       
       Assert.assertEquals( 12, points.size() );
       Assert.assertEquals( 0, points.remove( 0 ), TestCommon.precision() );
@@ -210,7 +210,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to a line moving in the north west direction.
     */
    @Test public void shouldCalculateSquareNorthWestFractal() {
-      List< Double > points = FractalPolygon.calculateFractal( 4, new Point2D( 0, 0 ), new Point2D( -1200, -900 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 4, new Point2D( 0, 0 ), new Point2D( -1200, -900 ) );
       
       Assert.assertEquals( 12, points.size() );
       Assert.assertEquals( 0, points.remove( 0 ), TestCommon.precision() );
@@ -236,7 +236,7 @@ public class FractalPolygonTest {
     * Test for adding a fractal to a line for a triangle.
     */
    @Test public void shouldCalculateTriangleFractalPositiveHorizontal() {
-      List< Double > points = FractalPolygon.calculateFractal( 3, new Point2D( 0, 0 ), new Point2D( 300, 0 ) );
+      List< Double > points = EllipticPolygon.calculateFractal( 3, new Point2D( 0, 0 ), new Point2D( 300, 0 ) );
       
       Assert.assertEquals( 10, points.size() );
       Assert.assertEquals( 0, points.remove( 0 ), TestCommon.precision() );
@@ -257,22 +257,22 @@ public class FractalPolygonTest {
    }//End Method
    
    /**
-    * {@link FractalPolygon#calculateFractals()} test.
+    * {@link EllipticPolygon#calculateFractals()} test.
     */
    @Test public void shouldApplyFractal(){
-      FractalPolygon polygon = new FractalPolygon( 4, 0, 0, 100, 100, 1 );
+      EllipticPolygon polygon = new EllipticPolygon( 4, 0, 0, 100, 100, 1 );
       List< Double > calculatedPoints = polygon.calculateFractals();
       Assert.assertEquals( 48, calculatedPoints.size() );
       
-      polygon = new FractalPolygon( 4, 0, 0, 100, 100, 2 );
+      polygon = new EllipticPolygon( 4, 0, 0, 100, 100, 2 );
       calculatedPoints = polygon.calculateFractals();
       Assert.assertEquals( 276, calculatedPoints.size() );
       
-      polygon = new FractalPolygon( 4, 0, 0, 100, 100, 3 );
+      polygon = new EllipticPolygon( 4, 0, 0, 100, 100, 3 );
       calculatedPoints = polygon.calculateFractals();
       Assert.assertEquals( 1644, calculatedPoints.size() );
       
-      polygon = new FractalPolygon( 4, 0, 0, 100, 100, 4 );
+      polygon = new EllipticPolygon( 4, 0, 0, 100, 100, 4 );
       calculatedPoints = polygon.calculateFractals();
       Assert.assertEquals( 9852, calculatedPoints.size() );
    }//End Method

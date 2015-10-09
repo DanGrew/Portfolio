@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 
 import graphics.utility.DefensiveDoubleSpinnerValueFactory;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TitledPane;
 

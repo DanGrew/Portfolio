@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import diagram.canvas.DiagramSettings;
 import diagram.shapes.EllipticPolygon;
-import diagram.shapes.FractalPolygon;
 import diagram.shapes.PolygonType;
 import diagram.shapes.ResizePoint;
 import diagram.shapes.RotationPoint;
@@ -58,7 +57,6 @@ public class ContentTest {
       Assert.assertTrue( shape instanceof EllipticPolygon );
       EllipticPolygon polygon = ( EllipticPolygon )shape;
       Assert.assertEquals( settings.getNumberOfSides(), polygon.getNumberOfSides() );
-      Assert.assertTrue( polygon instanceof FractalPolygon );
       Assert.assertTrue( polygon.inversionProperty().get() );
    }//End Method
    

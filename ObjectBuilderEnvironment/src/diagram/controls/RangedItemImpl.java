@@ -10,7 +10,6 @@ package diagram.controls;
 import java.util.function.Consumer;
 
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 
 /**
  * Implementation of {@link GridItem} to provide a base for properties that are ranged.

@@ -89,6 +89,6 @@ public class EllipticPolygonGraphics {
    }
    
    public static EllipticPolygon getPolygon( EllipticPolygon polygon ) {
-      return getPolygon( polygon.getNumberOfSides(), polygon.getPolygonType() );
+      return getPolygon( polygon.getNumberOfSides(), polygon.polygonTypeProperty().get() );
    }
 }//End Class

@@ -19,7 +19,7 @@ public class StarredPolygonTest {
     * {@link StarredPolygon#numberOfSidesProperty()} test.
     */
    @Test public void shouldRecalculateNumberOfSides() {
-      StarredPolygon polygon = new StarredPolygon( 4, 0, 0, 50, 50 );
+      EllipticPolygon polygon = new EllipticPolygon( PolygonType.Starred, 4, 0, 0, 50, 50, 0, true );
       Assert.assertEquals( 16, polygon.getPoints().size() );
       
       polygon.numberOfSidesProperty().set( 5 );

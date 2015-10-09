@@ -12,37 +12,9 @@ package diagram.shapes;
  */
 public enum PolygonType implements PolygonCreator {
    
-   Regular( 
-            ( sides, x, y, h, v ) -> {
-               return new EllipticPolygon( sides, x, y, h, v );
-            }
-   ),
-   Starred( 
-            ( sides, x, y, h, v ) -> {
-               StarredPolygon polygon = new StarredPolygon( 
-                        sides, x, y, h, v 
-               );
-               return polygon;
-            }
-   ),
-   Fractal( 
-            ( sides, x, y, h, v ) -> {
-               FractalPolygon polygon = new FractalPolygon( 
-                        sides, x, y, h, v, 3 
-               );
-               return polygon;
-            }
-   );
-   
-   private PolygonCreator creator;
-
-   /**
-    * Constructs a new {@link PolygonType}.
-    * @param creator the {@link PolygonCreator} function to construct the {@link EllipticPolygon}.
-    */
-   private PolygonType( PolygonCreator creator ) {
-      this.creator = creator;
-   }//End Constructor
+   Regular,
+   Starred,
+   Fractal;
    
    /**
     * {@inheritDoc}
@@ -54,7 +26,16 @@ public enum PolygonType implements PolygonCreator {
             double horizontalRadius, 
             double verticalRadius 
    ) {
-      return creator.createPolygon( numberOfSides, centreX, centreY, horizontalRadius, verticalRadius );
+      return new EllipticPolygon( 
+               this, 
+               numberOfSides, 
+               centreX, 
+               centreY, 
+               horizontalRadius, 
+               verticalRadius, 
+               3, 
+               true 
+      );
    }//End Method
 
 }//End Enum
