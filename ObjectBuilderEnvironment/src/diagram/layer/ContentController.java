@@ -8,7 +8,7 @@
 package diagram.layer;
 
 import diagram.shapes.AddShapeEvent;
-import diagram.shapes.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
 

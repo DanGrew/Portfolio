@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 
 import architecture.event.EventSystem;
 import diagram.shapes.AddShapeEvent;
-import diagram.shapes.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import javafx.embed.swing.JFXPanel;
 

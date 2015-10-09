@@ -5,7 +5,9 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.shapes;
+package diagram.shapes.ellipticpolygon;
+
+import diagram.shapes.PolygonType;
 
 /**
  * Builder pattern for the {@link EllipticPolygon}.

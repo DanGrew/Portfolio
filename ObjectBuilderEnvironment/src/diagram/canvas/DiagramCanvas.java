@@ -9,7 +9,7 @@ package diagram.canvas;
 
 import diagram.controls.DiagramAccordion;
 import diagram.layer.Content;
-import diagram.shapes.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import diagram.toolbox.ContentToolBox;
 import diagram.toolbox.ShapeToolBox;

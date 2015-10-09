@@ -10,6 +10,8 @@ package diagram.shapes;
 import org.junit.Assert;
 import org.junit.Test;
 
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
+
 /**
  * Test for the {@link PolygonType}.
  */

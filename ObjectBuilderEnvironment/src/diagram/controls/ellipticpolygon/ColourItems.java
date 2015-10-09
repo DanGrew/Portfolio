@@ -10,7 +10,7 @@ package diagram.controls.ellipticpolygon;
 import diagram.controls.ColourPickerItemImpl;
 import diagram.controls.GridItem;
 import diagram.controls.GridItemSelection;
-import diagram.shapes.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.paint.Color;
 
 /**

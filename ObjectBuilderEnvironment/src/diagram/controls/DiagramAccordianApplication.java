@@ -7,8 +7,8 @@
  */
 package diagram.controls;
 
-import diagram.shapes.EllipticPolygon;
-import diagram.shapes.EllipticPolygonGraphics;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;

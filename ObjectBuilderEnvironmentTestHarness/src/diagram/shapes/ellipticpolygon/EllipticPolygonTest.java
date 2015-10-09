@@ -5,13 +5,16 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.shapes;
+package diagram.shapes.ellipticpolygon;
 
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import diagram.shapes.PolygonType;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;
 import utility.TestCommon;
 
 /**

@@ -5,10 +5,14 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.shapes;
+package diagram.shapes.ellipticpolygon;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import diagram.shapes.PolygonType;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;
 
 /**
  * Test for the {@link StarredPolygon}.

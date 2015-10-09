@@ -7,10 +7,13 @@
  */
 package diagram.shapes;
 
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;
+
 /**
  * The {@link PolygonType} represents the different types of {@link EllipticPolygon}s that can be created.
  */
-public enum PolygonType implements PolygonCreator {
+public enum PolygonType {
    
    Regular,
    Starred,
@@ -19,7 +22,7 @@ public enum PolygonType implements PolygonCreator {
    /**
     * {@inheritDoc}
     */
-   @Override public EllipticPolygon createPolygon( 
+   public EllipticPolygon createPolygon( 
             int numberOfSides, 
             double centreX, 
             double centreY, 

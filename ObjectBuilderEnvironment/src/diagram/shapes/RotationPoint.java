@@ -9,6 +9,7 @@ package diagram.shapes;
 
 import diagram.behaviour.DragBehaviour;
 import diagram.layer.TranslationConstraint;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;

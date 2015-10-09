@@ -8,8 +8,8 @@
 package diagram.toolbox;
 
 import diagram.canvas.DiagramSettings;
-import diagram.shapes.EllipticPolygon;
 import diagram.shapes.PolygonType;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.geometry.Insets;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;

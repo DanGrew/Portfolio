@@ -9,7 +9,7 @@ package diagram.controls.ellipticpolygon;
 
 import diagram.controls.GridItemSelection;
 import diagram.controls.SliderItemImpl;
-import diagram.shapes.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
 
 /**
  * {@link RotationItems} provides the {@link GridItemSelection} for the properties

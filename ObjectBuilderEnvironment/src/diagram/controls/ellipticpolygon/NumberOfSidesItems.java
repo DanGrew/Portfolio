@@ -9,8 +9,8 @@ package diagram.controls.ellipticpolygon;
 
 import diagram.controls.ButtonItemImpl;
 import diagram.controls.GridItemSelection;
-import diagram.shapes.EllipticPolygon;
-import diagram.shapes.EllipticPolygonGraphics;
+import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
 
 /**
  * {@link NumberOfSidesItems} provides a custom extension of {@link GridItemSelection} to 
