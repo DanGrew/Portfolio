@@ -11,11 +11,12 @@ import diagram.canvas.DiagramCanvas;
 import diagram.controls.ellipticpolygon.ColourItems;
 import diagram.controls.ellipticpolygon.InversionItems;
 import diagram.controls.ellipticpolygon.LocationItems;
+import diagram.controls.ellipticpolygon.NumberOfFractalsItems;
 import diagram.controls.ellipticpolygon.NumberOfSidesItems;
 import diagram.controls.ellipticpolygon.PolygonTypeItems;
+import diagram.controls.ellipticpolygon.RotationItems;
 import diagram.controls.ellipticpolygon.SizeItems;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.controls.ellipticpolygon.RotationItems;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
@@ -35,6 +36,7 @@ public class DiagramAccordion extends BorderPane {
       window.getPanes().addAll( 
                new TitledPane( "Type", new PolygonTypeItems( polygon ) ),
                new TitledPane( "Sides", new NumberOfSidesItems( polygon ) ),
+               new TitledPane( "Fractals", new NumberOfFractalsItems( polygon ) ),
                new TitledPane( "Inversion", new InversionItems( polygon ) ),
                new TitledPane( "Rotation", new RotationItems( polygon ) ),
                new TitledPane( "Size", new SizeItems( polygon ) ),
