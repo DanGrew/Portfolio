@@ -11,6 +11,8 @@ import diagram.controls.ButtonItemImpl;
 import diagram.controls.GridItemSelection;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
+import javafx.beans.binding.Bindings;
+import javafx.scene.control.Button;
 
 /**
  * The {@link InversionItems} provides a custom extension of {@link GridItemSelection}
@@ -27,12 +29,12 @@ public class InversionItems extends GridItemSelection {
                1, 2,
                new ButtonItemImpl( 
                         "Standard", 
-                        EllipticPolygonGraphics.getPolygon( polygon ), 
+                        preparePolygon( polygon, EllipticPolygonGraphics.getPolygon( polygon ) ), 
                         () -> polygon.inversionProperty().set( false )
                ),
                new ButtonItemImpl( 
                         "Inverted", 
-                        prepareInvertedPolygon( polygon ), 
+                        preparePolygon( polygon, prepareInvertedPolygon( polygon ) ), 
                         () -> polygon.inversionProperty().set( true )
                )
       );
@@ -48,6 +50,20 @@ public class InversionItems extends GridItemSelection {
       EllipticPolygon inverted = EllipticPolygonGraphics.getPolygon( polygon );
       inverted.inversionProperty().set( true );
       return inverted;
+   }//End Method
+   
+   /**
+    * Method to bind the configurable {@link EllipticPolygon} to the graphical representation of the {@link EllipticPolygon}.
+    * @param configured the {@link EllipticPolygon} being configured.
+    * @param graphic the {@link EllipticPolygon} being shown on the {@link Button}.
+    * @return the {@link EllipticPolygon} graphic.
+    */
+   private static EllipticPolygon preparePolygon( EllipticPolygon configured, EllipticPolygon graphic ) {
+      Bindings.bindBidirectional( configured.polygonTypeProperty(), graphic.polygonTypeProperty() );
+      Bindings.bindBidirectional( configured.numberOfSidesProperty(), graphic.numberOfSidesProperty() );
+      Bindings.bindBidirectional( configured.rotateProperty(), graphic.rotateProperty() );
+      Bindings.bindBidirectional( configured.numberOfFractalsProperty(), graphic.numberOfFractalsProperty() );
+      return graphic;
    }//End Method
 
 }//End Class
