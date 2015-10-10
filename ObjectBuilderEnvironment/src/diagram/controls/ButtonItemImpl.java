@@ -19,8 +19,8 @@ import javafx.scene.layout.Pane;
  */
 public class ButtonItemImpl implements GridItem {
    
-   private Node graphic;
-   private Runnable action;
+   private final Button controller;
+   private final Runnable action;
    
    /**
     * Constructs a new {@link ButtonItemImpl}.
@@ -38,18 +38,14 @@ public class ButtonItemImpl implements GridItem {
     * @param action the {@link Runnable} to run when the {@link Button} is clicked.
     */
    public ButtonItemImpl( Node graphic, Runnable action ) {
-      this.graphic = graphic;
       this.action = action;
+      controller = new Button();
+      controller.setPrefWidth( 100 );
+      controller.setPrefHeight( 100 );
+      controller.setGraphic( graphic );
+      controller.setOnAction( event -> processAction() );
    }//End Constructor
 
-   /**
-    * Getter for the {@link Node} graphic to set on the {@link Button}
-    * @return the graphic {@link Node}.
-    */
-   private Node getGraphic() {
-      return graphic;
-   }//End Method
-   
    /**
     * Method to perform the action associated with the {@link ButtonItemImpl}.
     */
@@ -60,13 +56,8 @@ public class ButtonItemImpl implements GridItem {
    /**
     * {@inheritDoc}
     */
-   @Override public Node constructNodeController(){
-      Button button = new Button();
-      button.setPrefWidth( 100 );
-      button.setPrefHeight( 100 );
-      button.setGraphic( getGraphic() );
-      button.setOnAction( event -> processAction() );
-      return button;
+   @Override public Node getController(){
+      return controller;
    }//End Method
    
    /**

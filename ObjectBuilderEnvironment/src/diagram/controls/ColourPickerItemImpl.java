@@ -20,8 +20,9 @@ import javafx.scene.paint.Color;
  */
 public class ColourPickerItemImpl implements GridItem {
    
-   private String value;
-   private Consumer< Color > action;
+   private final ColorPicker controller;
+   private final TitledPane wrapper;
+   private final Consumer< Color > action;
    
    /**
     * Constructs a new {@link ColourPickerItemImpl}.
@@ -29,8 +30,12 @@ public class ColourPickerItemImpl implements GridItem {
     * @param action the {@link Consumer} to run when the chosen {@link Color} changes.
     */
    public ColourPickerItemImpl( String value, Consumer< Color > action ) {
-      this.value = value;
       this.action = action;
+      controller = new ColorPicker();
+      controller.setPrefWidth( 200 );
+      controller.valueProperty().addListener( ( change, old, updated ) -> performAction( updated ) );
+      wrapper = new TitledPane( value, controller );
+      wrapper.setCollapsible( false );
    }//End Constructor
    
    /**
@@ -44,13 +49,16 @@ public class ColourPickerItemImpl implements GridItem {
    /**
     * {@inheritDoc}
     */
-   @Override public Node constructNodeController(){
-      ColorPicker spinner = new ColorPicker();
-      spinner.setPrefWidth( 200 );
-      spinner.valueProperty().addListener( ( change, old, updated ) -> performAction( updated ) );
-      TitledPane title = new TitledPane( value, spinner );
-      title.setCollapsible( false );
-      return title;
+   @Override public Node getController(){
+      return wrapper;
+   }//End Method
+   
+   /**
+    * Method to select the given {@link Color} in the associated controller.
+    * @param colour the {@link Color} to select.
+    */
+   public void selectColour( Color colour ) {
+      controller.valueProperty().set( colour );
    }//End Method
 
 }//End Class

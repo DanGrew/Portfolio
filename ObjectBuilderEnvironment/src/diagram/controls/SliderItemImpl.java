@@ -62,7 +62,7 @@ public class SliderItemImpl extends RangedItemImpl {
    /**
     * {@inheritDoc}
     */
-   @Override public Node constructNodeController(){
+   @Override public Node getController(){
       BorderPane pane = new BorderPane();
 
       Slider slider = new Slider();

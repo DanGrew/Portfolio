@@ -43,7 +43,7 @@ public class NumberSpinnerItemImpl extends RangedItemImpl {
    /**
     * {@inheritDoc}
     */
-   @Override public Node constructNodeController(){
+   @Override public Node getController(){
       Spinner< Double > spinner = new Spinner< Double >();
       spinner.setValueFactory( new DefensiveDoubleSpinnerValueFactory( getMin(), getMax() ) );
       spinner.setPrefWidth( 200 );

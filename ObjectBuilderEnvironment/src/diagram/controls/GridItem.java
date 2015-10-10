@@ -17,10 +17,9 @@ import javafx.scene.layout.GridPane;
 public interface GridItem {
 
    /**
-    * Method to construct a {@link Node} that can be used to control the underlying property.
-    * @return a {@link Node} ready to be inserted into a {@link Scene}, where each call constructs
-    * a new.
+    * Method to get the {@link Node} that can be used to control the underlying property.
+    * @return a {@link Node} ready to be inserted into a {@link Scene}.
     */
-   public Node constructNodeController();
+   public Node getController();
 
 }//End Interface
