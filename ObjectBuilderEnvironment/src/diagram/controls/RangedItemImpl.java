@@ -68,6 +68,11 @@ public abstract class RangedItemImpl implements GridItem {
    /**
     * {@inheritDoc}
     */
+   @Override public abstract Node getWrapper();
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public abstract Node getController();
 
 }//End Class

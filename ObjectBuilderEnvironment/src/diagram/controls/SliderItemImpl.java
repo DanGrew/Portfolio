@@ -19,8 +19,9 @@ import javafx.scene.layout.BorderPane;
  * property.
  */
 public class SliderItemImpl extends RangedItemImpl {
-   
-   private String value;
+
+   private Slider controller;
+   private TitledPane wrapper;
    private int tickMarks;
    private int tickLabels;
    private int blockIncrements;
@@ -32,10 +33,25 @@ public class SliderItemImpl extends RangedItemImpl {
     */
    public SliderItemImpl( String value, Consumer< Double > action ) {
       super( action );
-      this.value = value;
       tickMarks = 10;
       tickLabels = 50;
       blockIncrements = 20;
+
+      controller = new Slider();
+      controller.setPrefWidth( 200 );
+      controller.setMin( getMin() );
+      controller.setMax( getMax() );
+      controller.setShowTickLabels( true );
+      controller.setShowTickMarks( true );
+      controller.setMinorTickCount( tickMarks );
+      controller.setMajorTickUnit( tickLabels );
+      controller.setBlockIncrement( blockIncrements );
+      controller.valueProperty().addListener( ( change, old, updated ) -> processAction( updated.doubleValue() ) );
+      
+      BorderPane pane = new BorderPane();
+      pane.setCenter( controller );
+      wrapper = new TitledPane( value, pane );
+      wrapper.setCollapsible( false );
    }//End Constructor
    
    /**
@@ -62,24 +78,23 @@ public class SliderItemImpl extends RangedItemImpl {
    /**
     * {@inheritDoc}
     */
-   @Override public Node getController(){
-      BorderPane pane = new BorderPane();
+   @Override public Node getWrapper(){
+      return wrapper;
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Node getController() {
+      return controller;
+   }//End Method
 
-      Slider slider = new Slider();
-      slider.setPrefWidth( 200 );
-      slider.setMin( getMin() );
-      slider.setMax( getMax() );
-      slider.setShowTickLabels( true );
-      slider.setShowTickMarks( true );
-      slider.setMinorTickCount( tickMarks );
-      slider.setMajorTickUnit( tickLabels );
-      slider.setBlockIncrement( blockIncrements );
-      slider.valueProperty().addListener( ( change, old, updated ) -> processAction( updated.doubleValue() ) );
-      
-      pane.setCenter( slider );
-      TitledPane title = new TitledPane( value, pane );
-      title.setCollapsible( false );
-      return title;
+   /**
+    * Method to programmtically set the value of the {@link Slider}.
+    * @param value the value to set.
+    */
+   public void selectValue( double value ) {
+      controller.setValue( value );
    }//End Method
 
 }//End Class

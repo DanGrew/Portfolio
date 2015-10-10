@@ -35,8 +35,8 @@ public class ButtonItemImplTest {
     */
    @Test public void shouldProduceAButton() {
       ButtonItemImpl item = new ButtonItemImpl( "test", new Rectangle( 20, 20 ), null );
-      Assert.assertNotNull( item.getController() );
-      Assert.assertTrue( item.getController() instanceof Button );
+      Assert.assertNotNull( item.getWrapper() );
+      Assert.assertTrue( item.getWrapper() instanceof Button );
    }//End Method
    
    /**
@@ -45,7 +45,7 @@ public class ButtonItemImplTest {
    @Test public void shouldRunAction() {
       final BooleanProperty success = new SimpleBooleanProperty( false );
       ButtonItemImpl item = new ButtonItemImpl( "test", new Rectangle( 20, 20 ), () -> success.set( true ) );
-      Button button = ( Button )item.getController();
+      Button button = ( Button )item.getWrapper();
       button.getOnAction().handle( new ActionEvent() );
       Assert.assertTrue( success.get() );
    }//End Method

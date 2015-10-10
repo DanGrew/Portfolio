@@ -49,8 +49,15 @@ public class ColourPickerItemImpl implements GridItem {
    /**
     * {@inheritDoc}
     */
-   @Override public Node getController(){
+   @Override public Node getWrapper(){
       return wrapper;
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Node getController() {
+      return controller;
    }//End Method
    
    /**

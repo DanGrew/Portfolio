@@ -50,7 +50,7 @@ public class GridItemSelection extends GridPane {
             }
             
             GridItem item = itemsToAdd.remove( 0 );
-            Node controller = item.getController();
+            Node controller = item.getWrapper();
             add( controller, j, i );
          }
       }

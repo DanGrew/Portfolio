@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 
 import graphics.utility.DefensiveDoubleSpinnerValueFactory;
 import javafx.scene.Node;
+import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TitledPane;
 
@@ -20,7 +21,8 @@ import javafx.scene.control.TitledPane;
  */
 public class NumberSpinnerItemImpl extends RangedItemImpl {
    
-   private String value;
+   private Spinner< Double > controller;
+   private TitledPane wrapper;
    
    /**
     * Constructs a new {@link NumberSpinnerItemImpl}.
@@ -29,7 +31,13 @@ public class NumberSpinnerItemImpl extends RangedItemImpl {
     */
    public NumberSpinnerItemImpl( String value, Consumer< Double > action ) {
       super( action );
-      this.value = value;
+      controller = new Spinner< Double >();
+      controller.setValueFactory( new DefensiveDoubleSpinnerValueFactory( getMin(), getMax() ) );
+      controller.setPrefWidth( 200 );
+      controller.setEditable( true );
+      controller.valueProperty().addListener( ( change, old, updated ) -> processAction( updated.doubleValue() ) );
+      wrapper = new TitledPane( value, controller );
+      wrapper.setCollapsible( false );
    }//End Constructor
    
    /**
@@ -43,15 +51,23 @@ public class NumberSpinnerItemImpl extends RangedItemImpl {
    /**
     * {@inheritDoc}
     */
-   @Override public Node getController(){
-      Spinner< Double > spinner = new Spinner< Double >();
-      spinner.setValueFactory( new DefensiveDoubleSpinnerValueFactory( getMin(), getMax() ) );
-      spinner.setPrefWidth( 200 );
-      spinner.setEditable( true );
-      spinner.valueProperty().addListener( ( change, old, updated ) -> processAction( updated.doubleValue() ) );
-      TitledPane title = new TitledPane( value, spinner );
-      title.setCollapsible( false );
-      return title;
+   @Override public Node getWrapper(){
+      return wrapper;
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
+   @Override public Node getController() {
+      return controller;
+   }//End Method
+
+   /**
+    * Method to programmatically set the value on the {@link Slider}.
+    * @param value the value to set.
+    */
+   public void setValue( double value ) {
+      controller.valueFactoryProperty().get().setValue( value );
    }//End Method
 
 }//End Class
