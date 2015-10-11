@@ -7,15 +7,12 @@
  */
 package launch;
 
-import gui.CommandPrompt;
 import gui.ObjectBuilder;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import menu.ObeMenuBar;
-import outline.SystemOutline;
-import outline.configuration.SystemOutlineDetail;
 
 /**
  * The {@link ObjectBuilderEnvironment} launches {@link ObjectBuilder} with the full IDE.
@@ -32,9 +29,13 @@ public class ObjectBuilderEnvironment extends Application {
     */
    @Override public void start( Stage stage ) throws Exception {
       BorderPane view = new BorderPane();
-      view.setTop( new ObeMenuBar() );
-      view.setCenter( new SystemOutline( SystemOutlineDetail.completeSystemOutline() ) );
-      view.setBottom( new CommandPrompt() );
+      
+      BorderPane header = new BorderPane();
+      header.setLeft( new ObeMenuBar() );
+      view.setTop( header );
+      
+      Perspectives perspectives = new Perspectives( view );
+      header.setRight( perspectives );
       
       Scene scene = new Scene( view, 1200, 800 );
       stage.setScene( scene );

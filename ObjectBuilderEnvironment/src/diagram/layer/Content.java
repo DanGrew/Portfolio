@@ -9,7 +9,7 @@ package diagram.layer;
 
 import diagram.behaviour.DragBehaviour;
 import diagram.behaviour.SelectionBehaviour;
-import diagram.canvas.DiagramCanvas;
+import diagram.canvas.DiagramCanvasApplication;
 import diagram.canvas.DiagramSettings;
 import diagram.shapes.SelectionShape;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
@@ -20,7 +20,7 @@ import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Shape;
 
 /**
- * The {@link Content} is responsible for holding all content for the {@link DiagramCanvas}.
+ * The {@link Content} is responsible for holding all content for the {@link DiagramCanvasApplication}.
  */
 public class Content extends Pane {
    

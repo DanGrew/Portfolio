@@ -7,7 +7,7 @@
  */
 package diagram.controls;
 
-import diagram.canvas.DiagramCanvas;
+import diagram.canvas.DiagramCanvasApplication;
 import diagram.controls.ellipticpolygon.ColourItems;
 import diagram.controls.ellipticpolygon.InversionItems;
 import diagram.controls.ellipticpolygon.LocationItems;
@@ -23,7 +23,7 @@ import javafx.scene.layout.BorderPane;
 
 /**
  * The {@link DiagramAccordion} provides an {@link Accordion} for {@link EllipticPolygon}s specifically
- * manipulated in the {@link DiagramCanvas}.
+ * manipulated in the {@link DiagramCanvasApplication}.
  */
 public class DiagramAccordion extends BorderPane {
 

@@ -12,43 +12,31 @@ import diagram.layer.Content;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
-import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 /**
- * The {@link DiagramCanvas} is a graphical interface for creating abstract diagrams.
+ * The {@link DiagramCanvas} provides the {@link Node} for creating diagrams using shapes.
  */
-public class DiagramCanvas extends Application {
-
-   public static void main( String[] args ) {
-      DiagramCanvas.launch();
-   }// End Method
+public class DiagramCanvas extends BorderPane {
    
    /**
-    * {@inheritDoc}
+    * Constructs a new {@link DiagramCanvas}.
     */
-   @Override public void start( Stage stage ) throws Exception {
+   public DiagramCanvas() {
       DiagramSettings canvasSettings = new DiagramSettings();
-      
-      BorderPane window = new BorderPane();
       
       Content contentLayer = new Content( canvasSettings );
       CanvasViewport viewPort = new CanvasViewport( contentLayer );
-      window.setCenter( viewPort );
+      setCenter( viewPort );
       
       JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> {
          EllipticPolygon polygon = ( EllipticPolygon )source;
-         window.setRight( new DiagramAccordion( polygon ) );
+         setRight( new DiagramAccordion( polygon ) );
       } );
       
 //      SystemOutline outline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );
-//      window.setLeft( outline );
-      
-      Scene scene = new Scene( window, 1200, 800 );
-      stage.setScene( scene );
-      stage.show();
-   }// End Method
-   
+//      setLeft( outline );
+   }//End Constructor
+
 }//End Class
