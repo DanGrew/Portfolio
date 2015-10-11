@@ -62,6 +62,7 @@ public class CanvasViewport extends Pane {
       } );
       
       ViewportInformation information = new ViewportInformation( contentHolder, this );
+      information.translateYProperty().bind( heightProperty().subtract( 60 ) );
       getChildren().add( information );
    }//End Constructor
    

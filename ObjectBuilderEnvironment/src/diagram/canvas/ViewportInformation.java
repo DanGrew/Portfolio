@@ -83,8 +83,7 @@ public class ViewportInformation extends Pane {
     */
    ViewportInformation( Pane scalablePane, Pane viewport ) {
       canvasLocation = new Label();
-      canvasLocation.setLayoutX( 0 );
-      canvasLocation.layoutYProperty().bind( viewport.heightProperty().subtract( 60 ) );
+      canvasLocation.setLayoutY( 0 );
       
       LabelUpdater translater = new LabelUpdater( 
                canvasLocation, CANVAS_LOCATION_FORMAT, scalablePane.translateXProperty(), scalablePane.translateYProperty() 
@@ -95,8 +94,7 @@ public class ViewportInformation extends Pane {
       getChildren().add( canvasLocation );
       
       mouseLocation = new Label( "Mouse( , )" );
-      mouseLocation.setLayoutX( 0 );
-      mouseLocation.layoutYProperty().bind( viewport.heightProperty().subtract( 40 ) );
+      mouseLocation.setLayoutY( 20 );
       viewport.addEventFilter( MouseEvent.MOUSE_MOVED, event -> {
          mouseLocation.setText( String.format( 
                   MOUSE_LOCATION_FORMAT, 
@@ -107,8 +105,7 @@ public class ViewportInformation extends Pane {
       getChildren().add( mouseLocation );
       
       canvasScale = new Label();
-      canvasScale.setLayoutX( 0 );
-      canvasScale.layoutYProperty().bind( viewport.heightProperty().subtract( 20 ) );
+      canvasScale.setLayoutY( 40 );
       
       LabelUpdater scaler = new LabelUpdater( 
                canvasScale, CANVAS_SCALE_FORMAT, scalablePane.scaleXProperty(), scalablePane.scaleYProperty() 

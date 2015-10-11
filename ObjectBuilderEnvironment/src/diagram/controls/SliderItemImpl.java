@@ -7,8 +7,6 @@
  */
 package diagram.controls;
 
-import java.util.function.Consumer;
-
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.control.Slider;

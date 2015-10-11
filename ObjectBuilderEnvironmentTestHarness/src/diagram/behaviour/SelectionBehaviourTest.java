@@ -7,6 +7,7 @@
  */
 package diagram.behaviour;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -44,6 +45,14 @@ public class SelectionBehaviourTest {
       pane.fireEvent( event );
       
       Assert.assertTrue( received.get() );
+   }//End Method
+   
+   /**
+    * Method to shutdown the {@link EventSystem} after the test so that it does not interfer
+    * with other tests.
+    */
+   @AfterClass public static void shutdown(){
+      EventSystem.reset();
    }//End Method
 
 }//End Class

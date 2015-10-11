@@ -7,8 +7,6 @@
  */
 package diagram.controls;
 
-import java.util.function.Consumer;
-
 import graphics.utility.DefensiveDoubleSpinnerValueFactory;
 import graphics.utility.SdkBindings;
 import javafx.beans.property.DoubleProperty;
