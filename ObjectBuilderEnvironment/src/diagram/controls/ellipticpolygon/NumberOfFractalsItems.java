@@ -28,22 +28,22 @@ public class NumberOfFractalsItems extends GridItemSelection {
                2, 2,
                new ButtonItemImpl( 
                         "0 Fractals", 
-                        preparePolygon( polygon, prepareFractalPolygon( EllipticPolygonGraphics.getTriangle(), 0 ) ), 
+                        preparePolygon( polygon, prepareFractalPolygon( polygon, 0 ) ), 
                         () -> polygon.numberOfFractalsProperty().set( 0 ) 
                ),
                new ButtonItemImpl( 
                         "1 Fractal", 
-                        preparePolygon( polygon, prepareFractalPolygon( EllipticPolygonGraphics.getTriangle(), 1 ) ), 
+                        preparePolygon( polygon, prepareFractalPolygon( polygon, 1 ) ), 
                         () -> polygon.numberOfFractalsProperty().set( 1 ) 
                ),
                new ButtonItemImpl( 
                         "2 Fractals", 
-                        preparePolygon( polygon, prepareFractalPolygon( EllipticPolygonGraphics.getTriangle(), 2 ) ), 
+                        preparePolygon( polygon, prepareFractalPolygon( polygon, 2 ) ), 
                         () -> polygon.numberOfFractalsProperty().set( 2 ) 
                ),
                new ButtonItemImpl( 
                         "3 Fractals", 
-                        preparePolygon( polygon, prepareFractalPolygon( EllipticPolygonGraphics.getTriangle(), 3 ) ), 
+                        preparePolygon( polygon, prepareFractalPolygon( polygon, 3 ) ), 
                         () -> polygon.numberOfFractalsProperty().set( 3 ) 
                )
       );
