@@ -11,15 +11,11 @@ import diagram.controls.DiagramAccordion;
 import diagram.layer.Content;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
-import diagram.toolbox.ContentToolBox;
-import diagram.toolbox.ShapeToolBox;
 import graphics.event.JavaFxEventSystem;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import outline.SystemOutline;
-import outline.configuration.SystemOutlineDetail;
 
 /**
  * The {@link DiagramCanvas} is a graphical interface for creating abstract diagrams.
@@ -42,18 +38,13 @@ public class DiagramCanvas extends Application {
       CanvasViewport viewPort = new CanvasViewport( contentLayer );
       window.setCenter( viewPort );
       
-      ContentToolBox contentToolBox = new ContentToolBox();
-      window.setRight( contentToolBox );
-      
       JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> {
          EllipticPolygon polygon = ( EllipticPolygon )source;
          window.setRight( new DiagramAccordion( polygon ) );
       } );
       
-      window.setTop( new ShapeToolBox( canvasSettings ) );
-      
-      SystemOutline outline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );
-      window.setLeft( outline );
+//      SystemOutline outline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );
+//      window.setLeft( outline );
       
       Scene scene = new Scene( window, 1200, 800 );
       stage.setScene( scene );

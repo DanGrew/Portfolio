@@ -78,10 +78,10 @@ public class ViewportInformation extends Pane {
    
    /**
     * Constructs a new {@link ViewportInformation}.
-    * @param scalablePane the {@link Pane} that provides the scalable canvas.
     * @param viewport the viewport to the canvas.
+    * @param scalablePane the {@link Pane} that provides the scalable canvas.
     */
-   ViewportInformation( Pane scalablePane, Pane viewport ) {
+   ViewportInformation( Pane viewport, Pane scalablePane ) {
       canvasLocation = new Label();
       canvasLocation.setLayoutY( 0 );
       

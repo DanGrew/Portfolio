@@ -61,9 +61,11 @@ public class CanvasViewport extends Pane {
          event.consume();
       } );
       
-      ViewportInformation information = new ViewportInformation( contentHolder, this );
+      ViewportInformation information = new ViewportInformation( this, contentHolder );
       information.translateYProperty().bind( heightProperty().subtract( 60 ) );
       getChildren().add( information );
+
+      getChildren().add( new ShapeControls( this, contentHolder ) );
    }//End Constructor
    
 //   void addShapeAtViewportCoordinates( double x, double y ) {
