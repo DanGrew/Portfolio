@@ -73,7 +73,7 @@ public class ViewportInformationTest {
    @Test public void shouldUpdateCanvasLocation(){
       Pane scalablePane = new Pane();
       Pane viewport = new Pane();
-      ViewportInformation information = new ViewportInformation( scalablePane, viewport );
+      ViewportInformation information = new ViewportInformation( viewport, scalablePane );
       
       Assert.assertEquals( 
                String.format( ViewportInformation.CANVAS_LOCATION_FORMAT, 0, 0 ), 
@@ -98,7 +98,7 @@ public class ViewportInformationTest {
    @Test public void shouldUpdateCanvasScale(){
       Pane scalablePane = new Pane();
       Pane viewport = new Pane();
-      ViewportInformation information = new ViewportInformation( scalablePane, viewport );
+      ViewportInformation information = new ViewportInformation( viewport, scalablePane );
       
       Assert.assertEquals( 
                String.format( ViewportInformation.CANVAS_SCALE_FORMAT, 1, 1 ), 
@@ -123,7 +123,7 @@ public class ViewportInformationTest {
    @Test public void shouldUpdateMouseLocation(){
       Pane scalablePane = new Pane();
       Pane viewport = new Pane();
-      ViewportInformation information = new ViewportInformation( scalablePane, viewport );
+      ViewportInformation information = new ViewportInformation( viewport, scalablePane );
       
       MouseEvent event = new MouseEvent( 
                MouseEvent.MOUSE_MOVED, 34.2334, -2398.348, 0, 0, null, 0, 
@@ -143,7 +143,7 @@ public class ViewportInformationTest {
    @Test public void shouldHaveThreeLabelsForData(){
       Pane scalablePane = new Pane();
       Pane viewport = new Pane();
-      ViewportInformation information = new ViewportInformation( scalablePane, viewport );
+      ViewportInformation information = new ViewportInformation( viewport, scalablePane );
       Assert.assertTrue( information.getChildren().get( 0 ) instanceof Label );
       Assert.assertTrue( information.getChildren().get( 1 ) instanceof Label );
       Assert.assertTrue( information.getChildren().get( 2 ) instanceof Label );
