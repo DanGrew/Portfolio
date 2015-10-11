@@ -24,9 +24,9 @@ public class RotationItems extends GridItemSelection {
    public RotationItems( EllipticPolygon polygon ) {
       super(   
                1, 1, 
-               new SliderItemImpl( "Degrees", rotation -> polygon.rotateProperty().set( rotation ) )
-                  .setRange( 0, 360 )
-                  .setRangeLabels( 45, 90, 15 )
+               new SliderItemImpl( "Degrees", polygon.rotateProperty() )
+                  .setRange( -180, 180 )
+                  .setRangeLabels( 90, 90, 90 )
       );
    }//End Constructor
 

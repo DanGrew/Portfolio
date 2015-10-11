@@ -24,11 +24,9 @@ public class LocationItems extends GridItemSelection {
    public LocationItems( EllipticPolygon polygon ) {
       super( 
                2, 1, 
-               new NumberSpinnerItemImpl( "X", value -> polygon.translateXProperty().set( value ) )
-                  .setRange( Integer.MIN_VALUE, Integer.MAX_VALUE ),
-               new NumberSpinnerItemImpl( "Y", value -> polygon.translateYProperty().set( value ) )
-                  .setRange( Integer.MIN_VALUE, Integer.MAX_VALUE )
+               new NumberSpinnerItemImpl( "X", Integer.MIN_VALUE, Integer.MAX_VALUE, polygon.translateXProperty() ),
+               new NumberSpinnerItemImpl( "Y", Integer.MIN_VALUE, Integer.MAX_VALUE, polygon.translateYProperty() )
       );
    }//End Constructor
-
+   
 }//End Class

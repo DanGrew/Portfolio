@@ -10,8 +10,9 @@ package diagram.controls;
 import java.util.function.Consumer;
 
 import graphics.utility.DefensiveDoubleSpinnerValueFactory;
+import graphics.utility.SdkBindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.Node;
-import javafx.scene.control.Slider;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TitledPane;
 
@@ -19,7 +20,7 @@ import javafx.scene.control.TitledPane;
  * Implementation of {@link GridItem} to provide a {@link Spinner} for {@link Double}s
  * that controls a property.
  */
-public class NumberSpinnerItemImpl extends RangedItemImpl {
+public class NumberSpinnerItemImpl implements GridItem {
    
    private Spinner< Double > controller;
    private TitledPane wrapper;
@@ -27,26 +28,30 @@ public class NumberSpinnerItemImpl extends RangedItemImpl {
    /**
     * Constructs a new {@link NumberSpinnerItemImpl}.
     * @param value the {@link String} value being controlled.
-    * @param action the {@link Consumer} to run when the {@link Spinner} is changed.
+    * @param min the minimum value of the {@link Spinner}.
+    * @param max the maximum value of the {@link Spinner}.
+    * @param property the {@link DoubleProperty} to bind with.
     */
-   public NumberSpinnerItemImpl( String value, Consumer< Double > action ) {
-      super( action );
+   public NumberSpinnerItemImpl( String value, double min, double max, DoubleProperty property ) {
+      super();
       controller = new Spinner< Double >();
-      controller.setValueFactory( new DefensiveDoubleSpinnerValueFactory( getMin(), getMax() ) );
+      controller.setValueFactory( new DefensiveDoubleSpinnerValueFactory( min, max ) );
       controller.setPrefWidth( 200 );
       controller.setEditable( true );
-      controller.valueProperty().addListener( ( change, old, updated ) -> processAction( updated.doubleValue() ) );
       wrapper = new TitledPane( value, controller );
       wrapper.setCollapsible( false );
+      if ( property != null ) looseBind( property );
    }//End Constructor
    
    /**
-    * {@inheritDoc}
+    * Constructs a new {@link NumberSpinnerItemImpl}.
+    * @param value the {@link String} value being controlled.
+    * @param min the minimum value of the {@link Spinner}.
+    * @param max the maximum value of the {@link Spinner}.
     */
-   @Override public NumberSpinnerItemImpl setRange( double min, double max ) {
-      super.setRange( min, max );
-      return this;
-   }//End Method
+   public NumberSpinnerItemImpl( String value, double min, double max ) {
+      this( value, min, max, null );
+   }//End Constructor
    
    /**
     * {@inheritDoc}
@@ -58,16 +63,16 @@ public class NumberSpinnerItemImpl extends RangedItemImpl {
    /**
     * {@inheritDoc}
     */
-   @Override public Node getController() {
+   @Override public Spinner< Double > getController() {
       return controller;
    }//End Method
 
    /**
-    * Method to programmatically set the value on the {@link Slider}.
-    * @param value the value to set.
+    * Method to apply a loose binding between with this {@link NumberSpinnerItemImpl} and the given {@link DoubleProperty}.
+    * @param property the {@link DoubleProperty} to bind to.
     */
-   public void setValue( double value ) {
-      controller.valueFactoryProperty().get().setValue( value );
+   public void looseBind( DoubleProperty property ) {
+      SdkBindings.bind( controller.getValueFactory().valueProperty(), property );
    }//End Method
 
 }//End Class

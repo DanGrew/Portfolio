@@ -11,8 +11,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
@@ -44,22 +44,14 @@ public class SliderItemImplTest {
     * Test that the {@link ColorPicker} when a colour is selected, triggers the action given.
     */
    @Test public void shouldRunAction() {
-      final BooleanProperty success = new SimpleBooleanProperty( false );
-      SliderItemImpl item = new SliderItemImpl( "test", colour -> success.set( true ) );
-      Slider picker = ( Slider )item.getController();
+      DoubleProperty property = new SimpleDoubleProperty( 0.0 );
+      SliderItemImpl item = new SliderItemImpl( "test", property );
+      Assert.assertEquals( 0.0, property.doubleValue(), TestCommon.precision() );
+      Slider picker = item.getController();
+      Assert.assertEquals( 0.0, picker.getValue(), TestCommon.precision() );
       picker.setValue( 20.0 );
-      Assert.assertTrue( success.get() );
+      Assert.assertEquals( 20.0, property.doubleValue(), TestCommon.precision() );
+      Assert.assertEquals( 20.0, picker.getValue(), TestCommon.precision() );
    }//End Method
    
-   /**
-    * Test that the {@link ColorPicker} is updated when the item is updated.
-    */
-   @Test public void shouldUpdateController() {
-      SliderItemImpl item = new SliderItemImpl( "test", colour -> {} );
-      Slider picker = ( Slider )item.getController();
-      Assert.assertNotEquals( 20.0, picker.valueProperty().get(), TestCommon.precision() );
-      item.selectValue( 20.0 );
-      Assert.assertEquals( 20.0, picker.valueProperty().get(), TestCommon.precision() );
-   }//End Method
-
 }//End Class

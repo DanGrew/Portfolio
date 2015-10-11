@@ -11,8 +11,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Spinner;
@@ -35,7 +35,7 @@ public class NumberSpinnerItemImplTest {
     * Test that the item produces a {@link ColorPicker}.
     */
    @Test public void shouldProduceASpinner() {
-      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", null );
+      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", 0, 100, null );
       Assert.assertNotNull( item.getWrapper() );
       Assert.assertTrue( item.getWrapper() instanceof TitledPane );
    }//End Method
@@ -44,23 +44,23 @@ public class NumberSpinnerItemImplTest {
     * Test that the {@link ColorPicker} when a colour is selected, triggers the action given.
     */
    @Test public void shouldRunAction() {
-      final BooleanProperty success = new SimpleBooleanProperty( false );
-      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", colour -> success.set( true ) );
-      @SuppressWarnings("unchecked") //Test will identify problem if unsafe. 
-      Spinner< Double > picker = ( Spinner< Double > )item.getController();
-      picker.valueFactoryProperty().get().setValue( 20.0 );
-      Assert.assertTrue( success.get() );
+      DoubleProperty property = new SimpleDoubleProperty( 78 );
+      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", 0, 100, property );
+      Spinner< Double > spinner = item.getController();
+      Assert.assertEquals( 78.0, spinner.getValue(), TestCommon.precision() );
+      spinner.valueFactoryProperty().get().setValue( 20.0 );
+      Assert.assertEquals( 20.0, property.doubleValue(), TestCommon.precision() );
    }//End Method
    
    /**
     * Test that the {@link ColorPicker} is updated when the item is updated.
     */
    @Test public void shouldUpdateController() {
-      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", colour -> {} );
-      @SuppressWarnings("unchecked") //Test will identify problem if unsafe.
-      Spinner< Double > picker = ( Spinner< Double > )item.getController();
+      DoubleProperty property = new SimpleDoubleProperty( 0.0 );
+      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", 0, 100, property );
+      Spinner< Double > picker = item.getController();
       Assert.assertNotEquals( 20.0, picker.valueProperty().get(), TestCommon.precision() );
-      item.setValue( 20.0 );
+      property.set( 20.0 );
       Assert.assertEquals( 20.0, picker.valueProperty().get(), TestCommon.precision() );
    }//End Method
 

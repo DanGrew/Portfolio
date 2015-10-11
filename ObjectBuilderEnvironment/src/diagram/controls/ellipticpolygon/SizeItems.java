@@ -24,12 +24,9 @@ public class SizeItems extends GridItemSelection {
    public SizeItems( EllipticPolygon polygon ) {
       super( 
                3, 1, 
-               new NumberSpinnerItemImpl( "Horizontal Radius", value -> polygon.horizontalRadiusProperty().set( value ) )
-                  .setRange( 1, Integer.MAX_VALUE ),
-               new NumberSpinnerItemImpl( "Vertical Radius", value -> polygon.verticalRadiusProperty().set( value ) )
-                  .setRange( 1, Integer.MAX_VALUE ),
-               new NumberSpinnerItemImpl( "Stroke Thickness", value -> polygon.setStrokeWidth( value ) )
-                  .setRange( 1, Integer.MAX_VALUE )
+               new NumberSpinnerItemImpl( "Horizontal Radius", 1, Integer.MAX_VALUE, polygon.horizontalRadiusProperty() ),
+               new NumberSpinnerItemImpl( "Vertical Radius", 1, Integer.MAX_VALUE, polygon.verticalRadiusProperty() ),
+               new NumberSpinnerItemImpl( "Stroke Thickness", 1, Integer.MAX_VALUE, polygon.strokeWidthProperty() )
       );
    }//End Constructor
 

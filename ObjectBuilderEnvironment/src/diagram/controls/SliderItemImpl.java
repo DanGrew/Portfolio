@@ -9,7 +9,8 @@ package diagram.controls;
 
 import java.util.function.Consumer;
 
-import javafx.scene.Node;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;
@@ -18,47 +19,44 @@ import javafx.scene.layout.BorderPane;
  * Implementation of {@link GridItem} to provide a {@link Slider} for controlling a 
  * property.
  */
-public class SliderItemImpl extends RangedItemImpl {
+public class SliderItemImpl implements GridItem {
 
    private Slider controller;
    private TitledPane wrapper;
-   private int tickMarks;
-   private int tickLabels;
-   private int blockIncrements;
    
    /**
     * Constructs a new {@link SliderItemImpl}.
     * @param value the {@link String} value being controlled.
-    * @param action the {@link Consumer} to run when the {@link Slider} is changed.
+    * @param property the {@link DoubleProperty} to loosely bind with.
     */
-   public SliderItemImpl( String value, Consumer< Double > action ) {
-      super( action );
-      tickMarks = 10;
-      tickLabels = 50;
-      blockIncrements = 20;
-
+   public SliderItemImpl( String value, DoubleProperty property ) {
       controller = new Slider();
       controller.setPrefWidth( 200 );
-      controller.setMin( getMin() );
-      controller.setMax( getMax() );
+      controller.setMin( 0 );
+      controller.setMax( 100 );
       controller.setShowTickLabels( true );
       controller.setShowTickMarks( true );
-      controller.setMinorTickCount( tickMarks );
-      controller.setMajorTickUnit( tickLabels );
-      controller.setBlockIncrement( blockIncrements );
-      controller.valueProperty().addListener( ( change, old, updated ) -> processAction( updated.doubleValue() ) );
+      controller.setMinorTickCount( 10 );
+      controller.setMajorTickUnit( 50 );
+      controller.setBlockIncrement( 20 );
       
       BorderPane pane = new BorderPane();
       pane.setCenter( controller );
       wrapper = new TitledPane( value, pane );
       wrapper.setCollapsible( false );
+      
+      if ( property != null ) looseBind( property );
    }//End Constructor
    
    /**
-    * {@inheritDoc}
+    * Method to set the range of the {@link Slider}.
+    * @param min the minimum value.
+    * @param max the maximum value.
+    * @return this.
     */
-   @Override public SliderItemImpl setRange( double min, double max ) {
-      super.setRange( min, max );
+   public SliderItemImpl setRange( double min, double max ) {
+      controller.setMin( min );
+      controller.setMax( max );
       return this;
    }//End Method
    
@@ -69,32 +67,32 @@ public class SliderItemImpl extends RangedItemImpl {
     * @param blockIncrements {@link Slider#setBlockIncrement(double)}.
     */
    public SliderItemImpl setRangeLabels( int tickMarks, int tickLabels, int blockIncrements ) {
-      this.tickMarks = tickMarks;
-      this.tickLabels = tickLabels;
-      this.blockIncrements = blockIncrements;
+      controller.setMinorTickCount( tickMarks );
+      controller.setMajorTickUnit( tickLabels );
+      controller.setBlockIncrement( blockIncrements );
       return this;
    }//End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public Node getWrapper(){
+   @Override public TitledPane getWrapper(){
       return wrapper;
    }//End Method
    
    /**
     * {@inheritDoc}
     */
-   @Override public Node getController() {
+   @Override public Slider getController() {
       return controller;
    }//End Method
-
+   
    /**
-    * Method to programmtically set the value of the {@link Slider}.
-    * @param value the value to set.
+    * Method to loosely bind the {@link DoubleProperty} to this {@link Slider}.
+    * @param property the {@link DoubleProperty} to bind.
     */
-   public void selectValue( double value ) {
-      controller.setValue( value );
+   public void looseBind( DoubleProperty property ) {
+      Bindings.bindBidirectional( controller.valueProperty(), property );
    }//End Method
 
 }//End Class
