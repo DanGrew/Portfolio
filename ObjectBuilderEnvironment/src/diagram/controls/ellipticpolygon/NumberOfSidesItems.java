@@ -72,7 +72,7 @@ public class NumberOfSidesItems extends GridItemSelection {
     * @return the {@link EllipticPolygon} graphic.
     */
    private static EllipticPolygon preparePolygon( EllipticPolygon configured, EllipticPolygon graphic ) {
-      Bindings.bindBidirectional( configured.polygonTypeProperty(), graphic.polygonTypeProperty() );
+      Bindings.bindBidirectional( graphic.polygonTypeProperty(), configured.polygonTypeProperty() );
       Bindings.bindBidirectional( configured.rotateProperty(), graphic.rotateProperty() );
       Bindings.bindBidirectional( configured.inversionProperty(), graphic.inversionProperty() );
       Bindings.bindBidirectional( configured.numberOfFractalsProperty(), graphic.numberOfFractalsProperty() );
