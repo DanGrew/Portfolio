@@ -11,6 +11,7 @@ import diagram.behaviour.DragBehaviour;
 import diagram.behaviour.SelectionBehaviour;
 import diagram.canvas.DiagramCanvasApplication;
 import diagram.canvas.DiagramSettings;
+import diagram.shapes.CanvasShape;
 import diagram.shapes.SelectionShape;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.Node;
@@ -29,7 +30,7 @@ public class Content extends Pane {
    private DragBehaviour dragBehaviour;
    private SelectionBehaviour selectionBehaviour;
    
-   private EllipticPolygon currentSelectedPolygon;
+   private CanvasShape currentSelectedPolygon;
    private SelectionShape currentSelection;
    
    /**
@@ -92,10 +93,10 @@ public class Content extends Pane {
    }//End Method
    
    /**
-    * Method to select the given {@link EllipticPolygon}. This will create a duplicate that is bound to the given.
-    * @param node the {@link EllipticPolygon} to select.
+    * Method to select the given {@link CanvasShape}. This will create a duplicate that is bound to the given.
+    * @param node the {@link CanvasShape} to select.
     */
-   void selectNode( EllipticPolygon node ) {
+   void selectNode( CanvasShape node ) {
       if ( node == currentSelectedPolygon ) {
          return;
       }

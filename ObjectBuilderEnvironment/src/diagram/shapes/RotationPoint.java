@@ -9,7 +9,6 @@ package diagram.shapes;
 
 import diagram.behaviour.DragBehaviour;
 import diagram.layer.TranslationConstraint;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
@@ -20,7 +19,7 @@ import math.ShapesAndVectors;
 
 /**
  * The {@link RotationPoint} provides a small {@link Circle} that can be used to 
- * rotate {@link EllipticPolygon}s.
+ * rotate {@link CanvasShape}s.
  */
 public class RotationPoint extends Circle {
    

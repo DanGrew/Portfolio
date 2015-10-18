@@ -31,8 +31,10 @@ public class DiagramCanvas extends BorderPane {
       setCenter( viewPort );
       
       JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> {
-         EllipticPolygon polygon = ( EllipticPolygon )source;
-         setRight( new DiagramAccordion( polygon ) );
+         if ( source instanceof EllipticPolygon ) {
+            EllipticPolygon polygon = ( EllipticPolygon )source;
+            setRight( new DiagramAccordion( polygon ) );
+         }
       } );
       
 //      SystemOutline outline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );

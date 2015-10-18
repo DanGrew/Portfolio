@@ -19,12 +19,12 @@ import javafx.scene.shape.Ellipse;
 
 /**
  * The {@link ResizePoint} provides a small {@link Circle} that can be used to 
- * resize {@link EllipticPolygon}s.
+ * resize {@link CanvasShape}s.
  */
 public class ResizePoint extends Circle {
    
    /**
-    * The {@link HorizontalRadiusUpdater} is responsible for recalculating the {@link EllipticPolygon#horizontalRadiusProperty()}
+    * The {@link HorizontalRadiusUpdater} is responsible for recalculating the {@link CanvasShape#horizontalRadiusProperty()}
     * when the associated event triggers.
     */
    private class HorizontalRadiusUpdater implements ChangeListener< Number > {
@@ -54,7 +54,7 @@ public class ResizePoint extends Circle {
    }//End Class
    
    /**
-    * The {@link VerticalRadiusUpdater} is responsible for recalculating the {@link EllipticPolygon#verticalRadiusProperty()}
+    * The {@link VerticalRadiusUpdater} is responsible for recalculating the {@link CanvasShape#verticalRadiusProperty()}
     * when the associated event triggers.
     */
    private class VerticalRadiusUpdater implements ChangeListener< Number > {

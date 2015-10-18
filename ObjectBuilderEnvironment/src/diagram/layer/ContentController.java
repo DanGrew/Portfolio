@@ -8,7 +8,7 @@
 package diagram.layer;
 
 import diagram.shapes.AddShapeEvent;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import diagram.shapes.CanvasShape;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
 
@@ -28,7 +28,7 @@ public class ContentController {
    ContentController( Content layer ) {
       this.contentLayer = layer;
       
-      JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> handleSelection( ( EllipticPolygon )source ) );
+      JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> handleSelection( ( CanvasShape )source ) );
       JavaFxEventSystem.registerForEvent( ContentEvents.AddShape, ( event, source ) -> handleAddShape( ( AddShapeEvent )source ) );
    }//End Constructor
    
@@ -41,10 +41,10 @@ public class ContentController {
    }//End Method
    
    /**
-    * Method to handle the selection of the given {@link EllipticPolygon}.
-    * @param node the {@link EllipticPolygon} to select.
+    * Method to handle the selection of the given {@link CanvasShape}.
+    * @param node the {@link CanvasShape} to select.
     */
-   private void handleSelection( EllipticPolygon node ) {
+   private void handleSelection( CanvasShape node ) {
       contentLayer.selectNode( node );
    }//End Method
    

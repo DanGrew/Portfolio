@@ -7,6 +7,7 @@
  */
 package diagram.shapes.ellipticpolygon;
 
+import diagram.shapes.CanvasShape;
 import diagram.shapes.PolygonType;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -23,7 +24,7 @@ import javafx.scene.shape.Polygon;
  * and vertical radius' where any number of points can be used to determine the shape which are
  * defined by the ellipse created by the radius'.
  */
-public class EllipticPolygon extends Polygon {
+public class EllipticPolygon extends Polygon implements CanvasShape {
    
    private static final double DEFAULT_RADIUS = 100;
    

@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
@@ -20,7 +19,7 @@ import javafx.scene.shape.Ellipse;
 
 /**
  * The {@link SelectionShape} is the shape responsible for showing the selection of the 
- * associated {@link EllipticPolygon} by highlighting its {@link Bounds}.
+ * associated {@link CanvasShape} by highlighting its {@link Bounds}.
  */
 public class SelectionShape extends Ellipse {
    
@@ -28,9 +27,9 @@ public class SelectionShape extends Ellipse {
 
    /**
     * Constructs a new {@link SelectionShape}.
-    * @param selected the {@link EllipticPolygon} being selected.
+    * @param selected the {@link CanvasShape} being selected.
     */
-   public SelectionShape( EllipticPolygon selected ) {
+   public SelectionShape( CanvasShape selected ) {
       setFill( Color.TRANSPARENT );
       setStroke( Color.ORANGE );
       setStrokeWidth( 3 );
@@ -43,7 +42,7 @@ public class SelectionShape extends Ellipse {
       setTranslateY( selected.translateYProperty().doubleValue() );
       setRadiusX( selected.horizontalRadiusProperty().doubleValue() );
       setRadiusY( selected.verticalRadiusProperty().doubleValue() );
-      setRotate( selected.getRotate() );
+      setRotate( selected.rotateProperty().doubleValue() );
 
       selected.centreXProperty().bind( centerXProperty() );
       selected.centreYProperty().bind( centerYProperty() );
