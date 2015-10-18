@@ -6,7 +6,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/ObjectBuilder"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKit"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CommandInterpreter"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKitTestHarness"/>
 	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/mockito-1.9.5/mockito-all-1.9.5.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CALI"/>
 	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/opencsv/opencsv-3.4.jar"/>

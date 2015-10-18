@@ -5,7 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CommandInterpreter"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKit"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKitTestHarness"/>
 	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/mockito-1.9.5/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/fest-assert-1.4/fest-assert-1.4-javadoc.jar"/>
 	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/fest-assert-1.4/fest-assert-1.4-sources.jar"/>
