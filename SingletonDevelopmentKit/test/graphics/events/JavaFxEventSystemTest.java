@@ -33,7 +33,7 @@ public class JavaFxEventSystemTest {
     * Method to setup the graphics for the java fx {@link Thread}.
     */
    @BeforeClass public static void setup(){
-      JavaFxInitializer.threadedLaunch( null );
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
    }// End Method
    
    /**
