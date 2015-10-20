@@ -9,10 +9,10 @@ package graphics.tasks;
 
 import java.util.UUID;
 
+import javafx.JavaFxInitializer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker.State;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -110,7 +110,7 @@ public class TaskProgressor {
    }// End Method
    
    public static void main( String[] args ) throws InterruptedException {
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
       Platform.runLater( () -> {
          TaskProgressor progressor = new TaskProgressor( "Performing Test Process", new Task< Void >() {
             @Override protected Void call() throws Exception {

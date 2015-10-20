@@ -12,8 +12,10 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import architecture.request.RequestSystem;
+import export.csv.CsvFileContents;
+import javafx.JavaFxInitializer;
 import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.Definition;
@@ -25,8 +27,6 @@ import runnables.ProgressControlledTask;
 import runnables.ProgressControlledTaskBindable;
 import runnables.TaskUpdateProcess.TaskProgress;
 import runnables.TaskUpdateProcess.TaskState;
-import architecture.request.RequestSystem;
-import export.csv.CsvFileContents;
 
 /**
  * The {@link CsvBuilderObjectImportProcess} provides the processing for the import of {@link BuilderObject}s
@@ -166,7 +166,8 @@ public class CsvBuilderObjectImportProcess implements ProgressControlledTaskBind
    }// End Method
    
    public static void main( String[] args ) throws InterruptedException {
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      
       Reader reader = new StringReader(
                "Key,TestObject,Value\n"
              + "SomeKey1,FirstObject,SomeValue\n"

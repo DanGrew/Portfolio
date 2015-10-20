@@ -12,15 +12,14 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-import javafx.embed.swing.JFXPanel;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import architecture.TaskProcessor;
 import architecture.event.EventSystem;
+import javafx.JavaFxInitializer;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 
 /**
  * The {@link TaskProcessorTest} is responsible for testing the {@link TaskProcessor}.
@@ -40,7 +39,7 @@ public class TaskProcessorTest {
     * Method to initialise the JavaFx {@link Thread} and components.
     */
    @BeforeClass public static void initialise(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunch( null );
       testThread = Thread.currentThread();
    }// End Method
    

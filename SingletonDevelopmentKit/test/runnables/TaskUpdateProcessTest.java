@@ -7,13 +7,9 @@
  */
 package runnables;
 
-import javafx.embed.swing.JFXPanel;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import runnables.ProgressControlledTask;
-import runnables.ProgressMessageGenerator;
 import runnables.TaskUpdateProcess.TaskProgress;
 import runnables.TaskUpdateProcess.TaskState;
 
@@ -99,7 +95,7 @@ public class TaskUpdateProcessTest {
       TaskProgress startingState = new TaskProgress( 1, loop1, INITIAL_PROGRESS_MESSAGE );
       
       TestControllableTask task = new TestControllableTask();
-      new JFXPanel();
+      
       TaskState state = new TaskState();
       state.setTaskLength( 35 );
       state.bind( task );

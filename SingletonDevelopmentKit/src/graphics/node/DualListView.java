@@ -11,11 +11,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import javafx.application.Platform;
+import javafx.JavaFxInitializer;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -23,7 +21,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * The {@link DualListView} is responsible for providing two {@link ListView}s where
@@ -159,15 +156,11 @@ public class DualListView< ItemT > extends BorderPane {
    }// End Method
    
    public static void main( String[] args ) {
-      new JFXPanel();
-      Platform.runLater( () -> {
-         Stage stage = new Stage();
+      JavaFxInitializer.threadedLaunch( () -> {
          DualListView< String > view = new DualListView< String >( false );
          view.setPrefHeight( 200 );
          view.setChoices( Arrays.asList( "Askdjcn", "sdjncksjnd", "skjdcksjnd" ) );
-         Scene scene = new Scene( view );
-         stage.setScene( scene );
-         stage.show();
+         return view;
       } );
    }
    

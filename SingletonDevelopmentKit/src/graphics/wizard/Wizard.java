@@ -12,9 +12,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import graphics.JavaFx;
+import javafx.JavaFxInitializer;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -173,7 +173,7 @@ public class Wizard< ConfigurableT > extends Alert {
    }// End Method
 
    public static void main( String[] args ) {
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
       Platform.runLater( new Runnable() {
          @Override public void run() {
             Wizard< Void > wizard = new Wizard< Void >( "Test" );

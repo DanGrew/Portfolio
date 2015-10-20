@@ -2,8 +2,8 @@ package graphics;
 
 import java.util.Optional;
 
+import javafx.JavaFxInitializer;
 import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -22,7 +22,7 @@ public class JavaFx {
     * Note that this is not ideal and needs to be investigated.
     */
    public static void launchJavaFxForSwingEnvironment(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunch( null );
       Platform.setImplicitExit( false );
    }// End Method
    

@@ -7,19 +7,17 @@
  */
 package graphics.events;
 
-import graphics.event.JavaFxEventSystem;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import architecture.event.EventSystem;
+import graphics.event.JavaFxEventSystem;
+import javafx.JavaFxInitializer;
+import javafx.application.Platform;
 
 /**
  * Test for the {@link JavaFxEventSystem}.
@@ -35,7 +33,7 @@ public class JavaFxEventSystemTest {
     * Method to setup the graphics for the java fx {@link Thread}.
     */
    @BeforeClass public static void setup(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunch( null );
    }// End Method
    
    /**
