@@ -16,7 +16,7 @@ import architecture.request.RequestSystem;
 public class DmsStorageTest {
 
    @Test public void shouldNotStoreUnassignableClassTypes() {
-      fail( "Not yet implemented" );
+      fail( "Not yet implemented!" );
    }// End Method
    
    /**
