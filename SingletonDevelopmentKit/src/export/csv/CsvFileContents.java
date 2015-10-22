@@ -178,7 +178,7 @@ public class CsvFileContents extends SingletonImpl< SerializableCsvFileContents 
     */
    public void excludeRow( Integer row ) {
       if ( row < rows.size() && row >= 0 ) {
-         rows.remove( row );
+         rows.remove( row.intValue() );
       }
    }// End Method
 
