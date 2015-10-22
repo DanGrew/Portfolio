@@ -44,6 +44,7 @@ public class DmsRetrieveTest {
     * Method to set up objects to test.
     */
    @BeforeClass public static void setup(){
+      RequestSystem.reset();
       testA = new SpecificImplementation( "AnythingA" );
       RequestSystem.store( testA, SomeOtherType.class );
       testB = new SpecificImplementation( "AnythingB" );
@@ -92,7 +93,7 @@ public class DmsRetrieveTest {
          }, 
          null 
       );
-      Assert.assertEquals( someOtherTypes, implObjects );
+      TestCommon.assertCollectionsSameOrderIrrelevant( someOtherTypes, implObjects );
    }// End Method
    
    /**
