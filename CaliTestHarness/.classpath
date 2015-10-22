@@ -5,8 +5,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CommandInterpreter"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKit"/>
-	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/mockito-1.9.5/mockito-all-1.9.5.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CALI"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/CommandInterpeterTestHarness"/>
+	<classpathentry kind="lib" path="/Library/Java/JavaVirtualMachines/mockito-all-1.9.5/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
