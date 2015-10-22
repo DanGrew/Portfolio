@@ -7,10 +7,11 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.request.RequestSystem;
+import model.singleton.Singleton;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
 import utility.TestCommon;
-import architecture.request.RequestSystem;
 
 /**
  * Test for the {@link DataManagementSystem}'s retrive methods.
@@ -37,8 +38,9 @@ public class DmsRetrieveTest {
    private static TestSingleton testD; 
    
    private static List< TestSingleton > specficImpls;
-   private static List< TestSingleton > someOtherTypes;
+   private static List< TestSingleton > singletons;
    private static List< TestSingleton > testSingletons;
+   private static List< Singleton > all;
    
    /**
     * Method to set up objects to test.
@@ -46,25 +48,26 @@ public class DmsRetrieveTest {
    @BeforeClass public static void setup(){
       RequestSystem.reset();
       testA = new SpecificImplementation( "AnythingA" );
-      RequestSystem.store( testA, SomeOtherType.class );
+      RequestSystem.store( testA, Singleton.class );
       testB = new SpecificImplementation( "AnythingB" );
-      RequestSystem.store( testB, SomeOtherType.class );
+      RequestSystem.store( testB );
       testC = new TestSingletonImpl( "AnythingC" );
-      RequestSystem.store( testC, SomeOtherType.class );
+      RequestSystem.store( testC, Singleton.class );
       testD = new TestSingletonImpl( "AnythingD" );
-      RequestSystem.store( testD, SomeOtherType.class );
+      RequestSystem.store( testD );
       
       specficImpls = Arrays.asList( testA, testB );
-      someOtherTypes = Arrays.asList( testA, testB, testC, testD );
+      singletons = Arrays.asList( testA, testC );
       testSingletons = Arrays.asList( testC, testD );
+      all = Arrays.asList( testA, testB, testC, testD );
    }// End Method
    
    /**
     * Method to test that retrieve all of a {@link Class} returns the correct objects.
     */
    @Test public void shouldRetrieveAllForClass() {
-      List< SomeOtherType > interfaceObjects = RequestSystem.retrieveAll( SomeOtherType.class );
-      Assert.assertEquals( someOtherTypes, interfaceObjects );
+      List< Singleton > interfaceObjects = RequestSystem.retrieveAll( Singleton.class );
+      Assert.assertEquals( singletons, interfaceObjects );
       
       List< TestSingletonImpl > implObjects = RequestSystem.retrieveAll( TestSingletonImpl.class );
       Assert.assertEquals( testSingletons, implObjects );
@@ -93,21 +96,21 @@ public class DmsRetrieveTest {
          }, 
          null 
       );
-      TestCommon.assertCollectionsSameOrderIrrelevant( someOtherTypes, implObjects );
+      TestCommon.assertCollectionsSameOrderIrrelevant( all, implObjects );
    }// End Method
    
    /**
     * Method to test that retrieve all of a {@link Class} with object matcher returns the correct objects.
     */
    @Test public void shouldRetrieveMatchingObject() {
-      List< TestSingleton > allObjects = RequestSystem.retrieveAll( 
-         TestSingleton.class, 
+      List< Singleton > allObjects = RequestSystem.retrieveAll( 
+         Singleton.class, 
          null, 
          object -> {
             return object.getIdentification().contains( "Anything" );
          }
       );
-      TestCommon.assertCollectionsSameOrderIrrelevant( someOtherTypes, allObjects );
+      TestCommon.assertCollectionsSameOrderIrrelevant( all, allObjects );
       
       List< TestSingleton > result = RequestSystem.retrieveAll( 
          TestSingleton.class, 
