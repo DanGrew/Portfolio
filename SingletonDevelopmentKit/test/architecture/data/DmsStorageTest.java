@@ -1,22 +1,30 @@
 package architecture.data;
 
-import static org.junit.Assert.fail;
-import model.singleton.Singleton;
-
 import org.junit.Assert;
 import org.junit.Test;
 
+import architecture.request.RequestSystem;
+import model.singleton.Singleton;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
-import architecture.request.RequestSystem;
 
 /**
  * Test for the {@link DataManagementSystem}'s storage mechanism.
  */
 public class DmsStorageTest {
 
+   /**
+    * Test to prove that the {@link RequestSystem} verifies that the given {@link Class}es match
+    * the {@link Object} given.
+    */
    @Test public void shouldNotStoreUnassignableClassTypes() {
-      fail( "Not yet implemented" );
+      TestSingletonImpl impl = new TestSingletonImpl( "anything" );
+      
+      RequestSystem.store( impl, String.class );
+      
+      Assert.assertTrue( RequestSystem.retrieveAll( TestSingleton.class ).contains( impl ) );
+      Assert.assertTrue( RequestSystem.retrieveAll( TestSingletonImpl.class ).contains( impl ) );
+      Assert.assertFalse( RequestSystem.retrieveAll( String.class ).contains( impl ) );
    }// End Method
    
    /**

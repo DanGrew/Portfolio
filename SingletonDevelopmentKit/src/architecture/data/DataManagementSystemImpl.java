@@ -48,8 +48,10 @@ public class DataManagementSystemImpl implements DataManagementSystem {
          manager.store( object );   
       }
       for ( Class< ? > clazz : classes ) {
-         manager = getDataManager( clazz );
-         manager.store( object );   
+         if ( clazz.isAssignableFrom( object.getClass() ) ) {
+            manager = getDataManager( clazz );
+            manager.store( object );   
+         }
       }
       EventSystem.raiseEvent( 
                DataManagementSystem.Events.ObjectStored, 
