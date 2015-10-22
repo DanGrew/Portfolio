@@ -1,0 +1,57 @@
+<project name="SingletonDevelopmentKit" >
+  <!-- properties used for build-->
+  <property environment = "environment" />
+  <property name = "project" value = "${environment.WORKSPACE}/SingletonDevelopmentKit" />
+  <property name = "src.directory" value ="${project}/src" />
+  <property name = "test.directory" value ="${project}/test" />
+  <property name = "libraries.directory" value ="${project}/libraries" />
+  <property name = "report.directory" value ="${project}/report" />
+  <property name = "products.classes.directory" value="${project}/products/classes" />
+      
+  <!-- class path for building tests -->
+  <path id ="test.classpath">
+    <pathelement location="${libraries.directory}/junit.jar" />
+    <pathelement location="${libraries.directory}/hamcrest-core-1.3.jar" />
+    <pathelement location="${libraries.directory}/hamcrest-all-1.3.jar" />
+    <pathelement location="${libraries.directory}/opencsv-3.4.jar" />
+  </path>
+	  
+  <!-- single target responsible for producing products classes with a compiled project -->
+	<target 
+		name="build_project" 
+		depends = "	
+			compile,
+			run_tests
+		" 
+	/>
+	  
+  <!-- target to compile src and test into products class -->
+  <target name="compile">
+    <delete dir="${products.classes.directory}"/>
+    <mkdir dir="${products.classes.directory}"/>
+    <!-- build src folder first -->
+    <javac srcdir="${src.directory}" destdir="${products.classes.directory}">
+	    <classpath refid="test.classpath" />
+		</javac>
+    <!-- build test folder next -->
+    <javac srcdir="${test.directory}" destdir="${products.classes.directory}">
+      <classpath refid="test.classpath" />
+    </javac>
+  </target>
+    
+  <!-- target to run all *Tests.class in products classes -->
+  <target name="run_tests" description="entire test package run" >
+    <delete dir="${report.directory}" />
+    <mkdir dir="${report.directory}" />
+    <junit haltonfailure="no" printsummary="yes" showoutput="true">
+      <classpath refid="test.classpath" />
+      <classpath location="${products.classes.directory}"/>
+      <formatter type="xml" />
+      <batchtest fork="false" todir="${report.directory}">
+        <fileset dir="${products.classes.directory}">
+          <include name="**/*Test.class" />
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+</project>
