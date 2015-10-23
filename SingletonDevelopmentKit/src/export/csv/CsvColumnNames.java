@@ -43,6 +43,8 @@ public class CsvColumnNames {
          return getDefaultColumnName( column );
       } else if ( row.length <= column ){
          return getDefaultColumnName( column );
+      } else if ( column < 0 ) {
+         return getDefaultColumnName( column );
       } else {
          return row[ column ];
       }
