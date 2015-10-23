@@ -14,6 +14,7 @@
     <pathelement location="${libraries.directory}/hamcrest-core-1.3.jar" />
     <pathelement location="${libraries.directory}/hamcrest-all-1.3.jar" />
     <pathelement location="${libraries.directory}/opencsv-3.4.jar" />
+  	<pathelement location="${libraries.directory}/mockito-all-1.9.5.jar" />
   </path>
 	  
   <!-- single target responsible for producing products classes with a compiled project -->
