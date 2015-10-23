@@ -7,9 +7,9 @@
  */
 package model.singleton;
 
+import architecture.utility.ObjectGenerator;
 import model.data.SerializedSingleton;
 import model.data.SingletonSerialization;
-import architecture.utility.ObjectGenerator;
 
 /**
  * The {@link SingletonImpl} provides the base definition for a single {@link Object} that exists in
@@ -26,6 +26,7 @@ public abstract class SingletonImpl< S extends SerializedSingleton< ? > >
     * @param identification the identification of the {@link SingletonImpl}.
     */
    public SingletonImpl( String identification ) {
+      if ( identification == null ) throw new IllegalArgumentException( "Identification for SingletonImpl cannot be null." );
       this.identification = identification;
    }// End Constructor
    
@@ -41,6 +42,9 @@ public abstract class SingletonImpl< S extends SerializedSingleton< ? > >
     * {@inheritDoc}
     */
    @Override public void setIdentification( String identification ){
+      if ( identification == null ) {
+         return;
+      }
       this.identification = identification;
    }// End Method
    
