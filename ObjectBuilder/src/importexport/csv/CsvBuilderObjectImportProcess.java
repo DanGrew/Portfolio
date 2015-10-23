@@ -14,7 +14,7 @@ import java.util.Map;
 
 import architecture.request.RequestSystem;
 import export.csv.CsvFileContents;
-import javafx.JavaFxInitializer;
+import graphics.JavaFxInitializer;
 import javafx.application.Platform;
 import object.BuilderObject;
 import object.BuilderObjectImpl;

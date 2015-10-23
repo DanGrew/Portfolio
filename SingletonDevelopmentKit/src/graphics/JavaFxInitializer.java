@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package javafx;
+package graphics;
 
 import java.util.function.Supplier;
 

@@ -9,7 +9,7 @@ package graphics.tasks;
 
 import java.util.UUID;
 
-import javafx.JavaFxInitializer;
+import graphics.JavaFxInitializer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker.State;

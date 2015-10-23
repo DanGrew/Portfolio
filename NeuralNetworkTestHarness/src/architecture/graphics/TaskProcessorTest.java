@@ -17,7 +17,7 @@ import org.junit.Test;
 
 import architecture.TaskProcessor;
 import architecture.event.EventSystem;
-import javafx.JavaFxInitializer;
+import graphics.JavaFxInitializer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 

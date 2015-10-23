@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package architecture;
+package architecture.event;
 
 import static org.junit.Assert.assertEquals;
 
@@ -13,18 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import utility.ObservableObject;
-import architecture.event.EventManagementSystem;
-import architecture.event.EventManagementSystemImpl;
-import architecture.event.EventSystem;
 import architecture.event.system.ManagementSystem;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import test.model.ObservableObject;
 
 /**
  * The {@link EventManagementSystemTest} is responsible for testing the {@link EventManagementSystem},

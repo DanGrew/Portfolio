@@ -15,8 +15,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import architecture.event.EventSystem;
+import graphics.JavaFxInitializer;
 import graphics.event.JavaFxEventSystem;
-import javafx.JavaFxInitializer;
 import javafx.application.Platform;
 
 /**

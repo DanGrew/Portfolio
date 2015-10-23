@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package utility;
+package test.model;
 
 import java.util.Observable;
 

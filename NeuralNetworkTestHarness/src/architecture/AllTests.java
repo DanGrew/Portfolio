@@ -6,7 +6,6 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class) 
 @SuiteClasses( { 
-   EventManagementSystemTest.class, 
    SerializationSystemTest.class 
 } ) 
 public class AllTests {
