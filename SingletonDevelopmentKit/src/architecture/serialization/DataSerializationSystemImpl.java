@@ -46,7 +46,7 @@ public class DataSerializationSystemImpl implements DataSerializationSystem {
          return true;
       } catch ( Exception e ) {
          e.printStackTrace();
-         System.out.println( "Unable to save perceptron." );
+         System.out.println( "Unable to save object." );
          return false;
       }
    }// End Method
