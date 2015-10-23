@@ -8,10 +8,7 @@
 package diagram.shapes;
 
 import diagram.canvas.DiagramCanvas;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.scene.shape.Polygon;
 
 /**
