@@ -7,13 +7,7 @@
   <property name = "libraries.directory" value ="${project}/libraries" />
   <property name = "report.directory" value ="${project}/report" />
   <property name = "products.classes.directory" value="${project}/products/classes" />
-  <!-- properties used for code coverage-->    
-  <property name = "coverage.directory" value = "${project}/coverage" />
-  <property name = "emma.directory" value = "${libraries.directory}" />
-  <property name = "class.directory" value = "${products.classes.directory}" />
-  <property name = "instrumented.directory" value = "${basedir}/instrumented" />
-	
-	
+      
   <!-- class path for building tests -->
   <path id ="test.classpath">
     <pathelement location="${libraries.directory}/junit.jar" />
@@ -23,15 +17,6 @@
   	<pathelement location="${libraries.directory}/mockito-all-1.9.5.jar" />
   </path>
 	  
-  <!-- fileset for emma libraries -->
-  <path id="emma.lib">
-    <fileset dir="${emma.directory}">
-      <include name="*.jar"/>
-	</fileset>
-  </path>
-	
-  <taskdef resource="emma_ant.properties" classpathref="emma.lib" />
-	
   <!-- single target responsible for producing products classes with a compiled project -->
 	<target 
 		name="build_project" 
@@ -57,16 +42,6 @@
     
   <!-- target to run all *Tests.class in products classes -->
   <target name="run_tests" description="entire test package run" >
-  	<!-- initialise emma -->
-  	<delete dir="${instrumented.directory}" />
-    <mkdir dir="${instrumented.directory}" />
-    <emma enabled="true">
-    	<instr instrpathref="${class.directory}" destdir="${instrumented.directory}" metadatafile="${coverage.directory}/metadata.emma" merge="true">
-  	  		<filter excludes="au.com.jenisys.view.*"/>
-    	</instr>
-    </emma>
-  	
-  	<!-- run tests -->
     <delete dir="${report.directory}" />
     <mkdir dir="${report.directory}" />
     <junit haltonfailure="no" printsummary="yes" showoutput="true">
@@ -79,15 +54,5 @@
         </fileset>
       </batchtest>
     </junit>
-  	
-  	<!-- produce reports -->
-  	<emma enabled="true" >
-  	     <report sourcepath="${src.directory}" >
-  	         <fileset dir="${coverage.directory}" >
-  	             <include name="*.emma" />
-  	         </fileset>
-  	         <xml outfile="${coverage.directory}/coverage.xml" depth="method"/>
-  	     </report>
-  	 </emma>
   </target>
 </project>
