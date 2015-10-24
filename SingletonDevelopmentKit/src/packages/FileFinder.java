@@ -57,9 +57,8 @@ public class FileFinder {
     * Recursive method used to find all classes in a given directory and subdirs.
     * @param directory the base directory.
     * @param packageName the package name for classes found inside the base directory.
-    * @throws ClassNotFoundException
     */
-   private void scanDirectoryClasses( File directory, String packageName ) throws ClassNotFoundException {
+   private void scanDirectoryClasses( File directory, String packageName ) {
       if ( !directory.exists() ) {
          return;
       }
@@ -67,15 +66,36 @@ public class FileFinder {
       for ( File file : files ) {
          if ( file.isDirectory() ) {
             assert !file.getName().contains( PACKAGE_SEPARATOR );
-            scanDirectoryClasses( file, packageName + PACKAGE_SEPARATOR + file.getName() );
+            scanDirectoryClasses( file, appendPackageName( packageName, file.getName() ) );
          } else if ( file.getName().endsWith( ".class" ) ) {
             String className = file.getName().substring( 0, file.getName().length() - 6 );
-            Class< ? > clazz = Class.forName( packageName + PACKAGE_SEPARATOR + className );
-            classes.add( clazz );
+            Class< ? > clazz;
+            try {
+               clazz = Class.forName( appendPackageName( packageName, className ) );
+               classes.add( clazz );
+            } catch ( ClassNotFoundException e ) {
+               //Skip as not a valid class, typically nested.
+               continue;
+            }
          } else {
             this.files.add( file );
          }
       }
+   }//End Method
+   
+   /**
+    * Method to append the package name. This resolves an issue where a top level package is provided and so
+    * the {@link #PACKAGE_SEPARATOR} should not be added.
+    * @param packageName the package name being scanned.
+    * @param name the name of the item.
+    * @return the name with the package appended.
+    */
+   private String appendPackageName( String packageName, String name ) {
+      if ( packageName.length() == 0 ) {
+         return name;
+      } else {
+         return packageName + PACKAGE_SEPARATOR + name;
+      }  
    }//End Method
    
    /**

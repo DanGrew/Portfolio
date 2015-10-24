@@ -38,7 +38,6 @@ public class ObjectGenerator {
 			T construction = clazz.newInstance();
 			return construction;
 		} catch ( InstantiationException | IllegalAccessException exception ) {
-			exception.printStackTrace();
 			return null;
 		}
 	}// End Method
