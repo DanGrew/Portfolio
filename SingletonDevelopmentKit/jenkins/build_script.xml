@@ -61,8 +61,8 @@
   	<delete dir="${instrumented.directory}" />
     <mkdir dir="${instrumented.directory}" />
     <emma enabled="true">
-    	<instr instrpath="${class.directory}" destdir="${instrumented.directory}" metadatafile="${coverage.directory}/metadata.emma" merge="true">
-  	  <filter excludes="au.com.jenisys.view.*"/>
+    	<instr instrpathref="${class.directory}" destdir="${instrumented.directory}" metadatafile="${coverage.directory}/metadata.emma" merge="true">
+  	  		<filter excludes="au.com.jenisys.view.*"/>
     	</instr>
     </emma>
   	
