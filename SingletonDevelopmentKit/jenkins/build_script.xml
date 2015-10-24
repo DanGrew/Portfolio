@@ -73,6 +73,7 @@
 			file="${basedir}/cobertura.ser" />
     	
       <classpath refid="test.classpath" />
+    	<classpath refid="cobertura.classpath" />
 		<!--
 			Note the classpath order: instrumented classes are before the
 			original (uninstrumented) classes.  This is important.
