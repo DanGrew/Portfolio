@@ -8,19 +8,6 @@
   <property name = "report.directory" value ="${project}/report" />
   <property name = "products.classes.directory" value="${project}/products/classes" />
       
-	<property name="cobertura.dir" value="${libraries.directory}" />
-	<property name="instrumented.dir" value="${project}/instrumented" />
-	<property name="coveragereport.dir" value="${project}/coverage" />
-
-	<path id="cobertura.classpath">
-	    <fileset dir="${cobertura.dir}">
-	        <include name="cobertura-2.1.1.jar" />
-	        <include name="lib/**/*.jar" />
-	    </fileset>
-	</path>
-
-	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
-	
   <!-- class path for building tests -->
   <path id ="test.classpath">
     <pathelement location="${libraries.directory}/junit.jar" />
@@ -38,7 +25,7 @@
 			run_tests
 		" 
 	/>
-	
+	  
   <!-- target to compile src and test into products class -->
   <target name="compile">
     <delete dir="${products.classes.directory}"/>
@@ -55,41 +42,17 @@
     
   <!-- target to run all *Tests.class in products classes -->
   <target name="run_tests" description="entire test package run" >
-	<cobertura-instrument todir="${instrumented.dir}">
-	    <fileset dir="${products.classes.directory}">
-	        <include name="**/*.class" />
-	        <exclude name="**/*Test.class" />
-	    </fileset>
-	</cobertura-instrument>
-  	
     <delete dir="${report.directory}" />
     <mkdir dir="${report.directory}" />
     <junit haltonfailure="no" printsummary="yes" showoutput="true">
-		<!--
-			Specify the name of the coverage data file to use.
-			The value specified below is the default.
-		-->
-		<sysproperty key="net.sourceforge.cobertura.datafile"
-			file="${basedir}/cobertura.ser" />
-    	
       <classpath refid="test.classpath" />
-    	<classpath refid="cobertura.classpath" />
-		<!--
-			Note the classpath order: instrumented classes are before the
-			original (uninstrumented) classes.  This is important.
-		-->
-		<classpath location="${instrumented.dir}" />
       <classpath location="${products.classes.directory}"/>
       <formatter type="xml" />
       <batchtest fork="false" todir="${report.directory}">
         <fileset dir="${products.classes.directory}">
           <include name="**/*Test.class" />
-        	<exclude name="**/JavaFxEventSystemTest*" />
         </fileset>
       </batchtest>
     </junit>
-	<cobertura-report format="xml" destdir="${coveragereport.dir}" srcdir="${src.directory}" />
   </target>
-	
-
 </project>
