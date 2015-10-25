@@ -1,6 +1,7 @@
 <project name="SingletonDevelopmentKit" xmlns:jacoco="antlib:org.jacoco.ant" >
   <!-- properties used for build-->
   <property environment = "environment" />
+	<property name = "build" value = "${environment.BUILD_URL}" />
   <property name = "project" value = "${environment.WORKSPACE}/SingletonDevelopmentKit" />
   <property name = "src.directory" value ="${project}/src" />
   <property name = "test.directory" value ="${project}/test" />
@@ -61,6 +62,11 @@
       </batchtest>
     </junit>
   	</jacoco:coverage>
+  	
+  	<copy todir="${build}/classes">
+  	    <fileset dir="${products.classes.directory}"/>
+  	  </copy>
+  	
   	<jacoco:report>
   	                        
   	    <executiondata>
