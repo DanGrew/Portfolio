@@ -39,10 +39,12 @@
     <!-- build src folder first -->
     <javac srcdir="${src.directory}" destdir="${products.classes.directory}">
 	    <classpath refid="test.classpath" />
-		</javac>
+    	<compilerarg value="-g"/>
+	</javac>
     <!-- build test folder next -->
     <javac srcdir="${test.directory}" destdir="${products.classes.directory}">
       <classpath refid="test.classpath" />
+      <compilerarg value="-g"/>
     </javac>
   </target>
     
@@ -74,7 +76,7 @@
   	        <file file="${coverage.directory}/jacoco.exec"/>
   	    </executiondata>
   	                        
-  	    <structure name="Example Project">
+  	    <structure name="Sdk">
   	        <classfiles>
   	            <fileset dir="${products.classes.directory}"/>
   	        </classfiles>
