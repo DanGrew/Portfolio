@@ -1,8 +1,8 @@
 <project name="SingletonDevelopmentKit" xmlns:jacoco="antlib:org.jacoco.ant" >
   <!-- properties used for build-->
   <property environment = "environment" />
-	<property name = "build" value = "${environment.BUILD_URL}" />
   <property name = "project" value = "${environment.WORKSPACE}/SingletonDevelopmentKit" />
+	<property name = "build" value = "${project}/../builds/${environment.BUILD_NUMBER}" />
   <property name = "src.directory" value ="${project}/src" />
   <property name = "test.directory" value ="${project}/test" />
   <property name = "libraries.directory" value ="${project}/libraries" />
@@ -63,7 +63,8 @@
     </junit>
   	</jacoco:coverage>
   	
-  	<copy todir="${build}/classes">
+  	    <mkdir dir="${build}/jacoco/classes" />
+  	<copy todir="${build}/jacoco/classes">
   	    <fileset dir="${products.classes.directory}"/>
   	  </copy>
   	
