@@ -39,12 +39,12 @@
     <!-- build src folder first -->
     <javac srcdir="${src.directory}" destdir="${products.classes.directory}">
 	    <classpath refid="test.classpath" />
-    	<compilerarg value="-g"/>
+    	<compilerarg value="-g:lines,source,vars"/>
 	</javac>
     <!-- build test folder next -->
     <javac srcdir="${test.directory}" destdir="${products.classes.directory}">
       <classpath refid="test.classpath" />
-      <compilerarg value="-g"/>
+      <compilerarg value="-g:lines,source,vars"/>
     </javac>
   </target>
     
