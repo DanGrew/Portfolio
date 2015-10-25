@@ -1,4 +1,4 @@
-<project name="SingletonDevelopmentKit" >
+<project name="SingletonDevelopmentKit" xmlns:jacoco="antlib:org.jacoco.ant" >
   <!-- properties used for build-->
   <property environment = "environment" />
   <property name = "project" value = "${environment.WORKSPACE}/SingletonDevelopmentKit" />
@@ -7,6 +7,7 @@
   <property name = "libraries.directory" value ="${project}/libraries" />
   <property name = "report.directory" value ="${project}/report" />
   <property name = "products.classes.directory" value="${project}/products/classes" />
+	<property name = "coverage.directory" value="${project}/coverage" />
       
   <!-- class path for building tests -->
   <path id ="test.classpath">
@@ -16,6 +17,10 @@
     <pathelement location="${libraries.directory}/opencsv-3.4.jar" />
   	<pathelement location="${libraries.directory}/mockito-all-1.9.5.jar" />
   </path>
+	
+  <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
+      <classpath path="${libraries.directory}/jacocoant.jar"/>
+  </taskdef>
 	  
   <!-- single target responsible for producing products classes with a compiled project -->
 	<target 
@@ -44,15 +49,35 @@
   <target name="run_tests" description="entire test package run" >
     <delete dir="${report.directory}" />
     <mkdir dir="${report.directory}" />
-    <junit haltonfailure="no" printsummary="yes" showoutput="true">
+  	<jacoco:coverage destfile="${coverage.directory}/jacoco.exec">
+    <junit fork = "true" forkmode = "once" haltonfailure="no" printsummary="yes" showoutput="true">
       <classpath refid="test.classpath" />
       <classpath location="${products.classes.directory}"/>
       <formatter type="xml" />
-      <batchtest fork="false" todir="${report.directory}">
+      <batchtest fork="true" todir="${report.directory}">
         <fileset dir="${products.classes.directory}">
           <include name="**/*Test.class" />
         </fileset>
       </batchtest>
     </junit>
+  	</jacoco:coverage>
+  	<jacoco:report>
+  	                        
+  	    <executiondata>
+  	        <file file="${coverage.directory}/jacoco.exec"/>
+  	    </executiondata>
+  	                        
+  	    <structure name="Example Project">
+  	        <classfiles>
+  	            <fileset dir="${products.classes.directory}"/>
+  	        </classfiles>
+  	        <sourcefiles encoding="UTF-8">
+  	            <fileset dir="${src.directory}"/>
+  	        </sourcefiles>
+  	    </structure>
+  	                        
+  	    <html destdir="${coverage.directory}"/>
+  	                        
+  	</jacoco:report>
   </target>
 </project>
