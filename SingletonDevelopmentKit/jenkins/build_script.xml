@@ -2,13 +2,14 @@
   <!-- properties used for build-->
   <property environment = "environment" />
   <property name = "project" value = "${environment.WORKSPACE}/SingletonDevelopmentKit" />
-	<property name = "build" value = "${project}/../../builds/${environment.BUILD_NUMBER}" />
+  <!-- note that this is dependent on jenkins folder hierarchy and is not ideal! -->
+  <property name = "build" value = "${project}/../../builds/${environment.BUILD_NUMBER}" />
   <property name = "src.directory" value ="${project}/src" />
   <property name = "test.directory" value ="${project}/test" />
   <property name = "libraries.directory" value ="${project}/libraries" />
   <property name = "report.directory" value ="${project}/report" />
   <property name = "products.classes.directory" value="${project}/products/classes" />
-	<property name = "coverage.directory" value="${project}/coverage" />
+  <property name = "coverage.directory" value="${project}/coverage" />
       
   <!-- class path for building tests -->
   <path id ="test.classpath">
@@ -19,18 +20,20 @@
   	<pathelement location="${libraries.directory}/mockito-all-1.9.5.jar" />
   </path>
 	
+  <!-- reference for the jacoco ant task -->
   <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
       <classpath path="${libraries.directory}/jacocoant.jar"/>
   </taskdef>
 	  
   <!-- single target responsible for producing products classes with a compiled project -->
-	<target 
-		name="build_project" 
-		depends = "	
-			compile,
-			run_tests
-		" 
-	/>
+  <target 
+	name="build_project" 
+	depends = "	
+		compile,
+		run_tests,
+  		build_jacoco_report
+	" 
+  />
 	  
   <!-- target to compile src and test into products class -->
   <target name="compile">
@@ -39,11 +42,13 @@
     <!-- build src folder first -->
     <javac srcdir="${src.directory}" destdir="${products.classes.directory}">
 	    <classpath refid="test.classpath" />
+    	<!-- enable source anotation for jacoco -->
     	<compilerarg value="-g:lines,source,vars"/>
 	</javac>
     <!-- build test folder next -->
     <javac srcdir="${test.directory}" destdir="${products.classes.directory}">
       <classpath refid="test.classpath" />
+	  <!-- enable source anotation for jacoco -->
       <compilerarg value="-g:lines,source,vars"/>
     </javac>
   </target>
@@ -52,41 +57,45 @@
   <target name="run_tests" description="entire test package run" >
     <delete dir="${report.directory}" />
     <mkdir dir="${report.directory}" />
+  	
+  	<!-- run as jacoco for coverage results -->
   	<jacoco:coverage destfile="${coverage.directory}/jacoco.exec">
-    <junit fork = "true" forkmode = "once" haltonfailure="no" printsummary="yes" showoutput="true">
-      <classpath refid="test.classpath" />
-      <classpath location="${products.classes.directory}"/>
-      <formatter type="xml" />
-      <batchtest fork="true" todir="${report.directory}">
-        <fileset dir="${products.classes.directory}">
-          <include name="**/*Test.class" />
-        </fileset>
-      </batchtest>
-    </junit>
+      <junit fork = "true" forkmode = "once" haltonfailure="no" printsummary="yes" showoutput="true">
+        <classpath refid="test.classpath" />
+        <classpath location="${products.classes.directory}"/>
+        <formatter type="xml" />
+        <batchtest fork="true" todir="${report.directory}">
+          <fileset dir="${products.classes.directory}">
+            <include name="**/*Test.class" />
+          </fileset>
+        </batchtest>
+      </junit>
   	</jacoco:coverage>
-  	
-  	    <mkdir dir="${build}/jacoco/classes" />
+  </target>
+	
+  <target name="build_jacoco_report" description="build test coverage report with jacoco" >
+  	<!-- jenkins jacoco plugin seems to need products classes in a fixed place in the build -->
+    <mkdir dir="${build}/jacoco/classes" />
   	<copy todir="${build}/jacoco/classes">
-  	    <fileset dir="${products.classes.directory}"/>
-  	  </copy>
+  	  <fileset dir="${products.classes.directory}"/>
+  	</copy>
   	
+  	<!-- now build the report -->
   	<jacoco:report>
+      <executiondata>
+  	    <file file="${coverage.directory}/jacoco.exec"/>
+      </executiondata>
   	                        
-  	    <executiondata>
-  	        <file file="${coverage.directory}/jacoco.exec"/>
-  	    </executiondata>
-  	                        
-  	    <structure name="Sdk">
-  	        <classfiles>
-  	            <fileset dir="${products.classes.directory}"/>
-  	        </classfiles>
-  	        <sourcefiles encoding="UTF-8">
-  	            <fileset dir="${src.directory}"/>
-  	        </sourcefiles>
-  	    </structure>
-  	                        
-  	    <html destdir="${coverage.directory}"/>
-  	                        
-  	</jacoco:report>
+  	  <structure name="Sdk">
+  	    <classfiles>
+  	      <fileset dir="${products.classes.directory}"/>
+  	    </classfiles>
+        <sourcefiles encoding="UTF-8">
+          <fileset dir="${src.directory}"/>
+        </sourcefiles>
+      </structure>
+  		
+      <html destdir="${coverage.directory}"/>
+    </jacoco:report>
   </target>
 </project>
