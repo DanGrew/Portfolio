@@ -57,6 +57,10 @@
           <include name="**/*.*" />
           <exclude name="**/*.java"/>
        </fileset>
+        <fileset dir="${test.directory}" >
+           <include name="**/*.*" />
+           <exclude name="**/*.java"/>
+        </fileset>
     </copy>
   </target>
     
