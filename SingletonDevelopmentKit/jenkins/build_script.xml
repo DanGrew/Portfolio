@@ -64,7 +64,7 @@
         <classpath refid="test.classpath" />
         <classpath location="${products.classes.directory}"/>
         <formatter type="xml" />
-        <batchtest fork="true" todir="${report.directory}">
+        <batchtest fork="true" todir="${report.directory}" skipNonTests="true">
           <fileset dir="${products.classes.directory}">
             <include name="**/*Test.class" />
           </fileset>
