@@ -51,6 +51,13 @@
 	  <!-- enable source anotation for jacoco -->
       <compilerarg value="-g:lines,source,vars"/>
     </javac>
+  	<!-- copy all data files over for the tests -->
+    <copy todir="${products.classes.directory}">
+       <fileset dir="${src.directory}" >
+          <include name="**/*.*" />
+          <exclude name="**/*.java"/>
+       </fileset>
+    </copy>
   </target>
     
   <!-- target to run all *Tests.class in products classes -->
@@ -72,7 +79,8 @@
       </junit>
   	</jacoco:coverage>
   </target>
-	
+
+  <!-- target to build the jacoco test report -->
   <target name="build_jacoco_report" description="build test coverage report with jacoco" >
   	<!-- jenkins jacoco plugin seems to need products classes in a fixed place in the build -->
     <mkdir dir="${build}/jacoco/classes" />
