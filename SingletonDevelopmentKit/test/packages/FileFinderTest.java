@@ -44,10 +44,24 @@ public class FileFinderTest {
    @Test public void shouldFindFiles() {
       List< File > files = finder.getFiles();
       Assert.assertEquals( 4, files.size() );
-      Assert.assertEquals( "a_data_file.dat", files.get( 0 ).getName() );
-      Assert.assertEquals( "a_text_file.txt", files.get( 1 ).getName() );
-      Assert.assertEquals( "an_xml_file.xml", files.get( 2 ).getName() );
-      Assert.assertEquals( "a_text_file_in_a_sub_dir.txt", files.get( 3 ).getName() );
+      assertHasFile( "a_data_file.dat", files );
+      assertHasFile( "a_text_file.txt", files );
+      assertHasFile( "an_xml_file.xml", files );
+      assertHasFile( "a_text_file_in_a_sub_dir.txt", files );
+   }//End Method
+   
+   /**
+    * Method to assert that a {@link File} with the given name exists in the given {@link List} of {@link File}s.
+    * @param fileName the name of the {@link File}.
+    * @param files the {@link List} of {@link File}s to check against.
+    */
+   private void assertHasFile( String fileName, List< File > files ) {
+      for ( File file : files ) {
+         if ( file.getName().equals( fileName ) ) {
+            return;
+         }
+      }
+      Assert.fail( "File: " + fileName + " not found in " + files.toString() + "." );
    }//End Method
 
 }//End Class
