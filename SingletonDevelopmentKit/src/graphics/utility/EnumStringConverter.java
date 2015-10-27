@@ -35,6 +35,9 @@ public class EnumStringConverter< EnumT extends Enum< EnumT > > extends StringCo
     * {@inheritDoc} 
     */
    @Override public EnumT fromString( String value ) {
+      if ( value == null ) {
+         return null;
+      }
       return Enum.valueOf( lookupType, value );
    }//End Method
 }//End Class
