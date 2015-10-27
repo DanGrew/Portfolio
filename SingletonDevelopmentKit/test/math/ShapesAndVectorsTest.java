@@ -182,6 +182,7 @@ public class ShapesAndVectorsTest {
    @Test public void shouldInvertScale(){
       Assert.assertEquals( 1.25, ShapesAndVectors.invertScale( 0.8 ), TestCommon.precision() );
       Assert.assertEquals( 0.8, ShapesAndVectors.invertScale( 1.25 ), TestCommon.precision() );
+      Assert.assertEquals( 1.0, ShapesAndVectors.invertScale( 1.0 ), TestCommon.precision() );
    }//End Method
    
    /**

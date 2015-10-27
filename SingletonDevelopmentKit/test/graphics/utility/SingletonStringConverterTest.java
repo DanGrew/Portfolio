@@ -42,6 +42,7 @@ public class SingletonStringConverterTest {
       SingletonStringConverter< TestSingleton > converter = new SingletonStringConverter<>( TestSingleton.class );
       Assert.assertEquals( TEST_OBJECT_1.getIdentification(), converter.toString( TEST_OBJECT_1 ) );
       Assert.assertEquals( TEST_OBJECT_2.getIdentification(), converter.toString( TEST_OBJECT_2 ) );
+      Assert.assertEquals( "", converter.toString( null ) );
    }//End Method
    
    /**

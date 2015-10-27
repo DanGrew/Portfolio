@@ -128,4 +128,12 @@ public class SingletonImplTest {
       systemUnderTest.write( SerializableSpecificSingletonImpl.class );
       Mockito.verify( systemUnderTest, Mockito.times( 1 ) ).writeSingleton( Mockito.any() );
    }//End Method
+   
+   /**
+    * Test that {@link SingletonImpl#toString()} returns {@link Singleton#getIdentification()}.
+    */
+   @Test public void shouldToStringAsName(){
+      SpecificSingletonImpl systemUnderTest = Mockito.spy( new SpecificSingletonImpl( "anything" ) );
+      Assert.assertEquals( systemUnderTest.getIdentification(), systemUnderTest.toString() );
+   }//End Method
 }//End Class

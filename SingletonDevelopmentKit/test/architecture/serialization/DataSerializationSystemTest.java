@@ -9,6 +9,7 @@ package architecture.serialization;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.AbstractMap.SimpleEntry;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,7 +47,7 @@ public class DataSerializationSystemTest {
    @Test public void shouldSerializeAndDeserialize() throws IOException {
       final String stringValue = "Anything";
       final Double doubleValue = 3487.238;
-      XmlSimpleEntry< String, Double > entry = new XmlSimpleEntry<>( stringValue, doubleValue );
+      XmlSimpleEntry< String, Double > entry = new XmlSimpleEntry<>( new SimpleEntry<>( stringValue, doubleValue ) );
       
       XmlWrapper wrapper = new XmlWrapper();
       wrapper.entry = entry;

@@ -30,6 +30,16 @@ public class FileFinderTest {
    }//End Method
    
    /**
+    * Test that {@link FileFinder} behaves sensibly when the package does not exist.
+    */
+   @Test public void shouldIgnoreNonExistentPackage() throws ClassNotFoundException, IOException{
+      FileFinder finder = new FileFinder();
+      finder.scan( "something_that_doesnt_exist" );
+      Assert.assertTrue( finder.getClasses().isEmpty() );
+      Assert.assertTrue( finder.getFiles().isEmpty() );
+   }//End Method
+   
+   /**
     * {@link FileFinder} should find this compiled class.
     */
    @Test public void shouldFindThisClass() throws IOException, ClassNotFoundException {
