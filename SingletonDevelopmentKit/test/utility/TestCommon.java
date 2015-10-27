@@ -2,6 +2,7 @@ package utility;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
@@ -40,4 +41,18 @@ public class TestCommon {
       
       Assert.assertTrue( listB.isEmpty() );
    }// End Method
+   
+   /**
+    * Method to assert that the contents of two {@link Iterator}s are the same.
+    * @param iterateOver the {@link Iterator} to iterate using.
+    * @param checkAgainst the {@link Iterator} to check against.
+    */
+   public static void assertIterators( Iterator< ? > iterateOver, Iterator< ? > checkAgainst ) {
+      iterateOver.forEachRemaining( object -> {
+         Assert.assertTrue( checkAgainst.hasNext() );
+         Object next = checkAgainst.next();
+         Assert.assertEquals( object, next );
+      } );
+      Assert.assertFalse( checkAgainst.hasNext() );
+   }//End Method
 }// End Class

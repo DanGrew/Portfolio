@@ -8,87 +8,81 @@
 package representation.xml.wrapper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import model.data.SerializedSingleton;
-import model.singleton.Singleton;
-import architecture.representation.SingletonContainer;
-import architecture.request.RequestSystem;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
+import architecture.utility.UnmodifiableIterator;
 
 /**
- * The {@link XmlCollectionWrapper} provides an extension to the {@link CollectionWrapper} that manages
- * the wrapping of {@link Singleton}s.
+ * The {@link XmlCollectionWrapper} provides a generic wrapper for {@link Object}s to be written to
+ * and XML file.
  */
-public abstract class XmlCollectionWrapper
-         < S extends Singleton, A extends SerializedSingleton< S > > extends CollectionWrapper< A > implements SingletonContainer
-{
-
+@XmlRootElement( name = "Collection" )
+public class XmlCollectionWrapper< T > {
+   
+   /** The {@link List} of {@link Object}s being wrapped.**/
+   @XmlElement protected List< T > objects;
+   
    /**
     * Constructs a new {@link XmlCollectionWrapper}.
     */
    public XmlCollectionWrapper(){
-      super();
+      objects = new ArrayList< T >();
    }// End Constructor
    
    /**
-    * Constructs a new {@link XmlCollectionWrapper} with the given {@link Iterator} of {@link Singleton}s.
-    * @param iterator the {@link Iterator} providing the elements to wrap and populate the collection.
+    * Constructs a new {@link XmlCollectionWrapper} with the given {@link Iterable} providing
+    * the {@link Object}s to populate this collection.
+    * @param iterable the {@link Iterable} providing the elements.
     */
-   public XmlCollectionWrapper( Iterator< S > iterator ){
-      super();
-      iterator.forEachRemaining( object -> addUnwrapped( object ) );
+   public XmlCollectionWrapper( Iterable< T > iterable ){
+      this( iterable.iterator() );
    }// End Constructor
    
    /**
-    * Method to add an unwrapped {@link Object} to this collection.
-    * @param object the unwrapped {@link Object} to wrap and add.
+    * Constructs a new {@link XmlCollectionWrapper} with the given {@link Iterator} providing
+    * the {@link Object}s to populate this collection
+    * @param iterator the {@link Iterator} providing the elements.
     */
-   public abstract void addUnwrapped( S object );
+   public XmlCollectionWrapper( Iterator< T > iterator ){
+      this();
+      iterator.forEachRemaining( object -> addObject( object ) );
+   }// End Constructor
    
    /**
-    * Method to add all of the unwrapped {@link Object}s in the {@link Iterator} to the collection.
-    * @param iterator the {@link Iterator} providing the unwrapped {@link Object}s to wrap and add.
+    * Method to add all {@link Object}s in the {@link Iterator} to the collection.
+    * @param iterator the {@link Iterator} providing the {@link Object}s.
     */
-   public void addAllUnwrapped( Iterator< S > iterator ){
-      iterator.forEachRemaining( object -> addUnwrapped( object ) );
+   public void addAll( Iterator< T > iterator ){
+      iterator.forEachRemaining( object -> addObject( object ) );
    }// End Method
    
    /**
-    * {@inheritDoc}
-    * {@link SerializedSingleton#unwrap()}s and {@link RequestSystem#store(Object)}s it.
+    * Method to add all {@link Object}s in the given {@link Collection} to this collection.
+    * @param collection the {@link Collection} to add.
     */
-   @Override public void constructSingletons(){
-      objects.forEach( object -> object.unwrap() );
+   public void addAll( Collection< T > collection ){
+      objects.addAll( collection );
    }// End Method
    
    /**
-    * {@inheritDoc}
+    * Method to add an {@link Object} to this collection.
+    * @param object the {@link Object} to add.
     */
-   @Override public void resolveSingletons() {
-      objects.forEach( object -> object.resolve() );
+   public void addObject( T object ){
+      objects.add( object );
    }// End Method
    
    /**
-    * Method to retrieve the resolve {@link Singleton}s associated.
-    * @return a {@link List} of resolved {@link Singleton}s.
+    * Method to get an {@link Iterator} of {@link Object}s in this {@link XmlCollectionWrapper}.
+    * @return the {@link Iterator} of {@link Object}s.
     */
-   public abstract List< S > retrieveSingletons();
-   
-   /**
-    * Method to retrieve a {@link List} of resolved {@link Singleton}s for the given {@link Class}
-    * type to be used with the {@link RequestSystem}.
-    * @param clazz the {@link Class} of the {@link Singleton}.
-    * @return a {@link List} of resolved {@link Singleton}s.
-    */
-   protected List< S > retrieveSingletons( Class< S > clazz ){
-      List< S > singletons = new ArrayList< S >();
-      for ( A object : objects ) {
-         S singleton = RequestSystem.retrieve( clazz, object.getIdentification() );
-         singletons.add( singleton );
-      }
-      return singletons;
+   public Iterator< T > iterator(){
+      return new UnmodifiableIterator< T >( objects.iterator() );
    }// End Method
-  
+
 }// End Class

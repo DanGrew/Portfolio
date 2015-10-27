@@ -26,7 +26,7 @@ import representation.xml.model.XmlLearningParameter;
  * representing {@link LearningParameters}.
  */
 @XmlRootElement @XmlSeeAlso( { XmlLearningParameter.class } )
-public class XmlLearningParametersWrapper extends XmlCollectionWrapper< LearningParameter, SerializableLearningParameter >
+public class XmlLearningParametersWrapper extends SingletonCollectionWrapper< LearningParameter, SerializableLearningParameter >
                                           implements StructuralRepresentation< LearningParameters >
 {
 

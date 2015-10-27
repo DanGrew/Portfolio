@@ -11,14 +11,14 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import representation.xml.wrapper.XmlCollectionWrapper;
+import representation.xml.wrapper.SingletonCollectionWrapper;
 
 /**
  * The {@link XmlGraphWrapper} provides an Xml wrapper for the {@link Graph}s in the 
  * system.
  */
 @XmlRootElement
-public class XmlGraphWrapper extends XmlCollectionWrapper< Graph, SerializableGraph >{
+public class XmlGraphWrapper extends SingletonCollectionWrapper< Graph, SerializableGraph >{
 
    /**
     * {@inheritDoc}

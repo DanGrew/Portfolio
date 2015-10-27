@@ -19,11 +19,11 @@ import representation.xml.model.XmlSynapse;
 import architecture.request.RequestSystem;
 
 /**
- * The {@link XmlSynapseWrapper} defines an extension to the {@link XmlCollectionWrapper} to wrap
+ * The {@link XmlSynapseWrapper} defines an extension to the {@link SingletonCollectionWrapper} to wrap
  * {@link Synapse}s in {@link XmlSynapse}s for XML storage.
  */
 @XmlRootElement @XmlSeeAlso( { XmlSynapse.class } )
-public class XmlSynapseWrapper extends XmlCollectionWrapper< Synapse, SerializableSynapse >{
+public class XmlSynapseWrapper extends SingletonCollectionWrapper< Synapse, SerializableSynapse >{
    
    /**
     * Constructs a new {@link XmlSynapseWrapper}.

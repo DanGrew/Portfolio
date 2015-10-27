@@ -11,14 +11,14 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-import representation.xml.wrapper.XmlCollectionWrapper;
+import representation.xml.wrapper.SingletonCollectionWrapper;
 
 /**
  * The {@link XmlSearchSpaceWrapper} provides an Xml wrapper for the {@link SearchSpace}s in the 
  * system.
  */
 @XmlRootElement
-public class XmlSearchSpaceWrapper extends XmlCollectionWrapper< SearchSpace, SerializableSearchSpace >{
+public class XmlSearchSpaceWrapper extends SingletonCollectionWrapper< SearchSpace, SerializableSearchSpace >{
 
    /**
     * {@inheritDoc}

@@ -19,11 +19,11 @@ import representation.xml.model.XmlNeuron;
 import architecture.request.RequestSystem;
 
 /**
- * The {@link XmlNeuronWrapper} provides an extension to the {@link XmlCollectionWrapper} to
+ * The {@link XmlNeuronWrapper} provides an extension to the {@link SingletonCollectionWrapper} to
  * wrap {@link Neuron}s in their associated {@link XmlNeuron}s.
  */
 @XmlRootElement @XmlSeeAlso( { XmlNeuron.class } )
-public class XmlNeuronWrapper extends XmlCollectionWrapper< Neuron, SerializableNeuron >{
+public class XmlNeuronWrapper extends SingletonCollectionWrapper< Neuron, SerializableNeuron >{
    
    /**
     * Constructs a new {@link XmlNeuronWrapper}.

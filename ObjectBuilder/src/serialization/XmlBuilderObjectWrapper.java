@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import object.BuilderObject;
 import object.SerializableBuilderObject;
 import object.XmlBuilderObjectImpl;
-import representation.xml.wrapper.XmlCollectionWrapper;
+import representation.xml.wrapper.SingletonCollectionWrapper;
 import architecture.request.RequestSystem;
 
 /**
  * The {@link XmlBuilderObjectWrapper} provides a wrapper for all {@link BuilderObject}s in the system.
  */
 @XmlRootElement
-public class XmlBuilderObjectWrapper extends XmlCollectionWrapper< BuilderObject, SerializableBuilderObject >{
+public class XmlBuilderObjectWrapper extends SingletonCollectionWrapper< BuilderObject, SerializableBuilderObject >{
 
    /**
     * {@inheritDoc}

@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import objecttype.Definition;
 import objecttype.SerializableDefinition;
 import objecttype.XmlDefinitionImpl;
-import representation.xml.wrapper.XmlCollectionWrapper;
+import representation.xml.wrapper.SingletonCollectionWrapper;
 import architecture.request.RequestSystem;
 
 /**
  * The {@link XmlDefinitionWrapper} provides a wrapper for all {@link Definition}s in the system.
  */
 @XmlRootElement
-public class XmlDefinitionWrapper extends XmlCollectionWrapper< Definition, SerializableDefinition >{
+public class XmlDefinitionWrapper extends SingletonCollectionWrapper< Definition, SerializableDefinition >{
 
    /**
     * {@inheritDoc}

@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 import propertytype.PropertyType;
 import propertytype.SerializablePropertyType;
 import propertytype.XmlPropertyTypeImpl;
-import representation.xml.wrapper.XmlCollectionWrapper;
+import representation.xml.wrapper.SingletonCollectionWrapper;
 
 /**
  * The {@link XmlPropertyTypeWrapper} provides an Xml wrapper for the {@link PropertyType}s in the 
  * system.
  */
 @XmlRootElement
-public class XmlPropertyTypeWrapper extends XmlCollectionWrapper< PropertyType, SerializablePropertyType >{
+public class XmlPropertyTypeWrapper extends SingletonCollectionWrapper< PropertyType, SerializablePropertyType >{
 
    /**
     * {@inheritDoc}
