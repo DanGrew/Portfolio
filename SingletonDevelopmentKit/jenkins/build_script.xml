@@ -16,7 +16,7 @@
       
   <!-- class path for building tests -->
   <path id ="test.classpath">
-    <pathelement location="${libraries.directory}/junit.jar" />
+    <pathelement location="${libraries.directory}/junit-4.12.jar" />
     <pathelement location="${libraries.directory}/hamcrest-core-1.3.jar" />
     <pathelement location="${libraries.directory}/hamcrest-all-1.3.jar" />
   	<pathelement location="${libraries.directory}/opencsv-3.4.jar" />

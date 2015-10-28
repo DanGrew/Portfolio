@@ -1,6 +1,9 @@
 <ivy-module version="1.0">
     <info organisation="dan_grew_portfolio" module="sdk"/>
     <dependencies>
+        <dependency org="junit" name="junit" rev="4.12"/>
+        <dependency org="org.hamcrest" name="hamcrest-core" rev="1.3"/>
+        <dependency org="org.hamcrest" name="hamcrest-all" rev="1.3"/>
         <dependency org="org.mockito" name="mockito-all" rev="1.9.5"/>
         <dependency org="com.opencsv" name="opencsv" rev="3.4"/>
     </dependencies>
