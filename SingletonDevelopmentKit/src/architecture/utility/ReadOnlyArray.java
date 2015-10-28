@@ -69,11 +69,11 @@ public class ReadOnlyArray < T > implements Iterable< T >{
    }// End Method
    
    /**
-    * Method to populate an {@link ObservableList} of {@link ReadOnlyProperty}s with the contents
+    * Method to populate an {@link ObservableList} of {@link ReadOnlyObjectProperty}s with the contents
     * of the {@link ReadOnlyArray}.
     * @param observable the {@link ObservableList} to populate.
     */
-   public void populateObservableList( ObservableList< ReadOnlyProperty< T > > observable ){
+   public void populateObservableList( ObservableList< ReadOnlyObjectProperty< T > > observable ){
       observable.clear();
       observable.addAll( array );
    }// End Method

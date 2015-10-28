@@ -7,6 +7,11 @@
  */
 package neuralnetwork.creator.view;
 
+import architecture.event.EventSystem;
+import architecture.utility.ObjectGenerator;
+import constructs.view.tableitemcontrols.TableItemControls;
+import constructs.view.tableitemcontrols.TableItemControlsControllerImpl;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.ReadOnlyProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener.Change;
@@ -22,10 +27,6 @@ import model.structure.NetworkPosition;
 import neuralnetwork.creator.view.module.FileManager;
 import neuralnetwork.creator.view.module.LearningProcessor;
 import representation.xml.wrapper.XmlLearningParametersWrapper;
-import architecture.event.EventSystem;
-import architecture.utility.ObjectGenerator;
-import constructs.view.tableitemcontrols.TableItemControls;
-import constructs.view.tableitemcontrols.TableItemControlsControllerImpl;
 
 /**
  * The {@link PerceptronLearnerController} provides a controller for the PerceptronLearner.fxml object.
@@ -56,15 +57,15 @@ public class PerceptronLearnerController implements TableItemControls{
    @FXML private TableColumn< LearningParameter, String > parameterDescriptionColumn;
    private ObservableList< LearningParameter > learningParameters = FXCollections.observableArrayList();
    
-   @FXML private TableView< ReadOnlyProperty< NeuronValue > > inputTable;
+   @FXML private TableView< ReadOnlyObjectProperty< NeuronValue > > inputTable;
    @FXML private TableColumn< ReadOnlyProperty< NeuronValue >, String > parmeterInputPositionColumn;
    @FXML private TableColumn< ReadOnlyProperty< NeuronValue >, Number > parmeterInputColumn;
-   @FXML private ObservableList< ReadOnlyProperty< NeuronValue > > parameterInputValues = FXCollections.observableArrayList();
+   @FXML private ObservableList< ReadOnlyObjectProperty< NeuronValue > > parameterInputValues = FXCollections.observableArrayList();
    
-   @FXML private TableView< ReadOnlyProperty< NeuronValue > > outputTable;
+   @FXML private TableView< ReadOnlyObjectProperty< NeuronValue > > outputTable;
    @FXML private TableColumn< ReadOnlyProperty< NeuronValue >, String > parmeterOutputPositionColumn;
    @FXML private TableColumn< ReadOnlyProperty< NeuronValue >, Number > parmeterOutputColumn;
-   @FXML private ObservableList< ReadOnlyProperty< NeuronValue > > parameterOutputValues = FXCollections.observableArrayList();
+   @FXML private ObservableList< ReadOnlyObjectProperty< NeuronValue > > parameterOutputValues = FXCollections.observableArrayList();
 
    /**
     * Method to initialise the controller, initialising the data and objects associated.
