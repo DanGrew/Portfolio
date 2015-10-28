@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.BiPredicate;
 
 import org.junit.Assert;
 
@@ -47,11 +48,25 @@ public class TestCommon {
     * @param iterateOver the {@link Iterator} to iterate using.
     * @param checkAgainst the {@link Iterator} to check against.
     */
-   public static void assertIterators( Iterator< ? > iterateOver, Iterator< ? > checkAgainst ) {
+   public static < TypeT > void assertIterators( Iterator< TypeT > iterateOver, Iterator< TypeT > checkAgainst ) {
+      assertIterators( iterateOver, checkAgainst, ( a, b ) -> { return a.equals( b ); } );
+   }//End Method
+   
+   /**
+    * Method to assert that the contents of two {@link Iterator}s are the same.
+    * @param iterateOver the {@link Iterator} to iterate using.
+    * @param checkAgainst the {@link Iterator} to check against.
+    * @param equalityCheck the {@link BiPredicate} used to compare any two items.
+    */
+   public static < TypeT > void assertIterators( 
+            Iterator< TypeT > iterateOver, 
+            Iterator< TypeT > checkAgainst, 
+            BiPredicate< TypeT, TypeT > equalityCheck 
+   ) {
       iterateOver.forEachRemaining( object -> {
          Assert.assertTrue( checkAgainst.hasNext() );
-         Object next = checkAgainst.next();
-         Assert.assertEquals( object, next );
+         TypeT next = checkAgainst.next();
+         Assert.assertTrue( equalityCheck.test( object, next ) );
       } );
       Assert.assertFalse( checkAgainst.hasNext() );
    }//End Method

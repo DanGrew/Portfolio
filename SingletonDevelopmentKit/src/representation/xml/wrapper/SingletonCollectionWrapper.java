@@ -37,7 +37,7 @@ public abstract class SingletonCollectionWrapper
     * @param iterator the {@link Iterator} providing the elements to wrap and populate the collection.
     */
    public SingletonCollectionWrapper( Iterator< S > iterator ){
-      super();
+      this();
       iterator.forEachRemaining( object -> addUnwrapped( object ) );
    }// End Constructor
    

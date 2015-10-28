@@ -41,7 +41,9 @@ public class XmlCollectionWrapperTest {
       File temporaryFile = temp.newFile();
       SerializationSystem.saveToFile( wrapper, temporaryFile, XmlCollectionWrapper.class );
       
-      XmlCollectionWrapper< ? > parsedWrapper = SerializationSystem.loadFromFile( XmlCollectionWrapper.class, temporaryFile, XmlCollectionWrapper.class );
+      @SuppressWarnings("unchecked") //Fail fast in unit test, assumption fine. 
+      XmlCollectionWrapper< String > parsedWrapper = ( XmlCollectionWrapper< String > )SerializationSystem.loadFromFile( 
+               XmlCollectionWrapper.class, temporaryFile, XmlCollectionWrapper.class );
       Assert.assertNotEquals( wrapper, parsedWrapper );
       
       TestCommon.assertIterators( data.iterator(), parsedWrapper.iterator() );
