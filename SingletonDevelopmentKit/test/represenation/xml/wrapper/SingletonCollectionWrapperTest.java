@@ -13,9 +13,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import architecture.request.RequestSystem;
+import model.singleton.Singleton;
 import representation.xml.wrapper.SingletonCollectionWrapper;
 import test.model.TestObjects.SerializableTestSingleton;
 import test.model.TestObjects.SerializableTestSingletonImpl;
@@ -56,6 +58,13 @@ public class SingletonCollectionWrapperTest {
       }//End Method
       
    }//End Class
+   
+   /**
+    * Initialises the {@link Singleton}s for the test.
+    */
+   @BeforeClass public static void initialiseSingletons(){
+      RequestSystem.reset();
+   }//End Method
    
    /**
     * {@link SingletonCollectionWrapper} constructor and {@link SingletonCollectionWrapper#iterator()} test.
