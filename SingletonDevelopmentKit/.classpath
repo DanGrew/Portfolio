@@ -3,8 +3,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="libraries/opencsv-3.4.jar"/>
-	<classpathentry kind="lib" path="libraries/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=SingletonDevelopmentKit&amp;ivyXmlPath=libraries%2Fivy.xml&amp;confs=*"/>
 	<classpathentry kind="output" path="products/classes"/>
 </classpath>

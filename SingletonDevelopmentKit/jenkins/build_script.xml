@@ -1,4 +1,4 @@
-<project name="SingletonDevelopmentKit" xmlns:jacoco="antlib:org.jacoco.ant" >
+<project name="SingletonDevelopmentKit" xmlns:jacoco="antlib:org.jacoco.ant" xmlns:ivy="antlib:org.apache.ivy.ant" >
   <!-- properties used for build-->
   <property environment = "environment" />
   <property name = "project" value = "${environment.WORKSPACE}/SingletonDevelopmentKit" />
@@ -10,13 +10,16 @@
   <property name = "report.directory" value ="${project}/report" />
   <property name = "products.classes.directory" value="${project}/products/classes" />
   <property name = "coverage.directory" value="${project}/coverage" />
+  <property name = "ivy.dep.file" value="${libraries.directory}/ivy.xml" />
+  <property name = "ivy.lib.dir" value="${libraries.directory}" />
+	
       
   <!-- class path for building tests -->
   <path id ="test.classpath">
     <pathelement location="${libraries.directory}/junit.jar" />
     <pathelement location="${libraries.directory}/hamcrest-core-1.3.jar" />
     <pathelement location="${libraries.directory}/hamcrest-all-1.3.jar" />
-    <pathelement location="${libraries.directory}/opencsv-3.4.jar" />
+  	<pathelement location="${libraries.directory}/opencsv-3.4.jar" />
   	<pathelement location="${libraries.directory}/mockito-all-1.9.5.jar" />
   </path>
 	
@@ -24,16 +27,27 @@
   <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
       <classpath path="${libraries.directory}/jacocoant.jar"/>
   </taskdef>
+  <!-- reference for the ivy ant task -->
+  <taskdef uri="antlib:org.apache.ivy.ant" >
+	  <classpath path="${libraries.directory}/ivy-2.4.0.jar"/>
+  </taskdef>
 	  
   <!-- single target responsible for producing products classes with a compiled project -->
   <target 
 	name="build_project" 
-	depends = "	
+	depends = "
+  		resolve,
 		compile,
 		run_tests,
   		build_jacoco_report
 	" 
   />
+	
+  <!--  target to resolve all ivy dependencies -->
+  <target name="resolve" description="retrieve dependencies with ivy">
+  	<!-- enable for settings <ivy:settings file="${libraries.directory}/ivysettings.xml"/> -->
+    <ivy:retrieve />
+  </target>
 	  
   <!-- target to compile src and test into products class -->
   <target name="compile">
