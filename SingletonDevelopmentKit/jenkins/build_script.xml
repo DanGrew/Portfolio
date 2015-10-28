@@ -25,7 +25,7 @@
 	
   <!-- reference for the jacoco ant task -->
   <taskdef uri="antlib:org.jacoco.ant" resource="org/jacoco/ant/antlib.xml">
-      <classpath path="${libraries.directory}/jacocoant.jar"/>
+      <classpath path="${libraries.directory}/jacoco/jacocoant.jar"/>
   </taskdef>
   <!-- reference for the ivy ant task -->
   <taskdef uri="antlib:org.apache.ivy.ant" >
