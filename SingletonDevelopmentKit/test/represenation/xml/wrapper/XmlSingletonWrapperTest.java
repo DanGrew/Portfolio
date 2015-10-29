@@ -53,7 +53,7 @@ public class XmlSingletonWrapperTest {
        * {@inheritDoc}
        */
       @Override public TestSingleton unwrap() {
-         return RequestSystem.retrieve( TestSingleton.class, TEST_SINGLETON.getIdentification() );
+         throw new UnsupportedOperationException( "Should not be called." );
       }//End Method
       
    }//End Class
