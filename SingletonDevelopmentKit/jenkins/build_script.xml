@@ -39,13 +39,14 @@
   		resolve,
 		compile,
 		run_tests,
-  		build_jacoco_report
+  		build_jacoco_report,
+  		publish
 	" 
   />
 	
   <!--  target to resolve all ivy dependencies -->
   <target name="resolve" description="retrieve dependencies with ivy">
-  	<!-- enable for settings <ivy:settings file="${libraries.directory}/ivysettings.xml"/> -->
+  	<!-- <ivy:cleancache /> -->
     <ivy:retrieve />
   </target>
 	  
@@ -123,5 +124,13 @@
   		
       <html destdir="${coverage.directory}"/>
     </jacoco:report>
+  </target>
+	
+  <target name ="publish" description = "publish the build files to archiva" >
+  	<ivy:settings id="ivy.pub.settings" file="${libraries.directory}/ivysettings.xml"/>
+	<jar destfile="${build}/Sdk.jar" basedir="${products.classes.directory}"/>
+	<ivy:publish resolver="resolver" pubrevision="${environment.BUILD_NUMBER}" settingsRef="ivy.pub.settings" overwrite="true" >
+	  <artifacts pattern="${build}/[artifact].[ext]" />
+	</ivy:publish>
   </target>
 </project>

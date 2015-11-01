@@ -24,7 +24,6 @@ public class RequestSystem extends ManagementSystem {
    
    /**
     * {@link DataManagementSystem#store(Object, Class...)}.
-    * TODO verify class types.
     */
    public static < T > void store( T object, Class< ? >... classes ){
       dataSystem().store( object, classes );

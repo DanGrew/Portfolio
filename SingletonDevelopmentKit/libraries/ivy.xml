@@ -1,5 +1,8 @@
 <ivy-module version="1.0">
-    <info organisation="dan_grew_portfolio" module="sdk"/>
+    <info organisation="dan-grew-portfolio" module="sdk"/>
+    <publications>
+		<artifact name="Sdk" type="jar" ext="jar" />
+	</publications>
     <dependencies>
         <dependency org="junit" name="junit" rev="4.12"/>
         <dependency org="org.hamcrest" name="hamcrest-core" rev="1.3"/>

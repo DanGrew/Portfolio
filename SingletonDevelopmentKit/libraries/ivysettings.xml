@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-settings>
+  <property name = "host-ip" value = "192.168.0.15" /> 
+  <property name = "host-port" value = "8081" /> 
+  <property name = "host-address" value = "http://${host-ip}" />
+  <property name = "repository-address" value = "http://${host-ip}:${host-port}/repository" />
+  <property name = "sdk-address" value = "${repository}/sdk-repo" /> 
+  
+  <settings defaultResolver="resolver" />
+  <credentials host="${host-ip}" realm="Repository Archiva Managed dan-grew-portfolio Repository" username="admin" passwd="rest25" />
+  <resolvers>
+    <chain name="resolver" latest="latest-time">
+      <ibiblio name='archiva' m2compatible='true' root = "${repository-address}" />
+      <url name="release" m2compatible="true" latest="latest-time" >
+      	<ivy pattern="${sdk-address}/ivy.xml" />
+      	<artifact pattern="${sdk-address}/[artifact].[ext]"/>
+      </url>
+    </chain>
+  </resolvers>
+</ivy-settings>
