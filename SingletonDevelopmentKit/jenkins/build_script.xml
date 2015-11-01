@@ -126,9 +126,13 @@
     </jacoco:report>
   </target>
 	
+  <!-- target to package the classes into a jar and publish to archiva -->
   <target name ="publish" description = "publish the build files to archiva" >
+  	<!-- use the settings file to identify the correct location of archiva -->
   	<ivy:settings id="ivy.pub.settings" file="${libraries.directory}/ivysettings.xml"/>
+  	<!-- package jar --> 
 	<jar destfile="${build}/Sdk.jar" basedir="${products.classes.directory}"/>
+  	<!-- publish everything in the build folder as the artifact plus its extension -->
 	<ivy:publish resolver="resolver" pubrevision="${environment.BUILD_NUMBER}" settingsRef="ivy.pub.settings" overwrite="true" >
 	  <artifacts pattern="${build}/[artifact].[ext]" />
 	</ivy:publish>

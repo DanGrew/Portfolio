@@ -4,7 +4,7 @@
   <property name = "host-port" value = "8081" /> 
   <property name = "host-address" value = "http://${host-ip}" />
   <property name = "repository-address" value = "http://${host-ip}:${host-port}/repository" />
-  <property name = "sdk-address" value = "${repository}/sdk-repo" /> 
+  <property name = "portfolio-address" value = "${repository}/portfolio" /> 
   
   <settings defaultResolver="resolver" />
   <credentials host="${host-ip}" realm="Repository Archiva Managed dan-grew-portfolio Repository" username="admin" passwd="rest25" />
@@ -12,8 +12,8 @@
     <chain name="resolver" latest="latest-time">
       <ibiblio name='archiva' m2compatible='true' root = "${repository-address}" />
       <url name="release" m2compatible="true" latest="latest-time" >
-      	<ivy pattern="${sdk-address}/ivy.xml" />
-      	<artifact pattern="${sdk-address}/[artifact].[ext]"/>
+      	<ivy pattern="${portfolio-address}/ivy.xml" />
+      	<artifact pattern="${portfolio-address}/[artifact].[ext]"/>
       </url>
     </chain>
   </resolvers>
