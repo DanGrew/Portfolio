@@ -40,7 +40,7 @@ public class FileFinder {
     * @throws ClassNotFoundException, {@link IOException}.
     */
    public void scan( String packageName ) throws ClassNotFoundException, IOException {
-      ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+      ClassLoader classLoader = FileFinder.class.getClassLoader();
       String path = packageName.replace( PACKAGE_SEPARATOR, "/" );
       Enumeration< URL > resources = classLoader.getResources( path );
       List< File > dirs = new ArrayList< File >();
