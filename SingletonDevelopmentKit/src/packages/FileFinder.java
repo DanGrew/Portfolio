@@ -41,11 +41,13 @@ public class FileFinder {
     */
    public void scan( String packageName ) throws ClassNotFoundException, IOException {
       ClassLoader classLoader = FileFinder.class.getClassLoader();
+      System.out.println( classLoader.getClass().getName() );
       String path = packageName.replace( PACKAGE_SEPARATOR, "/" );
       Enumeration< URL > resources = classLoader.getResources( path );
       List< File > dirs = new ArrayList< File >();
       while ( resources.hasMoreElements() ) {
          URL resource = resources.nextElement();
+         System.out.println( resource.getFile() );   
          dirs.add( new File( resource.getFile() ) );
       }
       for ( File directory : dirs ) {
