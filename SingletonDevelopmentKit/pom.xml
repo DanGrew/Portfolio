@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>Portfolio</groupId>
   <artifactId>SingletonDevelopmentKit</artifactId>
-  <version>version-0.0.1#${env.BUILD_NUMBER}-SNAPSHOT</version>
+  <version>v0.0.1-SNAPSHOT</version>
   <name>SingletonDevelopmentKit</name>
   <description>Core development kit</description>
   <build>
