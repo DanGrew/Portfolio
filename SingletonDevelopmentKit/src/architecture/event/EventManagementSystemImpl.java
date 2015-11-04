@@ -55,7 +55,7 @@ public class EventManagementSystemImpl implements EventManagementSystem {
     * {@inheritDoc}
     */
    @Override public void observe( Enum< ? > observableReference, Observable observable ) {
-      if ( utilObservables.containsKey( observableReference ) ){
+      if ( utilObservables.containsKey( observable ) ){
          throw new IllegalArgumentException( String.format( 
                   "Util Enum %s already managed.",
                   observableReference.toString()

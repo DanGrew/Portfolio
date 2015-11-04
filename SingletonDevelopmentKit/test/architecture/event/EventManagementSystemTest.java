@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -72,6 +73,17 @@ public class EventManagementSystemTest {
    }// End Method
    
    /**
+    * Verify that something not observed cannot be observed.
+    */
+   @Test( expected = IllegalArgumentException.class ) 
+   public void ShouldNotObserveAlreadyObserved() {
+      ObservableObject observable = new ObservableObject();
+      EventSystem.observe( TestTypes.Observable, observable );
+      EventSystem.observe( TestTypes.Observable, observable );
+      Assert.fail( "Should have thrown exception." );
+   }// End Method
+   
+   /**
     * Method to test that {@link ObservableList}s can be observed with {@link ListChangeListener}s.
     */
    @Test public void ObservableListTest(){
@@ -112,6 +124,28 @@ public class EventManagementSystemTest {
       String testSource = "Test source";
       EventSystem.raiseEvent( TestTypes.Event, testSource );
       
+      assertEquals( TestTypes.Event, results.remove( 0 ) );
+      assertEquals( testSource, results.remove( 0 ) );
+   }// End Method
+   
+   /**
+    * Test that a double registration triggers double events.
+    */
+   @Test public void DoubleEventNotificationTest(){
+      EventSystem.registerForEvent( TestTypes.Event, ( type, object ) -> {
+         results.add( type );
+         results.add( object );  
+      } );
+      EventSystem.registerForEvent( TestTypes.Event, ( type, object ) -> {
+         results.add( type );
+         results.add( object );  
+      } );
+      
+      String testSource = "Test source";
+      EventSystem.raiseEvent( TestTypes.Event, testSource );
+      
+      assertEquals( TestTypes.Event, results.remove( 0 ) );
+      assertEquals( testSource, results.remove( 0 ) );
       assertEquals( TestTypes.Event, results.remove( 0 ) );
       assertEquals( testSource, results.remove( 0 ) );
    }// End Method
