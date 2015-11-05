@@ -1,0 +1,46 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <profiles>
+    <profile>
+<id>archiva</id>
+<repositories>
+    <repository>
+      <id>portfolio-repo</id>
+      <name>Portfolio Repository</name>
+      <url>http://192.168.0.15:14445/repository/portfolio-repo/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>portfolio-repo</id>
+      <name>Portfolio Repository</name>
+      <url>http://192.168.0.15:14445/repository/portfolio-repo/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+    </profile>
+  </profiles>
+  <servers>
+    <server>
+      <id>portfolio-repo</id>
+      <username>deployer</username>
+      <password>jci-deployer78</password>
+    </server>
+  </servers>
+<activeProfiles>
+   <activeProfile>archiva</activeProfile>
+ </activeProfiles>
+</settings>
