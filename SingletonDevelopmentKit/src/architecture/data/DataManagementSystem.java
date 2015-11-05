@@ -15,7 +15,7 @@ import java.util.function.Predicate;
  * The {@link DataManagementSystem} provides the interface defining access to the {@link Object}s
  * currently active in the system.
  */
-public interface DataManagementSystem {
+public interface DataManagementSystem { 
    
    /** Enum for the events that can be raised.**/
    public enum Events {
