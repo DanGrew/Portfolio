@@ -16,7 +16,7 @@ import architecture.event.EventSystem;
 /**
  * The {@link CommandInput} represents the element of the gui that accepts input from the user.
  */
-public class CommandInput extends BorderPane {
+public class CommandInput extends BorderPane { 
 
    public enum Events {
       /** Text has been entered.**/
