@@ -26,7 +26,7 @@ public class CommandInput extends BorderPane {
    /**
     * Constructs a new {@link CommandInput}.
     */
-   public CommandInput(){
+   public CommandInput(){ 
       TextField textArea = new TextField();
       textArea.setText( "Type stuff here." );
       textArea.textProperty().addListener( ( event, old, newValue ) -> {
