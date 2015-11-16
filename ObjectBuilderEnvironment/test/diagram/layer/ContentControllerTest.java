@@ -15,7 +15,7 @@ import architecture.event.EventSystem;
 import diagram.shapes.AddShapeEvent;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
-import javafx.embed.swing.JFXPanel;
+import graphics.JavaFxInitializer;
 
 /**
  * Test for the {@link ContentController}.
@@ -26,7 +26,7 @@ public class ContentControllerTest {
     * Initialise method to launch JavaFx.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
    }//End Method
    
    /**

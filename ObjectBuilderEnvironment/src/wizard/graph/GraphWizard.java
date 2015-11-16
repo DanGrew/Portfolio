@@ -7,19 +7,18 @@
  */
 package wizard.graph;
 
-import graphics.wizard.Wizard;
-import graphs.graph.Graph;
-
 import java.util.Arrays;
 
+import architecture.request.RequestSystem;
+import graphics.JavaFxInitializer;
+import graphics.wizard.Wizard;
+import graphs.graph.Graph;
 import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import search.Search;
 import search.SearchSpace;
-import architecture.request.RequestSystem;
 
 /**
  * The {@link GraphWizard} provides a method of launching a {@link Wizard} responsible for
@@ -54,7 +53,7 @@ public class GraphWizard {
       RequestSystem.store( new SearchSpace( "SearchSpace2" ), Search.class );
       RequestSystem.store( new SearchSpace( "SearchSpace3" ), Search.class );
       
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
       Platform.runLater( () -> {
          new GraphWizard();
       } );

@@ -13,9 +13,9 @@ import org.junit.Test;
 
 import architecture.event.EventSystem;
 import diagram.toolbox.ContentEvents;
+import graphics.JavaFxInitializer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.Node;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.ScrollEvent;
@@ -32,7 +32,7 @@ public class CanvasViewportTest {
     * Initialise method to launch JavaFx.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
    }//End Method
    
    /**

@@ -10,9 +10,9 @@ package wizard.search;
 import java.util.Arrays;
 
 import architecture.request.RequestSystem;
+import graphics.JavaFxInitializer;
 import graphics.wizard.Wizard;
 import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.Definition;
@@ -60,7 +60,7 @@ public class SearchSpaceWizard {
       object2.set( type, "value" );
       RequestSystem.store( object2, BuilderObject.class );
       
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
       Platform.runLater( () -> {
          new SearchSpaceWizard();
       } );

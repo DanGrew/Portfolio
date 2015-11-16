@@ -12,9 +12,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import diagram.canvas.ViewportInformation.LabelUpdater;
+import graphics.JavaFxInitializer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -28,7 +28,7 @@ public class ViewportInformationTest {
     * Initialise method to launch JavaFx.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
    }//End Method
    
    /**

@@ -11,6 +11,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import graphics.JavaFxInitializer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.embed.swing.JFXPanel;
@@ -27,7 +28,7 @@ public class ButtonItemImplTest {
     * Method to initialise JavaFx for the test.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
    }//End Method
 
    /**

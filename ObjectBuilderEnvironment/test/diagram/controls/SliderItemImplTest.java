@@ -11,9 +11,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import graphics.JavaFxInitializer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TitledPane;
@@ -28,7 +28,7 @@ public class SliderItemImplTest {
     * Method to initialise JavaFx for the test.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
    }//End Method
 
    /**

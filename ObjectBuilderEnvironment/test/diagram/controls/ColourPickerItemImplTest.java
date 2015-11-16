@@ -11,9 +11,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import graphics.JavaFxInitializer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TitledPane;
 import javafx.scene.paint.Color;
@@ -27,7 +27,7 @@ public class ColourPickerItemImplTest {
     * Method to initialise JavaFx for the test.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      new JFXPanel();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
    }//End Method
 
    /**
