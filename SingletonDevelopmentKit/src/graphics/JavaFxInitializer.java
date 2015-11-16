@@ -24,19 +24,37 @@ import javafx.stage.Stage;
  */
 public class JavaFxInitializer extends Application {
    
-   private static Supplier< Node > supplier;
+   /** {@link BorderPane} at center of default {@link Scene}.**/
+   static BorderPane content;
 
    /**
     * {@inheritDoc}
     */
    @Override public void start(Stage stage) throws Exception {
-      if ( supplier != null ) {
-         Scene scene = new Scene( new BorderPane( supplier.get() ) );
-         stage.setScene( scene );
-         stage.show();
-      }
+      Scene scene = new Scene( content );
+      stage.setScene( scene );
+      stage.show();
    }//End Method
       
+   /**
+    * Private method to launch the {@link Application}, checking that it has not already
+    * been launched.
+    */
+   private static void launch(){
+      if ( !hasLaunched() ) {
+         content = new BorderPane();
+         new Thread( () -> launch() ).start();
+      }
+   }//End Method
+   
+   /**
+    * Method to determine whether the {@link JavaFxInitializer} has initialised.
+    * @return true if already launched, false otherwise.
+    */
+   public static boolean hasLaunched(){
+      return content != null;
+   }//End Method
+   
    /**
     * Method to initialise JavaFx with the given {@link Supplier} of a {@link Node} to display.
     * This is mainly used for manual tests where a test item can be supplied. If nothing is supplied
@@ -44,8 +62,8 @@ public class JavaFxInitializer extends Application {
     * @param runnable the {@link Supplier} for the {@link Node} to display.
     */
    public static void threadedLaunch( Supplier< Node > runnable ){
-      JavaFxInitializer.supplier = runnable;
-      new Thread( () -> launch() ).start();
+      launch();
+      content.setCenter( runnable.get() );
    }//End Method
    
    /**
@@ -54,6 +72,7 @@ public class JavaFxInitializer extends Application {
     * running with popups or dialog type items.
     */
    public static void threadedLaunchWithDefaultScene(){
+      //Should be safe to call if already launched.
       PlatformImpl.startup( () -> {} );
       threadedLaunch( () -> { return new Label( "Testing, should stay open!" ); } );
    }//End Method
