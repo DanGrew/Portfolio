@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
+import parameter.classparameter.DateClassParameterTypeImpl;
 import parameter.classparameter.NumberClassParameterTypeImpl;
 import parameter.classparameter.StringClassParameterTypeImpl;
 
@@ -29,7 +30,8 @@ public class ClassParameterTypeTest {
    @Test public void valueTest() {
       List< ClassParameterType > expected = Arrays.asList( 
                new StringClassParameterTypeImpl(),
-               new NumberClassParameterTypeImpl()
+               new NumberClassParameterTypeImpl(),
+               new DateClassParameterTypeImpl()
       );
       Assert.assertEquals( 
                expected,

@@ -37,6 +37,7 @@ public class ReferenceClassParameterTypeTest {
     * Method to setup the {@link Singleton}s required for the test.
     */
    @BeforeClass public static void setup(){
+      RequestSystem.reset();
       type = new ReferenceClassParameterTypeImpl< TestSingleton >( TestSingleton.class );
       TEST_SINGLETON_1_OBJECT = new TestSingletonImpl( TEST_SINGLETON_1 );
       RequestSystem.store( TEST_SINGLETON_1_OBJECT, TestSingleton.class );

@@ -69,9 +69,15 @@ public class ComplexParameterTest {
       );
    }// End Method
    
+   /**
+    * {@link Command#partialMatches(String)} test.
+    */
    @Test public void shouldNotPartialMatch() {
-      Assert.fail();
-   }
+      Assert.assertFalse( command.partialMatches( "kef" ) );
+      Assert.assertFalse( command.partialMatches( "key tf" ) );
+      Assert.assertFalse( command.partialMatches( "key true nothing" ) );
+      Assert.assertFalse( command.partialMatches( "key true TestInstance ff" ) );
+   }//End Method
    
    /**
     * Method to test that {@link Command#completeMatches(String)} accepts correctly.
@@ -84,9 +90,15 @@ public class ComplexParameterTest {
       );
    }// End Method
    
+   /**
+    * {@link Command#completeMatches(String)} test.
+    */
    @Test public void shouldNotCompleteMatch() {
-      Assert.fail();
-   }
+      Assert.assertFalse( command.completeMatches( "key" ) );
+      Assert.assertFalse( command.completeMatches( "key true" ) );
+      Assert.assertFalse( command.completeMatches( "key true TestInstance" ) );
+      Assert.assertFalse( command.completeMatches( "key true TestInstance fal" ) );
+   }//End Method
    
    /**
     * Method to test that the {@link Command} auto completes.

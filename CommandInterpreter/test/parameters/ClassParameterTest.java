@@ -112,7 +112,11 @@ public class ClassParameterTest {
     */
    @Test public void shouldSuggest(){
       Assert.assertEquals( 
-               Arrays.asList( ClassParameterTypes.STRING_PARAMETER_TYPE.getName(), ClassParameterTypes.NUMBER_PARAMETER_TYPE.getName() ), 
+               Arrays.asList( 
+                        ClassParameterTypes.STRING_PARAMETER_TYPE.getName(), 
+                        ClassParameterTypes.NUMBER_PARAMETER_TYPE.getName(),
+                        ClassParameterTypes.DATE_PARAMETER_TYPE.getName()
+               ), 
                parameter.getSuggestions( "" ) 
       );
       Assert.assertEquals( 
