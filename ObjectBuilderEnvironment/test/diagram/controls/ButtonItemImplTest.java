@@ -14,7 +14,6 @@ import org.junit.Test;
 import graphics.JavaFxInitializer;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.shape.Rectangle;
