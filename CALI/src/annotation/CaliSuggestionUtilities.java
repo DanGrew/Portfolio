@@ -9,7 +9,9 @@ package annotation;
 
 import java.lang.reflect.Executable;
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import parameter.CommandParameterParseUtilities;
 import parameter.wrapper.CommandParameters;
@@ -25,11 +27,11 @@ public class CaliSuggestionUtilities {
     * Method to construct the suggestions for all parameters of the associated {@link Executable}s
     * given the number of parameters parsed.
     * @param items the items to construct suggestions for.
-    * @param the number of parameters parsed.
+    * @param numberOfParameters the number of parameters parsed.
     * @return a {@link List} of {@link String} suggestions.
     */
    public static List< String > suggestAllParameters( List< ? extends Executable > items, int numberOfParameters ) {
-      List< String > suggestions = new ArrayList<>();
+      Set< String > suggestions = new LinkedHashSet<>();
       for ( Executable executable : items ) {
          StringBuffer buffer = new StringBuffer();
          for ( int i = numberOfParameters; i < executable.getParameterCount(); i++ ) {
@@ -45,7 +47,7 @@ public class CaliSuggestionUtilities {
          buffer.append( CaliParserUtilities.close() );
          suggestions.add( buffer.toString() );
       }
-      return suggestions;
+      return new ArrayList<>( suggestions );
    }// End Method
    
    /**
@@ -56,6 +58,9 @@ public class CaliSuggestionUtilities {
     * @return a {@link String} auto correct result.
     */
    public static String autoCorrectAllParameters( Executable item, Object[] parameters ) {
+      if ( item.getParameterCount() != parameters.length ) {
+         return null;
+      }
       boolean complete = true;
       StringBuffer buffer = new StringBuffer( CaliParserUtilities.open() + CommandParameterParseUtilities.delimiter() );
       for ( int i = 0; i < parameters.length; i++ ) {
@@ -69,9 +74,7 @@ public class CaliSuggestionUtilities {
          buffer.append( CaliParserUtilities.parameterDelimiter() );
          buffer.append( CommandParameterParseUtilities.delimiter() );
       }
-      if ( buffer.length() > 0 ) {
-         buffer.setLength( buffer.length() - 2 );
-      }
+      buffer.setLength( buffer.length() - 2 );
       if ( complete ) {
          buffer.append( CommandParameterParseUtilities.delimiter() );
          buffer.append( CaliParserUtilities.close() );

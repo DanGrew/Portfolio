@@ -30,13 +30,17 @@ public class TestCommon {
     * @param collectionB the second {@link Collection}.
     */
    public static void assertCollectionsSameOrderIrrelevant( Collection< ? > collectionA, Collection< ? > collectionB ) {
-      Assert.assertEquals( collectionA.size(), collectionB.size() );
+      Assert.assertEquals( 
+               collectionA + " and " + collectionB + " have a different number of elements.", 
+               collectionA.size(), 
+               collectionB.size() 
+      );
       
       List< ? > listA = new ArrayList<>( collectionA );
       List< ? > listB = new ArrayList<>( collectionB );
     
       for ( Object object : listA ) {
-         Assert.assertTrue( listB.contains( object ) );
+         Assert.assertTrue( listB + " does not contain " + object, listB.contains( object ) );
          listB.remove( object );
       }
       

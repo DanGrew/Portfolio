@@ -7,23 +7,24 @@
  */
 package command.parameter;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import parameter.CommandParameter;
-import system.CaliSystem;
-import test.model.TestObjects.TestSingleton;
-import test.model.TestObjects.TestSingletonImpl;
 import annotation.CaliParserUtilities;
 import architecture.request.RequestSystem;
-
 import command.Command;
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
 import common.TestObjects.TestAnotherAnnotatedSingletonImpl;
+import parameter.CommandParameter;
+import system.CaliSystem;
+import test.model.TestObjects.TestSingleton;
+import test.model.TestObjects.TestSingletonImpl;
 
 /**
  * Test for the {@link SingletonReferenceParameterImpl}.
@@ -168,7 +169,10 @@ public class SingletonReferenceParameterTest implements CommandParameterVerifier
    }// End Method
    
    @Test public void shouldSuggest(){
-      Assert.fail();
+      final List< String > expectedResult = parameter.getSuggestions( null );
+      Assert.assertEquals( expectedResult, parameter.getSuggestions( "" ) );
+      Assert.assertEquals( expectedResult, parameter.getSuggestions( "anything" ) );
+      Assert.assertEquals( expectedResult, parameter.getSuggestions( TEST_ANNOTATED_SINGLETON_NAME ) );
    }
 
 }// End Class
