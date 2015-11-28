@@ -420,7 +420,6 @@ import search.Search;
       result = verifyVerticalAxes();
       if ( result != null ) return result;
       
-      JavaFx.launchJavaFxForSwingEnvironment();
       Platform.runLater( new Runnable() {
          
          @Override public void run() {

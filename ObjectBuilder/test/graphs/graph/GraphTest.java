@@ -8,6 +8,7 @@
 package graphs.graph;
 
 import graphics.JavaFx;
+import graphics.JavaFxInitializer;
 import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 import graphs.series.GroupEvaluation;
@@ -50,7 +51,7 @@ public class GraphTest {
     * Method to setup the {@link Singleton}s for the test.
     */
    @BeforeClass public static void setup(){
-      JavaFx.launchJavaFxForSwingEnvironment();
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
       
       VERT_PROPERTY_A = new PropertyTypeImpl( "SOM", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
       RequestSystem.store( VERT_PROPERTY_A );
