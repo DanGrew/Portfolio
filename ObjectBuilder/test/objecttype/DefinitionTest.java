@@ -23,7 +23,7 @@ public class DefinitionTest {
     */
    @Test public void addPropertyTest() {
       Definition object = new DefinitionImpl( "Test" );
-      PropertyType propertyType = new PropertyTypeImpl( null, String.class );
+      PropertyType propertyType = new PropertyTypeImpl( "anything", String.class );
       object.addPropertyType( propertyType );
       Assert.assertTrue( object.hasProperty( propertyType ) );
    }// End Method

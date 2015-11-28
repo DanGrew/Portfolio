@@ -7,19 +7,21 @@
  */
 package commands.parameters;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.request.RequestSystem;
+import commands.parameters.extensions.PropertyTypeAndValue;
+import commands.parameters.extensions.PropertyTypeAndValueParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
-import architecture.request.RequestSystem;
-
-import commands.parameters.extensions.PropertyTypeAndValue;
-import commands.parameters.extensions.PropertyTypeAndValueParameterImpl;
+import utility.TestCommon;
 
 /**
  * Test for the {@link PropertyTypeAndValueParameterImpl}.
@@ -28,8 +30,10 @@ public class PropertyTypeAndValueParameterTest {
 
    private static final String DELIMITER = CommandParameterParseUtilities.delimiter();
    private static final String TEST_PROPERTY_TYPE = "TestPropertyType";
+   private static final String TEST_ALTERNATE_PROPERTY_TYPE = "TestPropertyAlternateType";
    private static final Number TEST_NUMBER = 1234.567;
    private static PropertyType propertyType;
+   private static PropertyType alternatePropertyType;
    private static CommandParameter parameter;
    
    /**
@@ -41,6 +45,8 @@ public class PropertyTypeAndValueParameterTest {
       
       propertyType = new PropertyTypeImpl( TEST_PROPERTY_TYPE, ClassParameterTypes.NUMBER_PARAMETER_TYPE );
       RequestSystem.store( propertyType, PropertyType.class );
+      alternatePropertyType = new PropertyTypeImpl( TEST_ALTERNATE_PROPERTY_TYPE, ClassParameterTypes.NUMBER_PARAMETER_TYPE );
+      RequestSystem.store( alternatePropertyType, PropertyType.class );
    }// End Method
    
    /**
@@ -124,8 +130,31 @@ public class PropertyTypeAndValueParameterTest {
       Assert.assertNull( parameter.autoComplete( "anything" + DELIMITER + 12 ) );
    }// End Method
    
+   /**
+    * {@link PropertyTypeAndValueParameterImpl#getSuggestions(String)} test.
+    */
    @Test public void shouldSuggest(){
-      Assert.fail();
-   }
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
+               Arrays.asList( 
+                        TEST_PROPERTY_TYPE + " ",
+                        TEST_ALTERNATE_PROPERTY_TYPE + " "), 
+               parameter.getSuggestions( "Tes" ) 
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( TEST_PROPERTY_TYPE + " " ), 
+               parameter.getSuggestions( TEST_PROPERTY_TYPE ) 
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( TEST_PROPERTY_TYPE + " " + 239847 ), 
+               parameter.getSuggestions( TEST_PROPERTY_TYPE + " " + 239847 ) 
+      );
+      TestCommon.assertCollectionsSameOrderIrrelevant(
+               Arrays.asList( 
+                        TEST_PROPERTY_TYPE + " " + 239847,
+                        TEST_ALTERNATE_PROPERTY_TYPE + " " + 239847
+               ), 
+               parameter.getSuggestions( "Test" + " " + 239847 ) 
+      );
+   }//End Method
 
 }// End Class

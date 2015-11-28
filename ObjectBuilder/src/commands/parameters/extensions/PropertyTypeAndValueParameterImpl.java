@@ -7,13 +7,15 @@
  */
 package commands.parameters.extensions;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
+import architecture.request.RequestSystem;
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import propertytype.PropertyType;
-import architecture.request.RequestSystem;
 
 /**
  * The {@link PropertyTypeAndValueParameterImpl} is responsible for providing a {@link CommandParameter}
@@ -32,7 +34,19 @@ public class PropertyTypeAndValueParameterImpl implements CommandParameter {
     * {@inheritDoc}
     */
    @Override public List< String > getSuggestions( String expression ) {
-      return Arrays.asList( getParameterType() );
+      String[] parameters = CommandParameterParseUtilities.parseParameters( 2, expression );
+      String propertyType = parameters[ 0 ];
+      String value = parameters[ 1 ];
+      
+      List< PropertyType > actualTypes = RequestSystem.retrieveAll( 
+               PropertyType.class, 
+               ( singleton ) -> { return singleton.getIdentification().contains( propertyType ); }
+      );
+      Set< String > suggestions = new LinkedHashSet<>();
+      for ( PropertyType type : actualTypes ) {
+         suggestions.add( type.getIdentification() + CommandParameterParseUtilities.delimiter() + value );
+      }
+      return new ArrayList<>( suggestions );
    }// End Method
    
    /**
