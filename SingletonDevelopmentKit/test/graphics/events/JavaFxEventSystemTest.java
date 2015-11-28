@@ -18,6 +18,7 @@ import architecture.event.EventSystem;
 import graphics.JavaFxInitializer;
 import graphics.event.JavaFxEventSystem;
 import javafx.application.Platform;
+import utility.ThreadWaiter;
 
 /**
  * Test for the {@link JavaFxEventSystem}.
@@ -39,19 +40,23 @@ public class JavaFxEventSystemTest {
    /**
     * {@link JavaFxEventSystem#registerForEvent(Enum, architecture.event.EventReceiver)} test.
     */
-   @Test public void shouldCallBackOnPlatformThread() throws InterruptedException {
+   @Test public void shouldCallBackOnPlatformThread() {
+      final ThreadWaiter waiter = new ThreadWaiter();
       final List< Object > result = new ArrayList<>();
+      waiter.assertions( () -> {
+         Assert.assertFalse( result.isEmpty() );
+         Assert.assertEquals( 1, result.size() );
+      } );
+      
       JavaFxEventSystem.registerForEvent( TestEvents.SimpleEvent, ( event, object ) -> {
          Assert.assertTrue( Platform.isFxApplicationThread() );
          result.add( "yep, it has come through" );
+         waiter.interrupt();
       } );
       
       EventSystem.raiseEvent( TestEvents.SimpleEvent, null );
       
-      //Expect no more than a second of waiting.
-      Thread.sleep( 1000 );
-      Assert.assertFalse( result.isEmpty() );
-      Assert.assertEquals( 1, result.size() );
+      waiter.waitForTrigger();
    }// End Method
 
 }// End Class
