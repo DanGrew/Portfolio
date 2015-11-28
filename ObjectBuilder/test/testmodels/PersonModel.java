@@ -38,6 +38,7 @@ public class PersonModel {
     * Method to setup the {@link Singleton}s for the test.
     */
    public static void setup(){
+      RequestSystem.reset();
       AGE = new PropertyTypeImpl( "Age", ClassParameterTypes.NUMBER_PARAMETER_TYPE );
       RequestSystem.store( AGE, PropertyType.class );
       COMPANY = new PropertyTypeImpl( "Company", ClassParameterTypes.STRING_PARAMETER_TYPE );

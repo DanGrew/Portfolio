@@ -27,6 +27,7 @@ import org.junit.Test;
 import propertytype.PropertyType;
 import search.SearchSpace.SearchCriteria;
 import testmodels.PersonModel;
+import utility.TestCommon;
 
 /**
  * Test for the {@link SearchSpace}.
@@ -122,7 +123,7 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( DAN, LIZ, MOM, DAD ), 
                matches 
       );
@@ -138,7 +139,7 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant(  
                Arrays.asList( DAN, LIZ, MOM, DAD ), 
                matches 
       );
@@ -147,7 +148,7 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( LIZ, MOM, DAD ), 
                matches 
       );
@@ -163,7 +164,7 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( DAN, LIZ, MOM, DAD ), 
                matches 
       );
@@ -173,7 +174,7 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( LIZ ), 
                matches 
       );
@@ -211,7 +212,7 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( DAN, LIZ ), 
                matches 
       );
@@ -227,7 +228,7 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( MOM, DAD ), 
                matches 
       );
@@ -242,7 +243,7 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( DAN, LIZ, MOM, DAD ), 
                matches 
       );
@@ -257,14 +258,14 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( DAN, LIZ, MOM, DAD ), 
                matches 
       );
       
       search.clearIncluded();
       matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList(), 
                matches 
       );
@@ -279,14 +280,14 @@ public class SearchSpaceTest {
       
       search.identifyMatches();
       Collection< BuilderObject > matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( DAN, LIZ, MOM, DAD ), 
                matches 
       );
       
       search.exclude( SearchPolicy.ContainsString, COMPANY, "Graff" );
       matches = search.getMatches();
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( LIZ, MOM, DAD ), 
                matches 
       );

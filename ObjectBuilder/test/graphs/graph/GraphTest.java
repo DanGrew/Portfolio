@@ -7,7 +7,11 @@
  */
 package graphs.graph;
 
-import graphics.JavaFx;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import architecture.request.RequestSystem;
 import graphics.JavaFxInitializer;
 import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
@@ -18,11 +22,6 @@ import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.Definition;
 import objecttype.DefinitionImpl;
-
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import parameter.classparameter.ClassParameterTypes;
 import parameter.classparameter.DateClassParameterTypeImpl;
 import propertytype.PropertyType;
@@ -30,7 +29,6 @@ import propertytype.PropertyTypeImpl;
 import search.Search;
 import search.SearchPolicy;
 import search.SearchSpace;
-import architecture.request.RequestSystem;
 
 /**
  * Test for the {@link Graph}.
