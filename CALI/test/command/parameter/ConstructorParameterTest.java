@@ -20,6 +20,7 @@ import parameter.classparameter.ClassParameterTypes;
 import parameter.classparameter.ReferenceClassParameterTypeImpl;
 import system.CaliSystem;
 import test.model.TestObjects.TestSingletonImpl;
+import utility.TestCommon;
 import annotation.CaliParserUtilities;
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingletonImpl;
@@ -257,39 +258,39 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
     * {@link ConstructorParameterImpl#getSuggestions(String)} test.
     */
    @Test public void shouldSuggest(){
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( "TestAnnotatedSingletonImpl(", "TestAnotherAnnotatedSingletonImpl(", "TestDoubleParameterAnnotatedSingletonImpl(" ), 
                parameter.getSuggestions( "" ) 
       );
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant(  
                Arrays.asList( "TestAnnotatedSingletonImpl(", "TestAnotherAnnotatedSingletonImpl(" ), 
                parameter.getSuggestions( "TestA" ) 
       );
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( "TestAnnotatedSingletonImpl(" ), 
                parameter.getSuggestions( "TestAnnota" ) 
       );
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( "<String> )", "<String>, <Double> )", "<String>, <TestAnotherAnnotatedSingletonImpl> )" ), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl(" ) 
       );
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( "<String> )", "<String>, <Double> )", "<String>, <TestAnotherAnnotatedSingletonImpl> )" ), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything" ) 
       );
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( ")", "<Double> )", "<TestAnotherAnnotatedSingletonImpl> )" ), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything," ) 
       );
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( "<Double> )", "<TestAnotherAnnotatedSingletonImpl> )" ), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything, 23" ) 
       );
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList(), 
                parameter.getSuggestions( "TestAnotherAnnotatedSingletonImpl( anything, 23 )" ) 
       );
-      Assert.assertEquals( 
+      TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( "<String>, <Double> )" ), 
                parameter.getSuggestions( "TestDoubleParameterAnnotatedSingletonImpl( anything" ) 
       );
