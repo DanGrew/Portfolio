@@ -45,7 +45,7 @@ public class NewCommandImpl extends ParameterizedCommandImpl< Object >{
          if ( result.getResult().equals( Result.Invoked ) ) {
             RequestSystem.store( result.getReturnValue(), Singleton.class );
          }
-         return new CommandResultImpl< Object >( result );
+         return new CommandResultImpl< Object >( result, result.getReturnValue() );
       }// End Method
    }; // End Class
    

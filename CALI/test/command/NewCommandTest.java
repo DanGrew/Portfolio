@@ -119,8 +119,4 @@ public class NewCommandTest implements CommandVerifier {
       Assert.assertNull( command.execute( "new TestAnnotatedSingletonImpl( " ) );
    }// End Method
    
-   @Test public void shouldRedirectConstructor(){
-      Assert.fail();
-   }
-
 }// End Class

@@ -22,5 +22,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/SingletonDevelopmentKit"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CommandInterpreter"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

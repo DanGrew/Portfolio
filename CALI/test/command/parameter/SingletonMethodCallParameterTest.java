@@ -206,7 +206,6 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
       final String methodB = "overloaded(";
       final String parametersC1 = "<String>";
       final String parametersC2 = "<String> )";
-      final String methodC = "overloaded(";
       
       TestCommon.assertCollectionsSameOrderIrrelevant( 
                Arrays.asList( TEST_ANNOTATED_SINGLETON_NAME + ".", TEST_ANOTHER_ANNOTATED_SINGLETON_NAME + "." ),
@@ -241,6 +240,10 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
                parameter.getSuggestions( "TestAnother.testCaliMethod" ) 
       );
       Assert.assertEquals( 
+               Arrays.asList( parametersA ),
+               parameter.getSuggestions( "TestAnother.testCaliMethod(" ) 
+      );
+      Assert.assertEquals( 
                Arrays.asList( methodB ),
                parameter.getSuggestions( "TestAnother.over" ) 
       );
@@ -268,7 +271,6 @@ public class SingletonMethodCallParameterTest extends SingletonReferenceParamete
                Arrays.asList(),
                parameter.getSuggestions( "TestAnother.anything( something, something )" ) 
       );
-      Assert.fail( "should use variables with warnings" );
    }// End Method
    
 }// End Class
