@@ -136,8 +136,31 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
    /**
     * {@inheritDoc}
     */
-   @Override public void shouldParseParameters() {
-      Assert.fail();
+   @Test @Override public void shouldParseParameters() {
+      Assert.assertEquals( 
+               "TestAnotherAnnotatedSingletonImpl(", 
+               parameter.parseParameter( "TestAnotherAnnotatedSingletonImpl( " ) 
+      );
+      Assert.assertEquals( 
+               "TestAnotherAnnotatedSingletonImpl(", 
+               parameter.parseParameter( "TestAnotherAnnotatedSingletonImpl(" ) 
+      );
+      Assert.assertEquals( 
+               "TestAnotherAnnotated", 
+               parameter.parseParameter( "TestAnotherAnnotated " ) 
+      );
+      Assert.assertEquals( 
+               "TestAnotherAnnotatedSingletonImpl(", 
+               parameter.parseParameter( "TestAnotherAnnotatedSingletonImpl( testName, 567.06 )" ) 
+      );
+      Assert.assertEquals( 
+               "TestAnotherAnnotatedSingletonImpl(", 
+               parameter.parseParameter( "TestAnotherAnnotatedSingletonImpl( testName, " ) 
+      );
+      Assert.assertEquals( 
+               "TestDoubleParameterAnnotatedSingletonImpl(", 
+               parameter.parseParameter( "TestDoubleParameterAnnotatedSingletonImpl( testName )" ) 
+      );
    }// End Method
    
    /**
@@ -230,10 +253,6 @@ public class ConstructorParameterTest implements CommandParameterVerifier {
       Assert.assertNull( parameter.autoComplete( " " ) );
    }// End Method
    
-   @Test public void acceptsNonStringParameters(){
-      Assert.fail();
-   }
-
    /**
     * {@link ConstructorParameterImpl#getSuggestions(String)} test.
     */
