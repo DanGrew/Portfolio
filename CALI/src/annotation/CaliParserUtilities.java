@@ -97,13 +97,19 @@ public class CaliParserUtilities {
     * @return the {@link String} part of the expression for the  object type.
     */
    public static String extractObjectType( String expression ) {
+      final String NO_TYPE = "";
+      if ( expression == null ) {
+         return NO_TYPE;
+      }
       String[] objectNameParts = CommandParameterParseUtilities.parseUpTo( 
                expression, 
                CaliParserUtilities.regexOpen(), 
                CommandParameterParseUtilities.delimiter() 
       );
-      if ( objectNameParts.length > 1 ) {
-         return null;
+      if ( objectNameParts.length == 0 ) {
+         return NO_TYPE;
+      } else if ( objectNameParts.length > 1 ) {
+         return NO_TYPE;
       }
       
       String objectName = objectNameParts[ 0 ].trim();
@@ -118,7 +124,7 @@ public class CaliParserUtilities {
          String objectCompleteName = split[ 0 ];
          return objectCompleteName;
       }
-      return null;
+      return NO_TYPE;
    }// End Method
    
    /**
