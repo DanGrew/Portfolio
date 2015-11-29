@@ -143,13 +143,6 @@ public class CsvBuilderObjectImportTest {
    /**
     * {@link CsvBuilderObjectContents#importObjects()} test.
     */
-   @Test public void shouldImportExistingDataAndOverwrite() {
-      Assert.fail();
-   }// End Method
-   
-   /**
-    * {@link CsvBuilderObjectContents#importObjects()} test.
-    */
    @Test public void shouldValidate() {
       Reader reader = new StringReader(
                "TestObject,Key,Value\n"
