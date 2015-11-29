@@ -26,7 +26,8 @@ public class Perspectives extends HBox {
 
    private BorderPane container;
    
-   private SystemOutline systemOutline;
+   private SystemOutline completeSystemOutline;
+   private SystemOutline referenceSystemOutline;
    private CommandPrompt commandPrompt;
    private DiagramCanvas diagramCanvas;
    
@@ -59,10 +60,27 @@ public class Perspectives extends HBox {
    }//End Constructor
    
    /**
+    * Package only access to spreadsheet {@link RadioButton}.
+    * @return {@link RadioButton} for spreadsheets.
+    */
+   RadioButton spreadsheet(){
+      return spreadsheet;
+   }//End Method
+   
+   /**
+    * Package only access to diagrams {@link RadioButton}.
+    * @return {@link RadioButton} for diagrams.
+    */
+   RadioButton diagrams(){
+      return diagrams;
+   }//End Method
+   
+   /**
     * Method to set up the elements of the {@link Perspectives}.
     */
    private void setupPerspectives(){
-      systemOutline = new SystemOutline( SystemOutlineDetail.completeSystemOutline() );
+      completeSystemOutline = new SystemOutline( SystemOutlineDetail.completeSystemOutline() );
+      referenceSystemOutline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );
       commandPrompt = new CommandPrompt();
       diagramCanvas = new DiagramCanvas();
    }//End Method
@@ -73,6 +91,20 @@ public class Perspectives extends HBox {
    private void changePerspective(){
       container.setCenter( getCenter() );
       container.setBottom( getBottom() );
+      container.setLeft( getLeft() );
+   }//End Method
+   
+   /**
+    * Method to get the {@link Node} to be placed on the left of the container.
+    * @return the {@link Node}.
+    */
+   private Node getLeft(){
+      if ( spreadsheet.isSelected() ) {
+         return null;
+      } else if ( diagrams.isSelected() ) {
+         return referenceSystemOutline;
+      }
+      return null;
    }//End Method
    
    /**
@@ -81,7 +113,7 @@ public class Perspectives extends HBox {
     */
    private Node getCenter(){
       if ( spreadsheet.isSelected() ) {
-         return systemOutline;
+         return completeSystemOutline;
       } else if ( diagrams.isSelected() ) {
          return diagramCanvas;
       }
