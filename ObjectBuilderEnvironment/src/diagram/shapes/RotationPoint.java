@@ -12,6 +12,7 @@ import diagram.layer.TranslationConstraint;
 import javafx.geometry.Point2D;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
@@ -88,10 +89,12 @@ public class RotationPoint extends Circle {
       polygon.radiusYProperty().addListener( ( change, old, updated ) -> resetCentre( polygon ) );
       
       setOnMouseEntered( event -> {
-         this.getParent().getScene().setCursor( Cursor.CROSSHAIR );
+         Scene scene = this.getParent().getScene();
+         if ( scene != null ) scene.setCursor( Cursor.CROSSHAIR );
       } );
       setOnMouseExited( event -> {
-         this.getParent().getScene().setCursor( Cursor.DEFAULT );
+         Scene scene = this.getParent().getScene();
+         if ( scene != null ) scene.setCursor( Cursor.DEFAULT );
       } );
    }//End Constructor
    
