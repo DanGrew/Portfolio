@@ -16,6 +16,8 @@ import java.util.Set;
 
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableSet;
 import model.singleton.Singleton;
 
 /**
@@ -27,8 +29,7 @@ public class ShapesManager {
    private Set< EllipticPolygon > unassociated;
    private Map< Singleton, Set< EllipticPolygon > > associations;
    
-   private Set< Singleton > currentSingletonSelection;
-   private Set< EllipticPolygon > currentUnassociatedSelection;
+   private ObservableSet< EllipticPolygon > selection;
 
    /**
     * Constructs a new {@link ShapesManager}.
@@ -36,8 +37,7 @@ public class ShapesManager {
    public ShapesManager() {
       unassociated = new LinkedHashSet<>();
       associations = new HashMap<>();
-      currentSingletonSelection = new LinkedHashSet<>();
-      currentUnassociatedSelection = new LinkedHashSet<>();
+      selection = FXCollections.observableSet();
    }//End Constructor
    
    /**
@@ -115,7 +115,7 @@ public class ShapesManager {
       if ( !unassociated.contains( polygon ) ) {
          return;
       }
-      currentUnassociatedSelection.add( polygon );
+      selection.add( polygon );
    }//End Method
 
    /**
@@ -126,7 +126,7 @@ public class ShapesManager {
       if ( !associations.containsKey( singleton ) ) {
          return;
       }
-      currentSingletonSelection.add( singleton );
+      selection.addAll( associations.get( singleton ) );
    }//End Method
    
    /**
@@ -134,7 +134,7 @@ public class ShapesManager {
     * @param polygon the {@link EllipticPolygon} to deselect.
     */
    public void deselect( EllipticPolygon polygon ) {
-      currentUnassociatedSelection.remove( polygon );
+      selection.remove( polygon );
    }//End Method
 
    /**
@@ -142,19 +142,17 @@ public class ShapesManager {
     * @param singleton the {@link Singleton} to deselect.
     */
    public void deselect( Singleton singleton ) {
-      currentSingletonSelection.remove( singleton );
+      if ( !associations.containsKey( singleton ) ) {
+         return;
+      }
+      selection.removeAll( associations.get( singleton ) );
    }//End Method
    
    /**
     * Method to get a {@link List} of all the selected {@link EllipticPolygon}s.
     * @param all selected {@link EllipticPolygon}s.
     */
-   public List< EllipticPolygon > getSelection() {
-      List< EllipticPolygon > selection = new ArrayList<>();
-      for ( Singleton singleton : currentSingletonSelection ) {
-         selection.addAll( associations.get( singleton ) );
-      }
-      selection.addAll( currentUnassociatedSelection );
+   public ObservableSet< EllipticPolygon > selection() {
       return selection;
    }//End Method
    
