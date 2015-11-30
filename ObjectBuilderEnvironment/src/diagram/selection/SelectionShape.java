@@ -5,12 +5,15 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.shapes;
+package diagram.selection;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import diagram.shapes.CanvasShape;
+import diagram.shapes.ResizePoint;
+import diagram.shapes.RotationPoint;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;

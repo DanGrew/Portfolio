@@ -11,10 +11,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import diagram.canvas.DiagramSettings;
+import diagram.selection.SelectionShape;
 import diagram.shapes.PolygonType;
 import diagram.shapes.ResizePoint;
 import diagram.shapes.RotationPoint;
-import diagram.shapes.SelectionShape;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.Node;
 import utility.TestCommon;

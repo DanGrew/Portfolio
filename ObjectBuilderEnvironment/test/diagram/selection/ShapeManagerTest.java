@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.canvas;
+package diagram.selection;
 
 import java.util.Arrays;
 
@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import diagram.selection.ShapesManager;
 import diagram.shapes.PolygonType;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;

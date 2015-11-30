@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.canvas;
+package diagram.selection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
