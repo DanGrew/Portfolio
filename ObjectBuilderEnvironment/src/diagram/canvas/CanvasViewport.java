@@ -68,17 +68,6 @@ public class CanvasViewport extends Pane {
       getChildren().add( new ShapeControls( this, contentHolder ) );
    }//End Constructor
    
-//   void addShapeAtViewportCoordinates( double x, double y ) {
-//      Bounds localBounds = contentHolder.getBoundsInLocal();
-//      Bounds parentBounds = contentHolder.getBoundsInParent();
-//      double proportion = localBounds.getWidth() / parentBounds.getWidth();
-//      
-//      EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( 
-//               ( x - contentHolder.getLayoutX() - contentHolder.getTranslateX() - 500 ) * proportion + 500, 
-//               ( y - contentHolder.getLayoutY() - contentHolder.getTranslateY() - 500 ) * proportion + 500
-//      ) );
-//   }
-   
    /**
     * Getter for the current translation x value for the view to the content.
     * @return the translate x value.

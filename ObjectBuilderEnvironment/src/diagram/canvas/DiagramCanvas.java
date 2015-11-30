@@ -36,9 +36,6 @@ public class DiagramCanvas extends BorderPane {
             setRight( new DiagramAccordion( polygon ) );
          }
       } );
-      
-//      SystemOutline outline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );
-//      setLeft( outline );
    }//End Constructor
 
 }//End Class
