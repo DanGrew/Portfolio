@@ -368,5 +368,38 @@ public class ShapeManagerTest {
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon, polygon2 ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton ), shapes.singletonSelection() );
    }//End Method
+   
+   /**
+    * Prove that deselect all removes all selection from the {@link ShapesManager}.
+    */
+   @Test public void shouldDeselectAll(){
+      ShapesManager shapes = new ShapesManager();
+      EllipticPolygonBuilder builder = new EllipticPolygonBuilder( PolygonType.Regular, 4 );
+      
+      Singleton singleton = Mockito.mock( Singleton.class );
+      EllipticPolygon polygon = new EllipticPolygon( builder );
+      shapes.associate( singleton, polygon );
+      EllipticPolygon polygon2 = new EllipticPolygon( builder );
+      shapes.associate( singleton, polygon2 );
+      shapes.select( singleton );
+      
+      EllipticPolygon unassociated = new EllipticPolygon( builder );
+      shapes.associate( null, unassociated );
+      shapes.select( unassociated );
+      
+      Singleton singleton2 = Mockito.mock( Singleton.class );
+      EllipticPolygon polygon3 = new EllipticPolygon( builder );
+      shapes.associate( singleton2, polygon3 );
+      EllipticPolygon polygon4 = new EllipticPolygon( builder );
+      shapes.associate( singleton2, polygon4 );
+      shapes.select( singleton2 );
+      
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon, polygon2, polygon3, polygon4, unassociated ), shapes.canvasShapeSelection() );
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton, singleton2 ), shapes.singletonSelection() );
+      
+      shapes.deselectAll();
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.canvasShapeSelection() );
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.singletonSelection() );
+   }//End Method
 
 }//End Class

@@ -11,7 +11,9 @@ import diagram.behaviour.DragBehaviour;
 import diagram.behaviour.SelectionBehaviour;
 import diagram.canvas.DiagramCanvasApplication;
 import diagram.canvas.DiagramSettings;
+import diagram.selection.SelectionMonitor;
 import diagram.selection.SelectionShape;
+import diagram.selection.ShapesManager;
 import diagram.shapes.CanvasShape;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.Node;
@@ -27,11 +29,9 @@ public class Content extends Pane {
    
    private LayerManager layers;
    private DiagramSettings canvasSettings;
-   private DragBehaviour dragBehaviour;
    private SelectionBehaviour selectionBehaviour;
    
-   private CanvasShape currentSelectedPolygon;
-   private SelectionShape currentSelection;
+   private ShapesManager shapesManager;
    
    /**
     * Constructs a new {@link Content}. 
@@ -42,8 +42,10 @@ public class Content extends Pane {
       new ContentController( this );
       this.canvasSettings = canvasSettings;
       layers = new LayerManager( getChildren() );
-      dragBehaviour = new DragBehaviour();
       selectionBehaviour = new SelectionBehaviour();
+      
+      shapesManager = new ShapesManager();
+      new SelectionMonitor( layers, shapesManager );
       
       setPrefWidth( 1000 );
       setPrefHeight( 1000 );
@@ -88,6 +90,7 @@ public class Content extends Pane {
             selectionBehaviour.registerForSelectionBehaviour( polygon );
             
             layers.addNodes( Layers.Content, polygon );
+            shapesManager.associate( null, polygon );
             break;
       }
    }//End Method
@@ -97,26 +100,15 @@ public class Content extends Pane {
     * @param node the {@link CanvasShape} to select.
     */
    void selectNode( CanvasShape node ) {
-      if ( node == currentSelectedPolygon ) {
-         return;
-      }
-      deselect();
-      currentSelection = new SelectionShape( node );
-      currentSelectedPolygon = node;
-      dragBehaviour.registerForDragOperations( currentSelection );
-
-      layers.addNodes( Layers.Selection, currentSelection );
-      layers.addNodes( Layers.Control, currentSelection.getComponents() );
+      shapesManager.deselectAll();
+      shapesManager.select( node );
    }//End Method
    
    /**
     * Method to deselect a {@link Node} by removing the current selection.
     */
    void deselect(){
-      if ( currentSelection != null ) {
-         layers.remove( currentSelection );
-         layers.remove( currentSelection.getComponents() );
-      }
+      shapesManager.deselectAll();
    }//End Method
    
 }//End Class

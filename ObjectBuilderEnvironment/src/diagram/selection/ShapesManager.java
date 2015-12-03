@@ -154,4 +154,12 @@ public class ShapesManager {
    public ObservableSet< Singleton > singletonSelection() {
       return singletonSelection;
    }
+
+   /**
+    * Method to clear selection for all objects.
+    */
+   public void deselectAll() {
+      canvasShapeSelection.clear();
+      singletonSelection.clear();
+   }//End Method
 }//End Class
