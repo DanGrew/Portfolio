@@ -26,6 +26,7 @@ import javafx.scene.shape.Ellipse;
  */
 public class SelectionShape extends Ellipse {
    
+   private final CanvasShape association;
    private List< Node > components;
 
    /**
@@ -33,6 +34,7 @@ public class SelectionShape extends Ellipse {
     * @param selected the {@link CanvasShape} being selected.
     */
    public SelectionShape( CanvasShape selected ) {
+      this.association = selected;
       setFill( Color.TRANSPARENT );
       setStroke( Color.ORANGE );
       setStrokeWidth( 3 );
@@ -62,6 +64,14 @@ public class SelectionShape extends Ellipse {
                resizer,
                rotator
       ) );
+   }//End Method
+   
+   /**
+    * Getter for the {@link CanvasShape} associated with the {@link SelectionShape}.
+    * @return the {@link CanvasShape} associated.
+    */
+   public CanvasShape getAssociation(){
+      return association;
    }//End Method
    
    /**

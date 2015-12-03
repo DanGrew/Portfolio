@@ -14,8 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;
+import diagram.shapes.CanvasShape;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import model.singleton.Singleton;
@@ -26,10 +25,11 @@ import model.singleton.Singleton;
  */
 public class ShapesManager {
    
-   private Set< EllipticPolygon > unassociated;
-   private Map< Singleton, Set< EllipticPolygon > > associations;
+   private Set< CanvasShape > unassociated;
+   private Map< Singleton, Set< CanvasShape > > associations;
    
-   private ObservableSet< EllipticPolygon > selection;
+   private ObservableSet< CanvasShape > canvasShapeSelection;
+   private ObservableSet< Singleton > singletonSelection;
 
    /**
     * Constructs a new {@link ShapesManager}.
@@ -37,48 +37,37 @@ public class ShapesManager {
    public ShapesManager() {
       unassociated = new LinkedHashSet<>();
       associations = new HashMap<>();
-      selection = FXCollections.observableSet();
+      canvasShapeSelection = FXCollections.observableSet();
+      singletonSelection = FXCollections.observableSet();
    }//End Constructor
-   
-   /**
-    * Method to build an {@link EllipticPolygon} for the given {@link Singleton} and {@link EllipticPolygonBuilder}.
-    * @param singleton the {@link Singleton} associated with the polygon.
-    * @param builder the {@link EllipticPolygonBuilder} to build an {@link EllipticPolygon}.
-    * @return the constructed {@link EllipticPolygon}.
-    */
-   public EllipticPolygon build( Singleton singleton, EllipticPolygonBuilder builder ) {
-      if ( builder == null ) {
-         return null;
-      }
-      EllipticPolygon polygon = new EllipticPolygon( builder );
-      populate( singleton, polygon );
-      return polygon;
-   }//End Method
 
    /**
-    * Getter for the {@link List} of {@link EllipticPolygon}s associated with the given {@link Singleton}.
-    * @param singleton the {@link Singleton} to get the {@link EllipticPolygon}s for.
-    * @return a {@link List} of {@link EllipticPolygon}s associated with the given {@link Singleton}.
+    * Getter for the {@link List} of {@link CanvasShape}s associated with the given {@link Singleton}.
+    * @param singleton the {@link Singleton} to get the {@link CanvasShape}s for.
+    * @return a {@link List} of {@link CanvasShape}s associated with the given {@link Singleton}.
     */
-   public List< EllipticPolygon > getPolygons( Singleton singleton ) {
+   public List< CanvasShape > getPolygons( Singleton singleton ) {
       return new ArrayList<>( associations.get( singleton ) );
    }//End Method
-
+   
    /**
-    * Method to associated the given {@link EllipticPolygon} with the given {@link Singleton}.
+    * Method to associated the given {@link CanvasShape} with the given {@link Singleton}.
     * @param singleton the {@link Singleton} associated, can be null.
-    * @param polygon the {@link EllipticPolygon} to associate.
+    * @param polygon the {@link CanvasShape} to associate.
     */
-   public void associate( Singleton singleton, EllipticPolygon polygon ) {
+   public void associate( Singleton singleton, CanvasShape polygon ) {
       populate( singleton, polygon );
+      if ( singletonSelection.contains( singleton ) ) {
+         canvasShapeSelection.add( polygon );
+      }
    }//End Method
    
    /**
     * Private method for populating associations.
     * @param singleton the {@link Singleton} to associate with, can be null.
-    * @param polygon the {@link EllipticPolygon} to associate.
+    * @param polygon the {@link CanvasShape} to associate.
     */
-   private void populate( Singleton singleton, EllipticPolygon polygon ) {
+   private void populate( Singleton singleton, CanvasShape polygon ) {
       if ( singleton != null ) {
          populateAssociated( singleton, polygon );
       }
@@ -86,20 +75,20 @@ public class ShapesManager {
    }//End Method
    
    /**
-    * Private method to populate unassociated {@link EllipticPolygon}s.
-    * @param polygon the {@link EllipticPolygon} to manage.
+    * Private method to populate unassociated {@link CanvasShape}s.
+    * @param polygon the {@link CanvasShape} to manage.
     */
-   private void populateUnassociated( EllipticPolygon polygon ) {
+   private void populateUnassociated( CanvasShape polygon ) {
       unassociated.add( polygon );
    }//End Method
    
    /**
-    * Private method to populate the association between the given {@link Singleton} and {@link EllipticPolygon}.
+    * Private method to populate the association between the given {@link Singleton} and {@link CanvasShape}.
     * @param singleton the {@link Singleton} associated, can be null.
-    * @param polygon the {@link EllipticPolygon} associated.
+    * @param polygon the {@link CanvasShape} associated.
     */
-   private void populateAssociated( Singleton singleton, EllipticPolygon polygon ) {
-      Set< EllipticPolygon > polygons = associations.get( singleton );
+   private void populateAssociated( Singleton singleton, CanvasShape polygon ) {
+      Set< CanvasShape > polygons = associations.get( singleton );
       if ( polygons == null ) {
          polygons = new LinkedHashSet<>();
          associations.put( singleton, polygons );
@@ -108,52 +97,61 @@ public class ShapesManager {
    }//End Method
 
    /**
-    * Method to select the given {@link EllipticPolygon}.
-    * @param polygon the {@link EllipticPolygon} to select.
+    * Method to select the given {@link CanvasShape}.
+    * @param polygon the {@link CanvasShape} to select.
     */
-   public void select( EllipticPolygon polygon ) {
+   public void select( CanvasShape polygon ) {
       if ( !unassociated.contains( polygon ) ) {
          return;
       }
-      selection.add( polygon );
+      canvasShapeSelection.add( polygon );
    }//End Method
 
    /**
-    * Method to select all {@link EllipticPolygon}s associated with the given {@link Singleton}.
+    * Method to select all {@link CanvasShape}s associated with the given {@link Singleton}.
     * @param singleton the {@link Singleton} to select.
     */
    public void select( Singleton singleton ) {
       if ( !associations.containsKey( singleton ) ) {
          return;
       }
-      selection.addAll( associations.get( singleton ) );
+      canvasShapeSelection.addAll( associations.get( singleton ) );
+      singletonSelection.add( singleton );
    }//End Method
    
    /**
-    * Method to deselect the given {@link EllipticPolygon}.
-    * @param polygon the {@link EllipticPolygon} to deselect.
+    * Method to deselect the given {@link CanvasShape}.
+    * @param polygon the {@link CanvasShape} to deselect.
     */
-   public void deselect( EllipticPolygon polygon ) {
-      selection.remove( polygon );
+   public void deselect( CanvasShape polygon ) {
+      canvasShapeSelection.remove( polygon );
    }//End Method
 
    /**
-    * Method to deselect all {@link EllipticPolygon}s associated with the given {@link Singleton}.
+    * Method to deselect all {@link CanvasShape}s associated with the given {@link Singleton}.
     * @param singleton the {@link Singleton} to deselect.
     */
    public void deselect( Singleton singleton ) {
       if ( !associations.containsKey( singleton ) ) {
          return;
       }
-      selection.removeAll( associations.get( singleton ) );
+      canvasShapeSelection.removeAll( associations.get( singleton ) );
+      singletonSelection.remove( singleton );
    }//End Method
    
    /**
-    * Method to get a {@link List} of all the selected {@link EllipticPolygon}s.
-    * @param all selected {@link EllipticPolygon}s.
+    * Method to get a {@link List} of all the selected {@link CanvasShape}s.
+    * @return all selected {@link CanvasShape}s.
     */
-   public ObservableSet< EllipticPolygon > selection() {
-      return selection;
+   public ObservableSet< CanvasShape > canvasShapeSelection() {
+      return canvasShapeSelection;
    }//End Method
    
+   /**
+    * Method to get a {@link List} of all the selected {@link Singleton}s.
+    * @return the selected {@link Singleton}s.
+    */
+   public ObservableSet< Singleton > singletonSelection() {
+      return singletonSelection;
+   }
 }//End Class

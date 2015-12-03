@@ -48,7 +48,7 @@ public class LayerManager {
     * Constructs a new {@link LayerManager}.
     * @param layeredObjects the {@link ObservableList} to order and layer/
     */
-   LayerManager( ObservableList< Node > layeredObjects ) {
+   public LayerManager( ObservableList< Node > layeredObjects ) {
       this.layeredObjects = layeredObjects;
       layerMapping = new HashMap<>();
       layerMapping.put( Layers.Content, new Layer( -1.0 ) );
@@ -61,7 +61,7 @@ public class LayerManager {
     * @param layer the {@link Layers} to add to.
     * @param nodes the {@link Node}s to add.
     */
-   void addNodes( Layers layer, Node... nodes ) {
+   public void addNodes( Layers layer, Node... nodes ) {
       addNodes( layer, Arrays.asList( nodes ) );
    }//End Method
 
@@ -70,7 +70,7 @@ public class LayerManager {
     * @param layer the {@link Layers} to add to.
     * @param nodes the {@link Node}s to add.
     */
-   void addNodes( Layers layer, Collection< Node > nodes ) {
+   public void addNodes( Layers layer, Collection< Node > nodes ) {
       nodes.forEach( node -> {
          layerMapping.get( layer ).layerNode( layeredObjects, node );
       } );
@@ -79,4 +79,21 @@ public class LayerManager {
       layeredObjects.clear();
       layeredObjects.addAll( sorted );
    }//End Method
+
+   /**
+    * Method to remove the given {@link Node} from the {@link LayerManager}.
+    * @param node the {@link Node} to remove.
+    */
+   public void remove( Node node ) {
+      layeredObjects.remove( node );
+   }//End Method
+   
+   /**
+    * Method to remove all the given {@link Node}s from the {@link LayerManager}.
+    * @param nodes the {@link Node}s to remove.
+    */
+   public void remove( Collection< Node > nodes ) {
+      layeredObjects.removeAll( nodes );
+   }//End Method
+   
 }//End Class

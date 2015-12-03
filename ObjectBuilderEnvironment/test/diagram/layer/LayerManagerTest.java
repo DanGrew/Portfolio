@@ -7,6 +7,8 @@
  */
 package diagram.layer;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -113,6 +115,30 @@ public class LayerManagerTest {
       Assert.assertEquals( object3, content.get( 0 ) );
       Assert.assertEquals( object2, content.get( 1 ) );
       Assert.assertEquals( object1, content.get( 2 ) );
+   }//End Method
+   
+   /**
+    * Prove that the {@link LayerManager} removes {@link Node}s from the associated content.
+    */
+   @Test public void shouldRemoveNodes(){
+      ObservableList< Node > content = FXCollections.observableArrayList();
+      LayerManager manager = new LayerManager( content );
+      
+      Rectangle object1 = new Rectangle();
+      manager.addNodes( Layers.Control, object1 );
+      Rectangle object3 = new Rectangle();
+      manager.addNodes( Layers.Content, object3 );
+      Rectangle object2 = new Rectangle();
+      manager.addNodes( Layers.Selection, object2 );
+      Assert.assertEquals( 3, content.size() );
+      
+      manager.remove( object3 );
+      Assert.assertEquals( 2, content.size() );
+      Assert.assertEquals( object2, content.get( 0 ) );
+      Assert.assertEquals( object1, content.get( 1 ) );
+      
+      manager.remove( Arrays.asList( object2, object1 ) );
+      Assert.assertTrue( content.isEmpty() );
    }//End Method
    
 }//End Class

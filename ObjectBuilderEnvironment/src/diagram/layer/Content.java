@@ -114,8 +114,8 @@ public class Content extends Pane {
     */
    void deselect(){
       if ( currentSelection != null ) {
-         getChildren().remove( currentSelection );
-         getChildren().removeAll( currentSelection.getComponents() );
+         layers.remove( currentSelection );
+         layers.remove( currentSelection.getComponents() );
       }
    }//End Method
    
