@@ -37,9 +37,9 @@ public class ContentControllerTest {
       Content content = Mockito.mock( Content.class );
       new ContentController( content );
       
-      EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( 100, -50 ) );
+      EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( null, 100, -50 ) );
       Thread.sleep( 1000 );
-      Mockito.verify( content ).addShape( 100, -50 );
+      Mockito.verify( content ).addShape( null, 100, -50 );
       Mockito.verifyNoMoreInteractions( content );
    }//End Method
    

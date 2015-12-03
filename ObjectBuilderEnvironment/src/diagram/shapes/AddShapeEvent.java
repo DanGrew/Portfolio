@@ -8,6 +8,7 @@
 package diagram.shapes;
 
 import diagram.layer.Content;
+import model.singleton.Singleton;
 
 /**
  * The {@link AddShapeEvent} provides the event and information for adding a shape to
@@ -15,17 +16,18 @@ import diagram.layer.Content;
  */
 public class AddShapeEvent {
    
-   /** X position to add the shape at.**/
+   public final Singleton association;
    public final double xPosition;
-   /** Y position to add the shape at.**/
    public final double yPosition;
    
    /**
     * Constructs a new {@link AddShapeEvent}.
+    * @param association the {@link Singleton} associated.
     * @param xPosition the {@link #xPosition}.
     * @param yPosition the {@link #yPosition}.
     */
-   public AddShapeEvent( double xPosition, double yPosition ) {
+   public AddShapeEvent( Singleton association, double xPosition, double yPosition ) {
+      this.association = association;
       this.xPosition = xPosition;
       this.yPosition = yPosition;
    }//End Constructor

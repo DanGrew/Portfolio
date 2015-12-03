@@ -31,7 +31,7 @@ public class ContentTest {
       Content content = new Content( new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
-      content.addShape( 100, -230 );
+      content.addShape( null, 100, -230 );
       Node shape = content.getChildren().get( 0 );
       Assert.assertNotNull( shape );
       Assert.assertTrue( shape instanceof EllipticPolygon );
@@ -51,7 +51,7 @@ public class ContentTest {
       Content content = new Content( settings );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
-      content.addShape( 0, 0 );
+      content.addShape( null, 0, 0 );
       Node shape = content.getChildren().get( 0 );
       Assert.assertNotNull( shape );
       Assert.assertTrue( shape instanceof EllipticPolygon );
@@ -67,9 +67,9 @@ public class ContentTest {
       Content content = new Content( new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
-      content.addShape( 1, 100 );
-      content.addShape( 2, 100 );
-      content.addShape( 3, 100 );
+      content.addShape( null, 1, 100 );
+      content.addShape( null, 2, 100 );
+      content.addShape( null, 3, 100 );
       Assert.assertEquals( 3, content.getChildren().size() );
       Assert.assertEquals( 1, ( ( EllipticPolygon )content.getChildren().get( 0 ) ).centreXProperty().get(), TestCommon.precision() );
       Assert.assertEquals( 2, ( ( EllipticPolygon )content.getChildren().get( 1 ) ).centreXProperty().get(), TestCommon.precision() );
@@ -83,7 +83,7 @@ public class ContentTest {
       Content content = new Content( new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
-      content.addShape( 100, 100 );
+      content.addShape( null, 100, 100 );
       content.selectNode( ( EllipticPolygon )content.getChildren().get( 0 ) );
       
       Assert.assertEquals( 4, content.getChildren().size() );
@@ -100,8 +100,8 @@ public class ContentTest {
       Content content = new Content( new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
-      content.addShape( 100, 100 );
-      content.addShape( 200, 200 );
+      content.addShape( null, 100, 100 );
+      content.addShape( null, 200, 200 );
       Assert.assertEquals( 2, content.getChildren().size() );
       
       content.selectNode( ( EllipticPolygon )content.getChildren().get( 1 ) );
@@ -122,8 +122,8 @@ public class ContentTest {
       Content content = new Content( new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
-      content.addShape( 100, 100 );
-      content.addShape( 200, 200 );
+      content.addShape( null, 100, 100 );
+      content.addShape( null, 200, 200 );
       Assert.assertEquals( 2, content.getChildren().size() );
       
       content.selectNode( ( EllipticPolygon )content.getChildren().get( 1 ) );

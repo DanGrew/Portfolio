@@ -7,12 +7,10 @@
  */
 package diagram.layer;
 
-import diagram.behaviour.DragBehaviour;
 import diagram.behaviour.SelectionBehaviour;
 import diagram.canvas.DiagramCanvasApplication;
 import diagram.canvas.DiagramSettings;
 import diagram.selection.SelectionMonitor;
-import diagram.selection.SelectionShape;
 import diagram.selection.ShapesManager;
 import diagram.shapes.CanvasShape;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
@@ -21,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Shape;
+import model.singleton.Singleton;
 
 /**
  * The {@link Content} is responsible for holding all content for the {@link DiagramCanvasApplication}.
@@ -53,10 +52,11 @@ public class Content extends Pane {
    
    /**
     * Method to add a {@link Shape} to the {@link Content}.
+    * @param singleton the {@link Singleton} associated.
     * @param x the x coordinate of the shape.
     * @param y the y coordinate of the shape.
     */
-   void addShape( double x, double y ){
+   void addShape( Singleton singleton, double x, double y ){
       switch ( canvasSettings.getNumberOfSides() ) {
          case 0:
             Ellipse circle = new Ellipse();
@@ -90,7 +90,7 @@ public class Content extends Pane {
             selectionBehaviour.registerForSelectionBehaviour( polygon );
             
             layers.addNodes( Layers.Content, polygon );
-            shapesManager.associate( null, polygon );
+            shapesManager.associate( singleton, polygon );
             break;
       }
    }//End Method

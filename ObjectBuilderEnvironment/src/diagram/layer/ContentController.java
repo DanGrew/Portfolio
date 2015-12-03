@@ -37,7 +37,7 @@ public class ContentController {
     * @param event the {@link AddShapeEvent}.
     */
    private void handleAddShape( AddShapeEvent event ){
-      contentLayer.addShape( event.xPosition, event.yPosition );
+      contentLayer.addShape( event.association, event.xPosition, event.yPosition );
    }//End Method
    
    /**

@@ -40,7 +40,7 @@ public class ShapeControls extends Pane {
                   contentHolder 
          );
          EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( 
-                  scaledPoint.getX(), scaledPoint.getY()
+                  null, scaledPoint.getX(), scaledPoint.getY()
          ) );  
       });
       layoutXProperty().bind( viewport.widthProperty().subtract( 100 ) );

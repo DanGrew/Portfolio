@@ -77,6 +77,7 @@ public class SelectionMonitor {
       SelectionShape selectionShape = selections.get( removed );
       layers.remove( selectionShape );
       layers.remove( selectionShape.getComponents() );
+      selections.remove( removed );
    }//End Method
    
    /**

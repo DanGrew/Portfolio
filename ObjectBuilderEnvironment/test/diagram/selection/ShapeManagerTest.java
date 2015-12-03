@@ -83,6 +83,22 @@ public class ShapeManagerTest {
    }//End Method
    
    /**
+    * Prove that the {@link ShapesManager} can select polygons not associated with {@link Singleton}s.
+    */
+   @Test public void shouldSelectAssociatedIndividually(){
+      ShapesManager shapes = new ShapesManager();
+      EllipticPolygonBuilder builder = new EllipticPolygonBuilder( PolygonType.Regular, 4 );
+      EllipticPolygon polygon = new EllipticPolygon( builder );
+      
+      Singleton singleton = Mockito.mock( Singleton.class );
+      shapes.associate( singleton, polygon );
+      shapes.select( polygon );
+      
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.canvasShapeSelection() );
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.singletonSelection() );
+   }//End Method
+   
+   /**
     * Prove that the {@link ShapesManager} can select multiple polygons that are unassociated.
     */
    @Test public void shouldSelectMultipleUnassociated(){

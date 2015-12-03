@@ -139,12 +139,31 @@ public class SelectionMonitorTest {
       singletonSelection.remove( singleton );
       assertSelectionShapesArePresent( polygon3 );
    }//End Method
+   
+   /**
+    * Prove that a shape can be selected, deselected, then reselected correctly.
+    */
+   @Test public void shouldSelectDeselectAndReselect(){
+      EllipticPolygon polygon = new EllipticPolygon( new EllipticPolygonBuilder( PolygonType.Regular, 4 ) );
+      canvasShapeSelection.add( polygon );
+      Assert.assertFalse( layeredObjects.isEmpty() );
+      canvasShapeSelection.clear();
+      Assert.assertTrue( layeredObjects.isEmpty() );
+      canvasShapeSelection.add( polygon );
+      Assert.assertFalse( layeredObjects.isEmpty() );
+      
+      Assert.assertTrue( layeredObjects.get( 0 ) instanceof SelectionShape );
+      SelectionShape selectionShape = ( SelectionShape )layeredObjects.get( 0 );
+      Assert.assertEquals( polygon, selectionShape.getAssociation() );
+      Assert.assertEquals( 1 + selectionShape.getComponents().size(), layeredObjects.size() );
+      Assert.assertTrue( layeredObjects.containsAll( selectionShape.getComponents() ) );
+   }//End Method
     
    /**
     * Method to assert that the given {@link CanvasShape}s are selected correctly.
     * @param expectedShapes the {@link CanvasShape}s expected.
     */
-   private  void assertSelectionShapesArePresent( CanvasShape... expectedShapes ){
+   private void assertSelectionShapesArePresent( CanvasShape... expectedShapes ){
       Assert.assertFalse( layeredObjects.isEmpty() );
       int componentCount = 0;
       for ( int i = 0; i < expectedShapes.length; i++ ) {
