@@ -40,6 +40,8 @@ public enum ContentEvents {
    PanEvent, 
    /** Select the {@link Node} associated with the event. **/
    SelectNode, 
+   /** Deselect the {@link Node} associated with the event. **/
+   DeselectNode, 
    /** Add a shape at the given position, {@link AddShapeEvent} given. **/
    AddShape 
 

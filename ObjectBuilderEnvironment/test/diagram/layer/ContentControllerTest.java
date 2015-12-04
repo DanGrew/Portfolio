@@ -53,7 +53,21 @@ public class ContentControllerTest {
       EllipticPolygon polygon = Mockito.mock( EllipticPolygon.class );
       EventSystem.raiseEvent( ContentEvents.SelectNode, polygon );
       Thread.sleep( 1000 );
-      Mockito.verify( content ).selectNode( polygon );
+      Mockito.verify( content ).select( polygon );
+      Mockito.verifyNoMoreInteractions( content );
+   }//End Method
+
+   /**
+    * Test for deselecting a shape from event.
+    */
+   @Test public void shouldTriggerDeselect() throws InterruptedException {
+      Content content = Mockito.mock( Content.class );
+      new ContentController( content );
+      
+      EllipticPolygon polygon = Mockito.mock( EllipticPolygon.class );
+      EventSystem.raiseEvent( ContentEvents.DeselectNode, polygon );
+      Thread.sleep( 1000 );
+      Mockito.verify( content ).deselect( polygon );
       Mockito.verifyNoMoreInteractions( content );
    }//End Method
 

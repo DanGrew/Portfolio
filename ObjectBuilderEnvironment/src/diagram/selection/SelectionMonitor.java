@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import diagram.behaviour.DragBehaviour;
+import diagram.behaviour.SelectionBehaviour;
 import diagram.layer.LayerManager;
 import diagram.layer.Layers;
 import diagram.shapes.CanvasShape;
@@ -26,6 +27,7 @@ public class SelectionMonitor {
    private LayerManager layers;
    private ShapesManager shapes;
    private DragBehaviour dragBehaviour;
+   private SelectionBehaviour selectionBehaviour;
    private Map< CanvasShape, SelectionShape > selections;
    
    /**
@@ -37,6 +39,7 @@ public class SelectionMonitor {
       this.layers = layers;
       this.shapes = shapes;
       dragBehaviour = new DragBehaviour();
+      selectionBehaviour = new SelectionBehaviour();
       selections = new HashMap<>();
       shapes.canvasShapeSelection().addListener( ( Change< ? extends CanvasShape > change ) -> {
          polygonAdded( change.getElementAdded() );
@@ -60,6 +63,7 @@ public class SelectionMonitor {
       SelectionShape currentSelection = new SelectionShape( added );
       selections.put( added, currentSelection );
       dragBehaviour.registerForDragOperations( currentSelection );
+      selectionBehaviour.registerForSelectionBehaviour( currentSelection, added );
 
       layers.addNodes( Layers.Selection, currentSelection );
       layers.addNodes( Layers.Control, currentSelection.getComponents() );

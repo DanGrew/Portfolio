@@ -29,7 +29,9 @@ public class ContentController {
       this.contentLayer = layer;
       
       JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> handleSelection( ( CanvasShape )source ) );
+      JavaFxEventSystem.registerForEvent( ContentEvents.DeselectNode, ( event, source ) -> handleDeselection( ( CanvasShape )source ) );
       JavaFxEventSystem.registerForEvent( ContentEvents.AddShape, ( event, source ) -> handleAddShape( ( AddShapeEvent )source ) );
+      
    }//End Constructor
    
    /**
@@ -45,7 +47,15 @@ public class ContentController {
     * @param node the {@link CanvasShape} to select.
     */
    private void handleSelection( CanvasShape node ) {
-      contentLayer.selectNode( node );
+      contentLayer.select( node );
+   }//End Method
+   
+   /**
+    * Method to handle the deselection of the given {@link CanvasShape}.
+    * @param node the {@link CanvasShape} to deselect.
+    */
+   private void handleDeselection( CanvasShape node ) {
+      contentLayer.deselect( node );
    }//End Method
    
 }//End Class

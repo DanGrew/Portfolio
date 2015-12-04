@@ -77,14 +77,14 @@ public class ContentTest {
    }//End Method
    
    /**
-    * {@link Content#selectNode(EllipticPolygon)} test.
+    * {@link Content#select(EllipticPolygon)} test.
     */
    @Test public void shouldAddSelectionElements(){
       Content content = new Content( new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
       content.addShape( null, 100, 100 );
-      content.selectNode( ( EllipticPolygon )content.getChildren().get( 0 ) );
+      content.select( ( EllipticPolygon )content.getChildren().get( 0 ) );
       
       Assert.assertEquals( 4, content.getChildren().size() );
       Assert.assertTrue( content.getChildren().get( 0 ) instanceof EllipticPolygon );
@@ -94,7 +94,7 @@ public class ContentTest {
    }//End Method
    
    /**
-    * {@link Content#selectNode(EllipticPolygon)} test.
+    * {@link Content#select(EllipticPolygon)} test.
     */
    @Test public void shouldSelectOnlyOne(){
       Content content = new Content( new DiagramSettings() );
@@ -104,8 +104,8 @@ public class ContentTest {
       content.addShape( null, 200, 200 );
       Assert.assertEquals( 2, content.getChildren().size() );
       
-      content.selectNode( ( EllipticPolygon )content.getChildren().get( 1 ) );
-      content.selectNode( ( EllipticPolygon )content.getChildren().get( 0 ) );
+      content.select( ( EllipticPolygon )content.getChildren().get( 1 ) );
+      content.select( ( EllipticPolygon )content.getChildren().get( 0 ) );
       
       Assert.assertEquals( 5, content.getChildren().size() );
       Assert.assertTrue( content.getChildren().get( 0 ) instanceof EllipticPolygon );
@@ -126,9 +126,9 @@ public class ContentTest {
       content.addShape( null, 200, 200 );
       Assert.assertEquals( 2, content.getChildren().size() );
       
-      content.selectNode( ( EllipticPolygon )content.getChildren().get( 1 ) );
-      content.selectNode( ( EllipticPolygon )content.getChildren().get( 0 ) );
-      content.deselect();
+      content.select( ( EllipticPolygon )content.getChildren().get( 1 ) );
+      content.select( ( EllipticPolygon )content.getChildren().get( 0 ) );
+      content.deselectAll();
       
       Assert.assertEquals( 2, content.getChildren().size() );
       Assert.assertTrue( content.getChildren().get( 0 ) instanceof EllipticPolygon );

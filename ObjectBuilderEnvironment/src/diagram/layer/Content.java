@@ -58,21 +58,7 @@ public class Content extends Pane {
     */
    void addShape( Singleton singleton, double x, double y ){
       switch ( canvasSettings.getNumberOfSides() ) {
-         case 0:
-            Ellipse circle = new Ellipse();
-            circle.setCenterX( x );
-            circle.setCenterY( y );
-            circle.setRadiusX( EllipticPolygon.getDefaultRadius() );
-            circle.setRadiusY( EllipticPolygon.getDefaultRadius() );
-      
-            circle.setFill( Color.TRANSPARENT );
-            circle.setStroke( Color.BLACK );
-            
-            selectionBehaviour.registerForSelectionBehaviour( circle );
-            
-            layers.addNodes( Layers.Content, circle );
-            break;
-         case 1: case 2:
+         case 0: case 1: case 2:
             break;
          case 3: case 4: case 5: case 6:
          case 7: case 8: case 9: case 10:
@@ -87,7 +73,7 @@ public class Content extends Pane {
             polygon.setStroke( Color.BLACK );
             polygon.setStrokeWidth( 1.0 );
             
-            selectionBehaviour.registerForSelectionBehaviour( polygon );
+            selectionBehaviour.registerForSelectionBehaviour( polygon, polygon );
             
             layers.addNodes( Layers.Content, polygon );
             shapesManager.associate( singleton, polygon );
@@ -99,15 +85,22 @@ public class Content extends Pane {
     * Method to select the given {@link CanvasShape}. This will create a duplicate that is bound to the given.
     * @param node the {@link CanvasShape} to select.
     */
-   void selectNode( CanvasShape node ) {
-      shapesManager.deselectAll();
+   void select( CanvasShape node ) {
       shapesManager.select( node );
    }//End Method
    
    /**
     * Method to deselect a {@link Node} by removing the current selection.
+    * @param node the {@link CanvasShape} to deselect.
     */
-   void deselect(){
+   void deselect( CanvasShape node ){
+      shapesManager.deselect( node );
+   }//End Method
+
+   /**
+    * Method to deselect everything in the {@link Content}.
+    */
+   void deselectAll() {
       shapesManager.deselectAll();
    }//End Method
    

@@ -9,6 +9,7 @@ package diagram.behaviour;
 
 import architecture.event.EventSystem;
 import diagram.layer.Content;
+import diagram.shapes.CanvasShape;
 import diagram.toolbox.ContentEvents;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
@@ -20,11 +21,25 @@ public class SelectionBehaviour {
 
    /**
     * Method to register the given {@link Node} as a selectable item.
-    * @param node the {@link Node} that can be selected.
+    * @param selectable the {@link Node} that can be selected.
+    * @param subject the {@link CanvasShape} subject associated.
     */
-   public void registerForSelectionBehaviour( Node node ) {
-      node.addEventFilter( MouseEvent.MOUSE_PRESSED, event -> {
-        EventSystem.raiseEvent( ContentEvents.SelectNode, node );
+   public void registerForSelectionBehaviour( Node selectable, CanvasShape subject ) {
+      selectable.addEventFilter( MouseEvent.MOUSE_PRESSED, event -> {
+         switch ( event.getButton() ) {
+            case MIDDLE:
+               break;
+            case NONE:
+               break;
+            case PRIMARY:
+               EventSystem.raiseEvent( ContentEvents.SelectNode, subject );
+               break;
+            case SECONDARY:
+               EventSystem.raiseEvent( ContentEvents.DeselectNode, subject );
+               break;
+            default:
+               break;
+         }
       } );
    }//End Method
 }//End Class
