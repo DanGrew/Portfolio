@@ -32,10 +32,10 @@ public class SelectionBehaviour {
             case NONE:
                break;
             case PRIMARY:
-               EventSystem.raiseEvent( ContentEvents.SelectNode, subject );
+               EventSystem.raiseEvent( ContentEvents.SelectShapes, subject );
                break;
             case SECONDARY:
-               EventSystem.raiseEvent( ContentEvents.DeselectNode, subject );
+               EventSystem.raiseEvent( ContentEvents.DeselectShapes, subject );
                break;
             default:
                break;

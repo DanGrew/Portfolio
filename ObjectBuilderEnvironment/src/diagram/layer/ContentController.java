@@ -7,7 +7,8 @@
  */
 package diagram.layer;
 
-import diagram.shapes.AddShapeEvent;
+import diagram.events.AddShapeEvent;
+import diagram.events.SelectShapesEvent;
 import diagram.shapes.CanvasShape;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
@@ -28,8 +29,8 @@ public class ContentController {
    ContentController( Content layer ) {
       this.contentLayer = layer;
       
-      JavaFxEventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> handleSelection( ( CanvasShape )source ) );
-      JavaFxEventSystem.registerForEvent( ContentEvents.DeselectNode, ( event, source ) -> handleDeselection( ( CanvasShape )source ) );
+      JavaFxEventSystem.registerForEvent( ContentEvents.SelectShapes, ( event, source ) -> handleSelection( ( SelectShapesEvent )source ) );
+      JavaFxEventSystem.registerForEvent( ContentEvents.DeselectShapes, ( event, source ) -> handleDeselection( ( SelectShapesEvent )source ) );
       JavaFxEventSystem.registerForEvent( ContentEvents.AddShape, ( event, source ) -> handleAddShape( ( AddShapeEvent )source ) );
       
    }//End Constructor
@@ -44,18 +45,22 @@ public class ContentController {
    
    /**
     * Method to handle the selection of the given {@link CanvasShape}.
-    * @param node the {@link CanvasShape} to select.
+    * @param event the {@link SelectShapesEvent}.
     */
-   private void handleSelection( CanvasShape node ) {
-      contentLayer.select( node );
+   private void handleSelection( SelectShapesEvent event ) {
+      for ( CanvasShape shape : event.selectedShapes ) {
+         contentLayer.select( shape );
+      }
    }//End Method
    
    /**
     * Method to handle the deselection of the given {@link CanvasShape}.
-    * @param node the {@link CanvasShape} to deselect.
+    * @param event the {@link SelectShapesEvent}.
     */
-   private void handleDeselection( CanvasShape node ) {
-      contentLayer.deselect( node );
+   private void handleDeselection( SelectShapesEvent event ) {
+      for ( CanvasShape shape : event.selectedShapes ) {
+         contentLayer.deselect( shape );
+      }
    }//End Method
    
 }//End Class

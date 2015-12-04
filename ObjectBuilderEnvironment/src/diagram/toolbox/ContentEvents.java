@@ -7,11 +7,12 @@
  */
 package diagram.toolbox;
 
+import diagram.events.AddShapeEvent;
 import diagram.layer.Content;
-import diagram.shapes.AddShapeEvent;
-import javafx.scene.Node;
+import diagram.shapes.CanvasShape;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.ZoomEvent;
+import model.singleton.Singleton;
 import object.BuilderObject;
 
 /**
@@ -38,10 +39,14 @@ public enum ContentEvents {
    PanLeft,
    /** Pan around the content, moving all items, using gestures, {@link ScrollEvent} given.**/
    PanEvent, 
-   /** Select the {@link Node} associated with the event. **/
-   SelectNode, 
-   /** Deselect the {@link Node} associated with the event. **/
-   DeselectNode, 
+   /** Select the {@link CanvasShape}s associated with the event. **/
+   SelectShapes, 
+   /** Deselect the {@link CanvasShape}s associated with the event. **/
+   DeselectShapes,
+   /** Select the {@link Singleton}s associated with the event. **/
+   SelectSingletons, 
+   /** Deselect the {@link Singleton}s associated with the event. **/
+   DeselectSingletons, 
    /** Add a shape at the given position, {@link AddShapeEvent} given. **/
    AddShape 
 

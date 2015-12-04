@@ -8,8 +8,8 @@
 package diagram.canvas;
 
 import architecture.event.EventSystem;
+import diagram.events.AddShapeEvent;
 import diagram.layer.Content;
-import diagram.shapes.AddShapeEvent;
 import diagram.toolbox.ContentEvents;
 import javafx.geometry.Point2D;
 import javafx.scene.Node;

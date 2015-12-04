@@ -7,9 +7,12 @@
  */
 package outline.configuration;
 
+import javafx.collections.ListChangeListener;
+import javafx.scene.control.TreeItem;
 import object.BuilderObject;
 import objecttype.Definition;
 import outline.SystemOutline;
+import outline.describer.OutlineDescriber;
 import propertytype.PropertyType;
 
 /**
@@ -35,6 +38,7 @@ public class SystemOutlineDetail {
    private boolean definitionsShown = false;
    private boolean builderObjectsShown = false;
    private boolean valueColumnsShown = false;
+   private ListChangeListener< TreeItem< OutlineDescriber > > selectionHandler;
    
    /**
     * Whether the {@link PropertyType}s are shown or not.
@@ -106,6 +110,24 @@ public class SystemOutlineDetail {
    public SystemOutlineDetail valueColumnsShown( boolean valueColumnsShown ) {
       this.valueColumnsShown = valueColumnsShown;
       return this;
+   }//End Method
+   
+   /**
+    * Set the {@link ListChangeListener} to be associated with the selection in the table.
+    * @param handler the {@link ListChangeListener}.
+    * @return the {@link SystemOutlineDetail}.
+    */
+   public SystemOutlineDetail selectionHandler( ListChangeListener< TreeItem< OutlineDescriber > > handler ) {
+      this.selectionHandler = handler;
+      return this;
+   }//End Method
+   
+   /**
+    * Getter for the {@link ListChangeListener} to be associated with the selection.
+    * @return the {@link ListChangeListener}.
+    */
+   public ListChangeListener< TreeItem< OutlineDescriber > > getSelectionHandler(){
+      return selectionHandler;
    }//End Method
    
    /**

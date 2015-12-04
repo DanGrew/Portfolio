@@ -17,7 +17,6 @@ import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Shape;
 import model.singleton.Singleton;
 

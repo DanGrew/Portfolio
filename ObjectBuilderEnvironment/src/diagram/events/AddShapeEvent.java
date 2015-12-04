@@ -5,7 +5,7 @@
  *          Produced by Dan Grew
  * ----------------------------------------
  */
-package diagram.shapes;
+package diagram.events;
 
 import diagram.layer.Content;
 import model.singleton.Singleton;

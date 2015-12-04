@@ -12,7 +12,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import architecture.event.EventSystem;
-import diagram.shapes.AddShapeEvent;
+import diagram.events.AddShapeEvent;
+import diagram.events.SelectShapesEvent;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.toolbox.ContentEvents;
 import graphics.JavaFxInitializer;
@@ -51,7 +52,7 @@ public class ContentControllerTest {
       new ContentController( content );
       
       EllipticPolygon polygon = Mockito.mock( EllipticPolygon.class );
-      EventSystem.raiseEvent( ContentEvents.SelectNode, polygon );
+      EventSystem.raiseEvent( ContentEvents.SelectShapes, new SelectShapesEvent( polygon ) );
       Thread.sleep( 1000 );
       Mockito.verify( content ).select( polygon );
       Mockito.verifyNoMoreInteractions( content );
@@ -65,7 +66,7 @@ public class ContentControllerTest {
       new ContentController( content );
       
       EllipticPolygon polygon = Mockito.mock( EllipticPolygon.class );
-      EventSystem.raiseEvent( ContentEvents.DeselectNode, polygon );
+      EventSystem.raiseEvent( ContentEvents.DeselectShapes, new SelectShapesEvent( polygon ) );
       Thread.sleep( 1000 );
       Mockito.verify( content ).deselect( polygon );
       Mockito.verifyNoMoreInteractions( content );

@@ -13,7 +13,7 @@ import model.singleton.Singleton;
  * Basic implementation of {@link OutlineDescriber} that displays the name and description of
  * an associated {@link Singleton}.
  */
-public class SingletonDescriberImpl< SingletonT extends Singleton > extends OutlineDescriberImpl implements OutlineDescriber {
+public class SingletonDescriberImpl< SingletonT extends Singleton > extends OutlineDescriberImpl implements OutlineDescriber, SingletonDescriber {
 
    private SingletonT singleton; 
    
@@ -31,7 +31,7 @@ public class SingletonDescriberImpl< SingletonT extends Singleton > extends Outl
     * Method to determine whether there is a {@link Singleton} associated.
     * @return true if the {@link Singleton} is not null.
     */
-   public boolean hasSingleton(){
+   @Override public boolean hasSingleton(){
       return singleton != null;
    }// End Method
    
@@ -39,7 +39,7 @@ public class SingletonDescriberImpl< SingletonT extends Singleton > extends Outl
     * Getter for the {@link Singleton} associated.
     * @return the {@link Singleton}.
     */
-   public SingletonT getSingleton(){
+   @Override public SingletonT getSingleton(){
       return singleton;
    }// End Method
    

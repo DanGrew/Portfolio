@@ -37,7 +37,7 @@ public class SelectionBehaviourTest {
       behaviour.registerForSelectionBehaviour( pane, subject );
       
       BooleanProperty received = new SimpleBooleanProperty( false );
-      EventSystem.registerForEvent( ContentEvents.SelectNode, ( event, source ) -> {
+      EventSystem.registerForEvent( ContentEvents.SelectShapes, ( event, source ) -> {
          received.set( true );
          Assert.assertEquals( subject, source );
       } );
@@ -62,7 +62,7 @@ public class SelectionBehaviourTest {
       behaviour.registerForSelectionBehaviour( pane, subject );
       
       BooleanProperty received = new SimpleBooleanProperty( false );
-      EventSystem.registerForEvent( ContentEvents.DeselectNode, ( event, source ) -> {
+      EventSystem.registerForEvent( ContentEvents.DeselectShapes, ( event, source ) -> {
          received.set( true );
          Assert.assertEquals( subject, source );
       } );
