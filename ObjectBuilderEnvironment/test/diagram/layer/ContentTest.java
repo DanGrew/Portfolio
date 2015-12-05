@@ -96,7 +96,7 @@ public class ContentTest {
    /**
     * {@link Content#select(EllipticPolygon)} test.
     */
-   @Test public void shouldSelectOnlyOne(){
+   @Test public void shouldSelectMultiple(){
       Content content = new Content( new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
@@ -107,12 +107,15 @@ public class ContentTest {
       content.select( ( EllipticPolygon )content.getChildren().get( 1 ) );
       content.select( ( EllipticPolygon )content.getChildren().get( 0 ) );
       
-      Assert.assertEquals( 5, content.getChildren().size() );
+      Assert.assertEquals( 8, content.getChildren().size() );
       Assert.assertTrue( content.getChildren().get( 0 ) instanceof EllipticPolygon );
       Assert.assertTrue( content.getChildren().get( 1 ) instanceof EllipticPolygon );
       Assert.assertTrue( content.getChildren().get( 2 ) instanceof SelectionShape );
-      Assert.assertTrue( content.getChildren().get( 3 ) instanceof ResizePoint );
-      Assert.assertTrue( content.getChildren().get( 4 ) instanceof RotationPoint );
+      Assert.assertTrue( content.getChildren().get( 3 ) instanceof SelectionShape );
+      Assert.assertTrue( content.getChildren().get( 4 ) instanceof ResizePoint );
+      Assert.assertTrue( content.getChildren().get( 5 ) instanceof RotationPoint );
+      Assert.assertTrue( content.getChildren().get( 6 ) instanceof ResizePoint );
+      Assert.assertTrue( content.getChildren().get( 7 ) instanceof RotationPoint );
    }//End Method
    
    /**
