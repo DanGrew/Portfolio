@@ -84,7 +84,7 @@ public class ContentTest {
       
       Assert.assertTrue( content.getChildren().isEmpty() );
       content.addShape( null, 100, 100 );
-      content.select( ( EllipticPolygon )content.getChildren().get( 0 ) );
+      content.shapesManager().select( ( EllipticPolygon )content.getChildren().get( 0 ) );
       
       Assert.assertEquals( 4, content.getChildren().size() );
       Assert.assertTrue( content.getChildren().get( 0 ) instanceof EllipticPolygon );
@@ -104,8 +104,8 @@ public class ContentTest {
       content.addShape( null, 200, 200 );
       Assert.assertEquals( 2, content.getChildren().size() );
       
-      content.select( ( EllipticPolygon )content.getChildren().get( 1 ) );
-      content.select( ( EllipticPolygon )content.getChildren().get( 0 ) );
+      content.shapesManager().select( ( EllipticPolygon )content.getChildren().get( 1 ) );
+      content.shapesManager().select( ( EllipticPolygon )content.getChildren().get( 0 ) );
       
       Assert.assertEquals( 8, content.getChildren().size() );
       Assert.assertTrue( content.getChildren().get( 0 ) instanceof EllipticPolygon );
@@ -129,9 +129,9 @@ public class ContentTest {
       content.addShape( null, 200, 200 );
       Assert.assertEquals( 2, content.getChildren().size() );
       
-      content.select( ( EllipticPolygon )content.getChildren().get( 1 ) );
-      content.select( ( EllipticPolygon )content.getChildren().get( 0 ) );
-      content.deselectAll();
+      content.shapesManager().select( ( EllipticPolygon )content.getChildren().get( 1 ) );
+      content.shapesManager().select( ( EllipticPolygon )content.getChildren().get( 0 ) );
+      content.shapesManager().deselectAll();
       
       Assert.assertEquals( 2, content.getChildren().size() );
       Assert.assertTrue( content.getChildren().get( 0 ) instanceof EllipticPolygon );

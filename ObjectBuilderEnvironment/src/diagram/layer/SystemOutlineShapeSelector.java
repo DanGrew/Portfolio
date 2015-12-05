@@ -30,11 +30,16 @@ public class SystemOutlineShapeSelector implements ListChangeListener< TreeItem<
    
    /**
     * Constructs a new {@link SystemOutlineShapeSelector}.
-    * @param selection the {@link ObservableList} containing the selection.
     */
-   public SystemOutlineShapeSelector( ObservableList< TreeItem< OutlineDescriber > > selection ) {
+   public SystemOutlineShapeSelector() {}
+   
+   /**
+    * Method to monitor the {@link ObservableList} representing the selection.
+    * @param selection the {@link ObservableList} of selected items.
+    */
+   public void monitorSelection( ObservableList< TreeItem< OutlineDescriber > > selection ) {
       selection.addListener( this );
-   }//End Constructor
+   }//End Method
 
    /**
     * {@inheritDoc}

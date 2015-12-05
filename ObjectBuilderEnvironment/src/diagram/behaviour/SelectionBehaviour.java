@@ -8,6 +8,7 @@
 package diagram.behaviour;
 
 import architecture.event.EventSystem;
+import diagram.events.SelectShapesEvent;
 import diagram.layer.Content;
 import diagram.shapes.CanvasShape;
 import diagram.toolbox.ContentEvents;
@@ -32,10 +33,10 @@ public class SelectionBehaviour {
             case NONE:
                break;
             case PRIMARY:
-               EventSystem.raiseEvent( ContentEvents.SelectShapes, subject );
+               EventSystem.raiseEvent( ContentEvents.SelectShapes, new SelectShapesEvent( subject ) );
                break;
             case SECONDARY:
-               EventSystem.raiseEvent( ContentEvents.DeselectShapes, subject );
+               EventSystem.raiseEvent( ContentEvents.DeselectShapes, new SelectShapesEvent( subject ) );
                break;
             default:
                break;

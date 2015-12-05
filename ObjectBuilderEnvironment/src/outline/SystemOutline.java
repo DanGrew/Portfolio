@@ -212,7 +212,7 @@ public class SystemOutline extends BorderPane {
       treeTableView.setTableMenuButtonVisible( true );
       treeTableView.setOnScrollFinished( event -> updateColumnHeadersForView( treeTableView ) );
       if ( detail.getSelectionHandler() != null ) {
-         treeTableView.getSelectionModel().getSelectedItems().addListener( detail.getSelectionHandler() );
+         detail.getSelectionHandler().monitorSelection( treeTableView.getSelectionModel().getSelectedItems() );
       }
       setCenter( treeTableView );
    }// End Method

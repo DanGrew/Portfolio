@@ -9,9 +9,11 @@ package diagram.layer;
 
 import diagram.events.AddShapeEvent;
 import diagram.events.SelectShapesEvent;
+import diagram.events.SelectSingletonsEvent;
 import diagram.shapes.CanvasShape;
 import diagram.toolbox.ContentEvents;
 import graphics.event.JavaFxEventSystem;
+import model.singleton.Singleton;
 
 /**
  * The {@link ContentController} is responsible for controlling the {@link Content} and
@@ -29,9 +31,11 @@ public class ContentController {
    ContentController( Content layer ) {
       this.contentLayer = layer;
       
+      JavaFxEventSystem.registerForEvent( ContentEvents.AddShape, ( event, source ) -> handleAddShape( ( AddShapeEvent )source ) );
       JavaFxEventSystem.registerForEvent( ContentEvents.SelectShapes, ( event, source ) -> handleSelection( ( SelectShapesEvent )source ) );
       JavaFxEventSystem.registerForEvent( ContentEvents.DeselectShapes, ( event, source ) -> handleDeselection( ( SelectShapesEvent )source ) );
-      JavaFxEventSystem.registerForEvent( ContentEvents.AddShape, ( event, source ) -> handleAddShape( ( AddShapeEvent )source ) );
+      JavaFxEventSystem.registerForEvent( ContentEvents.SelectSingletons, ( event, source ) -> handleSelection( ( SelectSingletonsEvent )source ) );
+      JavaFxEventSystem.registerForEvent( ContentEvents.DeselectSingletons, ( event, source ) -> handleDeselection( ( SelectSingletonsEvent )source ) );
       
    }//End Constructor
    
@@ -49,7 +53,7 @@ public class ContentController {
     */
    private void handleSelection( SelectShapesEvent event ) {
       for ( CanvasShape shape : event.selectedShapes ) {
-         contentLayer.select( shape );
+         contentLayer.shapesManager().select( shape );
       }
    }//End Method
    
@@ -59,7 +63,27 @@ public class ContentController {
     */
    private void handleDeselection( SelectShapesEvent event ) {
       for ( CanvasShape shape : event.selectedShapes ) {
-         contentLayer.deselect( shape );
+         contentLayer.shapesManager().deselect( shape );
+      }
+   }//End Method
+   
+   /**
+    * Method to handle the selection of the given {@link Singleton}s.
+    * @param event the {@link SelectShapesEvent}.
+    */
+   private void handleSelection( SelectSingletonsEvent event ) {
+      for ( Singleton singleton : event.selectedSingletons ) {
+         contentLayer.shapesManager().select( singleton );
+      }
+   }//End Method
+   
+   /**
+    * Method to handle the deselection of the given {@link Singleton}s.
+    * @param event the {@link SelectShapesEvent}.
+    */
+   private void handleDeselection( SelectSingletonsEvent event ) {
+      for ( Singleton singleton : event.selectedSingletons ) {
+         contentLayer.shapesManager().deselect( singleton );
       }
    }//End Method
    

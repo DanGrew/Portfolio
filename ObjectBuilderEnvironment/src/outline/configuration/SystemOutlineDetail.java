@@ -7,12 +7,11 @@
  */
 package outline.configuration;
 
+import diagram.layer.SystemOutlineShapeSelector;
 import javafx.collections.ListChangeListener;
-import javafx.scene.control.TreeItem;
 import object.BuilderObject;
 import objecttype.Definition;
 import outline.SystemOutline;
-import outline.describer.OutlineDescriber;
 import propertytype.PropertyType;
 
 /**
@@ -21,24 +20,11 @@ import propertytype.PropertyType;
  */
 public class SystemOutlineDetail {
    
-   private static final SystemOutlineDetail COMPLETE_SYSTEM_OUTLINE = 
-         new SystemOutlineDetail()
-               .propertyTypesShown( true )
-               .definitionsShown( true )
-               .builderObjectsShown( true )
-               .valueColumnsShown( true );
-   private static final SystemOutlineDetail SYSTEM_REFERENCE_OUTLINE = 
-         new SystemOutlineDetail()
-               .propertyTypesShown( false )
-               .definitionsShown( false )
-               .builderObjectsShown( true )
-               .valueColumnsShown( false );
-   
    private boolean propertyTypesShown = false;
    private boolean definitionsShown = false;
    private boolean builderObjectsShown = false;
    private boolean valueColumnsShown = false;
-   private ListChangeListener< TreeItem< OutlineDescriber > > selectionHandler;
+   private SystemOutlineShapeSelector selectionHandler;
    
    /**
     * Whether the {@link PropertyType}s are shown or not.
@@ -117,7 +103,7 @@ public class SystemOutlineDetail {
     * @param handler the {@link ListChangeListener}.
     * @return the {@link SystemOutlineDetail}.
     */
-   public SystemOutlineDetail selectionHandler( ListChangeListener< TreeItem< OutlineDescriber > > handler ) {
+   public SystemOutlineDetail selectionHandler( SystemOutlineShapeSelector handler ) {
       this.selectionHandler = handler;
       return this;
    }//End Method
@@ -126,7 +112,7 @@ public class SystemOutlineDetail {
     * Getter for the {@link ListChangeListener} to be associated with the selection.
     * @return the {@link ListChangeListener}.
     */
-   public ListChangeListener< TreeItem< OutlineDescriber > > getSelectionHandler(){
+   public SystemOutlineShapeSelector getSelectionHandler(){
       return selectionHandler;
    }//End Method
    
@@ -135,7 +121,11 @@ public class SystemOutlineDetail {
     * @return the {@link SystemOutlineDetail} for all detail.
     */
    public static final SystemOutlineDetail completeSystemOutline(){
-      return COMPLETE_SYSTEM_OUTLINE;
+      return new SystemOutlineDetail()
+                  .propertyTypesShown( true )
+                  .definitionsShown( true )
+                  .builderObjectsShown( true )
+                  .valueColumnsShown( true );
    }//End Method
    
    /**
@@ -144,7 +134,11 @@ public class SystemOutlineDetail {
     * @return the {@link SystemOutlineDetail} for reference only data.
     */
    public static final SystemOutlineDetail systemReferenceOutline(){
-      return SYSTEM_REFERENCE_OUTLINE;
+      return new SystemOutlineDetail()
+                  .propertyTypesShown( false )
+                  .definitionsShown( false )
+                  .builderObjectsShown( true )
+                  .valueColumnsShown( false );
    }//End Method
    
 }//End Class

@@ -8,6 +8,7 @@
 package launch;
 
 import diagram.canvas.DiagramCanvas;
+import diagram.layer.SystemOutlineShapeSelector;
 import gui.CommandPrompt;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -80,7 +81,10 @@ public class Perspectives extends HBox {
     */
    private void setupPerspectives(){
       completeSystemOutline = new SystemOutline( SystemOutlineDetail.completeSystemOutline() );
-      referenceSystemOutline = new SystemOutline( SystemOutlineDetail.systemReferenceOutline() );
+      referenceSystemOutline = new SystemOutline( 
+               SystemOutlineDetail.systemReferenceOutline()
+                  .selectionHandler( new SystemOutlineShapeSelector() )
+      );
       commandPrompt = new CommandPrompt();
       diagramCanvas = new DiagramCanvas();
    }//End Method

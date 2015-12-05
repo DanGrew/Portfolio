@@ -44,13 +44,14 @@ public class SystemOutlineShapeSelectorTest {
       waiter = new ThreadWaiter( 2000 );
       selection = FXCollections.observableArrayList();
       results = new ArrayList<>();
-      new SystemOutlineShapeSelector( selection );
+      SystemOutlineShapeSelector selector = new SystemOutlineShapeSelector();
+      selector.monitorSelection( selection );
    }//End Method
    
    /**
     * Prove the constructor constructs without error.
     */
-   @Test public void shouldConstruct() {
+   @Test public void shouldConstructAndSet() {
       //test covered by the before.
    }//End Method
    

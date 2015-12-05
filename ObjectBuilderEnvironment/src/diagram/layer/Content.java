@@ -81,26 +81,11 @@ public class Content extends Pane {
    }//End Method
    
    /**
-    * Method to select the given {@link CanvasShape}. This will create a duplicate that is bound to the given.
-    * @param node the {@link CanvasShape} to select.
+    * Getter for the {@link ShapesManager} associated, used to control selection.
+    * @return the {@link ShapesManager}.
     */
-   void select( CanvasShape node ) {
-      shapesManager.select( node );
-   }//End Method
-   
-   /**
-    * Method to deselect a {@link Node} by removing the current selection.
-    * @param node the {@link CanvasShape} to deselect.
-    */
-   void deselect( CanvasShape node ){
-      shapesManager.deselect( node );
-   }//End Method
-
-   /**
-    * Method to deselect everything in the {@link Content}.
-    */
-   void deselectAll() {
-      shapesManager.deselectAll();
+   ShapesManager shapesManager(){
+      return shapesManager;
    }//End Method
    
 }//End Class
