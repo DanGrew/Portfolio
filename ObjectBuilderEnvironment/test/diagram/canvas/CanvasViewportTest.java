@@ -122,20 +122,7 @@ public class CanvasViewportTest {
       pane.setPrefWidth( 4532 );
       pane.setPrefHeight( 38981 );
       CanvasViewport viewport = new CanvasViewport( pane );
-
-      final BooleanProperty received = new SimpleBooleanProperty( false );
-      EventSystem.registerForEvent( ContentEvents.AddShape, ( event, source ) -> {
-         //Note: can't really test values here because we need bounds and a scene.
-         received.set( true );
-      } );
-      
-      final double mouseX = 3948;
-      final double mouseY = -2039109.128;
-      DragEvent event = new DragEvent( null, null, mouseX, mouseY, 0, 0, null, null, null, null );
-      viewport.getOnDragOver().handle( event );
-      viewport.getOnDragDropped().handle( event );
-      
-      Assert.assertTrue( received.get() );
+      Assert.assertTrue( viewport.getOnDragDropped() instanceof CanvasViewportSingletonDropper );
    }//End Method
    
    /**

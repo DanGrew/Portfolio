@@ -38,6 +38,7 @@ public class CanvasViewportSingletonDropperTest {
    private Singleton singleton;
    private Singleton singleton2;
    private List< AddShapeEvent > results;
+   private int expectedEvents = 10;
    private CanvasViewportSingletonDropper systemUnderTest;
    private ThreadWaiter waiter;
    
@@ -59,7 +60,9 @@ public class CanvasViewportSingletonDropperTest {
       EventSystem.registerForEvent( ContentEvents.AddShape, ( event, source ) -> {
          Assert.assertTrue( source instanceof AddShapeEvent );
          results.add( ( AddShapeEvent )source );
-         waiter.interrupt();
+         if ( results.size() == expectedEvents ) {
+            waiter.interrupt();
+         }
       } );
    }//End Method
 
@@ -67,6 +70,7 @@ public class CanvasViewportSingletonDropperTest {
     * Prove that a single {@link Singleton} can be dropped.
     */
    @Test public void shouldDropIndividualSingleton() {
+      expectedEvents = 1;
       waiter.assertions( () -> {
          Assert.assertEquals( 1, results.size() );
          AddShapeEvent firstEvent = results.get( 0 );
@@ -91,6 +95,7 @@ public class CanvasViewportSingletonDropperTest {
     * Prove that multiple {@link Singleton}s can be dropped.
     */
    @Test public void shouldDropMultipleSingletons() {
+      expectedEvents = 2;
       Dragboard dragboard = ProtectedClasses.DragBoard();
       waiter.assertions( () -> {
          Assert.assertEquals( 2, results.size() );
@@ -114,6 +119,7 @@ public class CanvasViewportSingletonDropperTest {
     * Prove that no events are raised when nothing is dropped.
     */
    @Test public void shouldRaiseNoEventsForNothingBeingDropped() {
+      expectedEvents = 1;
       AddShapeEvent interruptionEvent = Mockito.mock( AddShapeEvent.class );
       waiter.assertions( () -> {
          Assert.assertEquals( 1, results.size() );

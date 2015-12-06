@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.request.RequestSystem;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 
@@ -28,6 +29,7 @@ public class OutlineDescriberImplTest {
     * Method to setup the {@link Singleton}s for the test.
     */
    @BeforeClass public static void setup(){
+      RequestSystem.reset();
       type1 = new PropertyTypeImpl( "type1", String.class );
       describer = new PropertyTypeDescriber( type1 );      
    }// End Method
