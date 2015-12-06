@@ -7,6 +7,7 @@
  */
 package diagram.selection;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -417,5 +418,15 @@ public class ShapeManagerTest {
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.singletonSelection() );
    }//End Method
-
+   
+   /**
+    * Prove that getting the shapes associated with a {@link Singleton} provides a safe return
+    * when the {@link Singleton} is not managed.
+    */
+   @Test public void shouldProvideSafeGetForSingletonsNotManaged(){
+      ShapesManager shapes = new ShapesManager();
+      Singleton singleton = Mockito.mock( Singleton.class );
+      Assert.assertEquals( new ArrayList<>(), shapes.getPolygons( singleton ) );
+   }//End Method
+   
 }//End Class

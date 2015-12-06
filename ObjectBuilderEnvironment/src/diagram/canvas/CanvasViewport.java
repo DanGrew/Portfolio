@@ -50,11 +50,11 @@ public class CanvasViewport extends Pane {
       } );
       
       setOnDragDropped( event -> {
-         Singleton singleton = DragAndDrop.drop( event.getDragboard() );
-         Point2D scaledPoint = ShapesAndVectors.scaleClick( event.getX(), event.getY(), contentHolder );
-         EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( 
-                  singleton, scaledPoint.getX(), scaledPoint.getY()
-         ) );
+//         Singleton singleton = DragAndDrop.drop( event.getDragboard() );
+//         Point2D scaledPoint = ShapesAndVectors.scaleClick( event.getX(), event.getY(), contentHolder );
+//         EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( 
+//                  singleton, scaledPoint.getX(), scaledPoint.getY()
+//         ) );
       } );
       setOnDragOver( event -> {
          event.acceptTransferModes( TransferMode.MOVE );

@@ -7,12 +7,15 @@
  */
 package diagram.behaviour;
 
+import java.util.Arrays;
+
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import architecture.event.EventSystem;
+import diagram.events.SelectShapesEvent;
 import diagram.shapes.CanvasShape;
 import diagram.toolbox.ContentEvents;
 import javafx.beans.property.BooleanProperty;
@@ -20,6 +23,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import utility.TestCommon;
 
 /**
  * Test for {@link SelectionBehaviour}.
@@ -39,7 +43,9 @@ public class SelectionBehaviourTest {
       BooleanProperty received = new SimpleBooleanProperty( false );
       EventSystem.registerForEvent( ContentEvents.SelectShapes, ( event, source ) -> {
          received.set( true );
-         Assert.assertEquals( subject, source );
+         Assert.assertTrue( source instanceof SelectShapesEvent );
+         SelectShapesEvent selectEvent = ( SelectShapesEvent )source;
+         TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( subject ), selectEvent.selectedShapes );
       } );
       
       MouseEvent event = new MouseEvent( 
@@ -64,7 +70,9 @@ public class SelectionBehaviourTest {
       BooleanProperty received = new SimpleBooleanProperty( false );
       EventSystem.registerForEvent( ContentEvents.DeselectShapes, ( event, source ) -> {
          received.set( true );
-         Assert.assertEquals( subject, source );
+         Assert.assertTrue( source instanceof SelectShapesEvent );
+         SelectShapesEvent selectEvent = ( SelectShapesEvent )source;
+         TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( subject ), selectEvent.selectedShapes );
       } );
       
       MouseEvent event = new MouseEvent( 

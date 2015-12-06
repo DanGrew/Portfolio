@@ -11,18 +11,16 @@ import java.util.List;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 
-import diagram.canvas.DragAndDrop;
 import javafx.Workarounds;
 import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.ObservableList;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableRow;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
-import javafx.scene.input.ClipboardContent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import model.singleton.Singleton;
 import objecttype.Definition;
@@ -107,8 +105,12 @@ public class SystemOutline extends BorderPane {
    /**
     * Method to create the first column representing the {@link Singleton} structure in the system.
     * @param parent the {@link TreeTableView} to add the column to.
+    * @param selection the {@link ObservableList} for the selection from the {@link TreeTableView}.
     */
-   private void createElementsColumn( TreeTableView< OutlineDescriber > parent ) {
+   private void createElementsColumn( 
+            TreeTableView< OutlineDescriber > parent, 
+            ObservableList< TreeItem< OutlineDescriber > > selection 
+   ) {
       TreeTableColumn< OutlineDescriber, String > elementsColumn = new TreeTableColumn<>( ELEMENTS );
       elementsColumn.setPrefWidth( 200 );
       elementsColumn.setCellFactory( list -> {
@@ -127,15 +129,7 @@ public class SystemOutline extends BorderPane {
                 }
             }
         };
-        cell.setOnDragDetected( event -> {
-           Dragboard dragBoard = cell.startDragAndDrop(TransferMode.ANY);
-           Singleton singleton = ( Singleton )cell.getTreeTableRow().getItem().getSubject();
-           if ( singleton == null ) {
-              return;
-           }
-           ClipboardContent content = DragAndDrop.drag( singleton );
-           dragBoard.setContent( content );
-        } );
+        cell.setOnDragDetected( new SystemOutlineDragger( cell, selection ) );
         return cell;
       } );
       elementsColumn.setCellValueFactory( param -> 
@@ -199,8 +193,9 @@ public class SystemOutline extends BorderPane {
 
       TreeTableView< OutlineDescriber > treeTableView = new TreeTableView<>( root );
       treeTableView.setEditable( true );
+      treeTableView.getSelectionModel().setSelectionMode( SelectionMode.MULTIPLE );
       
-      createElementsColumn( treeTableView );
+      createElementsColumn( treeTableView, treeTableView.getSelectionModel().getSelectedItems() );
       
       if ( detail.isValueColumnsShown() ) {
          for ( int i = 1; i < 20; i++ ) {

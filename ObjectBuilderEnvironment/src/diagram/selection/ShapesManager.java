@@ -47,7 +47,12 @@ public class ShapesManager {
     * @return a {@link List} of {@link CanvasShape}s associated with the given {@link Singleton}.
     */
    public List< CanvasShape > getPolygons( Singleton singleton ) {
-      return new ArrayList<>( associations.get( singleton ) );
+      Set< CanvasShape > shapes = associations.get( singleton );
+      if ( shapes == null ) {
+         return new ArrayList<>();
+      } else {
+         return new ArrayList<>( shapes );
+      }
    }//End Method
    
    /**
