@@ -49,13 +49,7 @@ public class CanvasViewport extends Pane {
          zoomViewport( event.getZoomFactor(), event.getZoomFactor() );  
       } );
       
-      setOnDragDropped( event -> {
-//         Singleton singleton = DragAndDrop.drop( event.getDragboard() );
-//         Point2D scaledPoint = ShapesAndVectors.scaleClick( event.getX(), event.getY(), contentHolder );
-//         EventSystem.raiseEvent( ContentEvents.AddShape, new AddShapeEvent( 
-//                  singleton, scaledPoint.getX(), scaledPoint.getY()
-//         ) );
-      } );
+      setOnDragDropped( new CanvasViewportSingletonDropper( contentHolder ) );
       setOnDragOver( event -> {
          event.acceptTransferModes( TransferMode.MOVE );
          event.consume();

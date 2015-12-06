@@ -15,6 +15,7 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;
+import javafx.util.Pair;
 import model.singleton.Singleton;
 
 /**
@@ -25,50 +26,31 @@ public class DragAndDrop {
    
    private static final String SINGLETON_COLLECTION = "SingletonCollection";
    static final DataFormat SINGLETON_COLLECTION_DATA_KEY = new DataFormat( SINGLETON_COLLECTION );
-   private static final String SINGLETON_NAME_KEY = "SingletonName";
-   static final DataFormat SINGLETON_NAME_DATA_KEY = new DataFormat( SINGLETON_NAME_KEY );
-   private static final String SINGLETON_CLASS_KEY = "SingletonClass";
-   static final DataFormat SINGLETON_NAME_CLASS_KEY = new DataFormat( SINGLETON_CLASS_KEY );
    
    /** This class provides a fixed generic implementation of {@link ArrayList} for serialization. **/
-   private static final class SerializableSingletonContent extends ArrayList< ClipboardContent > {
+   private static final class SerializableSingletonContent extends ArrayList< Pair< String, Class< ? > > > {
       private static final long serialVersionUID = 1L;
    }//End Class
 
    /**
     * Drag the given {@link Singleton} onto the {@link Clipboard}.
     * @param singleton the {@link Singleton} to drag.
-    * @return the {@link ClipboardContent} with th information for the given {@link Singleton}.
+    * @return the {@link Pair}, serializable, that can be dragged.
     */
-   public static ClipboardContent constructContent( Singleton singleton ) {
-      ClipboardContent content = new ClipboardContent();
-      content.put( SINGLETON_NAME_DATA_KEY, singleton.getIdentification() );
-      content.put( SINGLETON_NAME_CLASS_KEY, singleton.getClass() );
-      return content;
+   public static Pair< String, Class< ? > > constructContent( Singleton singleton ) {
+      return new Pair< String, Class< ? > >( singleton.getIdentification(), singleton.getClass() );
    }//End Method
 
    /**
-    * Method to drop the given {@link Singleton} contained on the {@link ClipboardContent}.
-    * @param board the {@link ClipboardContent} with the {@link Singleton} information.
-    * @return the dropped {@link Singleton}.
-    */
-   public static Singleton dropSingleton( ClipboardContent board ) {
-      Object name = board.get( SINGLETON_NAME_DATA_KEY );
-      Object clazz = board.get( SINGLETON_NAME_CLASS_KEY );
-      return getSingleton( name, clazz );
-   }//End Method
-   
-   /**
     * Method to get the {@link Singleton} for the given information added to the board.
-    * @param name the name of the {@link Singleton}.
-    * @param clazz the {@link Class} of the {@link Singleton}.
+    * @param pair the {@link Pair} describing the {@link Singleton}.
     * @return the resolved {@link Singleton}, or null.
     */
-   private static Singleton getSingleton( Object name, Object clazz ) {
-      if ( clazz instanceof Class< ? > ) {
-         @SuppressWarnings("unchecked") 
-         Class< Singleton > actualClass = ( Class< Singleton > )clazz;
-         return RequestSystem.retrieve( actualClass, name.toString() );
+   private static Singleton getSingleton( Pair< String, Class< ? > > pair ) {
+      if ( pair.getValue() instanceof Class< ? > ) {
+         @SuppressWarnings("unchecked")
+         Class< ? extends Singleton > singletonClass = ( Class< ? extends Singleton > )pair.getValue();
+         return RequestSystem.retrieve( singletonClass, pair.getKey() );
       }
       return null;
    }//End Method
@@ -79,34 +61,24 @@ public class DragAndDrop {
     * @return the {@link ClipboardContent} ready to be set on the {@link Dragboard}.
     */
    public static ClipboardContent constructContent( List< Singleton > singletons ) {
-      List< ClipboardContent > packagedSingletons = new SerializableSingletonContent();
+      List< Pair< String, Class< ? > > > packagedSingletons = new SerializableSingletonContent();
       for ( Singleton singleton : singletons ) {
          packagedSingletons.add( constructContent( singleton ) );
       }
       ClipboardContent containerContent = new ClipboardContent();
       containerContent.put( SINGLETON_COLLECTION_DATA_KEY, packagedSingletons );
-      
-      ClipboardContent wrapperForPuttingInDragboard = new ClipboardContent();
-      wrapperForPuttingInDragboard.put( SINGLETON_COLLECTION_DATA_KEY, containerContent );
-      return wrapperForPuttingInDragboard;
+      return containerContent;
    }//End Method
 
    /**
     * Method to drop the given {@link ClipboardContent}, resolving it back into {@link Singleton}s.
-    * @param content the {@link ClipboardContent} being dropped.
+    * @param content the {@link SerializableSingletonContent} to drop.
     * @return the {@link List} of resolved {@link Singleton}s.
     */
-   static List< Singleton > dropAll( ClipboardContent content ) {
-      Object data = content.get( SINGLETON_COLLECTION_DATA_KEY );
-      if ( data == null ) {
-         return null;
-      } else if ( !( data instanceof SerializableSingletonContent ) ){
-         return null;
-      }
-      List< ClipboardContent > packagedSingletons = ( SerializableSingletonContent )data;
+   static List< Singleton > dropAll( SerializableSingletonContent content ) {
       List< Singleton > unpackaged = new ArrayList<>();
-      for ( ClipboardContent packaged : packagedSingletons ) {
-         Singleton singleton = getSingleton( packaged.get( SINGLETON_NAME_DATA_KEY ), packaged.get( SINGLETON_NAME_CLASS_KEY ) );
+      for ( Pair< String, Class< ? > > packaged : content ) {
+         Singleton singleton = getSingleton( packaged );
          unpackaged.add( singleton );
       }
       return unpackaged;
@@ -121,10 +93,10 @@ public class DragAndDrop {
       Object data = dragboard.getContent( SINGLETON_COLLECTION_DATA_KEY );
       if ( data == null ) {
          return null;
-      } else if ( !( data instanceof ClipboardContent ) ) {
+      } else if ( !( data instanceof SerializableSingletonContent ) ){
          return null;
       }
-      return dropAll( ( ClipboardContent )data );
+      return dropAll( ( SerializableSingletonContent )data );
    }//End Method
 
 }//End Class

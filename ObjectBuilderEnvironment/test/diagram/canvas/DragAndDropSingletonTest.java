@@ -53,53 +53,6 @@ public class DragAndDropSingletonTest {
    }//End Method
 
    /**
-    * {@link DragAndDrop} test for passing a {@link Singleton} and resolving it.
-    */
-   @Test public void shouldDragAndDropSingleton() {
-      ClipboardContent content = DragAndDrop.constructContent( singleton );
-      
-      Singleton transferredSingleton = DragAndDrop.dropSingleton( content );
-      Assert.assertEquals( singleton, transferredSingleton );
-   }//End Method
-   
-   /**
-    * {@link DragAndDrop} test for passing a non {@link Singleton} {@link Class}.
-    */
-   @Test public void shouldDragAndDropNonSingleton() {
-      ClipboardContent content = DragAndDrop.constructContent( singleton );
-      content.put( DragAndDrop.SINGLETON_NAME_CLASS_KEY, String.class );
-      
-      Singleton transferredSingleton = DragAndDrop.dropSingleton( content );
-      Assert.assertNull( transferredSingleton );
-   }//End Method
-   
-   /**
-    * Prove that multiple {@link Singleton}s can be dragged onto the {@link Dragboard} and off again.
-    */
-   @Test public void shouldDragAndDropMultipleSingletons() {
-      List< Singleton > expected = Arrays.asList( singleton, singleton2, singleton3, singleton4 ); 
-      ClipboardContent content = DragAndDrop.constructContent( expected );
-      
-      List< Singleton > transferredSingletons = DragAndDrop.dropAll( 
-               ( ClipboardContent )content.get( DragAndDrop.SINGLETON_COLLECTION_DATA_KEY ) 
-      );
-      TestCommon.assertCollectionsSameOrderIrrelevant( expected, transferredSingletons );
-   }//End Method
-   
-   /**
-    * Prove that {@link ClipboardContent} without {@link Singleton}s is safely ignored.
-    */
-   @Test public void shouldIgnoreNonSingletonList(){
-      List< Singleton > transferredSingletons = DragAndDrop.dropAll( new ClipboardContent() );
-      Assert.assertNull( transferredSingletons );
-      
-      ClipboardContent contentWithIncorrectData = new ClipboardContent();
-      contentWithIncorrectData.put( DragAndDrop.SINGLETON_COLLECTION_DATA_KEY, new ClipboardContent() );
-      transferredSingletons = DragAndDrop.dropAll( contentWithIncorrectData );
-      Assert.assertNull( transferredSingletons );
-   }//End Method
-   
-   /**
     * Prove that {@link Singleton}s can be dropped using the {@link Dragboard} directly.
     */
    @Test public void shouldDropAllWithDragboard(){
