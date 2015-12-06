@@ -67,16 +67,9 @@ public class EllipticPolygon extends Polygon implements CanvasShape {
       inversionProperty.addListener( ( change, old, updated ) -> calculatePoints() );
       numberOfFractalsProperty = new SimpleIntegerProperty( builder.getNumberOfFractals() );
       numberOfFractalsProperty.addListener( ( change, old, updated ) -> calculatePoints() );
+      rotateProperty().set( builder.getRotateProperty() );
       calculatePoints();
    }//End Constructor
-   
-   /**
-    * Method to get the {@link PolygonType} associated with this type of {@link EllipticPolygon}.
-    * @return the {@link PolygonType}.
-    */
-   public ObjectProperty< PolygonType > polygonTypeProperty(){
-      return polygonTypeProperty;
-   }//End Method
    
    /**
     * Method to provide the calculation for the points in the {@link Polygon}.
@@ -103,6 +96,14 @@ public class EllipticPolygon extends Polygon implements CanvasShape {
          default:
             break;
       }
+   }//End Method
+   
+   /**
+    * Method to get the {@link PolygonType} associated with this type of {@link EllipticPolygon}.
+    * @return the {@link PolygonType}.
+    */
+   public ObjectProperty< PolygonType > polygonTypeProperty(){
+      return polygonTypeProperty;
    }//End Method
    
    /**

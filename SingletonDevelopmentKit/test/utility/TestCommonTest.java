@@ -10,6 +10,7 @@ package utility;
 import java.util.Arrays;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -80,6 +81,19 @@ public class TestCommonTest {
       List< String > a = Arrays.asList( "a", "b", "c" );
       List< String > b = Arrays.asList( "x", "y", "z" );
       TestCommon.assertIterators( a.iterator(), b.iterator(), ( s, t ) -> { return s.compareTo( t ) < 0; } );
+   }//End Method
+   
+   /**
+    * Prove that a random number can be generated within a range.
+    */
+   @Test public void shouldGenerateRandomWithinRange(){
+      final double min = 35000;
+      final double max = 35678;
+      for ( int i = 0; i < 1000000; i++ ) {
+         double random = TestCommon.random( min, max );
+         Assert.assertTrue( random >= min );
+         Assert.assertTrue( random <= max );
+      }
    }//End Method
 
 }//End Class

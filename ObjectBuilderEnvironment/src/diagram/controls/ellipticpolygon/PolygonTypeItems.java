@@ -13,6 +13,7 @@ import diagram.shapes.PolygonType;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
 import javafx.beans.binding.Bindings;
+import javafx.scene.control.Button;
 
 /**
  * {@link GridItemSelection} for the items to configure the {@link PolygonType} of an
@@ -52,11 +53,35 @@ public class PolygonTypeItems extends GridItemSelection {
     * @return the {@link EllipticPolygon} graphic.
     */
    private static EllipticPolygon preparePolygon( EllipticPolygon configured, EllipticPolygon graphic ) {
-      Bindings.bindBidirectional( configured.numberOfSidesProperty(), graphic.numberOfSidesProperty() );
-      Bindings.bindBidirectional( configured.rotateProperty(), graphic.rotateProperty() );
-      Bindings.bindBidirectional( configured.inversionProperty(), graphic.inversionProperty() );
-      Bindings.bindBidirectional( configured.numberOfFractalsProperty(), graphic.numberOfFractalsProperty() );
+      Bindings.bindBidirectional( graphic.numberOfSidesProperty(), configured.numberOfSidesProperty() );
+      Bindings.bindBidirectional( graphic.rotateProperty(), configured.rotateProperty() );
+      Bindings.bindBidirectional( graphic.inversionProperty(), configured.inversionProperty() );
+      Bindings.bindBidirectional( graphic.numberOfFractalsProperty(), configured.numberOfFractalsProperty() );
       return graphic;
+   }//End Method
+
+   /**
+    * Getter for the {@link Button} responsible for making an {@link EllipticPolygon} {@link PolygonType#Regular}.
+    * @return the {@link Button}.
+    */
+   public Button regularButton() {
+      return ( Button )getChildren().get( 0 );
+   }//End Method
+
+   /**
+    * Getter for the {@link Button} responsible for making an {@link EllipticPolygon} {@link PolygonType#Starred}.
+    * @return the {@link Button}.
+    */
+   public Button starredButton() {
+      return ( Button )getChildren().get( 1 );
+   }//End Method
+
+   /**
+    * Getter for the {@link Button} responsible for making an {@link EllipticPolygon} {@link PolygonType#Fractal}.
+    * @return the {@link Button}.
+    */
+   public Button fractalButton() {
+      return ( Button )getChildren().get( 2 );
    }//End Method
 
 }//End Class

@@ -22,6 +22,7 @@ public class EllipticPolygonBuilder {
    private double verticalRadiusProperty;
    private boolean inversionProperty;
    private int numberOfFractals;
+   private double rotateProperty;
    
    /**
     * Constructs a new {@link EllipticPolygonBuilder}.
@@ -98,6 +99,16 @@ public class EllipticPolygonBuilder {
       this.numberOfFractals = numberOfFractals;
       return this;
    }//End Method
+   
+   /**
+    * Configure {@link EllipticPolygon#rotateProperty()}.
+    * @param rotate the property.
+    * @return this {@link EllipticPolygonBuilder}.
+    */
+   public EllipticPolygonBuilder rotateProperty( double rotate ) {
+      this.rotateProperty = rotate;
+      return this;
+   }//End Method
 
    /**
     * Getter for the configured value of {@link EllipticPolygon#polygonTypeProperty()}.
@@ -161,6 +172,14 @@ public class EllipticPolygonBuilder {
     */
    public int getNumberOfFractals() {
       return numberOfFractals;
+   }//End Method
+   
+   /**
+    * Getter for the configured value of {@link EllipticPolygon#rotateProperty()}.
+    * @return the value.
+    */
+   public double getRotateProperty() {
+      return rotateProperty;
    }//End Method
    
 }//End Class

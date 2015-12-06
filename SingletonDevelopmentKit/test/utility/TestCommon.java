@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.function.BiPredicate;
 
 import org.junit.Assert;
@@ -15,6 +16,7 @@ import org.junit.Assert;
 public class TestCommon {
    
    private static final double DOUBLE_PRECISION = 0.001;
+   private static final Random RANDOM_NUMBER_GENERATOR = new Random();
 
    /**
     * Method to get the default double precision.
@@ -23,6 +25,45 @@ public class TestCommon {
    public static double precision(){
       return DOUBLE_PRECISION;
    }// End Method
+   
+   /**
+    * Method to get the next random number from {@link Random#nextDouble()}.
+    * @return the next random.
+    */
+   private static double random(){
+      return RANDOM_NUMBER_GENERATOR.nextDouble();
+   }//End Method
+   
+   /**
+    * Method to get the next random number scaled to the given range.
+    * @param min the minimum value the random could be.
+    * @param max the maximum value the random could be.
+    * @return the double between the given min and max.
+    */
+   static double random( double min, double max ) {
+      double range = max - min;
+      return random() * range + min;
+   }//End Method
+   
+   /**
+    * Method to get the next random number scaled to the given range.
+    * @param min the minimum value the random could be.
+    * @param max the maximum value the random could be.
+    * @return the int between the given min and max.
+    */
+   public static int randomInt( double min, double max ) {
+      return ( int )random( min, max );
+   }//End Method
+   
+   /**
+    * Method to get the next random number scaled to the given range.
+    * @param min the minimum value the random could be.
+    * @param max the maximum value the random could be.
+    * @return the double between the given min and max.
+    */
+   public static double randomDouble( double min, double max ) {
+      return random( min, max );
+   }//End Method
    
    /**
     * Method to assert that two {@link Collection}s are the same irrespective of order.
