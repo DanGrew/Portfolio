@@ -20,7 +20,7 @@ import javafx.beans.binding.Bindings;
 public class NumberOfSidesItems extends GridItemSelection {
 
    public NumberOfSidesItems( EllipticPolygon polygon ) {
-      super( 
+      populateGrid( 
                4, 2,
                new ButtonItemImpl( 
                         "3 Sides", 

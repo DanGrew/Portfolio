@@ -11,11 +11,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mockito;
 
+import diagram.selection.SelectionController;
+import diagram.selection.ShapesManagerSelectionControllerImpl;
+import diagram.selection.ShapesManager;
 import diagram.shapes.PolygonType;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;
 import graphics.JavaFxInitializer;
+import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
@@ -35,6 +40,8 @@ public class PolygonTypeItemsTest {
    private static final int DEFAULT_CENTRE_Y = 203;
    private static final int DEFAULT_CENTRE_X = 101;
    private EllipticPolygon polygon;
+   private ShapesManager shapes;
+   private SelectionController controller;
    private PolygonTypeItems systemUnderTest;
    
    /**
@@ -61,7 +68,12 @@ public class PolygonTypeItemsTest {
       );
       Assert.assertEquals( PolygonType.Starred, polygon.polygonTypeProperty().get() );
       
-      systemUnderTest = new PolygonTypeItems( polygon );
+      shapes = Mockito.mock( ShapesManager.class );
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( polygon ) );
+      Mockito.when( shapes.singletonSelection() ).thenReturn( FXCollections.observableSet() );
+      
+      controller = new ShapesManagerSelectionControllerImpl( shapes );
+      systemUnderTest = new PolygonTypeItems( controller );
       Assert.assertEquals( PolygonType.Starred, polygon.polygonTypeProperty().get() );
    }//End Method
    
@@ -117,7 +129,7 @@ public class PolygonTypeItemsTest {
     */
    @Test public void regularGraphicShouldMimicPolygon() {
       Button button = systemUnderTest.regularButton();
-      assertGraphicUpdates( button );
+      assertGraphicUpdates( button, PolygonType.Regular );
    }//End Method
    
    /**
@@ -125,7 +137,7 @@ public class PolygonTypeItemsTest {
     */
    @Test public void starredGraphicShouldMimicPolygon() {
       Button button = systemUnderTest.starredButton();
-      assertGraphicUpdates( button );
+      assertGraphicUpdates( button, PolygonType.Starred );
    }//End Method
    
    /**
@@ -133,58 +145,23 @@ public class PolygonTypeItemsTest {
     */
    @Test public void fractalGraphicShouldMimicPolygon() {
       Button button = systemUnderTest.fractalButton();
-      assertGraphicUpdates( button );
+      assertGraphicUpdates( button, PolygonType.Fractal );
    }//End Method
    
    /**
     * Method to obtain the graphic and verify that it and the associated {@link EllipticPolygon}
     * update together.
     * @param button the {@link Button} being tested.
+    * @param expectedType the expected {@link PolygonType} of the {@link Button}'s graphic.
     */
-   private void assertGraphicUpdates( Button button ) {
+   private void assertGraphicUpdates( Button button, PolygonType expectedType ) {
       Node graphic = button.getGraphic();
       Assert.assertTrue( graphic instanceof BorderPane );
       BorderPane pane = ( BorderPane )graphic;
       Assert.assertTrue( pane.getCenter() instanceof EllipticPolygon );
       EllipticPolygon graphicPolygon = ( EllipticPolygon )pane.getCenter();
       
-      assertPolygonTypeItemsGraphicPropertiesMatch( polygon, graphicPolygon );
-      modifyPolygonTypeItemsGraphicProperties( polygon );
-      assertPolygonTypeItemsGraphicPropertiesMatch( polygon, graphicPolygon );
-      modifyPolygonTypeItemsGraphicProperties( graphicPolygon );
-      assertPolygonTypeItemsGraphicPropertiesMatch( polygon, graphicPolygon );
+      Assert.assertEquals( expectedType, graphicPolygon.polygonTypeProperty().get() );
    }//End Method
    
-   /**
-    * Method to assert that the given two {@link EllipticPolygon}s match in their properties according to the
-    * requirements of the items.
-    */
-   private static void assertPolygonTypeItemsGraphicPropertiesMatch( EllipticPolygon polygon, EllipticPolygon graphicPolygon ){
-      Assert.assertEquals( polygon.numberOfSidesProperty().get(), graphicPolygon.numberOfSidesProperty().get() );
-      Assert.assertEquals( polygon.rotateProperty().get(), graphicPolygon.rotateProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( polygon.inversionProperty().get(), graphicPolygon.inversionProperty().get() );
-      Assert.assertEquals( polygon.numberOfFractalsProperty().get(), graphicPolygon.numberOfFractalsProperty().get() );
-   }//End Method
-   
-   /**
-    * Method to modify the contents of the given {@link EllipticPolygon}, randomly.
-    * @param polygon the {@link EllipticPolygon} to change.
-    */
-   private static void modifyPolygonTypeItemsGraphicProperties( EllipticPolygon polygon ) {
-      final int sides = TestCommon.randomInt( 3, 10 );
-      final double rotate = TestCommon.randomDouble( -180, 180 );
-      final boolean inversion = !polygon.inversionProperty().get();
-      final int fractals = TestCommon.randomInt( 0, 4 );      
-      
-      polygon.numberOfSidesProperty().set( sides );    
-      polygon.rotateProperty().set( rotate );           
-      polygon.inversionProperty().set( inversion );        
-      polygon.numberOfFractalsProperty().set( fractals ); 
-      
-      Assert.assertEquals( sides, polygon.numberOfSidesProperty().get() );
-      Assert.assertEquals( rotate, polygon.rotateProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( inversion, polygon.inversionProperty().get() );
-      Assert.assertEquals( fractals, polygon.numberOfFractalsProperty().get() );
-   }//End Method
-
 }//End Class

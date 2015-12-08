@@ -22,7 +22,7 @@ public class LocationItems extends GridItemSelection {
     * @param polygon the {@link EllipticPolygon} to control.
     */
    public LocationItems( EllipticPolygon polygon ) {
-      super( 
+      populateGrid( 
                2, 1, 
                new NumberSpinnerItemImpl( "X", Integer.MIN_VALUE, Integer.MAX_VALUE, polygon.translateXProperty() ),
                new NumberSpinnerItemImpl( "Y", Integer.MIN_VALUE, Integer.MAX_VALUE, polygon.translateYProperty() )

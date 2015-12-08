@@ -9,10 +9,9 @@ package diagram.controls.ellipticpolygon;
 
 import diagram.controls.ButtonItemImpl;
 import diagram.controls.GridItemSelection;
+import diagram.selection.SelectionController;
 import diagram.shapes.PolygonType;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
-import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 
 /**
@@ -21,44 +20,43 @@ import javafx.scene.control.Button;
  */
 public class PolygonTypeItems extends GridItemSelection {
 
+   private static final Object POLYGON_TYPE_REGULAR_KEY = new Object();
+   private static final Object POLYGON_TYPE_STARRED_KEY = new Object();
+   private static final Object POLYGON_TYPE_FRACTAL_KEY = new Object();
+   
    /**
     * Constructs a new {@link PolygonTypeItems}.
-    * @param polygon the {@link EllipticPolygon} to configure.
+    * @param selection the {@link SelectionController} to modify the current selection.
     */
-   public PolygonTypeItems( EllipticPolygon polygon ) {
-      super( 
+   public PolygonTypeItems( SelectionController selection ) {
+      selection.register( POLYGON_TYPE_REGULAR_KEY, polygon -> polygon.polygonTypeProperty().set( PolygonType.Regular ) );
+      selection.register( POLYGON_TYPE_STARRED_KEY, polygon -> polygon.polygonTypeProperty().set( PolygonType.Starred ) );
+      selection.register( POLYGON_TYPE_FRACTAL_KEY, polygon -> polygon.polygonTypeProperty().set( PolygonType.Fractal ) );
+      populateGrid( 
                2, 2,
                new ButtonItemImpl( 
                         "Regular", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getPolygon( polygon.getNumberOfSides(), PolygonType.Regular ) ), 
-                        () -> polygon.polygonTypeProperty().set( PolygonType.Regular ) 
+                        selection.constructRepresentativeGraphic( 
+                                 POLYGON_TYPE_REGULAR_KEY
+                        ),
+                        () -> selection.apply( POLYGON_TYPE_REGULAR_KEY )
                ),
                new ButtonItemImpl( 
                         "Starred", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getPolygon( polygon.getNumberOfSides(), PolygonType.Starred ) ), 
-                        () -> polygon.polygonTypeProperty().set( PolygonType.Starred ) 
+                        selection.constructRepresentativeGraphic( 
+                                 POLYGON_TYPE_STARRED_KEY
+                        ),
+                        () -> selection.apply( POLYGON_TYPE_STARRED_KEY ) 
                ),
                new ButtonItemImpl( 
                         "Fractal", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getPolygon( polygon.getNumberOfSides(), PolygonType.Fractal ) ), 
-                        () -> polygon.polygonTypeProperty().set( PolygonType.Fractal ) 
+                        selection.constructRepresentativeGraphic( 
+                                 POLYGON_TYPE_FRACTAL_KEY
+                        ),
+                        () -> selection.apply( POLYGON_TYPE_FRACTAL_KEY ) 
                )
             );
    }//End Constructor
-   
-   /**
-    * Method to bind the configurable {@link EllipticPolygon} to the graphical representation of the {@link EllipticPolygon}.
-    * @param configured the {@link EllipticPolygon} being configured.
-    * @param graphic the {@link EllipticPolygon} being shown on the {@link Button}.
-    * @return the {@link EllipticPolygon} graphic.
-    */
-   private static EllipticPolygon preparePolygon( EllipticPolygon configured, EllipticPolygon graphic ) {
-      Bindings.bindBidirectional( graphic.numberOfSidesProperty(), configured.numberOfSidesProperty() );
-      Bindings.bindBidirectional( graphic.rotateProperty(), configured.rotateProperty() );
-      Bindings.bindBidirectional( graphic.inversionProperty(), configured.inversionProperty() );
-      Bindings.bindBidirectional( graphic.numberOfFractalsProperty(), configured.numberOfFractalsProperty() );
-      return graphic;
-   }//End Method
 
    /**
     * Getter for the {@link Button} responsible for making an {@link EllipticPolygon} {@link PolygonType#Regular}.

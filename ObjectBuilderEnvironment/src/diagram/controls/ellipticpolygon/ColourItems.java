@@ -25,7 +25,7 @@ public class ColourItems extends GridItemSelection {
     * @param polygon {@link EllipticPolygon} to colour.
     */
    public ColourItems( EllipticPolygon polygon ) {
-      super( 
+      populateGrid( 
                2, 1, 
                prepareFill( polygon ),
                prepareStroke( polygon )

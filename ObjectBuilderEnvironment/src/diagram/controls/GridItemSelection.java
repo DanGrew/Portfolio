@@ -22,17 +22,13 @@ public class GridItemSelection extends GridPane {
 
    /**
     * Constructs a new {@link GridItemSelection}.
-    * @param rows the number of rows to use.
-    * @param columns the number of columns to use.
-    * @param items the {@link GridItem}s to display, in order left to right.
     */
-   public GridItemSelection( int rows, int columns, GridItem... items ) {
+   public GridItemSelection() {
       super();
       setPadding( new Insets( 10 ) );
       setHgap( 5 );
       setVgap( 5 );
       setPrefWidth( 300 );
-      populateGrid( rows, columns, items );
    }//End Constructor
    
    /**
@@ -41,7 +37,7 @@ public class GridItemSelection extends GridPane {
     * @param columns the number of columns to use.
     * @param items the {@link GridItem}s to display, in order left to right.
     */
-   private void populateGrid( int rows, int columns, GridItem... items ) {
+   protected void populateGrid( int rows, int columns, GridItem... items ) {
       List< GridItem > itemsToAdd = new ArrayList<>( Arrays.asList( items ) );
       for ( int i = 0; i < rows; i++ ) {
          for ( int j = 0; j < columns; j++ ) {

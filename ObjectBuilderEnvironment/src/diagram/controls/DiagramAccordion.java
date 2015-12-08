@@ -13,7 +13,6 @@ import diagram.controls.ellipticpolygon.InversionItems;
 import diagram.controls.ellipticpolygon.LocationItems;
 import diagram.controls.ellipticpolygon.NumberOfFractalsItems;
 import diagram.controls.ellipticpolygon.NumberOfSidesItems;
-import diagram.controls.ellipticpolygon.PolygonTypeItems;
 import diagram.controls.ellipticpolygon.RotationItems;
 import diagram.controls.ellipticpolygon.SizeItems;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
@@ -34,7 +33,7 @@ public class DiagramAccordion extends BorderPane {
    public DiagramAccordion( EllipticPolygon polygon ) {
       Accordion window = new Accordion();
       window.getPanes().addAll( 
-               new TitledPane( "Type", new PolygonTypeItems( polygon ) ),
+//               new TitledPane( "Type", new PolygonTypeItems( polygon ) ),
                new TitledPane( "Sides", new NumberOfSidesItems( polygon ) ),
                new TitledPane( "Fractals", new NumberOfFractalsItems( polygon ) ),
                new TitledPane( "Inversion", new InversionItems( polygon ) ),

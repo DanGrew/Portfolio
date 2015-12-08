@@ -25,7 +25,7 @@ public class InversionItems extends GridItemSelection {
     * @param polygon the {@link EllipticPolygon} associated, being controlled.
     */
    public InversionItems( EllipticPolygon polygon ) {
-      super( 
+      populateGrid( 
                1, 2,
                new ButtonItemImpl( 
                         "Standard", 

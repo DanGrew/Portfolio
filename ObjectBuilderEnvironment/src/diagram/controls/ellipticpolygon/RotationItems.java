@@ -22,7 +22,7 @@ public class RotationItems extends GridItemSelection {
     * @param polygon the {@link EllipticPolygon} to control.
     */
    public RotationItems( EllipticPolygon polygon ) {
-      super(   
+      populateGrid(   
                1, 1, 
                new SliderItemImpl( "Degrees", polygon.rotateProperty() )
                   .setRange( -180, 180 )

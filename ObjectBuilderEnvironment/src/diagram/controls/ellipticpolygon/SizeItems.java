@@ -22,7 +22,7 @@ public class SizeItems extends GridItemSelection {
     * @param polygon the {@link EllipticPolygon} to control.
     */
    public SizeItems( EllipticPolygon polygon ) {
-      super( 
+      populateGrid( 
                3, 1, 
                new NumberSpinnerItemImpl( "Horizontal Radius", 1, Integer.MAX_VALUE, polygon.horizontalRadiusProperty() ),
                new NumberSpinnerItemImpl( "Vertical Radius", 1, Integer.MAX_VALUE, polygon.verticalRadiusProperty() ),

@@ -24,7 +24,7 @@ public class NumberOfFractalsItems extends GridItemSelection {
     * @param polygon the {@link EllipticPolygon} to configure.
     */
    public NumberOfFractalsItems( EllipticPolygon polygon ) {
-      super( 
+      populateGrid( 
                2, 2,
                new ButtonItemImpl( 
                         "0 Fractals", 
