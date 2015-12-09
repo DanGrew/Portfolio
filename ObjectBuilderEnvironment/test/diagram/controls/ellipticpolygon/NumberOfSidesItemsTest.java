@@ -29,10 +29,11 @@ import utility.TestCommon;
 /**
  * {@link PolygonTypeItems} test.
  */
-public class PolygonTypeItemsTest {
+public class NumberOfSidesItemsTest {
    
+   private static final int TESTED_VALUE = 4;
+   private static final PolygonType DEFAULT_TYPE = PolygonType.Regular;
    private static final int DEFAULT_ROTATE = 189;
-   private static final int DEFAULT_NUMBER_OF_SIDES = 4;
    private static final int DEFAULT_FRACTAL = 1;
    private static final boolean DEFAULT_INVERSION = false;
    private static final int DEFAULT_VERTICAL_RADIUS = 564;
@@ -42,7 +43,7 @@ public class PolygonTypeItemsTest {
    private EllipticPolygon polygon;
    private ShapesManager shapes;
    private SelectionController controller;
-   private PolygonTypeItems systemUnderTest;
+   private NumberOfSidesItems systemUnderTest;
    
    /**
     * Method to initialise the environment for testing.
@@ -56,7 +57,7 @@ public class PolygonTypeItemsTest {
     */
    @Before public void initialiseSystemUnderTest(){
       polygon = new EllipticPolygon( 
-               new EllipticPolygonBuilder( PolygonType.Starred, DEFAULT_NUMBER_OF_SIDES )
+               new EllipticPolygonBuilder( DEFAULT_TYPE, TESTED_VALUE )
                   .centreXProperty( DEFAULT_CENTRE_X )
                   .centreYProperty( DEFAULT_CENTRE_Y )
                   .horizontalRadiusProperty( DEFAULT_HORIZONTAL_RADIUS )
@@ -66,22 +67,22 @@ public class PolygonTypeItemsTest {
                   .rotateProperty( DEFAULT_ROTATE )
                   
       );
-      Assert.assertEquals( PolygonType.Starred, polygon.polygonTypeProperty().get() );
+      Assert.assertEquals( TESTED_VALUE, polygon.numberOfSidesProperty().get() );
       
       shapes = Mockito.mock( ShapesManager.class );
       Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( polygon ) );
       Mockito.when( shapes.singletonSelection() ).thenReturn( FXCollections.observableSet() );
       
       controller = new ShapeManagerSelectionControllerImpl( shapes );
-      systemUnderTest = new PolygonTypeItems( controller );
-      Assert.assertEquals( PolygonType.Starred, polygon.polygonTypeProperty().get() );
+      systemUnderTest = new NumberOfSidesItems( controller );
+      Assert.assertEquals( TESTED_VALUE, polygon.numberOfSidesProperty().get() );
    }//End Method
    
    /**
     * Prove that the associated {@link EllipticPolygon} is not changed by the creation of the items.
     */
    @Test public void shouldRetainOriginalConfigurationOfPolygon(){
-      Assert.assertEquals( DEFAULT_NUMBER_OF_SIDES, polygon.numberOfSidesProperty().get() );
+      Assert.assertEquals( DEFAULT_TYPE, polygon.polygonTypeProperty().get() );
       Assert.assertEquals( DEFAULT_CENTRE_X, polygon.centreXProperty().get(), TestCommon.precision() );
       Assert.assertEquals( DEFAULT_CENTRE_Y, polygon.centreYProperty().get(), TestCommon.precision() );
       Assert.assertEquals( DEFAULT_HORIZONTAL_RADIUS, polygon.horizontalRadiusProperty().get(), TestCommon.precision() );
@@ -92,66 +93,37 @@ public class PolygonTypeItemsTest {
    }//End Method
 
    /**
-    * Prove that an {@link EllipticPolygon} can be made {@link PolygonType#Regular}.
+    * Prove that an {@link EllipticPolygon} can have the number of sides changed and nothing else.
     */
-   @Test public void shouldMakePolygonRegular() {
-      Button button = systemUnderTest.regularButton();
-      button.fire();
-      
-      Assert.assertEquals( PolygonType.Regular, polygon.polygonTypeProperty().get() );
-      shouldRetainOriginalConfigurationOfPolygon();
+   @Test public void shouldMakePolygonsChangeSides() {
+      for ( int i = 3; i < 11; i++ ) {
+         Button button = systemUnderTest.sidesButton( i );
+         button.fire();
+         
+         Assert.assertEquals( i, polygon.numberOfSidesProperty().get() );
+         shouldRetainOriginalConfigurationOfPolygon();
+      }
+   }//End Method
+
+   /**
+    * Prove that numbers outside of the {@link Button} range are ignored.
+    */
+   @Test public void shouldIgnoreButtonOutsideOfRange() {
+      Button button = systemUnderTest.sidesButton( 11 );
+      Assert.assertNull( button );
+      button = systemUnderTest.sidesButton( 2 );
+      Assert.assertNull( button );
    }//End Method
    
    /**
-    * Prove that an {@link EllipticPolygon} can be made {@link PolygonType#Starred}.
+    * Prove that the original {@link EllipticPolygon} does not change when a graphic is constructed.
     */
-   @Test public void shouldMakePolygonStarred() {
-      polygon.polygonTypeProperty().set( PolygonType.Regular );
-      Assert.assertEquals( PolygonType.Regular, polygon.polygonTypeProperty().get() );
-      
-      Button button = systemUnderTest.starredButton();
-      button.fire();
-      
-      Assert.assertEquals( PolygonType.Starred, polygon.polygonTypeProperty().get() );
-      shouldRetainOriginalConfigurationOfPolygon();
-   }//End Method
-   
-   /**
-    * Prove that an {@link EllipticPolygon} can be made {@link PolygonType#Fractal}.
-    */
-   @Test public void shouldMakePolygonFractal() {
-      Button button = systemUnderTest.fractalButton();
-      button.fire();
-      
-      Assert.assertEquals( PolygonType.Fractal, polygon.polygonTypeProperty().get() );
-      shouldRetainOriginalConfigurationOfPolygon();
-   }//End Method
-   
-   /**
-    * Prove that the {@link PolygonType#Regular} updates.
-    */
-   @Test public void regularGraphicShouldMimicPolygon() {
-      Button button = systemUnderTest.regularButton();
-      assertGraphicUpdates( button, PolygonType.Regular );
-      shouldRetainOriginalConfigurationOfPolygon();
-   }//End Method
-   
-   /**
-    * Prove that the {@link PolygonType#Starred} updates.
-    */
-   @Test public void starredGraphicShouldMimicPolygon() {
-      Button button = systemUnderTest.starredButton();
-      assertGraphicUpdates( button, PolygonType.Starred );
-      shouldRetainOriginalConfigurationOfPolygon();
-   }//End Method
-   
-   /**
-    * Prove that the {@link PolygonType#Fractal} updates.
-    */
-   @Test public void fractalGraphicShouldMimicPolygon() {
-      Button button = systemUnderTest.fractalButton();
-      assertGraphicUpdates( button, PolygonType.Fractal );
-      shouldRetainOriginalConfigurationOfPolygon();
+   @Test public void graphicShouldNotChangeAssociatedPolygons() {
+      for ( int i = 3; i < 11; i++ ) {
+         Button button = systemUnderTest.sidesButton( i );
+         assertGraphicUpdates( button, i );
+         shouldRetainOriginalConfigurationOfPolygon();
+      }
    }//End Method
    
    /**
@@ -160,14 +132,14 @@ public class PolygonTypeItemsTest {
     * @param button the {@link Button} being tested.
     * @param expectedType the expected {@link PolygonType} of the {@link Button}'s graphic.
     */
-   private void assertGraphicUpdates( Button button, PolygonType expectedType ) {
+   private void assertGraphicUpdates( Button button, int numberOfSides ) {
       Node graphic = button.getGraphic();
       Assert.assertTrue( graphic instanceof BorderPane );
       BorderPane pane = ( BorderPane )graphic;
       Assert.assertTrue( pane.getCenter() instanceof EllipticPolygon );
       EllipticPolygon graphicPolygon = ( EllipticPolygon )pane.getCenter();
       
-      Assert.assertEquals( expectedType, graphicPolygon.polygonTypeProperty().get() );
+      Assert.assertEquals( numberOfSides, graphicPolygon.numberOfSidesProperty().get() );
    }//End Method
    
 }//End Class

@@ -20,7 +20,7 @@ import model.singleton.Singleton;
 /**
  * {@link SelectionController} for controlling the selection within a {@link ShapesManager}.
  */
-public class ShapesManagerSelectionControllerImpl implements SelectionController {
+public class ShapeManagerSelectionControllerImpl implements SelectionController {
    
    static final EllipticPolygonBuilder DEFAULT_POLYGON = 
             new EllipticPolygonBuilder( PolygonType.Regular, 4 )
@@ -36,10 +36,10 @@ public class ShapesManagerSelectionControllerImpl implements SelectionController
    private Map< Object, Consumer< EllipticPolygon > > modificationFunctions;
    
    /**
-    * Constructs a new {@link ShapesManagerSelectionControllerImpl}.
+    * Constructs a new {@link ShapeManagerSelectionControllerImpl}.
     * @param shapes the {@link ShapesManager} associated.
     */
-   public ShapesManagerSelectionControllerImpl( ShapesManager shapes ) {
+   public ShapeManagerSelectionControllerImpl( ShapesManager shapes ) {
       this.shapes = shapes;
       modificationFunctions = new HashMap<>();
    }//End Constructor

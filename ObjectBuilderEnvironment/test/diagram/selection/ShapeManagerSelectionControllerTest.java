@@ -22,9 +22,9 @@ import utility.RandomEllipticPolygon;
 import utility.TestCommon;
 
 /**
- * {@link ShapesManagerSelectionControllerTest} test.
+ * {@link ShapeManagerSelectionControllerTest} test.
  */
-public class ShapesManagerSelectionControllerTest {
+public class ShapeManagerSelectionControllerTest {
    
    private EllipticPolygon subject1;
    private EllipticPolygon subject2;
@@ -46,7 +46,7 @@ public class ShapesManagerSelectionControllerTest {
       shapes = Mockito.mock( ShapesManager.class );
       Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet() );
       Mockito.when( shapes.singletonSelection() ).thenReturn( FXCollections.observableSet() );
-      controller = new ShapesManagerSelectionControllerImpl( shapes );
+      controller = new ShapeManagerSelectionControllerImpl( shapes );
    }//End Method
 
    /**
@@ -85,13 +85,13 @@ public class ShapesManagerSelectionControllerTest {
       
       EllipticPolygon graphic = controller.constructRepresentativeGraphic( applierKey );
       Assert.assertEquals( modifiedNumberOfSides, graphic.numberOfSidesProperty().get() );
-      Assert.assertEquals( ShapesManagerSelectionControllerImpl.DEFAULT_POLYGON.getCentreXProperty(), graphic.centreXProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( ShapesManagerSelectionControllerImpl.DEFAULT_POLYGON.getCentreYProperty(), graphic.centreYProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( ShapesManagerSelectionControllerImpl.DEFAULT_POLYGON.getHorizontalRadiusProperty(), graphic.horizontalRadiusProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( ShapesManagerSelectionControllerImpl.DEFAULT_POLYGON.getVerticalRadiusProperty(), graphic.verticalRadiusProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( ShapesManagerSelectionControllerImpl.DEFAULT_POLYGON.getRotateProperty(), graphic.rotateProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( ShapesManagerSelectionControllerImpl.DEFAULT_POLYGON.getNumberOfFractals(), graphic.numberOfFractalsProperty().get() );
-      Assert.assertEquals( ShapesManagerSelectionControllerImpl.DEFAULT_POLYGON.getPolygonTypeProperty(), graphic.polygonTypeProperty().get() );
+      Assert.assertEquals( ShapeManagerSelectionControllerImpl.DEFAULT_POLYGON.getCentreXProperty(), graphic.centreXProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( ShapeManagerSelectionControllerImpl.DEFAULT_POLYGON.getCentreYProperty(), graphic.centreYProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( ShapeManagerSelectionControllerImpl.DEFAULT_POLYGON.getHorizontalRadiusProperty(), graphic.horizontalRadiusProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( ShapeManagerSelectionControllerImpl.DEFAULT_POLYGON.getVerticalRadiusProperty(), graphic.verticalRadiusProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( ShapeManagerSelectionControllerImpl.DEFAULT_POLYGON.getRotateProperty(), graphic.rotateProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( ShapeManagerSelectionControllerImpl.DEFAULT_POLYGON.getNumberOfFractals(), graphic.numberOfFractalsProperty().get() );
+      Assert.assertEquals( ShapeManagerSelectionControllerImpl.DEFAULT_POLYGON.getPolygonTypeProperty(), graphic.polygonTypeProperty().get() );
    }//End Method
    
    /**
@@ -223,5 +223,25 @@ public class ShapesManagerSelectionControllerTest {
    @Test public void shouldNotConstructRepresenationForUnrecognisedKey(){
       Object applierKey = new Object();
       Assert.assertNull( controller.constructRepresentativeGraphic( applierKey ) );
+   }//End Method
+   
+   /**
+    * Prove that the {@link EllipticPolygon} graphic does not update when the associated {@link EllipticPolygon} does.
+    */
+   @Test public void shouldNotUpdateGraphicWhenPolygonChanges(){
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( subject1 ) );
+      
+      final int modifiedNumberOfSides = 15;
+      Object applierKey = new Object();
+      controller.register( applierKey, polygon -> polygon.numberOfSidesProperty().set( modifiedNumberOfSides ) );
+      
+      EllipticPolygon graphic = controller.constructRepresentativeGraphic( applierKey );
+      
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertEquals( modifiedNumberOfSides, graphic.numberOfSidesProperty().get() );
+      
+      subject1.numberOfSidesProperty().set( modifiedNumberOfSides );
+      Assert.assertEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertEquals( modifiedNumberOfSides, graphic.numberOfSidesProperty().get() );
    }//End Method
 }//End Class

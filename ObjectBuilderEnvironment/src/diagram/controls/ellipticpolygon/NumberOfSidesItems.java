@@ -9,9 +9,9 @@ package diagram.controls.ellipticpolygon;
 
 import diagram.controls.ButtonItemImpl;
 import diagram.controls.GridItemSelection;
+import diagram.selection.SelectionController;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
-import javafx.beans.binding.Bindings;
+import javafx.scene.control.Button;
 
 /**
  * {@link NumberOfSidesItems} provides a custom extension of {@link GridItemSelection} to 
@@ -19,64 +19,90 @@ import javafx.beans.binding.Bindings;
  */
 public class NumberOfSidesItems extends GridItemSelection {
 
-   public NumberOfSidesItems( EllipticPolygon polygon ) {
+   private static final Object THREE_SIDES_KEY = new Object();
+   private static final Object FOUR_SIDES_KEY = new Object();
+   private static final Object FIVE_SIDES_KEY = new Object();
+   private static final Object SIX_SIDES_KEY = new Object();
+   private static final Object SEVEN_SIDES_KEY = new Object();
+   private static final Object EIGHT_SIDES_KEY = new Object();
+   private static final Object NINE_SIDES_KEY = new Object();
+   private static final Object TEN_SIDES_KEY = new Object();
+
+   public NumberOfSidesItems( SelectionController selection ) {
+      selection.register( THREE_SIDES_KEY, polygon -> polygon.numberOfSidesProperty().set( 3 ) );
+      selection.register( FOUR_SIDES_KEY, polygon -> polygon.numberOfSidesProperty().set( 4 ) );
+      selection.register( FIVE_SIDES_KEY, polygon -> polygon.numberOfSidesProperty().set( 5 ) );
+      selection.register( SIX_SIDES_KEY, polygon -> polygon.numberOfSidesProperty().set( 6 ) );
+      selection.register( SEVEN_SIDES_KEY, polygon -> polygon.numberOfSidesProperty().set( 7 ) );
+      selection.register( EIGHT_SIDES_KEY, polygon -> polygon.numberOfSidesProperty().set( 8 ) );
+      selection.register( NINE_SIDES_KEY, polygon -> polygon.numberOfSidesProperty().set( 9 ) );
+      selection.register( TEN_SIDES_KEY, polygon -> polygon.numberOfSidesProperty().set( 10 ) );
       populateGrid( 
                4, 2,
                new ButtonItemImpl( 
                         "3 Sides", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getTriangle() ), 
-                        () -> polygon.numberOfSidesProperty().set( 3 ) 
+                        selection.constructRepresentativeGraphic( 
+                                 THREE_SIDES_KEY
+                        ),
+                        () -> selection.apply( THREE_SIDES_KEY )
                ),
                new ButtonItemImpl( 
                         "4 Sides", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getDiamond() ), 
-                        () -> polygon.numberOfSidesProperty().set( 4 ) 
+                        selection.constructRepresentativeGraphic( 
+                                 FOUR_SIDES_KEY
+                        ),
+                        () -> selection.apply( FOUR_SIDES_KEY )
                ),
                new ButtonItemImpl( 
                         "5 Sides", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getPentagon() ), 
-                        () -> polygon.numberOfSidesProperty().set( 5 ) 
-               ),
-               new ButtonItemImpl( 
+                        selection.constructRepresentativeGraphic( 
+                                 FIVE_SIDES_KEY
+                        ),
+                        () -> selection.apply( FIVE_SIDES_KEY )
+               ),new ButtonItemImpl( 
                         "6 Sides", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getHexagon() ), 
-                        () -> polygon.numberOfSidesProperty().set( 6 ) 
-               ),
-               new ButtonItemImpl( 
+                        selection.constructRepresentativeGraphic( 
+                                 SIX_SIDES_KEY
+                        ),
+                        () -> selection.apply( SIX_SIDES_KEY )
+               ),new ButtonItemImpl( 
                         "7 Sides", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getHeptagon() ), 
-                        () -> polygon.numberOfSidesProperty().set( 7 ) 
-               ),
-               new ButtonItemImpl( 
+                        selection.constructRepresentativeGraphic( 
+                                 SEVEN_SIDES_KEY
+                        ),
+                        () -> selection.apply( SEVEN_SIDES_KEY )
+               ),new ButtonItemImpl( 
                         "8 Sides", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getOctagon() ), 
-                        () -> polygon.numberOfSidesProperty().set( 8 ) 
-               ),
-               new ButtonItemImpl( 
+                        selection.constructRepresentativeGraphic( 
+                                 EIGHT_SIDES_KEY
+                        ),
+                        () -> selection.apply( EIGHT_SIDES_KEY )
+               ),new ButtonItemImpl( 
                         "9 Sides", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getNonagon() ), 
-                        () -> polygon.numberOfSidesProperty().set( 9 ) 
-               ),
-               new ButtonItemImpl( 
+                        selection.constructRepresentativeGraphic( 
+                                 NINE_SIDES_KEY
+                        ),
+                        () -> selection.apply( NINE_SIDES_KEY )
+               ),new ButtonItemImpl( 
                         "10 Sides", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getDecagon() ), 
-                        () -> polygon.numberOfSidesProperty().set( 10 ) 
+                        selection.constructRepresentativeGraphic( 
+                                 TEN_SIDES_KEY
+                        ),
+                        () -> selection.apply( TEN_SIDES_KEY )
                )
       );
    }//End Constructor
-   
+
    /**
-    * Method to bind the configurable {@link EllipticPolygon} to the graphical representation of the {@link EllipticPolygon}.
-    * @param configured the {@link EllipticPolygon} being configured.
-    * @param graphic the {@link EllipticPolygon} being shown on the {@link Button}.
-    * @return the {@link EllipticPolygon} graphic.
+    * Method to get the {@link Button} for changing the number of sides to the number of sides given.
+    * @param numberOfSides the number of sides the {@link Button} changes the {@link EllipticPolygon} to.
+    * @return the {@link Button}.
     */
-   private static EllipticPolygon preparePolygon( EllipticPolygon configured, EllipticPolygon graphic ) {
-      Bindings.bindBidirectional( graphic.polygonTypeProperty(), configured.polygonTypeProperty() );
-      Bindings.bindBidirectional( configured.rotateProperty(), graphic.rotateProperty() );
-      Bindings.bindBidirectional( configured.inversionProperty(), graphic.inversionProperty() );
-      Bindings.bindBidirectional( configured.numberOfFractalsProperty(), graphic.numberOfFractalsProperty() );
-      return graphic;
+   public Button sidesButton( int numberOfSides ) {
+      if ( numberOfSides > 2 && numberOfSides < 11 ) {
+         return ( Button ) getChildren().get( numberOfSides - 3 );
+      }
+      return null;
    }//End Method
    
 }//End Class
