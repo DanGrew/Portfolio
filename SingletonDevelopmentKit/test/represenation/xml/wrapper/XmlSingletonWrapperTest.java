@@ -18,9 +18,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
-import architecture.serialization.utility.XmlSimpleEntry;
 import representation.xml.wrapper.XmlSingletonWrapper;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;

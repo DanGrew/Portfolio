@@ -13,13 +13,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import diagram.selection.SelectionController;
-import diagram.selection.ShapeManagerSelectionControllerImpl;
-import diagram.selection.ShapesManager;
 import diagram.shapes.PolygonType;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;
-import graphics.JavaFxInitializer;
 import javafx.collections.FXCollections;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -31,64 +26,40 @@ import utility.TestCommon;
  */
 public class PolygonTypeItemsTest {
    
-   private static final int DEFAULT_ROTATE = 189;
-   private static final int DEFAULT_NUMBER_OF_SIDES = 4;
-   private static final int DEFAULT_FRACTAL = 1;
-   private static final boolean DEFAULT_INVERSION = false;
-   private static final int DEFAULT_VERTICAL_RADIUS = 564;
-   private static final int DEFAULT_HORIZONTAL_RADIUS = 876;
-   private static final int DEFAULT_CENTRE_Y = 203;
-   private static final int DEFAULT_CENTRE_X = 101;
-   private EllipticPolygon polygon;
-   private ShapesManager shapes;
-   private SelectionController controller;
+   private SelectionScenario scenario;
    private PolygonTypeItems systemUnderTest;
    
    /**
     * Method to initialise the environment for testing.
     */
    @BeforeClass public static void initialiseScenario(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      SelectionScenario.initialiseScenario();
    }//End Method
    
    /**
     * Method to initialise the system under test.
     */
    @Before public void initialiseSystemUnderTest(){
-      polygon = new EllipticPolygon( 
-               new EllipticPolygonBuilder( PolygonType.Starred, DEFAULT_NUMBER_OF_SIDES )
-                  .centreXProperty( DEFAULT_CENTRE_X )
-                  .centreYProperty( DEFAULT_CENTRE_Y )
-                  .horizontalRadiusProperty( DEFAULT_HORIZONTAL_RADIUS )
-                  .verticalRadiusProperty( DEFAULT_VERTICAL_RADIUS )
-                  .inversionProperty( DEFAULT_INVERSION )
-                  .numberOfFractals( DEFAULT_FRACTAL )
-                  .rotateProperty( DEFAULT_ROTATE )
-                  
-      );
-      Assert.assertEquals( PolygonType.Starred, polygon.polygonTypeProperty().get() );
+      scenario = new SelectionScenario();
       
-      shapes = Mockito.mock( ShapesManager.class );
-      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( polygon ) );
-      Mockito.when( shapes.singletonSelection() ).thenReturn( FXCollections.observableSet() );
+      Mockito.when( scenario.shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( scenario.diamond ) );
+      Mockito.when( scenario.shapes.singletonSelection() ).thenReturn( FXCollections.observableSet() );
       
-      controller = new ShapeManagerSelectionControllerImpl( shapes );
-      systemUnderTest = new PolygonTypeItems( controller );
-      Assert.assertEquals( PolygonType.Starred, polygon.polygonTypeProperty().get() );
+      systemUnderTest = new PolygonTypeItems( scenario.controller );
    }//End Method
    
    /**
     * Prove that the associated {@link EllipticPolygon} is not changed by the creation of the items.
     */
    @Test public void shouldRetainOriginalConfigurationOfPolygon(){
-      Assert.assertEquals( DEFAULT_NUMBER_OF_SIDES, polygon.numberOfSidesProperty().get() );
-      Assert.assertEquals( DEFAULT_CENTRE_X, polygon.centreXProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( DEFAULT_CENTRE_Y, polygon.centreYProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( DEFAULT_HORIZONTAL_RADIUS, polygon.horizontalRadiusProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( DEFAULT_VERTICAL_RADIUS, polygon.verticalRadiusProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( DEFAULT_ROTATE, polygon.rotateProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( DEFAULT_INVERSION, polygon.inversionProperty().get() );
-      Assert.assertEquals( DEFAULT_FRACTAL, polygon.numberOfFractalsProperty().get() );  
+      Assert.assertEquals( SelectionScenario.DIAMOND_NUMBER_OF_SIDES, scenario.diamond.numberOfSidesProperty().get() );
+      Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_X, scenario.diamond.centreXProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_Y, scenario.diamond.centreYProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( SelectionScenario.DIAMOND_HORIZONTAL_RADIUS, scenario.diamond.horizontalRadiusProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( SelectionScenario.DIAMOND_VERTICAL_RADIUS, scenario.diamond.verticalRadiusProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( SelectionScenario.DIAMOND_ROTATE, scenario.diamond.rotateProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( SelectionScenario.DIAMOND_INVERSION, scenario.diamond.inversionProperty().get() );
+      Assert.assertEquals( SelectionScenario.DIAMOND_FRACTAL, scenario.diamond.numberOfFractalsProperty().get() );  
    }//End Method
 
    /**
@@ -98,7 +69,7 @@ public class PolygonTypeItemsTest {
       Button button = systemUnderTest.regularButton();
       button.fire();
       
-      Assert.assertEquals( PolygonType.Regular, polygon.polygonTypeProperty().get() );
+      Assert.assertEquals( PolygonType.Regular, scenario.diamond.polygonTypeProperty().get() );
       shouldRetainOriginalConfigurationOfPolygon();
    }//End Method
    
@@ -106,13 +77,13 @@ public class PolygonTypeItemsTest {
     * Prove that an {@link EllipticPolygon} can be made {@link PolygonType#Starred}.
     */
    @Test public void shouldMakePolygonStarred() {
-      polygon.polygonTypeProperty().set( PolygonType.Regular );
-      Assert.assertEquals( PolygonType.Regular, polygon.polygonTypeProperty().get() );
+      scenario.diamond.polygonTypeProperty().set( PolygonType.Regular );
+      Assert.assertEquals( PolygonType.Regular, scenario.diamond.polygonTypeProperty().get() );
       
       Button button = systemUnderTest.starredButton();
       button.fire();
       
-      Assert.assertEquals( PolygonType.Starred, polygon.polygonTypeProperty().get() );
+      Assert.assertEquals( PolygonType.Starred, scenario.diamond.polygonTypeProperty().get() );
       shouldRetainOriginalConfigurationOfPolygon();
    }//End Method
    
@@ -123,7 +94,7 @@ public class PolygonTypeItemsTest {
       Button button = systemUnderTest.fractalButton();
       button.fire();
       
-      Assert.assertEquals( PolygonType.Fractal, polygon.polygonTypeProperty().get() );
+      Assert.assertEquals( PolygonType.Fractal, scenario.diamond.polygonTypeProperty().get() );
       shouldRetainOriginalConfigurationOfPolygon();
    }//End Method
    

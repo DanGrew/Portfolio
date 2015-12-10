@@ -7,11 +7,7 @@
  */
 package diagram.canvas;
 
-import architecture.event.EventSystem;
-import diagram.events.AddShapeEvent;
 import diagram.layer.Content;
-import diagram.toolbox.ContentEvents;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.TransferMode;
@@ -19,8 +15,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import math.ShapesAndVectors;
-import model.singleton.Singleton;
 
 /**
  * The {@link CanvasViewport} provides the viewport to the {@link Content}, essentially

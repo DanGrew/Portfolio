@@ -8,7 +8,6 @@
 package diagram.shapes;
 
 import diagram.behaviour.DragBehaviour;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Bounds;

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import annotation.Cali;
-import graphics.JavaFx;
 import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 import graphs.series.GroupEvaluation;
