@@ -9,9 +9,9 @@ package diagram.canvas;
 
 import diagram.controls.DiagramAccordion;
 import diagram.layer.Content;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.toolbox.ContentEvents;
-import graphics.event.JavaFxEventSystem;
+import diagram.selection.SelectionController;
+import diagram.selection.ShapeManagerSelectionControllerImpl;
+import diagram.selection.ShapesManager;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
@@ -26,16 +26,14 @@ public class DiagramCanvas extends BorderPane {
    public DiagramCanvas() {
       DiagramSettings canvasSettings = new DiagramSettings();
       
-      Content contentLayer = new Content( canvasSettings );
+      ShapesManager shapes = new ShapesManager();
+      SelectionController selectionController = new ShapeManagerSelectionControllerImpl( shapes );
+      Content contentLayer = new Content( shapes, canvasSettings );
+      
       CanvasViewport viewPort = new CanvasViewport( contentLayer );
       setCenter( viewPort );
       
-      JavaFxEventSystem.registerForEvent( ContentEvents.SelectShapes, ( event, source ) -> {
-         if ( source instanceof EllipticPolygon ) {
-            EllipticPolygon polygon = ( EllipticPolygon )source;
-            setRight( new DiagramAccordion( polygon ) );
-         }
-      } );
+      setRight( new DiagramAccordion( selectionController ) );
    }//End Constructor
 
 }//End Class

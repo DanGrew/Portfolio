@@ -12,9 +12,7 @@ import diagram.canvas.DiagramCanvasApplication;
 import diagram.canvas.DiagramSettings;
 import diagram.selection.SelectionMonitor;
 import diagram.selection.ShapesManager;
-import diagram.shapes.CanvasShape;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -33,16 +31,17 @@ public class Content extends Pane {
    
    /**
     * Constructs a new {@link Content}. 
+    * @param shapesManager the {@link ShapesManager} associated with the {@link Content}.
     * @param canvasSettings the {@link DiagramSettings} for controlling content.
     */
-   public Content( DiagramSettings canvasSettings ) {
+   public Content( ShapesManager shapesManager, DiagramSettings canvasSettings ) {
       super();
       new ContentController( this );
       this.canvasSettings = canvasSettings;
       layers = new LayerManager( getChildren() );
       selectionBehaviour = new SelectionBehaviour();
       
-      shapesManager = new ShapesManager();
+      this.shapesManager = shapesManager;
       new SelectionMonitor( layers, shapesManager );
       
       setPrefWidth( 1000 );

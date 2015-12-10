@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import diagram.canvas.DiagramSettings;
 import diagram.selection.SelectionShape;
+import diagram.selection.ShapesManager;
 import diagram.shapes.PolygonType;
 import diagram.shapes.ResizePoint;
 import diagram.shapes.RotationPoint;
@@ -28,7 +29,7 @@ public class ContentTest {
     * {@link Content#addShape(double, double)} test.
     */
    @Test public void shouldAddShape() {
-      Content content = new Content( new DiagramSettings() );
+      Content content = new Content( new ShapesManager(), new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
       content.addShape( null, 100, -230 );
@@ -48,7 +49,7 @@ public class ContentTest {
       settings.setNumberOfSides( 7 );
       settings.setPolygonType( PolygonType.Fractal );
       settings.setInvertPolygon( true );
-      Content content = new Content( settings );
+      Content content = new Content( new ShapesManager(), settings );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
       content.addShape( null, 0, 0 );
@@ -64,7 +65,7 @@ public class ContentTest {
     * {@link Content#addShape(double, double)} test.
     */
    @Test public void shouldAddMultipleShapes() {
-      Content content = new Content( new DiagramSettings() );
+      Content content = new Content( new ShapesManager(), new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
       content.addShape( null, 1, 100 );
@@ -80,7 +81,7 @@ public class ContentTest {
     * {@link Content#select(EllipticPolygon)} test.
     */
    @Test public void shouldAddSelectionElements(){
-      Content content = new Content( new DiagramSettings() );
+      Content content = new Content( new ShapesManager(), new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
       content.addShape( null, 100, 100 );
@@ -97,7 +98,7 @@ public class ContentTest {
     * {@link Content#select(EllipticPolygon)} test.
     */
    @Test public void shouldSelectMultiple(){
-      Content content = new Content( new DiagramSettings() );
+      Content content = new Content( new ShapesManager(), new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
       content.addShape( null, 100, 100 );
@@ -122,7 +123,7 @@ public class ContentTest {
     * {@link Content#deselect()} test.
     */
    @Test public void shouldDeselect(){
-      Content content = new Content( new DiagramSettings() );
+      Content content = new Content( new ShapesManager(), new DiagramSettings() );
       
       Assert.assertTrue( content.getChildren().isEmpty() );
       content.addShape( null, 100, 100 );

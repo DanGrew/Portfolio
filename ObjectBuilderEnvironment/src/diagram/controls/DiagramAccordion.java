@@ -8,12 +8,9 @@
 package diagram.controls;
 
 import diagram.canvas.DiagramCanvasApplication;
-import diagram.controls.ellipticpolygon.ColourItems;
-import diagram.controls.ellipticpolygon.InversionItems;
-import diagram.controls.ellipticpolygon.LocationItems;
-import diagram.controls.ellipticpolygon.NumberOfFractalsItems;
-import diagram.controls.ellipticpolygon.RotationItems;
-import diagram.controls.ellipticpolygon.SizeItems;
+import diagram.controls.ellipticpolygon.NumberOfSidesItems;
+import diagram.controls.ellipticpolygon.PolygonTypeItems;
+import diagram.selection.SelectionController;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
@@ -27,19 +24,19 @@ public class DiagramAccordion extends BorderPane {
 
    /**
     * Constructs a new {@link DiagramAccordion}.
-    * @param polygon the {@link EllipticPolygon} to configure.
+    * @param controller the {@link SelectionController} for controlling the selection.
     */
-   public DiagramAccordion( EllipticPolygon polygon ) {
+   public DiagramAccordion( SelectionController controller ) {
       Accordion window = new Accordion();
       window.getPanes().addAll( 
-//               new TitledPane( "Type", new PolygonTypeItems( polygon ) ),
-//               new TitledPane( "Sides", new NumberOfSidesItems( polygon ) ),
-               new TitledPane( "Fractals", new NumberOfFractalsItems( polygon ) ),
-               new TitledPane( "Inversion", new InversionItems( polygon ) ),
-               new TitledPane( "Rotation", new RotationItems( polygon ) ),
-               new TitledPane( "Size", new SizeItems( polygon ) ),
-               new TitledPane( "Location", new LocationItems( polygon ) ),
-               new TitledPane( "Colour", new ColourItems( polygon ) )
+               new TitledPane( "Type", new PolygonTypeItems( controller ) ),
+               new TitledPane( "Sides", new NumberOfSidesItems( controller ) )
+//               new TitledPane( "Fractals", new NumberOfFractalsItems( polygon ) ),
+//               new TitledPane( "Inversion", new InversionItems( polygon ) ),
+//               new TitledPane( "Rotation", new RotationItems( polygon ) ),
+//               new TitledPane( "Size", new SizeItems( polygon ) ),
+//               new TitledPane( "Location", new LocationItems( polygon ) ),
+//               new TitledPane( "Colour", new ColourItems( polygon ) )
       );
       setCenter( window );
       

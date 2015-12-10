@@ -7,8 +7,9 @@
  */
 package diagram.controls;
 
+import diagram.selection.ShapeManagerSelectionControllerImpl;
+import diagram.selection.ShapesManager;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Accordion;
@@ -28,8 +29,8 @@ public class DiagramAccordianApplication extends Application {
     * {@inheritDoc}
     */
    @Override public void start( Stage stage ) throws Exception {
-      EllipticPolygon polygon = EllipticPolygonGraphics.getStarredTriangle();
-      DiagramAccordion accordion = new DiagramAccordion( polygon );
+      DiagramAccordion accordion = new DiagramAccordion( 
+               new ShapeManagerSelectionControllerImpl( new ShapesManager() ) );
       Scene scene = new Scene( accordion, 220, 800 );
       stage.setScene( scene );
       stage.show();
