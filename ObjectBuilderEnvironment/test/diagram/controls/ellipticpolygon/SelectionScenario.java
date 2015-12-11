@@ -18,6 +18,8 @@ import diagram.shapes.PolygonType;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonBuilder;
 import graphics.JavaFxInitializer;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  * The {@link SelectionScenario} provides a simple scenario with some {@link EllipticPolygon}s that
@@ -34,6 +36,8 @@ public class SelectionScenario {
    static final int DIAMOND_HORIZONTAL_RADIUS = 876;
    static final int DIAMOND_CENTRE_Y = 203;
    static final int DIAMOND_CENTRE_X = 101;
+   static final Paint DIAMOND_FILL_COLOUR = Color.RED;
+   static final Paint DIAMOND_STROKE_COLOUR = Color.ORANGE;
    
    static final PolygonType TRIANGLE_TYPE = PolygonType.Starred;
    static final int TRIANGLE_ROTATE = 25;
@@ -44,6 +48,8 @@ public class SelectionScenario {
    static final int TRIANGLE_HORIZONTAL_RADIUS = 34;
    static final int TRIANGLE_CENTRE_Y = 1000;
    static final int TRIANGLE_CENTRE_X = 2000;
+   static final Paint TRIANGLE_FILL_COLOUR = Color.GREEN;
+   static final Paint TRIANGLE_STROKE_COLOUR = Color.BLUE;
    
    static final PolygonType PENTAGON_TYPE = PolygonType.Fractal;
    static final int PENTAGON_ROTATE = 90;
@@ -54,6 +60,8 @@ public class SelectionScenario {
    static final int PENTAGON_HORIZONTAL_RADIUS = 2000;
    static final int PENTAGON_CENTRE_Y = 1;
    static final int PENTAGON_CENTRE_X = 2;
+   static final Paint PENTAGON_FILL_COLOUR = Color.BROWN;
+   static final Paint PENTAGON_STROKE_COLOUR = Color.GRAY;
    
    final EllipticPolygon diamond;
    final EllipticPolygon triangle;
@@ -84,6 +92,8 @@ public class SelectionScenario {
                   .rotateProperty( DIAMOND_ROTATE )
                   
       );
+      diamond.fillProperty().set( DIAMOND_FILL_COLOUR );
+      diamond.strokeProperty().set( DIAMOND_STROKE_COLOUR );
       triangle = new EllipticPolygon( 
                new EllipticPolygonBuilder( TRIANGLE_TYPE, TRIANGLE_NUMBER_OF_SIDES )
                   .centreXProperty( TRIANGLE_CENTRE_X )
@@ -95,6 +105,8 @@ public class SelectionScenario {
                   .rotateProperty( TRIANGLE_ROTATE )
                   
       );
+      triangle.fillProperty().set( TRIANGLE_FILL_COLOUR );
+      triangle.strokeProperty().set( TRIANGLE_STROKE_COLOUR );
       pentagon = new EllipticPolygon( 
                new EllipticPolygonBuilder( PENTAGON_TYPE, PENTAGON_NUMBER_OF_SIDES )
                   .centreXProperty( PENTAGON_CENTRE_X )
@@ -106,6 +118,8 @@ public class SelectionScenario {
                   .rotateProperty( PENTAGON_ROTATE )
                   
       );
+      pentagon.fillProperty().set( PENTAGON_FILL_COLOUR );
+      pentagon.strokeProperty().set( PENTAGON_STROKE_COLOUR );
       Assert.assertEquals( DIAMOND_TYPE, diamond.polygonTypeProperty().get() );
       Assert.assertEquals( TRIANGLE_TYPE, triangle.polygonTypeProperty().get() );
       Assert.assertEquals( PENTAGON_TYPE, pentagon.polygonTypeProperty().get() );

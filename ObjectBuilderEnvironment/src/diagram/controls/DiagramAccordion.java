@@ -8,6 +8,7 @@
 package diagram.controls;
 
 import diagram.canvas.DiagramCanvasApplication;
+import diagram.controls.ellipticpolygon.ColourItems;
 import diagram.controls.ellipticpolygon.NumberOfSidesItems;
 import diagram.controls.ellipticpolygon.PolygonTypeItems;
 import diagram.selection.SelectionController;
@@ -30,13 +31,13 @@ public class DiagramAccordion extends BorderPane {
       Accordion window = new Accordion();
       window.getPanes().addAll( 
                new TitledPane( "Type", new PolygonTypeItems( controller ) ),
-               new TitledPane( "Sides", new NumberOfSidesItems( controller ) )
+               new TitledPane( "Sides", new NumberOfSidesItems( controller ) ),
 //               new TitledPane( "Fractals", new NumberOfFractalsItems( polygon ) ),
 //               new TitledPane( "Inversion", new InversionItems( polygon ) ),
 //               new TitledPane( "Rotation", new RotationItems( polygon ) ),
 //               new TitledPane( "Size", new SizeItems( polygon ) ),
 //               new TitledPane( "Location", new LocationItems( polygon ) ),
-//               new TitledPane( "Colour", new ColourItems( polygon ) )
+               new TitledPane( "Colour", new ColourItems( controller ) )
       );
       setCenter( window );
       

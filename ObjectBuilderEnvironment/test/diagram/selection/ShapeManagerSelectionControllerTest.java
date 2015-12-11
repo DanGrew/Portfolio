@@ -244,4 +244,187 @@ public class ShapeManagerSelectionControllerTest {
       Assert.assertEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
       Assert.assertEquals( modifiedNumberOfSides, graphic.numberOfSidesProperty().get() );
    }//End Method
+   
+   /**
+    * Prove that the apply works with a parameter.
+    */
+   @Test public void shouldApplyWithParameter(){
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( subject1 ) );
+      
+      Object applierKey = new Object();
+      controller.register( applierKey, ( polygon, value ) -> polygon.numberOfSidesProperty().set( ( Integer )value ) );
+
+      final int modifiedNumberOfSides = 15;
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+      
+      controller.apply( applierKey, modifiedNumberOfSides );
+      Assert.assertEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+   }//End Method
+   
+   /**
+    * Prove that apply with a parameter only works with a matching registration.
+    */
+   @Test public void shouldNotApplyParameterWithoutMatchingRegistration(){
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( subject1 ) );
+      
+      final int modifiedNumberOfSides = 15;
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+      
+      Object applierKey = new Object();
+      controller.apply( applierKey, modifiedNumberOfSides );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+   }//End Method
+   
+   /**
+    * Prove that apply without a parameter does not work if only registered with parameter.
+    */
+   @Test public void shouldNotApplyNormallyWithoutMatchingRegistration(){
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( subject1 ) );
+      
+      Object applierKey = new Object();
+      controller.register( applierKey, ( polygon, value ) -> polygon.numberOfSidesProperty().set( ( Integer )value ) );
+
+      final int modifiedNumberOfSides = 15;
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+      
+      Object applierKey2 = new Object();
+      controller.apply( applierKey2 );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+   }//End Method
+   
+   /**
+    * Prove that {@link SelectionController#apply(Object)} works with no selection.
+    */
+   @Test public void shouldApplyParameterWithNoSelection() {
+      Object applierKey = new Object();
+      controller.register( applierKey, ( polygon, value ) -> polygon.numberOfSidesProperty().set( ( Integer )value ) );
+      
+      final int modifiedNumberOfSides = 15;
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+      
+      controller.apply( applierKey, modifiedNumberOfSides );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+   }//End Method
+   
+   /**
+    * Prove that {@link SelectionController#apply(Object)} works with a single item.
+    */
+   @Test public void shouldApplyParameterWithSingleItemSelected() {
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( subject1 ) );
+      
+      Object applierKey = new Object();
+      controller.register( applierKey, ( polygon, value ) -> polygon.numberOfSidesProperty().set( ( Integer )value ) );
+      
+      final int modifiedNumberOfSides = 15;
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+      
+      controller.apply( applierKey, modifiedNumberOfSides );
+      Assert.assertEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+   }//End Method
+   
+   /**
+    * Prove that {@link SelectionController#apply(Object)} works with multiple items.
+    */
+   @Test public void shouldApplyParameterWithMultipleSelected() {
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( subject1, subject2, subject3 ) );
+      
+      Object applierKey = new Object();
+      controller.register( applierKey, ( polygon, value ) -> polygon.numberOfSidesProperty().set( ( Integer )value ) );
+      
+      final int modifiedNumberOfSides = 15;
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+      
+      controller.apply( applierKey, modifiedNumberOfSides );
+      Assert.assertEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+   }//End Method
+   
+   /**
+    * Prove that {@link SelectionController#apply(Object)} works with shapes and {@link Singleton}s.
+    */
+   @Test public void shouldApplyParameterToPolygonsAndSingletons() {
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( subject2 ) );
+      Mockito.when( shapes.singletonSelection() ).thenReturn( FXCollections.observableSet( singleton1, singleton2 ) );
+      Mockito.when( shapes.getPolygons( singleton1 ) ).thenReturn( Arrays.asList( subject1, subject3 ) );
+      Mockito.when( shapes.getPolygons( singleton2 ) ).thenReturn( Arrays.asList() );
+      
+      Object applierKey = new Object();
+      controller.register( applierKey, ( polygon, value ) -> polygon.numberOfSidesProperty().set( ( Integer )value ) );
+      
+      final int modifiedNumberOfSides = 15;
+      Assert.assertNotEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertNotEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+      
+      controller.apply( applierKey, modifiedNumberOfSides );
+      Assert.assertEquals( modifiedNumberOfSides, subject1.numberOfSidesProperty().get() );
+      Assert.assertEquals( modifiedNumberOfSides, subject2.numberOfSidesProperty().get() );
+      Assert.assertEquals( modifiedNumberOfSides, subject3.numberOfSidesProperty().get() );
+   }//End Method
+   
+   /**
+    * Prove that both shapes and {@link Singleton}s are iterrogated in the {@link ShapesManager}s selection.
+    */
+   @Test public void shouldApplyParameterForShapesAndSingletons() {
+      Object applierKey = new Object();
+      controller.register( applierKey, ( polygon, value ) -> {} );
+      
+      Mockito.verify( shapes, Mockito.times( 0 ) ).canvasShapeSelection();
+      Mockito.verify( shapes, Mockito.times( 0 ) ).singletonSelection();
+      
+      controller.apply( applierKey, 0 );
+      
+      Mockito.verify( shapes, Mockito.times( 1 ) ).canvasShapeSelection();
+      Mockito.verify( shapes, Mockito.times( 1 ) ).singletonSelection();
+   }//End Method
+   
+   /**
+    * Prove that unregister keys are ignored.
+    */
+   @Test public void shouldIgnoreUnregisteredWithParameter() {
+      Object applierKey = new Object();
+      controller.apply( applierKey, 0 );
+      
+      Mockito.verify( shapes, Mockito.times( 0 ) ).canvasShapeSelection();
+      Mockito.verify( shapes, Mockito.times( 0 ) ).singletonSelection();
+   }//End Method
+   
+   /**
+    * Prove that non- {@link EllipticPolygon}s are ignored.
+    */
+   @Test public void shouldIgnoreNonPolygonsWithParameter() {
+      CanvasShape exampleShape = Mockito.mock( CanvasShape.class );
+      Mockito.when( shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( exampleShape ) );
+      
+      Object applierKey = new Object();
+      controller.register( applierKey, ( polygon, value ) -> polygon.numberOfSidesProperty().set( ( Integer )value ) );
+      final int modifiedNumberOfSides = 15;
+      controller.apply( applierKey, modifiedNumberOfSides );
+      
+      Mockito.verifyNoMoreInteractions( exampleShape );
+   }//End Method
+
 }//End Class
