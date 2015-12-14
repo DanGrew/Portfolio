@@ -57,7 +57,6 @@ public class NumberOfFractalsItemsMultipleTest {
     * Prove that the associated {@link EllipticPolygon} is not changed by the creation of the items.
     */
    @Test public void shouldRetainOriginalConfigurationOfPolygon(){
-      Assert.assertEquals( SelectionScenario.DIAMOND_TYPE, scenario.diamond.polygonTypeProperty().get() );
       Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_X, scenario.diamond.centreXProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_Y, scenario.diamond.centreYProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.DIAMOND_HORIZONTAL_RADIUS, scenario.diamond.horizontalRadiusProperty().get(), TestCommon.precision() );
@@ -66,7 +65,6 @@ public class NumberOfFractalsItemsMultipleTest {
       Assert.assertEquals( SelectionScenario.DIAMOND_INVERSION, scenario.diamond.inversionProperty().get() );
       Assert.assertEquals( SelectionScenario.DIAMOND_NUMBER_OF_SIDES, scenario.diamond.numberOfSidesProperty().get() );
       
-      Assert.assertEquals( SelectionScenario.TRIANGLE_TYPE, scenario.triangle.polygonTypeProperty().get() );
       Assert.assertEquals( SelectionScenario.TRIANGLE_CENTRE_X, scenario.triangle.centreXProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.TRIANGLE_CENTRE_Y, scenario.triangle.centreYProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.TRIANGLE_HORIZONTAL_RADIUS, scenario.triangle.horizontalRadiusProperty().get(), TestCommon.precision() );
@@ -75,7 +73,6 @@ public class NumberOfFractalsItemsMultipleTest {
       Assert.assertEquals( SelectionScenario.TRIANGLE_INVERSION, scenario.triangle.inversionProperty().get() );
       Assert.assertEquals( SelectionScenario.TRIANGLE_NUMBER_OF_SIDES, scenario.triangle.numberOfSidesProperty().get() ); 
       
-      Assert.assertEquals( SelectionScenario.PENTAGON_TYPE, scenario.pentagon.polygonTypeProperty().get() );
       Assert.assertEquals( SelectionScenario.PENTAGON_CENTRE_X, scenario.pentagon.centreXProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.PENTAGON_CENTRE_Y, scenario.pentagon.centreYProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.PENTAGON_HORIZONTAL_RADIUS, scenario.pentagon.horizontalRadiusProperty().get(), TestCommon.precision() );
@@ -96,6 +93,9 @@ public class NumberOfFractalsItemsMultipleTest {
          Assert.assertEquals( i, scenario.diamond.numberOfFractalsProperty().get() );
          Assert.assertEquals( i, scenario.triangle.numberOfFractalsProperty().get() );
          Assert.assertEquals( i, scenario.pentagon.numberOfFractalsProperty().get() );
+         Assert.assertEquals( PolygonType.Fractal, scenario.triangle.polygonTypeProperty().get() );
+         Assert.assertEquals( PolygonType.Fractal, scenario.diamond.polygonTypeProperty().get() );
+         Assert.assertEquals( PolygonType.Fractal, scenario.pentagon.polygonTypeProperty().get() );
          shouldRetainOriginalConfigurationOfPolygon();
       }
    }//End Method
@@ -131,6 +131,7 @@ public class NumberOfFractalsItemsMultipleTest {
     */
    private void assertGraphicDisplaysProperty( int expectedFractals, EllipticPolygon graphicPolygon ){
       Assert.assertEquals( expectedFractals, graphicPolygon.numberOfFractalsProperty().get() );
+      Assert.assertEquals( PolygonType.Fractal, graphicPolygon.polygonTypeProperty().get() );
    }//End Method
 
 }//End Class

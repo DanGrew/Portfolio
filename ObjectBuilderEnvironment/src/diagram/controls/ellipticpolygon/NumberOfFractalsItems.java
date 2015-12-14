@@ -30,40 +30,43 @@ public class NumberOfFractalsItems extends GridItemSelection {
     * @param selection the {@link SelectionController} for changing the selection.
     */
    public NumberOfFractalsItems( SelectionController selection ) {
-      selection.register( ZERO_FRACTALS_KEY, polygon -> polygon.numberOfFractalsProperty().set( 0 ) );
-      selection.register( ONE_FRACTAL_KEY, polygon -> polygon.numberOfFractalsProperty().set( 1 ) );
-      selection.register( TWO_FRACTALS_KEY, polygon -> polygon.numberOfFractalsProperty().set( 2 ) );
-      selection.register( THREE_FRACTALS_KEY, polygon -> polygon.numberOfFractalsProperty().set( 3 ) );
-      
-      EllipticPolygon zero = selection.constructRepresentativeGraphic( ZERO_FRACTALS_KEY );
-      zero.polygonTypeProperty().set( PolygonType.Fractal );
-      EllipticPolygon one = selection.constructRepresentativeGraphic( ONE_FRACTAL_KEY );
-      one.polygonTypeProperty().set( PolygonType.Fractal );
-      EllipticPolygon two = selection.constructRepresentativeGraphic( TWO_FRACTALS_KEY );
-      two.polygonTypeProperty().set( PolygonType.Fractal );
-      EllipticPolygon three = selection.constructRepresentativeGraphic( THREE_FRACTALS_KEY );
-      three.polygonTypeProperty().set( PolygonType.Fractal );
+      selection.register( ZERO_FRACTALS_KEY, polygon -> { 
+         polygon.numberOfFractalsProperty().set( 0 );
+         polygon.polygonTypeProperty().set( PolygonType.Fractal );
+      } );
+      selection.register( ONE_FRACTAL_KEY, polygon -> {
+         polygon.numberOfFractalsProperty().set( 1 );
+         polygon.polygonTypeProperty().set( PolygonType.Fractal );
+      } );
+      selection.register( TWO_FRACTALS_KEY, polygon -> {
+         polygon.numberOfFractalsProperty().set( 2 );
+         polygon.polygonTypeProperty().set( PolygonType.Fractal );
+      } );
+      selection.register( THREE_FRACTALS_KEY, polygon -> { 
+         polygon.numberOfFractalsProperty().set( 3 );
+         polygon.polygonTypeProperty().set( PolygonType.Fractal );
+      } );
       
       populateGrid( 
                2, 2,
                new ButtonItemImpl( 
                         "0 Fractals", 
-                        zero,
+                        selection.constructRepresentativeGraphic( ZERO_FRACTALS_KEY ),
                         () -> selection.apply( ZERO_FRACTALS_KEY )
                ),
                new ButtonItemImpl( 
                         "1 Fractal", 
-                        one,
+                        selection.constructRepresentativeGraphic( ONE_FRACTAL_KEY ),
                         () -> selection.apply( ONE_FRACTAL_KEY )
                ),
                new ButtonItemImpl( 
                         "2 Fractals", 
-                        two,
+                        selection.constructRepresentativeGraphic( TWO_FRACTALS_KEY ),
                         () -> selection.apply( TWO_FRACTALS_KEY )
                ),
                new ButtonItemImpl( 
                         "3 Fractals", 
-                        three,
+                        selection.constructRepresentativeGraphic( THREE_FRACTALS_KEY ),
                         () -> selection.apply( THREE_FRACTALS_KEY )
                )
       );

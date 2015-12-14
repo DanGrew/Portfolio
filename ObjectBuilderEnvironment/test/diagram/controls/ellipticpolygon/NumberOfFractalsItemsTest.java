@@ -53,7 +53,6 @@ public class NumberOfFractalsItemsTest {
     * Prove that the associated {@link EllipticPolygon} is not changed by the creation of the items.
     */
    @Test public void shouldRetainOriginalConfigurationOfPolygon(){
-      Assert.assertEquals( SelectionScenario.DIAMOND_TYPE, scenario.diamond.polygonTypeProperty().get() );
       Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_X, scenario.diamond.centreXProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_Y, scenario.diamond.centreYProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.DIAMOND_HORIZONTAL_RADIUS, scenario.diamond.horizontalRadiusProperty().get(), TestCommon.precision() );
@@ -66,12 +65,13 @@ public class NumberOfFractalsItemsTest {
    /**
     * Prove that an {@link EllipticPolygon} can have the number of fractals changed.
     */
-   @Test public void shouldMakePolygonsChangeSides() {
+   @Test public void shouldMakePolygonsChangeFractals() {
       for ( int i = 0; i < 4; i++ ) {
          Button button = systemUnderTest.fractalsButton( i );
          button.fire();
          
          Assert.assertEquals( i, scenario.diamond.numberOfFractalsProperty().get() );
+         Assert.assertEquals( PolygonType.Fractal, scenario.diamond.polygonTypeProperty().get() );
          shouldRetainOriginalConfigurationOfPolygon();
       }
    }//End Method
