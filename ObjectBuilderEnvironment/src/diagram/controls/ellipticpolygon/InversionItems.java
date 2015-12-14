@@ -9,9 +9,9 @@ package diagram.controls.ellipticpolygon;
 
 import diagram.controls.ButtonItemImpl;
 import diagram.controls.GridItemSelection;
+import diagram.selection.SelectionController;
+import diagram.shapes.PolygonType;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
-import javafx.beans.binding.Bindings;
 import javafx.scene.control.Button;
 
 /**
@@ -19,51 +19,53 @@ import javafx.scene.control.Button;
  * to specify buttons for controlling whether an {@link EllipticPolygon} is inverted or not.
  */
 public class InversionItems extends GridItemSelection {
+   
+   private static final Object STANDARD_KEY = new Object();
+   private static final Object INVERTED_KEY = new Object();
 
    /**
     * Constructs a new {@link InversionItems}.
-    * @param polygon the {@link EllipticPolygon} associated, being controlled.
+    * @param selection the {@link SelectionController} for changing the selection properties.
     */
-   public InversionItems( EllipticPolygon polygon ) {
+   public InversionItems( SelectionController selection ) {
+      selection.register( STANDARD_KEY, polygon -> { 
+         polygon.inversionProperty().set( false );
+         polygon.polygonTypeProperty().set( PolygonType.Regular );
+      } );
+      selection.register( INVERTED_KEY, polygon -> {
+         polygon.inversionProperty().set( true );
+         polygon.polygonTypeProperty().set( PolygonType.Starred );
+      } );
       populateGrid( 
                1, 2,
                new ButtonItemImpl( 
                         "Standard", 
-                        preparePolygon( polygon, EllipticPolygonGraphics.getPolygon( polygon ) ), 
-                        () -> polygon.inversionProperty().set( false )
+                        selection.constructRepresentativeGraphic( 
+                                 STANDARD_KEY
+                        ),
+                        () -> selection.apply( STANDARD_KEY )
                ),
                new ButtonItemImpl( 
                         "Inverted", 
-                        preparePolygon( polygon, prepareInvertedPolygon( polygon ) ), 
-                        () -> polygon.inversionProperty().set( true )
+                        selection.constructRepresentativeGraphic( 
+                                 INVERTED_KEY
+                        ),
+                        () -> selection.apply( INVERTED_KEY )
                )
       );
    }//End Constructor
-   
+
    /**
-    * Convenience method to prepare an {@link EllipticPolygon} that is inverted in the 
-    * same style as the given.
-    * @param polygon the {@link EllipticPolygon} to mimic.
-    * @return an {@link EllipticPolygon} that is inverted.
+    * Method to get the {@link Button} for the given inversion value.
+    * @param value the inversion property value.
+    * @return the {@link Button}.
     */
-   private static EllipticPolygon prepareInvertedPolygon( EllipticPolygon polygon ) {
-      EllipticPolygon inverted = EllipticPolygonGraphics.getPolygon( polygon );
-      inverted.inversionProperty().set( true );
-      return inverted;
-   }//End Method
-   
-   /**
-    * Method to bind the configurable {@link EllipticPolygon} to the graphical representation of the {@link EllipticPolygon}.
-    * @param configured the {@link EllipticPolygon} being configured.
-    * @param graphic the {@link EllipticPolygon} being shown on the {@link Button}.
-    * @return the {@link EllipticPolygon} graphic.
-    */
-   private static EllipticPolygon preparePolygon( EllipticPolygon configured, EllipticPolygon graphic ) {
-      Bindings.bindBidirectional( configured.polygonTypeProperty(), graphic.polygonTypeProperty() );
-      Bindings.bindBidirectional( configured.numberOfSidesProperty(), graphic.numberOfSidesProperty() );
-      Bindings.bindBidirectional( configured.rotateProperty(), graphic.rotateProperty() );
-      Bindings.bindBidirectional( configured.numberOfFractalsProperty(), graphic.numberOfFractalsProperty() );
-      return graphic;
+   Button inversionButton( boolean value ) {
+      if ( value ) {
+         return ( Button )getChildren().get( 1 );
+      } else  {
+         return ( Button )getChildren().get( 0 );
+      }
    }//End Method
 
 }//End Class
