@@ -22,12 +22,12 @@ import javafx.scene.layout.BorderPane;
 import utility.TestCommon;
 
 /**
- * {@link NumberOfSidesItems} test.
+ * {@link PolygonTypeItems} test.
  */
-public class NumberOfSidesItemsTest {
+public class NumberOfFractalsItemsTest {
 
    private SelectionScenario scenario;
-   private NumberOfSidesItems systemUnderTest;
+   private NumberOfFractalsItems systemUnderTest;
    
    /**
     * Method to initialise the environment for testing.
@@ -45,8 +45,8 @@ public class NumberOfSidesItemsTest {
       Mockito.when( scenario.shapes.canvasShapeSelection() ).thenReturn( FXCollections.observableSet( scenario.diamond ) );
       Mockito.when( scenario.shapes.singletonSelection() ).thenReturn( FXCollections.observableSet() );
       
-      systemUnderTest = new NumberOfSidesItems( scenario.controller );
-      Assert.assertEquals( SelectionScenario.DIAMOND_NUMBER_OF_SIDES, scenario.diamond.numberOfSidesProperty().get() );
+      systemUnderTest = new NumberOfFractalsItems( scenario.controller );
+      Assert.assertEquals( SelectionScenario.DIAMOND_FRACTAL, scenario.diamond.numberOfFractalsProperty().get() );
    }//End Method
    
    /**
@@ -60,18 +60,18 @@ public class NumberOfSidesItemsTest {
       Assert.assertEquals( SelectionScenario.DIAMOND_VERTICAL_RADIUS, scenario.diamond.verticalRadiusProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.DIAMOND_ROTATE, scenario.diamond.rotateProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.DIAMOND_INVERSION, scenario.diamond.inversionProperty().get() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_FRACTAL, scenario.diamond.numberOfFractalsProperty().get() );  
+      Assert.assertEquals( SelectionScenario.DIAMOND_NUMBER_OF_SIDES, scenario.diamond.numberOfSidesProperty().get() );  
    }//End Method
 
    /**
-    * Prove that an {@link EllipticPolygon} can have the number of sides changed and nothing else.
+    * Prove that an {@link EllipticPolygon} can have the number of fractals changed.
     */
    @Test public void shouldMakePolygonsChangeSides() {
-      for ( int i = 3; i < 11; i++ ) {
-         Button button = systemUnderTest.sidesButton( i );
+      for ( int i = 0; i < 4; i++ ) {
+         Button button = systemUnderTest.fractalsButton( i );
          button.fire();
          
-         Assert.assertEquals( i, scenario.diamond.numberOfSidesProperty().get() );
+         Assert.assertEquals( i, scenario.diamond.numberOfFractalsProperty().get() );
          shouldRetainOriginalConfigurationOfPolygon();
       }
    }//End Method
@@ -80,9 +80,9 @@ public class NumberOfSidesItemsTest {
     * Prove that numbers outside of the {@link Button} range are ignored.
     */
    @Test public void shouldIgnoreButtonOutsideOfRange() {
-      Button button = systemUnderTest.sidesButton( 11 );
+      Button button = systemUnderTest.fractalsButton( 5 );
       Assert.assertNull( button );
-      button = systemUnderTest.sidesButton( 2 );
+      button = systemUnderTest.fractalsButton( -1 );
       Assert.assertNull( button );
    }//End Method
    
@@ -90,8 +90,8 @@ public class NumberOfSidesItemsTest {
     * Prove that the original {@link EllipticPolygon} does not change when a graphic is constructed.
     */
    @Test public void graphicShouldNotChangeAssociatedPolygons() {
-      for ( int i = 3; i < 11; i++ ) {
-         Button button = systemUnderTest.sidesButton( i );
+      for ( int i = 0; i < 4; i++ ) {
+         Button button = systemUnderTest.fractalsButton( i );
          assertGraphicUpdates( button, i );
          shouldRetainOriginalConfigurationOfPolygon();
       }
@@ -101,16 +101,17 @@ public class NumberOfSidesItemsTest {
     * Method to obtain the graphic and verify that it and the associated {@link EllipticPolygon}
     * update together.
     * @param button the {@link Button} being tested.
-    * @param expectedType the expected {@link PolygonType} of the {@link Button}'s graphic.
+    * @param numberOfFractals the expected number of fractals.
     */
-   private void assertGraphicUpdates( Button button, int numberOfSides ) {
+   private void assertGraphicUpdates( Button button, int numberOfFractals ) {
       Node graphic = button.getGraphic();
       Assert.assertTrue( graphic instanceof BorderPane );
       BorderPane pane = ( BorderPane )graphic;
       Assert.assertTrue( pane.getCenter() instanceof EllipticPolygon );
       EllipticPolygon graphicPolygon = ( EllipticPolygon )pane.getCenter();
       
-      Assert.assertEquals( numberOfSides, graphicPolygon.numberOfSidesProperty().get() );
+      Assert.assertEquals( PolygonType.Fractal, graphicPolygon.polygonTypeProperty().get() );
+      Assert.assertEquals( numberOfFractals, graphicPolygon.numberOfFractalsProperty().get() );
    }//End Method
    
 }//End Class

@@ -9,9 +9,10 @@ package diagram.controls.ellipticpolygon;
 
 import diagram.controls.ButtonItemImpl;
 import diagram.controls.GridItemSelection;
+import diagram.selection.SelectionController;
+import diagram.shapes.PolygonType;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonGraphics;
-import javafx.beans.binding.Bindings;
+import javafx.scene.control.Button;
 
 /**
  * {@link NumberOfFractalsItems} provides a custom extension of {@link GridItemSelection} to 
@@ -19,59 +20,65 @@ import javafx.beans.binding.Bindings;
  */
 public class NumberOfFractalsItems extends GridItemSelection {
 
+   private static final Object ZERO_FRACTALS_KEY = new Object();
+   private static final Object ONE_FRACTAL_KEY = new Object();
+   private static final Object TWO_FRACTALS_KEY = new Object();
+   private static final Object THREE_FRACTALS_KEY = new Object();
+   
    /**
     * Constructs a new {@link NumberOfFractalsItems}.
-    * @param polygon the {@link EllipticPolygon} to configure.
+    * @param selection the {@link SelectionController} for changing the selection.
     */
-   public NumberOfFractalsItems( EllipticPolygon polygon ) {
+   public NumberOfFractalsItems( SelectionController selection ) {
+      selection.register( ZERO_FRACTALS_KEY, polygon -> polygon.numberOfFractalsProperty().set( 0 ) );
+      selection.register( ONE_FRACTAL_KEY, polygon -> polygon.numberOfFractalsProperty().set( 1 ) );
+      selection.register( TWO_FRACTALS_KEY, polygon -> polygon.numberOfFractalsProperty().set( 2 ) );
+      selection.register( THREE_FRACTALS_KEY, polygon -> polygon.numberOfFractalsProperty().set( 3 ) );
+      
+      EllipticPolygon zero = selection.constructRepresentativeGraphic( ZERO_FRACTALS_KEY );
+      zero.polygonTypeProperty().set( PolygonType.Fractal );
+      EllipticPolygon one = selection.constructRepresentativeGraphic( ONE_FRACTAL_KEY );
+      one.polygonTypeProperty().set( PolygonType.Fractal );
+      EllipticPolygon two = selection.constructRepresentativeGraphic( TWO_FRACTALS_KEY );
+      two.polygonTypeProperty().set( PolygonType.Fractal );
+      EllipticPolygon three = selection.constructRepresentativeGraphic( THREE_FRACTALS_KEY );
+      three.polygonTypeProperty().set( PolygonType.Fractal );
+      
       populateGrid( 
                2, 2,
                new ButtonItemImpl( 
                         "0 Fractals", 
-                        preparePolygon( polygon, prepareFractalPolygon( polygon, 0 ) ), 
-                        () -> polygon.numberOfFractalsProperty().set( 0 ) 
+                        zero,
+                        () -> selection.apply( ZERO_FRACTALS_KEY )
                ),
                new ButtonItemImpl( 
                         "1 Fractal", 
-                        preparePolygon( polygon, prepareFractalPolygon( polygon, 1 ) ), 
-                        () -> polygon.numberOfFractalsProperty().set( 1 ) 
+                        one,
+                        () -> selection.apply( ONE_FRACTAL_KEY )
                ),
                new ButtonItemImpl( 
                         "2 Fractals", 
-                        preparePolygon( polygon, prepareFractalPolygon( polygon, 2 ) ), 
-                        () -> polygon.numberOfFractalsProperty().set( 2 ) 
+                        two,
+                        () -> selection.apply( TWO_FRACTALS_KEY )
                ),
                new ButtonItemImpl( 
                         "3 Fractals", 
-                        preparePolygon( polygon, prepareFractalPolygon( polygon, 3 ) ), 
-                        () -> polygon.numberOfFractalsProperty().set( 3 ) 
+                        three,
+                        () -> selection.apply( THREE_FRACTALS_KEY )
                )
       );
    }//End Constructor
 
    /**
-    * Convenience method to prepare an {@link EllipticPolygon} that has a certain number of fractals.
-    * @param polygon the {@link EllipticPolygon} to mimic.
-    * @return an {@link EllipticPolygon} that has fractals applied.
+    * Method to get the {@link Button} for configuring the given number of fractals.
+    * @param i the number of fractals 0 <= i <= 3.
+    * @return the {@link Button}.
     */
-   private static EllipticPolygon prepareFractalPolygon( EllipticPolygon polygon, int fractals ) {
-      EllipticPolygon fractal = EllipticPolygonGraphics.getPolygon( polygon );
-      fractal.numberOfFractalsProperty().set( fractals );
-      return fractal;
-   }//End Method
-   
-   /**
-    * Method to bind the configurable {@link EllipticPolygon} to the graphical representation of the {@link EllipticPolygon}.
-    * @param configured the {@link EllipticPolygon} being configured.
-    * @param graphic the {@link EllipticPolygon} being shown on the {@link Button}.
-    * @return the {@link EllipticPolygon} graphic.
-    */
-   private static EllipticPolygon preparePolygon( EllipticPolygon configured, EllipticPolygon graphic ) {
-      Bindings.bindBidirectional( configured.polygonTypeProperty(), graphic.polygonTypeProperty() );
-      Bindings.bindBidirectional( configured.rotateProperty(), graphic.rotateProperty() );
-      Bindings.bindBidirectional( configured.inversionProperty(), graphic.inversionProperty() );
-      Bindings.bindBidirectional( configured.numberOfSidesProperty(), graphic.numberOfSidesProperty() );
-      return graphic;
+   public Button fractalsButton( int i ) {
+      if ( i < 0 || i > 3 ) {
+         return null;
+      }
+      return ( Button )getChildren().get( i );
    }//End Method
    
 }//End Class

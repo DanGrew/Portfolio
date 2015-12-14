@@ -23,12 +23,12 @@ import javafx.scene.layout.BorderPane;
 import utility.TestCommon;
 
 /**
- * {@link NumberOfSidesItems} test.
+ * {@link PolygonTypeItems} test.
  */
-public class NumberOfSidesItemsMultipleTest {
+public class NumberOfFractalsItemsMultipleTest {
    
    private SelectionScenario scenario;
-   private NumberOfSidesItems systemUnderTest;
+   private NumberOfFractalsItems systemUnderTest;
    
    /**
     * Method to initialise the environment for testing.
@@ -47,10 +47,10 @@ public class NumberOfSidesItemsMultipleTest {
       Mockito.when( scenario.shapes.singletonSelection() ).thenReturn( FXCollections.observableSet() );
       
       scenario.controller = new ShapeManagerSelectionControllerImpl( scenario.shapes );
-      systemUnderTest = new NumberOfSidesItems( scenario.controller );
-      Assert.assertEquals( SelectionScenario.DIAMOND_TYPE, scenario.diamond.polygonTypeProperty().get() );
-      Assert.assertEquals( SelectionScenario.TRIANGLE_TYPE, scenario.triangle.polygonTypeProperty().get() );
-      Assert.assertEquals( SelectionScenario.PENTAGON_TYPE, scenario.pentagon.polygonTypeProperty().get() );
+      systemUnderTest = new NumberOfFractalsItems( scenario.controller );
+      Assert.assertEquals( SelectionScenario.DIAMOND_FRACTAL, scenario.diamond.numberOfFractalsProperty().get() );
+      Assert.assertEquals( SelectionScenario.TRIANGLE_FRACTAL, scenario.triangle.numberOfFractalsProperty().get() );
+      Assert.assertEquals( SelectionScenario.PENTAGON_FRACTAL, scenario.pentagon.numberOfFractalsProperty().get() );
    }//End Method
    
    /**
@@ -64,7 +64,7 @@ public class NumberOfSidesItemsMultipleTest {
       Assert.assertEquals( SelectionScenario.DIAMOND_VERTICAL_RADIUS, scenario.diamond.verticalRadiusProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.DIAMOND_ROTATE, scenario.diamond.rotateProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.DIAMOND_INVERSION, scenario.diamond.inversionProperty().get() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_FRACTAL, scenario.diamond.numberOfFractalsProperty().get() );
+      Assert.assertEquals( SelectionScenario.DIAMOND_NUMBER_OF_SIDES, scenario.diamond.numberOfSidesProperty().get() );
       
       Assert.assertEquals( SelectionScenario.TRIANGLE_TYPE, scenario.triangle.polygonTypeProperty().get() );
       Assert.assertEquals( SelectionScenario.TRIANGLE_CENTRE_X, scenario.triangle.centreXProperty().get(), TestCommon.precision() );
@@ -73,7 +73,7 @@ public class NumberOfSidesItemsMultipleTest {
       Assert.assertEquals( SelectionScenario.TRIANGLE_VERTICAL_RADIUS, scenario.triangle.verticalRadiusProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.TRIANGLE_ROTATE, scenario.triangle.rotateProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.TRIANGLE_INVERSION, scenario.triangle.inversionProperty().get() );
-      Assert.assertEquals( SelectionScenario.TRIANGLE_FRACTAL, scenario.triangle.numberOfFractalsProperty().get() ); 
+      Assert.assertEquals( SelectionScenario.TRIANGLE_NUMBER_OF_SIDES, scenario.triangle.numberOfSidesProperty().get() ); 
       
       Assert.assertEquals( SelectionScenario.PENTAGON_TYPE, scenario.pentagon.polygonTypeProperty().get() );
       Assert.assertEquals( SelectionScenario.PENTAGON_CENTRE_X, scenario.pentagon.centreXProperty().get(), TestCommon.precision() );
@@ -82,30 +82,30 @@ public class NumberOfSidesItemsMultipleTest {
       Assert.assertEquals( SelectionScenario.PENTAGON_VERTICAL_RADIUS, scenario.pentagon.verticalRadiusProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.PENTAGON_ROTATE, scenario.pentagon.rotateProperty().get(), TestCommon.precision() );
       Assert.assertEquals( SelectionScenario.PENTAGON_INVERSION, scenario.pentagon.inversionProperty().get() );
-      Assert.assertEquals( SelectionScenario.PENTAGON_FRACTAL, scenario.pentagon.numberOfFractalsProperty().get() ); 
+      Assert.assertEquals( SelectionScenario.PENTAGON_NUMBER_OF_SIDES, scenario.pentagon.numberOfSidesProperty().get() ); 
    }//End Method
 
    /**
-    * Prove that an {@link EllipticPolygon} can have the number of sides changed.
+    * Prove that an {@link EllipticPolygon} can have its fractal number changed.
     */
    @Test public void shouldMakePolygonChangeSides() {
-      for ( int i = 3; i < 11; i++ ) {
-         Button button = systemUnderTest.sidesButton( i );
+      for ( int i = 0; i < 4; i++ ) {
+         Button button = systemUnderTest.fractalsButton( i );
          button.fire();
          
-         Assert.assertEquals( i, scenario.diamond.numberOfSidesProperty().get() );
-         Assert.assertEquals( i, scenario.triangle.numberOfSidesProperty().get() );
-         Assert.assertEquals( i, scenario.pentagon.numberOfSidesProperty().get() );
+         Assert.assertEquals( i, scenario.diamond.numberOfFractalsProperty().get() );
+         Assert.assertEquals( i, scenario.triangle.numberOfFractalsProperty().get() );
+         Assert.assertEquals( i, scenario.pentagon.numberOfFractalsProperty().get() );
          shouldRetainOriginalConfigurationOfPolygon();
       }
    }//End Method
    
    /**
-    * Prove that the graphic does not update.
+    * Prove that the {@link EllipticPolygon} shown represents fractals.
     */
    @Test public void graphicShouldMimicPolygonWithDifferentSides() {
-      for ( int i = 3; i < 11; i++ ) {
-         Button button = systemUnderTest.sidesButton( i );
+      for ( int i = 0; i < 4; i++ ) {
+         Button button = systemUnderTest.fractalsButton( i );
          EllipticPolygon graphicPolygon = extractGraphicPolygon( button );
          assertGraphicDisplaysProperty( i, graphicPolygon );
       }
@@ -117,7 +117,7 @@ public class NumberOfSidesItemsMultipleTest {
     * @param button the {@link Button} being tested.
     * @return the {@link EllipticPolygon} in the graphic of the {@link Button}.
     */
-   private EllipticPolygon extractGraphicPolygon( Button button ) {
+   private static EllipticPolygon extractGraphicPolygon( Button button ) {
       Node graphic = button.getGraphic();
       Assert.assertTrue( graphic instanceof BorderPane );
       BorderPane pane = ( BorderPane )graphic;
@@ -129,8 +129,8 @@ public class NumberOfSidesItemsMultipleTest {
    /**
     * Method to prove that the associated graphic is not disturbed by the shapes it represents.
     */
-   private void assertGraphicDisplaysProperty( int expectedSides, EllipticPolygon graphicPolygon ){
-      Assert.assertEquals( expectedSides, graphicPolygon.numberOfSidesProperty().get() );
+   private void assertGraphicDisplaysProperty( int expectedFractals, EllipticPolygon graphicPolygon ){
+      Assert.assertEquals( expectedFractals, graphicPolygon.numberOfFractalsProperty().get() );
    }//End Method
 
 }//End Class

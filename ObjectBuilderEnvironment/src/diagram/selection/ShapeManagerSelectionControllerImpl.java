@@ -30,7 +30,7 @@ public class ShapeManagerSelectionControllerImpl implements SelectionController 
                .horizontalRadiusProperty( 25 )
                .verticalRadiusProperty( 25 )
                .inversionProperty( false )
-               .numberOfFractals( 0 )
+               .numberOfFractals( 1 )
                .rotateProperty( 0 );
    
    private ShapesManager shapes;
