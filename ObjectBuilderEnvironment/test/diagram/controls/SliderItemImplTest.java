@@ -45,7 +45,7 @@ public class SliderItemImplTest {
     */
    @Test public void shouldRunAction() {
       DoubleProperty property = new SimpleDoubleProperty( 0.0 );
-      SliderItemImpl item = new SliderItemImpl( "test", property );
+      SliderItemImpl item = new SliderItemImpl( "test", value -> property.set( value ) );
       Assert.assertEquals( 0.0, property.doubleValue(), TestCommon.precision() );
       Slider picker = item.getController();
       Assert.assertEquals( 0.0, picker.getValue(), TestCommon.precision() );
