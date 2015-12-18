@@ -9,7 +9,9 @@ package diagram.controls.ellipticpolygon;
 
 import diagram.controls.GridItemSelection;
 import diagram.controls.SliderItemImpl;
+import diagram.selection.SelectionController;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import javafx.scene.control.Slider;
 
 /**
  * {@link RotationItems} provides the {@link GridItemSelection} for the properties
@@ -17,17 +19,29 @@ import diagram.shapes.ellipticpolygon.EllipticPolygon;
  */
 public class RotationItems extends GridItemSelection {
 
+   private static final Object ROTATE_KEY = new Object();
+   private SliderItemImpl sliderItem;
+   
    /**
     * Constructs a new {@link RotationItems}.
-    * @param polygon the {@link EllipticPolygon} to control.
+    * @param selection the {@link SelectionController} for the selection.
     */
-   public RotationItems( EllipticPolygon polygon ) {
+   public RotationItems( SelectionController selection ) {
+      selection.register( ROTATE_KEY, ( polygon, value ) -> polygon.rotateProperty().set( ( double )value ) );
+      sliderItem = new SliderItemImpl( "Degrees", value -> selection.apply( ROTATE_KEY, value ) )
+               .setRange( -180, 180 )
+               .setRangeLabels( 90, 90, 90 );
       populateGrid(   
-               1, 1, 
-               new SliderItemImpl( "Degrees", polygon.rotateProperty() )
-                  .setRange( -180, 180 )
-                  .setRangeLabels( 90, 90, 90 )
+               1, 1, sliderItem
       );
    }//End Constructor
+   
+   /**
+    * Getter for the {@link Slider} controlling the selection.
+    * @return the {@link Slider}.
+    */
+   Slider rotateSlider(){
+      return sliderItem.getController();
+   }//End Method
 
 }//End Class

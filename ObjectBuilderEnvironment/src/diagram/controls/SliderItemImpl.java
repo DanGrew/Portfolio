@@ -7,7 +7,8 @@
  */
 package diagram.controls;
 
-import javafx.beans.binding.Bindings;
+import java.util.function.Consumer;
+
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TitledPane;
@@ -25,9 +26,9 @@ public class SliderItemImpl implements GridItem {
    /**
     * Constructs a new {@link SliderItemImpl}.
     * @param value the {@link String} value being controlled.
-    * @param property the {@link DoubleProperty} to loosely bind with.
+    * @param action the {@link Consumer} to process on change.
     */
-   public SliderItemImpl( String value, DoubleProperty property ) {
+   public SliderItemImpl( String value, Consumer< Double > action ) {
       controller = new Slider();
       controller.setPrefWidth( 200 );
       controller.setMin( 0 );
@@ -37,13 +38,12 @@ public class SliderItemImpl implements GridItem {
       controller.setMinorTickCount( 10 );
       controller.setMajorTickUnit( 50 );
       controller.setBlockIncrement( 20 );
+      controller.valueProperty().addListener( ( source, old, updated ) -> action.accept( updated.doubleValue() ) );
       
       BorderPane pane = new BorderPane();
       pane.setCenter( controller );
       wrapper = new TitledPane( value, pane );
       wrapper.setCollapsible( false );
-      
-      if ( property != null ) looseBind( property );
    }//End Constructor
    
    /**
@@ -83,14 +83,6 @@ public class SliderItemImpl implements GridItem {
     */
    @Override public Slider getController() {
       return controller;
-   }//End Method
-   
-   /**
-    * Method to loosely bind the {@link DoubleProperty} to this {@link Slider}.
-    * @param property the {@link DoubleProperty} to bind.
-    */
-   public void looseBind( DoubleProperty property ) {
-      Bindings.bindBidirectional( controller.valueProperty(), property );
    }//End Method
 
 }//End Class
