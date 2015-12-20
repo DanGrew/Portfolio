@@ -10,7 +10,6 @@ package diagram.controls;
 import java.util.function.Consumer;
 
 import graphics.utility.DefensiveDoubleSpinnerValueFactory;
-import javafx.beans.property.DoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;

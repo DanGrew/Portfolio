@@ -17,7 +17,6 @@ import org.mockito.Mockito;
 
 import diagram.selection.ShapeManagerSelectionControllerImpl;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Spinner;
 import utility.TestCommon;
@@ -63,18 +62,9 @@ public class LocationItemsMultipleTest {
     * Prove that the associated {@link EllipticPolygon} is not changed by the creation of the items.
     */
    @Test public void shouldRetainOriginalConfigurationOfPolygon(){
-      scenario.assertDiamondPropertiesUnchanged( Arrays.asList( 
-               EllipticPolygonProperties.CentreX,
-               EllipticPolygonProperties.CentreY
-      ) );
-      scenario.assertTrianglePropertiesUnchanged( Arrays.asList( 
-               EllipticPolygonProperties.CentreX,
-               EllipticPolygonProperties.CentreY
-      ) );
-      scenario.assertPentagonPropertiesUnchanged( Arrays.asList( 
-               EllipticPolygonProperties.CentreX,
-               EllipticPolygonProperties.CentreY
-      ) );
+      scenario.assertDiamondPropertiesUnchanged( Arrays.asList() );
+      scenario.assertTrianglePropertiesUnchanged( Arrays.asList() );
+      scenario.assertPentagonPropertiesUnchanged( Arrays.asList() );
    }//End Method
 
    /**
@@ -102,9 +92,9 @@ public class LocationItemsMultipleTest {
       Spinner< Double > spinner = systemUnderTest.centreXSpinner();
       spinner.getValueFactory().valueProperty().set( value );
       
-      Assert.assertEquals( expected, scenario.diamond.centreXProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( expected, scenario.triangle.centreXProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( expected, scenario.pentagon.centreXProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( expected, scenario.diamond.translateXProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( expected, scenario.triangle.translateXProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( expected, scenario.pentagon.translateXProperty().get(), TestCommon.precision() );
       shouldRetainOriginalConfigurationOfPolygon();
    }//End Method
    
@@ -117,9 +107,9 @@ public class LocationItemsMultipleTest {
       Spinner< Double > spinner = systemUnderTest.centreYSpinner();
       spinner.getValueFactory().valueProperty().set( value );
       
-      Assert.assertEquals( expected, scenario.diamond.centreYProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( expected, scenario.triangle.centreYProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( expected, scenario.pentagon.centreYProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( expected, scenario.diamond.translateYProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( expected, scenario.triangle.translateYProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( expected, scenario.pentagon.translateYProperty().get(), TestCommon.precision() );
       shouldRetainOriginalConfigurationOfPolygon();
    }//End Method
    

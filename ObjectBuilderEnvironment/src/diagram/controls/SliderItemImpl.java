@@ -9,7 +9,6 @@ package diagram.controls;
 
 import java.util.function.Consumer;
 
-import javafx.beans.property.DoubleProperty;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;

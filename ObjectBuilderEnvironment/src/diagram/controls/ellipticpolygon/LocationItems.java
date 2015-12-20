@@ -29,8 +29,8 @@ public class LocationItems extends GridItemSelection {
     * @param selection the {@link SelectionController} for controlling the selection.
     */
    public LocationItems( SelectionController selection ) {
-      selection.register( X_KEY, ( polygon, value ) -> polygon.centreXProperty().set( ( double )value ) );
-      selection.register( Y_KEY, ( polygon, value ) -> polygon.centreYProperty().set( ( double )value ) );
+      selection.register( X_KEY, ( polygon, value ) -> polygon.translateXProperty().set( ( double )value ) );
+      selection.register( Y_KEY, ( polygon, value ) -> polygon.translateYProperty().set( ( double )value ) );
       
       centreXSpinner = new NumberSpinnerItemImpl( "X", Integer.MIN_VALUE, Integer.MAX_VALUE, value -> selection.apply( X_KEY, value ) );
       centreYSpinner = new NumberSpinnerItemImpl( "Y", Integer.MIN_VALUE, Integer.MAX_VALUE, value -> selection.apply( Y_KEY, value ) );

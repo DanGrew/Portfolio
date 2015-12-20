@@ -7,6 +7,8 @@
  */
 package diagram.controls.ellipticpolygon;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -14,10 +16,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
 import javafx.collections.FXCollections;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.paint.Color;
-import utility.TestCommon;
 
 /**
  * {@link ColourItems} test.
@@ -52,14 +54,10 @@ public class ColourItemsTest {
     * Prove that the associated {@link EllipticPolygon} is not changed by the creation of the items.
     */
    @Test public void shouldRetainOriginalConfigurationOfPolygon(){
-      Assert.assertEquals( SelectionScenario.DIAMOND_TYPE, scenario.diamond.polygonTypeProperty().get() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_X, scenario.diamond.centreXProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_Y, scenario.diamond.centreYProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_HORIZONTAL_RADIUS, scenario.diamond.horizontalRadiusProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_VERTICAL_RADIUS, scenario.diamond.verticalRadiusProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_ROTATE, scenario.diamond.rotateProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_INVERSION, scenario.diamond.inversionProperty().get() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_FRACTAL, scenario.diamond.numberOfFractalsProperty().get() );  
+      scenario.assertDiamondPropertiesUnchanged( Arrays.asList( 
+               EllipticPolygonProperties.FillColour,
+               EllipticPolygonProperties.StrokeColour
+      ) );   
    }//End Method
 
    /**

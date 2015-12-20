@@ -7,7 +7,7 @@
  */
 package diagram.controls.ellipticpolygon;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
-import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Spinner;
 import utility.TestCommon;
@@ -54,10 +53,7 @@ public class LocationItemsTest {
     * Prove that the associated {@link EllipticPolygon} is not changed by the creation of the items.
     */
    @Test public void shouldRetainOriginalConfigurationOfPolygon(){
-      scenario.assertDiamondPropertiesUnchanged( Arrays.asList( 
-               EllipticPolygonProperties.CentreX,
-               EllipticPolygonProperties.CentreY
-      ) );
+      scenario.assertDiamondPropertiesUnchanged( new ArrayList<>() );
    }//End Method
 
    /**
@@ -66,10 +62,10 @@ public class LocationItemsTest {
    @Test public void shouldMakePolygonChangeCentreX() {
       Spinner< Double > spinner = systemUnderTest.centreXSpinner();
       final double value = -500.39;
-      Assert.assertNotEquals( value, scenario.diamond.centreXProperty().get(), TestCommon.precision() );
+      Assert.assertNotEquals( value, scenario.diamond.translateXProperty().get(), TestCommon.precision() );
       spinner.getValueFactory().valueProperty().set( value );
       
-      Assert.assertEquals( value, scenario.diamond.centreXProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( value, scenario.diamond.translateXProperty().get(), TestCommon.precision() );
       shouldRetainOriginalConfigurationOfPolygon();
    }//End Method
    
@@ -79,10 +75,10 @@ public class LocationItemsTest {
    @Test public void shouldMakePolygonChangeCentreY() {
       Spinner< Double > spinner = systemUnderTest.centreYSpinner();
       final double value = 84723.2342;
-      Assert.assertNotEquals( value, scenario.diamond.centreYProperty().get(), TestCommon.precision() );
+      Assert.assertNotEquals( value, scenario.diamond.translateYProperty().get(), TestCommon.precision() );
       spinner.getValueFactory().valueProperty().set( value );
       
-      Assert.assertEquals( value, scenario.diamond.centreYProperty().get(), TestCommon.precision() );
+      Assert.assertEquals( value, scenario.diamond.translateYProperty().get(), TestCommon.precision() );
       shouldRetainOriginalConfigurationOfPolygon();
    }//End Method
    

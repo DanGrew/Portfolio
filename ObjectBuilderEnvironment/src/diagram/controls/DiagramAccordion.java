@@ -10,6 +10,7 @@ package diagram.controls;
 import diagram.canvas.DiagramCanvasApplication;
 import diagram.controls.ellipticpolygon.ColourItems;
 import diagram.controls.ellipticpolygon.InversionItems;
+import diagram.controls.ellipticpolygon.LocationItems;
 import diagram.controls.ellipticpolygon.NumberOfFractalsItems;
 import diagram.controls.ellipticpolygon.NumberOfSidesItems;
 import diagram.controls.ellipticpolygon.PolygonTypeItems;
@@ -40,7 +41,7 @@ public class DiagramAccordion extends BorderPane {
                new TitledPane( "Inversion", new InversionItems( controller ) ),
                new TitledPane( "Rotation", new RotationItems( controller ) ),
                new TitledPane( "Size", new SizeItems( controller ) ),
-//               new TitledPane( "Location", new LocationItems( polygon ) ),
+               new TitledPane( "Location", new LocationItems( controller ) ),
                new TitledPane( "Colour", new ColourItems( controller ) )
       );
       setCenter( window );
