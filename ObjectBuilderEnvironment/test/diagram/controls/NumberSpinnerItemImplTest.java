@@ -45,23 +45,10 @@ public class NumberSpinnerItemImplTest {
     */
    @Test public void shouldRunAction() {
       DoubleProperty property = new SimpleDoubleProperty( 78 );
-      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", 0, 100, property );
+      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", 0, 100, value -> property.set( value ) );
       Spinner< Double > spinner = item.getController();
-      Assert.assertEquals( 78.0, spinner.getValue(), TestCommon.precision() );
       spinner.valueFactoryProperty().get().setValue( 20.0 );
       Assert.assertEquals( 20.0, property.doubleValue(), TestCommon.precision() );
    }//End Method
    
-   /**
-    * Test that the {@link ColorPicker} is updated when the item is updated.
-    */
-   @Test public void shouldUpdateController() {
-      DoubleProperty property = new SimpleDoubleProperty( 0.0 );
-      NumberSpinnerItemImpl item = new NumberSpinnerItemImpl( "test", 0, 100, property );
-      Spinner< Double > picker = item.getController();
-      Assert.assertNotEquals( 20.0, picker.valueProperty().get(), TestCommon.precision() );
-      property.set( 20.0 );
-      Assert.assertEquals( 20.0, picker.valueProperty().get(), TestCommon.precision() );
-   }//End Method
-
 }//End Class

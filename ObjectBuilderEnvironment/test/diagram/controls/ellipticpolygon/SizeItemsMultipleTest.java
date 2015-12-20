@@ -7,6 +7,8 @@
  */
 package diagram.controls.ellipticpolygon;
 
+import java.util.Arrays;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -15,6 +17,7 @@ import org.mockito.Mockito;
 
 import diagram.selection.ShapeManagerSelectionControllerImpl;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
+import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Spinner;
 import utility.TestCommon;
@@ -63,23 +66,21 @@ public class SizeItemsMultipleTest {
     * Prove that the associated {@link EllipticPolygon} is not changed by the creation of the items.
     */
    @Test public void shouldRetainOriginalConfigurationOfPolygon(){
-      Assert.assertEquals( SelectionScenario.DIAMOND_TYPE, scenario.diamond.polygonTypeProperty().get() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_X, scenario.diamond.centreXProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_CENTRE_Y, scenario.diamond.centreYProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_INVERSION, scenario.diamond.inversionProperty().get() );
-      Assert.assertEquals( SelectionScenario.DIAMOND_FRACTAL, scenario.diamond.numberOfFractalsProperty().get() );
-      
-      Assert.assertEquals( SelectionScenario.TRIANGLE_TYPE, scenario.triangle.polygonTypeProperty().get() );
-      Assert.assertEquals( SelectionScenario.TRIANGLE_CENTRE_X, scenario.triangle.centreXProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.TRIANGLE_CENTRE_Y, scenario.triangle.centreYProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.TRIANGLE_INVERSION, scenario.triangle.inversionProperty().get() );
-      Assert.assertEquals( SelectionScenario.TRIANGLE_FRACTAL, scenario.triangle.numberOfFractalsProperty().get() ); 
-      
-      Assert.assertEquals( SelectionScenario.PENTAGON_TYPE, scenario.pentagon.polygonTypeProperty().get() );
-      Assert.assertEquals( SelectionScenario.PENTAGON_CENTRE_X, scenario.pentagon.centreXProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.PENTAGON_CENTRE_Y, scenario.pentagon.centreYProperty().get(), TestCommon.precision() );
-      Assert.assertEquals( SelectionScenario.PENTAGON_INVERSION, scenario.pentagon.inversionProperty().get() );
-      Assert.assertEquals( SelectionScenario.PENTAGON_FRACTAL, scenario.pentagon.numberOfFractalsProperty().get() ); 
+      scenario.assertDiamondPropertiesUnchanged( Arrays.asList( 
+               EllipticPolygonProperties.HorizontalRadius,
+               EllipticPolygonProperties.VerticalRadius,
+               EllipticPolygonProperties.StrokeWidth
+      ) );  
+      scenario.assertTrianglePropertiesUnchanged( Arrays.asList( 
+               EllipticPolygonProperties.HorizontalRadius,
+               EllipticPolygonProperties.VerticalRadius,
+               EllipticPolygonProperties.StrokeWidth
+      ) );  
+      scenario.assertPentagonPropertiesUnchanged( Arrays.asList( 
+               EllipticPolygonProperties.HorizontalRadius,
+               EllipticPolygonProperties.VerticalRadius,
+               EllipticPolygonProperties.StrokeWidth
+      ) );  
    }//End Method
 
    /**
