@@ -14,6 +14,7 @@ import diagram.controls.ellipticpolygon.NumberOfFractalsItems;
 import diagram.controls.ellipticpolygon.NumberOfSidesItems;
 import diagram.controls.ellipticpolygon.PolygonTypeItems;
 import diagram.controls.ellipticpolygon.RotationItems;
+import diagram.controls.ellipticpolygon.SizeItems;
 import diagram.selection.SelectionController;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.control.Accordion;
@@ -38,7 +39,7 @@ public class DiagramAccordion extends BorderPane {
                new TitledPane( "Fractals", new NumberOfFractalsItems( controller ) ),
                new TitledPane( "Inversion", new InversionItems( controller ) ),
                new TitledPane( "Rotation", new RotationItems( controller ) ),
-//               new TitledPane( "Size", new SizeItems( polygon ) ),
+               new TitledPane( "Size", new SizeItems( controller ) ),
 //               new TitledPane( "Location", new LocationItems( polygon ) ),
                new TitledPane( "Colour", new ColourItems( controller ) )
       );

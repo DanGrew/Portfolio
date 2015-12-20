@@ -38,6 +38,7 @@ public class SelectionScenario {
    static final int DIAMOND_CENTRE_X = 101;
    static final Paint DIAMOND_FILL_COLOUR = Color.RED;
    static final Paint DIAMOND_STROKE_COLOUR = Color.ORANGE;
+   static final double DIAMOND_STROKE_WIDTH = 1;
    
    static final PolygonType TRIANGLE_TYPE = PolygonType.Starred;
    static final int TRIANGLE_ROTATE = 25;
@@ -50,6 +51,7 @@ public class SelectionScenario {
    static final int TRIANGLE_CENTRE_X = 2000;
    static final Paint TRIANGLE_FILL_COLOUR = Color.GREEN;
    static final Paint TRIANGLE_STROKE_COLOUR = Color.BLUE;
+   static final double TRIANGLE_STROKE_WIDTH = 3;
    
    static final PolygonType PENTAGON_TYPE = PolygonType.Fractal;
    static final int PENTAGON_ROTATE = 90;
@@ -62,6 +64,7 @@ public class SelectionScenario {
    static final int PENTAGON_CENTRE_X = 2;
    static final Paint PENTAGON_FILL_COLOUR = Color.BROWN;
    static final Paint PENTAGON_STROKE_COLOUR = Color.GRAY;
+   static final double PENTAGON_STROKE_WIDTH = 5;
    
    final EllipticPolygon diamond;
    final EllipticPolygon triangle;
@@ -94,6 +97,7 @@ public class SelectionScenario {
       );
       diamond.fillProperty().set( DIAMOND_FILL_COLOUR );
       diamond.strokeProperty().set( DIAMOND_STROKE_COLOUR );
+      diamond.strokeWidthProperty().set( DIAMOND_STROKE_WIDTH );
       triangle = new EllipticPolygon( 
                new EllipticPolygonBuilder( TRIANGLE_TYPE, TRIANGLE_NUMBER_OF_SIDES )
                   .centreXProperty( TRIANGLE_CENTRE_X )
@@ -107,6 +111,7 @@ public class SelectionScenario {
       );
       triangle.fillProperty().set( TRIANGLE_FILL_COLOUR );
       triangle.strokeProperty().set( TRIANGLE_STROKE_COLOUR );
+      triangle.strokeWidthProperty().set( TRIANGLE_STROKE_WIDTH );
       pentagon = new EllipticPolygon( 
                new EllipticPolygonBuilder( PENTAGON_TYPE, PENTAGON_NUMBER_OF_SIDES )
                   .centreXProperty( PENTAGON_CENTRE_X )
@@ -120,6 +125,7 @@ public class SelectionScenario {
       );
       pentagon.fillProperty().set( PENTAGON_FILL_COLOUR );
       pentagon.strokeProperty().set( PENTAGON_STROKE_COLOUR );
+      pentagon.strokeWidthProperty().set( PENTAGON_STROKE_WIDTH );
       Assert.assertEquals( DIAMOND_TYPE, diamond.polygonTypeProperty().get() );
       Assert.assertEquals( TRIANGLE_TYPE, triangle.polygonTypeProperty().get() );
       Assert.assertEquals( PENTAGON_TYPE, pentagon.polygonTypeProperty().get() );

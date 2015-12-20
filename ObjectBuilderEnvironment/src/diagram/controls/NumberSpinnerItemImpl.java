@@ -7,11 +7,13 @@
  */
 package diagram.controls;
 
+import java.util.function.Consumer;
+
 import graphics.utility.DefensiveDoubleSpinnerValueFactory;
-import graphics.utility.SdkBindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TitledPane;
 
 /**
@@ -28,17 +30,18 @@ public class NumberSpinnerItemImpl implements GridItem {
     * @param value the {@link String} value being controlled.
     * @param min the minimum value of the {@link Spinner}.
     * @param max the maximum value of the {@link Spinner}.
-    * @param property the {@link DoubleProperty} to bind with.
+    * @param action the {@link Consumer} to execute when the value changes.
     */
-   public NumberSpinnerItemImpl( String value, double min, double max, DoubleProperty property ) {
+   public NumberSpinnerItemImpl( String value, double min, double max, Consumer< Double > action ) {
       super();
       controller = new Spinner< Double >();
-      controller.setValueFactory( new DefensiveDoubleSpinnerValueFactory( min, max ) );
+      SpinnerValueFactory< Double > factory = new DefensiveDoubleSpinnerValueFactory( min, max );
+      controller.setValueFactory( factory );
       controller.setPrefWidth( 200 );
       controller.setEditable( true );
+      factory.valueProperty().addListener( ( source, old, updated ) -> action.accept( updated ) );
       wrapper = new TitledPane( value, controller );
       wrapper.setCollapsible( false );
-      if ( property != null ) looseBind( property );
    }//End Constructor
    
    /**
@@ -63,14 +66,6 @@ public class NumberSpinnerItemImpl implements GridItem {
     */
    @Override public Spinner< Double > getController() {
       return controller;
-   }//End Method
-
-   /**
-    * Method to apply a loose binding between with this {@link NumberSpinnerItemImpl} and the given {@link DoubleProperty}.
-    * @param property the {@link DoubleProperty} to bind to.
-    */
-   public void looseBind( DoubleProperty property ) {
-      SdkBindings.bind( controller.getValueFactory().valueProperty(), property );
    }//End Method
 
 }//End Class
