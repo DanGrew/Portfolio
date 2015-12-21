@@ -15,6 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import diagram.controls.ellipticpolygon.composite.ButtonPad;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Spinner;
@@ -80,6 +81,38 @@ public class LocationItemsTest {
       
       Assert.assertEquals( value, scenario.diamond.translateYProperty().get(), TestCommon.precision() );
       shouldRetainOriginalConfigurationOfPolygon();
+   }//End Method
+   
+   /**
+    * Prove polygons are moved with {@link ButtonPad}.
+    */
+   @Test public void shouldMovePolygonUsingTranslate(){
+      assertMovement( -LocationItems.STEP, -LocationItems.STEP, 0 );
+      assertMovement( 0, -LocationItems.STEP, 1 );
+      assertMovement( LocationItems.STEP, -LocationItems.STEP, 2 );
+      assertMovement( -LocationItems.STEP, 0, 3 );
+      assertMovement( 0, 0, 4 );
+      assertMovement( LocationItems.STEP, 0, 5 );
+      assertMovement( -LocationItems.STEP, LocationItems.STEP, 6 );
+      assertMovement( 0, LocationItems.STEP, 7 );
+      assertMovement( LocationItems.STEP, LocationItems.STEP, 8 );
+   }//End Method
+   
+   /**
+    * Method to assert that the movement has been witnessed.
+    * @param xStep the expected step in the x axis.
+    * @param yStep the expected step in the y axis.
+    * @param buttonIndex the index of the {@link Button} in question.
+    */
+   private void assertMovement( double xStep, double yStep, int buttonIndex ){
+      ButtonPad pad = systemUnderTest.movePad();
+      double currentTranslateX = scenario.diamond.getTranslateX();
+      double currentTranslateY = scenario.diamond.getTranslateY();
+      pad.button( buttonIndex ).fire();
+      currentTranslateX += xStep;
+      currentTranslateY += yStep;
+      Assert.assertEquals( currentTranslateX, scenario.diamond.getTranslateX(), TestCommon.precision() );
+      Assert.assertEquals( currentTranslateY, scenario.diamond.getTranslateY(), TestCommon.precision() );
    }//End Method
    
 }//End Class

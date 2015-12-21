@@ -15,9 +15,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import diagram.controls.ellipticpolygon.composite.ButtonPad;
 import diagram.selection.ShapeManagerSelectionControllerImpl;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.collections.FXCollections;
+import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
 import utility.TestCommon;
 
@@ -84,6 +86,21 @@ public class LocationItemsMultipleTest {
    }//End Method
    
    /**
+    * Prove polygons are moved with {@link ButtonPad}.
+    */
+   @Test public void shouldMovePolygonUsingTranslate(){
+      assertMovement( -LocationItems.STEP, -LocationItems.STEP, 0 );
+      assertMovement( 0, -LocationItems.STEP, 1 );
+      assertMovement( LocationItems.STEP, -LocationItems.STEP, 2 );
+      assertMovement( -LocationItems.STEP, 0, 3 );
+      assertMovement( 0, 0, 4 );
+      assertMovement( LocationItems.STEP, 0, 5 );
+      assertMovement( -LocationItems.STEP, LocationItems.STEP, 6 );
+      assertMovement( 0, LocationItems.STEP, 7 );
+      assertMovement( LocationItems.STEP, LocationItems.STEP, 8 );
+   }//End Method
+   
+   /**
     * Method to assert that the centre X is changed correctly.
     * @param expected the expected centre X.
     * @param value the value to change to.
@@ -111,6 +128,38 @@ public class LocationItemsMultipleTest {
       Assert.assertEquals( expected, scenario.triangle.translateYProperty().get(), TestCommon.precision() );
       Assert.assertEquals( expected, scenario.pentagon.translateYProperty().get(), TestCommon.precision() );
       shouldRetainOriginalConfigurationOfPolygon();
+   }//End Method
+   
+   /**
+    * Method to assert that the movement has been witnessed.
+    * @param xStep the expected step in the x axis.
+    * @param yStep the expected step in the y axis.
+    * @param buttonIndex the index of the {@link Button} in question.
+    */
+   private void assertMovement( double xStep, double yStep, int buttonIndex ){
+      ButtonPad pad = systemUnderTest.movePad();
+      
+      double currentDiamondTranslateX = scenario.diamond.getTranslateX();
+      double currentDiamondTranslateY = scenario.diamond.getTranslateY();
+      double currentTriangleTranslateX = scenario.triangle.getTranslateX();
+      double currentTriangleTranslateY = scenario.triangle.getTranslateY();
+      double currentPentagonTranslateX = scenario.pentagon.getTranslateX();
+      double currentPentagonTranslateY = scenario.pentagon.getTranslateY();
+      
+      pad.button( buttonIndex ).fire();
+      currentDiamondTranslateX += xStep;
+      currentDiamondTranslateY += yStep;
+      currentTriangleTranslateX += xStep;
+      currentTriangleTranslateY += yStep;
+      currentPentagonTranslateX += xStep;
+      currentPentagonTranslateY += yStep;
+      
+      Assert.assertEquals( currentDiamondTranslateX, scenario.diamond.getTranslateX(), TestCommon.precision() );
+      Assert.assertEquals( currentDiamondTranslateY, scenario.diamond.getTranslateY(), TestCommon.precision() );
+      Assert.assertEquals( currentTriangleTranslateX, scenario.triangle.getTranslateX(), TestCommon.precision() );
+      Assert.assertEquals( currentTriangleTranslateY, scenario.triangle.getTranslateY(), TestCommon.precision() );
+      Assert.assertEquals( currentPentagonTranslateX, scenario.pentagon.getTranslateX(), TestCommon.precision() );
+      Assert.assertEquals( currentPentagonTranslateY, scenario.pentagon.getTranslateY(), TestCommon.precision() );
    }//End Method
    
 }//End Class
