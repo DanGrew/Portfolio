@@ -36,6 +36,7 @@ public class ShapeManagerTest {
       
       shapes.associate( singleton, polygon );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.getPolygons( singleton ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
    }//End Method
    
    /**
@@ -52,6 +53,8 @@ public class ShapeManagerTest {
       shapes.associate( singleton, polygon );
       shapes.associate( singleton, polygon2 );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon, polygon2 ), shapes.getPolygons( singleton ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon2 ) );
    }//End Method
    
    /**
@@ -66,6 +69,7 @@ public class ShapeManagerTest {
       shapes.associate( singleton, polygon );
       shapes.associate( singleton, polygon );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.getPolygons( singleton ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
    }//End Method
    
    /**
@@ -97,6 +101,7 @@ public class ShapeManagerTest {
       
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
    }//End Method
    
    /**
@@ -132,6 +137,7 @@ public class ShapeManagerTest {
       
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton ), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
    }//End Method
    
    /**
@@ -151,6 +157,8 @@ public class ShapeManagerTest {
       
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon, polygon2 ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton ), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon2 ) );
    }//End Method
    
    /**
@@ -176,6 +184,10 @@ public class ShapeManagerTest {
       
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon, polygon2, polygon3, polygon4 ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton, singleton2 ), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon2 ) );
+      Assert.assertEquals( singleton2, shapes.getAssociation( polygon3 ) );
+      Assert.assertEquals( singleton2, shapes.getAssociation( polygon4 ) );
    }//End Method
    
    /**
@@ -205,6 +217,10 @@ public class ShapeManagerTest {
       
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon, polygon2, polygon3, polygon4, unassociated ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton, singleton2 ), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon2 ) );
+      Assert.assertEquals( singleton2, shapes.getAssociation( polygon3 ) );
+      Assert.assertEquals( singleton2, shapes.getAssociation( polygon4 ) );
    }//End Method
    
    /**
@@ -241,9 +257,13 @@ public class ShapeManagerTest {
       shapes.select( singleton );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon, polygon2 ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton ), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon2 ) );
       
       shapes.deselect( singleton );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.canvasShapeSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon2 ) );
    }//End Method
    
    /**
@@ -259,6 +279,7 @@ public class ShapeManagerTest {
       shapes.select( polygon );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
    }//End Method
    
    /**
@@ -274,10 +295,12 @@ public class ShapeManagerTest {
       shapes.select( singleton );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton ), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
       
       shapes.deselect( polygon );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.canvasShapeSelection() );
       TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( singleton ), shapes.singletonSelection() );
+      Assert.assertEquals( singleton, shapes.getAssociation( polygon ) );
    }//End Method
    
    /**
@@ -427,6 +450,24 @@ public class ShapeManagerTest {
       ShapesManager shapes = new ShapesManager();
       Singleton singleton = Mockito.mock( Singleton.class );
       Assert.assertEquals( new ArrayList<>(), shapes.getPolygons( singleton ) );
+   }//End Method
+   
+   /**
+    * Prove that old associations are removed when new ones are added.
+    */
+   @Test public void shouldRemoveAssociationWhenReassociated(){
+      ShapesManager shapes = new ShapesManager();
+      EllipticPolygonBuilder builder = new EllipticPolygonBuilder( PolygonType.Regular, 4 );
+      
+      Singleton singleton = Mockito.mock( Singleton.class );
+      EllipticPolygon polygon = new EllipticPolygon( builder );
+      shapes.associate( singleton, polygon );
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.getPolygons( singleton ) );
+      
+      Singleton singleton2 = Mockito.mock( Singleton.class );
+      shapes.associate( singleton2, polygon );
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList( polygon ), shapes.getPolygons( singleton2 ) );
+      TestCommon.assertCollectionsSameOrderIrrelevant( Arrays.asList(), shapes.getPolygons( singleton ) );
    }//End Method
    
 }//End Class

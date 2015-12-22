@@ -26,7 +26,8 @@ import model.singleton.Singleton;
 public class ShapesManager {
    
    private Set< CanvasShape > unassociated;
-   private Map< Singleton, Set< CanvasShape > > associations;
+   private Map< Singleton, Set< CanvasShape > > singletonAssociations;
+   private Map< CanvasShape, Singleton > shapeAssociations;
    
    private ObservableSet< CanvasShape > canvasShapeSelection;
    private ObservableSet< Singleton > singletonSelection;
@@ -36,7 +37,8 @@ public class ShapesManager {
     */
    public ShapesManager() {
       unassociated = new LinkedHashSet<>();
-      associations = new HashMap<>();
+      singletonAssociations = new HashMap<>();
+      shapeAssociations = new HashMap<>();
       canvasShapeSelection = FXCollections.observableSet();
       singletonSelection = FXCollections.observableSet();
    }//End Constructor
@@ -47,12 +49,21 @@ public class ShapesManager {
     * @return a {@link List} of {@link CanvasShape}s associated with the given {@link Singleton}.
     */
    public List< CanvasShape > getPolygons( Singleton singleton ) {
-      Set< CanvasShape > shapes = associations.get( singleton );
+      Set< CanvasShape > shapes = singletonAssociations.get( singleton );
       if ( shapes == null ) {
          return new ArrayList<>();
       } else {
          return new ArrayList<>( shapes );
       }
+   }//End Method
+   
+   /**
+    * Method to get the {@link Singleton} association for the given {@link CanvasShape}.
+    * @param shape the {@link CanvasShape} to get for.
+    * @return the associated {@link Singleton}, can be null.
+    */
+   public Singleton getAssociation( CanvasShape shape ) {
+      return shapeAssociations.get( shape );
    }//End Method
    
    /**
@@ -93,10 +104,19 @@ public class ShapesManager {
     * @param polygon the {@link CanvasShape} associated.
     */
    private void populateAssociated( Singleton singleton, CanvasShape polygon ) {
-      Set< CanvasShape > polygons = associations.get( singleton );
+      //First remove old association.
+      Singleton currentAssociation = shapeAssociations.get( polygon );
+      if ( currentAssociation != null ) {
+         Set< CanvasShape > currentAssociationAssociations = singletonAssociations.get( currentAssociation );
+         currentAssociationAssociations.remove( polygon );
+      }
+      shapeAssociations.put( polygon, singleton );
+      
+      //Now add new association.
+      Set< CanvasShape > polygons = singletonAssociations.get( singleton );
       if ( polygons == null ) {
          polygons = new LinkedHashSet<>();
-         associations.put( singleton, polygons );
+         singletonAssociations.put( singleton, polygons );
       }
       polygons.add( polygon );
    }//End Method
@@ -117,10 +137,10 @@ public class ShapesManager {
     * @param singleton the {@link Singleton} to select.
     */
    public void select( Singleton singleton ) {
-      if ( !associations.containsKey( singleton ) ) {
+      if ( !singletonAssociations.containsKey( singleton ) ) {
          return;
       }
-      canvasShapeSelection.addAll( associations.get( singleton ) );
+      canvasShapeSelection.addAll( singletonAssociations.get( singleton ) );
       singletonSelection.add( singleton );
    }//End Method
    
@@ -137,10 +157,10 @@ public class ShapesManager {
     * @param singleton the {@link Singleton} to deselect.
     */
    public void deselect( Singleton singleton ) {
-      if ( !associations.containsKey( singleton ) ) {
+      if ( !singletonAssociations.containsKey( singleton ) ) {
          return;
       }
-      canvasShapeSelection.removeAll( associations.get( singleton ) );
+      canvasShapeSelection.removeAll( singletonAssociations.get( singleton ) );
       singletonSelection.remove( singleton );
    }//End Method
    
