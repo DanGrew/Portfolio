@@ -96,9 +96,13 @@ public class EllipticPolygonBindingsTest {
    /**
     * Prove that a null {@link PropertyType} results in an exception.
     */
-   @Test( expected = IllegalArgumentException.class ) public void shouldIgnoreNullValue() {
-      EllipticPolygonBindings bindings = new EllipticPolygonBindings( Mockito.mock( ShapesManager.class ) );
-      bindings.oneTimeBind( Mockito.mock( EllipticPolygon.class ), EllipticPolygonProperties.CentreX, null );
+   @Test public void shouldIgnoreNullValue() {
+      final String testValue = "any value";
+      Mockito.when( builderObject.get( stringType ) ).thenReturn( testValue );
+      
+      Assert.assertNotEquals( testValue, polygon.rotateProperty().get(), TestCommon.precision() );
+      systemUnderTest.oneTimeBind( polygon, EllipticPolygonProperties.Rotation, null );
+      Assert.assertNotEquals( testValue, polygon.rotateProperty().get() );
    }//End Method
    
    /**

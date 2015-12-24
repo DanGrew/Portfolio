@@ -33,7 +33,7 @@ public class DiagramCanvas extends BorderPane {
       CanvasViewport viewPort = new CanvasViewport( contentLayer );
       setCenter( viewPort );
       
-      setRight( new DiagramAccordion( selectionController ) );
+      setRight( new DiagramAccordion( selectionController, shapes ) );
    }//End Constructor
 
 }//End Class

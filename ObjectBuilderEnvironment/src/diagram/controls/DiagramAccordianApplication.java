@@ -29,8 +29,9 @@ public class DiagramAccordianApplication extends Application {
     * {@inheritDoc}
     */
    @Override public void start( Stage stage ) throws Exception {
+      ShapesManager manager = new ShapesManager();
       DiagramAccordion accordion = new DiagramAccordion( 
-               new ShapeManagerSelectionControllerImpl( new ShapesManager() ) );
+               new ShapeManagerSelectionControllerImpl( manager ), manager );
       Scene scene = new Scene( accordion, 220, 800 );
       stage.setScene( scene );
       stage.show();

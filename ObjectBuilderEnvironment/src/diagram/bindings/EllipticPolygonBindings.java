@@ -46,7 +46,10 @@ public class EllipticPolygonBindings {
    public void oneTimeBind( EllipticPolygon polygon, EllipticPolygonProperties property, PropertyType type ) {
       if ( polygon == null ) throw new IllegalArgumentException( "Null input: oneTimeBind" );
       if ( property == null ) throw new IllegalArgumentException( "Null input: oneTimeBind" );
-      if ( type == null ) throw new IllegalArgumentException( "Null input: oneTimeBind" );
+      
+      if ( type == null ) {
+         return;
+      }
       
       Singleton association = shapes.getAssociation( polygon );
       if ( association == null ) {

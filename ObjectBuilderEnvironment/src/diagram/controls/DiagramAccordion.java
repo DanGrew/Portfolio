@@ -7,7 +7,9 @@
  */
 package diagram.controls;
 
+import diagram.bindings.EllipticPolygonBindings;
 import diagram.canvas.DiagramCanvasApplication;
+import diagram.controls.ellipticpolygon.BindingItems;
 import diagram.controls.ellipticpolygon.ColourItems;
 import diagram.controls.ellipticpolygon.InversionItems;
 import diagram.controls.ellipticpolygon.LocationItems;
@@ -17,6 +19,7 @@ import diagram.controls.ellipticpolygon.PolygonTypeItems;
 import diagram.controls.ellipticpolygon.RotationItems;
 import diagram.controls.ellipticpolygon.SizeItems;
 import diagram.selection.SelectionController;
+import diagram.selection.ShapesManager;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
@@ -31,8 +34,9 @@ public class DiagramAccordion extends BorderPane {
    /**
     * Constructs a new {@link DiagramAccordion}.
     * @param controller the {@link SelectionController} for controlling the selection.
+    * @param shapes the {@link ShapesManager} for controlling selection.
     */
-   public DiagramAccordion( SelectionController controller ) {
+   public DiagramAccordion( SelectionController controller, ShapesManager shapes ) {
       Accordion window = new Accordion();
       window.getPanes().addAll( 
                new TitledPane( "Type", new PolygonTypeItems( controller ) ),
@@ -42,7 +46,8 @@ public class DiagramAccordion extends BorderPane {
                new TitledPane( "Rotation", new RotationItems( controller ) ),
                new TitledPane( "Size", new SizeItems( controller ) ),
                new TitledPane( "Location", new LocationItems( controller ) ),
-               new TitledPane( "Colour", new ColourItems( controller ) )
+               new TitledPane( "Colour", new ColourItems( controller ) ),
+               new TitledPane( "Bindings", new BindingItems( controller, shapes, new EllipticPolygonBindings( shapes ) ) )
       );
       setCenter( window );
       

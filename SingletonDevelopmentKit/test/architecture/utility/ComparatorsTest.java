@@ -7,8 +7,13 @@
  */
 package architecture.utility;
 
+import java.util.Comparator;
+
 import org.junit.Assert;
 import org.junit.Test;
+
+import model.singleton.Singleton;
+import test.model.TestObjects.TestSingletonImpl;
 
 
 /**
@@ -45,5 +50,21 @@ public class ComparatorsTest {
       Assert.assertTrue( Comparators.compare( "56", "-34" ) > 0 );
       Assert.assertTrue( Comparators.compare( "56", null ) > 0 );
    }// End Method
+   
+   /**
+    * Prove that {@link Comparators#stringExtractionComparater(java.util.function.Function)} works.
+    */
+   @Test public void shouldConstructComparatorForSingletonStringExtraction(){
+      Comparator< Singleton > comparator = Comparators.stringExtractionComparater( singleton -> { return singleton.getIdentification(); } );
+      
+      Singleton first = new TestSingletonImpl( "first" );
+      Singleton second = new TestSingletonImpl( "second" );
+      Singleton last = new TestSingletonImpl( "xlast" );
+      
+      Assert.assertTrue( comparator.compare( first, second ) < 0 );
+      Assert.assertTrue( comparator.compare( second, last ) < 0 );
+      Assert.assertTrue( comparator.compare( last, second ) > 0 );
+      Assert.assertTrue( comparator.compare( second, second ) == 0 );
+   }//End Method
    
 }// End Class

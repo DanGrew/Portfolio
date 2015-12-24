@@ -9,6 +9,7 @@ package architecture.utility;
 
 import java.time.LocalDate;
 import java.util.Comparator;
+import java.util.function.Function;
 
 import javafx.scene.chart.XYChart.Data;
 
@@ -18,7 +19,7 @@ import javafx.scene.chart.XYChart.Data;
 public class Comparators {
 
    /** Basic implementation of a {@link String} {@link Comparator}.**/
-   private static final Comparator< String > STRING_ALPHABETICAL = new Comparator< String >() {
+   public static final Comparator< String > STRING_ALPHABETICAL = new Comparator< String >() {
       @Override public int compare( String o1, String o2 ) {
          Integer nullResult = compareForNullValues( o1, o2, true );
          if ( nullResult == null ) {
@@ -82,6 +83,21 @@ public class Comparators {
    public static int compare( LocalDate o1, LocalDate o2 ) {
       return DATE_ASCENDING.compare( o1, o2 );
    }// End Method
+   
+   /**
+    * Method to construct a {@link Comparator} for comparing {@link String}s extracted by the given {@link Function}.
+    * @param valueGetter the {@link Function} for getting the {@link String}.
+    * @return the {@link Comparator} constructed.
+    */
+   public static < TypeT > Comparator< TypeT > stringExtractionComparater( Function< TypeT, String > valueGetter ) {
+      return new Comparator< TypeT >() {
+         @Override public int compare( TypeT o1, TypeT o2 ) {
+            String o1s = valueGetter.apply( o1 );
+            String o2s = valueGetter.apply( o2 );
+            return Comparators.compare( o1s, o2s );
+         }
+      };
+   }//End Method
    
    /**
     * Method to construct a reverse {@link Comparator} for the given. This will simply negate the given {@link Comparator}.
