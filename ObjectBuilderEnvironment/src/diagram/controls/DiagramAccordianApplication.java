@@ -31,7 +31,7 @@ public class DiagramAccordianApplication extends Application {
    @Override public void start( Stage stage ) throws Exception {
       ShapesManager manager = new ShapesManager();
       DiagramAccordion accordion = new DiagramAccordion( 
-               new ShapeManagerSelectionControllerImpl( manager ), manager );
+               new ShapeManagerSelectionControllerImpl( manager ) );
       Scene scene = new Scene( accordion, 220, 800 );
       stage.setScene( scene );
       stage.show();

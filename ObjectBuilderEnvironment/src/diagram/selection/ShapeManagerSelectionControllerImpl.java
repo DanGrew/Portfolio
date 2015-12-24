@@ -50,6 +50,13 @@ public class ShapeManagerSelectionControllerImpl implements SelectionController 
    /**
     * {@inheritDoc}
     */
+   @Override public ShapesManager getShapesManager() {
+      return shapes;
+   }//End Method
+   
+   /**
+    * {@inheritDoc}
+    */
    @Override public void register( Object key, Consumer< EllipticPolygon > propertyApplier ) {
       modificationFunctions.put( key, propertyApplier );
    }//End Method

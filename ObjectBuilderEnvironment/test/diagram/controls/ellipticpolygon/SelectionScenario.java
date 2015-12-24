@@ -88,6 +88,14 @@ public class SelectionScenario {
     * Method to initialise the system under test.
     */
    SelectionScenario() { 
+      this( Mockito.mock( ShapesManager.class ) );
+   }//End Constructor
+   
+   /**
+    * Constructs a new {@link SelectionScenario} with the given {@link ShapesManager}.
+    * @param shapes the {@link ShapesManager}.
+    */
+   SelectionScenario( ShapesManager shapes ){
       diamond = new EllipticPolygon( 
                new EllipticPolygonBuilder( DIAMOND_TYPE, DIAMOND_NUMBER_OF_SIDES )
                   .centreXProperty( DIAMOND_CENTRE_X )
@@ -134,9 +142,9 @@ public class SelectionScenario {
       Assert.assertEquals( TRIANGLE_TYPE, triangle.polygonTypeProperty().get() );
       Assert.assertEquals( PENTAGON_TYPE, pentagon.polygonTypeProperty().get() );
       
-      shapes = Mockito.mock( ShapesManager.class );
+      this.shapes = shapes;
       controller = new ShapeManagerSelectionControllerImpl( shapes );
-   }//End Constructor
+   }
    
    /**
     * Method to assert that the properties of the diamond are as originally configured. 

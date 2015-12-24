@@ -19,6 +19,12 @@ import diagram.shapes.ellipticpolygon.EllipticPolygon;
 public interface SelectionController {
    
    /**
+    * Getter for the {@link ShapesManager} associated.
+    * @return the {@link ShapesManager}.
+    */
+   public ShapesManager getShapesManager();
+   
+   /**
     * Register a unique key for a function that can be applied at will.
     * @param key the {@link Object} key.
     * @param propertyApplier the function to run for the key.

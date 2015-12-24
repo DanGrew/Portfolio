@@ -33,9 +33,8 @@ public class DiagramAccordion extends BorderPane {
    /**
     * Constructs a new {@link DiagramAccordion}.
     * @param controller the {@link SelectionController} for controlling the selection.
-    * @param shapes the {@link ShapesManager} for controlling selection.
     */
-   public DiagramAccordion( SelectionController controller, ShapesManager shapes ) {
+   public DiagramAccordion( SelectionController controller ) {
       Accordion window = new Accordion();
       window.getPanes().addAll( 
                new TitledPane( "Type", new PolygonTypeItems( controller ) ),
@@ -46,7 +45,7 @@ public class DiagramAccordion extends BorderPane {
                new TitledPane( "Size", new SizeItems( controller ) ),
                new TitledPane( "Location", new LocationItems( controller ) ),
                new TitledPane( "Colour", new ColourItems( controller ) ),
-               new TitledPane( "Bindings", new BindingItems( controller, shapes ) )
+               new TitledPane( "Bindings", new BindingItems( controller ) )
       );
       setCenter( window );
       

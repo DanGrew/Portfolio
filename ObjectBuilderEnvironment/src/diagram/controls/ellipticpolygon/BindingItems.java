@@ -7,7 +7,6 @@
  */
 package diagram.controls.ellipticpolygon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import diagram.bindings.EllipticPolygonBindings;
@@ -18,9 +17,7 @@ import diagram.selection.SelectionController;
 import diagram.selection.ShapesManager;
 import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
-import model.singleton.Singleton;
-import object.BuilderObject;
-import parameter.classparameter.ClassParameterTypes;
+import javafx.scene.control.ComboBox;
 import propertytype.PropertyType;
 
 /**
@@ -43,11 +40,9 @@ public class BindingItems extends GridItemSelection {
    /**
     * Constructs a new {@link BindingItems}.
     * @param selection the {@link SelectionController} for the selection.
-    * @param shapes the {@link ShapesManager} for handling selection.
-    * @param bindings the {@link EllipticPolygonBindings} for applying binding functions.
     */
-   public BindingItems( SelectionController selection, ShapesManager shapes ) {
-      EllipticPolygonBindings bindings = new EllipticPolygonBindings( shapes );
+   public BindingItems( SelectionController selection ) {
+      EllipticPolygonBindings bindings = new EllipticPolygonBindings( selection.getShapesManager() );
       selection.register( BIND_CENTREX_KEY, ( polygon ) -> bindings.oneTimeBind( 
                polygon, EllipticPolygonProperties.CentreX, centreXProperty.getController().getValue() ) 
       );
@@ -63,7 +58,7 @@ public class BindingItems extends GridItemSelection {
       selection.register( BIND_ROTATION_KEY, ( polygon ) -> bindings.oneTimeBind( 
                polygon, EllipticPolygonProperties.Rotation, rotationProperty.getController().getValue() ) 
       );
-      association = new AssociationComboBoxItemImpl( shapes );
+      association = new AssociationComboBoxItemImpl( selection.getShapesManager() );
       association.getController().valueProperty().addListener( ( source, old, updated ) -> {
          List< PropertyType > types = association.getNumberPropertyTypes();
          centreXProperty.setItems( types );
@@ -87,5 +82,52 @@ public class BindingItems extends GridItemSelection {
                rotationProperty
       );
    }//End Constructor
+
+   /**
+    * Getter for the {@link AssociationComboBoxItemImpl} controlling the other bindings.
+    * @return the {@link AssociationComboBoxItemImpl}.
+    */
+   AssociationComboBoxItemImpl associationsController() {
+      return association;
+   }//End Method
+
+   /**
+    * Getter for the {@link ComboBox} controlling the centre x.
+    * @return the {@link ComboBox}.
+    */
+   ComboBox< PropertyType > centreXBox() {
+      return centreXProperty.getController();
+   }//End Method
+
+   /**
+    * Getter for the {@link ComboBox} controlling the centre y.
+    * @return the {@link ComboBox}.
+    */
+   ComboBox< PropertyType > centreYBox() {
+      return centreYProperty.getController();
+   }//End Method
    
-}
+   /**
+    * Getter for the {@link ComboBox} controlling the vertical radius.
+    * @return the {@link ComboBox}.
+    */
+   ComboBox< PropertyType > verticalRadiusBox() {
+      return verticalRadiusProperty.getController();
+   }//End Method
+   
+   /**
+    * Getter for the {@link ComboBox} controlling the horizontal radius.
+    * @return the {@link ComboBox}.
+    */
+   ComboBox< PropertyType > horizontalRadiusBox() {
+      return horizontalRadiusProperty.getController();
+   }//End Method
+   
+   /**
+    * Getter for the {@link ComboBox} controlling the rotation.
+    * @return the {@link ComboBox}.
+    */
+   ComboBox< PropertyType > rotateBox() {
+      return rotationProperty.getController();
+   }//End Method
+}//End Class
