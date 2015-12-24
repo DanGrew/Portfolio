@@ -7,7 +7,6 @@
  */
 package diagram.controls;
 
-import diagram.bindings.EllipticPolygonBindings;
 import diagram.canvas.DiagramCanvasApplication;
 import diagram.controls.ellipticpolygon.BindingItems;
 import diagram.controls.ellipticpolygon.ColourItems;
@@ -47,7 +46,7 @@ public class DiagramAccordion extends BorderPane {
                new TitledPane( "Size", new SizeItems( controller ) ),
                new TitledPane( "Location", new LocationItems( controller ) ),
                new TitledPane( "Colour", new ColourItems( controller ) ),
-               new TitledPane( "Bindings", new BindingItems( controller, shapes, new EllipticPolygonBindings( shapes ) ) )
+               new TitledPane( "Bindings", new BindingItems( controller, shapes ) )
       );
       setCenter( window );
       

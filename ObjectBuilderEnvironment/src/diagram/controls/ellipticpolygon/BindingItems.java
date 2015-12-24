@@ -46,7 +46,8 @@ public class BindingItems extends GridItemSelection {
     * @param shapes the {@link ShapesManager} for handling selection.
     * @param bindings the {@link EllipticPolygonBindings} for applying binding functions.
     */
-   public BindingItems( SelectionController selection, ShapesManager shapes, EllipticPolygonBindings bindings ) {
+   public BindingItems( SelectionController selection, ShapesManager shapes ) {
+      EllipticPolygonBindings bindings = new EllipticPolygonBindings( shapes );
       selection.register( BIND_CENTREX_KEY, ( polygon ) -> bindings.oneTimeBind( 
                polygon, EllipticPolygonProperties.CentreX, centreXProperty.getController().getValue() ) 
       );

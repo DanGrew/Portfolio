@@ -47,7 +47,7 @@ public class AssociationComboBoxItemImpl implements GridItem {
       relevantNumberTypes = new TreeSet<>( 
                Comparators.stringExtractionComparater( singleton -> { return singleton.getIdentification(); } ) 
       );
-      comboBoxItem = new ComboBoxItemImpl<>( "Scope", value -> {} );
+      comboBoxItem = new ComboBoxItemImpl<>( "Scope", value -> calculatePropertyTypes( value ) );
       resetItems();
       comboBoxItem.getController().valueProperty().set( SHARED_PROPERTIES_OPTION );
       
@@ -59,16 +59,13 @@ public class AssociationComboBoxItemImpl implements GridItem {
          resetItems();
          calculatePropertyTypes( comboBoxItem.getController().valueProperty().get() );
       } );
-      comboBoxItem.getController().valueProperty().addListener( ( source, old, updated ) -> {
-         calculatePropertyTypes( updated );
-      } );
    }//End Constructor
    
    /**
     * Method to reset the items in the {@link ComboBoxItemImpl}.
     */
    private void resetItems(){
-      Object selection = comboBoxItem.getController().valueProperty().get();
+      final Object currentSelection = comboBoxItem.getController().valueProperty().get();
       
       Set< Definition > definitions = new TreeSet<>( 
                Comparators.stringExtractionComparater( definition -> { return definition.getIdentification(); } ) 
@@ -91,8 +88,8 @@ public class AssociationComboBoxItemImpl implements GridItem {
       items.addAll( definitions );
       items.addAll( objects );
       
-      if ( items.contains( selection ) ) {
-         comboBoxItem.getController().valueProperty().set( selection );
+      if ( items.contains( currentSelection ) ) {
+         comboBoxItem.getController().valueProperty().set( currentSelection );
       }
    }//End Method
    
