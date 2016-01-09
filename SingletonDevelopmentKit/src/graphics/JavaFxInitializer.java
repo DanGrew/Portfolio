@@ -74,6 +74,6 @@ public class JavaFxInitializer extends Application {
    public static void threadedLaunchWithDefaultScene(){
       //Should be safe to call if already launched.
       PlatformImpl.startup( () -> {} );
-//      threadedLaunch( () -> { return new Label( "Testing, should stay open!" ); } );
+      threadedLaunch( () -> { return new Label( "Testing, should stay open!" ); } );
    }//End Method
 }//End Class
