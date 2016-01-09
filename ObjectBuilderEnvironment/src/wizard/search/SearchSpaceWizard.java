@@ -60,7 +60,7 @@ public class SearchSpaceWizard {
       object2.set( type, "value" );
       RequestSystem.store( object2, BuilderObject.class );
       
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       Platform.runLater( () -> {
          new SearchSpaceWizard();
       } );

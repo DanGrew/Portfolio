@@ -81,7 +81,7 @@ public class SelectionScenario {
     * Method to initialise the environment for testing.
     */
    public static void initialiseScenario(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
    }//End Method
    
    /**

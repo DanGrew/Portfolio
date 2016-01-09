@@ -53,7 +53,7 @@ public class GraphWizard {
       RequestSystem.store( new SearchSpace( "SearchSpace2" ), Search.class );
       RequestSystem.store( new SearchSpace( "SearchSpace3" ), Search.class );
       
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       Platform.runLater( () -> {
          new GraphWizard();
       } );

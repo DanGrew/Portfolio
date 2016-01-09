@@ -56,7 +56,7 @@ public class AssociationComboBoxItemImplTest {
     * Method to initialise JavaFx and the {@link BuilderObject}s for testing.
     */
    @BeforeClass public static void initialiseEnvironment(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       
       RequestSystem.reset();
       

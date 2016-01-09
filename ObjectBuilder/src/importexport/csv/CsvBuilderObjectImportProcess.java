@@ -166,7 +166,7 @@ public class CsvBuilderObjectImportProcess implements ProgressControlledTaskBind
    }// End Method
    
    public static void main( String[] args ) throws InterruptedException {
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       
       Reader reader = new StringReader(
                "Key,TestObject,Value\n"

@@ -173,7 +173,7 @@ public class Wizard< ConfigurableT > extends Alert {
    }// End Method
 
    public static void main( String[] args ) {
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       Platform.runLater( new Runnable() {
          @Override public void run() {
             Wizard< Void > wizard = new Wizard< Void >( "Test" );

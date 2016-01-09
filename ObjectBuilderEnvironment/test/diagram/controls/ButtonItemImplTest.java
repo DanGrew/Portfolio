@@ -27,7 +27,7 @@ public class ButtonItemImplTest {
     * Method to initialise JavaFx for the test.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
    }//End Method
 
    /**

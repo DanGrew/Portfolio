@@ -110,7 +110,7 @@ public class TaskProgressor {
    }// End Method
    
    public static void main( String[] args ) throws InterruptedException {
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       Platform.runLater( () -> {
          TaskProgressor progressor = new TaskProgressor( "Performing Test Process", new Task< Void >() {
             @Override protected Void call() throws Exception {

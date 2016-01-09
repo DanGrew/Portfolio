@@ -26,7 +26,7 @@ public class PerspectivesTest {
     * Method to setup JavaFx for the test.
     */
    @BeforeClass public static void setupJfx(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
    }//End Method
    
    /**

@@ -28,9 +28,11 @@ public class EllipticPolygonPropertyMapper {
       switch ( property ) {
          case CentreX:
             mapDoubleProperty( polygon.centreXProperty(), value );
+//            mapDoubleProperty( polygon.translateXProperty(), value );
             break;
          case CentreY:
             mapDoubleProperty( polygon.centreYProperty(), value );
+//            mapDoubleProperty( polygon.translateYProperty(), value );
             break;
          case FillColour:
             break;

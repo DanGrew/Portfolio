@@ -40,7 +40,7 @@ public class DragAndDropSingletonTest {
     * Method to initialise the {@link Singleton}s ready for the test.
     */
    @BeforeClass public static void initialiseSingletonsForTest(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       RequestSystem.reset();
       singleton = new TestSingletonImpl( "Anything" );
       RequestSystem.store( singleton );

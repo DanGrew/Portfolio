@@ -30,7 +30,7 @@ public class ButtonPadTest {
     * Initialise JavaFx before using components.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
    }//End Method
    
    /**

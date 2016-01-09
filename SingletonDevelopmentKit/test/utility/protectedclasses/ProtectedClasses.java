@@ -31,7 +31,7 @@ public class ProtectedClasses {
     * @return the {@link Dragboard} constructed.
     */
    public static Dragboard DragBoard(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       ObjectProperty< Dragboard > generatedItem = new SimpleObjectProperty< Dragboard >( null );
       
       ThreadWaiter waiter = new ThreadWaiter( 2000 );

@@ -27,7 +27,7 @@ public class CanvasViewportTest {
     * Initialise method to launch JavaFx.
     */
    @BeforeClass public static void initialiseJavaFx(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
    }//End Method
    
    /**

@@ -47,7 +47,7 @@ public class SystemOutlineDraggerTest {
     * Method to setup the the scenario for testing.
     */
    @BeforeClass public static void setupClass(){
-      JavaFxInitializer.threadedLaunchWithDefaultScene();
+      JavaFxInitializer.startPlatform();
       RequestSystem.reset();
       
       singleton = new TestSingletonImpl( "anything" );
