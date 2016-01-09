@@ -9,6 +9,8 @@ package graphics;
 
 import java.util.function.Supplier;
 
+import org.junit.Assert;
+
 import com.sun.javafx.application.PlatformImpl;
 
 import javafx.application.Application;
@@ -40,10 +42,39 @@ public class JavaFxInitializer extends Application {
     * Private method to launch the {@link Application}, checking that it has not already
     * been launched.
     */
-   private static void launch(){
+   private static void launch( Supplier< Node > runnable ){
       if ( !hasLaunched() ) {
          content = new BorderPane();
-         new Thread( () -> launch() ).start();
+         /* Run on separate thread because this will not return while the scene is open.*/
+         new Thread( () -> Application.launch() ).start();
+      }
+      
+      final Thread current = Thread.currentThread();
+      //Get feedback as soon as the center is set, continue current thread.
+      content.centerProperty().addListener( ( source, old, updated ) -> {
+         current.interrupt();
+      } );
+      
+      //Wait a maximum of 2 seconds for application to launch.
+      try {
+         Thread.sleep( 2000 );
+      } catch ( InterruptedException e ) {
+         Assert.assertTrue( hasLaunched() );
+         //continue having proved it has launched.
+      }
+      
+      //Must synchronise call through to launch with the run later so that the center is set.
+      PlatformImpl.runLater( () -> {
+         content.setCenter( runnable.get() );
+         current.interrupt();
+      } );
+      
+      //Wait a maximum of 2 seconds for PlatformImpl to respond.
+      try {
+         Thread.sleep( 2000 );
+         Assert.fail( "JavaFxInitializer took too long." );
+      } catch ( InterruptedException e ) {
+         //return as the set has completed.
       }
    }//End Method
    
@@ -52,7 +83,10 @@ public class JavaFxInitializer extends Application {
     * @return true if already launched, false otherwise.
     */
    public static boolean hasLaunched(){
-      return content != null;
+      if ( content == null ) {
+         return false;
+      }
+      return content.getScene() != null;
    }//End Method
    
    /**
@@ -62,8 +96,9 @@ public class JavaFxInitializer extends Application {
     * @param runnable the {@link Supplier} for the {@link Node} to display.
     */
    public static void threadedLaunch( Supplier< Node > runnable ){
-      launch();
-      content.setCenter( runnable.get() );
+      //Should be safe to call if already launched.
+      PlatformImpl.startup( () -> {} );
+      launch( runnable );
    }//End Method
    
    /**
@@ -72,8 +107,6 @@ public class JavaFxInitializer extends Application {
     * running with popups or dialog type items.
     */
    public static void threadedLaunchWithDefaultScene(){
-      //Should be safe to call if already launched.
-      PlatformImpl.startup( () -> {} );
       threadedLaunch( () -> { return new Label( "Testing, should stay open!" ); } );
    }//End Method
 }//End Class

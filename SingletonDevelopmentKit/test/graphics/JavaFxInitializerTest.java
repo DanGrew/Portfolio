@@ -7,11 +7,14 @@
  */
 package graphics;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javafx.application.Application;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 
 /**
  * {@link JavaFxInitializer} test.
@@ -21,9 +24,21 @@ public class JavaFxInitializerTest {
    /**
     * Proves {@link JavaFxInitializer} should have launched and recorded that fact.
     */
-   @Test public void shouldHaveLaunched() {
+   @Ignore //JavaFx initialises once for entire test suite, so first assertion is rarely false.
+   @Test public void shouldHaveLaunched() throws InterruptedException {
+      Assert.assertFalse( JavaFxInitializer.hasLaunched() );
       JavaFxInitializer.threadedLaunchWithDefaultScene();
       Assert.assertTrue( JavaFxInitializer.hasLaunched() );
+   }//End Method
+   
+   /**
+    * Proves {@link JavaFxInitializer} should have launched only when a {@link Scene} has been shown.
+    */
+   @Ignore //JavaFx initialises once for entire test suite, so first assertion is rarely false.
+   @Test public void shouldHaveLaunchedOnlyWhenSceneAttached() {
+      Assert.assertFalse( JavaFxInitializer.hasLaunched() );
+      JavaFxInitializer.content = new BorderPane();
+      Assert.assertFalse( JavaFxInitializer.hasLaunched() );
    }//End Method
    
    /**
@@ -38,9 +53,11 @@ public class JavaFxInitializerTest {
    }//End Method
    
    /**
-    * Proves that whena lready launched the center of the {@link Application} can be swapped.
+    * Proves that when already launched the center of the {@link Application} can be swapped.
+    * @throws InterruptedException 
     */
    @Test public void shouldSwapCenter() {
+      JavaFxInitializer.threadedLaunchWithDefaultScene();
       Node first = new Label( "anything" );
       JavaFxInitializer.threadedLaunch( () -> { return first; } );
       Assert.assertEquals( first, JavaFxInitializer.content.getCenter() );
