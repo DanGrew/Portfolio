@@ -9,7 +9,6 @@ package diagram.toolbox;
 
 import architecture.event.EventSystem;
 import architecture.request.RequestSystem;
-import diagram.layer.Content;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;

@@ -7,8 +7,6 @@
  */
 package model.data;
 
-import model.singleton.Singleton;
-
 /**
  * The {@link SerializedSingleton} provides the interface required to serialize a {@link Singleton}.
  */

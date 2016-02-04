@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Set;
 
 import parameter.CommandParameterParseUtilities;
-import parameter.wrapper.CommandParameters;
 import redirect.ParameterSuggestions;
 
 /**

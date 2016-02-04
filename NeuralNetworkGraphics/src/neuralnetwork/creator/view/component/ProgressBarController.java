@@ -7,12 +7,11 @@
  */
 package neuralnetwork.creator.view.component;
 
+import architecture.event.EventSystem;
 import javafx.scene.control.ProgressBar;
 import model.singleton.LearningParameter;
 import model.structure.LearningParameters;
-import neuralnetwork.creator.view.NetworkOverviewController;
 import neuralnetwork.creator.view.module.LearningProcessor;
-import architecture.event.EventSystem;
 
 /**
  * The {@link ProgressBarController} is responsible for controlling the {@link ProgressBar}

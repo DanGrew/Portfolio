@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.network.Perceptron;
 import neuralnetwork.creator.view.NetworkViewerController;
 
 /**

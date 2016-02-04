@@ -7,20 +7,16 @@
  */
 package serialization;
 
-import gui.ObjectBuilder;
-
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import model.singleton.Singleton;
+import architecture.representation.SingletonContainer;
+import architecture.representation.StructuralRepresentation;
 import object.BuilderObject;
 import objecttype.Definition;
 import propertytype.PropertyType;
-import architecture.representation.SingletonContainer;
-import architecture.representation.StructuralRepresentation;
-import architecture.request.RequestSystem;
 
 /**
  * The {@link XmlObjectBuilderSystemWrapper} wraps the {@link ObjectBuilder} system and its {@link Singleton}s

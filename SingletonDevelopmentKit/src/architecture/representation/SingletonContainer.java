@@ -7,8 +7,6 @@
  */
 package architecture.representation;
 
-import model.singleton.Singleton;
-
 /**
  * The {@link SingletonContainer} defines the interface a wrapper class should implemented
  * if it wraps {@link Singleton}s so that those {@link Singleton}s can be recreated and 

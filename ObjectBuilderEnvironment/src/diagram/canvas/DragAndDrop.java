@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import architecture.request.RequestSystem;
-import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.Dragboard;

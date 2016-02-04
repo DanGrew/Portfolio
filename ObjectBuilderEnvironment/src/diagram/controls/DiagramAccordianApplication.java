@@ -9,10 +9,8 @@ package diagram.controls;
 
 import diagram.selection.ShapeManagerSelectionControllerImpl;
 import diagram.selection.ShapesManager;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Accordion;
 import javafx.stage.Stage;
 
 /**

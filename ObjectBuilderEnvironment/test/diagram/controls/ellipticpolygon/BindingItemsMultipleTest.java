@@ -15,9 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import diagram.controls.ellipticpolygon.composite.AssociationComboBoxItemImpl;
 import diagram.selection.ShapesManager;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
 import javafx.scene.control.ComboBox;
 import object.BuilderObject;

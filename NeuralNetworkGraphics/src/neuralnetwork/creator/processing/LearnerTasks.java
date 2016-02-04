@@ -7,12 +7,10 @@
  */
 package neuralnetwork.creator.processing;
 
-import javafx.concurrent.Task;
-import model.network.Perceptron;
+import architecture.TaskProcessor;
 import model.singleton.LearningParameter;
 import model.structure.LearningParameters;
 import neuralnetwork.creator.view.module.LearningProcessor;
-import architecture.TaskProcessor;
 
 /**
  * The {@link LearnerTasks} defines the specific {@link Task}s to be processed by

@@ -14,7 +14,6 @@ import java.util.List;
 import architecture.request.RequestSystem;
 import graphics.utility.EnumStringConverter;
 import graphics.utility.SingletonStringConverter;
-import graphs.series.GroupEvaluation;
 import javafx.Workarounds;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;

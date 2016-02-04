@@ -9,7 +9,6 @@ package object;
 
 import java.io.Serializable;
 
-import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElement;
 
 import architecture.request.RequestSystem;

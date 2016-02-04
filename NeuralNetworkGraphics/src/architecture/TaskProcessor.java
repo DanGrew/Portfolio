@@ -11,9 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import architecture.event.EventSystem;
+import javafx.concurrent.Service;
 
 /**
  * The {@link TaskProcessor} is responsible for managing {@link Task}s that should be processed

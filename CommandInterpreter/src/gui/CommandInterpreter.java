@@ -7,19 +7,13 @@
  */
 package gui;
 
+import architecture.request.RequestSystem;
+import command.Command;
+import defaults.CommonCommands;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-
-import architecture.request.RequestSystem;
-
-import command.Command;
-
-import defaults.CommonCommands;
 
 /**
  * The {@link CommandInterpreter} provides a {@link JFrame} and {@link JMenuBar} for the 

@@ -7,11 +7,6 @@
  */
 package wizard.common;
 
-import graphics.wizard.Wizard;
-import graphics.wizard.WizardPage;
-import javafx.scene.control.TableView;
-import wizard.graph.GraphWizard;
-
 /**
  * The {@link WizardConfiguration} if responsible for defining the defaults for the 
  * {@link GraphWizard} and {@link WizardPage}s within it.

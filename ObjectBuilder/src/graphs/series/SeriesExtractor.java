@@ -10,7 +10,6 @@ package graphs.series;
 import graphs.graph.sorting.GraphSort;
 import javafx.scene.chart.XYChart.Data;
 import javafx.scene.chart.XYChart.Series;
-import object.BuilderObject;
 import propertytype.PropertyType;
 import search.Search;
 

@@ -7,13 +7,9 @@
  */
 package gui.console;
 
+import architecture.event.EventSystem;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
-
-import javax.swing.JList;
-import javax.swing.ListModel;
-
-import architecture.event.EventSystem;
 
 /**
  * The {@link ConsoleModel} provides the {@link ListModel} for the {@link Console} {@link JList}.

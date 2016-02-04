@@ -9,9 +9,8 @@ package model.structure;
 
 import java.util.Iterator;
 
-import model.singleton.LearningParameter.NeuronValue;
-import model.singleton.Neuron;
 import architecture.utility.ReadOnlyArray;
+import model.singleton.LearningParameter.NeuronValue;
 
 /**
  * The {@link NeuronValueArray} provides an implementation of a {@link ReadOnlyArray}

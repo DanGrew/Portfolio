@@ -14,8 +14,6 @@ import diagram.controls.ComboBoxItemImpl;
 import diagram.controls.GridItemSelection;
 import diagram.controls.ellipticpolygon.composite.AssociationComboBoxItemImpl;
 import diagram.selection.SelectionController;
-import diagram.selection.ShapesManager;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
 import javafx.scene.control.ComboBox;
 import propertytype.PropertyType;

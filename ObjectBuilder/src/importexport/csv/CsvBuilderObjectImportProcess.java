@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import architecture.request.RequestSystem;
-import export.csv.CsvFileContents;
 import graphics.JavaFxInitializer;
 import javafx.application.Platform;
 import object.BuilderObject;

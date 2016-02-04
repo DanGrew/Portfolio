@@ -15,7 +15,6 @@ import java.util.Iterator;
 import model.data.SerializableLearningParameter;
 import model.data.SerializableNeuron;
 import model.data.SerializableSynapse;
-import model.function.threshold.ThresholdFunction;
 import model.singleton.LearningParameter;
 import model.singleton.LearningParameter.NeuronValue;
 import model.singleton.Neuron;

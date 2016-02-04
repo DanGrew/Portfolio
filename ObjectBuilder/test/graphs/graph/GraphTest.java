@@ -16,8 +16,6 @@ import graphics.JavaFxInitializer;
 import graphs.graph.sorting.GraphDataPolicy;
 import graphs.graph.sorting.GraphSort;
 import graphs.series.GroupEvaluation;
-import graphs.series.SeriesExtractor;
-import model.singleton.Singleton;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.Definition;

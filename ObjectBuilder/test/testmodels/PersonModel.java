@@ -7,7 +7,7 @@
  */
 package testmodels;
 
-import model.singleton.Singleton;
+import architecture.request.RequestSystem;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.Definition;
@@ -15,7 +15,6 @@ import objecttype.DefinitionImpl;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
-import architecture.request.RequestSystem;
 
 /**
  * The {@link PersonModel} provides a basic {@link BuilderObject} model for people.

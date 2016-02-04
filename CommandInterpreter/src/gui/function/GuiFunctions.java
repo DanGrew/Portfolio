@@ -8,7 +8,6 @@
 package gui.function;
 
 import architecture.event.EventSystem;
-import command.Command;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;

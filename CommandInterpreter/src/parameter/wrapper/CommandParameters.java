@@ -8,10 +8,8 @@
 package parameter.wrapper;
 
 import java.util.List;
-import java.util.function.Function;
 
 import parameter.CommandParameter;
-import command.Command;
 
 /**
  * The {@link CommandParameters} provides a wrapper for the {@link CommandParameter}s needed for a {@link Command}.

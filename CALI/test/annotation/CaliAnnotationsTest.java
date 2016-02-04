@@ -7,16 +7,13 @@
  */
 package annotation;
 
-import java.lang.reflect.Method;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import test.model.TestObjects.TestSingleton;
-import test.model.TestObjects.TestSingletonImpl;
-
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;
+import test.model.TestObjects.TestSingleton;
+import test.model.TestObjects.TestSingletonImpl;
 
 /**
  * Test for the {@link CaliAnnotations}.

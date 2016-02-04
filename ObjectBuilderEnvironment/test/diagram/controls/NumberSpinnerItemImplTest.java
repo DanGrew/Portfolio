@@ -14,7 +14,6 @@ import org.junit.Test;
 import graphics.JavaFxInitializer;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TitledPane;
 import utility.TestCommon;

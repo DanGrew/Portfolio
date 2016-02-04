@@ -24,7 +24,6 @@ import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.Axis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.Chart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
@@ -36,7 +35,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.singleton.SingletonImpl;
 import parameter.classparameter.ClassParameterTypes;
-import property.Property;
 import propertytype.PropertyType;
 import search.Search;
 

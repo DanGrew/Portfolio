@@ -11,13 +11,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javafx.scene.control.ListView;
-
-import javax.swing.JList;
-
 import architecture.event.EventSystem;
 import architecture.request.RequestSystem;
 import command.Command;
+import javafx.scene.control.ListView;
 
 /**
  * The {@link SuggestionsModel} supports the {@link JList} providing suggestions to the user

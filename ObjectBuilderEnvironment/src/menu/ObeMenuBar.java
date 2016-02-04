@@ -9,9 +9,7 @@ package menu;
 
 import gui.CommandInterpreterMenuBar;
 import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import launch.ObjectBuilderEnvironment;
 
 /**
  * The {@link ObeMenuBar} provides a {@link MenuBar} specifically for the {@link ObjectBuilderEnvironment}.

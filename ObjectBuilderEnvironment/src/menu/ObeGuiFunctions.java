@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import launch.ObjectBuilderEnvironment;
 import wizard.graph.GraphWizard;
 import wizard.search.SearchSpaceWizard;
 

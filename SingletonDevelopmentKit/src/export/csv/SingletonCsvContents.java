@@ -7,8 +7,6 @@
  */
 package export.csv;
 
-import model.singleton.Singleton;
-
 /**
  * Abstract class providing a base for {@link Singleton} related contents imported
  * from a csv file.

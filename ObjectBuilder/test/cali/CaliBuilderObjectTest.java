@@ -11,7 +11,6 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import annotation.Cali;
 import object.BuilderObjectImpl;
 import objecttype.Definition;
 import propertytype.PropertyType;

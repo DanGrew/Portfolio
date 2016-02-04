@@ -8,8 +8,6 @@
 package diagram.controls;
 
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 
 /**
  * Interface describing an item that can be placed in a {@link GridItemSelection} {@link GridPane}.

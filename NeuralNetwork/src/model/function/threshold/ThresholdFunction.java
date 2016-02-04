@@ -8,10 +8,7 @@
  package model.function.threshold;
 
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
-import model.singleton.Neuron;
-import model.singleton.Synapse;
 
 /**
  * The {@link ThresholdFunction} is responsible for defining the base of all threshold

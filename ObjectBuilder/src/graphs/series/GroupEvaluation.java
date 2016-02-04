@@ -7,7 +7,6 @@
  */
 package graphs.series;
 
-import object.BuilderObject;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
 

@@ -11,21 +11,19 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 
-import model.network.Perceptron;
-import model.singleton.Neuron;
-import model.singleton.Singleton;
-import model.singleton.Synapse;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.event.system.ManagementSystem;
+import architecture.request.RequestSystem;
+import architecture.serialization.SerializationSystem;
+import model.network.Perceptron;
+import model.singleton.Neuron;
+import model.singleton.Synapse;
 import representation.xml.wrapper.XmlPerceptronWrapper;
 import temporary.TemporaryFiles;
 import utility.Comparison;
 import utility.Resolution;
-import architecture.event.system.ManagementSystem;
-import architecture.request.RequestSystem;
-import architecture.serialization.SerializationSystem;
 
 /**
  * The {@link SerializationSystemTest} is responsible for testing the {@link SerializationSystem}

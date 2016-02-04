@@ -19,7 +19,6 @@ import architecture.TaskProcessor;
 import architecture.event.EventSystem;
 import graphics.JavaFxInitializer;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 
 /**
  * The {@link TaskProcessorTest} is responsible for testing the {@link TaskProcessor}.
@@ -39,7 +38,7 @@ public class TaskProcessorTest {
     * Method to initialise the JavaFx {@link Thread} and components.
     */
    @BeforeClass public static void initialise(){
-      JavaFxInitializer.threadedLaunch( null );
+      JavaFxInitializer.startPlatform();
       testThread = Thread.currentThread();
    }// End Method
    

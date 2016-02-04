@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import diagram.selection.ShapeManagerSelectionControllerImpl;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Slider;

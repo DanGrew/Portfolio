@@ -7,8 +7,6 @@
  */
 package diagram.canvas;
 
-import diagram.layer.Content;
-import javafx.scene.Node;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Background;

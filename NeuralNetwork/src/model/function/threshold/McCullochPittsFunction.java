@@ -7,9 +7,6 @@
  */
  package model.function.threshold;
 
-import model.singleton.Neuron;
-import model.singleton.Synapse;
-
 /**
  * The {@link McCullochPittsFunction} defines the McCullock Pitts {@link Neuron}
  * equation.

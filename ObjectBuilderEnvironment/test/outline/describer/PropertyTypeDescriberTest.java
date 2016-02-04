@@ -7,8 +7,6 @@
  */
 package outline.describer;
 
-import model.singleton.Singleton;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

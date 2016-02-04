@@ -10,8 +10,6 @@ package command.pattern;
 import org.junit.Assert;
 import org.junit.Test;
 
-import command.Command;
-
 /**
  * The {@link CommandVerifier} provides an interface for tests that test {@link Command}s.
  */

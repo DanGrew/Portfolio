@@ -8,7 +8,6 @@
 package javafx;
 
 import javafx.scene.control.TableColumnBase;
-import javafx.scene.control.TreeTableColumn;
 
 /**
  * {@link Workarounds} provides workaround functions for oddities in JavaFx.

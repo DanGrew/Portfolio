@@ -9,7 +9,6 @@ package graphics.event;
 
 import architecture.event.EventManagementSystem;
 import architecture.event.EventReceiver;
-import architecture.event.EventSystem;
 
 /**
  * The {@link JavaFxEventSystem} provides an {@link EventSystem} that automatically

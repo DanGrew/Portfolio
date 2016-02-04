@@ -7,9 +7,6 @@
  */
 package gui;
 
-import java.util.List;
-import java.util.function.Function;
-
 /**
  * Functional interface used to determine whether a cell is editablein the {@link FunctionalTableModel}.
  */

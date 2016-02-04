@@ -7,21 +7,18 @@
  */
 package commands.functions;
 
-import gui.DefinitionViewer;
-import gui.console.ConsoleMessageImpl;
-
 import java.util.function.Function;
 
+import architecture.request.RequestSystem;
+import command.CommandResult;
+import command.CommandResultImpl;
+import commands.parameters.DefinitionCommandParameters;
+import gui.DefinitionViewer;
+import gui.console.ConsoleMessageImpl;
 import objecttype.Definition;
 import objecttype.DefinitionImpl;
 import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
-import architecture.request.RequestSystem;
-
-import command.CommandResult;
-import command.CommandResultImpl;
-import commands.DefinitionCommands;
-import commands.parameters.DefinitionCommandParameters;
 
 /**
  * {@link Class} to hold the {@link Function}s associated with {@link DefinitionCommands}.

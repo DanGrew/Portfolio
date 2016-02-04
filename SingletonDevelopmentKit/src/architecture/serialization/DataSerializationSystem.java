@@ -9,10 +9,6 @@ package architecture.serialization;
 
 import java.io.File;
 
-import javax.xml.bind.JAXB;
-
-import model.singleton.Singleton;
-
 /**
  * The {@link DataSerializationSystem} provides the interface to serializing {@link Object}s
  * and {@link Singleton}s to different output formats.

@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import diagram.controls.ellipticpolygon.composite.ButtonPad;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Spinner;
 import utility.TestCommon;

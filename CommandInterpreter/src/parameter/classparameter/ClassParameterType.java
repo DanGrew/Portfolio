@@ -10,8 +10,6 @@ package parameter.classparameter;
 import java.io.Serializable;
 import java.util.List;
 
-import command.Command;
-
 /**
  * The {@link ClassParameterType} defines the interface for interacting with a type of {@link Class}
  * that can be a parameter for a {@link Command}.

@@ -7,15 +7,18 @@
  */
 package commands.functions;
 
-import graphics.tasks.TaskProgressor;
-import graphs.graph.Graph;
-import graphs.graph.XmlGraphImpl;
-import gui.console.ConsoleMessageImpl;
-
 import java.io.File;
 import java.util.List;
 import java.util.function.Function;
 
+import architecture.request.RequestSystem;
+import architecture.serialization.SerializationSystem;
+import command.CommandResult;
+import command.CommandResultImpl;
+import graphics.tasks.TaskProgressor;
+import graphs.graph.Graph;
+import graphs.graph.XmlGraphImpl;
+import gui.console.ConsoleMessageImpl;
 import javafx.concurrent.Task;
 import javafx.stage.FileChooser;
 import object.BuilderObject;
@@ -29,11 +32,6 @@ import search.SearchSpace;
 import search.XmlSearchSpaceImpl;
 import serialization.XmlAnalysisWrapper;
 import serialization.XmlObjectBuilderSystemWrapper;
-import architecture.request.RequestSystem;
-import architecture.serialization.SerializationSystem;
-import command.CommandResult;
-import command.CommandResultImpl;
-import commands.SystemCommands;
 
 /**
  * {@link Class} to hold the {@link Function}s associated with {@link SystemCommands}.

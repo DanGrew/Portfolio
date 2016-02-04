@@ -11,10 +11,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import model.singleton.Singleton;
-import architecture.data.DataManagementSystem;
 import architecture.event.system.ManagementSystem;
 import architecture.utility.IdentificationMatcher;
+import model.singleton.Singleton;
 
 /**
  * The {@link RequestSystem} provides an interface to the management systems that provide access

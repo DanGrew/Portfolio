@@ -15,17 +15,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import annotation.Cali;
+import export.csv.SingletonCsvContents;
+import graphics.tasks.TaskProgressor;
 import javafx.concurrent.Task;
 import javafx.stage.FileChooser;
-import model.singleton.Singleton;
-import object.BuilderObject;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
 import runnables.ProgressControlledTaskImpl;
-import annotation.Cali;
-import export.csv.CsvFileContents;
-import export.csv.SingletonCsvContents;
-import graphics.tasks.TaskProgressor;
 
 /**
  * The {@link CsvBuilderObjectContents} is responsible for importing data using

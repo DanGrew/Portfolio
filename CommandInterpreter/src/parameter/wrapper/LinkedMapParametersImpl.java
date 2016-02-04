@@ -13,12 +13,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Function;
 
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
-
-import command.Command;
 
 /**
  * The {@link LinkedMapParametersImpl} provides a wrapper for the {@link CommandParameter}s needed for a {@link Command}.

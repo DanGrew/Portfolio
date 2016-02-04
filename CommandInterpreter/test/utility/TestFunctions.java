@@ -7,8 +7,6 @@
  */
 package utility;
 
-import org.mockito.stubbing.Answer;
-
 /**
  * Container class for functions associated with tests providing a readable interface for access.
  */

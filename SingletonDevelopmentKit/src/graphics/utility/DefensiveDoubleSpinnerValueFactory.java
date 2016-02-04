@@ -8,7 +8,6 @@
 package graphics.utility;
 
 import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory;
-import javafx.util.StringConverter;
 
 /**
  * Defensive extension of the {@link DoubleSpinnerValueFactory} that does not crash when

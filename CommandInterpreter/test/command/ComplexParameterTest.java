@@ -9,20 +9,17 @@ package command;
 
 import java.util.Arrays;
 
-import model.singleton.Singleton;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.request.RequestSystem;
 import parameter.BooleanParameterImpl;
-import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import parameter.FixedValueParameterImpl;
 import parameter.ReferenceObjectParameterImpl;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
-import architecture.request.RequestSystem;
 
 /**
  * Test for {@link ParameterizedCommandImpl} that uses {@link CommandParameter}s capable of

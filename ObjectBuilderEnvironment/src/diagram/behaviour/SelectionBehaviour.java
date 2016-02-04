@@ -9,7 +9,6 @@ package diagram.behaviour;
 
 import architecture.event.EventSystem;
 import diagram.events.SelectShapesEvent;
-import diagram.layer.Content;
 import diagram.shapes.CanvasShape;
 import diagram.toolbox.ContentEvents;
 import javafx.scene.Node;

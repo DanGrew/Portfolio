@@ -7,9 +7,7 @@
  */
 package diagram.shapes;
 
-import diagram.canvas.DiagramCanvas;
 import javafx.beans.property.DoubleProperty;
-import javafx.scene.shape.Polygon;
 
 /**
  * Th {@link CanvasShape} provides a wrapper for all types of shape in the

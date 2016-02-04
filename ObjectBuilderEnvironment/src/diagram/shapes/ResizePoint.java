@@ -10,7 +10,6 @@ package diagram.shapes;
 import diagram.behaviour.DragBehaviour;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

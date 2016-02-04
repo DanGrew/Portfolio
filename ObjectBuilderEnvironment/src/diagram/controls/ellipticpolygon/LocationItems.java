@@ -12,7 +12,6 @@ import diagram.controls.GridItemSelection;
 import diagram.controls.NumberSpinnerItemImpl;
 import diagram.controls.ellipticpolygon.composite.ButtonPad;
 import diagram.selection.SelectionController;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import images.arrows.ImageArrows;
 import javafx.scene.control.Spinner;
 

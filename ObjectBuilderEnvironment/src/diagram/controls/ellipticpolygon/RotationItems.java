@@ -10,7 +10,6 @@ package diagram.controls.ellipticpolygon;
 import diagram.controls.GridItemSelection;
 import diagram.controls.SliderItemImpl;
 import diagram.selection.SelectionController;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.control.Slider;
 
 /**

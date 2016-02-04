@@ -11,17 +11,16 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import architecture.request.RequestSystem;
+import architecture.utility.ObjectGenerator;
+import architecture.utility.UnmodifiableIterator;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.Property;
 import javafx.beans.property.StringProperty;
 import model.data.SerializableNeuron;
 import model.function.threshold.McCullochPittsFunction;
 import model.function.threshold.ThresholdFunction;
 import model.singleton.LearningParameter.NeuronValue;
 import model.structure.NetworkPosition;
-import architecture.request.RequestSystem;
-import architecture.utility.ObjectGenerator;
-import architecture.utility.UnmodifiableIterator;
 
 /**
  * The {@link Neuron} represents a single {@link Neuron} in the Neural Network.

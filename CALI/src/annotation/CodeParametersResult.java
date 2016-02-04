@@ -7,10 +7,8 @@
  */
 package annotation;
 
-import java.lang.reflect.Method;
-
-import model.result.ComplexReturnResult;
 import annotation.CodeParametersResult.Result;
+import model.result.ComplexReturnResult;
 
 /**
  * The {@link CodeParametersResult} provides the result of parsing coding parameters

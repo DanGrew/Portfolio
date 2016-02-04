@@ -10,10 +10,8 @@
 import architecture.request.RequestSystem;
 import architecture.utility.ObjectGenerator;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.Property;
 import model.data.SerializableSynapse;
 import model.function.learning.PerceptronLearningRule;
-import model.function.threshold.ThresholdFunction;
 
  /**
   * The {@link Synapse} is responsible for connecting two {@link Neuron}s and weighting

@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import diagram.selection.ShapesManager;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import diagram.shapes.ellipticpolygon.EllipticPolygonProperties;
 import javafx.scene.control.ComboBox;
 import object.BuilderObject;

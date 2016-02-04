@@ -7,22 +7,19 @@
  */
 package outline;
 
-import graphics.JavaFx;
-import graphics.event.JavaFxEventSystem;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import model.singleton.Singleton;
-import javafx.collections.ObservableList;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableView;
-import outline.describer.OutlineDescriber;
-import outline.describer.OutlineDescriberFactory;
-import outline.describer.OutlineDescriberFactory.OutlineDescribables;
 import architecture.data.DataManagementSystem;
 import architecture.data.SingletonStoredSource;
 import architecture.event.EventReceiver;
+import graphics.JavaFx;
+import graphics.event.JavaFxEventSystem;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TreeItem;
+import outline.describer.OutlineDescriber;
+import outline.describer.OutlineDescriberFactory;
+import outline.describer.OutlineDescriberFactory.OutlineDescribables;
 
 /**
  * The {@link TreeItemListModel} is responsible for managing changes to objects

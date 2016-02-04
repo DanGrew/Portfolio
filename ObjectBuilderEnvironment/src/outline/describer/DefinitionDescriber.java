@@ -9,7 +9,6 @@ package outline.describer;
 
 import java.util.List;
 
-import model.singleton.Singleton;
 import objecttype.Definition;
 import propertytype.PropertyType;
 

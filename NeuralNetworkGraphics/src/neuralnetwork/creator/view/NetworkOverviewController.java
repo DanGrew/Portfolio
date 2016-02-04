@@ -23,7 +23,6 @@ import model.singleton.Synapse;
 import model.sort.NeuronComparator;
 import model.sort.SynapseComparator;
 import model.structure.NeuronLayer;
-import neuralnetwork.creator.NetworkViewer;
 import neuralnetwork.creator.view.NetworkViewerController.Events;
 import neuralnetwork.creator.view.component.ProgressBarController;
 

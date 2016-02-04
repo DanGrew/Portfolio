@@ -11,8 +11,6 @@ import java.util.List;
 
 import parameter.CommandParameterParseUtilities;
 
-import command.Command;
-
 public class CaliParserUtilities {
    
    private static final String REGEX_PREFIX = "\\";

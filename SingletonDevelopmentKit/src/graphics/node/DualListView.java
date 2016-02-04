@@ -156,7 +156,7 @@ public class DualListView< ItemT > extends BorderPane {
    }// End Method
    
    public static void main( String[] args ) {
-      JavaFxInitializer.threadedLaunch( () -> {
+      JavaFxInitializer.launchInWindow( () -> {
          DualListView< String > view = new DualListView< String >( false );
          view.setPrefHeight( 200 );
          view.setChoices( Arrays.asList( "Askdjcn", "sdjncksjnd", "skjdcksjnd" ) );

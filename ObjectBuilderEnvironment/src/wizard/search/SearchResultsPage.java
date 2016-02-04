@@ -18,7 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import object.BuilderObject;
 import search.SearchSpace;
-import search.SearchSpace.SearchCriteria;
 import wizard.common.WizardConfiguration;
 
 /**

@@ -9,8 +9,6 @@ package parameter;
 
 import java.util.List;
 
-import command.Command;
-
 /**
  * The {@link CommandParameter} defines the interface for interacting with a parameter
  * of a {@link Command}.

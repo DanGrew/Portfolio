@@ -9,8 +9,6 @@ package command.pattern;
 
 import org.junit.Test;
 
-import parameter.CommandParameter;
-
 /**
  * Interface defining the methods that should be tested on {@link CommandParameter}.
  */

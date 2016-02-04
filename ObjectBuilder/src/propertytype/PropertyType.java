@@ -11,7 +11,6 @@ import java.io.Serializable;
 
 import model.data.SingletonSerialization;
 import parameter.classparameter.ClassParameterType;
-import property.Property;
 
 /**
  * {@link PropertyType} defines the basic structure of a {@link Property} defining the

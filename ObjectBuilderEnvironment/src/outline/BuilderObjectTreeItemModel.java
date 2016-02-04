@@ -7,13 +7,14 @@
  */
 package outline;
 
-import graphics.JavaFx;
-import graphics.event.JavaFxEventSystem;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import model.singleton.Singleton;
+import architecture.data.DataManagementSystem;
+import architecture.data.SingletonStoredSource;
+import architecture.event.EventReceiver;
+import graphics.JavaFx;
+import graphics.event.JavaFxEventSystem;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import object.BuilderObject;
@@ -21,9 +22,6 @@ import objecttype.Definition;
 import outline.describer.OutlineDescriber;
 import outline.describer.OutlineDescriberFactory;
 import outline.describer.OutlineDescriberFactory.OutlineDescribables;
-import architecture.data.DataManagementSystem;
-import architecture.data.SingletonStoredSource;
-import architecture.event.EventReceiver;
 
 /**
  * The {@link BuilderObjectTreeItemModel} is responsible for displaying nested {@link TreeItem}s

@@ -7,21 +7,17 @@
  */
 package serialization;
 
-import graphs.graph.Graph;
-import graphs.graph.XmlGraphWrapper;
-import gui.ObjectBuilder;
-
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import model.singleton.Singleton;
-import search.SearchSpace;
-import search.XmlSearchSpaceWrapper;
 import architecture.representation.SingletonContainer;
 import architecture.representation.StructuralRepresentation;
-import architecture.request.RequestSystem;
+import graphs.graph.Graph;
+import graphs.graph.XmlGraphWrapper;
+import search.SearchSpace;
+import search.XmlSearchSpaceWrapper;
 
 /**
  * The {@link XmlAnalysisWrapper} wraps the analysis objects in the {@link ObjectBuilder} system and its {@link Singleton}s

@@ -16,7 +16,6 @@ import org.junit.Test;
 
 import annotation.CaliParserUtilities;
 import architecture.request.RequestSystem;
-import command.Command;
 import command.pattern.CommandParameterVerifier;
 import common.TestObjects.TestAnnotatedSingleton;
 import common.TestObjects.TestAnnotatedSingletonImpl;

@@ -12,8 +12,6 @@ import javafx.geometry.Orientation;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.BorderPane;
 
-import command.Command;
-
 /**
  * The {@link CommandPrompt} represents the overall panel for using {@link Command}s.
  */

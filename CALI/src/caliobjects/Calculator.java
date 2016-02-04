@@ -7,9 +7,8 @@
  */
 package caliobjects;
 
-import command.Command;
-import model.singleton.SingletonImpl;
 import annotation.Cali;
+import model.singleton.SingletonImpl;
 
 /**
  * The {@link Calculator} provides a basic calculator that can be controlled by {@link Command}s.

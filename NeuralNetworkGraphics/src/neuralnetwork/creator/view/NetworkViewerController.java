@@ -10,6 +10,7 @@ package neuralnetwork.creator.view;
 import java.util.HashMap;
 import java.util.Map;
 
+import architecture.event.EventSystem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -17,12 +18,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import model.network.Perceptron;
 import model.singleton.LearningParameter;
-import neuralnetwork.creator.NetworkViewer;
 import neuralnetwork.creator.processing.LearnerTasks;
 import neuralnetwork.creator.view.module.FileManager;
 import neuralnetwork.creator.view.module.LearningProcessor;
 import representation.xml.wrapper.XmlPerceptronWrapper;
-import architecture.event.EventSystem;
 
 /**
  * The {@link NetworkViewerController} is responsible for controlling the overall {@link NetworkViewer},

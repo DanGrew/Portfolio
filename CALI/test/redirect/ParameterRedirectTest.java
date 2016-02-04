@@ -7,20 +7,18 @@
  */
 package redirect;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-
-import model.singleton.Singleton;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import architecture.request.RequestSystem;
+import model.singleton.Singleton;
 import redirect.ParameterRedirectTest.TestClass.TestEnum;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
-import architecture.request.RequestSystem;
 
 /**
  * Test for the {@link ParameterRedirect}.

@@ -7,14 +7,12 @@
  */
 package outline.describer;
 
-import model.singleton.Singleton;
-import objecttype.Definition;
-import objecttype.DefinitionImpl;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 

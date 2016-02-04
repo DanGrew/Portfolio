@@ -15,7 +15,6 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
 
 /**
  * The {@link ShapeToolBox} is a simple tool box for configuring {@link Shape} drawing.

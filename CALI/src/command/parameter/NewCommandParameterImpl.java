@@ -7,9 +7,7 @@
  */
 package command.parameter;
 
-import parameter.CommandParameter;
 import parameter.FixedValueParameterImpl;
-import command.NewCommandImpl;
 
 /**
  * The {@link NewCommandParameterImpl} defines the {@link CommandParameter} for {@link NewCommandImpl}.

@@ -11,7 +11,6 @@ import diagram.controls.ButtonItemImpl;
 import diagram.controls.GridItemSelection;
 import diagram.selection.SelectionController;
 import diagram.shapes.PolygonType;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.control.Button;
 
 /**

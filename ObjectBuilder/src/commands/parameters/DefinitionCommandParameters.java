@@ -12,8 +12,6 @@ import parameter.CommandParameter;
 import parameter.CommandParameterImpl;
 import parameter.SingletonNameAsReferenceParameterImpl;
 import propertytype.PropertyType;
-import commands.DefinitionCommands;
-import commands.functions.DefinitionCommandFunctions;
 
 /**
  * {@link Class} to hold {@link CommandParameter}s for {@link DefinitionCommands} and

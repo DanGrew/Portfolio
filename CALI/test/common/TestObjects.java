@@ -7,8 +7,6 @@
  */
 package common;
 
-import java.lang.reflect.Method;
-
 import annotation.Cali;
 import model.data.SerializedSingleton;
 import model.singleton.Singleton;

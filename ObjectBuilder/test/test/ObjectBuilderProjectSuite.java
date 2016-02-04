@@ -10,8 +10,6 @@ package test;
 import org.junit.runner.RunWith;
 import org.junit.runners.AllTests;
 
-import junit.framework.TestSuite;
-
 /**
  * Specific {@link TestSuite} for scanning for all tests in the project.
  */

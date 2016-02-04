@@ -1,7 +1,5 @@
 package model.singleton;
 
-import architecture.request.RequestSystem;
-
 /**
  * The {@link Singleton} represents a stand alone object that can be referenced using various systems
  * such as the {@link RequestSystem}.

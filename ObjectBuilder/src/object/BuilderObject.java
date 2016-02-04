@@ -9,7 +9,6 @@ package object;
 
 import model.data.SingletonSerialization;
 import objecttype.Definition;
-import property.Property;
 import propertytype.PropertyType;
 
 /**

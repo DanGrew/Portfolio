@@ -8,7 +8,6 @@
 package graphics.wizard;
 
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 
 /**
  * The {@link WizardPage} provides an interface for pages of a {@link Wizard} to implement.

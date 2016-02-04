@@ -8,15 +8,14 @@
 package examples.learning;
 
 import static org.junit.Assert.assertTrue;
-import model.network.Perceptron;
-import model.singleton.LearningParameter;
-import model.singleton.Neuron;
-import model.structure.LearningParameters;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import architecture.utility.ReadOnlyArray;
+import model.network.Perceptron;
+import model.singleton.LearningParameter;
+import model.structure.LearningParameters;
 
 /**
  * The {@link AeroplaneMultipleOutputClassificationTest} is responsible for teaching a {@link Perceptron}

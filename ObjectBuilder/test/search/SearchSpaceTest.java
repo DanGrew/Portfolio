@@ -18,13 +18,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import object.BuilderObject;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import propertytype.PropertyType;
+import object.BuilderObject;
 import search.SearchSpace.SearchCriteria;
 import testmodels.PersonModel;
 import utility.TestCommon;

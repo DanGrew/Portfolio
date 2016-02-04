@@ -8,7 +8,6 @@
 package objecttype;
 
 import architecture.request.RequestSystem;
-import object.BuilderObject;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 

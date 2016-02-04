@@ -12,22 +12,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.singleton.Singleton;
-import objecttype.Definition;
-import objecttype.DefinitionImpl;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import propertytype.PropertyType;
-import propertytype.PropertyTypeImpl;
-import serialization.XmlBuilderObjectWrapper;
 import architecture.request.RequestSystem;
 import architecture.serialization.SerializationSystem;
 import commands.parameters.ObjectBuilderClassParameterTypes;
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
+import propertytype.PropertyType;
+import propertytype.PropertyTypeImpl;
+import serialization.XmlBuilderObjectWrapper;
 
 /**
  * Test for the {@link SerializableBuilderObject}.

@@ -12,7 +12,6 @@ import static testmodels.PersonModel.BIRTH_DATE;
 import static testmodels.PersonModel.COMPANY;
 import static testmodels.PersonModel.DAD;
 import static testmodels.PersonModel.DAN;
-import model.singleton.Singleton;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;

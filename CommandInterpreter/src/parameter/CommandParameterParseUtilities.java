@@ -10,10 +10,8 @@ package parameter;
 import java.util.Arrays;
 import java.util.List;
 
-import model.singleton.Singleton;
 import architecture.request.RequestSystem;
-
-import command.Command;
+import model.singleton.Singleton;
 
 /**
  * {@link CommandParameterParseUtilities} is responsible for providing common methods of manipulting

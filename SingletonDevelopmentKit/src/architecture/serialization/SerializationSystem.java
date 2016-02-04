@@ -9,13 +9,10 @@ package architecture.serialization;
 
 import java.io.File;
 
-import javax.xml.bind.JAXB;
-
-import model.data.SerializedSingleton;
-import model.data.SingletonSerialization;
-import model.singleton.Singleton;
 import architecture.representation.SingletonContainer;
 import architecture.representation.StructuralRepresentation;
+import model.data.SerializedSingleton;
+import model.data.SingletonSerialization;
 
 /**
  * The {@link SerializationSystem} provides the public interface for serializing and deserializing

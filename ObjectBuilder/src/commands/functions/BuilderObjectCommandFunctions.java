@@ -7,22 +7,19 @@
  */
 package commands.functions;
 
-import gui.BuilderObjectViewer;
-import gui.console.ConsoleMessageImpl;
-
 import java.util.function.Function;
 
+import architecture.request.RequestSystem;
+import command.CommandResult;
+import command.CommandResultImpl;
+import commands.parameters.BuilderObjectCommandParameters;
+import commands.parameters.extensions.PropertyTypeAndValue;
+import gui.BuilderObjectViewer;
+import gui.console.ConsoleMessageImpl;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import objecttype.Definition;
 import parameter.wrapper.CommandParameters;
-import architecture.request.RequestSystem;
-
-import command.CommandResult;
-import command.CommandResultImpl;
-import commands.BuilderObjectCommands;
-import commands.parameters.BuilderObjectCommandParameters;
-import commands.parameters.extensions.PropertyTypeAndValue;
 
 /**
  * {@link Class} to hold the {@link Function}s associated with {@link BuilderObjectCommands}.

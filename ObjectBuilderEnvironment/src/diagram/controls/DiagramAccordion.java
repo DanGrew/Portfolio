@@ -7,7 +7,6 @@
  */
 package diagram.controls;
 
-import diagram.canvas.DiagramCanvasApplication;
 import diagram.controls.ellipticpolygon.BindingItems;
 import diagram.controls.ellipticpolygon.ColourItems;
 import diagram.controls.ellipticpolygon.InversionItems;
@@ -18,8 +17,6 @@ import diagram.controls.ellipticpolygon.PolygonTypeItems;
 import diagram.controls.ellipticpolygon.RotationItems;
 import diagram.controls.ellipticpolygon.SizeItems;
 import diagram.selection.SelectionController;
-import diagram.selection.ShapesManager;
-import diagram.shapes.ellipticpolygon.EllipticPolygon;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.BorderPane;

@@ -7,8 +7,6 @@
  */
 package search;
 
-import gui.ObjectBuilder;
-
 import java.util.Collection;
 
 import model.singleton.Singleton;

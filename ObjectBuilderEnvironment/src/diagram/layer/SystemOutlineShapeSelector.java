@@ -19,7 +19,6 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
 import model.singleton.Singleton;
-import outline.SystemOutline;
 import outline.describer.OutlineDescriber;
 import outline.describer.SingletonDescriber;
 

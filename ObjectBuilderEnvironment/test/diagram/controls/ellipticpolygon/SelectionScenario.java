@@ -12,7 +12,6 @@ import java.util.Collection;
 import org.junit.Assert;
 import org.mockito.Mockito;
 
-import diagram.controls.DiagramAccordion;
 import diagram.selection.SelectionController;
 import diagram.selection.ShapeManagerSelectionControllerImpl;
 import diagram.selection.ShapesManager;

@@ -7,8 +7,6 @@
  */
 package commands.parameters;
 
-import commands.PropertyTypeCommands;
-import commands.functions.PropertyTypeCommandFunctions;
 import parameter.ClassParameterImpl;
 import parameter.CommandParameter;
 import parameter.CommandParameterImpl;

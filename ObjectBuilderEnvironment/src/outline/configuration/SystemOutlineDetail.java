@@ -8,11 +8,6 @@
 package outline.configuration;
 
 import diagram.layer.SystemOutlineShapeSelector;
-import javafx.collections.ListChangeListener;
-import object.BuilderObject;
-import objecttype.Definition;
-import outline.SystemOutline;
-import propertytype.PropertyType;
 
 /**
  * The {@link SystemOutlineDetail} is responsible for defining the configurable detail to show in the 

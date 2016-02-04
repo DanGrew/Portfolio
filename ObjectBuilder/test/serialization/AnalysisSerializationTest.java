@@ -7,27 +7,23 @@
  */
 package serialization;
 
-import graphs.graph.Graph;
-import graphs.graph.SerializableGraphTest;
-import graphs.graph.XmlGraphImpl;
-import gui.ObjectBuilder;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.singleton.Singleton;
 
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import architecture.serialization.SerializationSystem;
+import graphs.graph.Graph;
+import graphs.graph.SerializableGraphTest;
+import graphs.graph.XmlGraphImpl;
 import search.SearchSpace;
 import search.SerializableSearchSpaceTest;
 import search.XmlSearchSpaceImpl;
-import architecture.serialization.SerializationSystem;
 
 /**
  * {@link AnalysisSerializationTest} is responsible for test that an {@link XmlAnalysisWrapper} can

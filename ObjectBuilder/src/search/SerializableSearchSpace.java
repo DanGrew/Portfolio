@@ -7,7 +7,6 @@
  */
 package search;
 
-import java.io.Serializable;
 import java.util.List;
 
 import model.data.SerializedSingleton;

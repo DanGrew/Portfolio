@@ -11,14 +11,13 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
+import annotation.CaliParserUtilities;
+import annotation.CaliSuggestionUtilities;
+import annotation.CodeParametersResult;
 import parameter.CommandParameter;
 import parameter.CommandParameterParseUtilities;
 import redirect.ParameterSuggestions;
 import system.CaliSystem;
-import annotation.Cali;
-import annotation.CaliParserUtilities;
-import annotation.CaliSuggestionUtilities;
-import annotation.CodeParametersResult;
 
 /**
  * The {@link ConstructorParameterImpl} provides a {@link CommandParameter} capable of parsing 

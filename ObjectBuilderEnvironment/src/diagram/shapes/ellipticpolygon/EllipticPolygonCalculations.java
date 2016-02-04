@@ -12,7 +12,6 @@ import java.util.List;
 
 import diagram.shapes.PolygonType;
 import javafx.geometry.Point2D;
-import javafx.scene.shape.Polygon;
 import math.ShapesAndVectors;
 
 /**

@@ -8,7 +8,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -16,14 +15,6 @@ import javafx.stage.Stage;
  * {@link JavaFx} defines common java fx functions.
  */
 public class JavaFx {
-   /**
-    * Method to perform the initialisation needed to launch JavaFX components.
-    * Note that this is not ideal and needs to be investigated.
-    */
-   public static void launchJavaFxForSwingEnvironment(){
-      JavaFxInitializer.threadedLaunch( null );
-      Platform.setImplicitExit( false );
-   }// End Method
    
    /**
     * Method to expand all branching {@link TreeItem}s in a {@link TreeTableView}.

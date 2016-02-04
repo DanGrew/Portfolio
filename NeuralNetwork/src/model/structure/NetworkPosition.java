@@ -7,12 +7,10 @@
  */
 package model.structure;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-
 import javax.xml.bind.annotation.XmlElement;
 
-import model.singleton.Neuron;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  * The {@link NetworkPosition} respresents the position of a {@link Neuron}

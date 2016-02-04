@@ -7,21 +7,18 @@
  */
 package commands.functions;
 
-import gui.PropertyTypeViewer;
-import gui.console.ConsoleMessageImpl;
-
 import java.util.function.Function;
 
+import architecture.request.RequestSystem;
+import command.CommandResult;
+import command.CommandResultImpl;
+import commands.parameters.PropertyTypeCommandParameters;
+import gui.PropertyTypeViewer;
+import gui.console.ConsoleMessageImpl;
 import parameter.classparameter.ClassParameterType;
 import parameter.wrapper.CommandParameters;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
-import architecture.request.RequestSystem;
-
-import command.CommandResult;
-import command.CommandResultImpl;
-import commands.PropertyTypeCommands;
-import commands.parameters.PropertyTypeCommandParameters;
 
 /**
  * {@link Class} to hold the {@link Function}s associated with {@link PropertyTypeCommands}.

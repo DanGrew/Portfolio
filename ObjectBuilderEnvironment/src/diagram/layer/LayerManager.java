@@ -17,7 +17,6 @@ import java.util.Map;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 
 /**
  * The {@link LayerManager} is responsible for layering the {@link Node}s in a {@link Scene} according

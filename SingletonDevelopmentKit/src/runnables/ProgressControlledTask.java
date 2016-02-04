@@ -7,8 +7,6 @@
  */
 package runnables;
 
-import javafx.concurrent.Task;
-
 /**
  * The {@link ProgressControlledTask} provides an interface for publicizing the
  * update methods of a {@link Task}.

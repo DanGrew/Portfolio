@@ -13,9 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import architecture.utility.Comparators;
-import graphs.graph.Graph;
 import javafx.scene.chart.XYChart.Data;
-import javafx.scene.chart.XYChart.Series;
 import parameter.classparameter.ClassParameterType;
 import parameter.classparameter.ClassParameterTypes;
 import parameter.classparameter.DateClassParameterTypeImpl;

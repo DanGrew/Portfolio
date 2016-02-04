@@ -10,15 +10,14 @@ package representation.xml.wrapper;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import model.network.Perceptron;
-import model.singleton.Neuron;
-import model.singleton.Synapse;
-import model.structure.NeuronLayer;
-import representation.xml.model.XmlNeuron;
-import representation.xml.model.XmlNeuronLayer;
 import architecture.representation.SingletonContainer;
 import architecture.representation.StructuralRepresentation;
 import architecture.request.RequestSystem;
+import model.network.Perceptron;
+import model.singleton.Neuron;
+import model.structure.NeuronLayer;
+import representation.xml.model.XmlNeuron;
+import representation.xml.model.XmlNeuronLayer;
 
 /**
  * The {@link XmlPerceptronWrapper} provides a wrapping class for the {@link Perceptron}

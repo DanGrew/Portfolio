@@ -12,7 +12,6 @@ import diagram.layer.Content;
 import diagram.selection.SelectionController;
 import diagram.selection.ShapeManagerSelectionControllerImpl;
 import diagram.selection.ShapesManager;
-import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 
 /**

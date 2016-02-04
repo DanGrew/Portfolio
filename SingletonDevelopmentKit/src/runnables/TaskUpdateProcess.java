@@ -7,8 +7,6 @@
  */
 package runnables;
 
-import javafx.concurrent.Task;
-
 /**
  *The {@link TaskUpdateProcess} collects classes related to the {@link TaskProgress} concept.
  */

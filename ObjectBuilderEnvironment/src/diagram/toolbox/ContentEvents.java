@@ -7,14 +7,6 @@
  */
 package diagram.toolbox;
 
-import diagram.events.AddShapeEvent;
-import diagram.layer.Content;
-import diagram.shapes.CanvasShape;
-import javafx.scene.input.ScrollEvent;
-import javafx.scene.input.ZoomEvent;
-import model.singleton.Singleton;
-import object.BuilderObject;
-
 /**
  * {@link Enum} defining the events that can be received by the {@link Content}
  * for controlling the content.

@@ -7,7 +7,6 @@
  */
 package graphics.utility;
 
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.Property;
 

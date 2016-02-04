@@ -7,8 +7,6 @@
  */
 package graphs.graph;
 
-import javafx.scene.chart.XYChart;
-
 /**
  * {@link ChartType} defines the types of {@link XYChart} that can be displayed.
  */

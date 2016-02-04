@@ -10,12 +10,11 @@ package neuralnetwork.creator.view.module;
 import java.io.File;
 import java.util.function.Function;
 
-import model.singleton.Singleton;
-import javafx.stage.FileChooser;
-import utility.Alerts;
 import architecture.event.EventSystem;
 import architecture.representation.StructuralRepresentation;
 import architecture.serialization.SerializationSystem;
+import javafx.stage.FileChooser;
+import utility.Alerts;
 
 /**
  * The {@link FileManager} is responsible for managing the marshalling and unmarshalling

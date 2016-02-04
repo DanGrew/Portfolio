@@ -3,7 +3,6 @@ package test.model;
 import architecture.request.RequestSystem;
 import model.data.SerializedSingleton;
 import model.data.SingletonSerialization;
-import model.singleton.Singleton;
 import model.singleton.SingletonImpl;
 
 /**

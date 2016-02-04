@@ -7,10 +7,8 @@
  */
 package gui;
 
-import gui.function.GuiFunctions;
 import architecture.event.EventSystem;
-
-import command.Command;
+import gui.function.GuiFunctions;
 
 /**
  * The {@link CommandAutoComplete} is responsible for processing the auto completion of the

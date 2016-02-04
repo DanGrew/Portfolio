@@ -7,7 +7,7 @@
  */
 package model.singleton;
 
-import javafx.beans.property.Property;
+import architecture.utility.ReadOnlyArray;
 import javafx.beans.property.ReadOnlyDoubleProperty;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -17,7 +17,6 @@ import model.data.SerializableLearningParameter;
 import model.network.Perceptron;
 import model.structure.NetworkPosition;
 import model.structure.NeuronValueArray;
-import architecture.utility.ReadOnlyArray;
 
 /**
  * The {@link LearningParameter} is responsible for defining a set of input parameters

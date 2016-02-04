@@ -7,7 +7,6 @@
  */
 package diagram.events;
 
-import diagram.layer.Content;
 import model.singleton.Singleton;
 
 /**

@@ -9,19 +9,17 @@
 
 import java.util.Iterator;
 
+import architecture.utility.ReadOnlyArray;
 import model.function.threshold.BasicInputFunction;
 import model.function.threshold.McCullochPittsFunction;
-import model.function.threshold.ThresholdFunction;
 import model.singleton.LearningParameter;
-import model.singleton.Neuron;
-import model.singleton.Synapse;
 import model.singleton.LearningParameter.NeuronValue;
+import model.singleton.Neuron;
 import model.structure.LearningParameters;
 import model.structure.NetworkPosition;
 import model.structure.NeuronLayer;
 import model.structure.NeuronLayer.NeuronLayerBuilder;
 import model.structure.NeuronValueArray;
-import architecture.utility.ReadOnlyArray;
 
 /**
  * The {@link Perceptron} provides a basic Neural Network with two layers, input and output.

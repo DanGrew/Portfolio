@@ -8,7 +8,6 @@
 package gui;
 
 import java.util.List;
-import java.util.function.Function;
 
 /**
  * Functional interface used to get a value from a {@link FunctionalTableModel} using a cell

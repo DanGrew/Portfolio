@@ -9,8 +9,6 @@ package utility.protectedclasses;
 
 import java.lang.reflect.Constructor;
 
-import org.mockito.Mockito;
-
 import com.sun.javafx.tk.TKClipboard;
 
 import graphics.JavaFxInitializer;

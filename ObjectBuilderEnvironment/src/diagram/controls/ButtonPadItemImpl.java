@@ -7,13 +7,9 @@
  */
 package diagram.controls;
 
-import java.util.function.Consumer;
-
 import diagram.controls.ellipticpolygon.composite.ButtonPad;
 import javafx.scene.Node;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TitledPane;
-import javafx.scene.paint.Color;
 
 /**
  * Implementation of {@link GridItem} to provide a {@link ButtonPad} with custom controls.

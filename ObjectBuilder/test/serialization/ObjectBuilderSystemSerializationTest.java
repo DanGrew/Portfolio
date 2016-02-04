@@ -7,14 +7,17 @@
  */
 package serialization;
 
-import gui.ObjectBuilder;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.singleton.Singleton;
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
+
+import architecture.serialization.SerializationSystem;
 import object.BuilderObject;
 import object.BuilderObjectImpl;
 import object.SerializableBuilderObjectTest;
@@ -24,18 +27,11 @@ import objecttype.DefinitionImpl;
 import objecttype.DefinitionStructure;
 import objecttype.SerializableDefinitionTest;
 import objecttype.XmlDefinitionImpl;
-
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
-
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import propertytype.SerializablePropertyTypeTest;
 import propertytype.XmlPropertyTypeImpl;
-import architecture.serialization.SerializationSystem;
 
 /**
  * {@link ObjectBuilderSystemSerializationTest} is responsible for test that an {@link XmlObjectBuilderSystemWrapper} can

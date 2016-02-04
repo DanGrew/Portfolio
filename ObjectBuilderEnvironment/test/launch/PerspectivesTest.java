@@ -13,7 +13,6 @@ import org.junit.Test;
 import diagram.canvas.DiagramCanvas;
 import graphics.JavaFxInitializer;
 import gui.CommandPrompt;
-import javafx.scene.control.RadioButton;
 import javafx.scene.layout.BorderPane;
 import outline.SystemOutline;
 

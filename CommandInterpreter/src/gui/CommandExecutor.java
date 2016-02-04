@@ -7,14 +7,12 @@
  */
 package gui;
 
+import architecture.event.EventSystem;
+import command.CommandResult;
 import gui.console.ConsoleMessage;
 import gui.console.ConsoleMessageImpl;
 import gui.console.ConsoleModel;
 import gui.function.GuiFunctions;
-import architecture.event.EventSystem;
-
-import command.Command;
-import command.CommandResult;
 
 /**
  * The {@link CommandExecutor} is responsible for executing {@link Command}s in response to 

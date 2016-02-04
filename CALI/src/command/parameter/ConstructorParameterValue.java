@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import command.Command;
-
-import annotation.Cali;
-
 /**
  * The {@link ConstructorParameterValue} defines the input for the creation of
  * an {@link Object} through its {@link Constructor} for a {@link Cali} {@link Command}.

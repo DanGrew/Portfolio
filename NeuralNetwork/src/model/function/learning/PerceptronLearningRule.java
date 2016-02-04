@@ -7,14 +7,10 @@
  */
 package model.function.learning;
 
+import architecture.utility.ObjectGenerator;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleDoubleProperty;
 import model.data.SerializableSynapse;
-import model.network.Perceptron;
-import model.singleton.Neuron;
-import model.singleton.Synapse;
-import architecture.utility.ObjectGenerator;
 
 /**
  * The {@link PerceptronLearningRule} is responsible for defining how a {@link Perceptron}

@@ -15,7 +15,6 @@ import diagram.shapes.CanvasShape;
 import diagram.shapes.ResizePoint;
 import diagram.shapes.RotationPoint;
 import javafx.beans.binding.Bindings;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;

@@ -26,7 +26,6 @@ import menu.ObeGuiFunctions;
 import search.Search;
 import search.SearchSpace;
 import wizard.common.WizardConfiguration;
-import wizard.search.SearchSpaceWizard;
 
 /**
  * The {@link GraphDataSeriesPage} is responsible for showing the user how to configure

@@ -7,8 +7,6 @@
  */
 package gui;
 
-import gui.function.GuiFunctions;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +15,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import parameter.CommandParameter;
 import architecture.event.EventSystem;
-
 import command.Command;
-
 import defaults.CommonCommands;
+import gui.function.GuiFunctions;
 
 /**
  * Test for the {@link CommandAutoComplete} function.

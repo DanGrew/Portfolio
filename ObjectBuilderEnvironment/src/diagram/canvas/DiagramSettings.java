@@ -8,7 +8,6 @@
 package diagram.canvas;
 
 import diagram.shapes.PolygonType;
-import javafx.scene.shape.Polygon;
 
 /**
  * The {@link DiagramSettings} provides a object that is configurable by the system, where the system

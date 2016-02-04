@@ -14,20 +14,18 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import model.singleton.Singleton;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import architecture.request.RequestSystem;
+import architecture.serialization.SerializationSystem;
 import parameter.classparameter.ClassParameterTypes;
 import propertytype.PropertyType;
 import propertytype.PropertyTypeImpl;
 import search.SearchSpace.SearchCriteria;
-import architecture.request.RequestSystem;
-import architecture.serialization.SerializationSystem;
 
 /**
  * Test for the {@link SerializableSearchOnly}.

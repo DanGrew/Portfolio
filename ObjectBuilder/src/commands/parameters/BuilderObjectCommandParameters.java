@@ -7,15 +7,13 @@
  */
 package commands.parameters;
 
+import commands.parameters.extensions.PropertyTypeAndValueParameterImpl;
 import object.BuilderObject;
 import objecttype.Definition;
 import parameter.CommandParameter;
 import parameter.CommandParameterImpl;
 import parameter.SingletonNameAsReferenceParameterImpl;
 import propertytype.PropertyType;
-import commands.BuilderObjectCommands;
-import commands.functions.DefinitionCommandFunctions;
-import commands.parameters.extensions.PropertyTypeAndValueParameterImpl;
 
 /**
  * {@link Class} to hold {@link CommandParameter}s for {@link BuilderObjectCommands} and

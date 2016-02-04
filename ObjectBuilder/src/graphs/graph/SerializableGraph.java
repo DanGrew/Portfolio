@@ -7,7 +7,6 @@
  */
 package graphs.graph;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Map.Entry;
 

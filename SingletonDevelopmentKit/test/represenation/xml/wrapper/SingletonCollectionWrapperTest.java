@@ -17,7 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import architecture.request.RequestSystem;
-import model.singleton.Singleton;
 import representation.xml.wrapper.SingletonCollectionWrapper;
 import test.model.TestObjects.SerializableTestSingleton;
 import test.model.TestObjects.SerializableTestSingletonImpl;

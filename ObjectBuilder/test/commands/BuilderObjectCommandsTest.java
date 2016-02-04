@@ -7,21 +7,19 @@
  */
 package commands;
 
-import model.singleton.Singleton;
-import object.BuilderObject;
-import object.BuilderObjectImpl;
-import objecttype.Definition;
-import objecttype.DefinitionImpl;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import propertytype.PropertyType;
-import propertytype.PropertyTypeImpl;
 import architecture.request.RequestSystem;
 import command.Command;
 import command.CommandResult;
+import object.BuilderObject;
+import object.BuilderObjectImpl;
+import objecttype.Definition;
+import objecttype.DefinitionImpl;
+import propertytype.PropertyType;
+import propertytype.PropertyTypeImpl;
 
 /**
  * Test for the {@link BuilderObjectCommands}.

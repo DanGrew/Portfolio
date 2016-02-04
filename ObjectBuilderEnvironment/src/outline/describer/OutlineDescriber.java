@@ -7,9 +7,6 @@
  */
 package outline.describer;
 
-import javafx.scene.control.TreeTableView;
-import model.singleton.Singleton;
-
 /**
  * The {@link OutlineDescriber} provides an interface for an item that describes a {@link Singleton}
  * in a {@link TreeTableView}.

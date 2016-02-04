@@ -7,18 +7,16 @@
  */
 package command;
 
-import model.singleton.Singleton;
-
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import architecture.request.RequestSystem;
 import parameter.CommandParameterParseUtilities;
 import parameter.FixedValueParameterImpl;
 import parameter.SingletonNameAsReferenceParameterImpl;
 import test.model.TestObjects.TestSingleton;
 import test.model.TestObjects.TestSingletonImpl;
-import architecture.request.RequestSystem;
 
 /**
  * Test for the {@link Command}s where {@link Singleton} names are shared, in common, or contained 

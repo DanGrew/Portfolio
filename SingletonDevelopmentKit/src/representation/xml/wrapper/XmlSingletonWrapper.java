@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 
 import model.data.SerializedSingleton;
-import model.singleton.Singleton;
 
 /**
  * The {@link XmlSingletonWrapper} provides the parent to all classes that wrap {@link Singleton}s for

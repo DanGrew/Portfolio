@@ -7,17 +7,12 @@
  */
 package gui;
 
+import architecture.event.EventSystem;
 import gui.function.GuiFunctions;
 import javafx.collections.ListChangeListener.Change;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.BorderPane;
-
-import javax.swing.JList;
-
-import architecture.event.EventSystem;
-
-import command.Command;
 
 /**
  * The {@link Suggestions} represents a {@link JList} of possible {@link Command}s based on the 

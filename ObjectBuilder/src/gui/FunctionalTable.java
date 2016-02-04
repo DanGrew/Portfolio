@@ -7,12 +7,9 @@
  */
 package gui;
 
-import java.util.function.Function;
-
-import gui.FunctionalTableModel.FunctionalTableBuilder;
-
 import javax.swing.JTable;
 
+import gui.FunctionalTableModel.FunctionalTableBuilder;
 import model.singleton.Singleton;
 
 /**

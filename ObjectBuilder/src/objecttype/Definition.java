@@ -10,7 +10,6 @@ package objecttype;
 import java.util.List;
 
 import model.data.SingletonSerialization;
-import object.BuilderObject;
 import propertytype.PropertyType;
 
 /**

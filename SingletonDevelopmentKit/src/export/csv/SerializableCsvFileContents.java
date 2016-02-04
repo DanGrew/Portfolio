@@ -7,8 +7,6 @@
  */
 package export.csv;
 
-import java.io.Serializable;
-
 import model.data.SerializedSingleton;
 
 /**
